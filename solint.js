@@ -53,7 +53,7 @@ function processStdin(options) {
 }
 
 function writeSampleConfigFile() {
-    const sampleConfig = { extends: "default", rules: { "avoid-sha3": "error" } };
+    const sampleConfig = { extends: 'default', rules: { 'avoid-sha3': 'error' } };
     const sampleConfigJson = JSON.stringify(sampleConfig, (k, v) => v, 4);
 
     fs.writeFileSync('.solhint.json', sampleConfigJson);

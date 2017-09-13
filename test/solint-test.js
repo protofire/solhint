@@ -13,10 +13,10 @@ describe('Linter', function() {
         });
 
         it('should return compiler version error', function () {
-            const report = linter.processStr('pragma solidity ^0.3.4;');
+            const report = linter.processStr('pragma solidity 0.3.4;');
 
             assert.equal(report.errorCount, 1);
-            assert.ok(report.reports[0].message.includes('Compiler'));
+            assert.ok(report.reports[0].message.includes('0.4'));
         });
 
         it('should return "send" call verification error', function () {
