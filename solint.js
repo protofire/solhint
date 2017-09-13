@@ -31,7 +31,7 @@ async function execMainAction () {
     const pathPromises = program
         .args
         .filter(i => typeof(i) === 'string')
-        .map(linter.processPath);
+        .map(processPath);
 
     const reports = _.flatten(await Promise.all(pathPromises));
 
@@ -43,9 +43,22 @@ function processStdin(options) {
     const STDIN_FILE = 0;
     const stdinBuffer = fs.readFileSync(STDIN_FILE);
 
-    const report = linter.processStr(stdinBuffer.toString());
+    const report = processStr(stdinBuffer.toString());
     report.file = options.filename || 'stdin';
     printReports([report]);
+}
+
+const readConfig = _.curry(function () {
+    const configStr = fs.readFileSync('.solhint.json').toString();
+    return JSON.parse(configStr);
+});
+
+function processStr(input) {
+    return linter.processStr(input, readConfig());
+}
+
+function processPath(path) {
+    return linter.processPath(path, readConfig());
 }
 
 function printReports (reports, formatter) {
