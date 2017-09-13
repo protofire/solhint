@@ -21,6 +21,10 @@ function init () {
         .action(processStdin);
 
     program
+        .command('init-config')
+        .action(writeSampleConfigFile);
+
+    program
         .parse(process.argv);
 
     program.args.length < 1
@@ -46,6 +50,15 @@ function processStdin(options) {
     const report = processStr(stdinBuffer.toString());
     report.file = options.filename || 'stdin';
     printReports([report]);
+}
+
+function writeSampleConfigFile() {
+    const sampleConfig = { extends: "default", rules: { "avoid-sha3": "error" } };
+    const sampleConfigJson = JSON.stringify(sampleConfig, (k, v) => v, 4);
+
+    fs.writeFileSync('.solhint.json', sampleConfigJson);
+
+    console.log('Configuration file created!');
 }
 
 const readConfig = _.curry(function () {
