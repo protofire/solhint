@@ -83,5 +83,11 @@ describe('Linter', function() {
             assert.equal(report.errorCount, 0);
         });
 
+        it('should not erase error', function () {
+            const report = linter.processStr('/* solhint-disable-next-line */');
+
+            assert.equal(report.errorCount, 0);
+        });
+
     });
 });
