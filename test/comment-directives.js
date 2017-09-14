@@ -27,6 +27,16 @@ describe('Linter', function() {
             assert.equal(report.errorCount, 1);
         });
 
+        it('should disable only one compiler error using multiline comment', function () {
+            const report = linter.processStr(`
+                /* solhint-disable-next-line */
+                pragma solidity ^0.4.4; 
+                pragma solidity 0.3.4;
+            `);
+
+            assert.equal(report.errorCount, 1);
+        });
+
         it('should disable only compiler version error', function () {
             const report = linter.processStr(`
                 // solhint-disable compiler-gt-0_4
@@ -61,6 +71,16 @@ describe('Linter', function() {
 
             assert.equal(report.errorCount, 2);
             assert.ok(report.reports[0].message.includes('fixed'));
+        });
+
+        it('should disable all errors', function () {
+            const report = linter.processStr(`
+                /* solhint-disable */
+                pragma solidity ^0.4.4;
+                pragma solidity 0.3.4; 
+            `);
+
+            assert.equal(report.errorCount, 0);
         });
 
     });
