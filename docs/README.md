@@ -1,4 +1,6 @@
+
 #### Security Error Codes:
+
  - **avoid-sha3**: Use "keccak256" instead of deprecated "sha3"
  - **avoid-suicide**: Use "selfdestruct" instead of deprecated "suicide"
  - **avoid-throw**: "throw" is deprecated, avoid to use it
@@ -12,3 +14,4 @@
  - **mark-callable-contracts**: Explicitly mark all external contracts as trusted or untrusted
  - **multiple-sends**: Avoid multiple calls of "send" method in single transaction
  - **no-simple-event-func-name**: Event and function names must be different
+ 
