@@ -62,12 +62,24 @@ Disable validation on next line
   uint[] a;
 ```
 
+Disable validation of fixed compiler version validation on next line
+ 
+```solidity
+  // solhint-disable-next-line compiler-fixed, compiler-gt-0_4
+  pragma solidity ^0.4.4; 
+```
+
 Disable validation on current line
 
 ```solidity
   pragma solidity ^0.4.4; // solhint-disable-line
 ```
 
+Disable validation of fixed compiler version validation on current line 
+
+```solidity
+  pragma solidity ^0.4.4; // solhint-disable-line compiler-fixed, compiler-gt-0_4
+```
 
 ### Security Error Codes:
 
