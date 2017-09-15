@@ -7,7 +7,7 @@
     "test": "eslint *.js lib/*.js lib/rules/*.js test/*.js && mocha"
   },
   "bin": {
-    "solint": "solint.js"
+    "solhint": "solhint.js"
   },
   "author": "Ilya Drabenia",
   "license": "MIT",
@@ -15,7 +15,6 @@
     "antlr4": "4.7.0",
     "colors": "1.1.2",
     "commander": "2.11.0",
-    "eslint": "^4.6.1",
     "glob": "7.1.2",
     "lodash": "4.17.4"
   },
