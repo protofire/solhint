@@ -117,7 +117,8 @@ Disable all linter rules for code fragment
  | **no-complex-fallback**       | Fallback function must be simple                   |
  | **mark-callable-contracts**   | Explicitly mark all external contracts as trusted or untrusted |
  | **multiple-sends**            | Avoid multiple calls of "send" method in single transaction |
- | **no-simple-event-func-name** |Event and function names must be different          |
+ | **no-simple-event-func-name** | Event and function names must be different         |
+ | **func-name-camelcase**       | Function name must be in camelCase                 |
  
 ### Licence
 

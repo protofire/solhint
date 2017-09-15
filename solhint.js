@@ -64,8 +64,12 @@ function writeSampleConfigFile() {
 }
 
 const readConfig = _.curry(function () {
-    const configStr = fs.readFileSync('.solhint.json').toString();
-    return JSON.parse(configStr);
+    try {
+        const configStr = fs.readFileSync('.solhint.json').toString();
+        return JSON.parse(configStr);
+    } catch (e) {
+        return { rules: {} };
+    }
 });
 
 function processStr(input) {
