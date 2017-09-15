@@ -27,19 +27,47 @@ Linter for Solidity programming language
 Options:
 
   -V, --version           output the version number
-  -f, --formatter [name]  Report formatter name
+  -f, --formatter [name]  report formatter name
   -h, --help              output usage information
 
 
 Commands:
 
-  stdin [options] 
-  init-config     
+  stdin [options]         put source code to stdin of this utility   
+  init-config             create sample solhint config in current folder
 ```
 
-### Documentation
+### Configuration 
 
-Related documentation you may find [there](https://tokenhouse.github.io/solhint/).
+Configuration file has next format:
+
+```json
+  {
+    "extends": "default",
+    "rules": {
+      "avoid-throw": false,
+      "avoid-suicide": "error",
+      "avoid-sha3": "warn",
+      "indent": ["warn", 4]
+    }
+  }
+```
+
+### Configure linter with comments
+
+Disable validation on next line
+
+```solidity
+  // solhint-disable-next-line
+  uint[] a;
+```
+
+Disable validation on current line
+
+```solidity
+  pragma solidity ^0.4.4; // solhint-disable-line
+```
+
 
 ### Security Error Codes:
 
@@ -60,4 +88,3 @@ Related documentation you may find [there](https://tokenhouse.github.io/solhint/
 ### Licence
 
 MIT
- 
