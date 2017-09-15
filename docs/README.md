@@ -57,27 +57,27 @@ Configuration file has next format:
 
 Disable validation on next line
 
-```solidity
+```javascript
   // solhint-disable-next-line
   uint[] a;
 ```
 
 Disable validation of fixed compiler version validation on next line
  
-```solidity
+```javascript
   // solhint-disable-next-line compiler-fixed, compiler-gt-0_4
   pragma solidity ^0.4.4; 
 ```
 
 Disable validation on current line
 
-```solidity
+```javascript
   pragma solidity ^0.4.4; // solhint-disable-line
 ```
 
 Disable validation of fixed compiler version validation on current line 
 
-```solidity
+```javascript
   pragma solidity ^0.4.4; // solhint-disable-line compiler-fixed, compiler-gt-0_4
 ```
 
