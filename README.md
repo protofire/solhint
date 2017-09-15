@@ -20,20 +20,20 @@ solhint -V
 
 ```text
 
-  Usage: solhint [options] <file> [...other_files]
+Usage: solhint [options] <file> [...other_files]
 
-  Linter for Solidity programming language
-
-
-  Options:
-
-    -V, --version           output the version number
-    -f, --formatter [name]  Report formatter name
-    -h, --help              output usage information
+Linter for Solidity programming language
 
 
-  Commands:
+Options:
 
-    stdin [options] 
-    init-config     
+  -V, --version           output the version number
+  -f, --formatter [name]  Report formatter name
+  -h, --help              output usage information
+
+
+Commands:
+
+  stdin [options] 
+  init-config     
 ```
