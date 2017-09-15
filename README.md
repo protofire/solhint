@@ -19,7 +19,6 @@ solhint -V
 ### Usage
 
 ```text
-
 Usage: solhint [options] <file> [...other_files]
 
 Linter for Solidity programming language
@@ -37,3 +36,11 @@ Commands:
   stdin [options] 
   init-config     
 ```
+
+### Documentation
+
+Related documentation you may find [there](https://tokenhouse.github.io/solhint/).
+
+### Licence
+
+MIT
