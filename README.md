@@ -18,7 +18,7 @@ solhint -V
 
 ### Usage
 
-```sh
+```text
 
   Usage: solhint [options] <file> [...other_files]
 
