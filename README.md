@@ -10,8 +10,30 @@ provide both **security** and **style guide** validations.
 For install project you need to execute next commands
 
 ```sh
-git clone https://github.com/tokenhouse/solhint
+git clone https://github.com/tokenhouse/solhint.git
 npm install
 npm i -g .
 solhint -V
+```
+
+### Usage
+
+```sh
+
+  Usage: solhint [options] <file> [...other_files]
+
+  Linter for Solidity programming language
+
+
+  Options:
+
+    -V, --version           output the version number
+    -f, --formatter [name]  Report formatter name
+    -h, --help              output usage information
+
+
+  Commands:
+
+    stdin [options] 
+    init-config     
 ```
