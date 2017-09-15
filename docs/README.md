@@ -119,6 +119,7 @@ Disable all linter rules for code fragment
  | **multiple-sends**            | Avoid multiple calls of "send" method in single transaction |
  | **no-simple-event-func-name** | Event and function names must be different         |
  | **func-name-camelcase**       | Function name must be in camelCase                 |
+ | **func-name-camelcase**       | Function param name must be in mixedCase           |
  
 ### Licence
 

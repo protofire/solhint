@@ -11,7 +11,7 @@ describe('Linter', function() {
             const report = linter.processStr(code);
 
             assert.equal(report.errorCount, 1);
-            assert.ok(report.messages[0].message.includes('camelCase'));
+            assert.ok(report.messages[0].message.includes('mixedCase'));
         });
 
         it('should dot raise incorrect func name error', function () {
@@ -20,6 +20,15 @@ describe('Linter', function() {
             const report = linter.processStr(code);
 
             assert.equal(report.errorCount, 0);
+        });
+
+        it('should raise incorrect func param name error', function () {
+            const code = contractWith('function funcName (uint A) public {}');
+
+            const report = linter.processStr(code);
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.messages[0].message.includes('param'));
         });
 
     });
