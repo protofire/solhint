@@ -83,9 +83,8 @@ Disable validation of fixed compiler version validation on current line
 
 Disable linter rules for code fragment 
 
-```solidity
+```javascript
   /* solhint-disable avoid-throw */
-  throw;
   if (a > 1) {
     throw;
   }
@@ -94,9 +93,11 @@ Disable linter rules for code fragment
 
 Disable all linter rules for code fragment
 
-```solidity
+```javascript
   /* solhint-disable */
-  {code fragment}
+  if (a > 1) {
+    throw;
+  }
   /* solhint-enable */
 ```
 
