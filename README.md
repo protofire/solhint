@@ -9,9 +9,9 @@ provide both **security** and **style guide** validations.
 
 For install project you need to execute next commands
 
-```bash
+```sh
     git clone https://github.com/tokenhouse/solhint
-    
     npm install
+    npm i -g .
+    solhint -V
 ```
-

@@ -2,7 +2,7 @@
   "name": "sec-check",
   "version": "1.0.0",
   "description": "Solidity Security Linter",
-  "main": "index.js",
+  "main": "solhint.js",
   "scripts": {
     "test": "eslint *.js lib/*.js lib/rules/*.js test/*.js && mocha"
   },

@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const program = require('commander');
 const linter = require('./lib/index');
 const _ = require('lodash');
