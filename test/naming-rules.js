@@ -31,6 +31,15 @@ describe('Linter', function() {
             assert.ok(report.messages[0].message.includes('param'));
         });
 
+        it('should raise incorrect var name error', function () {
+            const code = funcWith('var (a, B);');
+
+            const report = linter.processStr(code);
+
+            assert.ok(report.errorCount > 0);
+            assert.ok(report.messages.map(i => i.message).some(i => i.includes('name')));
+        });
+
     });
 
     function contractWith(code) {
@@ -41,5 +50,13 @@ describe('Linter', function() {
             ${code}
           }
         `;
+    }
+
+    function funcWith(statements) {
+        return contractWith(`
+          function b() public {
+            ${statements}
+          }
+        `);
     }
 });

@@ -91,8 +91,8 @@ describe('Linter', function() {
 
         it('should return error that multiple send calls used in transation', function () {
             const code = funcWith(`
-              uint a_res = a.send(1); 
-              uint b_res = b.send(2);
+              uint aRes = a.send(1); 
+              uint bRes = b.send(2);
             `);
 
             const report = linter.processStr(code);

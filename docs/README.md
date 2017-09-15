@@ -118,8 +118,14 @@ Disable all linter rules for code fragment
  | **mark-callable-contracts**   | Explicitly mark all external contracts as trusted or untrusted |
  | **multiple-sends**            | Avoid multiple calls of "send" method in single transaction |
  | **no-simple-event-func-name** | Event and function names must be different         |
- | **func-name-camelcase**       | Function name must be in camelCase                 |
- | **func-param-name-camelcase** | Function param name must be in mixedCase           |
+ 
+### Style Guide Codes:
+ 
+ | Rule ID                       |                      Error                         |
+ |-------------------------------|----------------------------------------------------| 
+ | **func-name-mixedcase**       | Function name must be in camelCase                 |
+ | **func-param-name-mixedcase** | Function param name must be in mixedCase           |
+ | **var-name-mixedcase**        | Variable name must be in mixedCase                 |
  
 ### Licence
 
