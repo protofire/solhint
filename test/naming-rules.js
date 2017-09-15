@@ -40,6 +40,15 @@ describe('Linter', function() {
             assert.ok(report.messages.map(i => i.message).some(i => i.includes('name')));
         });
 
+        it('should raise incorrect var name error for typed declaration', function () {
+            const code = funcWith('uint B = 1;');
+
+            const report = linter.processStr(code);
+
+            assert.ok(report.errorCount > 0);
+            assert.ok(report.messages.map(i => i.message).some(i => i.includes('name')));
+        });
+
     });
 
     function contractWith(code) {
