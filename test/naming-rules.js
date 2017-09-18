@@ -112,11 +112,7 @@ describe('Linter', function() {
         });
 
         it('should raise contract name error', function () {
-            const code = (`
-                pragma solidity 0.4.4;
-            
-                contract a {}
-            `);
+            const code = ('contract a {}');
 
             const report = linter.processStr(code);
 
@@ -138,6 +134,7 @@ describe('Linter', function() {
     function contractWith(code) {
         return `
           pragma solidity 0.4.4;
+            
             
           contract A {
             ${code}

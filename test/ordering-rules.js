@@ -18,6 +18,7 @@ describe('Linter', function() {
             const code = `
                 contract A {}
                 
+                
                 import 'lib.sol';
             `;
 
@@ -31,6 +32,8 @@ describe('Linter', function() {
             const code = `
                 pragma solidity 0.4.17;
                 import 'lib.sol';
+                
+                
                 contract A {}
             `;
 
@@ -44,6 +47,7 @@ describe('Linter', function() {
     function contractWith(code) {
         return `
           pragma solidity 0.4.4;
+            
             
           contract A {
             ${code}

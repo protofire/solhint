@@ -133,6 +133,7 @@ Disable all linter rules for code fragment
  | **use-forbidden-name**        | Avoid to use letters 'I', 'l', 'O' as identifiers  |
  | **visibility-modifier-order** | Visibility modifier must be first in list of modifiers |
  | **imports-on-top**            | Import statements must be on top                   |
+ | **two-lines-top-level-separator** | Definition must be surrounded with two blank line indent |
  
 ### Licence
 
