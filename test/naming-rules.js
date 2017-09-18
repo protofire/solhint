@@ -83,6 +83,16 @@ describe('Linter', function() {
             assert.equal(report.errorCount, 1);
             assert.ok(report.messages[0].message.includes('CamelCase'));
         });
+
+        it('should raise const name error', function () {
+            const code = contractWith('uint private constant a;');
+
+            const report = linter.processStr(code);
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.messages[0].message.includes('SNAKE_CASE'));
+        });
+
     });
 
     function contractWith(code) {
