@@ -134,6 +134,7 @@ Disable all linter rules for code fragment
  | **visibility-modifier-order** | Visibility modifier must be first in list of modifiers |
  | **imports-on-top**            | Import statements must be on top                   |
  | **two-lines-top-level-separator** | Definition must be surrounded with two blank line indent |
+ | **func-order**                | Function order is incorrect                        |
  
 ### Licence
 

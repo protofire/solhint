@@ -42,6 +42,41 @@ describe('Linter', function() {
             assert.equal(report.errorCount, 0);
         });
 
+        it('should raise incorrect function order error', function () {
+            const code = contractWith(`
+                function b() private {}
+                function () public payable {}
+            `);
+
+            const report = linter.processStr(code);
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.messages[0].message.includes('Function order is incorrect'));
+        });
+
+        it('should raise incorrect function order error for external constant funcs', function () {
+            const code = contractWith(`
+                function b() external constant {}
+                function c() external {}
+            `);
+
+            const report = linter.processStr(code);
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.messages[0].message.includes('Function order is incorrect'));
+        });
+
+        // it('should not raise incorrect function order error', function () {
+        //     const code = contractWith(`
+        //         function A() public {}
+        //         function () public payable {}
+        //     `);
+        //
+        //     const report = linter.processStr(code);
+        //
+        //     assert.equal(report.errorCount, 0);
+        // });
+
     });
 
     function contractWith(code) {

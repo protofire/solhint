@@ -129,6 +129,15 @@ describe('Linter', function() {
             assert.ok(report.messages[0].message.includes('Avoid to use'));
         });
 
+        it('should raise enum name error', function () {
+            const code = contractWith('enum abc {}');
+
+            const report = linter.processStr(code);
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.messages[0].message.includes('CamelCase'));
+        });
+
     });
 
     function contractWith(code) {
