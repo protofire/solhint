@@ -124,6 +124,15 @@ describe('Linter', function() {
             assert.ok(report.messages[0].message.includes('CamelCase'));
         });
 
+        it('should raise forbidden name error', function () {
+            const code = funcWith('uint l = 0');
+
+            const report = linter.processStr(code);
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.messages[0].message.includes('Avoid to use'));
+        });
+
     });
 
     function contractWith(code) {

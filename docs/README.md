@@ -130,6 +130,7 @@ Disable all linter rules for code fragment
  | **const-name-snakecase**      | Constant name must be in SNAKE_CASE                |
  | **modifier-name-snakecase**   | Modifier name must be in snake_case                |
  | **contract-name-camelcase**   | Contract name must be in CamelCase                 |
+ | **use-forbidden-name**        | Avoid to use letters 'I', 'l', 'O' as identifiers  |
  
 ### Licence
 
