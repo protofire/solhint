@@ -93,6 +93,15 @@ describe('Linter', function() {
             assert.ok(report.messages[0].message.includes('SNAKE_CASE'));
         });
 
+        it('should raise modifier name error', function () {
+            const code = contractWith('modifier ownedBy(address a) { }');
+
+            const report = linter.processStr(code);
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.messages[0].message.includes('snake_case'));
+        });
+
     });
 
     function contractWith(code) {

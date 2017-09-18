@@ -128,6 +128,7 @@ Disable all linter rules for code fragment
  | **var-name-mixedcase**        | Variable name must be in mixedCase                 |
  | **event-name-camelcase**      | Event name must be in CamelCase                    |
  | **const-name-snakecase**      | Constant name must be in SNAKE_CASE                |
+ | **modifier-name-snakecase**   | Modifier name must be in snake_case                |
  
 ### Licence
 
