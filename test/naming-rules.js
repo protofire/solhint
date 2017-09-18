@@ -102,6 +102,28 @@ describe('Linter', function() {
             assert.ok(report.messages[0].message.includes('snake_case'));
         });
 
+        it('should raise struct name error', function () {
+            const code = contractWith('struct a {}');
+
+            const report = linter.processStr(code);
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.messages[0].message.includes('CamelCase'));
+        });
+
+        it('should raise contract name error', function () {
+            const code = (`
+                pragma solidity 0.4.4;
+            
+                contract a {}
+            `);
+
+            const report = linter.processStr(code);
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.messages[0].message.includes('CamelCase'));
+        });
+
     });
 
     function contractWith(code) {

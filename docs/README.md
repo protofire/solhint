@@ -129,6 +129,7 @@ Disable all linter rules for code fragment
  | **event-name-camelcase**      | Event name must be in CamelCase                    |
  | **const-name-snakecase**      | Constant name must be in SNAKE_CASE                |
  | **modifier-name-snakecase**   | Modifier name must be in snake_case                |
+ | **contract-name-camelcase**   | Contract name must be in CamelCase                 |
  
 ### Licence
 
