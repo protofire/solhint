@@ -133,6 +133,15 @@ describe('Linter', function() {
             assert.ok(report.messages[0].message.includes('Avoid to use'));
         });
 
+        it('should raise visibility modifier error', function () {
+            const code = contractWith('function a() ownable() public payable {}');
+
+            const report = linter.processStr(code);
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.messages[0].message.includes('Visibility'));
+        });
+
     });
 
     function contractWith(code) {

@@ -131,6 +131,7 @@ Disable all linter rules for code fragment
  | **modifier-name-snakecase**   | Modifier name must be in snake_case                |
  | **contract-name-camelcase**   | Contract name must be in CamelCase                 |
  | **use-forbidden-name**        | Avoid to use letters 'I', 'l', 'O' as identifiers  |
+ | **visibility-modifier-order** | Visibility modifier must be first in list of modifiers |
  
 ### Licence
 

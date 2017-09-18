@@ -47,7 +47,7 @@ describe('Linter', function() {
         });
 
         it('should return that fallback must be simple', function () {
-            const code = contractWith(`function () payable public {
+            const code = contractWith(`function () public payable {
                 make1(); 
                 make2(); 
                 make3();
@@ -62,7 +62,7 @@ describe('Linter', function() {
         it('should return error that function and event names are similar', function () {
             const code = contractWith(`
               event Name1();
-              function name1() payable public { }
+              function name1() public payable { }
             `);
 
             const report = linter.processStr(code);
