@@ -94,12 +94,12 @@ describe('Linter', function() {
         });
 
         it('should raise modifier name error', function () {
-            const code = contractWith('modifier ownedBy(address a) { }');
+            const code = contractWith('modifier owned_by(address a) { }');
 
             const report = linter.processStr(code);
 
             assert.equal(report.errorCount, 1);
-            assert.ok(report.messages[0].message.includes('snake_case'));
+            assert.ok(report.messages[0].message.includes('mixedCase'));
         });
 
         it('should raise struct name error', function () {
