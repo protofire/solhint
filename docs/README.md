@@ -126,6 +126,7 @@ Disable all linter rules for code fragment
  | **func-name-mixedcase**       | Function name must be in camelCase                 |
  | **func-param-name-mixedcase** | Function param name must be in mixedCase           |
  | **var-name-mixedcase**        | Variable name must be in mixedCase                 |
+ | **event-name-camelcase**      | Event name must be in CamelCase                    |
  
 ### Licence
 

@@ -66,6 +66,23 @@ describe('Linter', function() {
             assert.equal(report.errorCount, 0);
         });
 
+        it('should raise var name error for event arguments illegal styling', function () {
+            const code = contractWith('event Event1(uint B);');
+
+            const report = linter.processStr(code);
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.messages[0].message.includes('mixedCase'));
+        });
+
+        it('should raise event name error for event in mixedCase', function () {
+            const code = contractWith('event event1(uint a);');
+
+            const report = linter.processStr(code);
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.messages[0].message.includes('CamelCase'));
+        });
     });
 
     function contractWith(code) {
