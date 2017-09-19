@@ -135,6 +135,7 @@ Disable all linter rules for code fragment
  | **imports-on-top**            | Import statements must be on top                   |
  | **two-lines-top-level-separator** | Definition must be surrounded with two blank line indent |
  | **func-order**                | Function order is incorrect                        |
+ | **quotes**                    | Use double quotes for string literals              |
  
 ### Licence
 

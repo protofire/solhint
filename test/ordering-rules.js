@@ -19,7 +19,7 @@ describe('Linter', function() {
                 contract A {}
                 
                 
-                import 'lib.sol';
+                import "lib.sol";
             `;
 
             const report = linter.processStr(code);
@@ -31,7 +31,7 @@ describe('Linter', function() {
         it('should not raise impoty not on top error', function () {
             const code = `
                 pragma solidity 0.4.17;
-                import 'lib.sol';
+                import "lib.sol";
                 
                 
                 contract A {}
