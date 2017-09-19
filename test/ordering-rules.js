@@ -66,16 +66,16 @@ describe('Linter', function() {
             assert.ok(report.messages[0].message.includes('Function order is incorrect'));
         });
 
-        // it('should not raise incorrect function order error', function () {
-        //     const code = contractWith(`
-        //         function A() public {}
-        //         function () public payable {}
-        //     `);
-        //
-        //     const report = linter.processStr(code);
-        //
-        //     assert.equal(report.errorCount, 0);
-        // });
+        it('should not raise incorrect function order error', function () {
+            const code = contractWith(`
+                function A() public {}
+                function () public payable {}
+            `);
+
+            const report = linter.processStr(code);
+
+            assert.equal(report.errorCount, 0);
+        });
 
     });
 
