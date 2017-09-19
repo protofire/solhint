@@ -15,12 +15,12 @@ describe('Linter', function() {
             assert.ok(report.messages[0].message.includes('Visibility'));
         });
 
-        it('should raise impoty not on top error', function () {
+        it('should raise import not on top error', function () {
             const code = `
-                contract A {}
+              contract A {}
                 
                 
-                import "lib.sol";
+              import "lib.sol";
             `;
 
             const report = linter.processStr(code);
@@ -29,7 +29,7 @@ describe('Linter', function() {
             assert.ok(report.messages[0].message.includes('Import'));
         });
 
-        it('should not raise impoty not on top error', function () {
+        it('should not raise import not on top error', function () {
             const code = `
                 pragma solidity 0.4.17;
                 import "lib.sol";
