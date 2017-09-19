@@ -9,7 +9,7 @@ describe('Linter', function() {
         it('should raise quotes error', function () {
             const code = contractWith('string private a = \'test\';');
 
-            const report = linter.processStr(code);
+            const report = linter.processStr(code, config());
 
             assert.equal(report.errorCount, 1);
             assert.ok(report.messages[0].message.includes('double quotes'));
@@ -52,5 +52,11 @@ describe('Linter', function() {
         });
 
     });
+
+    function config() {
+        return {
+            rules: { indent: false }
+        };
+    }
 
 });

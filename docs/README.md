@@ -137,6 +137,7 @@ Disable all linter rules for code fragment
  | **func-order**                | Function order is incorrect                        |
  | **quotes**                    | Use double quotes for string literals              |
  | **no-mix-tabs-and-spaces**    | Mixed tabs and spaces                              |
+ | **indent**                    | Indentation is incorrect                           |
  
 ### Licence
 

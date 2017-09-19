@@ -37,11 +37,17 @@ describe('Linter', function() {
         it('should raise error about mixed tabs and spaces', function () {
             const code = ' \t import "lib.sol";';
 
-            const report = linter.processStr(code);
+            const report = linter.processStr(code, config());
 
             assert.equal(report.errorCount, 1);
             assert.ok(report.messages[0].message.includes('Mixed tabs and spaces'));
         });
 
     });
+
+    function config() {
+        return {
+            rules: { indent: false }
+        };
+    }
 });
