@@ -1,5 +1,6 @@
 const assert = require('assert');
 const linter = require('./../lib/index');
+const contractWith = require('./contract-builder').contractWith;
 
 
 describe('Linter', function() {
@@ -78,23 +79,4 @@ describe('Linter', function() {
         });
 
     });
-
-    function contractWith(code) {
-        return `
-          pragma solidity 0.4.4;
-            
-            
-          contract A {
-            ${code}
-          }
-        `;
-    }
-    //
-    // function funcWith(statements) {
-    //     return contractWith(`
-    //       function b() public {
-    //         ${statements}
-    //       }
-    //     `);
-    // }
 });

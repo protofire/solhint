@@ -2,6 +2,7 @@ const assert = require('assert');
 const linter = require('./../lib/index');
 
 
+
 describe('Linter', function() {
     describe('Config', function () {
 
