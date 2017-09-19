@@ -136,6 +136,7 @@ Disable all linter rules for code fragment
  | **two-lines-top-level-separator** | Definition must be surrounded with two blank line indent |
  | **func-order**                | Function order is incorrect                        |
  | **quotes**                    | Use double quotes for string literals              |
+ | **no-mix-tabs-and-spaces**    | Mixed tabs and spaces                              |
  
 ### Licence
 
