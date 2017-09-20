@@ -138,6 +138,7 @@ Disable all linter rules for code fragment
  | **quotes**                    | Use double quotes for string literals              |
  | **no-mix-tabs-and-spaces**    | Mixed tabs and spaces                              |
  | **indent**                    | Indentation is incorrect                           |
+ | **bracket-align**             | Open bracket must be on same line. It must be indented by other constructions by space |
  
 ### Licence
 
