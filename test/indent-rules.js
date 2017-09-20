@@ -1,6 +1,6 @@
 const assert = require('assert');
 const linter = require('./../lib/index');
-const { funcWith } = require('./contract-builder');
+const { funcWith, contractWith } = require('./contract-builder');
 
 
 describe('Linter', function() {
@@ -188,6 +188,24 @@ describe('Linter', function() {
 
             assert.equal(report.errorCount, 1);
             assert.ok(report.messages[0].message.includes('Open bracket'));
+        });
+
+        it('should raise error when array declaration has spaces', function () {
+            const code = contractWith('uint [] [] private a;');
+
+            const report = linter.processStr(code, config());
+
+            assert.equal(report.errorCount, 2);
+            assert.ok(report.messages[0].message.includes('Array declaration'));
+            assert.ok(report.messages[0].message.includes('Array declaration'));
+        });
+
+        it('should not raise error for array declaration', function () {
+            const code = contractWith('uint[][] private a;');
+
+            const report = linter.processStr(code, config());
+
+            assert.equal(report.errorCount, 0);
         });
     });
 

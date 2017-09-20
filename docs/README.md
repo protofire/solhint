@@ -139,6 +139,7 @@ Disable all linter rules for code fragment
  | **no-mix-tabs-and-spaces**    | Mixed tabs and spaces                              |
  | **indent**                    | Indentation is incorrect                           |
  | **bracket-align**             | Open bracket must be on same line. It must be indented by other constructions by space |
+ | **array-declaration-spaces**  | Array declaration must not contains spaces         |
  
 ### Licence
 
