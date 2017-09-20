@@ -141,20 +141,23 @@ describe('Linter', function() {
                 + '        uint private a;\n'           // 3
                 + '        function A() private { \n'   // 4
                 + '    if (a < b) {\n'                  // 5
-                + '            continue; \n'            // 6
-                + '        } \n'                        // 7
-                + '      }\n'                           // 8
-                + '    }\n';                            // 9
+                + '            a += 1; \n'              // 6
+                + '        b -= 1; \n'                  // 7
+                + '            continue; \n'            // 8
+                + '        } \n'                        // 9
+                + '      }\n'                           // 10
+                + '    }\n';                            // 11
 
             const report = linter.processStr(code);
 
-            assert.equal(report.errorCount, 6);
+            assert.equal(report.errorCount, 7);
             assert.ok(report.messages[0].message.includes('Expected indentation of 0'));
             assert.ok(report.messages[1].message.includes('Expected indentation of 4'));
             assert.ok(report.messages[2].message.includes('Expected indentation of 4'));
             assert.ok(report.messages[3].message.includes('Expected indentation of 8'));
-            assert.ok(report.messages[4].message.includes('Expected indentation of 4'));
-            assert.ok(report.messages[5].message.includes('Expected indentation of 0'));
+            assert.ok(report.messages[4].message.includes('Expected indentation of 12'));
+            assert.ok(report.messages[5].message.includes('Expected indentation of 4'));
+            assert.ok(report.messages[6].message.includes('Expected indentation of 0'));
         });
 
     });
