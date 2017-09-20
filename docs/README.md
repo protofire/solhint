@@ -140,6 +140,7 @@ Disable all linter rules for code fragment
  | **indent**                    | Indentation is incorrect                           |
  | **bracket-align**             | Open bracket must be on same line. It must be indented by other constructions by space |
  | **array-declaration-spaces**  | Array declaration must not contains spaces         |
+ | **separate-by-one-line-in-contract** | Definitions inside contract / library must be separated by one line |
  
 ### Licence
 

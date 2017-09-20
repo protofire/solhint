@@ -84,7 +84,7 @@ describe('Linter', function() {
                 + '      }\n'
                 + '    }\n';
 
-            const report = linter.processStr(code);
+            const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
             assert.equal(report.errorCount, 5);
             assert.ok(report.messages[0].message.includes('Expected indentation of 0'));
@@ -104,7 +104,7 @@ describe('Linter', function() {
                 + '      }\n'                           // 7
                 + '    }\n';                            // 8
 
-            const report = linter.processStr(code);
+            const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
             assert.equal(report.errorCount, 6);
             assert.ok(report.messages[0].message.includes('Expected indentation of 0'));
@@ -125,7 +125,7 @@ describe('Linter', function() {
                 + '      }\n'                           // 7
                 + '    }\n';                            // 8
 
-            const report = linter.processStr(code);
+            const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
             assert.equal(report.errorCount, 6);
             assert.ok(report.messages[0].message.includes('Expected indentation of 0 spaces'));
@@ -149,7 +149,7 @@ describe('Linter', function() {
                 + '      }\n'                           // 10
                 + '    }\n';                            // 11
 
-            const report = linter.processStr(code);
+            const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
             assert.equal(report.errorCount, 7);
             assert.ok(report.messages[0].message.includes('Expected indentation of 0 spaces'));
@@ -170,7 +170,13 @@ describe('Linter', function() {
                 '\t}\n' +
                 '}';
 
-            const report = linter.processStr(code, { rules: {indent: ['warn', 'tabs'], 'func-visibility': false} });
+            const report = linter.processStr(code, {
+                rules: {
+                    indent: ['warn', 'tabs'],
+                    'func-visibility': false,
+                    'separate-by-one-line-in-contract': false
+                }
+            });
 
             assert.equal(report.warningCount, 1);
             assert.ok(report.messages[0].message.includes('Expected indentation of 2 tabs'));
@@ -207,11 +213,12 @@ describe('Linter', function() {
 
             assert.equal(report.errorCount, 0);
         });
+
     });
 
     function config() {
         return {
-            rules: { indent: false }
+            rules: { indent: false, 'separate-by-one-line-in-contract': false }
         };
     }
 });
