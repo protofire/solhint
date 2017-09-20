@@ -93,6 +93,27 @@ describe('Linter', function() {
             assert.ok(report.messages[4].message.includes('Expected indentation of 0'));
         });
 
+        it('should raise error when line indent is incorrect for function', function () {
+            const code = '\n'                           // 1
+                + '    contract A {\n'                  // 2
+                + '        uint private a;\n'           // 3
+                + '        function A() private { \n'   // 4
+                + '    for (uint a; a < b; a += 1) \n'  // 5
+                + '            continue; \n'            // 6
+                + '      }\n'                           // 7
+                + '    }\n';                            // 8
+
+            const report = linter.processStr(code);
+
+            assert.equal(report.errorCount, 6);
+            assert.ok(report.messages[0].message.includes('Expected indentation of 0'));
+            assert.ok(report.messages[1].message.includes('Expected indentation of 4'));
+            assert.ok(report.messages[2].message.includes('Expected indentation of 4'));
+            assert.ok(report.messages[3].message.includes('Expected indentation of 8'));
+            assert.ok(report.messages[4].message.includes('Expected indentation of 4'));
+            assert.ok(report.messages[5].message.includes('Expected indentation of 0'));
+        });
+
     });
 
     function config() {
