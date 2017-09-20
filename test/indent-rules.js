@@ -214,11 +214,24 @@ describe('Linter', function() {
             assert.equal(report.errorCount, 0);
         });
 
+        it('should raise error when items inside contract do not separated by new line', function () {
+            const code = contractWith(`
+                function a() public {
+                }
+                function b() public {}
+            `);
+
+            const report = linter.processStr(code, config());
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.messages[0].message.includes('must be separated by one line'));
+        });
+
     });
 
     function config() {
         return {
-            rules: { indent: false, 'separate-by-one-line-in-contract': false }
+            rules: { indent: false }
         };
     }
 });
