@@ -52,6 +52,15 @@ describe('Linter', function() {
             assert.ok(report.messages[0].message.includes('indent'));
         });
 
+        it('should raise error when line indent is incorrect', function () {
+            const code = '\t\timport "lib.sol";';
+
+            const report = linter.processStr(code);
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.messages[0].message.includes('indent'));
+        });
+
     });
 
     function config() {
