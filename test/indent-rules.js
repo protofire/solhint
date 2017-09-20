@@ -46,7 +46,7 @@ describe('Linter', function() {
         it('should raise error when line indent is incorrect', function () {
             const code = '\t\timport "lib.sol";';
 
-            const report = linter.processStr(code);
+            const report = linter.processStr(code, {rules: { indent:['error', 'tabs'] } });
 
             assert.equal(report.errorCount, 1);
             assert.ok(report.messages[0].message.includes('indent'));
@@ -55,7 +55,7 @@ describe('Linter', function() {
         it('should raise error when line indent is incorrect', function () {
             const code = '\t\timport "lib.sol";';
 
-            const report = linter.processStr(code);
+            const report = linter.processStr(code, {rules: { indent:['error', 'tabs'] } });
 
             assert.equal(report.errorCount, 1);
             assert.ok(report.messages[0].message.includes('indent'));
@@ -164,7 +164,8 @@ describe('Linter', function() {
             const code = '\n' +
                 'contract A {\n' +
                 '\tuint private a = 0;\n' +
-                '\tfunction A() {\n' +
+                '\tfunction A() \n' +
+                '\t{\n' +
                 '\t\t\tuint a = 5;\n' +
                 '\t}\n' +
                 '}';
