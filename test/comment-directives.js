@@ -22,7 +22,7 @@ describe('Linter', function() {
                 // solhint-disable-next-line
                 pragma solidity ^0.4.4; 
                 pragma solidity 0.3.4;
-            `);
+            `, config());
 
             assert.equal(report.errorCount, 1);
         });
@@ -32,7 +32,7 @@ describe('Linter', function() {
                 /* solhint-disable-next-line */
                 pragma solidity ^0.4.4; 
                 pragma solidity 0.3.4;
-            `);
+            `, config());
 
             assert.equal(report.errorCount, 1);
         });
@@ -42,7 +42,7 @@ describe('Linter', function() {
                 // solhint-disable compiler-gt-0_4
                 pragma solidity ^0.4.4; 
                 pragma solidity 0.3.4; // disabled error: Compiler version must be greater that 0.4
-            `);
+            `, config());
 
             assert.equal(report.errorCount, 1);
             assert.ok(report.reports[0].message.includes('Compiler version must be fixed'));
@@ -55,7 +55,7 @@ describe('Linter', function() {
                 pragma solidity 0.3.4;
                 /* solhint-enable compiler-gt-0_4 */
                 pragma solidity 0.3.4; 
-            `);
+            `, config());
 
             assert.equal(report.errorCount, 1);
             assert.ok(report.reports[0].message.includes('0.4'));
@@ -67,7 +67,7 @@ describe('Linter', function() {
                 pragma solidity ^0.4.4;
                 /* solhint-enable compiler-gt-0_4 */
                 pragma solidity ^0.4.4; 
-            `);
+            `, config());
 
             assert.equal(report.errorCount, 2);
             assert.ok(report.reports[0].message.includes('fixed'));
@@ -78,7 +78,7 @@ describe('Linter', function() {
                 /* solhint-disable */
                 pragma solidity ^0.4.4;
                 pragma solidity 0.3.4; 
-            `);
+            `, config());
 
             assert.equal(report.errorCount, 0);
         });
@@ -90,4 +90,10 @@ describe('Linter', function() {
         });
 
     });
+
+    function config() {
+        return {
+            rules: { indent: false }
+        };
+    }
 });

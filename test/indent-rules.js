@@ -12,7 +12,7 @@ describe('Linter', function() {
             contract B {}
             `;
 
-            const report = linter.processStr(code);
+            const report = linter.processStr(code, config());
 
             assert.equal(report.errorCount, 2);
             assert.ok(report.messages[0].message.includes('two blank'));
@@ -29,7 +29,7 @@ describe('Linter', function() {
             contract C {}
             `;
 
-            const report = linter.processStr(code);
+            const report = linter.processStr(code, config());
 
             assert.equal(report.errorCount, 0);
         });
@@ -41,6 +41,15 @@ describe('Linter', function() {
 
             assert.equal(report.errorCount, 1);
             assert.ok(report.messages[0].message.includes('Mixed tabs and spaces'));
+        });
+
+        it('should raise error when line indent is incorrect', function () {
+            const code = '\t\timport "lib.sol";';
+
+            const report = linter.processStr(code);
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.messages[0].message.includes('indent'));
         });
 
     });
