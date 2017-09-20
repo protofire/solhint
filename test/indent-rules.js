@@ -1,5 +1,6 @@
 const assert = require('assert');
 const linter = require('./../lib/index');
+const { funcWith } = require('./contract-builder');
 
 
 describe('Linter', function() {
@@ -164,8 +165,7 @@ describe('Linter', function() {
             const code = '\n' +
                 'contract A {\n' +
                 '\tuint private a = 0;\n' +
-                '\tfunction A() \n' +
-                '\t{\n' +
+                '\tfunction A() {\n' +
                 '\t\t\tuint a = 5;\n' +
                 '\t}\n' +
                 '}';
@@ -174,6 +174,20 @@ describe('Linter', function() {
 
             assert.equal(report.warningCount, 1);
             assert.ok(report.messages[0].message.includes('Expected indentation of 2 tabs'));
+        });
+
+        it('should raise error when bracket incorrect aligned', function () {
+            const code = funcWith(`
+                for (uint i = 0; i < a; i += 1) 
+                {
+                  continue;
+                }
+            `);
+
+            const report = linter.processStr(code, config());
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.messages[0].message.includes('Open bracket'));
         });
     });
 
