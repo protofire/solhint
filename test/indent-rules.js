@@ -111,7 +111,7 @@ describe('Linter', function() {
             assert.ok(report.messages[2].message.includes('Expected indentation of 4'));
             assert.ok(report.messages[3].message.includes('Expected indentation of 8'));
             assert.ok(report.messages[4].message.includes('Expected indentation of 4'));
-            assert.ok(report.messages[5].message.includes('Expected indentation of 0'));
+            assert.ok(report.messages[5].message.includes('Expected indentation of 0 spaces'));
         });
 
         it('should raise error when line indent is incorrect for function with for while loop', function () {
@@ -127,7 +127,7 @@ describe('Linter', function() {
             const report = linter.processStr(code);
 
             assert.equal(report.errorCount, 6);
-            assert.ok(report.messages[0].message.includes('Expected indentation of 0'));
+            assert.ok(report.messages[0].message.includes('Expected indentation of 0 spaces'));
             assert.ok(report.messages[1].message.includes('Expected indentation of 4'));
             assert.ok(report.messages[2].message.includes('Expected indentation of 4'));
             assert.ok(report.messages[3].message.includes('Expected indentation of 8'));
@@ -151,7 +151,7 @@ describe('Linter', function() {
             const report = linter.processStr(code);
 
             assert.equal(report.errorCount, 7);
-            assert.ok(report.messages[0].message.includes('Expected indentation of 0'));
+            assert.ok(report.messages[0].message.includes('Expected indentation of 0 spaces'));
             assert.ok(report.messages[1].message.includes('Expected indentation of 4'));
             assert.ok(report.messages[2].message.includes('Expected indentation of 4'));
             assert.ok(report.messages[3].message.includes('Expected indentation of 8'));
@@ -160,6 +160,20 @@ describe('Linter', function() {
             assert.ok(report.messages[6].message.includes('Expected indentation of 0'));
         });
 
+        it('should not raise error for custom configured indent rules', function () {
+            const code = '\n' +
+                'contract A {\n' +
+                '\tuint private a = 0;\n' +
+                '\tfunction A() {\n' +
+                '\t\t\tuint a = 5;\n' +
+                '\t}\n' +
+                '}';
+
+            const report = linter.processStr(code, { rules: {indent: ['warn', 'tabs'], 'func-visibility': false} });
+
+            assert.equal(report.warningCount, 1);
+            assert.ok(report.messages[0].message.includes('Expected indentation of 2 tabs'));
+        });
     });
 
     function config() {
