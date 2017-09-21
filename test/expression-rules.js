@@ -24,7 +24,7 @@ describe('Linter - Expression Align Rules', function() {
         ];
 
         INCORRECT_EXPRESSIONS.forEach(curExpr =>
-            it('should raise expression indentation error', function () {
+            it(`should raise expression indentation error for ${curExpr}`, function () {
                 const code = funcWith(curExpr + ';');
 
                 const report = linter.processStr(code, config());
@@ -55,7 +55,7 @@ describe('Linter - Expression Align Rules', function() {
         ];
 
         CORRECT_EXPRESSIONS.forEach(curExpr =>
-            it('should raise expression indentation error', function () {
+            it(`should not raise expression indentation error for ${curExpr}`, function () {
                 const code = funcWith(curExpr + ';');
 
                 const report = linter.processStr(code, config());

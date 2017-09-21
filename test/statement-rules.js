@@ -3,10 +3,10 @@ const linter = require('./../lib/index');
 const { funcWith } = require('./contract-builder');
 
 
-describe('Linter - Statements Align Rules', function() {
+describe('Linter - Statement Align Rules', function() {
 
-    describe('Incorrect Expressions', function () {
-        const INCORRECT_EXPRESSIONS = [
+    describe('Incorrect Statements', function () {
+        const INCORRECT_STATEMENTS = [
             'if(a > b) {}',
             'if (a > b ) {} else {}',
             'while ( a > b) {}',
@@ -21,9 +21,9 @@ describe('Linter - Statements Align Rules', function() {
             'for (uint i = 0;a < b; i += 1) {}'
         ];
 
-        INCORRECT_EXPRESSIONS.forEach(curExpr =>
-            it('should raise expression indentation error', function () {
-                const code = funcWith(curExpr);
+        INCORRECT_STATEMENTS.forEach(curStatement =>
+            it(`${curStatement} should raise statement indentation error`, function () {
+                const code = funcWith(curStatement);
 
                 const report = linter.processStr(code, config());
 
@@ -33,8 +33,8 @@ describe('Linter - Statements Align Rules', function() {
         );
     });
 
-    describe('Correct Expressions', function () {
-        const CORRECT_EXPRESSIONS = [
+    describe('Correct Statements', function () {
+        const CORRECT_STATEMENTS = [
             'if (a > b) {}',
             'if (a > b) {} else {}',
             'while (a > b) {}',
@@ -49,9 +49,9 @@ describe('Linter - Statements Align Rules', function() {
             'for (uint i = 0; a < b; i += 1) {}'
         ];
 
-        CORRECT_EXPRESSIONS.forEach(curExpr =>
-            it('should raise expression indentation error', function () {
-                const code = funcWith(curExpr);
+        CORRECT_STATEMENTS.forEach(curStatement =>
+            it(`${curStatement} should not raise statement indentation error`, function () {
+                const code = funcWith(curStatement);
 
                 const report = linter.processStr(code, config());
 
