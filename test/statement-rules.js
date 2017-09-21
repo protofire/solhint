@@ -24,7 +24,11 @@ describe('Linter - Statement Align Rules', function() {
             '} \n' +
             'else {\n' +
             '  test2();\n' +
-            '}'
+            '}',
+            'do { \n' +
+            '  test1(); \n' +
+            '} \n' +
+            'while (a < b); \n'
         ];
 
         INCORRECT_STATEMENTS.forEach(curStatement =>
@@ -57,7 +61,10 @@ describe('Linter - Statement Align Rules', function() {
             '  test1(); \n' +
             '} else {\n' +
             '  test2();\n' +
-            '}'
+            '}',
+            'do { \n' +
+            '  test1(); \n' +
+            '} while (a < b); \n'
         ];
 
         CORRECT_STATEMENTS.forEach(curStatement =>
