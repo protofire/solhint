@@ -18,7 +18,13 @@ describe('Linter - Statement Align Rules', function() {
             'for (uint i = 0;;i += 1) {}',
             'for (uint i = 0;i += 1;) {}',
             'for (;a < b; i += 1) {}',
-            'for (uint i = 0;a < b; i += 1) {}'
+            'for (uint i = 0;a < b; i += 1) {}',
+            'if (a < b) {\n' +
+            '  test1(); \n' +
+            '} \n' +
+            'else {\n' +
+            '  test2();\n' +
+            '}'
         ];
 
         INCORRECT_STATEMENTS.forEach(curStatement =>
@@ -46,7 +52,12 @@ describe('Linter - Statement Align Rules', function() {
             'for (uint i = 0;; i += 1) {}',
             'for (uint i = 0; i += 1;) {}',
             'for (; a < b; i += 1) {}',
-            'for (uint i = 0; a < b; i += 1) {}'
+            'for (uint i = 0; a < b; i += 1) {}',
+            'if (a < b) {\n' +
+            '  test1(); \n' +
+            '} else {\n' +
+            '  test2();\n' +
+            '}'
         ];
 
         CORRECT_STATEMENTS.forEach(curStatement =>
