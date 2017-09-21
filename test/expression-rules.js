@@ -19,7 +19,8 @@ describe('Linter - Expression Align Rules', function() {
             'a &&b',
             'a > b ?a : b',
             '! a',
-            'a ++'
+            'a ++',
+            'a +=1'
         ];
 
         INCORRECT_EXPRESSIONS.forEach(curExpr =>
@@ -48,7 +49,9 @@ describe('Linter - Expression Align Rules', function() {
             'a && b',
             'a > b ? a : b',
             '!a',
-            'a++'
+            'a++',
+            'a += 1',
+            'a += (b + c) * d'
         ];
 
         CORRECT_EXPRESSIONS.forEach(curExpr =>
