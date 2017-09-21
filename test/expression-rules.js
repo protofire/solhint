@@ -6,23 +6,31 @@ const { funcWith } = require('./contract-builder');
 describe('Linter', function() {
     describe('Expression Align Rules', function () {
 
-        it('should raise error when "new" has more than one space', function () {
-            const code = funcWith('new  TrustedContract;');
+        const incorrectExpressions = [
+            'new  TrustedContract',
+            'myArray[ 5 ]',
+            'myFunc( 1, 2, 3 )',
+            'myFunc. call(1)',
+            'a = ( b + c )',
+            'a=b + 1',
+            'a+=1',
+            'a ==b',
+            '1** 2',
+            'a &&b',
+            'a > b ?a : b',
+            '! a',
+            'a ++'
+        ];
 
-            const report = linter.processStr(code, config());
+        incorrectExpressions.forEach(curExpr =>
+            it('should raise expression indentation error', function () {
+                const code = funcWith(curExpr + ';');
 
-            assert.equal(report.errorCount, 1);
-            assert.ok(report.messages[0].message.includes('Required space'));
-        });
+                const report = linter.processStr(code, config());
 
-        it('should raise error when array access brackets has spaces', function () {
-            const code = funcWith('myArray[ 5 ];');
-
-            const report = linter.processStr(code, config());
-
-            assert.equal(report.errorCount, 1);
-            assert.ok(report.messages[0].message.includes('Expression indentation is incorrect'));
-        });
+                assert.equal(report.errorCount, 1);
+                assert.ok(report.messages[0].message.includes('Expression indentation is incorrect'));
+            }));
 
     });
 
