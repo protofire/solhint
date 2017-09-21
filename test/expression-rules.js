@@ -3,10 +3,10 @@ const linter = require('./../lib/index');
 const { funcWith } = require('./contract-builder');
 
 
-describe('Linter', function() {
-    describe('Expression Align Rules', function () {
+describe('Linter - Expression Align Rules', function() {
 
-        const incorrectExpressions = [
+    describe('Incorrect Expressions', function () {
+        const INCORRECT_EXPRESSIONS = [
             'new  TrustedContract',
             'myArray[ 5 ]',
             'myFunc( 1, 2, 3 )',
@@ -22,7 +22,7 @@ describe('Linter', function() {
             'a ++'
         ];
 
-        incorrectExpressions.forEach(curExpr =>
+        INCORRECT_EXPRESSIONS.forEach(curExpr =>
             it('should raise expression indentation error', function () {
                 const code = funcWith(curExpr + ';');
 
@@ -30,8 +30,36 @@ describe('Linter', function() {
 
                 assert.equal(report.errorCount, 1);
                 assert.ok(report.messages[0].message.includes('Expression indentation is incorrect'));
-            }));
+            })
+        );
+    });
 
+    describe('Correct Expressions', function () {
+        const CORRECT_EXPRESSIONS = [
+            'new TrustedContract',
+            'myArray[5]',
+            'myFunc(1, 2, 3)',
+            'myFunc.call(1)',
+            'a = (b + c)',
+            'a = b + 1',
+            'a += 1',
+            'a == b',
+            '1**2',
+            'a && b',
+            'a > b ? a : b',
+            '!a',
+            'a++'
+        ];
+
+        CORRECT_EXPRESSIONS.forEach(curExpr =>
+            it('should raise expression indentation error', function () {
+                const code = funcWith(curExpr + ';');
+
+                const report = linter.processStr(code, config());
+
+                assert.equal(report.errorCount, 0);
+            })
+        );
     });
 
     function config() {
