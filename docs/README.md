@@ -142,6 +142,7 @@ Disable all linter rules for code fragment
  | **array-declaration-spaces**  | Array declaration must not contains spaces         |
  | **separate-by-one-line-in-contract** | Definitions inside contract / library must be separated by one line |
  | **expression-indent**         | Expression indentation is incorrect.               |
+ | **statement-indent**          | Statement indentation is incorrect.                |
  
 ### Licence
 
