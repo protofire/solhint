@@ -51,7 +51,8 @@ describe('Linter - Expression Align Rules', function() {
             '!a',
             'a++',
             'a += 1',
-            'a += (b + c) * d'
+            'a += (b + c) * d',
+            'bytesStringTrimmed[j] = bytesString[j];'
         ];
 
         CORRECT_EXPRESSIONS.forEach(curExpr =>
