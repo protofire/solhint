@@ -227,6 +227,36 @@ describe('Linter', function() {
             assert.ok(report.messages[0].message.includes('must be separated by one line'));
         });
 
+        it('should not raise error when items inside contract separated by new line', function () {
+            const code = contractWith(`
+                function a() public {
+                }
+                
+                // any comment
+                function b() public {}
+            `);
+
+            const report = linter.processStr(code, config());
+
+            assert.equal(report.errorCount, 0);
+        });
+
+        it('should not raise error when items inside contract separated by new line with comments', function () {
+            const code = contractWith(`
+                function a() public {
+                }
+                
+                /**
+                 * Function b
+                 */
+                function b() public {}
+            `);
+
+            const report = linter.processStr(code, config());
+
+            assert.equal(report.errorCount, 0);
+        });
+
         it('should raise error when line length exceed 120', function () {
             const code = ' '.repeat(121);
 
