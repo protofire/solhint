@@ -73,14 +73,14 @@ describe('Linter', function() {
             assert.ok(report.reports[0].message.includes('Event and function names must be different'));
         });
 
-        it('should return error that external contract is not marked as trusted / untrusted', function () {
-            const code = funcWith('Bank.withdraw(100);');
-
-            const report = linter.processStr(code, config());
-
-            assert.equal(report.warningCount, 1);
-            assert.ok(report.reports[0].message.includes('trusted'));
-        });
+        // it('should return error that external contract is not marked as trusted / untrusted', function () {
+        //     const code = funcWith('Bank.withdraw(100);');
+        //
+        //     const report = linter.processStr(code, config());
+        //
+        //     assert.equal(report.warningCount, 1);
+        //     assert.ok(report.reports[0].message.includes('trusted'));
+        // });
 
         it('should return error that used deprecations', function () {
             const code = funcWith('sha3("test");');
