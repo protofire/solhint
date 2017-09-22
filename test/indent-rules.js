@@ -161,6 +161,23 @@ describe('Linter', function() {
             assert.ok(report.messages[6].message.includes('Expected indentation of 0'));
         });
 
+        it('should not raise error when line indent is correct for function with for if-else statement', function () {
+            const code = '\n'                       // 1
+                + 'contract A {\n'                  // 2
+                + '    function A() private { \n'   // 3
+                + '        if (a < b) {\n'          // 4
+                + '            a += 1; \n'          // 5
+                + '        } else { \n'             // 6
+                + '            b -= 1; \n'          // 7
+                + '        } \n'                    // 8
+                + '    }\n'                         // 9
+                + '}\n';                            // 10
+
+            const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
+
+            assert.equal(report.errorCount, 0);
+        });
+
         it('should not raise error for custom configured indent rules', function () {
             const code = '\n' +
                 'contract A {\n' +
