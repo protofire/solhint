@@ -227,6 +227,25 @@ describe('Linter', function() {
             assert.ok(report.messages[0].message.includes('must be separated by one line'));
         });
 
+        it('should raise error when line length exceed 120', function () {
+            const code = ' '.repeat(121);
+
+            const report = linter.processStr(code, config());
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.messages[0].message.includes('Line length must be no more than'));
+        });
+
+        it('should not raise error when line length exceed 120 and custom config provided', function () {
+            const code = ' '.repeat(130);
+
+            const report = linter.processStr(code, {
+                rules: { indent: false, 'max-line-length': ['error', 130] }
+            });
+
+            assert.equal(report.errorCount, 0);
+        });
+
     });
 
     function config() {
