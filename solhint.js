@@ -13,17 +13,19 @@ function init () {
 
     program
         .usage('[options] <file> [...other_files]')
-        .option('-f, --formatter [name]', 'Report formatter name')
+        .option('-f, --formatter [name]', 'report formatter name')
         .description('Linter for Solidity programming language')
         .action(execMainAction);
 
     program
         .command('stdin')
-        .option('--filename [file_name]', 'Name of file received using STDIN')
+        .description('linting of source code data provided to STDIN')
+        .option('--filename [file_name]', 'name of file received using STDIN')
         .action(processStdin);
 
     program
         .command('init-config')
+        .description('create in current directory configuration file for solhint')
         .action(writeSampleConfigFile);
 
     program
@@ -55,7 +57,16 @@ function processStdin(options) {
 }
 
 function writeSampleConfigFile() {
-    const sampleConfig = { extends: 'default', rules: { 'avoid-sha3': 'error' } };
+    const sampleConfig = {
+        extends: 'default',
+        rules: {
+            'no-complex-fallback': 'warn',
+            'indent': ['error', 4],
+            'quotes': ['error', 'double'],
+            'max-line-length': ['error', 120]
+        }
+    };
+
     const sampleConfigJson = JSON.stringify(sampleConfig, (k, v) => v, 4);
 
     fs.writeFileSync('.solhint.json', sampleConfigJson);
