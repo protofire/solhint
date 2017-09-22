@@ -32,7 +32,7 @@ describe('Linter - Statement Align Rules', function() {
         ];
 
         INCORRECT_STATEMENTS.forEach(curStatement =>
-            it(`${curStatement} should raise statement indentation error`, function () {
+            it(`${label(curStatement)} should raise statement indentation error`, function () {
                 const code = funcWith(curStatement);
 
                 const report = linter.processStr(code, config());
@@ -68,7 +68,7 @@ describe('Linter - Statement Align Rules', function() {
         ];
 
         CORRECT_STATEMENTS.forEach(curStatement =>
-            it(`${curStatement} should not raise statement indentation error`, function () {
+            it(`${label(curStatement)} should not raise statement indentation error`, function () {
                 const code = funcWith(curStatement);
 
                 const report = linter.processStr(code, config());
@@ -82,5 +82,9 @@ describe('Linter - Statement Align Rules', function() {
         return {
             rules: { indent: false }
         };
+    }
+
+    function label (data) {
+        return data.split('\n')[0];
     }
 });
