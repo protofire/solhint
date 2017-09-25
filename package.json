@@ -1,12 +1,13 @@
 {
   "name": "solhint",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Solidity Code Linter",
   "main": "solhint.js",
   "keywords": [
     "solidity", "linter", "security-scanner", "etherium", "ast", "developer-tools", "code-quality", "smart-contracts"
   ],
   "homepage": "https://tokenhouse.github.io/solhint/",
+  "repository": "https://github.com/tokenhouse/solhint",
   "scripts": {
     "test": "eslint *.js lib/*.js lib/rules/*.js test/*.js && mocha"
   },
