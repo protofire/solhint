@@ -1,15 +1,23 @@
 {
   "name": "solhint",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Solidity Code Linter",
   "main": "solhint.js",
   "keywords": [
-    "solidity", "linter", "security-scanner", "etherium", "ast", "developer-tools", "code-quality", "smart-contracts"
+    "solidity",
+    "linter",
+    "security-scanner",
+    "etherium",
+    "ast",
+    "developer-tools",
+    "code-quality",
+    "smart-contracts"
   ],
   "homepage": "https://tokenhouse.github.io/solhint/",
   "repository": "https://github.com/tokenhouse/solhint",
   "scripts": {
-    "test": "eslint *.js lib/*.js lib/rules/*.js test/*.js && mocha"
+    "exec-tests": "nyc -x \"**/grammar/**\" mocha && nyc report --reporter=text-lcov | coveralls",
+    "test": "eslint *.js lib/*.js lib/rules/*.js test/*.js && npm run exec-tests"
   },
   "bin": {
     "solhint": "solhint.js"
@@ -25,7 +33,10 @@
   },
   "devDependencies": {
     "assert": "1.4.1",
+    "coveralls": "2.13.1",
     "eslint": "4.6.1",
-    "mocha": "3.5.0"
+    "mocha": "3.5.0",
+    "mocha-lcov-reporter": "1.3.0",
+    "nyc": "11.2.1"
   }
 }
