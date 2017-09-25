@@ -1,6 +1,8 @@
 ## Solhint Project
 
 [![Build Status](https://travis-ci.org/tokenhouse/solhint.svg?branch=master)](https://travis-ci.org/tokenhouse/solhint)
+[![npm version](http://img.shields.io/npm/v/solhint.svg?style=flat)](https://npmjs.org/package/solhint 
+"View this project on npm")
 
 This is an open source project for linting [solidity](http://solidity.readthedocs.io/en/develop/) code. This project 
 provide both **security** and **style guide** validations.   
