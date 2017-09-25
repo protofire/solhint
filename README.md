@@ -10,9 +10,7 @@ provide both **security** and **style guide** validations.
 For install project you need to execute next commands
 
 ```sh
-git clone https://github.com/tokenhouse/solhint.git
-npm install
-npm i -g .
+npm install -g solhint
 solhint -V
 ```
 
