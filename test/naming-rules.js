@@ -104,6 +104,14 @@ describe('Linter', function() {
             assert.ok(report.messages[0].message.includes('mixedCase'));
         });
 
+        it('should not raise modifier name error', function () {
+            const code = contractWith('modifier ownedBy(address a) { }');
+
+            const report = linter.processStr(code, config());
+
+            assert.equal(report.errorCount, 0);
+        });
+
         it('should raise struct name error', function () {
             const code = contractWith('struct a {}');
 

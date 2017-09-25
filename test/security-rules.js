@@ -48,6 +48,15 @@ describe('Linter', function() {
             assert.ok(report.reports[0].message.includes('visibility'));
         });
 
+        it('should return required visibility error for state', function () {
+            const code = contractWith('uint a;');
+
+            const report = linter.processStr(code, config());
+
+            assert.equal(report.warningCount, 1);
+            assert.ok(report.reports[0].message.includes('visibility'));
+        });
+
         it('should return that fallback must be simple', function () {
             const code = contractWith(`function () public payable {
                 make1(); 
@@ -73,6 +82,18 @@ describe('Linter', function() {
             assert.ok(report.reports[0].message.includes('Event and function names must be different'));
         });
 
+        it('should return error that function and event names are similar', function () {
+            const code = contractWith(`
+              function name1() public payable { }
+              event Name1();
+            `);
+
+            const report = linter.processStr(code, config());
+
+            assert.equal(report.warningCount, 1);
+            assert.ok(report.reports[0].message.includes('Event and function names must be different'));
+        });
+
         // it('should return error that external contract is not marked as trusted / untrusted', function () {
         //     const code = funcWith('Bank.withdraw(100);');
         //
@@ -82,14 +103,17 @@ describe('Linter', function() {
         //     assert.ok(report.reports[0].message.includes('trusted'));
         // });
 
-        it('should return error that used deprecations', function () {
-            const code = funcWith('sha3("test");');
+        const DEPRECATION_ERRORS = ['sha3("test");', 'throw;', 'suicide();'];
 
-            const report = linter.processStr(code, config());
+        DEPRECATION_ERRORS.forEach(curText =>
+            it(`should return error that used deprecations ${curText}`, function () {
+                const code = funcWith(curText);
 
-            assert.equal(report.errorCount, 1);
-            assert.ok(report.reports[0].message.includes('sha3'));
-        });
+                const report = linter.processStr(code, config());
+
+                assert.equal(report.errorCount, 1);
+                assert.ok(report.reports[0].message.includes('deprecate'));
+            }));
 
         it('should return error that multiple send calls used in transation', function () {
             const code = funcWith(`

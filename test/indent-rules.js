@@ -178,6 +178,22 @@ describe('Linter', function() {
             assert.equal(report.errorCount, 0);
         });
 
+        it('should raise error when line indent is not correct for function with for assembly statement', function () {
+            const code = '\n'                       // 1
+                + 'contract A {\n'                  // 2
+                + '    function A() private { \n'   // 3
+                + '        assembly { \n'           // 4
+                + '         {} \n'                  // 5
+                + '        } \n'                    // 6
+                + '    }\n'                         // 7
+                + '}\n';                            // 8
+
+            const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.messages[0].message.includes('Indentation is incorrect'));
+        });
+
         it('should not raise error when line indent is correct for function with for if-else statement', function () {
             const code = '\n'                       // 1
                 + 'contract A {\n'                  // 2
