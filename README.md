@@ -65,20 +65,20 @@ Disable validation on next line
 
 Disable validation of fixed compiler version validation on next line
  
-```javascript
+```text
   // solhint-disable-next-line compiler-fixed, compiler-gt-0_4
   pragma solidity ^0.4.4; 
 ```
 
 Disable validation on current line
 
-```javascript
+```text
   pragma solidity ^0.4.4; // solhint-disable-line
 ```
 
 Disable validation of fixed compiler version validation on current line 
 
-```javascript
+```text
   pragma solidity ^0.4.4; // solhint-disable-line compiler-fixed, compiler-gt-0_4
 ```
 
