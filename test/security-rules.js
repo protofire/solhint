@@ -44,7 +44,7 @@ describe('Linter', function() {
 
             const report = linter.processStr(code, config());
 
-            assert.equal(report.errorCount, 1);
+            assert.equal(report.warningCount, 1);
             assert.ok(report.reports[0].message.includes('visibility'));
         });
 
