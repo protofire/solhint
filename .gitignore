@@ -4,4 +4,4 @@
 test2.sol
 convertLib.sol
 package-lock.json
-/lib/grammar/Solidity.g4
+lib/grammar/Solidity.g4
