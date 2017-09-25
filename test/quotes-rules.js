@@ -51,14 +51,21 @@ describe('Linter', function() {
             assert.ok(report.messages[0].message.includes('double quotes'));
         });
 
-        it('should raise quotes error in assembly clause', function () {
-            const code = funcWith('assembly { \'abc\' }');
+        const ERROR_ASSEMBLY_CLAUSES = [
+            'assembly { \'abc\' }',
+            'assembly { dataSize(\'uint\') }',
+            'assembly { linkerSymbol(\'uint\') }'
+        ];
 
-            const report = linter.processStr(code, config());
+        ERROR_ASSEMBLY_CLAUSES.forEach(curText =>
+            it(`should raise quotes error in assembly clause ${curText}`, function () {
+                const code = funcWith(curText);
 
-            assert.equal(report.errorCount, 1);
-            assert.ok(report.messages[0].message.includes('double quotes'));
-        });
+                const report = linter.processStr(code, config());
+
+                assert.equal(report.errorCount, 1);
+                assert.ok(report.messages[0].message.includes('double quotes'));
+            }));
 
     });
 
