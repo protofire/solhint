@@ -1,6 +1,6 @@
 {
   "name": "solhint",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Solidity Code Linter",
   "main": "solhint.js",
   "scripts": {
