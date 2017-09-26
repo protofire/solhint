@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+//#!/usr/bin/env node
 
 const program = require('commander');
 const linter = require('./lib/index');
@@ -9,7 +9,7 @@ const process = require('process');
 
 function init () {
     program
-        .version('1.0.0');
+        .version('1.0.13');
 
     program
         .usage('[options] <file> [...other_files]')
