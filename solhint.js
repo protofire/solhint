@@ -9,7 +9,7 @@ const process = require('process');
 
 function init () {
     program
-        .version('1.0.13');
+        .version('1.0.14');
 
     program
         .usage('[options] <file> [...other_files]')
