@@ -35,16 +35,19 @@ function init () {
         && program.help();
 }
 
-async function execMainAction () {
+function execMainAction () {
     const pathPromises = program
         .args
         .filter(i => typeof(i) === 'string')
         .map(processPath);
 
-    const reports = _.flatten(await Promise.all(pathPromises));
-
-    printReports(reports, program.formatter);
-    exitWithCode(reports);
+    Promise
+        .all(pathPromises)
+        .then(items => _.flatten(items))
+        .then(reports => {
+            printReports(reports, program.formatter);
+            exitWithCode(reports);
+        });
 }
 
 function processStdin(options) {
