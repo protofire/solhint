@@ -1,13 +1,13 @@
 {
   "name": "solhint",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "description": "Solidity Code Linter",
   "main": "solhint.js",
   "keywords": [
     "solidity",
     "linter",
     "security-scanner",
-    "etherium",
+    "ethereum",
     "ast",
     "developer-tools",
     "code-quality",
