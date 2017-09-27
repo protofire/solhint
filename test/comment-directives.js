@@ -1,4 +1,5 @@
-const assert = require('assert');
+const { noIndent } = require('./common/configs');
+const { assertNoErrors, assertErrorCount, assertThatReportHas } = require('./common/asserts');
 const linter = require('./../lib/index');
 
 
@@ -8,13 +9,13 @@ describe('Linter', function() {
         it('should disable fixed compiler error', function () {
             const report = linter.processStr('pragma solidity ^0.4.4; // solhint-disable-line');
 
-            assert.equal(report.errorCount, 0);
+            assertNoErrors(report);
         });
 
         it('should disable fixed compiler error using multiline comment', function () {
             const report = linter.processStr('pragma solidity ^0.4.4; /* solhint-disable-line */');
 
-            assert.equal(report.errorCount, 0);
+            assertNoErrors(report);
         });
 
         it('should disable only one compiler error', function () {
@@ -22,9 +23,9 @@ describe('Linter', function() {
                 // solhint-disable-next-line
                 pragma solidity ^0.4.4; 
                 pragma solidity 0.3.4;
-            `, config());
+            `, noIndent());
 
-            assert.equal(report.errorCount, 1);
+            assertErrorCount(report, 1);
         });
 
         it('should disable only one compiler error using multiline comment', function () {
@@ -32,9 +33,9 @@ describe('Linter', function() {
                 /* solhint-disable-next-line */
                 pragma solidity ^0.4.4; 
                 pragma solidity 0.3.4;
-            `, config());
+            `, noIndent());
 
-            assert.equal(report.errorCount, 1);
+            assertErrorCount(report, 1);
         });
 
         it('should disable only compiler version error', function () {
@@ -42,10 +43,10 @@ describe('Linter', function() {
                 // solhint-disable compiler-gt-0_4
                 pragma solidity ^0.4.4; 
                 pragma solidity 0.3.4; // disabled error: Compiler version must be greater that 0.4
-            `, config());
+            `, noIndent());
 
-            assert.equal(report.errorCount, 1);
-            assert.ok(report.reports[0].message.includes('Compiler version must be fixed'));
+            assertErrorCount(report, 1);
+            assertThatReportHas(report, 0, 'Compiler version must be fixed');
         });
 
 
@@ -55,10 +56,10 @@ describe('Linter', function() {
                 pragma solidity 0.3.4;
                 /* solhint-enable compiler-gt-0_4 */
                 pragma solidity 0.3.4; 
-            `, config());
+            `, noIndent());
 
-            assert.equal(report.errorCount, 1);
-            assert.ok(report.reports[0].message.includes('0.4'));
+            assertErrorCount(report, 1);
+            assertThatReportHas(report, 0, '0.4');
         });
 
         it('should not disable fixed compiler error', function () {
@@ -67,10 +68,10 @@ describe('Linter', function() {
                 pragma solidity ^0.4.4;
                 /* solhint-enable compiler-gt-0_4 */
                 pragma solidity ^0.4.4; 
-            `, config());
+            `, noIndent());
 
-            assert.equal(report.errorCount, 2);
-            assert.ok(report.reports[0].message.includes('fixed'));
+            assertErrorCount(report, 2);
+            assertThatReportHas(report, 0, 'fixed');
         });
 
         it('should disable all errors', function () {
@@ -78,22 +79,16 @@ describe('Linter', function() {
                 /* solhint-disable */
                 pragma solidity ^0.4.4;
                 pragma solidity 0.3.4; 
-            `, config());
+            `, noIndent());
 
-            assert.equal(report.errorCount, 0);
+            assertNoErrors(report);
         });
 
         it('should not erase error', function () {
             const report = linter.processStr('/* solhint-disable-next-line */');
 
-            assert.equal(report.errorCount, 0);
+            assertNoErrors(report);
         });
 
     });
-
-    function config() {
-        return {
-            rules: { indent: false }
-        };
-    }
 });
