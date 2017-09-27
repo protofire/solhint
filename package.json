@@ -17,7 +17,7 @@
   "repository": "https://github.com/tokenhouse/solhint",
   "scripts": {
     "exec-tests": "nyc -x \"**/grammar/**\" mocha && nyc report --reporter=text-lcov | coveralls",
-    "test": "eslint *.js lib/*.js lib/rules/*.js test/*.js && npm run exec-tests"
+    "test": "eslint *.js lib/*.js lib/rules/*.js lib/rules/**/*.js test/*.js && npm run exec-tests"
   },
   "bin": {
     "solhint": "solhint.js"
