@@ -14,7 +14,7 @@ function assertErrorMessage(...args) {
         message = args[1];
     }
 
-    const errorMessage = `Report should contain message with text ${message} on ${index} position`;
+    const errorMessage = `Report should contain message with text "${message}" on ${index} position`;
     assert.ok(report.messages[index].message.includes(message), errorMessage);
 }
 

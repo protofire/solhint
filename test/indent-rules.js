@@ -1,5 +1,6 @@
 const assert = require('assert');
 const { assertErrorMessage, assertNoErrors } = require('./common/asserts');
+const { noIndent } = require('./common/configs');
 const linter = require('./../lib/index');
 const { funcWith, contractWith, multiLine } = require('./common/contract-builder');
 
@@ -14,7 +15,7 @@ describe('Linter', function() {
             contract B {}
             `;
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 2);
             assertErrorMessage(report, 0, 'two blank');
@@ -31,7 +32,7 @@ describe('Linter', function() {
             contract C {}
             `;
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assertNoErrors(report);
         });
@@ -39,7 +40,7 @@ describe('Linter', function() {
         it('should raise error about mixed tabs and spaces', function () {
             const code = ' \t import "lib.sol";';
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 1);
             assertErrorMessage(report, 0, 'Mixed tabs and spaces');
@@ -87,7 +88,9 @@ describe('Linter', function() {
                 '    }                             '
             );
 
-            const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
+            const report = linter.processStr(code, {rules:
+                {'separate-by-one-line-in-contract': false, 'no-empty-blocks': false}
+            });
 
             assert.equal(report.errorCount, 5);
             assertErrorMessage(report, 0, 'Expected indentation of 0');
@@ -196,7 +199,9 @@ describe('Linter', function() {
                 '}                                '  // 8
             );
 
-            const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
+            const report = linter.processStr(code, {rules:
+                {'separate-by-one-line-in-contract': false, 'no-empty-blocks': false}
+            });
 
             assert.equal(report.errorCount, 1);
             assertErrorMessage(report, 0, 'Indentation is incorrect');
@@ -252,7 +257,7 @@ describe('Linter', function() {
                 }
             `);
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 1);
             assertErrorMessage(report, 0, 'Open bracket');
@@ -261,7 +266,7 @@ describe('Linter', function() {
         it('should raise error when array declaration has spaces', function () {
             const code = contractWith('uint [] [] private a;');
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 2);
             assertErrorMessage(report, 0, 'Array declaration');
@@ -271,7 +276,7 @@ describe('Linter', function() {
         it('should not raise error for array declaration', function () {
             const code = contractWith('uint[][] private a;');
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assertNoErrors(report);
         });
@@ -283,7 +288,7 @@ describe('Linter', function() {
                 function b() public {}
             `);
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 1);
             assertErrorMessage(report, 0, 'must be separated by one line');
@@ -298,7 +303,7 @@ describe('Linter', function() {
                 function b() public {}
             `);
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assertNoErrors(report);
         });
@@ -314,7 +319,7 @@ describe('Linter', function() {
                 function b() public {}
             `);
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assertNoErrors(report);
         });
@@ -322,7 +327,7 @@ describe('Linter', function() {
         it('should raise error when line length exceed 120', function () {
             const code = ' '.repeat(121);
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 1);
             assertErrorMessage(report, 0, 'Line length must be no more than');
@@ -339,11 +344,4 @@ describe('Linter', function() {
         });
 
     });
-
-    function config() {
-        return {
-            rules: { indent: false }
-        };
-    }
-
 });

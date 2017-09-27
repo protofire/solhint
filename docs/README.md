@@ -147,7 +147,8 @@ Disable all linter rules for code fragment
  | **expression-indent**         | Expression indentation is incorrect.               |
  | **statement-indent**          | Statement indentation is incorrect.                |
  | **max-line-length**           | Line length must be no more than 120 but current length is 121. |
- | **payable-fallbakc**          | When fallback is not payable you will not be able to receive ethers |
+ | **payable-fallback**          | When fallback is not payable you will not be able to receive ethers |
+ | **no-empty-blocks**           | Code contains empty block                          |
  
 ### Licence
 

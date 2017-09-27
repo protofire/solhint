@@ -2,7 +2,10 @@
 
 function noIndent() {
     return {
-        rules: { indent: false }
+        rules: {
+            'indent': false,
+            'no-empty-blocks': false
+        }
     };
 }
 
