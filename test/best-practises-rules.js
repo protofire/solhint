@@ -13,7 +13,7 @@ describe('Linter', function() {
             const report = linter.processStr(code, noIndent());
 
             assertWarnsCount(report, 1);
-            assertErrorMessage(report, 0, 'payable');
+            assertErrorMessage(report, 'payable');
         });
 
         it('should not raise warn when fallback is payable', function () {

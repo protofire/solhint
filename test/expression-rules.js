@@ -2,7 +2,7 @@ const assert = require('assert');
 const linter = require('./../lib/index');
 const { funcWith } = require('./common/contract-builder');
 const { noIndent } = require('./common/configs');
-
+const { assertNoErrors } = require('./common/asserts');
 
 describe('Linter - Expression Align Rules', function() {
 
@@ -62,7 +62,7 @@ describe('Linter - Expression Align Rules', function() {
 
                 const report = linter.processStr(code, noIndent());
 
-                assert.equal(report.errorCount, 0);
+                assertNoErrors(report, 0);
             })
         );
     });
