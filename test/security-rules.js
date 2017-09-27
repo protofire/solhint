@@ -127,6 +127,17 @@ describe('Linter', function() {
             assert.ok(report.reports[0].message.includes('multiple'));
         });
 
+        it('should return error that used tx.origin', function () {
+            const code = funcWith(`
+              uint aRes = tx.origin;
+            `);
+
+            const report = linter.processStr(code, config());
+
+            assert.equal(report.errorCount, 1);
+            assert.ok(report.reports[0].message.includes('origin'));
+        });
+
     });
 
     function config() {
