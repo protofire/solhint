@@ -11,6 +11,7 @@ function contractWith(code) {
     `;
 }
 
+
 function funcWith(statements) {
     return contractWith(`
       function b() public {
@@ -20,4 +21,9 @@ function funcWith(statements) {
 }
 
 
-module.exports = { contractWith, funcWith };
+function multiLine(...args) {
+    return args.join('\n');
+}
+
+
+module.exports = { contractWith, funcWith, multiLine };

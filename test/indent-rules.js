@@ -1,6 +1,6 @@
 const assert = require('assert');
 const linter = require('./../lib/index');
-const { funcWith, contractWith } = require('./contract-builder');
+const { funcWith, contractWith, multiLine } = require('./contract-builder');
 
 
 describe('Linter', function() {
@@ -63,10 +63,11 @@ describe('Linter', function() {
         });
 
         it('should raise error when line indent is incorrect', function () {
-            const code = '\n'
-                + '    contract A {\n'
-                + '        uint private a;\n'
-                + '    }\n';
+            const code = multiLine(
+                '    contract A {        ',
+                '        uint private a; ',
+                '    }                   '
+            );
 
             const report = linter.processStr(code);
 
@@ -77,12 +78,13 @@ describe('Linter', function() {
         });
 
         it('should raise error when line indent is incorrect for function', function () {
-            const code = '\n'
-                + '    contract A {\n'
-                + '        uint private a;\n'
-                + '        function A() private { \n'
-                + '      }\n'
-                + '    }\n';
+            const code = multiLine(
+                '    contract A {                  ',
+                '        uint private a;           ',
+                '        function A() private {    ',
+                '      }                           ',
+                '    }                             '
+            );
 
             const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
@@ -95,14 +97,15 @@ describe('Linter', function() {
         });
 
         it('should raise error when line indent is incorrect for function with for loop', function () {
-            const code = '\n'                           // 1
-                + '    contract A {\n'                  // 2
-                + '        uint private a;\n'           // 3
-                + '        function A() private { \n'   // 4
-                + '    for (uint a; a < b; a += 1) \n'  // 5
-                + '            break; \n'               // 6
-                + '      }\n'                           // 7
-                + '    }\n';                            // 8
+            const code = multiLine('                     ', // 1
+                '    contract A {                        ', // 2
+                '        uint private a;                 ', // 3
+                '        function A() private {          ', // 4
+                '    for (uint a; a < b; a += 1)         ', // 5
+                '            break;                      ', // 6
+                '      }                                 ', // 7
+                '    }                                   '  // 8
+            );
 
             const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
