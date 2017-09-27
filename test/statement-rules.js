@@ -1,6 +1,6 @@
 const assert = require('assert');
 const linter = require('./../lib/index');
-const { funcWith } = require('./contract-builder');
+const { funcWith, multiLine } = require('./contract-builder');
 
 
 describe('Linter - Statement Align Rules', function() {
@@ -19,16 +19,20 @@ describe('Linter - Statement Align Rules', function() {
             'for (uint i = 0;i += 1;) {}',
             'for (;a < b; i += 1) {}',
             'for (uint i = 0;a < b; i += 1) {}',
-            'if (a < b) {\n' +
-            '  test1(); \n' +
-            '} \n' +
-            'else {\n' +
-            '  test2();\n' +
-            '}',
-            'do { \n' +
-            '  test1(); \n' +
-            '} \n' +
-            'while (a < b); \n'
+            multiLine(
+                'if (a < b) { ',
+                '  test1();   ',
+                '}            ',
+                'else {       ',
+                '  test2();   ',
+                '}            '
+            ),
+            multiLine(
+                'do {           ',
+                '  test1();     ',
+                '}              ',
+                'while (a < b); '
+            )
         ];
 
         INCORRECT_STATEMENTS.forEach(curStatement =>
@@ -57,14 +61,18 @@ describe('Linter - Statement Align Rules', function() {
             'for (uint i = 0; i += 1;) {}',
             'for (; a < b; i += 1) {}',
             'for (uint i = 0; a < b; i += 1) {}',
-            'if (a < b) {\n' +
-            '  test1(); \n' +
-            '} else {\n' +
-            '  test2();\n' +
-            '}',
-            'do { \n' +
-            '  test1(); \n' +
-            '} while (a < b); \n'
+            multiLine(
+                'if (a < b) { ',
+                '  test1();   ',
+                '} else {     ',
+                '  test2();   ',
+                '}            '
+            ),
+            multiLine(
+                'do {             ',
+                '  test1();       ',
+                '} while (a < b); '
+            )
         ];
 
         CORRECT_STATEMENTS.forEach(curStatement =>
