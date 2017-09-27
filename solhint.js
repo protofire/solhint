@@ -77,7 +77,7 @@ function writeSampleConfigFile() {
     console.log('Configuration file created!');
 }
 
-const readConfig = _.curry(function () {
+const readConfig = _.memoize(function () {
     try {
         const configStr = fs.readFileSync('.solhint.json').toString();
         return JSON.parse(configStr);
