@@ -12,8 +12,18 @@ function assertNoErrors(report) {
 
 
 function assertNoWarnings(report) {
-    assert.equal(report.errorCount, 0);
+    assert.equal(report.warningCount, 0);
 }
 
 
-module.exports = { assertThatReportHas, assertNoWarnings, assertNoErrors };
+function assertErrorCount(report, count) {
+    assert.equal(report.errorCount, count);
+}
+
+
+function assertWarnsCount(report, count) {
+    assert.equal(report.warningCount, count);
+}
+
+
+module.exports = { assertThatReportHas, assertNoWarnings, assertNoErrors, assertErrorCount, assertWarnsCount };
