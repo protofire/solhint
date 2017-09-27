@@ -137,7 +137,7 @@ describe('Linter', function() {
             const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 1);
-            assert.ok(report.reports[0].message.includes('origin'));
+            assertErrorMessage(report, 'origin');
         });
 
         it('should return warn when business logic rely on time', function () {
@@ -148,7 +148,7 @@ describe('Linter', function() {
             const report = linter.processStr(code, noIndent());
 
             assertWarnsCount(report, 1);
-            assertErrorMessage(report, 0, 'time');
+            assertErrorMessage(report, 'time');
         });
 
     });
