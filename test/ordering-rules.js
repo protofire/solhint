@@ -1,6 +1,7 @@
 const assert = require('assert');
 const linter = require('./../lib/index');
 const contractWith = require('./common/contract-builder').contractWith;
+const { noIndent } = require('./common/configs');
 
 
 describe('Linter', function() {
@@ -9,7 +10,7 @@ describe('Linter', function() {
         it('should raise visibility modifier error', function () {
             const code = contractWith('function a() ownable() public payable {}');
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 1);
             assert.ok(report.messages[0].message.includes('Visibility'));
@@ -23,7 +24,7 @@ describe('Linter', function() {
               import "lib.sol";
             `;
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 1);
             assert.ok(report.messages[0].message.includes('Import'));
@@ -38,7 +39,7 @@ describe('Linter', function() {
                 contract A {}
             `;
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 0);
         });
@@ -49,7 +50,7 @@ describe('Linter', function() {
                 function () public payable {}
             `);
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 1);
             assert.ok(report.messages[0].message.includes('Function order is incorrect'));
@@ -61,7 +62,7 @@ describe('Linter', function() {
                 function c() external {}
             `);
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 1);
             assert.ok(report.messages[0].message.includes('Function order is incorrect'));
@@ -73,16 +74,10 @@ describe('Linter', function() {
                 function () public payable {}
             `);
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 0);
         });
 
     });
-
-    function config() {
-        return {
-            rules: { indent: false }
-        };
-    }
 });

@@ -1,6 +1,7 @@
 const assert = require('assert');
 const linter = require('./../lib/index');
 const { funcWith } = require('./common/contract-builder');
+const { noIndent } = require('./common/configs');
 
 
 describe('Linter - Expression Align Rules', function() {
@@ -27,7 +28,7 @@ describe('Linter - Expression Align Rules', function() {
             it(`should raise expression indentation error for ${curExpr}`, function () {
                 const code = funcWith(curExpr + ';');
 
-                const report = linter.processStr(code, config());
+                const report = linter.processStr(code, noIndent());
 
                 assert.equal(report.errorCount, 1);
                 assert.ok(report.messages[0].message.includes('Expression indentation is incorrect'));
@@ -59,16 +60,11 @@ describe('Linter - Expression Align Rules', function() {
             it(`should not raise expression indentation error for ${curExpr}`, function () {
                 const code = funcWith(curExpr + ';');
 
-                const report = linter.processStr(code, config());
+                const report = linter.processStr(code, noIndent());
 
                 assert.equal(report.errorCount, 0);
             })
         );
     });
 
-    function config() {
-        return {
-            rules: { indent: false }
-        };
-    }
 });

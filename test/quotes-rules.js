@@ -1,6 +1,7 @@
 const assert = require('assert');
 const linter = require('./../lib/index');
 const { contractWith, funcWith } = require('./common/contract-builder');
+const { noIndent } = require('./common/configs');
 
 
 describe('Linter', function() {
@@ -9,7 +10,7 @@ describe('Linter', function() {
         it('should raise quotes error', function () {
             const code = contractWith('string private a = \'test\';');
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 1);
             assert.ok(report.messages[0].message.includes('double quotes'));
@@ -61,18 +62,11 @@ describe('Linter', function() {
             it(`should raise quotes error in assembly clause ${curText}`, function () {
                 const code = funcWith(curText);
 
-                const report = linter.processStr(code, config());
+                const report = linter.processStr(code, noIndent());
 
                 assert.equal(report.errorCount, 1);
                 assert.ok(report.messages[0].message.includes('double quotes'));
             }));
 
     });
-
-    function config() {
-        return {
-            rules: { indent: false }
-        };
-    }
-
 });

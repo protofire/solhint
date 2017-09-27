@@ -2,6 +2,7 @@ const assert = require('assert');
 const linter = require('./../lib/index');
 const contractWith = require('./common/contract-builder').contractWith;
 const funcWith = require('./common/contract-builder').funcWith;
+const { noIndent } = require('./common/configs');
 
 
 describe('Linter', function() {
@@ -24,7 +25,7 @@ describe('Linter', function() {
         it('should return "send" call verification error', function () {
             const code = funcWith('x.send(55);');
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 1);
             assert.ok(report.reports[0].message.includes('send'));
@@ -33,7 +34,7 @@ describe('Linter', function() {
         it('should return "call.value" verification error', function () {
             const code = funcWith('x.call.value(55)();');
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 1);
             assert.ok(report.reports[0].message.includes('call.value'));
@@ -42,7 +43,7 @@ describe('Linter', function() {
         it('should return required visibility error', function () {
             const code = contractWith('function b() { }');
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.warningCount, 1);
             assert.ok(report.reports[0].message.includes('visibility'));
@@ -51,7 +52,7 @@ describe('Linter', function() {
         it('should return required visibility error for state', function () {
             const code = contractWith('uint a;');
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.warningCount, 1);
             assert.ok(report.reports[0].message.includes('visibility'));
@@ -64,7 +65,7 @@ describe('Linter', function() {
                 make3();
             }`);
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.warningCount, 1);
             assert.ok(report.reports[0].message.includes('Fallback'));
@@ -76,7 +77,7 @@ describe('Linter', function() {
               function name1() public payable { }
             `);
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.warningCount, 1);
             assert.ok(report.reports[0].message.includes('Event and function names must be different'));
@@ -88,7 +89,7 @@ describe('Linter', function() {
               event Name1();
             `);
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.warningCount, 1);
             assert.ok(report.reports[0].message.includes('Event and function names must be different'));
@@ -109,7 +110,7 @@ describe('Linter', function() {
             it(`should return error that used deprecations ${curText}`, function () {
                 const code = funcWith(curText);
 
-                const report = linter.processStr(code, config());
+                const report = linter.processStr(code, noIndent());
 
                 assert.equal(report.errorCount, 1);
                 assert.ok(report.reports[0].message.includes('deprecate'));
@@ -121,7 +122,7 @@ describe('Linter', function() {
               uint bRes = b.send(2);
             `);
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 1);
             assert.ok(report.reports[0].message.includes('multiple'));
@@ -132,17 +133,11 @@ describe('Linter', function() {
               uint aRes = tx.origin;
             `);
 
-            const report = linter.processStr(code, config());
+            const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 1);
             assert.ok(report.reports[0].message.includes('origin'));
         });
 
     });
-
-    function config() {
-        return {
-            rules: { indent: false }
-        };
-    }
 });

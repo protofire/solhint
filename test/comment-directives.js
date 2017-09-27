@@ -1,5 +1,5 @@
 const { noIndent } = require('./common/configs');
-const { assertNoErrors, assertErrorCount, assertThatReportHas } = require('./common/asserts');
+const { assertNoErrors, assertErrorCount, assertErrorMessage } = require('./common/asserts');
 const linter = require('./../lib/index');
 
 
@@ -46,7 +46,7 @@ describe('Linter', function() {
             `, noIndent());
 
             assertErrorCount(report, 1);
-            assertThatReportHas(report, 0, 'Compiler version must be fixed');
+            assertErrorMessage(report, 0, 'Compiler version must be fixed');
         });
 
 
@@ -59,7 +59,7 @@ describe('Linter', function() {
             `, noIndent());
 
             assertErrorCount(report, 1);
-            assertThatReportHas(report, 0, '0.4');
+            assertErrorMessage(report, 0, '0.4');
         });
 
         it('should not disable fixed compiler error', function () {
@@ -71,7 +71,7 @@ describe('Linter', function() {
             `, noIndent());
 
             assertErrorCount(report, 2);
-            assertThatReportHas(report, 0, 'fixed');
+            assertErrorMessage(report, 0, 'fixed');
         });
 
         it('should disable all errors', function () {

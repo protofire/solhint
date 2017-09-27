@@ -1,7 +1,7 @@
 const assert = require('assert');
 
 
-function assertThatReportHas(report, index, message) {
+function assertErrorMessage(report, index, message) {
     assert.ok(report.messages[index].message.includes(message));
 }
 
@@ -26,4 +26,4 @@ function assertWarnsCount(report, count) {
 }
 
 
-module.exports = { assertThatReportHas, assertNoWarnings, assertNoErrors, assertErrorCount, assertWarnsCount };
+module.exports = { assertErrorMessage, assertNoWarnings, assertNoErrors, assertErrorCount, assertWarnsCount };

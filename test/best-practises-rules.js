@@ -1,4 +1,4 @@
-const { assertNoWarnings, assertThatReportHas, assertWarnsCount } = require('./common/asserts');
+const { assertNoWarnings, assertErrorMessage, assertWarnsCount } = require('./common/asserts');
 const { noIndent } = require('./common/configs');
 const linter = require('./../lib/index');
 const { contractWith } = require('./common/contract-builder');
@@ -13,7 +13,7 @@ describe('Linter', function() {
             const report = linter.processStr(code, noIndent());
 
             assertWarnsCount(report, 1);
-            assertThatReportHas(report, 0, 'payable');
+            assertErrorMessage(report, 0, 'payable');
         });
 
         it('should not raise warn when fallback is payable', function () {

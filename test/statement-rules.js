@@ -1,6 +1,7 @@
 const assert = require('assert');
 const linter = require('./../lib/index');
 const { funcWith, multiLine } = require('./common/contract-builder');
+const { noIndent } = require('./common/configs');
 
 
 describe('Linter - Statement Align Rules', function() {
@@ -39,7 +40,7 @@ describe('Linter - Statement Align Rules', function() {
             it(`${label(curStatement)} should raise statement indentation error`, function () {
                 const code = funcWith(curStatement);
 
-                const report = linter.processStr(code, config());
+                const report = linter.processStr(code, noIndent());
 
                 assert.equal(report.errorCount, 1);
                 assert.ok(report.messages[0].message.includes('Statement indentation is incorrect'));
@@ -79,18 +80,12 @@ describe('Linter - Statement Align Rules', function() {
             it(`${label(curStatement)} should not raise statement indentation error`, function () {
                 const code = funcWith(curStatement);
 
-                const report = linter.processStr(code, config());
+                const report = linter.processStr(code, noIndent());
 
                 assert.equal(report.errorCount, 0);
             })
         );
     });
-
-    function config() {
-        return {
-            rules: { indent: false }
-        };
-    }
 
     function label (data) {
         return data.split('\n')[0];
