@@ -15,6 +15,14 @@ describe('Linter', function() {
             assert.ok(report.messages[0].message.includes('payable'));
         });
 
+        it('should not raise warn when fallback is payable', function () {
+            const code = contractWith('function () public payable {}');
+
+            const report = linter.processStr(code, config());
+
+            assert.equal(report.warningCount, 0);
+        });
+
     });
 
     function config() {
