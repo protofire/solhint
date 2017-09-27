@@ -3,6 +3,7 @@ const linter = require('./../lib/index');
 const contractWith = require('./common/contract-builder').contractWith;
 const funcWith = require('./common/contract-builder').funcWith;
 const { noIndent } = require('./common/configs');
+const { assertWarnsCount, assertErrorMessage } = require('./common/asserts');
 
 
 describe('Linter', function() {
@@ -137,6 +138,17 @@ describe('Linter', function() {
 
             assert.equal(report.errorCount, 1);
             assert.ok(report.reports[0].message.includes('origin'));
+        });
+
+        it('should return warn when business logic rely on time', function () {
+            const code = funcWith(`
+              now >= start + daysAfter * 1 days;
+            `);
+
+            const report = linter.processStr(code, noIndent());
+
+            assertWarnsCount(report, 1);
+            assertErrorMessage(report, 0, 'time');
         });
 
     });
