@@ -119,14 +119,15 @@ describe('Linter', function() {
         });
 
         it('should raise error when line indent is incorrect for function with for while loop', function () {
-            const code = '\n'                           // 1
-                + '    contract A {\n'                  // 2
-                + '        uint private a;\n'           // 3
-                + '        function A() private { \n'   // 4
-                + '    while (a < b) \n'                // 5
-                + '            return; \n'              // 6
-                + '      }\n'                           // 7
-                + '    }\n';                            // 8
+            const code = multiLine('                   ', // 1
+                '    contract A {                      ', // 2
+                '        uint private a;               ', // 3
+                '        function A() private {        ', // 4
+                '    while (a < b)                     ', // 5
+                '            return;                   ', // 6
+                '      }                               ', // 7
+                '    }                                 '  // 8
+            );
 
             const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
@@ -140,17 +141,18 @@ describe('Linter', function() {
         });
 
         it('should raise error when line indent is incorrect for function with for if statement', function () {
-            const code = '\n'                           // 1
-                + '    contract A {\n'                  // 2
-                + '        uint private a;\n'           // 3
-                + '        function A() private { \n'   // 4
-                + '    if (a < b) {\n'                  // 5
-                + '            a += 1; \n'              // 6
-                + '        b -= 1; \n'                  // 7
-                + '            continue; \n'            // 8
-                + '        } \n'                        // 9
-                + '      }\n'                           // 10
-                + '    }\n';                            // 11
+            const code = multiLine('                  ', // 1
+                '    contract A {                     ', // 2
+                '        uint private a;              ', // 3
+                '        function A() private {       ', // 4
+                '    if (a < b) {                     ', // 5
+                '            a += 1;                  ', // 6
+                '        b -= 1;                      ', // 7
+                '            continue;                ', // 8
+                '        }                            ', // 9
+                '      }                              ', // 10
+                '    }                                '  // 11
+            );
 
             const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
@@ -165,16 +167,17 @@ describe('Linter', function() {
         });
 
         it('should not raise error when line indent is correct for function with for if-else statement', function () {
-            const code = '\n'                       // 1
-                + 'contract A {\n'                  // 2
-                + '    function A() private { \n'   // 3
-                + '        if (a < b) {\n'          // 4
-                + '            a += 1; \n'          // 5
-                + '        } else { \n'             // 6
-                + '            b -= 1; \n'          // 7
-                + '        } \n'                    // 8
-                + '    }\n'                         // 9
-                + '}\n';                            // 10
+            const code = multiLine('              ', // 1
+                'contract A {                     ', // 2
+                '    function A() private {       ', // 3
+                '        if (a < b) {             ', // 4
+                '            a += 1;              ', // 5
+                '        } else {                 ', // 6
+                '            b -= 1;              ', // 7
+                '        }                        ', // 8
+                '    }                            ', // 9
+                '}                                '  // 10
+            );
 
             const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
@@ -182,14 +185,15 @@ describe('Linter', function() {
         });
 
         it('should raise error when line indent is not correct for function with for assembly statement', function () {
-            const code = '\n'                       // 1
-                + 'contract A {\n'                  // 2
-                + '    function A() private { \n'   // 3
-                + '        assembly { \n'           // 4
-                + '         {} \n'                  // 5
-                + '        } \n'                    // 6
-                + '    }\n'                         // 7
-                + '}\n';                            // 8
+            const code = multiLine('              ', // 1
+                'contract A {                     ', // 2
+                '    function A() private {       ', // 3
+                '        assembly {               ', // 4
+                '         {}                      ', // 5
+                '        }                        ', // 6
+                '    }                            ', // 7
+                '}                                '  // 8
+            );
 
             const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
@@ -198,18 +202,19 @@ describe('Linter', function() {
         });
 
         it('should not raise error when line indent is correct for function with for if-else statement', function () {
-            const code = '\n'                       // 1
-                + 'contract A {\n'                  // 2
-                + '    function A() private { \n'   // 3
-                + '        if ( \n'                 // 4
-                + '            a < b \n'            // 5
-                + '        ) {\n'                   // 6
-                + '            a += 1; \n'          // 7
-                + '        } else { \n'             // 8
-                + '            b -= 1; \n'          // 9
-                + '        } \n'                    // 10
-                + '    }\n'                         // 11
-                + '}\n';                            // 12
+            const code = multiLine('               ', // 1
+                'contract A {                      ', // 2
+                '    function A() private {        ', // 3
+                '        if (                      ', // 4
+                '            a < b                 ', // 5
+                '        ) {                       ', // 6
+                '            a += 1;               ', // 7
+                '        } else {                  ', // 8
+                '            b -= 1;               ', // 9
+                '        }                         ', // 10
+                '    }                             ', // 11
+                '}                                 '  // 12
+            );
 
             const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
@@ -217,13 +222,14 @@ describe('Linter', function() {
         });
 
         it('should not raise error for custom configured indent rules', function () {
-            const code = '\n' +
-                'contract A {\n' +
-                '\tuint private a = 0;\n' +
-                '\tfunction A() {\n' +
-                '\t\t\tuint a = 5;\n' +
-                '\t}\n' +
-                '}';
+            const code = multiLine('',
+                'contract A {              ',
+                '\tuint private a = 0;     ',
+                '\tfunction A() {          ',
+                '\t\t\tuint a = 5;         ',
+                '\t}                       ',
+                '}                         '
+            );
 
             const report = linter.processStr(code, {
                 rules: {
