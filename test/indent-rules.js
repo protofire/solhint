@@ -16,7 +16,7 @@ describe('Linter', function() {
             const report = linter.processStr(code, config());
 
             assert.equal(report.errorCount, 2);
-            assert.ok(report.messages[0].message.includes('two blank'));
+            assertThatReportHas(report, 0, 'two blank');
         });
 
         it('should not raise error when contract do not surrounds with two blank lines', function () {
@@ -41,7 +41,7 @@ describe('Linter', function() {
             const report = linter.processStr(code, config());
 
             assert.equal(report.errorCount, 1);
-            assert.ok(report.messages[0].message.includes('Mixed tabs and spaces'));
+            assertThatReportHas(report, 0, 'Mixed tabs and spaces');
         });
 
         it('should raise error when line indent is incorrect', function () {
@@ -50,7 +50,7 @@ describe('Linter', function() {
             const report = linter.processStr(code, {rules: { indent:['error', 'tabs'] } });
 
             assert.equal(report.errorCount, 1);
-            assert.ok(report.messages[0].message.includes('indent'));
+            assertThatReportHas(report, 0, 'indent');
         });
 
         it('should raise error when line indent is incorrect', function () {
@@ -59,7 +59,7 @@ describe('Linter', function() {
             const report = linter.processStr(code, {rules: { indent:['error', 'tabs'] } });
 
             assert.equal(report.errorCount, 1);
-            assert.ok(report.messages[0].message.includes('indent'));
+            assertThatReportHas(report, 0, 'indent');
         });
 
         it('should raise error when line indent is incorrect', function () {
@@ -72,9 +72,9 @@ describe('Linter', function() {
             const report = linter.processStr(code);
 
             assert.equal(report.errorCount, 3);
-            assert.ok(report.messages[0].message.includes('0'));
-            assert.ok(report.messages[1].message.includes('4'));
-            assert.ok(report.messages[2].message.includes('0'));
+            assertThatReportHas(report, 0, '0');
+            assertThatReportHas(report, 1, '4');
+            assertThatReportHas(report, 2, '0');
         });
 
         it('should raise error when line indent is incorrect for function', function () {
@@ -89,11 +89,11 @@ describe('Linter', function() {
             const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
             assert.equal(report.errorCount, 5);
-            assert.ok(report.messages[0].message.includes('Expected indentation of 0'));
-            assert.ok(report.messages[1].message.includes('Expected indentation of 4'));
-            assert.ok(report.messages[2].message.includes('Expected indentation of 4'));
-            assert.ok(report.messages[3].message.includes('Expected indentation of 4'));
-            assert.ok(report.messages[4].message.includes('Expected indentation of 0'));
+            assertThatReportHas(report, 0, 'Expected indentation of 0');
+            assertThatReportHas(report, 1, 'Expected indentation of 4');
+            assertThatReportHas(report, 2, 'Expected indentation of 4');
+            assertThatReportHas(report, 3, 'Expected indentation of 4');
+            assertThatReportHas(report, 4, 'Expected indentation of 0');
         });
 
         it('should raise error when line indent is incorrect for function with for loop', function () {
@@ -110,12 +110,12 @@ describe('Linter', function() {
             const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
             assert.equal(report.errorCount, 6);
-            assert.ok(report.messages[0].message.includes('Expected indentation of 0'));
-            assert.ok(report.messages[1].message.includes('Expected indentation of 4'));
-            assert.ok(report.messages[2].message.includes('Expected indentation of 4'));
-            assert.ok(report.messages[3].message.includes('Expected indentation of 8'));
-            assert.ok(report.messages[4].message.includes('Expected indentation of 4'));
-            assert.ok(report.messages[5].message.includes('Expected indentation of 0 spaces'));
+            assertThatReportHas(report, 0, 'Expected indentation of 0');
+            assertThatReportHas(report, 1, 'Expected indentation of 4');
+            assertThatReportHas(report, 2, 'Expected indentation of 4');
+            assertThatReportHas(report, 3, 'Expected indentation of 8');
+            assertThatReportHas(report, 4, 'Expected indentation of 4');
+            assertThatReportHas(report, 5, 'Expected indentation of 0 spaces');
         });
 
         it('should raise error when line indent is incorrect for function with for while loop', function () {
@@ -132,12 +132,12 @@ describe('Linter', function() {
             const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
             assert.equal(report.errorCount, 6);
-            assert.ok(report.messages[0].message.includes('Expected indentation of 0 spaces'));
-            assert.ok(report.messages[1].message.includes('Expected indentation of 4'));
-            assert.ok(report.messages[2].message.includes('Expected indentation of 4'));
-            assert.ok(report.messages[3].message.includes('Expected indentation of 8'));
-            assert.ok(report.messages[4].message.includes('Expected indentation of 4'));
-            assert.ok(report.messages[5].message.includes('Expected indentation of 0'));
+            assertThatReportHas(report, 0, 'Expected indentation of 0 spaces');
+            assertThatReportHas(report, 1, 'Expected indentation of 4');
+            assertThatReportHas(report, 2, 'Expected indentation of 4');
+            assertThatReportHas(report, 3, 'Expected indentation of 8');
+            assertThatReportHas(report, 4, 'Expected indentation of 4');
+            assertThatReportHas(report, 5, 'Expected indentation of 0');
         });
 
         it('should raise error when line indent is incorrect for function with for if statement', function () {
@@ -157,13 +157,13 @@ describe('Linter', function() {
             const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
             assert.equal(report.errorCount, 7);
-            assert.ok(report.messages[0].message.includes('Expected indentation of 0 spaces'));
-            assert.ok(report.messages[1].message.includes('Expected indentation of 4'));
-            assert.ok(report.messages[2].message.includes('Expected indentation of 4'));
-            assert.ok(report.messages[3].message.includes('Expected indentation of 8'));
-            assert.ok(report.messages[4].message.includes('Expected indentation of 12'));
-            assert.ok(report.messages[5].message.includes('Expected indentation of 4'));
-            assert.ok(report.messages[6].message.includes('Expected indentation of 0'));
+            assertThatReportHas(report, 0, 'Expected indentation of 0 spaces');
+            assertThatReportHas(report, 1, 'Expected indentation of 4');
+            assertThatReportHas(report, 2, 'Expected indentation of 4');
+            assertThatReportHas(report, 3, 'Expected indentation of 8');
+            assertThatReportHas(report, 4, 'Expected indentation of 12');
+            assertThatReportHas(report, 5, 'Expected indentation of 4');
+            assertThatReportHas(report, 6, 'Expected indentation of 0');
         });
 
         it('should not raise error when line indent is correct for function with for if-else statement', function () {
@@ -198,7 +198,7 @@ describe('Linter', function() {
             const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
             assert.equal(report.errorCount, 1);
-            assert.ok(report.messages[0].message.includes('Indentation is incorrect'));
+            assertThatReportHas(report, 0, 'Indentation is incorrect');
         });
 
         it('should not raise error when line indent is correct for function with for if-else statement', function () {
@@ -240,7 +240,7 @@ describe('Linter', function() {
             });
 
             assert.equal(report.warningCount, 1);
-            assert.ok(report.messages[0].message.includes('Expected indentation of 2 tabs'));
+            assertThatReportHas(report, 0, 'Expected indentation of 2 tabs');
         });
 
         it('should raise error when bracket incorrect aligned', function () {
@@ -254,7 +254,7 @@ describe('Linter', function() {
             const report = linter.processStr(code, config());
 
             assert.equal(report.errorCount, 1);
-            assert.ok(report.messages[0].message.includes('Open bracket'));
+            assertThatReportHas(report, 0, 'Open bracket');
         });
 
         it('should raise error when array declaration has spaces', function () {
@@ -263,8 +263,8 @@ describe('Linter', function() {
             const report = linter.processStr(code, config());
 
             assert.equal(report.errorCount, 2);
-            assert.ok(report.messages[0].message.includes('Array declaration'));
-            assert.ok(report.messages[0].message.includes('Array declaration'));
+            assertThatReportHas(report, 0, 'Array declaration');
+            assertThatReportHas(report, 1, 'Array declaration');
         });
 
         it('should not raise error for array declaration', function () {
@@ -285,7 +285,7 @@ describe('Linter', function() {
             const report = linter.processStr(code, config());
 
             assert.equal(report.errorCount, 1);
-            assert.ok(report.messages[0].message.includes('must be separated by one line'));
+            assertThatReportHas(report, 0, 'must be separated by one line');
         });
 
         it('should not raise error when items inside contract separated by new line', function () {
@@ -324,7 +324,7 @@ describe('Linter', function() {
             const report = linter.processStr(code, config());
 
             assert.equal(report.errorCount, 1);
-            assert.ok(report.messages[0].message.includes('Line length must be no more than'));
+            assertThatReportHas(report, 0, 'Line length must be no more than');
         });
 
         it('should not raise error when line length exceed 120 and custom config provided', function () {
@@ -344,4 +344,9 @@ describe('Linter', function() {
             rules: { indent: false }
         };
     }
+
+    function assertThatReportHas(report, index, message) {
+        assert.ok(report.messages[index].message.includes(message));
+    }
+
 });
