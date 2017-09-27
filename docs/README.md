@@ -120,6 +120,7 @@ Disable all linter rules for code fragment
  | **mark-callable-contracts**   | Explicitly mark all external contracts as trusted or untrusted |
  | **multiple-sends**            | Avoid multiple calls of "send" method in single transaction |
  | **no-simple-event-func-name** | Event and function names must be different         |
+ | **avoid-tx-origin**           | Avoid to use tx.origin                             |
  
 ### Style Guide Codes:
  
