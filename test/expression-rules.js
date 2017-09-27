@@ -1,6 +1,6 @@
 const assert = require('assert');
 const linter = require('./../lib/index');
-const { funcWith } = require('./contract-builder');
+const { funcWith } = require('./common/contract-builder');
 
 
 describe('Linter - Expression Align Rules', function() {

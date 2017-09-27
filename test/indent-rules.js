@@ -1,6 +1,7 @@
 const assert = require('assert');
+const { assertThatReportHas, assertNoErrors } = require('./common/asserts');
 const linter = require('./../lib/index');
-const { funcWith, contractWith, multiLine } = require('./contract-builder');
+const { funcWith, contractWith, multiLine } = require('./common/contract-builder');
 
 
 describe('Linter', function() {
@@ -32,7 +33,7 @@ describe('Linter', function() {
 
             const report = linter.processStr(code, config());
 
-            assert.equal(report.errorCount, 0);
+            assertNoErrors(report);
         });
 
         it('should raise error about mixed tabs and spaces', function () {
@@ -181,7 +182,7 @@ describe('Linter', function() {
 
             const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
-            assert.equal(report.errorCount, 0);
+            assertNoErrors(report);
         });
 
         it('should raise error when line indent is not correct for function with for assembly statement', function () {
@@ -218,7 +219,7 @@ describe('Linter', function() {
 
             const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
-            assert.equal(report.errorCount, 0);
+            assertNoErrors(report);
         });
 
         it('should not raise error for custom configured indent rules', function () {
@@ -272,7 +273,7 @@ describe('Linter', function() {
 
             const report = linter.processStr(code, config());
 
-            assert.equal(report.errorCount, 0);
+            assertNoErrors(report);
         });
 
         it('should raise error when items inside contract do not separated by new line', function () {
@@ -299,7 +300,7 @@ describe('Linter', function() {
 
             const report = linter.processStr(code, config());
 
-            assert.equal(report.errorCount, 0);
+            assertNoErrors(report);
         });
 
         it('should not raise error when items inside contract separated by new line with comments', function () {
@@ -315,7 +316,7 @@ describe('Linter', function() {
 
             const report = linter.processStr(code, config());
 
-            assert.equal(report.errorCount, 0);
+            assertNoErrors(report);
         });
 
         it('should raise error when line length exceed 120', function () {
@@ -334,7 +335,7 @@ describe('Linter', function() {
                 rules: { indent: false, 'max-line-length': ['error', 130] }
             });
 
-            assert.equal(report.errorCount, 0);
+            assertNoErrors(report);
         });
 
     });
@@ -343,10 +344,6 @@ describe('Linter', function() {
         return {
             rules: { indent: false }
         };
-    }
-
-    function assertThatReportHas(report, index, message) {
-        assert.ok(report.messages[index].message.includes(message));
     }
 
 });

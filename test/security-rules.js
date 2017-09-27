@@ -1,7 +1,7 @@
 const assert = require('assert');
 const linter = require('./../lib/index');
-const contractWith = require('./contract-builder').contractWith;
-const funcWith = require('./contract-builder').funcWith;
+const contractWith = require('./common/contract-builder').contractWith;
+const funcWith = require('./common/contract-builder').funcWith;
 
 
 describe('Linter', function() {

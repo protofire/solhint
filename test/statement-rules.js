@@ -1,6 +1,6 @@
 const assert = require('assert');
 const linter = require('./../lib/index');
-const { funcWith, multiLine } = require('./contract-builder');
+const { funcWith, multiLine } = require('./common/contract-builder');
 
 
 describe('Linter - Statement Align Rules', function() {
