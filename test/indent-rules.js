@@ -241,7 +241,8 @@ describe('Linter', function() {
                 rules: {
                     indent: ['warn', 'tabs'],
                     'func-visibility': false,
-                    'separate-by-one-line-in-contract': false
+                    'separate-by-one-line-in-contract': false,
+                    'no-unused-vars': false
                 }
             });
 

@@ -57,6 +57,31 @@ describe('Linter', function() {
                 assertNoWarnings(report);
             }));
 
+        const UNUSED_VARS = [
+            contractWith('function a(uint a, uint b) public { b += 1; }'),
+            funcWith('uint a = 0;'),
+            funcWith('var (a) = 1;')
+        ];
+
+        UNUSED_VARS.forEach(curData =>
+            it(`should raise warn for vars ${label(curData)}`, function () {
+                const report = linter.processStr(curData, {rules: {indent: false}});
+
+                assertWarnsCount(report, 1);
+                assertErrorMessage(report, 'unused');
+            }));
+
+        const USED_VARS = [
+            contractWith('function a(uint a) public { uint b = bytes32(a); b += 1; }')
+        ];
+
+        USED_VARS.forEach(curData =>
+            it(`should not raise warn for vars ${label(curData)}`, function () {
+                const report = linter.processStr(curData, {rules: {indent: false}});
+
+                assertNoWarnings(report);
+            }));
+
     });
 
     function label (data) {

@@ -14,28 +14,34 @@ function assertErrorMessage(...args) {
         message = args[1];
     }
 
-    const errorMessage = `Report should contain message with text "${message}" on ${index} position`;
+    const errorMessage = `Report should contain message with text "${message}" at ${index} pos. ${printReport(report)}`;
     assert.ok(report.messages[index].message.includes(message), errorMessage);
 }
 
 
 function assertNoErrors(report) {
-    assert.equal(report.errorCount, 0, 'Report must not contain errors');
+    assert.equal(report.errorCount, 0, `Report must not contain errors. ${printReport(report)}`);
 }
 
 
 function assertNoWarnings(report) {
-    assert.equal(report.warningCount, 0, 'Report must not contain warnings');
+    assert.equal(report.warningCount, 0, `Report must not contain warnings. ${printReport(report)}`);
 }
 
 
 function assertErrorCount(report, count) {
-    assert.equal(report.errorCount, count, `Report must contains ${count} errors`);
+    assert.equal(report.errorCount, count, `Report must contains ${count} errors. ${printReport(report)}`);
 }
 
 
 function assertWarnsCount(report, count) {
-    assert.equal(report.warningCount, count, `Report must contains ${count} warnings`);
+    assert.equal(report.warningCount, count, `Report must contains ${count} warnings. ${printReport(report)}`);
+}
+
+
+function printReport(report) {
+    const messages = report.messages.map((i, index) => `${index + 1}. ${i.message}`);
+    return ['Errors / Warnings:', ...messages, ''].join('\n' + ' '.repeat(8));
 }
 
 
