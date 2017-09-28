@@ -128,20 +128,21 @@ describe('Linter', function() {
                 '        uint private a;               ', // 3
                 '        function A() private {        ', // 4
                 '    while (a < b)                     ', // 5
-                '            return;                   ', // 6
+                '             return;                  ', // 6
                 '      }                               ', // 7
                 '    }                                 '  // 8
             );
 
             const report = linter.processStr(code, {rules: {'separate-by-one-line-in-contract': false}});
 
-            assert.equal(report.errorCount, 6);
+            assert.equal(report.errorCount, 7);
             assertErrorMessage(report, 0, 'Expected indentation of 0 spaces');
             assertErrorMessage(report, 1, 'Expected indentation of 4');
             assertErrorMessage(report, 2, 'Expected indentation of 4');
             assertErrorMessage(report, 3, 'Expected indentation of 8');
-            assertErrorMessage(report, 4, 'Expected indentation of 4');
-            assertErrorMessage(report, 5, 'Expected indentation of 0');
+            assertErrorMessage(report, 4, 'Expected indentation of 12');
+            assertErrorMessage(report, 5, 'Expected indentation of 4');
+            assertErrorMessage(report, 6, 'Expected indentation of 0');
         });
 
         it('should raise error when line indent is incorrect for function with for if statement', function () {

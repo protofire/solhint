@@ -60,7 +60,8 @@ describe('Linter', function() {
         const UNUSED_VARS = [
             contractWith('function a(uint a, uint b) public { b += 1; }'),
             funcWith('uint a = 0;'),
-            funcWith('var (a) = 1;')
+            funcWith('var (a) = 1;'),
+            contractWith('function a(uint a, uint b) public { uint c = a + b; }')
         ];
 
         UNUSED_VARS.forEach(curData =>
@@ -72,12 +73,15 @@ describe('Linter', function() {
             }));
 
         const USED_VARS = [
-            contractWith('function a(uint a) public { uint b = bytes32(a); b += 1; }')
+            contractWith('function a(uint a) public { uint b = bytes32(a); b += 1; }'),
+            contractWith('function a() public returns (uint c) { return 1; }'),
+            contractWith('function a(uint d) public returns (uint c) { }'),
+            contractWith('function a(uint a, uint c) public returns (uint c);')
         ];
 
         USED_VARS.forEach(curData =>
             it(`should not raise warn for vars ${label(curData)}`, function () {
-                const report = linter.processStr(curData, {rules: {indent: false}});
+                const report = linter.processStr(curData, {rules: {indent: false, 'no-empty-blocks': false}});
 
                 assertNoWarnings(report);
             }));
