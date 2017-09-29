@@ -1,7 +1,9 @@
 const { assertNoWarnings, assertErrorMessage, assertWarnsCount } = require('./common/asserts');
+const { assertErrorCount, assertNoErrors } = require('./common/asserts');
 const { noIndent } = require('./common/configs');
 const linter = require('./../lib/index');
 const { contractWith, funcWith } = require('./common/contract-builder');
+const _ = require('lodash');
 
 
 describe('Linter', function() {
@@ -66,7 +68,7 @@ describe('Linter', function() {
 
         UNUSED_VARS.forEach(curData =>
             it(`should raise warn for vars ${label(curData)}`, function () {
-                const report = linter.processStr(curData, {rules: {indent: false}});
+                const report = linter.processStr(curData, noIndent());
 
                 assertWarnsCount(report, 1);
                 assertErrorMessage(report, 'unused');
@@ -81,14 +83,45 @@ describe('Linter', function() {
 
         USED_VARS.forEach(curData =>
             it(`should not raise warn for vars ${label(curData)}`, function () {
-                const report = linter.processStr(curData, {rules: {indent: false, 'no-empty-blocks': false}});
+                const report = linter.processStr(curData, noIndent());
 
                 assertNoWarnings(report);
             }));
 
+        it('should raise error for function with 51 lines', function () {
+            const code = funcWith(emptyLines(51));
+
+            const report = linter.processStr(code, noIndent());
+
+            assertErrorCount(report, 1);
+            assertErrorMessage(report, 'no more than');
+        });
+
+        it('should not raise error for function with 50 lines', function () {
+            const code = funcWith(emptyLines(50));
+
+            const report = linter.processStr(code, noIndent());
+
+            assertNoErrors(report);
+        });
+
+        it('should not raise error for function with 99 lines with 100 allowed', function () {
+            const code = funcWith(emptyLines(99));
+            const config = _.defaultsDeep(noIndent(), {rules: {'function-max-lines': ['error', 100]}});
+
+            const report = linter.processStr(code, config);
+
+            assertNoErrors(report);
+        });
     });
 
     function label (data) {
         return data.split('\n')[0];
+    }
+
+    function emptyLines(count) {
+        return _.times(count)
+            .map(() => '')
+            .join('\n');
     }
 });
