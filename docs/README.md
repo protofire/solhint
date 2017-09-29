@@ -151,6 +151,7 @@ Disable all linter rules for code fragment
  | **no-empty-blocks**           | Code contains empty block                          |
  | **no-unused-vars**            | Variable "name" is unused                          |
  | **function-max-lines**        | Function body contains "count" lines but allowed no more than "maxLines" lines |
+ | **space-after-comma**         | Comma must be separated from next element by space |
  
 ### Licence
 
