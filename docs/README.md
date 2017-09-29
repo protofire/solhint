@@ -154,6 +154,17 @@ Disable all linter rules for code fragment
  | **space-after-comma**         | Comma must be separated from next element by space |
  | **no-spaces-before-semicolon**| Semicolon must not have spaces before              |
  
+### Best Practise Codes:
+ 
+  | Rule ID                       |                      Error                         |
+  |-------------------------------|----------------------------------------------------| 
+  | **max-line-length**           | Line length must be no more than 120 but current length is 121. |
+  | **payable-fallback**          | When fallback is not payable you will not be able to receive ethers |
+  | **no-empty-blocks**           | Code contains empty block                          |
+  | **no-unused-vars**            | Variable "name" is unused                          |
+  | **function-max-lines**        | Function body contains "count" lines but allowed no more than "maxLines" lines |
+  | **code-complexity**           | Function has cyclomatic complexity "current" but allowed no more than "max" |
+ 
 ### Licence
 
 MIT
