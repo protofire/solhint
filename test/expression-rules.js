@@ -10,6 +10,7 @@ describe('Linter - Expression Align Rules', function() {
         const INCORRECT_EXPRESSIONS = [
             'new  TrustedContract',
             'myArray[ 5 ]',
+            'myArray/* test */[5]',
             'myFunc( 1, 2, 3 )',
             'myFunc. call(1)',
             'a = ( b + c )',

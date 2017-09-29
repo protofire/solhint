@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { assertErrorMessage, assertNoErrors } = require('./common/asserts');
+const { assertErrorMessage, assertNoErrors, assertErrorCount } = require('./common/asserts');
 const { noIndent } = require('./common/configs');
 const linter = require('./../lib/index');
 const { funcWith, contractWith, multiLine } = require('./common/contract-builder');
@@ -344,6 +344,36 @@ describe('Linter', function() {
 
             assertNoErrors(report);
         });
+
+        const INCORRECT_COMMA_ALIGN = [
+            funcWith('var (a,b) = test1.test2(); a + b;'),
+            funcWith('test(1,2, b);'),
+            funcWith('test(1,/* test */ 2, b);'),
+            contractWith('function b(uint a,uintc) public {}')
+        ];
+
+        INCORRECT_COMMA_ALIGN.forEach(curExpr =>
+            it('should raise error when comma incorrect aligned', function () {
+                const report = linter.processStr(curExpr, noIndent());
+
+                assertErrorCount(report, 1);
+                assertErrorMessage(report, 'must be separated');
+            }));
+
+
+        const CORRECT_COMMA_ALIGN = [
+            funcWith('var (a, b,) = test1.test2(); a + b;'),
+            funcWith('test(1, 2, b);'),
+            funcWith('test(1, 2, b);'),
+            contractWith('function b(uint a, uintc) public {}')
+        ];
+
+        CORRECT_COMMA_ALIGN.forEach(curExpr =>
+            it('should raise error when comma incorrect aligned', function () {
+                const report = linter.processStr(curExpr, noIndent());
+
+                assertNoErrors(report);
+            }));
 
     });
 });
