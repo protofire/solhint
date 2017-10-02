@@ -164,6 +164,7 @@ Disable all linter rules for code fragment
   | **no-unused-vars**            | Variable "name" is unused                          |
   | **function-max-lines**        | Function body contains "count" lines but allowed no more than "maxLines" lines |
   | **code-complexity**           | Function has cyclomatic complexity "current" but allowed no more than "max" |
+  | **max-states-count**          | Contract has "curCount" states declarations but allowed no more than "max" |
  
 ### Licence
 
