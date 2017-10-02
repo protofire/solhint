@@ -6,8 +6,10 @@ const { contractWith, funcWith } = require('./common/contract-builder');
 const _ = require('lodash');
 
 
-describe('Linter', function() {
-    describe('Best Practises Rules', function () {
+describe('Linter - Best Practises Rules', function() {
+
+
+    describe('Fallback must be payable', function () {
 
         it('should raise warn when fallback is not payable', function () {
             const code = contractWith('function () public {}');
@@ -25,6 +27,11 @@ describe('Linter', function() {
 
             assertNoWarnings(report);
         });
+
+    });
+
+
+    describe('No empty blocks', function () {
 
         const EMPTY_BLOCKS = [
             contractWith('function () public payable {}'),
@@ -59,6 +66,11 @@ describe('Linter', function() {
                 assertNoWarnings(report);
             }));
 
+    });
+
+
+    describe('No unused vars', function () {
+
         const UNUSED_VARS = [
             contractWith('function a(uint a, uint b) public { b += 1; }'),
             funcWith('uint a = 0;'),
@@ -89,6 +101,11 @@ describe('Linter', function() {
                 assertNoWarnings(report);
             }));
 
+    });
+
+
+    describe('Max line length', function () {
+
         it('should raise error for function with 51 lines', function () {
             const code = funcWith(emptyLines(51));
 
@@ -115,6 +132,11 @@ describe('Linter', function() {
             assertNoErrors(report);
         });
 
+    });
+
+
+    describe('Max states count', function () {
+
         it('should raise error when count of states too big', function () {
             const code = contractWith(stateDef(16));
 
@@ -124,8 +146,7 @@ describe('Linter', function() {
             assertErrorMessage(report, 'no more than 15');
         });
 
-
-        it('should not raise error for count of states', function () {
+        it('should not raise error for count of states that lower that max', function () {
             const code = contractWith([stateDef(10), constantDef(10)].join('\n'));
 
             const report = linter.processStr(code, noIndent());
@@ -141,7 +162,9 @@ describe('Linter', function() {
 
             assertNoErrors(report);
         });
+
     });
+
 
     function label (data) {
         const items = data.split('\n');
