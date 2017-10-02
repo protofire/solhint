@@ -113,15 +113,57 @@ describe('Linter', function() {
 
             assertNoErrors(report);
         });
+
+        it('should raise error when count of states too big', function () {
+            const code = contractWith(stateDef(16));
+
+            const report = linter.processStr(code, noIndent());
+
+            assertErrorCount(report, 1);
+            assertErrorMessage(report, 'no more than 15');
+        });
+
+
+        it('should not raise error for count of states', function () {
+            const code = contractWith([stateDef(10), constantDef(10)].join('\n'));
+
+            const report = linter.processStr(code, noIndent());
+
+            assertNoErrors(report);
+        });
+
+        it('should not raise error for count of states when it value increased in config', function () {
+            const code = contractWith(stateDef(20));
+            const config = _.defaultsDeep(noIndent(), {rules: {'max-states-count': ['error', 20]}});
+
+            const report = linter.processStr(code, config);
+
+            assertNoErrors(report);
+        });
     });
 
     function label (data) {
-        return data.split('\n')[0];
+        const items = data.split('\n');
+        const lastItemIndex = items.length  - 1;
+        const labelIndex = Math.floor(lastItemIndex / 5) * 4;
+        return items[labelIndex];
+    }
+
+    function repeatLines(line, count) {
+        return _.times(count)
+            .map(() => line)
+            .join('\n');
     }
 
     function emptyLines(count) {
-        return _.times(count)
-            .map(() => '')
-            .join('\n');
+        return repeatLines('', count);
+    }
+
+    function stateDef(count) {
+        return repeatLines('uint private a;', count);
+    }
+
+    function constantDef(count) {
+        return repeatLines('uint private constant TEST = 1;', count);
     }
 });

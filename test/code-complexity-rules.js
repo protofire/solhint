@@ -19,7 +19,7 @@ describe('Linter - Code Complexity Rule', function() {
         '   }                            ',
         ' }                              ',
         'for (i = 0; i < b; i += 1) { }  ',
-        'do { d++ } while (b > c);       ',
+        'do { d++; } while (b > c);       ',
         'while (d > e) { }               '
     ));
 
@@ -38,7 +38,7 @@ describe('Linter - Code Complexity Rule', function() {
         '   }                            ',
         ' }                              ',
         'for (i = 0; i < b; i += 1) { }  ',
-        'do { d++ } while (b > c);       ',
+        'do { d++; } while (b > c);       ',
         'while (d > e) { }               '
     ));
 
@@ -56,7 +56,7 @@ describe('Linter - Code Complexity Rule', function() {
         '   }                            ',
         ' }                              ',
         'for (i = 0; i < b; i += 1) { }  ',
-        'do { d++ } while (b > c);       ',
+        'do { d++; } while (b > c);       ',
         'while (d > e) { }               ',
         'while (d > e) { }               ',
         'while (d > e) { }               ',
