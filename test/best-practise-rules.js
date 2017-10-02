@@ -78,7 +78,8 @@ describe('Linter', function() {
             contractWith('function a(uint a) public { uint b = bytes32(a); b += 1; }'),
             contractWith('function a() public returns (uint c) { return 1; }'),
             contractWith('function a(uint d) public returns (uint c) { }'),
-            contractWith('function a(uint a, uint c) public returns (uint c);')
+            contractWith('function a(uint a, uint c) public returns (uint c);'),
+            contractWith('function a(address a) internal { assembly { t := eq(a, and(mask, calldataload(4))) } }')
         ];
 
         USED_VARS.forEach(curData =>
