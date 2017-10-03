@@ -1,1 +1,7 @@
 theme: jekyll-theme-cayman
+defaults:
+  - scope:
+      path: readme
+      type: default
+    values:
+      layout: default
