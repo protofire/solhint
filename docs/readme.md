@@ -43,6 +43,7 @@ Commands:
 
  - [List of Rules](./rules.html)
  - [Configuration](./configuration.html)
+ - [Use Solhint in Your Application](./use-in-app.html)
 
 ### Licence
 
