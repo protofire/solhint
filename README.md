@@ -29,7 +29,7 @@ Linter for Solidity programming language
 Options:
 
   -V, --version           output the version number
-  -f, --formatter [name]  Report formatter name
+  -f, --formatter [name]  Report formatter name (stylish, table, tap, unix)'
   -h, --help              output usage information
 
 
