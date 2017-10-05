@@ -13,7 +13,7 @@ function init () {
 
     program
         .usage('[options] <file> [...other_files]')
-        .option('-f, --formatter [name]', 'report formatter name')
+        .option('-f, --formatter [name]', 'report formatter name (stylish, table, tap, unix)')
         .description('Linter for Solidity programming language')
         .action(execMainAction);
 
