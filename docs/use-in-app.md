@@ -16,7 +16,7 @@ report.messages.forEach(curError => console.log(curError.message));
 
 #### Functions
    
-  **linter.parseStr**:
+  **linter.processStr**:
    
    - Arguments:
      - code {String} - Source code to validation
@@ -24,7 +24,7 @@ report.messages.forEach(curError => console.log(curError.message));
    - Returns: 
      - report {Report} - object that contains list of errors and warnings
      
-  **linter.parseFile**:
+  **linter.processFile**:
    
    - Arguments:
      - file {String} - Path to file for validation
@@ -32,7 +32,7 @@ report.messages.forEach(curError => console.log(curError.message));
    - Returns: 
      - report {Report} - object that contains list of errors and warnings
     
-  **linter.parsePath** 
+  **linter.processPath** 
   
    - Arguments:
      - path {String} - Glob path for validation
