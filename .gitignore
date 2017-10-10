@@ -5,3 +5,7 @@ test2.sol
 convertLib.sol
 package-lock.json
 lib/grammar/Solidity.g4
+/.nyc_output/
+/coverage/
+/docs/_site/
+/docs/Gemfile*
