@@ -47,9 +47,9 @@ Commands:
 
 ### IDE Integrations
 
- - **[Sublime Text 3](https://packagecontrol.io/search/solhint)**
- - **[Atom](https://atom.io/packages/atom-solidity-linter)**
- - **[Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=idrabenia.solidity-solhint)**
+ - [Sublime Text 3](https://packagecontrol.io/search/solhint)
+ - [Atom](https://atom.io/packages/atom-solidity-linter)
+ - [Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=idrabenia.solidity-solhint)
 
 ### Licence
 
