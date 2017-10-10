@@ -3,6 +3,7 @@ const { assertErrorMessage, assertNoErrors, assertErrorCount } = require('./comm
 const { noIndent } = require('./common/configs');
 const linter = require('./../lib/index');
 const { funcWith, contractWith, multiLine } = require('./common/contract-builder');
+const _ = require('lodash');
 
 
 describe('Linter', function() {
@@ -263,6 +264,36 @@ describe('Linter', function() {
 
             assert.equal(report.errorCount, 1);
             assertErrorMessage(report, 0, 'Open bracket');
+        });
+
+        it('should not raise error when function bracket correct aligned', function () {
+            const code = contractWith(`
+                function a (
+                    uint a
+                ) 
+                    public  
+                {
+                  continue;
+                }
+            `);
+
+            const report = linter.processStr(code, noIndent());
+
+            assertNoErrors(report);
+        });
+
+        it('should raise error when function bracket incorrect aligned', function () {
+            const code = contractWith(`
+                function a (uint a) public{
+                  continue;
+                }
+            `);
+
+            const config = _.defaultsDeep({rules: {'no-unused-vars': false}}, noIndent());
+            const report = linter.processStr(code, config);
+
+            assertErrorCount(report, 1);
+            assertErrorMessage(report, 'bracket');
         });
 
         it('should raise error when array declaration has spaces', function () {
