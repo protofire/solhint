@@ -166,6 +166,12 @@ Disable all linter rules for code fragment
 
 Related documentation you may find [there](https://tokenhouse.github.io/solhint/).
 
+### IDE Integrations
+
+ - **[Sublime Text 3](https://packagecontrol.io/search/solhint)**
+ - **[Atom](https://atom.io/packages/atom-solidity-linter)**
+ - **[Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=idrabenia.solidity-solhint)**
+
 ### Licence
 
 MIT
