@@ -51,4 +51,5 @@ describe('Linter', function() {
     function removeTmpFiles() {
         fs.unlinkSync(tmpFilePath());
     }
+
 });
