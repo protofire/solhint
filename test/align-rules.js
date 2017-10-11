@@ -7,7 +7,7 @@ const _ = require('lodash');
 
 
 describe('Linter', function() {
-    describe('Indent Rules', function () {
+    describe('Align Rules', function () {
 
         it('should raise error when contract do not surrounds with two blank lines', function () {
             const code = `
@@ -202,7 +202,7 @@ describe('Linter', function() {
             );
 
             const report = linter.processStr(code, {rules:
-                {'separate-by-one-line-in-contract': false, 'no-empty-blocks': false}
+                {'separate-by-one-line-in-contract': false, 'no-empty-blocks': false, 'no-inline-assembly': false}
             });
 
             assert.equal(report.errorCount, 1);
@@ -397,7 +397,7 @@ describe('Linter', function() {
             funcWith('var (a, b,) = test1.test2(); a + b;'),
             funcWith('test(1, 2, b);'),
             contractWith('function b(uint a, uintc) public {}'),
-            contractWith('enum A {Test1, Test2,}')
+            contractWith('enum A {Test1, Test2}')
         ];
 
         CORRECT_COMMA_ALIGN.forEach(curExpr =>

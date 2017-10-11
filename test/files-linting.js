@@ -25,7 +25,7 @@ describe('Linter', function() {
 
             linter
                 .processPath(filePath, noIndent())
-                .then(report => assertErrorCount(report, 1));
+                .then(reports => assertErrorCount(reports[0], 1));
         });
 
         after(function () {

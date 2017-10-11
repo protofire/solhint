@@ -151,5 +151,16 @@ describe('Linter', function() {
             assertErrorMessage(report, 'time');
         });
 
+        it('should return warn when function use inline assembly', function () {
+            const code = funcWith(`
+              assembly { "test" }
+            `);
+
+            const report = linter.processStr(code, noIndent());
+
+            assertWarnsCount(report, 1);
+            assertErrorMessage(report, 'assembly');
+        });
+
     });
 });

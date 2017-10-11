@@ -44,7 +44,7 @@ describe('Linter - Best Practises Rules', function() {
 
         EMPTY_BLOCKS.forEach(curData =>
             it(`should raise warn for empty blocks ${label(curData)}`, function () {
-                const report = linter.processStr(curData, {rules: {indent: false}});
+                const report = linter.processStr(curData, config());
 
                 assertWarnsCount(report, 1);
                 assertErrorMessage(report, 'empty block');
@@ -61,10 +61,14 @@ describe('Linter - Best Practises Rules', function() {
 
         BLOCKS_WITH_DEFINITIONS.forEach(curData =>
             it(`should not raise warn for blocks ${label(curData)}`, function () {
-                const report = linter.processStr(curData, {rules: {indent: false}});
+                const report = linter.processStr(curData, config());
 
                 assertNoWarnings(report);
             }));
+
+        function config() {
+            return {rules: {indent: false, 'no-inline-assembly': false}};
+        }
 
     });
 
@@ -96,7 +100,9 @@ describe('Linter - Best Practises Rules', function() {
 
         USED_VARS.forEach(curData =>
             it(`should not raise warn for vars ${label(curData)}`, function () {
-                const report = linter.processStr(curData, noIndent());
+                const config = _.defaultsDeep({rules: {'no-inline-assembly': false}}, noIndent());
+
+                const report = linter.processStr(curData, config);
 
                 assertNoWarnings(report);
             }));

@@ -29,6 +29,7 @@
  | **multiple-sends**            | Avoid multiple calls of "send" method in single transaction | *[default](#options)*|
  | **no-simple-event-func-name** | Event and function names must be different      | *[default](#options)*     |
  | **avoid-tx-origin**           | Avoid to use tx.origin                          | *[default](#options)*     |
+ | **no-inline-assembly**        | Avoid to use inline assembly. It is acceptable only in rare cases | *[default](#options)*|
  
 ### Style Guide Codes:
  

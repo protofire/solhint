@@ -122,6 +122,7 @@ Disable all linter rules for code fragment
  | **multiple-sends**            | Avoid multiple calls of "send" method in single transaction |
  | **no-simple-event-func-name** | Event and function names must be different         |
  | **avoid-tx-origin**           | Avoid to use tx.origin                             |
+ | **no-inline-assembly**        | Avoid to use inline assembly. It is acceptable only in rare cases |
  
 ### Style Guide Codes:
  
