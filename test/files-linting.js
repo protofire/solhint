@@ -8,6 +8,7 @@ const fs = require('fs');
 
 
 describe('Linter', function() {
+
     describe('File Linting', function () {
 
         it('should raise no error', function () {
@@ -32,6 +33,7 @@ describe('Linter', function() {
         });
 
     });
+
 
     function tmpFilePath () {
         const tempDirPath = os.tmpdir();
