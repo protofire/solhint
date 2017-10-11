@@ -140,21 +140,21 @@ describe('Linter', function() {
             assertErrorMessage(report, 'origin');
         });
 
-        it('should return warn when business logic rely on time', function () {
-            const code = funcWith(`
-              now >= start + daysAfter * 1 days;
-            `);
+        const TIME_BASED_LOGIC = [
+            funcWith('now >= start + daysAfter * 1 days;'),
+            funcWith('start >= block.timestamp + daysAfter * 1 days;')
+        ];
 
-            const report = linter.processStr(code, noIndent());
+        TIME_BASED_LOGIC.forEach(curCode =>
+            it('should return warn when business logic rely on time', function () {
+                const report = linter.processStr(curCode, noIndent());
 
-            assertWarnsCount(report, 1);
-            assertErrorMessage(report, 'time');
-        });
+                assertWarnsCount(report, 1);
+                assertErrorMessage(report, 'time');
+            }));
 
         it('should return warn when function use inline assembly', function () {
-            const code = funcWith(`
-              assembly { "test" }
-            `);
+            const code = funcWith(' assembly { "test" } ');
 
             const report = linter.processStr(code, noIndent());
 
