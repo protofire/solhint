@@ -380,7 +380,8 @@ describe('Linter', function() {
             funcWith('var (a,b) = test1.test2(); a + b;'),
             funcWith('test(1,2, b);'),
             funcWith('test(1,/* test */ 2, b);'),
-            contractWith('function b(uint a,uintc) public {}')
+            contractWith('function b(uint a,uintc) public {}'),
+            funcWith('test(1, 2 , b);')
         ];
 
         INCORRECT_COMMA_ALIGN.forEach(curExpr =>
@@ -395,7 +396,8 @@ describe('Linter', function() {
         const CORRECT_COMMA_ALIGN = [
             funcWith('var (a, b,) = test1.test2(); a + b;'),
             funcWith('test(1, 2, b);'),
-            contractWith('function b(uint a, uintc) public {}')
+            contractWith('function b(uint a, uintc) public {}'),
+            contractWith('enum A {Test1, Test2,}')
         ];
 
         CORRECT_COMMA_ALIGN.forEach(curExpr =>
