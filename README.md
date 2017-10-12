@@ -22,7 +22,7 @@ solhint -V
 
 For linting Solidity files you need to execute next command
 
-```sh
+```bash
 solhint *.sol **/*.sol <any_other_glob_pattern>
 ```
 
