@@ -3,7 +3,7 @@ const linter = require('./../lib/index');
 const contractWith = require('./common/contract-builder').contractWith;
 const funcWith = require('./common/contract-builder').funcWith;
 const { noIndent } = require('./common/configs');
-const { assertWarnsCount, assertErrorMessage } = require('./common/asserts');
+const { assertWarnsCount, assertErrorMessage, assertNoWarnings } = require('./common/asserts');
 
 
 describe('Linter', function() {
@@ -169,6 +169,46 @@ describe('Linter', function() {
 
             assertWarnsCount(report, 1);
             assertErrorMessage(report, 'block.blockhash');
+        });
+
+        it('should return warn when code contains possible reentrancy', function () {
+            const code = funcWith(`
+                uint amount = shares[msg.sender];
+                msg.sender.transfer(amount);
+                shares[msg.sender] = 0;
+            `);
+
+            const report = linter.processStr(code, noIndent());
+
+            assertWarnsCount(report, 1);
+            assertErrorMessage(report, 'reentrancy');
+        });
+
+        it('should return warn when code contains possible reentrancy with send method', function () {
+            const code = funcWith(`
+                uint amount = shares[msg.sender];
+                bool a = msg.sender.send(amount);
+                if (a) {
+                    shares[msg.sender] = 0;
+                }
+            `);
+
+            const report = linter.processStr(code, noIndent());
+
+            assertWarnsCount(report, 1);
+            assertErrorMessage(report, 'reentrancy');
+        });
+
+        it('should not return warn when code do not contains transfer', function () {
+            const code = funcWith(`
+                uint amount = shares[msg.sender];
+                user.test(amount);
+                shares[msg.sender] = 0;
+            `);
+
+            const report = linter.processStr(code, noIndent());
+
+            assertNoWarnings(report);
         });
 
     });
