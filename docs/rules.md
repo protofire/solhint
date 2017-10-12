@@ -10,8 +10,7 @@
  }
  ```
 
-
-### Security Error Codes\*:
+### Security Rules
 
  | Rule ID                       |                      Error                      |     Options               |
  |-------------------------------|-------------------------------------------------|---------------------------|
@@ -35,7 +34,7 @@
 \* \- All security rules implemented according [ConsenSys Guide for Smart Contracts](
 https://github.com/ConsenSys/smart-contract-best-practices#recommendations-for-smart-contract-security-in-solidity)
  
-### Style Guide Codes:
+### Style Guide Rules
  
  | Rule ID                       |                      Error                         |     Options                    |
  |-------------------------------|----------------------------------------------------|--------------------------------| 
@@ -62,7 +61,10 @@ https://github.com/ConsenSys/smart-contract-best-practices#recommendations-for-s
  | **space-after-comma**         | Comma must be separated from next element by space | *[default](#options)*          |
  | **no-spaces-before-semicolon**| Semicolon must not have spaces before              | *[default](#options)*          |
  
-### Best Practise Codes:
+\* \- All style guide rules implemented according [Solidity Style Guide](
+http://solidity.readthedocs.io/en/develop/style-guide.html)
+ 
+### Best Practise Rules
  
   | Rule ID                       |                      Error                         |     Options                   |
   |-------------------------------|----------------------------------------------------|-------------------------------| 

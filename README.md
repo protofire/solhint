@@ -104,7 +104,7 @@ Disable all linter rules for code fragment
   /* solhint-enable */
 ```
 
-### Security Error Codes\*:
+### Security Error Rules
 
  | Rule ID                       |                      Error                         |
  |-------------------------------|----------------------------------------------------| 
@@ -128,7 +128,7 @@ Disable all linter rules for code fragment
 \* \- All security rules implemented according [ConsenSys Guide for Smart Contracts](
 https://github.com/ConsenSys/smart-contract-best-practices#recommendations-for-smart-contract-security-in-solidity)
  
-### Style Guide Codes:
+### Style Guide Rules
  
  | Rule ID                       |                      Error                         |
  |-------------------------------|----------------------------------------------------| 
@@ -155,7 +155,10 @@ https://github.com/ConsenSys/smart-contract-best-practices#recommendations-for-s
  | **space-after-comma**         | Comma must be separated from next element by space |
  | **no-spaces-before-semicolon**| Semicolon must not have spaces before              |
  
-### Best Practise Codes:
+\* \- All style guide rules implemented according [Solidity Style Guide](
+http://solidity.readthedocs.io/en/develop/style-guide.html)
+ 
+### Best Practise Rules
  
   | Rule ID                       |                      Error                         |
   |-------------------------------|----------------------------------------------------| 

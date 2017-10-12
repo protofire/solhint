@@ -43,6 +43,7 @@ Commands:
 
  - [List of Rules](./rules.html)
  - [Configuration](./configuration.html)
+ - [Formatters](https://eslint.org/docs/user-guide/formatters/)
  - [Use Solhint in Your Application](./use-in-app.html)
 
 ### IDE Integrations
