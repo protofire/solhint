@@ -104,7 +104,7 @@ Disable all linter rules for code fragment
   /* solhint-enable */
 ```
 
-### Security Error Rules
+### Security Rules
 
  | Rule ID                       |                      Error                         |
  |-------------------------------|----------------------------------------------------| 
