@@ -14,6 +14,7 @@
 
  | Rule ID                       |                      Error                      |     Options               |
  |-------------------------------|-------------------------------------------------|---------------------------|
+ | **reentrancy**                | Possible reentrancy vulnerabilities. Avoid state changes after transfer. | *[default](#options)* |
  | **avoid-sha3**                | Use "keccak256" instead of deprecated "sha3"    | *[default](#options)*     |
  | **avoid-suicide**             | Use "selfdestruct" instead of deprecated "suicide" | *[default](#options)*  |
  | **avoid-throw**               | "throw" is deprecated, avoid to use it          | *[default](#options)*     |

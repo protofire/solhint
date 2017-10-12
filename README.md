@@ -115,6 +115,7 @@ Disable all linter rules for code fragment
 
  | Rule ID                       |                      Error                                        |
  |-------------------------------|-------------------------------------------------------------------| 
+ | **reentrancy**                | Possible reentrancy vulnerabilities. Avoid state changes after transfer. |
  | **avoid-sha3**                | Use "keccak256" instead of deprecated "sha3"                      |
  | **avoid-suicide**             | Use "selfdestruct" instead of deprecated "suicide"                |
  | **avoid-throw**               | "throw" is deprecated, avoid to use it                            |
