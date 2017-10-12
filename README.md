@@ -7,7 +7,7 @@
 https://coveralls.io/github/tokenhouse/solhint?branch=master)
 
 This is an open source project for linting [Solidity](http://solidity.readthedocs.io/en/develop/) code. This project 
-provide both **security** and **style guide** validations.   
+provide both **Security** and **Style Guide** validations.   
 
 ### Installation
 
