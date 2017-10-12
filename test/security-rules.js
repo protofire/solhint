@@ -6,210 +6,217 @@ const { noIndent } = require('./common/configs');
 const { assertWarnsCount, assertErrorMessage, assertNoWarnings } = require('./common/asserts');
 
 
-describe('Linter', function() {
-    describe('SecurityRules', function() {
+describe('Linter - SecurityRules', function() {
 
-        it('should return pragma error', function() {
-            const report = linter.processStr('pragma solidity ^0.4.4;');
+    it('should return pragma error', function() {
+        const report = linter.processStr('pragma solidity ^0.4.4;');
 
-            assert.equal(report.errorCount, 1);
-            assert.ok(report.reports[0].message.includes('Compiler'));
-        });
+        assert.equal(report.errorCount, 1);
+        assert.ok(report.reports[0].message.includes('Compiler'));
+    });
 
-        it('should return compiler version error', function () {
-            const report = linter.processStr('pragma solidity 0.3.4;');
+    it('should return compiler version error', function () {
+        const report = linter.processStr('pragma solidity 0.3.4;');
 
-            assert.equal(report.errorCount, 1);
-            assert.ok(report.reports[0].message.includes('0.4'));
-        });
+        assert.equal(report.errorCount, 1);
+        assert.ok(report.reports[0].message.includes('0.4'));
+    });
 
-        it('should return "send" call verification error', function () {
-            const code = funcWith('x.send(55);');
+    it('should return "send" call verification error', function () {
+        const code = funcWith('x.send(55);');
 
-            const report = linter.processStr(code, noIndent());
+        const report = linter.processStr(code, noIndent());
 
-            assert.equal(report.errorCount, 1);
-            assert.ok(report.reports[0].message.includes('send'));
-        });
+        assert.equal(report.errorCount, 1);
+        assert.ok(report.reports[0].message.includes('send'));
+    });
 
-        it('should return "call.value" verification error', function () {
-            const code = funcWith('x.call.value(55)();');
+    it('should return "call.value" verification error', function () {
+        const code = funcWith('x.call.value(55)();');
 
-            const report = linter.processStr(code, noIndent());
+        const report = linter.processStr(code, noIndent());
 
-            assert.equal(report.errorCount, 1);
-            assert.ok(report.reports[0].message.includes('call.value'));
-        });
+        assert.equal(report.errorCount, 1);
+        assert.ok(report.reports[0].message.includes('call.value'));
+    });
 
-        it('should return required visibility error', function () {
-            const code = contractWith('function b() { }');
+    it('should return required visibility error', function () {
+        const code = contractWith('function b() { }');
 
-            const report = linter.processStr(code, noIndent());
+        const report = linter.processStr(code, noIndent());
 
-            assert.equal(report.warningCount, 1);
-            assert.ok(report.reports[0].message.includes('visibility'));
-        });
+        assert.equal(report.warningCount, 1);
+        assert.ok(report.reports[0].message.includes('visibility'));
+    });
 
-        it('should return required visibility error for state', function () {
-            const code = contractWith('uint a;');
+    it('should return required visibility error for state', function () {
+        const code = contractWith('uint a;');
 
-            const report = linter.processStr(code, noIndent());
+        const report = linter.processStr(code, noIndent());
 
-            assert.equal(report.warningCount, 1);
-            assert.ok(report.reports[0].message.includes('visibility'));
-        });
+        assert.equal(report.warningCount, 1);
+        assert.ok(report.reports[0].message.includes('visibility'));
+    });
 
-        it('should return that fallback must be simple', function () {
-            const code = contractWith(`function () public payable {
-                make1(); 
-                make2(); 
-                make3();
-            }`);
+    it('should return that fallback must be simple', function () {
+        const code = contractWith(`function () public payable {
+            make1(); 
+            make2(); 
+            make3();
+        }`);
 
-            const report = linter.processStr(code, noIndent());
+        const report = linter.processStr(code, noIndent());
 
-            assert.equal(report.warningCount, 1);
-            assert.ok(report.reports[0].message.includes('Fallback'));
-        });
+        assert.equal(report.warningCount, 1);
+        assert.ok(report.reports[0].message.includes('Fallback'));
+    });
 
-        it('should return error that function and event names are similar', function () {
-            const code = contractWith(`
-              event Name1();
-              function name1() public payable { }
-            `);
+    it('should return error that function and event names are similar', function () {
+        const code = contractWith(`
+          event Name1();
+          function name1() public payable { }
+        `);
 
-            const report = linter.processStr(code, noIndent());
+        const report = linter.processStr(code, noIndent());
 
-            assert.equal(report.warningCount, 1);
-            assert.ok(report.reports[0].message.includes('Event and function names must be different'));
-        });
+        assert.equal(report.warningCount, 1);
+        assert.ok(report.reports[0].message.includes('Event and function names must be different'));
+    });
 
-        it('should return error that function and event names are similar', function () {
-            const code = contractWith(`
-              function name1() public payable { }
-              event Name1();
-            `);
+    it('should return error that function and event names are similar', function () {
+        const code = contractWith(`
+          function name1() public payable { }
+          event Name1();
+        `);
 
-            const report = linter.processStr(code, noIndent());
+        const report = linter.processStr(code, noIndent());
 
-            assert.equal(report.warningCount, 1);
-            assert.ok(report.reports[0].message.includes('Event and function names must be different'));
-        });
+        assert.equal(report.warningCount, 1);
+        assert.ok(report.reports[0].message.includes('Event and function names must be different'));
+    });
 
-        // it('should return error that external contract is not marked as trusted / untrusted', function () {
-        //     const code = funcWith('Bank.withdraw(100);');
-        //
-        //     const report = linter.processStr(code, config());
-        //
-        //     assert.equal(report.warningCount, 1);
-        //     assert.ok(report.reports[0].message.includes('trusted'));
-        // });
+    // it('should return error that external contract is not marked as trusted / untrusted', function () {
+    //     const code = funcWith('Bank.withdraw(100);');
+    //
+    //     const report = linter.processStr(code, config());
+    //
+    //     assert.equal(report.warningCount, 1);
+    //     assert.ok(report.reports[0].message.includes('trusted'));
+    // });
 
-        const DEPRECATION_ERRORS = ['sha3("test");', 'throw;', 'suicide();'];
+    const DEPRECATION_ERRORS = ['sha3("test");', 'throw;', 'suicide();'];
 
-        DEPRECATION_ERRORS.forEach(curText =>
-            it(`should return error that used deprecations ${curText}`, function () {
-                const code = funcWith(curText);
-
-                const report = linter.processStr(code, noIndent());
-
-                assert.equal(report.errorCount, 1);
-                assert.ok(report.reports[0].message.includes('deprecate'));
-            }));
-
-        it('should return error that multiple send calls used in transation', function () {
-            const code = funcWith(`
-              uint aRes = a.send(1); 
-              uint bRes = b.send(2);
-            `);
+    DEPRECATION_ERRORS.forEach(curText =>
+        it(`should return error that used deprecations ${curText}`, function () {
+            const code = funcWith(curText);
 
             const report = linter.processStr(code, noIndent());
 
             assert.equal(report.errorCount, 1);
-            assert.ok(report.reports[0].message.includes('multiple'));
-        });
+            assert.ok(report.reports[0].message.includes('deprecate'));
+        }));
 
-        it('should return error that used tx.origin', function () {
-            const code = funcWith(`
-              uint aRes = tx.origin;
-            `);
+    it('should return error that multiple send calls used in transation', function () {
+        const code = funcWith(`
+          uint aRes = a.send(1); 
+          uint bRes = b.send(2);
+        `);
 
-            const report = linter.processStr(code, noIndent());
+        const report = linter.processStr(code, noIndent());
 
-            assert.equal(report.errorCount, 1);
-            assertErrorMessage(report, 'origin');
-        });
+        assert.equal(report.errorCount, 1);
+        assert.ok(report.reports[0].message.includes('multiple'));
+    });
 
-        const TIME_BASED_LOGIC = [
-            funcWith('now >= start + daysAfter * 1 days;'),
-            funcWith('start >= block.timestamp + daysAfter * 1 days;')
-        ];
+    it('should return error that used tx.origin', function () {
+        const code = funcWith(`
+          uint aRes = tx.origin;
+        `);
 
-        TIME_BASED_LOGIC.forEach(curCode =>
-            it('should return warn when business logic rely on time', function () {
-                const report = linter.processStr(curCode, noIndent());
+        const report = linter.processStr(code, noIndent());
 
-                assertWarnsCount(report, 1);
-                assertErrorMessage(report, 'time');
-            }));
+        assert.equal(report.errorCount, 1);
+        assertErrorMessage(report, 'origin');
+    });
 
-        it('should return warn when function use inline assembly', function () {
-            const code = funcWith(' assembly { "test" } ');
+    const TIME_BASED_LOGIC = [
+        funcWith('now >= start + daysAfter * 1 days;'),
+        funcWith('start >= block.timestamp + daysAfter * 1 days;')
+    ];
 
-            const report = linter.processStr(code, noIndent());
+    TIME_BASED_LOGIC.forEach(curCode =>
+        it('should return warn when business logic rely on time', function () {
+            const report = linter.processStr(curCode, noIndent());
 
             assertWarnsCount(report, 1);
-            assertErrorMessage(report, 'assembly');
-        });
+            assertErrorMessage(report, 'time');
+        }));
 
-        it('should return warn when function rely on block has', function () {
-            const code = funcWith('end >= block.blockhash + daysAfter * 1 days;');
+    it('should return warn when function use inline assembly', function () {
+        const code = funcWith(' assembly { "test" } ');
 
-            const report = linter.processStr(code, noIndent());
+        const report = linter.processStr(code, noIndent());
 
-            assertWarnsCount(report, 1);
-            assertErrorMessage(report, 'block.blockhash');
-        });
+        assertWarnsCount(report, 1);
+        assertErrorMessage(report, 'assembly');
+    });
 
-        it('should return warn when code contains possible reentrancy', function () {
-            const code = funcWith(`
+    it('should return warn when function rely on block has', function () {
+        const code = funcWith('end >= block.blockhash + daysAfter * 1 days;');
+
+        const report = linter.processStr(code, noIndent());
+
+        assertWarnsCount(report, 1);
+        assertErrorMessage(report, 'block.blockhash');
+    });
+
+
+    describe('Reentrancy', function () {
+
+        const REENTRANCY_ERROR = [
+            funcWith(`
+                uint amount = shares[msg.sender];
+                bool a = msg.sender.send(amount);
+                if (a) { shares[msg.sender] = 0; }
+            `),
+            funcWith(`
                 uint amount = shares[msg.sender];
                 msg.sender.transfer(amount);
                 shares[msg.sender] = 0;
-            `);
+            `)
+        ];
 
-            const report = linter.processStr(code, noIndent());
+        REENTRANCY_ERROR.forEach(curCode =>
+            it('should return warn when code contains possible reentrancy', function () {
+                const report = linter.processStr(curCode, noIndent());
 
-            assertWarnsCount(report, 1);
-            assertErrorMessage(report, 'reentrancy');
-        });
+                assertWarnsCount(report, 1);
+                assertErrorMessage(report, 'reentrancy');
+            })
+        );
 
-        it('should return warn when code contains possible reentrancy with send method', function () {
-            const code = funcWith(`
-                uint amount = shares[msg.sender];
-                bool a = msg.sender.send(amount);
-                if (a) {
-                    shares[msg.sender] = 0;
-                }
-            `);
-
-            const report = linter.processStr(code, noIndent());
-
-            assertWarnsCount(report, 1);
-            assertErrorMessage(report, 'reentrancy');
-        });
-
-        it('should not return warn when code do not contains transfer', function () {
-            const code = funcWith(`
+        const NO_REENTRANCY_ERRORS = [
+            funcWith(`
                 uint amount = shares[msg.sender];
                 user.test(amount);
                 shares[msg.sender] = 0;
-            `);
+            `),
+            funcWith(`
+                uint amount = shares[msg.sender];
+                shares[msg.sender] = 0;
+                msg.sender.transfer(amount);
+            `)
+        ];
 
-            const report = linter.processStr(code, noIndent());
+        NO_REENTRANCY_ERRORS.forEach(curCode =>
+            it('should not return warn when code do not contains transfer', function () {
+                const report = linter.processStr(curCode, noIndent());
 
-            assertNoWarnings(report);
-        });
+                assertNoWarnings(report);
+            })
+        );
 
     });
+
+
 });
