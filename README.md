@@ -35,8 +35,8 @@ Options:
 
 Commands:
 
-  stdin [options] 
-  init-config     
+  stdin [options]         put source code to stdin of this utility   
+  init-config             create sample solhint config in current folder 
 ```
 
 
