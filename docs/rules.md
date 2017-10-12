@@ -66,12 +66,12 @@ http://solidity.readthedocs.io/en/develop/style-guide.html)
  
 ### Best Practise Rules
  
-  | Rule ID                       |                      Error                         |     Options                   |
-  |-------------------------------|----------------------------------------------------|-------------------------------| 
-  | **max-line-length**           | Line length must be no more than *maxlen*. | [*\<[default](#options)\>*,&nbsp;*\<maxlen\>*] Default *maxlen* is **120**. | 
-  | **payable-fallback**          | When fallback is not payable you will not be able to receive ethers | *[default](#options)* |
-  | **no-empty-blocks**           | Code contains empty block                          | *[default](#options)*         |
-  | **no-unused-vars**            | Variable "name" is unused                          | *[default](#options)*         |
-  | **function-max-lines**        | Function body contains "count" lines but allowed no more than *maxlines*. | [*\<[default](#options)\>*,&nbsp;*\<maxlines\>*] Default *maxlines* is **45**. |
-  | **code-complexity**           | Function has cyclomatic complexity "current" but allowed no more than *maxcompl*. | [*\<[default](#options)\>*,&nbsp;*\<maxcompl\>*] Default *maxcompl* is **7**. |
-  | **max-states-count**          | Contract has "some count" states declarations but allowed no more than *maxstates* | [*\<[default](#options)\>*,&nbsp;*\<maxstates\>*] Default *maxstates* is **15**. |
+ | Rule ID                       |                      Error                         |     Options                   |
+ |-------------------------------|----------------------------------------------------|-------------------------------| 
+ | **max-line-length**           | Line length must be no more than *maxlen*. | [*\<[default](#options)\>*,&nbsp;*\<maxlen\>*] Default *maxlen* is **120**. | 
+ | **payable-fallback**          | When fallback is not payable you will not be able to receive ethers | *[default](#options)* |
+ | **no-empty-blocks**           | Code contains empty block                          | *[default](#options)*         |
+ | **no-unused-vars**            | Variable "name" is unused                          | *[default](#options)*         |
+ | **function-max-lines**        | Function body contains "count" lines but allowed no more than *maxlines*. | [*\<[default](#options)\>*,&nbsp;*\<maxlines\>*] Default *maxlines* is **45**. |
+ | **code-complexity**           | Function has cyclomatic complexity "current" but allowed no more than *maxcompl*. | [*\<[default](#options)\>*,&nbsp;*\<maxcompl\>*] Default *maxcompl* is **7**. |
+ | **max-states-count**          | Contract has "some count" states declarations but allowed no more than *maxstates* | [*\<[default](#options)\>*,&nbsp;*\<maxstates\>*] Default *maxstates* is **15**. |
