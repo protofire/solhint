@@ -6,7 +6,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/tokenhouse/solhint/badge.svg?branch=master)](
 https://coveralls.io/github/tokenhouse/solhint?branch=master)
 
-This is an open source project for linting [solidity](http://solidity.readthedocs.io/en/develop/) code. This project 
+This is an open source project for linting [Solidity](http://solidity.readthedocs.io/en/develop/) code. This project 
 provide both **security** and **style guide** validations.   
 
 ### Installation
