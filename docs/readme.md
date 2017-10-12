@@ -15,10 +15,18 @@ For install project you need to execute next commands
 
 ```sh
 npm install -g solhint
-solhint *.sol
+solhint -V
 ```
 
 ### Usage
+
+For linting Solidity files you need to execute next command
+
+```sh
+solhint *.sol **/*.sol <any_other_glob_pattern>
+```
+
+Solhint command details 
 
 ```text
 Usage: solhint [options] <file> [...other_files]

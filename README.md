@@ -20,6 +20,14 @@ solhint -V
 
 ### Usage
 
+For linting Solidity files you need to execute next command
+
+```text
+solhint *.sol **/*.sol <any_other_glob_pattern>
+```
+
+Solhint command description
+
 ```text
 Usage: solhint [options] <file> [...other_files]
 
@@ -38,7 +46,6 @@ Commands:
   stdin [options]         put source code to stdin of this utility   
   init-config             create sample solhint config in current folder 
 ```
-
 
 ### Configuration 
 
