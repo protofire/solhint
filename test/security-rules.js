@@ -162,5 +162,14 @@ describe('Linter', function() {
             assertErrorMessage(report, 'assembly');
         });
 
+        it('should return warn when function rely on block has', function () {
+            const code = funcWith('end >= block.blockhash + daysAfter * 1 days;');
+
+            const report = linter.processStr(code, noIndent());
+
+            assertWarnsCount(report, 1);
+            assertErrorMessage(report, 'block.blockhash');
+        });
+
     });
 });

@@ -25,11 +25,12 @@
  | **compiler-fixed**            | Compiler version must be fixed                  | *[default](#options)*     |
  | **compiler-gt-0_4**           | Use at least '0.4' compiler version             | *[default](#options)*     |
  | **no-complex-fallback**       | Fallback function must be simple                | *[default](#options)*     |
- | **mark-callable-contracts**   | Explicitly mark all external contracts as trusted or untrusted | *[default](#options)*|
- | **multiple-sends**            | Avoid multiple calls of "send" method in single transaction | *[default](#options)*|
+ | **mark-callable-contracts**   | Explicitly mark all external contracts as trusted or untrusted | *[default](#options)* |
+ | **multiple-sends**            | Avoid multiple calls of "send" method in single transaction | *[default](#options)* |
  | **no-simple-event-func-name** | Event and function names must be different      | *[default](#options)*     |
  | **avoid-tx-origin**           | Avoid to use tx.origin                          | *[default](#options)*     |
- | **no-inline-assembly**        | Avoid to use inline assembly. It is acceptable only in rare cases | *[default](#options)*|
+ | **no-inline-assembly**        | Avoid to use inline assembly. It is acceptable only in rare cases | *[default](#options)* |
+ | **not-rely-on-block-hash**    | Do not rely on "block.blockhash". Miners can influence its value. | *[default](#options)* |
  
 ### Style Guide Codes:
  

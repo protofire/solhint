@@ -123,6 +123,7 @@ Disable all linter rules for code fragment
  | **no-simple-event-func-name** | Event and function names must be different         |
  | **avoid-tx-origin**           | Avoid to use tx.origin                             |
  | **no-inline-assembly**        | Avoid to use inline assembly. It is acceptable only in rare cases |
+ | **not-rely-on-block-hash**    | Do not rely on "block.blockhash". Miners can influence its value. |
  
 ### Style Guide Codes:
  
