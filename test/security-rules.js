@@ -230,4 +230,24 @@ describe('Linter - SecurityRules', function() {
     });
 
 
+    describe('Avoid low level calls', function () {
+
+        const LOW_LEVEL_CALLS = [
+            funcWith('msg.sender.call(code);'),
+            funcWith('a.callcode(test1);'),
+            funcWith('a.delegatecall(test1);')
+        ];
+
+        LOW_LEVEL_CALLS.forEach(curCode =>
+            it('should return warn when code contains possible reentrancy', function () {
+                const report = linter.processStr(curCode, noIndent());
+
+                assertWarnsCount(report, 1);
+                assertErrorMessage(report, 'low level');
+            })
+        );
+
+    });
+
+
 });
