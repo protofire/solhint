@@ -84,6 +84,18 @@ describe('Linter', function() {
             assertNoErrors(report);
         });
 
+        it('should disable then enable all errors', function () {
+            const report = linter.processStr(`
+                /* solhint-disable */
+                pragma solidity ^0.4.4;
+                /* solhint-enable */
+                pragma solidity ^0.4.4; 
+            `, noIndent());
+
+            assertErrorCount(report, 1);
+            assertErrorMessage(report, 'fixed');
+        });
+
         it('should not erase error', function () {
             const report = linter.processStr('/* solhint-disable-next-line */');
 

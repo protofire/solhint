@@ -3,7 +3,7 @@ const linter = require('./../lib/index');
 const contractWith = require('./common/contract-builder').contractWith;
 const funcWith = require('./common/contract-builder').funcWith;
 const { noIndent } = require('./common/configs');
-const { assertWarnsCount, assertErrorMessage, assertNoWarnings } = require('./common/asserts');
+const { assertWarnsCount, assertErrorMessage, assertNoWarnings, assertErrorCount } = require('./common/asserts');
 
 
 describe('Linter - SecurityRules', function() {
@@ -126,6 +126,17 @@ describe('Linter - SecurityRules', function() {
 
         assert.equal(report.errorCount, 1);
         assert.ok(report.reports[0].message.includes('multiple'));
+    });
+
+    it('should return error that multiple send calls used in loop', function () {
+        const code = funcWith(`
+          while (ac > b) { uint res = a.send(1); }
+        `);
+
+        const report = linter.processStr(code, noIndent());
+
+        assertErrorCount(report, 1);
+        assertErrorMessage(report, 'multiple');
     });
 
     it('should return error that used tx.origin', function () {
