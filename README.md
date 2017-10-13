@@ -132,6 +132,7 @@ Disable all linter rules for code fragment
  | **avoid-tx-origin**           | Avoid to use tx.origin                                            |
  | **no-inline-assembly**        | Avoid to use inline assembly. It is acceptable only in rare cases |
  | **not-rely-on-block-hash**    | Do not rely on "block.blockhash". Miners can influence its value. |
+ | **avoid-low-level-calls**     | Avoid to use low level calls.                                     |
  
 \* \- All security rules implemented according [ConsenSys Guide for Smart Contracts](
 https://github.com/ConsenSys/smart-contract-best-practices#recommendations-for-smart-contract-security-in-solidity)
