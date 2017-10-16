@@ -1,6 +1,6 @@
 ## Solhint Project
 
-[![Build Status](https://travis-ci.org/tokenhouse/solhint.svg?branch=master)](https://travis-ci.org/tokenhouse/solhint)
+[![Build Status](https://travis-ci.org/protofire/solhint.svg?branch=master)](https://travis-ci.org/protofire/solhint)
 [![npm version](http://img.shields.io/npm/v/solhint.svg?style=flat)](https://npmjs.org/package/solhint 
 "View this project on npm")
 [![Coverage Status](https://coveralls.io/repos/github/tokenhouse/solhint/badge.svg?branch=master)](
