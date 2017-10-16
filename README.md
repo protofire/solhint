@@ -3,8 +3,8 @@
 [![Build Status](https://travis-ci.org/protofire/solhint.svg?branch=master)](https://travis-ci.org/protofire/solhint)
 [![npm version](http://img.shields.io/npm/v/solhint.svg?style=flat)](https://npmjs.org/package/solhint 
 "View this project on npm")
-[![Coverage Status](https://coveralls.io/repos/github/tokenhouse/solhint/badge.svg?branch=master)](
-https://coveralls.io/github/tokenhouse/solhint?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/protofire/solhint/badge.svg?branch=master)](
+https://coveralls.io/github/protofire/solhint?branch=master)
 
 This is an open source project for linting [Solidity](http://solidity.readthedocs.io/en/develop/) code. This project 
 provide both **Security** and **Style Guide** validations.   
