@@ -52,7 +52,7 @@ describe('Linter', function() {
         try {
             fs.unlinkSync(tmpFilePath());
         } catch (err) {
-            // noop
+            // console.log(err);
         }
     }
 
