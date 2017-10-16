@@ -49,7 +49,11 @@ describe('Linter', function() {
     }
 
     function removeTmpFiles() {
-        fs.unlinkSync(tmpFilePath());
+        try {
+            fs.unlinkSync(tmpFilePath());
+        } catch (err) {
+            // noop
+        }
     }
 
 });
