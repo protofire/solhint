@@ -13,8 +13,8 @@
     "code-quality",
     "smart-contracts"
   ],
-  "homepage": "https://tokenhouse.github.io/solhint/",
-  "repository": "https://github.com/tokenhouse/solhint",
+  "homepage": "https://protofire.github.io/solhint/",
+  "repository": "https://github.com/protofire/solhint",
   "scripts": {
     "exec-tests": "nyc -x \"**/grammar/**\" mocha && nyc report --reporter=text-lcov | coveralls",
     "test": "eslint *.js lib/*.js lib/rules/*.js lib/rules/**/*.js test/*.js && npm run exec-tests"
