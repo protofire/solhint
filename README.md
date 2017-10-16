@@ -181,7 +181,7 @@ http://solidity.readthedocs.io/en/develop/style-guide.html)
  
 ### Documentation
 
-Related documentation you may find [there](https://tokenhouse.github.io/solhint/).
+Related documentation you may find [there](https://protofire.github.io/solhint/).
 
 ### IDE Integrations
 
