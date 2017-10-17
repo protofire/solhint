@@ -185,15 +185,23 @@ describe('Linter - SecurityRules', function() {
     describe('Reentrancy', function () {
 
         const REENTRANCY_ERROR = [
-            funcWith(`
-                uint amount = shares[msg.sender];
-                bool a = msg.sender.send(amount);
-                if (a) { shares[msg.sender] = 0; }
+            contractWith(`
+                mapping(address => uint) private shares;
+                
+                function b() external {
+                    uint amount = shares[msg.sender];
+                    bool a = msg.sender.send(amount);
+                    if (a) { shares[msg.sender] = 0; }
+                }
             `),
-            funcWith(`
-                uint amount = shares[msg.sender];
-                msg.sender.transfer(amount);
-                shares[msg.sender] = 0;
+            contractWith(`
+                mapping(address => uint) private shares;
+            
+                function b() external {
+                    uint amount = shares[msg.sender];
+                    msg.sender.transfer(amount);
+                    shares[msg.sender] = 0;
+                }
             `)
         ];
 
@@ -207,15 +215,29 @@ describe('Linter - SecurityRules', function() {
         );
 
         const NO_REENTRANCY_ERRORS = [
-            funcWith(`
-                uint amount = shares[msg.sender];
-                user.test(amount);
-                shares[msg.sender] = 0;
+            contractWith(`
+                mapping(address => uint) private shares;
+                
+                function b() external {
+                    uint amount = shares[msg.sender];
+                    shares[msg.sender] = 0;
+                    msg.sender.transfer(amount);
+                }
+            `),
+            contractWith(`
+                mapping(address => uint) private shares;
+                
+                function b() external {
+                    uint amount = shares[msg.sender];
+                    user.test(amount);
+                    shares[msg.sender] = 0;
+                }
             `),
             funcWith(`
+                uint[] shares;
                 uint amount = shares[msg.sender];
-                shares[msg.sender] = 0;
                 msg.sender.transfer(amount);
+                shares[msg.sender] = 0;
             `)
         ];
 
