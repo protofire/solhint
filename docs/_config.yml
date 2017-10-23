@@ -1,4 +1,8 @@
 theme: jekyll-theme-cayman
+gems:
+  - jekyll-seo-tag
+plugins:
+  - jekyll-seo-tag
 defaults:
   - scope:
       path: readme
