@@ -1,5 +1,4 @@
 ---
-layout:      default
 title:       Solhint - Solidity Linter
 date:        2017-10-23 14:16:00 +0300
 author:      "@drabenia"
