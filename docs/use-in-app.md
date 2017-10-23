@@ -3,8 +3,7 @@ layout:      default
 title:       API for Ethereum's Solidity Code Validator
 date:        2017-10-23 14:16:00 +0300
 author:      "@drabenia"
-description: Embedded solidity security validation, solidity style guide verification, 
-             solidity best practise validations.
+description: Description of API provided by Solhint - Ethereum's Solidity Code Validator
 ---
 
 

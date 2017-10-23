@@ -1,9 +1,9 @@
 ---
 layout:      default
-title:       Validation Rules for Ethereum's Solidity
+title:       Validation Rules for Solhint
 date:        2017-10-23 14:16:00 +0300
 author:      "@drabenia"
-description: Solidity security validation, solidity style guide, solidity best practise validations.
+description: List of validation rules for Solhint - Solidity security, style guide, best practise validator.
 ---
 
 

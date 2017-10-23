@@ -3,8 +3,8 @@ layout:      default
 title:       Solhint - Solidity Linter
 date:        2017-10-23 14:16:00 +0300
 author:      "@drabenia"
-description: This is an open source project for linting Solidity code, validating Solidity code. 
-             The project provides solidity security, solidity style guide, solidity best practise validations.
+description: This is an open source project for validating Solidity code. 
+             The project provides solidity security, style guide and best practise validations.
 ---
 
 
