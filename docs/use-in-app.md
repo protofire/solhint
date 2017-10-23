@@ -1,3 +1,13 @@
+---
+layout:      default
+title:       API for Ethereum's Solidity Code Validator
+date:        2017-10-23 14:16:00 +0300
+author:      "@drabenia"
+description: Embedded solidity security validation, solidity style guide verification, 
+             solidity best practise validations.
+---
+
+
 ### Use Solhint in Your Application
 
 If you want to use Solhint linter in your application - you may import `solhint/lib/index` file and run function 

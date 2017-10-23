@@ -1,3 +1,11 @@
+---
+layout:      default
+title:       Validation Rules for Ethereum's Solidity
+date:        2017-10-23 14:16:00 +0300
+author:      "@drabenia"
+description: Solidity security validation, solidity style guide, solidity best practise validations.
+---
+
 
 ### Options
  Default list of options are *false, "error", "warn"*. It supports by all rules.
