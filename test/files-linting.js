@@ -56,4 +56,5 @@ describe('Linter', function() {
         }
     }
 
+
 });
