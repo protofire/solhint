@@ -9,7 +9,7 @@ const process = require('process');
 
 function init () {
     program
-        .version('1.1.5');
+        .version('1.1.7');
 
     program
         .usage('[options] <file> [...other_files]')
@@ -60,21 +60,25 @@ function processStdin(options) {
 }
 
 function writeSampleConfigFile() {
-    const sampleConfig = {
-        extends: 'default',
-        rules: {
-            'no-complex-fallback': 'warn',
-            'indent': ['error', 4],
-            'quotes': ['error', 'double'],
-            'max-line-length': ['error', 120]
-        }
-    };
+    const configPath = '.solhint.json';
+    const sampleConfig = [
+        '{                                              ',
+        '    "extends": "default",                      ',
+        '    "rules": {                                 ',
+        '        "indent": ["error", 4],                ',
+        '        "quotes": ["error", "double"],         ',
+        '        "max-line-length": ["error", 120]      ',
+        '    }                                          ',
+        '}                                              '
+    ];
 
-    const sampleConfigJson = JSON.stringify(sampleConfig, (k, v) => v, 4);
+    if (!fs.existsSync(configPath)) {
+        fs.writeFileSync(configPath, sampleConfig.join('\n'));
 
-    fs.writeFileSync('.solhint.json', sampleConfigJson);
-
-    console.log('Configuration file created!');
+        console.log('Configuration file created!');
+    } else {
+        console.log('Configuration file already exists');
+    }
 }
 
 const readConfig = _.memoize(function () {
