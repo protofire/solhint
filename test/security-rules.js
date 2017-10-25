@@ -11,8 +11,8 @@ describe('Linter - SecurityRules', function() {
     it('should return pragma error', function() {
         const report = linter.processStr('pragma solidity ^0.4.4;');
 
-        assert.equal(report.errorCount, 1);
-        assert.ok(report.reports[0].message.includes('Compiler'));
+        assertWarnsCount(report, 1);
+        assertErrorMessage(report, 'Compiler');
     });
 
     it('should return compiler version error', function () {

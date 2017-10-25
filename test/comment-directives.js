@@ -1,5 +1,5 @@
 const { noIndent } = require('./common/configs');
-const { assertNoErrors, assertErrorCount, assertErrorMessage } = require('./common/asserts');
+const { assertNoErrors, assertErrorCount, assertWarnsCount, assertErrorMessage } = require('./common/asserts');
 const linter = require('./../lib/index');
 
 
@@ -45,7 +45,7 @@ describe('Linter', function() {
                 pragma solidity 0.3.4; // disabled error: Compiler version must be greater that 0.4
             `, noIndent());
 
-            assertErrorCount(report, 1);
+            assertWarnsCount(report, 1);
             assertErrorMessage(report, 'Compiler version must be fixed');
         });
 
@@ -70,7 +70,7 @@ describe('Linter', function() {
                 pragma solidity ^0.4.4; 
             `, noIndent());
 
-            assertErrorCount(report, 2);
+            assertWarnsCount(report, 2);
             assertErrorMessage(report, 'fixed');
         });
 
@@ -92,7 +92,7 @@ describe('Linter', function() {
                 pragma solidity ^0.4.4; 
             `, noIndent());
 
-            assertErrorCount(report, 1);
+            assertWarnsCount(report, 1);
             assertErrorMessage(report, 'fixed');
         });
 
