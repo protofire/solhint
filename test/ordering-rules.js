@@ -58,7 +58,7 @@ describe('Linter', function() {
 
         it('should raise incorrect function order error for external constant funcs', function () {
             const code = contractWith(`
-                function b() external constant {}
+                function b() external pure {}
                 function c() external {}
             `);
 
@@ -71,7 +71,7 @@ describe('Linter', function() {
         it('should raise incorrect function order error for internal function', function () {
             const code = contractWith(`
                 function c() internal {}
-                function b() external constant {}
+                function b() external view {}
             `);
 
             const report = linter.processStr(code, noIndent());

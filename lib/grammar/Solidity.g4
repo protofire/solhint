@@ -74,8 +74,11 @@ returnParameters
   : 'returns' parameterList ;
 
 modifierList
-  : ( modifierInvocation | ConstantKeyword | PayableKeyword | ExternalKeyword
-    | PublicKeyword | InternalKeyword | PrivateKeyword )* ;
+  : ( modifierInvocation | stateMutability
+    | ExternalKeyword | PublicKeyword | InternalKeyword | PrivateKeyword )* ;
+
+stateMutability
+  : ( PureKeyword | ConstantKeyword | ViewKeyword | PayableKeyword ) ;
 
 eventDefinition
   : 'event' identifier indexedParameterList AnonymousKeyword? ';' ;
@@ -122,7 +125,7 @@ mapping
 
 functionTypeName
   : 'function' typeNameList
-    ( InternalKeyword | ExternalKeyword | ConstantKeyword | PayableKeyword )*
+    ( stateMutability | InternalKeyword | ExternalKeyword )*
     ( 'returns' typeNameList )? ;
 
 storageLocation
@@ -381,12 +384,10 @@ ReservedKeyword
   | 'type'
   | 'typeof';
 
-ConstantKeyword
-  : 'constant'
-  | 'pure'
-  | 'view' ;
-
 AnonymousKeyword : 'anonymous' ;
+ConstantKeyword : 'constant' ;
+PureKeyword : 'pure' ;
+ViewKeyword : 'view' ;
 ExternalKeyword : 'external' ;
 IndexedKeyword : 'indexed' ;
 InternalKeyword : 'internal' ;
