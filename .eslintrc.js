@@ -28,6 +28,10 @@ module.exports = {
             "error",
             "always"
         ],
+        "space-before-function-paren": [
+            "error",
+            {"anonymous": "always", "named": "never"}
+        ],
         "max-len": [
             "error",
             120
