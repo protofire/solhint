@@ -41,8 +41,7 @@ description: List of validation rules for Solhint - Solidity security, style gui
  | **not-rely-on-block-hash**    | Do not rely on "block.blockhash". Miners can influence its value. | *[default](#options)* |
  | **avoid-low-level-calls**     | Avoid to use low level calls.                                     | *[default](#options)* |
  
-\* \- All security rules implemented according [ConsenSys Guide for Smart Contracts](
-https://github.com/ConsenSys/smart-contract-best-practices#recommendations-for-smart-contract-security-in-solidity)
+\* \- All security rules implemented according [ConsenSys Guide for Smart Contracts](https://consensys.github.io/smart-contract-best-practices/recommendations/)
  
 ### Style Guide Rules
  
