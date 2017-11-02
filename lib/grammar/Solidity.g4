@@ -280,7 +280,7 @@ assemblyExpression
   : assemblyCall | assemblyLiteral ;
 
 assemblyCall
-  : ( 'return' | 'address' | ByteWord | Identifier ) ( '(' assemblyExpression? ( ',' assemblyExpression )* ')' )? ;
+  : ( 'return' | 'address' | elementaryTypeName | Identifier ) ( '(' assemblyExpression? ( ',' assemblyExpression )* ')' )? ;
 
 assemblyLocalDefinition
   : 'let' assemblyIdentifierOrList ':=' assemblyExpression ;
