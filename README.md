@@ -135,7 +135,7 @@ Disable all linter rules for code fragment
  | **avoid-low-level-calls**     | Avoid to use low level calls.                                     |
  
 \* \- All security rules implemented according [ConsenSys Guide for Smart Contracts](
-https://github.com/ConsenSys/smart-contract-best-practices#recommendations-for-smart-contract-security-in-solidity)
+https://consensys.github.io/smart-contract-best-practices/recommendations/)
  
 ### Style Guide Rules
  
