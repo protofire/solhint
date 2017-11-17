@@ -51,7 +51,7 @@ description: List of validation rules for Solhint - Solidity security, style gui
  | **func-param-name-mixedcase** | Function param name must be in mixedCase           | *[default](#options)*          |
  | **var-name-mixedcase**        | Variable name must be in mixedCase                 | *[default](#options)*          |
  | **event-name-camelcase**      | Event name must be in CamelCase                    | *[default](#options)*          |
- | **const-name-snakecase**      | Constant name must be in SCREAMING_SNAKE_CASE      | *[default](#options)*          |
+ | **const-name-snakecase**      | Constant name must be in capitalized SNAKE_CASE    | *[default](#options)*          |
  | **modifier-name-mixedcase**   | Modifier name must be in mixedCase                 | *[default](#options)*          |
  | **contract-name-camelcase**   | Contract name must be in CamelCase                 | *[default](#options)*          |
  | **use-forbidden-name**        | Avoid to use letters 'I', 'l', 'O' as identifiers  | *[default](#options)*          |

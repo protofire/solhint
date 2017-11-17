@@ -145,7 +145,7 @@ https://consensys.github.io/smart-contract-best-practices/recommendations/)
  | **func-param-name-mixedcase** | Function param name must be in mixedCase                                  |
  | **var-name-mixedcase**        | Variable name must be in mixedCase                                        |
  | **event-name-camelcase**      | Event name must be in CamelCase                                           |
- | **const-name-snakecase**      | Constant name must be in SCREAMING_SNAKE_CASE                             |
+ | **const-name-snakecase**      | Constant name must be in capitalized SNAKE_CASE                           |
  | **modifier-name-mixedcase**   | Modifier name must be in mixedCase                                        |
  | **contract-name-camelcase**   | Contract name must be in CamelCase                                        |
  | **use-forbidden-name**        | Avoid to use letters 'I', 'l', 'O' as identifiers                         |
