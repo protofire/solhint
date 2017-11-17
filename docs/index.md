@@ -65,12 +65,12 @@ Commands:
 
 ### IDE Integrations
  
-  - **[Sublime Text 3](https://packagecontrol.io/search/solhint)**
-  - **[Atom](https://atom.io/packages/atom-solidity-linter)**
-  - **[VS Code: Solidity by Juan Blanco](
-         https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity)**
-  - **[VS Code: Solidity Language Support by CodeChain.io](
-         https://marketplace.visualstudio.com/items?itemName=kodebox.solidity-language-server)**
+  - [Sublime Text 3](https://packagecontrol.io/search/solhint)
+  - [Atom](https://atom.io/packages/atom-solidity-linter)
+  - [VS Code: Solidity by Juan Blanco](
+         https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity)
+  - [VS Code: Solidity Language Support by CodeChain.io](
+         https://marketplace.visualstudio.com/items?itemName=kodebox.solidity-language-server)
 
 ### Licence
 
