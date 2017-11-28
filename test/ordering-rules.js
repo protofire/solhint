@@ -91,5 +91,16 @@ describe('Linter', function() {
             assert.equal(report.errorCount, 0);
         });
 
+        it('should not raise error when external const goes before public ', function () {
+            const code = contractWith(`
+                function a() external view {}
+                function b() public {}
+            `);
+
+            const report = linter.processStr(code, noIndent());
+
+            assert.equal(report.errorCount, 0);
+        });
+
     });
 });
