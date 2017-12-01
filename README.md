@@ -187,6 +187,7 @@ Related documentation you may find [there](https://protofire.github.io/solhint/)
 
   - **[Sublime Text 3](https://packagecontrol.io/search/solhint)**
   - **[Atom](https://atom.io/packages/atom-solidity-linter)**
+  - **[Vim](https://github.com/sohkai/syntastic-local-solhint)**
   - **[JetBrains IDEA, WebStorm, CLion, etc.](https://plugins.jetbrains.com/plugin/10177-solidity-solhint)**
   - **[VS Code: Solidity by Juan Blanco](
          https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity)**
