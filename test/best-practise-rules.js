@@ -6,7 +6,7 @@ const { contractWith, funcWith } = require('./common/contract-builder');
 const _ = require('lodash');
 
 
-describe('Linter - Best Practises Rules', function() {
+describe('Linter - Best Practises Rules', function () {
 
 
     describe('Fallback must be payable', function () {
@@ -172,7 +172,7 @@ describe('Linter - Best Practises Rules', function() {
     });
 
 
-    function label (data) {
+    function label(data) {
         const items = data.split('\n');
         const lastItemIndex = items.length  - 1;
         const labelIndex = Math.floor(lastItemIndex / 5) * 4;

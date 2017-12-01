@@ -4,7 +4,7 @@ const { funcWith, multiLine } = require('./common/contract-builder');
 const { noIndent } = require('./common/configs');
 
 
-describe('Linter - Statement Align Rules', function() {
+describe('Linter - Statement Align Rules', function () {
 
     describe('Incorrect Statements', function () {
         const INCORRECT_STATEMENTS = [
@@ -87,7 +87,7 @@ describe('Linter - Statement Align Rules', function() {
         );
     });
 
-    function label (data) {
+    function label(data) {
         return data.split('\n')[0];
     }
 });

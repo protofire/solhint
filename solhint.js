@@ -7,7 +7,7 @@ const fs = require('fs');
 const process = require('process');
 
 
-function init () {
+function init() {
     program
         .version('1.1.9');
 
@@ -35,7 +35,7 @@ function init () {
         && program.help();
 }
 
-function execMainAction () {
+function execMainAction() {
     const pathPromises = program
         .args
         .filter(i => typeof(i) === 'string')
@@ -98,7 +98,7 @@ function processPath(path) {
     return linter.processPath(path, readConfig());
 }
 
-function printReports (reports, formatter) {
+function printReports(reports, formatter) {
     const formatterName = formatter || 'stylish';
     const formatterFn = require(`eslint/lib/formatters/${formatterName}`);
     console.log(formatterFn(reports));

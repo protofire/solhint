@@ -6,7 +6,7 @@ const { funcWith, contractWith, multiLine } = require('./common/contract-builder
 const _ = require('lodash');
 
 
-describe('Linter', function() {
+describe('Linter', function () {
     describe('Align Rules', function () {
 
         it('should raise error when contract do not surrounds with two blank lines', function () {

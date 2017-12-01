@@ -7,7 +7,7 @@ const os = require('os');
 const fs = require('fs');
 
 
-describe('Linter', function() {
+describe('Linter', function () {
 
     describe('File Linting', function () {
 
@@ -35,7 +35,7 @@ describe('Linter', function() {
     });
 
 
-    function tmpFilePath () {
+    function tmpFilePath() {
         const tempDirPath = os.tmpdir();
         return `${tempDirPath}/test.sol`;
     }

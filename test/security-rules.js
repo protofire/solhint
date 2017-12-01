@@ -6,9 +6,9 @@ const { noIndent } = require('./common/configs');
 const { assertWarnsCount, assertErrorMessage, assertNoWarnings, assertErrorCount } = require('./common/asserts');
 
 
-describe('Linter - SecurityRules', function() {
+describe('Linter - SecurityRules', function () {
 
-    it('should return pragma error', function() {
+    it('should return pragma error', function () {
         const report = linter.processStr('pragma solidity ^0.4.4;');
 
         assertWarnsCount(report, 1);

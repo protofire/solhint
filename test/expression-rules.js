@@ -4,7 +4,7 @@ const { funcWith } = require('./common/contract-builder');
 const { noIndent } = require('./common/configs');
 const { assertNoErrors } = require('./common/asserts');
 
-describe('Linter - Expression Align Rules', function() {
+describe('Linter - Expression Align Rules', function () {
 
     describe('Incorrect Expressions', function () {
         const INCORRECT_EXPRESSIONS = [

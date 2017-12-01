@@ -3,7 +3,7 @@ const { assertNoErrors, assertErrorCount, assertWarnsCount, assertErrorMessage }
 const linter = require('./../lib/index');
 
 
-describe('Linter', function() {
+describe('Linter', function () {
     describe('Comment Directives', function () {
 
         it('should disable fixed compiler error', function () {

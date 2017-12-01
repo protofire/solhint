@@ -5,7 +5,7 @@ const funcWith = require('./common/contract-builder').funcWith;
 const { noIndent } = require('./common/configs');
 
 
-describe('Linter', function() {
+describe('Linter', function () {
     describe('NamingRules', function () {
 
         it('should raise incorrect func name error', function () {

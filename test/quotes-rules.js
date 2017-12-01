@@ -4,7 +4,7 @@ const { contractWith, funcWith } = require('./common/contract-builder');
 const { noIndent } = require('./common/configs');
 
 
-describe('Linter', function() {
+describe('Linter', function () {
     describe('Quote Rules', function () {
 
         it('should raise quotes error', function () {

@@ -4,7 +4,7 @@ const contractWith = require('./common/contract-builder').contractWith;
 const { noIndent } = require('./common/configs');
 
 
-describe('Linter', function() {
+describe('Linter', function () {
     describe('Ordering Rules', function () {
 
         it('should raise visibility modifier error', function () {

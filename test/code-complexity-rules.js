@@ -6,7 +6,7 @@ const { multiLine } = require('./common/contract-builder');
 const _ = require('lodash');
 
 
-describe('Linter - Code Complexity Rule', function() {
+describe('Linter - Code Complexity Rule', function () {
 
     const MAX_COMPLEXITY_EXCEEDED_CODE =funcWith(multiLine(
         ' if (a > b) {                   ',

@@ -3,7 +3,7 @@ const linter = require('./../lib/index');
 
 
 
-describe('Linter', function() {
+describe('Linter', function () {
     describe('Config', function () {
 
         it('should disable fixed compiler error', function () {
