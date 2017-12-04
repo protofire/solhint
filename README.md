@@ -1,32 +1,41 @@
 ## Solhint Project
 
 [![Build Status](https://travis-ci.org/protofire/solhint.svg?branch=master)](https://travis-ci.org/protofire/solhint)
-[![npm version](http://img.shields.io/npm/v/solhint.svg?style=flat)](https://npmjs.org/package/solhint 
+[![npm version](http://img.shields.io/npm/v/solhint.svg?style=flat)](https://npmjs.org/package/solhint
 "View this project on npm")
 [![Coverage Status](https://coveralls.io/repos/github/protofire/solhint/badge.svg?branch=master)](
 https://coveralls.io/github/protofire/solhint?branch=master)
 
-This is an open source project for linting [Solidity](http://solidity.readthedocs.io/en/develop/) code. This project 
-provide both **Security** and **Style Guide** validations.   
+This is an open source project for linting [Solidity](http://solidity.readthedocs.io/en/develop/) code. This project
+provides both **Security** and **Style Guide** validations.
 
 ### Installation
 
-For install project you need to execute next commands
+You can install solhint using NPM:
 
 ```sh
 npm install -g solhint
+
+# verify that it was installed correctly
 solhint -V
 ```
 
 ### Usage
 
-For linting Solidity files you need to execute next command
+For linting Solidity files you need to run solhint with one or more globs as arguments. For example,
+to lint all files inside `src`, you can do:
 
 ```sh
-solhint *.sol **/*.sol <any_other_glob_pattern>
+solhint src/**/*.sol
 ```
 
-Solhint command description
+To lint a single file:
+
+```sh
+solhint src/Contract.sol
+```
+
+Solhint command description:
 
 ```text
 Usage: solhint [options] <file> [...other_files]
@@ -43,13 +52,14 @@ Options:
 
 Commands:
 
-  stdin [options]         put source code to stdin of this utility   
-  init-config             create sample solhint config in current folder 
+  stdin [options]         put source code to stdin of this utility
+  init-config             create sample solhint config in current folder
 ```
 
-### Configuration 
+### Configuration
 
-Configuration file has next format:
+You can use a `.solhint.json` file to configure solhint globally. This file has the following
+format:
 
 ```json
   {
@@ -65,33 +75,36 @@ Configuration file has next format:
 
 ### Configure linter with comments
 
-Disable validation on next line
+You can use comments in the source code to configure solhint in a given line or file.
+
+For example, to disable all validations in the line following a comment:
 
 ```javascript
   // solhint-disable-next-line
   uint[] a;
 ```
 
-Disable validation of fixed compiler version validation on next line
- 
+You can disable a single rule on a given line. For example, to disable validation of fixed compiler
+version in the next line:
+
 ```text
   // solhint-disable-next-line compiler-fixed, compiler-gt-0_4
-  pragma solidity ^0.4.4; 
+  pragma solidity ^0.4.4;
 ```
 
-Disable validation on current line
+Disable validation on current line:
 
 ```text
   pragma solidity ^0.4.4; // solhint-disable-line
 ```
 
-Disable validation of fixed compiler version validation on current line 
+Disable validation of fixed compiler version validation on current line:
 
 ```text
   pragma solidity ^0.4.4; // solhint-disable-line compiler-fixed, compiler-gt-0_4
 ```
 
-Disable linter rules for code fragment 
+You can disable a rule for a group of lines:
 
 ```javascript
   /* solhint-disable avoid-throw */
@@ -101,7 +114,7 @@ Disable linter rules for code fragment
   /* solhint-enable avoid-throw */
 ```
 
-Disable all linter rules for code fragment
+Or disable all validations for a group of lines:
 
 ```javascript
   /* solhint-disable */
@@ -114,7 +127,7 @@ Disable all linter rules for code fragment
 ### Security Rules
 
  | Rule ID                       |                      Error                                        |
- |-------------------------------|-------------------------------------------------------------------| 
+ |-------------------------------|-------------------------------------------------------------------|
  | **reentrancy**                | Possible reentrancy vulnerabilities. Avoid state changes after transfer. |
  | **avoid-sha3**                | Use "keccak256" instead of deprecated "sha3"                      |
  | **avoid-suicide**             | Use "selfdestruct" instead of deprecated "suicide"                |
@@ -133,14 +146,14 @@ Disable all linter rules for code fragment
  | **no-inline-assembly**        | Avoid to use inline assembly. It is acceptable only in rare cases |
  | **not-rely-on-block-hash**    | Do not rely on "block.blockhash". Miners can influence its value. |
  | **avoid-low-level-calls**     | Avoid to use low level calls.                                     |
- 
+
 \* \- All security rules implemented according [ConsenSys Guide for Smart Contracts](
 https://consensys.github.io/smart-contract-best-practices/recommendations/)
- 
+
 ### Style Guide Rules
- 
+
  | Rule ID                       |                      Error                                                |
- |-------------------------------|---------------------------------------------------------------------------| 
+ |-------------------------------|---------------------------------------------------------------------------|
  | **func-name-mixedcase**       | Function name must be in camelCase                                        |
  | **func-param-name-mixedcase** | Function param name must be in mixedCase                                  |
  | **var-name-mixedcase**        | Variable name must be in mixedCase                                        |
@@ -163,14 +176,14 @@ https://consensys.github.io/smart-contract-best-practices/recommendations/)
  | **statement-indent**          | Statement indentation is incorrect.                                       |
  | **space-after-comma**         | Comma must be separated from next element by space                        |
  | **no-spaces-before-semicolon**| Semicolon must not have spaces before                                     |
- 
+
 \* \- All style guide rules implemented according [Solidity Style Guide](
 http://solidity.readthedocs.io/en/develop/style-guide.html)
- 
+
 ### Best Practise Rules
- 
+
   | Rule ID                       |                      Error                                                       |
-  |-------------------------------|----------------------------------------------------------------------------------| 
+  |-------------------------------|----------------------------------------------------------------------------------|
   | **max-line-length**           | Line length must be no more than 120 but current length is 121.                  |
   | **payable-fallback**          | When fallback is not payable you will not be able to receive ethers              |
   | **no-empty-blocks**           | Code contains empty block                                                        |
@@ -178,7 +191,7 @@ http://solidity.readthedocs.io/en/develop/style-guide.html)
   | **function-max-lines**        | Function body contains "count" lines but allowed no more than "maxLines" lines   |
   | **code-complexity**           | Function has cyclomatic complexity "current" but allowed no more than "max"      |
   | **max-states-count**          | Contract has "curCount" states declarations but allowed no more than "max"       |
- 
+
 ### Documentation
 
 Related documentation you may find [there](https://protofire.github.io/solhint/).
