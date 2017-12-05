@@ -11,7 +11,7 @@ provides both **Security** and **Style Guide** validations.
 
 ### Installation
 
-You can install solhint using NPM:
+You can install **Solhint** using NPM:
 
 ```sh
 npm install -g solhint
@@ -22,17 +22,17 @@ solhint -V
 
 ### Usage
 
-For linting Solidity files you need to run solhint with one or more globs as arguments. For example,
-to lint all files inside `src`, you can do:
+For linting Solidity files you need to run **Solhint** with one or more globs as arguments. For example,
+to lint all files inside `contracts`, you can do:
 
 ```sh
-solhint src/**/*.sol
+solhint contracts/**/*.sol
 ```
 
 To lint a single file:
 
 ```sh
-solhint src/Contract.sol
+solhint contracts/MyToken.sol
 ```
 
 Solhint command description:
@@ -151,7 +151,7 @@ Or disable all validations for a group of lines:
 https://consensys.github.io/smart-contract-best-practices/recommendations/)
 
 ### Style Guide Rules
-
+ 
  | Rule ID                       |                      Error                                                |
  |-------------------------------|---------------------------------------------------------------------------|
  | **func-name-mixedcase**       | Function name must be in camelCase                                        |
@@ -176,12 +176,12 @@ https://consensys.github.io/smart-contract-best-practices/recommendations/)
  | **statement-indent**          | Statement indentation is incorrect.                                       |
  | **space-after-comma**         | Comma must be separated from next element by space                        |
  | **no-spaces-before-semicolon**| Semicolon must not have spaces before                                     |
-
+ 
 \* \- All style guide rules implemented according [Solidity Style Guide](
 http://solidity.readthedocs.io/en/develop/style-guide.html)
-
+ 
 ### Best Practise Rules
-
+ 
   | Rule ID                       |                      Error                                                       |
   |-------------------------------|----------------------------------------------------------------------------------|
   | **max-line-length**           | Line length must be no more than 120 but current length is 121.                  |
@@ -191,7 +191,7 @@ http://solidity.readthedocs.io/en/develop/style-guide.html)
   | **function-max-lines**        | Function body contains "count" lines but allowed no more than "maxLines" lines   |
   | **code-complexity**           | Function has cyclomatic complexity "current" but allowed no more than "max"      |
   | **max-states-count**          | Contract has "curCount" states declarations but allowed no more than "max"       |
-
+ 
 ### Documentation
 
 Related documentation you may find [there](https://protofire.github.io/solhint/).
