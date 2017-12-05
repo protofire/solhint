@@ -11,7 +11,7 @@ provides both **Security** and **Style Guide** validations.
 
 ### Installation
 
-You can install Solhint using ***npm***:
+You can install ***Solhint*** using ***npm***:
 
 ```sh
 npm install -g solhint
@@ -22,7 +22,7 @@ solhint -V
 
 ### Usage
 
-For linting Solidity files you need to run **Solhint** with one or more globs as arguments. For example,
+For linting Solidity files you need to run ***Solhint*** with one or more globs as arguments. For example,
 to lint all files inside `contracts`, you can do:
 
 ```sh
