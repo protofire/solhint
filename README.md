@@ -11,7 +11,7 @@ provides both **Security** and **Style Guide** validations.
 
 ### Installation
 
-You can install Solhint using `npm`:
+You can install Solhint using *npm*:
 
 ```sh
 npm install -g solhint
