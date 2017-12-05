@@ -57,7 +57,7 @@ Commands:
 
 ### Configuration
 
-You can use a `.solhint.json` file to configure solhint globally. This file has the following
+You can use a `.solhint.json` file to configure Solhint globally. This file has the following
 format:
 
 ```json

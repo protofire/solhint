@@ -6,7 +6,6 @@ description: This is an open source project for validating Solidity code.
              The project provides solidity security, style guide and best practise validations.
 ---
 
-
 ## Solhint Project
 
 [![Build Status](https://travis-ci.org/protofire/solhint.svg?branch=master)](https://travis-ci.org/protofire/solhint)
@@ -20,22 +19,32 @@ provide both **security** and **style guide** validations.
 
 ### Installation
 
-For install project you need to execute next commands
+You can install Solhint using **npm**:
 
 ```sh
 npm install -g solhint
+
+# verify that it was installed correctly
 solhint -V
 ```
 
 ### Usage
 
-For linting Solidity files you need to execute next command
+For linting Solidity files you need to run Solhint with one or more 
+[Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside 
+`contracts` directory, you can do:
 
 ```sh
-solhint *.sol **/*.sol <any_other_glob_pattern>
+solhint contracts/**/*.sol
 ```
 
-Solhint command details 
+To lint a single file:
+
+```sh
+solhint contracts/MyToken.sol
+```
+
+Solhint command description:
 
 ```text
 Usage: solhint [options] <file> [...other_files]
@@ -52,7 +61,7 @@ Options:
 
 Commands:
 
-  stdin [options]         put source code to stdin of this utility   
+  stdin [options]         put source code to stdin of this utility
   init-config             create sample solhint config in current folder
 ```
 

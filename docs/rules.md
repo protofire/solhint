@@ -6,7 +6,6 @@ author:      "@drabenia"
 description: List of validation rules for Solhint - Solidity security, style guide, best practise validator.
 ---
 
-
 ### Options
  Default list of options are *false, "error", "warn"*. It supports by all rules.
  It provides in format 

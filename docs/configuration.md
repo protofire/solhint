@@ -7,10 +7,10 @@ description: Configuration of solidity security and style guide verification,
              best practise validations.
 ---
 
+### Configuration
 
-### Configuration 
-
-Configuration file has next format:
+You can use a `.solhint.json` file to configure Solhint globally. This file has the following
+format:
 
 ```json
   {
@@ -26,33 +26,36 @@ Configuration file has next format:
 
 ### Configure linter with comments
 
-Disable validation on next line
+You can use comments in the source code to configure solhint in a given line or file.
+
+For example, to disable all validations in the line following a comment:
 
 ```javascript
   // solhint-disable-next-line
   uint[] a;
 ```
 
-Disable validation of fixed compiler version validation on next line
- 
-```javascript
+You can disable a single rule on a given line. For example, to disable validation of fixed compiler
+version in the next line:
+
+```text
   // solhint-disable-next-line compiler-fixed, compiler-gt-0_4
-  pragma solidity ^0.4.4; 
+  pragma solidity ^0.4.4;
 ```
 
-Disable validation on current line
+Disable validation on current line:
 
-```javascript
+```text
   pragma solidity ^0.4.4; // solhint-disable-line
 ```
 
-Disable validation of fixed compiler version validation on current line 
+Disable validation of fixed compiler version validation on current line:
 
-```javascript
+```text
   pragma solidity ^0.4.4; // solhint-disable-line compiler-fixed, compiler-gt-0_4
 ```
 
-Disable linter rules for code fragment 
+You can disable a rule for a group of lines:
 
 ```javascript
   /* solhint-disable avoid-throw */
@@ -62,7 +65,7 @@ Disable linter rules for code fragment
   /* solhint-enable avoid-throw */
 ```
 
-Disable all linter rules for code fragment
+Or disable all validations for a group of lines:
 
 ```javascript
   /* solhint-disable */

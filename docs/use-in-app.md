@@ -6,7 +6,6 @@ author:      "@drabenia"
 description: Description of API provided by Solhint - Ethereum's Solidity Code Validator
 ---
 
-
 ### Use Solhint in Your Application
 
 If you want to use Solhint linter in your application - you may import `solhint/lib/index` file and run function 
