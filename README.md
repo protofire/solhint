@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/protofire/solhint.svg?branch=master)](https://travis-ci.org/protofire/solhint)
 [![npm version](http://img.shields.io/npm/v/solhint.svg?style=flat)](https://npmjs.org/package/solhint
-"View this project on npm")
+"Solhint on npmjs.com")
 [![Coverage Status](https://coveralls.io/repos/github/protofire/solhint/badge.svg?branch=master)](
 https://coveralls.io/github/protofire/solhint?branch=master)
 
