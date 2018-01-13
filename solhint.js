@@ -81,10 +81,26 @@ function writeSampleConfigFile() {
     }
 }
 
+const readIgnore = _.memoize(function () {
+    try {
+        return fs
+            .readFileSync('.solhintignore')
+            .toString()
+            .split('\n')
+            .map(i => i.trim());
+    } catch (e) {
+        return [];
+    }
+});
+
 const readConfig = _.memoize(function () {
     try {
         const configStr = fs.readFileSync('.solhint.json').toString();
-        return JSON.parse(configStr);
+
+        const config = JSON.parse(configStr);
+        config.excludedFiles = [].concat(_.flatten(config.excludedFiles), readIgnore());
+
+        return config;
     } catch (e) {
         return { rules: {} };
     }
