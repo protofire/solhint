@@ -209,6 +209,32 @@ describe('Linter', function () {
             assertErrorMessage(report, 0, 'Indentation is incorrect');
         });
 
+        it('should not raise error when indent is correct for function with non single line header', function () {
+            const code = multiLine('              ', // 1
+                'contract A {                     ', // 2
+                '     function A(                 ', // 3
+                '     )                           ', // 4
+                '        private                  ', // 5
+                '     {                           ', // 6
+                '         {                       ', // 7
+                '                                 ', // 8
+                '        }                        ', // 9
+                '    }                            ', // 10
+                '}                                '  // 11
+            );
+
+            const report = linter.processStr(code, {rules: {
+                'separate-by-one-line-in-contract': false, 'bracket-align': false,
+                'no-empty-blocks': false, 'no-inline-assembly': false
+            }});
+
+            assert.equal(report.errorCount, 4);
+            assertErrorMessage(report, 0, 'Expected indentation of 4');
+            assertErrorMessage(report, 1, 'Indentation is incorrect');
+            assertErrorMessage(report, 2, 'Indentation is incorrect');
+            assertErrorMessage(report, 3, 'Expected indentation of 8');
+        });
+
         it('should not raise error when line indent is correct for function with for if-else statement', function () {
             const code = multiLine('               ', // 1
                 'contract A {                      ', // 2
