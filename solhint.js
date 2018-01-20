@@ -102,7 +102,12 @@ const readConfig = _.memoize(function () {
 
         return config;
     } catch (e) {
-        return { rules: {} };
+        if (e instanceof SyntaxError) {
+            console.log('Configuration file is not valid JSON');
+            throw e;
+        } else {
+            throw e;
+        }
     }
 });
 
