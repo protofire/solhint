@@ -23,9 +23,9 @@ describe('Linter', function () {
         it('should raise an one error', function () {
             const filePath = storeAsFile(contractWith('string private a = \'test\';'));
 
-            linter
-                .processPath(filePath, noIndent())
-                .then(reports => assertErrorCount(reports[0], 1));
+            const reports = linter.processPath(filePath, noIndent());
+
+            assertErrorCount(reports[0], 1);
         });
 
         after(function () {
