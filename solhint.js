@@ -101,7 +101,7 @@ const readConfig = _.memoize(function () {
         config.excludedFiles = [].concat(_.flatten(config.excludedFiles), readIgnore());
 
         return config;
-    } catch catch (e){
+    } catch (e) {
         if (e instanceof SyntaxError) {
             console.log('Configuration file is not valid JSON');
             throw e;
