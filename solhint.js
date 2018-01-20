@@ -94,21 +94,22 @@ const readIgnore = _.memoize(function () {
 });
 
 const readConfig = _.memoize(function () {
+    let config = {};
+
     try {
         const configStr = fs.readFileSync('.solhint.json').toString();
-
-        const config = JSON.parse(configStr);
-        config.excludedFiles = [].concat(_.flatten(config.excludedFiles), readIgnore());
-
-        return config;
+        config = JSON.parse(configStr);
     } catch (e) {
         if (e instanceof SyntaxError) {
-            console.log('Configuration file is not valid JSON');
-            throw e;
-        } else {
-            throw e;
+            const msg = 'ERROR: Configuration file [.solhint.json] is not a valid JSON. Please correct it! \n';
+            console.log(msg);
+            process.exit(0);
         }
     }
+
+    config.excludedFiles = [].concat(_.flatten(config.excludedFiles), readIgnore());
+    console.log(config.excludedFiles);
+    return config;
 });
 
 function processStr(input) {
