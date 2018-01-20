@@ -36,18 +36,11 @@ function init() {
 }
 
 function execMainAction() {
-    const pathPromises = program
-        .args
-        .filter(i => typeof(i) === 'string')
-        .map(processPath);
+    const reportLists = program.args.filter(_.isString).map(processPath);
+    const reports =_.flatten(reportLists);
 
-    Promise
-        .all(pathPromises)
-        .then(items => _.flatten(items))
-        .then(reports => {
-            printReports(reports, program.formatter);
-            exitWithCode(reports);
-        });
+    printReports(reports, program.formatter);
+    exitWithCode(reports);
 }
 
 function processStdin(options) {
@@ -101,14 +94,14 @@ const readConfig = _.memoize(function () {
         config = JSON.parse(configStr);
     } catch (e) {
         if (e instanceof SyntaxError) {
-            const msg = 'ERROR: Configuration file [.solhint.json] is not a valid JSON. Please correct it! \n';
-            console.log(msg);
+            console.log('ERROR: Configuration file [.solhint.json] is not a valid JSON!\n');
             process.exit(0);
         }
     }
 
-    config.excludedFiles = [].concat(_.flatten(config.excludedFiles), readIgnore());
-    console.log(config.excludedFiles);
+    const configExcludeFiles = _.flatten(config.excludedFiles);
+    config.excludedFiles = _.concat(configExcludeFiles, readIgnore());
+
     return config;
 });
 

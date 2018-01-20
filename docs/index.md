@@ -35,7 +35,7 @@ For linting Solidity files you need to run Solhint with one or more
 `contracts` directory, you can do:
 
 ```sh
-solhint contracts/**/*.sol
+solhint "contracts/**/*.sol"
 ```
 
 To lint a single file:

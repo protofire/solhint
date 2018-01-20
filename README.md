@@ -25,7 +25,7 @@ solhint -V
 For linting Solidity files you need to run Solhint with one or more [Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside `contracts` directory, you can do:
 
 ```sh
-solhint contracts/**/*.sol
+solhint "contracts/**/*.sol"
 ```
 
 To lint a single file:
@@ -70,6 +70,14 @@ format:
       "indent": ["warn", 4]
     }
   }
+```
+
+To ignore files / folders that do not require validation you may use `.solhintignore` file. It supports rules in 
+`.gitignore` format.
+
+```git exclude
+/node_modules/
+additiona-tests.sol
 ```
 
 ### Configure linter with comments

@@ -24,6 +24,14 @@ format:
   }
 ```
 
+To ignore files / folders that do not require validation you may use `.solhintignore` file. It supports rules in 
+`.gitignore` format.
+
+```git exclude
+/node_modules/
+additiona-tests.sol
+```
+
 ### Configure linter with comments
 
 You can use comments in the source code to configure solhint in a given line or file.
