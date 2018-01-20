@@ -28,7 +28,7 @@ To ignore files / folders that do not require validation you may use `.solhintig
 `.gitignore` format.
 
 ```git exclude
-/node_modules/
+node_modules/
 additiona-tests.sol
 ```
 
