@@ -5,6 +5,8 @@
 "Solhint on npmjs.com")
 [![Coverage Status](https://coveralls.io/repos/github/protofire/solhint/badge.svg?branch=master)](
 https://coveralls.io/github/protofire/solhint?branch=master)
+[![dependencies Status](https://david-dm.org/protofire/solhint/status.svg)](https://david-dm.org/protofire/solhint)
+[![devDependencies Status](https://david-dm.org/protofire/solhint/dev-status.svg)](https://david-dm.org/protofire/solhint?type=dev)
 
 This is an open source project for linting [Solidity](http://solidity.readthedocs.io/en/develop/) code. This project
 provides both **Security** and **Style Guide** validations.
