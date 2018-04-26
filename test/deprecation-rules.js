@@ -2,6 +2,7 @@ const assert = require('assert');
 const linter = require('./../lib/index');
 const { multiLine } = require('./common/contract-builder');
 const { assertErrorMessage } = require('./common/asserts');
+const BaseDeprecation = require('./../lib/rules/deprecations/base-deprecation');
 
 describe('Linter - Deprecations', function () {
 
@@ -96,6 +97,12 @@ describe('Linter - Deprecations', function () {
             );
             const report = linter.processStr(code, config);
             assert.equal(report.warningCount, 0);
+        });
+    });
+
+    describe('General infrastructure', function () {
+        it('should fail without deprecationVersion() implemented', function () {
+            assert.throws(()=>new BaseDeprecation());
         });
     });
 });
