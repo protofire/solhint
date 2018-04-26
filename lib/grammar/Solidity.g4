@@ -44,6 +44,7 @@ contractPart:
     structDefinition |
     modifierDefinition |
     functionDefinition |
+    constructorDefinition |
     eventDefinition |
     enumDefinition ;
 
@@ -69,6 +70,9 @@ modifierInvocation:
 
 functionDefinition:
     'function' identifier? parameterList modifierList returnParameters? (';' | block);
+
+constructorDefinition:
+    'constructor' parameterList modifierList block;
 
 returnParameters:
     'returns' parameterList ;
@@ -375,6 +379,7 @@ expression:
     expression ('++' | '--') |
     'new' typeName |
     expression '[' expression ']' |
+    'emit' expression '(' functionCallArguments ')' |
     expression '(' functionCallArguments ')' |
     expression '.' expression |
     '(' expression ')' |
