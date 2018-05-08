@@ -60,13 +60,8 @@ case, the steps to update it are:
 
 1. Copy the `Solidity.g4` file and replace the one in this repo
 (`lib/grammar/Solidity.g4`).
-2. Download [ANTLR4](http://www.antlr.org/download.html)
-3. Update the parser:
-
-    `java -jar antlr-4.7.1-complete.jar -Dlanguage=JavaScript Solidity.g4`
-
-4. Stage and commit the changes. You can ignore the `*.interp` files that were
-created.
+2. From the root of the project, execute `scripts/build-grammar.sh`. You will
+need to have java installed for this to work.
 
 Pull Requests
 -------------
