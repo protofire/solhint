@@ -61,7 +61,8 @@ case, the steps to update it are:
 1. Copy the `Solidity.g4` file and replace the one in this repo
 (`lib/grammar/Solidity.g4`).
 2. From the root of the project, execute `scripts/build-grammar.sh`. You will
-need to have java installed for this to work.
+need to have the Java Runtime Environment (7 or later) installed for this to
+work.
 
 Pull Requests
 -------------
