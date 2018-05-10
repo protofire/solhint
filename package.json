@@ -19,7 +19,7 @@
     "exec-tests": "nyc -x \"**/grammar/**\" mocha && nyc report --reporter=text-lcov | coveralls",
     "test": "eslint *.js lib/*.js lib/rules/*.js lib/rules/**/*.js test/*.js && npm run exec-tests",
     "test-only": "mocha",
-    "generate": "(cd lib/grammar; java org.antlr.v4.Tool ./Solidity.g4 -Dlanguage=JavaScript)"
+    "generate": "(cd ./solidity-antlr4; java org.antlr.v4.Tool ./Solidity.g4 -Dlanguage=JavaScript -o ../lib/grammar)"
   },
   "bin": {
     "solhint": "solhint.js"
