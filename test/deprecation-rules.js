@@ -57,49 +57,6 @@ describe('Linter - Deprecations', function () {
         });
     });
 
-    describe('Event emit Syntax', function () {
-        it('should raise a warning for old-style event emission', function () {
-            const code = multiLine('              ', // 1
-                'pragma solidity 0.4.22;          ', // 2
-                'contract A {                     ', // 3
-                '    event Foo();                 ', // 4
-                '    function xyz() public {      ', // 5
-                '        Foo();                   ', // 6
-                '    }                            ', // 7
-                '}                                '  // 8
-            );
-            const report = linter.processStr(code, config);
-            assert.equal(report.warningCount, 1);
-            assertErrorMessage(report, 0, 'Use emit syntax');
-        });
-        it('should NOT raise a warning for old-style event emission in old version', function () {
-            const code = multiLine('              ', // 1
-                'pragma solidity 0.4.20;          ', // 2
-                'contract A {                     ', // 3
-                '    event Foo();                 ', // 4
-                '    function xyz() public {      ', // 5
-                '        Foo();                   ', // 6
-                '    }                            ', // 7
-                '}                                '  // 8
-            );
-            const report = linter.processStr(code, config);
-            assert.equal(report.warningCount, 0);
-        });
-        it('should raise a warning for new-style event emission', function () {
-            const code = multiLine('              ', // 1
-                'pragma solidity 0.4.22;          ', // 2
-                'contract A {                     ', // 3
-                '    event Foo();                 ', // 4
-                '    function xyz() public {      ', // 5
-                '        emit Foo();              ', // 6
-                '    }                            ', // 7
-                '}                                '  // 8
-            );
-            const report = linter.processStr(code, config);
-            assert.equal(report.warningCount, 0);
-        });
-    });
-
     describe('General infrastructure', function () {
         it('should fail without deprecationVersion() implemented', function () {
             assert.throws(()=>new BaseDeprecation());
