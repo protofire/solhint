@@ -42,6 +42,7 @@ describe('Linter - Expression Align Rules', function () {
             'new TrustedContract',
             'myArray[5]',
             'myFunc(1, 2, 3)',
+            'emit myEvent(1, 2, 3)',
             'myFunc.call(1)',
             'a = (b + c)',
             'a = b + 1',

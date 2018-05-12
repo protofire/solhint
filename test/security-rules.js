@@ -60,8 +60,8 @@ describe('Linter - SecurityRules', function () {
 
     it('should return that fallback must be simple', function () {
         const code = contractWith(`function () public payable {
-            make1(); 
-            make2(); 
+            make1();
+            make2();
             make3();
         }`);
 
@@ -118,7 +118,7 @@ describe('Linter - SecurityRules', function () {
 
     it('should return error that multiple send calls used in transation', function () {
         const code = funcWith(`
-          uint aRes = a.send(1); 
+          uint aRes = a.send(1);
           uint bRes = b.send(2);
         `);
 
@@ -187,7 +187,7 @@ describe('Linter - SecurityRules', function () {
         const REENTRANCY_ERROR = [
             contractWith(`
                 mapping(address => uint) private shares;
-                
+
                 function b() external {
                     uint amount = shares[msg.sender];
                     bool a = msg.sender.send(amount);
@@ -196,7 +196,7 @@ describe('Linter - SecurityRules', function () {
             `),
             contractWith(`
                 mapping(address => uint) private shares;
-            
+
                 function b() external {
                     uint amount = shares[msg.sender];
                     msg.sender.transfer(amount);
@@ -217,7 +217,7 @@ describe('Linter - SecurityRules', function () {
         const NO_REENTRANCY_ERRORS = [
             contractWith(`
                 mapping(address => uint) private shares;
-                
+
                 function b() external {
                     uint amount = shares[msg.sender];
                     shares[msg.sender] = 0;
@@ -226,7 +226,7 @@ describe('Linter - SecurityRules', function () {
             `),
             contractWith(`
                 mapping(address => uint) private shares;
-                
+
                 function b() external {
                     uint amount = shares[msg.sender];
                     user.test(amount);
