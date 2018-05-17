@@ -3,7 +3,6 @@
 .solhint.json
 test2.sol
 convertLib.sol
-package-lock.json
 /.nyc_output/
 /coverage/
 /docs/_site/
