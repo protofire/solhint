@@ -74,7 +74,7 @@ format:
   }
 ```
 
-To ignore files / folders that do not require validation you may use `.solhintignore` file. It supports rules in 
+To ignore files / folders that do not require validation you may use `.solhintignore` file. It supports rules in
 `.gitignore` format.
 
 ```git exclude
@@ -160,7 +160,7 @@ Or disable all validations for a group of lines:
 https://consensys.github.io/smart-contract-best-practices/recommendations/)
 
 ### Style Guide Rules
- 
+
  | Rule ID                       |                      Error                                                |
  |-------------------------------|---------------------------------------------------------------------------|
  | **func-name-mixedcase**       | Function name must be in camelCase                                        |
@@ -185,12 +185,12 @@ https://consensys.github.io/smart-contract-best-practices/recommendations/)
  | **statement-indent**          | Statement indentation is incorrect.                                       |
  | **space-after-comma**         | Comma must be separated from next element by space                        |
  | **no-spaces-before-semicolon**| Semicolon must not have spaces before                                     |
- 
+
 \* \- All style guide rules implemented according [Solidity Style Guide](
 http://solidity.readthedocs.io/en/develop/style-guide.html)
- 
+
 ### Best Practise Rules
- 
+
   | Rule ID                       |                      Error                                                       |
   |-------------------------------|----------------------------------------------------------------------------------|
   | **max-line-length**           | Line length must be no more than 120 but current length is 121.                  |
@@ -200,7 +200,7 @@ http://solidity.readthedocs.io/en/develop/style-guide.html)
   | **function-max-lines**        | Function body contains "count" lines but allowed no more than "maxLines" lines   |
   | **code-complexity**           | Function has cyclomatic complexity "current" but allowed no more than "max"      |
   | **max-states-count**          | Contract has "curCount" states declarations but allowed no more than "max"       |
- 
+
 ### Documentation
 
 Related documentation you may find [there](https://protofire.github.io/solhint/).
@@ -215,6 +215,11 @@ Related documentation you may find [there](https://protofire.github.io/solhint/)
          https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity)**
   - **[VS Code: Solidity Language Support by CodeChain.io](
          https://marketplace.visualstudio.com/items?itemName=kodebox.solidity-language-server)**
+
+### Acknowledgements
+
+The grammar used by solhint was created and is maintained by [Federico Bond](https://github.com/federicobond).
+You can find it [here](https://github.com/solidityj/solidity-antlr4).
 
 ### Licence
 

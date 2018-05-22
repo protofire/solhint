@@ -48,6 +48,22 @@ passing. If you contribute with a new feature, please add tests for it. To run t
 
     $ npm test
 
+Grammar modifications
+---------------------
+
+Solhint uses [ANTLR4](http://www.antlr.org/) to generate the Solidity parser.
+The grammar description is taken from
+[solidity-antlr4](https://github.com/solidityj/solidity-antlr4). If there is
+some language feature that Solhint doesn't support, the first step is to check
+if the `Solidity.g4` fil is out of sync with the one in that repo. If that's the
+case, the steps to update it are:
+
+1. Copy the `Solidity.g4` file and replace the one in this repo
+(`lib/grammar/Solidity.g4`).
+2. From the root of the project, execute `scripts/build-grammar.sh`. You will
+need to have the Java Runtime Environment (7 or later) installed for this to
+work.
+
 Pull Requests
 -------------
 
