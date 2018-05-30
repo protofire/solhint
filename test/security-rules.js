@@ -116,6 +116,17 @@ describe('Linter - SecurityRules', function () {
             assert.ok(report.reports[0].message.includes('deprecate'));
         }));
 
+    const ALMOST_DEPRECATION_ERRORS = ['sha33("test");', 'throwing;', 'suicides();'];
+
+    ALMOST_DEPRECATION_ERRORS.forEach(curText =>
+        it(`should not return error when doing ${curText}`, function () {
+            const code = funcWith(curText);
+
+            const report = linter.processStr(code, noIndent());
+
+            assert.equal(report.errorCount, 0);
+        }));
+
     it('should return error that multiple send calls used in transation', function () {
         const code = funcWith(`
           uint aRes = a.send(1);
