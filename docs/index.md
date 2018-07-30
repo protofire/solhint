@@ -2,20 +2,20 @@
 title:       Solhint - Solidity Linter
 date:        2017-10-23 14:16:00 +0300
 author:      "@drabenia"
-description: This is an open source project for validating Solidity code. 
+description: This is an open source project for validating Solidity code.
              The project provides solidity security, style guide and best practise validations.
 ---
 
 ## Solhint Project
 
 [![Build Status](https://travis-ci.org/protofire/solhint.svg?branch=master)](https://travis-ci.org/protofire/solhint)
-[![npm version](http://img.shields.io/npm/v/solhint.svg?style=flat)](https://npmjs.org/package/solhint 
+[![npm version](http://img.shields.io/npm/v/solhint.svg?style=flat)](https://npmjs.org/package/solhint
 "View this project on npm")
 [![Coverage Status](https://coveralls.io/repos/github/protofire/solhint/badge.svg?branch=master)](
 https://coveralls.io/github/protofire/solhint?branch=master)
 
-This is an open source project for linting [solidity](http://solidity.readthedocs.io/en/develop/) code. This project 
-provide both **security** and **style guide** validations.   
+This is an open source project for linting [solidity](http://solidity.readthedocs.io/en/develop/) code. This project
+provide both **security** and **style guide** validations.
 
 ### Installation
 
@@ -30,8 +30,8 @@ solhint -V
 
 ### Usage
 
-For linting Solidity files you need to run Solhint with one or more 
-[Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside 
+For linting Solidity files you need to run Solhint with one or more
+[Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside
 `contracts` directory, you can do:
 
 ```sh
@@ -65,15 +65,17 @@ Commands:
   init-config             create sample solhint config in current folder
 ```
 
+You can use any formatter supported by ESLint. See the full list
+[here](https://eslint.org/docs/user-guide/formatters/).
+
 ### Docs
 
  - [List of Rules](./rules.html)
  - [Configuration](./configuration.html)
- - [Formatters](https://eslint.org/docs/user-guide/formatters/)
  - [Use Solhint in Your Application](./use-in-app.html)
 
 ### IDE Integrations
- 
+
   - [Sublime Text 3](https://packagecontrol.io/search/solhint)
   - [Atom](https://atom.io/packages/atom-solidity-linter)
   - [Vim](https://github.com/sohkai/syntastic-local-solhint)
