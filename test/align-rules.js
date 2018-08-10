@@ -80,6 +80,50 @@ describe('Linter', function () {
             assertErrorMessage(report, 2, '0');
         });
 
+        it('should not raise error for multiline multi variable functions with additional indent', function () {
+            const code = multiLine(
+                'contract A {                                       ',
+                '    function a() public view returns (uint, uint) {',
+                '        return (1, 2);                             ',
+                '    }                                              ',
+                '                                                   ',
+                '    function b() public view returns (uint, uint) {',
+                '        (                                          ',
+                '            uint c,                                ',
+                '            uint d                                 ',
+                '        ) = a();                                   ',
+                '        return (c, d);                             ',
+                '    }                                              ',
+                '}                                                  '
+            );
+
+            const report = linter.processStr(code);
+
+            assert.equal(report.errorCount, 0);
+        });
+
+        it('should not raise error for multiline multi variable functions with no additional indent', function () {
+            const code = multiLine(
+                'contract A {                                       ',
+                '    function a() public view returns (uint, uint) {',
+                '        return (1, 2);                             ',
+                '    }                                              ',
+                '                                                   ',
+                '    function b() public view returns (uint, uint) {',
+                '        (                                          ',
+                '        uint c,                                    ',
+                '        uint d                                     ',
+                '        ) = a();                                   ',
+                '        return (c, d);                             ',
+                '    }                                              ',
+                '}                                                  '
+            );
+
+            const report = linter.processStr(code);
+
+            assert.equal(report.errorCount, 0);
+        });
+
         it('should raise error when line indent is incorrect for function', function () {
             const code = multiLine(
                 '    contract A {                  ',

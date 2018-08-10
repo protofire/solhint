@@ -2,7 +2,7 @@ const { assertNoWarnings, assertErrorMessage, assertWarnsCount } = require('./co
 const { assertErrorCount, assertNoErrors } = require('./common/asserts');
 const { noIndent } = require('./common/configs');
 const linter = require('./../lib/index');
-const { contractWith, funcWith } = require('./common/contract-builder');
+const { contractWith, funcWith, multiLine } = require('./common/contract-builder');
 const _ = require('lodash');
 
 
@@ -95,7 +95,31 @@ describe('Linter - Best Practises Rules', function () {
             contractWith('function a() public returns (uint c) { return 1; }'),
             contractWith('function a(uint d) public returns (uint c) { }'),
             contractWith('function a(uint a, uint c) public returns (uint c);'),
-            contractWith('function a(address a) internal { assembly { t := eq(a, and(mask, calldataload(4))) } }')
+            contractWith('function a(address a) internal { assembly { t := eq(a, and(mask, calldataload(4))) } }'),
+            contractWith(
+                multiLine(
+                    'function a() public view returns (uint, uint) {',
+                    '  return (1, 2);                               ',
+                    '}                                              ',
+                    '                                               ',
+                    'function b() public view returns (uint, uint) {',
+                    '  (uint c, uint d) = a();                      ',
+                    '  return (c, d);                               ',
+                    '}                                              '
+                )
+            ),
+            contractWith(
+                multiLine(
+                    'function a() public view returns (uint, uint) {    ',
+                    '  return (1, 2);                                   ',
+                    '}                                                  ',
+                    '                                                   ',
+                    'function b() public view returns (uint c, uint d) {',
+                    '  (c, d) = a();                                    ',
+                    '  return (c, d);                                   ',
+                    '}                                                  '
+                )
+            )
         ];
 
         USED_VARS.forEach(curData =>
