@@ -5,6 +5,19 @@ const linter = require('./lib/index');
 const _ = require('lodash');
 const fs = require('fs');
 const process = require('process');
+const formatterOptions = [
+    'checkstyle',
+    'codeframe',
+    'compact',
+    'html',
+    'jslint-xml',
+    'json',
+    'junit',
+    'stylish',
+    'table',
+    'tap',
+    'unix',
+    'visualstudio'];
 
 
 function init() {
@@ -115,10 +128,14 @@ function processPath(path) {
 
 function printReports(reports, formatter) {
     const formatterName = formatter || 'stylish';
-    const formatterFn = require(`eslint/lib/formatters/${formatterName}`);
-    console.log(formatterFn(reports));
-
-    return reports;
+    if (formatterOptions.includes(formatterName)) {
+        const formatterFn = require(`eslint/lib/formatters/${formatterName}`);
+        console.log(formatterFn(reports));
+        return reports;
+    } else {
+        console.log(`ERROR: The formatter option ${formatterName} does not exist.`);
+        exitWithCode(reports);
+    }
 }
 
 function exitWithCode(reports) {
