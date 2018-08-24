@@ -18,6 +18,11 @@ function init() {
         .action(execMainAction);
 
     program
+        .usage('[options] <file> [...other_files]')
+        .option('-q, --quiet', 'report errors only - default: false')
+        .action(execMainAction);
+
+    program
         .command('stdin')
         .description('linting of source code data provided to STDIN')
         .option('--filename [file_name]', 'name of file received using STDIN')
@@ -38,6 +43,12 @@ function init() {
 function execMainAction() {
     const reportLists = program.args.filter(_.isString).map(processPath);
     const reports =_.flatten(reportLists);
+
+    if (program.quiet) {
+        console.log('::::Quiet mode enabled - filtering out warnings::::');
+        // Setting int the report list errors only.
+        reports[0].reports  = getErrorResults(reports);
+    }
 
     printReports(reports, program.formatter);
     exitWithCode(reports);
@@ -111,6 +122,17 @@ function processStr(input) {
 
 function processPath(path) {
     return linter.processPath(path, readConfig());
+}
+
+
+/**
+     * Returns results that only contains errors.
+     * @param {LintResult[]} reporter The results to filter.
+     * @returns {LintResult[]} The filtered results.
+**/
+function getErrorResults(reporter) {
+    const reporterErrors = reporter[0].reports.filter(i => i.severity === 2);
+    return reporterErrors;
 }
 
 function printReports(reports, formatter) {
