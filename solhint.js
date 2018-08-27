@@ -127,14 +127,27 @@ function processPath(path) {
 }
 
 function printReports(reports, formatter) {
-    const formatterName = formatter || 'stylish';
-    if (formatterOptions.includes(formatterName)) {
-        const formatterFn = require(`eslint/lib/formatters/${formatterName}`);
+    try {
+        const formatterFn = getFormatter(formatter);
         console.log(formatterFn(reports));
         return reports;
+    } catch(ex) {
+        console.error(ex.message);
+    }
+}
+
+function getFormatter(formatter){
+    const formatterName = formatter || 'stylish';
+    if (typeof formatterName === 'string' && formatterOptions.includes(formatterName)) {
+        try {
+            return require(`eslint/lib/formatters/${formatterName}`);
+        } catch (ex) {
+            ex.message = `\n\nThere was a problem loading formatter option: \nError: ${ex.message}`;
+            throw ex;
+        }
     } else {
-        console.log(`ERROR: The formatter option ${formatterName} does not exist.`);
-        exitWithCode(reports);
+        console.log(`\nError: The formatter option ${formatterName} is invalid or does not exist.`);
+        process.exit(1);
     }
 }
 
