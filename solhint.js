@@ -18,9 +18,7 @@ function init() {
         .action(execMainAction);
 
     program
-        .usage('[options] <file> [...other_files]')
-        .option('-q, --quiet', 'report errors only - default: false')
-        .action(execMainAction);
+        .option('-q, --quiet', 'report errors only - default: false');
 
     program
         .command('stdin')
@@ -45,7 +43,6 @@ function execMainAction() {
     const reports =_.flatten(reportLists);
 
     if (program.quiet) {
-        console.log('::::Quiet mode enabled - filtering out warnings::::');
         // Setting int the report list errors only.
         reports[0].reports  = getErrorResults(reports);
     }
@@ -131,8 +128,8 @@ function processPath(path) {
      * @returns {LintResult[]} The filtered results.
 **/
 function getErrorResults(reporter) {
-    const reporterErrors = reporter[0].reports.filter(i => i.severity === 2);
-    return reporterErrors;
+    return reporter[0].reports.filter(i => i.severity === 2);
+
 }
 
 function printReports(reports, formatter) {
