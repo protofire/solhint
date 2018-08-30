@@ -14,11 +14,9 @@ function init() {
     program
         .usage('[options] <file> [...other_files]')
         .option('-f, --formatter [name]', 'report formatter name (stylish, table, tap, unix)')
+        .option('-q, --quiet', 'report errors only - default: false')
         .description('Linter for Solidity programming language')
         .action(execMainAction);
-
-    program
-        .option('-q, --quiet', 'report errors only - default: false');
 
     program
         .command('stdin')
@@ -43,8 +41,8 @@ function execMainAction() {
     const reports =_.flatten(reportLists);
 
     if (program.quiet) {
-        // Setting int the report list errors only.
-        reports[0].reports  = getErrorResults(reports);
+        // filter the list of reports, to set errors only.
+        reports[0].reports  = reports[0].reports.filter(i => i.severity === 2);
     }
 
     printReports(reports, program.formatter);
@@ -119,17 +117,6 @@ function processStr(input) {
 
 function processPath(path) {
     return linter.processPath(path, readConfig());
-}
-
-
-/**
-     * Returns results that only contains errors.
-     * @param {LintResult[]} reporter The results to filter.
-     * @returns {LintResult[]} The filtered results.
-**/
-function getErrorResults(reporter) {
-    return reporter[0].reports.filter(i => i.severity === 2);
-
 }
 
 function printReports(reports, formatter) {
