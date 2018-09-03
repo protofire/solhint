@@ -44,7 +44,7 @@ function execMainAction() {
         const warningsNumberExceeded = program.maxWarnings >= 0 && reports[0].warningCount > program.maxWarnings;
 
         if (program.maxWarnings && !reports[0].errorCount && warningsNumberExceeded) {
-            console.log('Solhint found more warnings than the maximum specified (maximum:%s).\n', program.maxWarnings);
+            console.log('Solhint found more warnings than the maximum specified (maximum: %s).', program.maxWarnings);
             process.exit(1);
         }
     }
@@ -121,7 +121,6 @@ function processStr(input) {
 function processPath(path) {
     return linter.processPath(path, readConfig());
 }
-
 
 function printReports(reports, formatter) {
     const formatterName = formatter || 'stylish';
