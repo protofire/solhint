@@ -15,7 +15,7 @@ function init() {
         .usage('[options] <file> [...other_files]')
         .option('-f, --formatter [name]', 'report formatter name (stylish, table, tap, unix)')
         .option('-q, --quiet', 'report errors only - default: false')
-        .option('--ignore-path [file_name]', 'allows you to specify the file to use as your .solhintignore')
+        .option('--ignore-path [file_name]', 'file to use as your .solhintignore')
         .description('Linter for Solidity programming language')
         .action(execMainAction);
 
