@@ -55,7 +55,7 @@ function execMainAction() {
             process.exit(1);
         }
     }
-    
+
     exitWithCode(reports);
 }
 
