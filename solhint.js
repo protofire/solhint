@@ -15,6 +15,7 @@ function init() {
         .usage('[options] <file> [...other_files]')
         .option('-f, --formatter [name]', 'report formatter name (stylish, table, tap, unix)')
         .option('-w, --max-warnings [maxWarningsNumber]', 'number of warnings to trigger nonzero exit code')
+        .option('-q, --quiet', 'report errors only')
         .description('Linter for Solidity programming language')
         .action(execMainAction);
 
@@ -39,12 +40,18 @@ function init() {
 function execMainAction() {
     const reportLists = program.args.filter(_.isString).map(processPath);
     const reports =_.flatten(reportLists);
+    const warningsNumberExceeded = program.maxWarnings >= 0 && reports[0].warningCount >= program.maxWarnings;
+
+    if (program.quiet) {
+        // filter the list of reports, to set errors only.
+        reports[0].reports  = reports[0].reports.filter(i => i.severity === 2);
+    }
 
     if (printReports(reports, program.formatter)) {
-        const warningsNumberExceeded = program.maxWarnings >= 0 && reports[0].warningCount > program.maxWarnings;
-
         if (program.maxWarnings && !reports[0].errorCount && warningsNumberExceeded) {
-            console.log('Solhint found more warnings than the maximum specified (maximum:%s).\n', program.maxWarnings);
+            console.log(
+                'Solhint found more warnings than the maximum specified (maximum: %s)',
+                program.maxWarnings);
             process.exit(1);
         }
     }
@@ -121,7 +128,6 @@ function processStr(input) {
 function processPath(path) {
     return linter.processPath(path, readConfig());
 }
-
 
 function printReports(reports, formatter) {
     const formatterName = formatter || 'stylish';
