@@ -134,16 +134,11 @@ function printReports(reports, formatter) {
 
 function getFormatter(formatter){
     const formatterName = formatter || 'stylish';
-    if (typeof formatterName === 'string') {
-        try {
-            return require(`eslint/lib/formatters/${formatterName}`);
-        } catch (ex) {
-            ex.message = `\nThere was a problem loading formatter option: \nError: ${ex.message}`;
-            throw ex;
-        }
-    } else {
-        console.log('\nError: The formatter option is invalid or does not exist.');
-        process.exit(1);
+    try {
+        return require(`eslint/lib/formatters/${formatterName}`);
+    } catch (ex) {
+        ex.message = `\nThere was a problem loading formatter option: ${program.formatter} \nError: ${ex.message}`;
+        throw ex;
     }
 }
 
