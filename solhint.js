@@ -16,7 +16,7 @@ function init() {
         .option('-f, --formatter [name]', 'report formatter name (stylish, table, tap, unix)')
         .option('-w, --max-warnings [maxWarningsNumber]', 'number of warnings to trigger nonzero exit code')
         .option('-q, --quiet', 'report errors only - default: false')
-        .option('--ignore-path [file_name]', 'allows you to specify the file to use as your .solhintignore')
+        .option('--ignore-path [file_name]', 'file to use as your .solhintignore')
         .description('Linter for Solidity programming language')
         .action(execMainAction);
 
