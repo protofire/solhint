@@ -14,6 +14,7 @@ function init() {
     program
         .usage('[options] <file> [...other_files]')
         .option('-f, --formatter [name]', 'report formatter name (stylish, table, tap, unix)')
+        .option('-w, --max-warnings [maxWarningsNumber]', 'number of warnings to trigger nonzero exit code')
         .option('-q, --quiet', 'report errors only - default: false')
         .option('--ignore-path [file_name]', 'allows you to specify the file to use as your .solhintignore')
         .description('Linter for Solidity programming language')
@@ -40,13 +41,22 @@ function init() {
 function execMainAction() {
     const reportLists = program.args.filter(_.isString).map(processPath);
     const reports =_.flatten(reportLists);
+    const warningsNumberExceeded = program.maxWarnings >= 0 && reports[0].warningCount >= program.maxWarnings;
 
     if (program.quiet) {
         // filter the list of reports, to set errors only.
         reports[0].reports  = reports[0].reports.filter(i => i.severity === 2);
     }
 
-    printReports(reports, program.formatter);
+    if (printReports(reports, program.formatter)) {
+        if (program.maxWarnings && !reports[0].errorCount && warningsNumberExceeded) {
+            console.log(
+                'Solhint found more warnings than the maximum specified (maximum: %s)',
+                program.maxWarnings);
+            process.exit(1);
+        }
+    }
+
     exitWithCode(reports);
 }
 
@@ -83,9 +93,7 @@ function writeSampleConfigFile() {
 
 const readIgnore = _.memoize(function () {
     let ignoreFile = '.solhintignore';
-
     try {
-
         if(program.ignorePath) {
             ignoreFile = program.ignorePath;
         }
@@ -97,7 +105,6 @@ const readIgnore = _.memoize(function () {
             .map(i => i.trim());
 
     } catch (e){
-
         if (program.ignorePath && e.code == 'ENOENT') {
             console.error(`\nERROR: ${ignoreFile} is not a valid path.`);
         }
