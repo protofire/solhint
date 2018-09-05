@@ -5,20 +5,6 @@ const linter = require('./lib/index');
 const _ = require('lodash');
 const fs = require('fs');
 const process = require('process');
-const formatterOptions = [
-    'checkstyle',
-    'codeframe',
-    'compact',
-    'html',
-    'jslint-xml',
-    'json',
-    'junit',
-    'stylish',
-    'table',
-    'tap',
-    'unix',
-    'visualstudio'];
-
 
 function init() {
     program
@@ -50,6 +36,15 @@ function init() {
 }
 
 function execMainAction() {
+    let formatterFn;
+
+    try { // to check if is a valid formatter before execute linter
+        formatterFn = getFormatter(program.formatter);
+    } catch (ex) {
+        console.error(ex.message);
+        process.exit(1);
+    }
+
     const reportLists = program.args.filter(_.isString).map(processPath);
     const reports =_.flatten(reportLists);
 
@@ -58,7 +53,7 @@ function execMainAction() {
         reports[0].reports  = reports[0].reports.filter(i => i.severity === 2);
     }
 
-    printReports(reports, program.formatter);
+    printReports(reports, formatterFn);
     exitWithCode(reports);
 }
 
@@ -133,26 +128,21 @@ function processPath(path) {
 }
 
 function printReports(reports, formatter) {
-    try {
-        const formatterFn = getFormatter(formatter);
-        console.log(formatterFn(reports));
-        return reports;
-    } catch(ex) {
-        console.error(ex.message);
-    }
+    console.log(formatter(reports));
+    return reports;
 }
 
 function getFormatter(formatter){
     const formatterName = formatter || 'stylish';
-    if (typeof formatterName === 'string' && formatterOptions.includes(formatterName)) {
+    if (typeof formatterName === 'string') {
         try {
             return require(`eslint/lib/formatters/${formatterName}`);
         } catch (ex) {
-            ex.message = `\n\nThere was a problem loading formatter option: \nError: ${ex.message}`;
+            ex.message = `\nThere was a problem loading formatter option: \nError: ${ex.message}`;
             throw ex;
         }
     } else {
-        console.log(`\nError: The formatter option ${formatterName} is invalid or does not exist.`);
+        console.log('\nError: The formatter option is invalid or does not exist.');
         process.exit(1);
     }
 }
