@@ -6,7 +6,6 @@ const _ = require('lodash');
 const fs = require('fs');
 const process = require('process');
 
-
 function init() {
     program
         .version('1.1.10');
@@ -38,6 +37,15 @@ function init() {
 }
 
 function execMainAction() {
+    let formatterFn;
+
+    try { // to check if is a valid formatter before execute linter
+        formatterFn = getFormatter(program.formatter);
+    } catch (ex) {
+        console.error(ex.message);
+        process.exit(1);
+    }
+
     const reportLists = program.args.filter(_.isString).map(processPath);
     const reports =_.flatten(reportLists);
     const warningsNumberExceeded = program.maxWarnings >= 0 && reports[0].warningCount >= program.maxWarnings;
@@ -47,7 +55,7 @@ function execMainAction() {
         reports[0].reports  = reports[0].reports.filter(i => i.severity === 2);
     }
 
-    if (printReports(reports, program.formatter)) {
+    if (printReports(reports, formatterFn)) {
         if (program.maxWarnings && !reports[0].errorCount && warningsNumberExceeded) {
             console.log(
                 'Solhint found more warnings than the maximum specified (maximum: %s)',
@@ -130,11 +138,18 @@ function processPath(path) {
 }
 
 function printReports(reports, formatter) {
-    const formatterName = formatter || 'stylish';
-    const formatterFn = require(`eslint/lib/formatters/${formatterName}`);
-    console.log(formatterFn(reports));
-
+    console.log(formatter(reports));
     return reports;
+}
+
+function getFormatter(formatter){
+    const formatterName = formatter || 'stylish';
+    try {
+        return require(`eslint/lib/formatters/${formatterName}`);
+    } catch (ex) {
+        ex.message = `\nThere was a problem loading formatter option: ${program.formatter} \nError: ${ex.message}`;
+        throw ex;
+    }
 }
 
 function exitWithCode(reports) {
