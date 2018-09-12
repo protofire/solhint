@@ -1,11 +1,11 @@
+const _ = require('lodash')
 const linter = require('./../lib/index')
 const { funcWith } = require('./common/contract-builder')
 const { noIndent } = require('./common/configs')
 const { assertErrorCount, assertErrorMessage, assertNoErrors } = require('./common/asserts')
 const { multiLine } = require('./common/contract-builder')
-const _ = require('lodash')
 
-describe('Linter - Code Complexity Rule', function() {
+describe('Linter - Code Complexity Rule', () => {
   const MAX_COMPLEXITY_EXCEEDED_CODE = funcWith(
     multiLine(
       ' if (a > b) {                   ',
@@ -23,7 +23,7 @@ describe('Linter - Code Complexity Rule', function() {
     )
   )
 
-  it('should raise error when cyclomatic complexity of code is too high', function() {
+  it('should raise error when cyclomatic complexity of code is too high', () => {
     const report = linter.processStr(MAX_COMPLEXITY_EXCEEDED_CODE, noIndent())
 
     assertErrorCount(report, 1)
@@ -44,7 +44,7 @@ describe('Linter - Code Complexity Rule', function() {
     )
   )
 
-  it('should not raise error when cyclomatic complexity is equal to max allowed', function() {
+  it('should not raise error when cyclomatic complexity is equal to max allowed', () => {
     const report = linter.processStr(MAX_COMPLEXITY_CODE, noIndent())
 
     assertNoErrors(report)
@@ -67,7 +67,7 @@ describe('Linter - Code Complexity Rule', function() {
     )
   )
 
-  it('should not raise error when cyclomatic complexity is equal to max allowed', function() {
+  it('should not raise error when cyclomatic complexity is equal to max allowed', () => {
     const config = _.defaultsDeep(noIndent(), { rules: { 'code-complexity': ['error', 12] } })
 
     const report = linter.processStr(CUSTOM_CONFIG_CHECK_CODE, config)

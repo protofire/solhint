@@ -1,13 +1,13 @@
+const _ = require('lodash')
 const { assertNoWarnings, assertErrorMessage, assertWarnsCount } = require('./common/asserts')
 const { assertErrorCount, assertNoErrors } = require('./common/asserts')
 const { noIndent } = require('./common/configs')
 const linter = require('./../lib/index')
 const { contractWith, funcWith } = require('./common/contract-builder')
-const _ = require('lodash')
 
-describe('Linter - Best Practises Rules', function() {
-  describe('Fallback must be payable', function() {
-    it('should raise warn when fallback is not payable', function() {
+describe('Linter - Best Practises Rules', () => {
+  describe('Fallback must be payable', () => {
+    it('should raise warn when fallback is not payable', () => {
       const code = contractWith('function () public {}')
 
       const report = linter.processStr(code, noIndent())
@@ -16,7 +16,7 @@ describe('Linter - Best Practises Rules', function() {
       assertErrorMessage(report, 'payable')
     })
 
-    it('should not raise warn when fallback is payable', function() {
+    it('should not raise warn when fallback is payable', () => {
       const code = contractWith('function () public payable {}')
 
       const report = linter.processStr(code, noIndent())
@@ -25,7 +25,7 @@ describe('Linter - Best Practises Rules', function() {
     })
   })
 
-  describe('No empty blocks', function() {
+  describe('No empty blocks', () => {
     const EMPTY_BLOCKS = [
       contractWith('function () public payable {}'),
       funcWith('if (a < b) {  }'),
@@ -36,7 +36,7 @@ describe('Linter - Best Practises Rules', function() {
     ]
 
     EMPTY_BLOCKS.forEach(curData =>
-      it(`should raise warn for empty blocks ${label(curData)}`, function() {
+      it(`should raise warn for empty blocks ${label(curData)}`, () => {
         const report = linter.processStr(curData, config())
 
         assertWarnsCount(report, 1)
@@ -54,7 +54,7 @@ describe('Linter - Best Practises Rules', function() {
     ]
 
     BLOCKS_WITH_DEFINITIONS.forEach(curData =>
-      it(`should not raise warn for blocks ${label(curData)}`, function() {
+      it(`should not raise warn for blocks ${label(curData)}`, () => {
         const report = linter.processStr(curData, config())
 
         assertNoWarnings(report)
@@ -66,7 +66,7 @@ describe('Linter - Best Practises Rules', function() {
     }
   })
 
-  describe('No unused vars', function() {
+  describe('No unused vars', () => {
     const UNUSED_VARS = [
       contractWith('function a(uint a, uint b) public { b += 1; }'),
       funcWith('uint a = 0;'),
@@ -75,7 +75,7 @@ describe('Linter - Best Practises Rules', function() {
     ]
 
     UNUSED_VARS.forEach(curData =>
-      it(`should raise warn for vars ${label(curData)}`, function() {
+      it(`should raise warn for vars ${label(curData)}`, () => {
         const report = linter.processStr(curData, noIndent())
 
         assertWarnsCount(report, 1)
@@ -94,7 +94,7 @@ describe('Linter - Best Practises Rules', function() {
     ]
 
     USED_VARS.forEach(curData =>
-      it(`should not raise warn for vars ${label(curData)}`, function() {
+      it(`should not raise warn for vars ${label(curData)}`, () => {
         const config = _.defaultsDeep({ rules: { 'no-inline-assembly': false } }, noIndent())
 
         const report = linter.processStr(curData, config)
@@ -104,8 +104,8 @@ describe('Linter - Best Practises Rules', function() {
     )
   })
 
-  describe('Max line length', function() {
-    it('should raise error for function with 51 lines', function() {
+  describe('Max line length', () => {
+    it('should raise error for function with 51 lines', () => {
       const code = funcWith(emptyLines(51))
 
       const report = linter.processStr(code, noIndent())
@@ -114,7 +114,7 @@ describe('Linter - Best Practises Rules', function() {
       assertErrorMessage(report, 'no more than')
     })
 
-    it('should not raise error for function with 50 lines', function() {
+    it('should not raise error for function with 50 lines', () => {
       const code = funcWith(emptyLines(50))
 
       const report = linter.processStr(code, noIndent())
@@ -122,7 +122,7 @@ describe('Linter - Best Practises Rules', function() {
       assertNoErrors(report)
     })
 
-    it('should not raise error for function with 99 lines with 100 allowed', function() {
+    it('should not raise error for function with 99 lines with 100 allowed', () => {
       const code = funcWith(emptyLines(99))
       const config = _.defaultsDeep(noIndent(), { rules: { 'function-max-lines': ['error', 100] } })
 
@@ -132,8 +132,8 @@ describe('Linter - Best Practises Rules', function() {
     })
   })
 
-  describe('Max states count', function() {
-    it('should raise error when count of states too big', function() {
+  describe('Max states count', () => {
+    it('should raise error when count of states too big', () => {
       const code = contractWith(stateDef(16))
 
       const report = linter.processStr(code, noIndent())
@@ -142,7 +142,7 @@ describe('Linter - Best Practises Rules', function() {
       assertErrorMessage(report, 'no more than 15')
     })
 
-    it('should not raise error for count of states that lower that max', function() {
+    it('should not raise error for count of states that lower that max', () => {
       const code = contractWith([stateDef(10), constantDef(10)].join('\n'))
 
       const report = linter.processStr(code, noIndent())
@@ -150,7 +150,7 @@ describe('Linter - Best Practises Rules', function() {
       assertNoErrors(report)
     })
 
-    it('should not raise error for count of states when it value increased in config', function() {
+    it('should not raise error for count of states when it value increased in config', () => {
       const code = contractWith(stateDef(20))
       const config = _.defaultsDeep(noIndent(), { rules: { 'max-states-count': ['error', 20] } })
 

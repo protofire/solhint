@@ -1,9 +1,9 @@
 const assert = require('assert')
 const linter = require('./../lib/index')
 
-describe('Linter', function() {
-  describe('Config', function() {
-    it('should disable fixed compiler error', function() {
+describe('Linter', () => {
+  describe('Config', () => {
+    it('should disable fixed compiler error', () => {
       const config = {
         rules: {
           'compiler-fixed': false
@@ -15,7 +15,7 @@ describe('Linter', function() {
       assert.equal(report.errorCount, 0)
     })
 
-    it('should change error to warn for fixed compiler issue', function() {
+    it('should change error to warn for fixed compiler issue', () => {
       const config = {
         rules: {
           'compiler-fixed': 'warn'
@@ -29,7 +29,7 @@ describe('Linter', function() {
       assert.ok(report.messages[0].message.includes('Compiler'))
     })
 
-    it('should change error to warn for fixed compiler issue for array config', function() {
+    it('should change error to warn for fixed compiler issue for array config', () => {
       const config = {
         rules: {
           'compiler-fixed': ['warn']

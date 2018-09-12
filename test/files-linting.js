@@ -1,14 +1,14 @@
-const linter = require('./../lib/index')
 const assert = require('assert')
+const fs = require('fs')
+const os = require('os')
+const linter = require('./../lib/index')
 const { assertNoErrors, assertErrorCount } = require('./common/asserts')
 const { contractWith } = require('./common/contract-builder')
 const { noIndent } = require('./common/configs')
-const os = require('os')
-const fs = require('fs')
 
-describe('Linter', function() {
-  describe('File Linting', function() {
-    it('should raise no error', function() {
+describe('Linter', () => {
+  describe('File Linting', () => {
+    it('should raise no error', () => {
       const filePath = storeAsFile(contractWith('string private a = "test";'))
 
       const report = linter.processFile(filePath, noIndent())
@@ -17,7 +17,7 @@ describe('Linter', function() {
       assert.equal(report.filePath, filePath)
     })
 
-    it('should raise an one error', function() {
+    it('should raise an one error', () => {
       const filePath = storeAsFile(contractWith("string private a = 'test';"))
 
       const reports = linter.processPath(filePath, noIndent())
@@ -25,7 +25,7 @@ describe('Linter', function() {
       assertErrorCount(reports[0], 1)
     })
 
-    after(function() {
+    after(() => {
       removeTmpFiles()
     })
   })

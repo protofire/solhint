@@ -7,21 +7,21 @@ const {
 } = require('./common/asserts')
 const linter = require('./../lib/index')
 
-describe('Linter', function() {
-  describe('Comment Directives', function() {
-    it('should disable fixed compiler error', function() {
+describe('Linter', () => {
+  describe('Comment Directives', () => {
+    it('should disable fixed compiler error', () => {
       const report = linter.processStr('pragma solidity ^0.4.4; // solhint-disable-line')
 
       assertNoErrors(report)
     })
 
-    it('should disable fixed compiler error using multiline comment', function() {
+    it('should disable fixed compiler error using multiline comment', () => {
       const report = linter.processStr('pragma solidity ^0.4.4; /* solhint-disable-line */')
 
       assertNoErrors(report)
     })
 
-    it('should disable only one compiler error', function() {
+    it('should disable only one compiler error', () => {
       const report = linter.processStr(
         `
                 // solhint-disable-next-line
@@ -34,7 +34,7 @@ describe('Linter', function() {
       assertErrorCount(report, 1)
     })
 
-    it('should disable only one compiler error using multiline comment', function() {
+    it('should disable only one compiler error using multiline comment', () => {
       const report = linter.processStr(
         `
                 /* solhint-disable-next-line */
@@ -47,7 +47,7 @@ describe('Linter', function() {
       assertErrorCount(report, 1)
     })
 
-    it('should disable only compiler version error', function() {
+    it('should disable only compiler version error', () => {
       const report = linter.processStr(
         `
                 // solhint-disable compiler-gt-0_4
@@ -61,7 +61,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 'Compiler version must be fixed')
     })
 
-    it('should disable only one compiler version error', function() {
+    it('should disable only one compiler version error', () => {
       const report = linter.processStr(
         `
                 /* solhint-disable compiler-gt-0_4 */
@@ -76,7 +76,7 @@ describe('Linter', function() {
       assertErrorMessage(report, '0.4')
     })
 
-    it('should not disable fixed compiler error', function() {
+    it('should not disable fixed compiler error', () => {
       const report = linter.processStr(
         `
                 /* solhint-disable compiler-gt-0_4 */
@@ -91,7 +91,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 'fixed')
     })
 
-    it('should disable all errors', function() {
+    it('should disable all errors', () => {
       const report = linter.processStr(
         `
                 /* solhint-disable */
@@ -104,7 +104,7 @@ describe('Linter', function() {
       assertNoErrors(report)
     })
 
-    it('should disable then enable all errors', function() {
+    it('should disable then enable all errors', () => {
       const report = linter.processStr(
         `
                 /* solhint-disable */
@@ -119,7 +119,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 'fixed')
     })
 
-    it('should not erase error', function() {
+    it('should not erase error', () => {
       const report = linter.processStr('/* solhint-disable-next-line */')
 
       assertNoErrors(report)

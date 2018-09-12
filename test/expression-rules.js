@@ -4,8 +4,8 @@ const { funcWith } = require('./common/contract-builder')
 const { noIndent } = require('./common/configs')
 const { assertNoErrors } = require('./common/asserts')
 
-describe('Linter - Expression Align Rules', function() {
-  describe('Incorrect Expressions', function() {
+describe('Linter - Expression Align Rules', () => {
+  describe('Incorrect Expressions', () => {
     const INCORRECT_EXPRESSIONS = [
       'new  TrustedContract',
       'myArray[ 5 ]',
@@ -25,7 +25,7 @@ describe('Linter - Expression Align Rules', function() {
     ]
 
     INCORRECT_EXPRESSIONS.forEach(curExpr =>
-      it(`should raise expression indentation error for ${curExpr}`, function() {
+      it(`should raise expression indentation error for ${curExpr}`, () => {
         const code = funcWith(curExpr + ';')
 
         const report = linter.processStr(code, noIndent())
@@ -36,7 +36,7 @@ describe('Linter - Expression Align Rules', function() {
     )
   })
 
-  describe('Correct Expressions', function() {
+  describe('Correct Expressions', () => {
     const CORRECT_EXPRESSIONS = [
       'new TrustedContract',
       'myArray[5]',
@@ -58,7 +58,7 @@ describe('Linter - Expression Align Rules', function() {
     ]
 
     CORRECT_EXPRESSIONS.forEach(curExpr =>
-      it(`should not raise expression indentation error for ${curExpr}`, function() {
+      it(`should not raise expression indentation error for ${curExpr}`, () => {
         const code = funcWith(curExpr + ';')
 
         const report = linter.processStr(code, noIndent())

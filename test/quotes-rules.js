@@ -3,9 +3,9 @@ const linter = require('./../lib/index')
 const { contractWith, funcWith } = require('./common/contract-builder')
 const { noIndent } = require('./common/configs')
 
-describe('Linter', function() {
-  describe('Quote Rules', function() {
-    it('should raise quotes error', function() {
+describe('Linter', () => {
+  describe('Quote Rules', () => {
+    it('should raise quotes error', () => {
       const code = contractWith("string private a = 'test';")
 
       const report = linter.processStr(code, noIndent())
@@ -14,7 +14,7 @@ describe('Linter', function() {
       assert.ok(report.messages[0].message.includes('double quotes'))
     })
 
-    it('should raise quotes error in import', function() {
+    it('should raise quotes error in import', () => {
       const code = "import * from 'lib.sol';"
 
       const report = linter.processStr(code)
@@ -23,7 +23,7 @@ describe('Linter', function() {
       assert.ok(report.messages[0].message.includes('double quotes'))
     })
 
-    it('should raise quotes error in import for custom rules', function() {
+    it('should raise quotes error in import for custom rules', () => {
       const code = 'import * from "lib.sol";'
 
       const report = linter.processStr(code, { rules: { quotes: ['error', 'single'] } })
@@ -32,7 +32,7 @@ describe('Linter', function() {
       assert.ok(report.messages[0].message.includes('single quotes'))
     })
 
-    it('should raise quotes error in import for custom rules', function() {
+    it('should raise quotes error in import for custom rules', () => {
       const code = 'import * from "lib.sol";'
 
       const report = linter.processStr(code, { rules: { quotes: ['error', 'single'] } })
@@ -41,7 +41,7 @@ describe('Linter', function() {
       assert.ok(report.messages[0].message.includes('single quotes'))
     })
 
-    it('should raise quotes error in import for complex import', function() {
+    it('should raise quotes error in import for complex import', () => {
       const code = "import {a as b, c as d} from 'lib.sol';"
 
       const report = linter.processStr(code)
@@ -57,7 +57,7 @@ describe('Linter', function() {
     ]
 
     ERROR_ASSEMBLY_CLAUSES.forEach(curText =>
-      it(`should raise quotes error in assembly clause ${curText}`, function() {
+      it(`should raise quotes error in assembly clause ${curText}`, () => {
         const code = funcWith(curText)
 
         const report = linter.processStr(code, noIndent())

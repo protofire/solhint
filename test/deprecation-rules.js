@@ -4,7 +4,7 @@ const { multiLine } = require('./common/contract-builder')
 const { assertErrorMessage } = require('./common/asserts')
 const BaseDeprecation = require('./../lib/rules/deprecations/base-deprecation')
 
-describe('Linter - Deprecations', function() {
+describe('Linter - Deprecations', () => {
   const config = {
     rules: {
       'separate-by-one-line-in-contract': false,
@@ -15,8 +15,8 @@ describe('Linter - Deprecations', function() {
     }
   }
 
-  describe('Constructor Syntax', function() {
-    it('should raise a warning for old-style constructors', function() {
+  describe('Constructor Syntax', () => {
+    it('should raise a warning for old-style constructors', () => {
       const code = multiLine(
         '              ', // 1
         'pragma solidity 0.4.22;          ', // 2
@@ -28,7 +28,7 @@ describe('Linter - Deprecations', function() {
       assert.equal(report.warningCount, 1)
       assertErrorMessage(report, 0, 'constructor keyword')
     })
-    it('should NOT raise a warning for old-style constructors in old versions', function() {
+    it('should NOT raise a warning for old-style constructors in old versions', () => {
       const code = multiLine(
         '              ', // 1
         'pragma solidity 0.4.21;          ', // 2
@@ -39,7 +39,7 @@ describe('Linter - Deprecations', function() {
       const report = linter.processStr(code, config)
       assert.equal(report.warningCount, 0)
     })
-    it('should NOT raise a warning for new-style constructors', function() {
+    it('should NOT raise a warning for new-style constructors', () => {
       const code = multiLine(
         '              ', // 1
         'pragma solidity 0.4.22;          ', // 2
@@ -50,7 +50,7 @@ describe('Linter - Deprecations', function() {
       const report = linter.processStr(code, config)
       assert.equal(report.warningCount, 0)
     })
-    it('should raise an error for new-style constructors in old versions', function() {
+    it('should raise an error for new-style constructors in old versions', () => {
       const code = multiLine(
         '              ', // 1
         'pragma solidity 0.4.21;          ', // 2
@@ -64,8 +64,8 @@ describe('Linter - Deprecations', function() {
     })
   })
 
-  describe('General infrastructure', function() {
-    it('should fail without deprecationVersion() implemented', function() {
+  describe('General infrastructure', () => {
+    it('should fail without deprecationVersion() implemented', () => {
       assert.throws(() => new BaseDeprecation())
     })
   })

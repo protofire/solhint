@@ -3,9 +3,9 @@ const linter = require('./../lib/index')
 const contractWith = require('./common/contract-builder').contractWith
 const { noIndent } = require('./common/configs')
 
-describe('Linter', function() {
-  describe('Ordering Rules', function() {
-    it('should raise visibility modifier error', function() {
+describe('Linter', () => {
+  describe('Ordering Rules', () => {
+    it('should raise visibility modifier error', () => {
       const code = contractWith('function a() ownable() public payable {}')
 
       const report = linter.processStr(code, noIndent())
@@ -14,7 +14,7 @@ describe('Linter', function() {
       assert.ok(report.messages[0].message.includes('Visibility'))
     })
 
-    it('should raise import not on top error', function() {
+    it('should raise import not on top error', () => {
       const code = `
               contract A {}
 
@@ -28,7 +28,7 @@ describe('Linter', function() {
       assert.ok(report.messages[0].message.includes('Import'))
     })
 
-    it('should not raise import not on top error', function() {
+    it('should not raise import not on top error', () => {
       const code = `
                 pragma solidity 0.4.17;
                 import "lib.sol";
@@ -42,7 +42,7 @@ describe('Linter', function() {
       assert.equal(report.errorCount, 0)
     })
 
-    it('should raise incorrect function order error', function() {
+    it('should raise incorrect function order error', () => {
       const code = contractWith(`
                 function b() private {}
                 function () public payable {}
@@ -54,7 +54,7 @@ describe('Linter', function() {
       assert.ok(report.messages[0].message.includes('Function order is incorrect'))
     })
 
-    it('should raise incorrect function order error for external constant funcs', function() {
+    it('should raise incorrect function order error for external constant funcs', () => {
       const code = contractWith(`
                 function b() external pure {}
                 function c() external {}
@@ -66,7 +66,7 @@ describe('Linter', function() {
       assert.ok(report.messages[0].message.includes('Function order is incorrect'))
     })
 
-    it('should raise incorrect function order error for internal function', function() {
+    it('should raise incorrect function order error for internal function', () => {
       const code = contractWith(`
                 function c() internal {}
                 function b() external view {}
@@ -78,7 +78,7 @@ describe('Linter', function() {
       assert.ok(report.messages[0].message.includes('Function order is incorrect'))
     })
 
-    it('should not raise incorrect function order error', function() {
+    it('should not raise incorrect function order error', () => {
       const code = contractWith(`
                 function A() public {}
                 function () public payable {}
@@ -89,7 +89,7 @@ describe('Linter', function() {
       assert.equal(report.errorCount, 0)
     })
 
-    it('should not raise incorrect function order error', function() {
+    it('should not raise incorrect function order error', () => {
       const code = contractWith(`
                 constructor() public {}
                 function () public payable {}
@@ -100,7 +100,7 @@ describe('Linter', function() {
       assert.equal(report.errorCount, 0)
     })
 
-    it('should raise incorrect function order error', function() {
+    it('should raise incorrect function order error', () => {
       const code = contractWith(`
                 function () public payable {}
                 constructor() public {}
@@ -111,7 +111,7 @@ describe('Linter', function() {
       assert.ok(report.messages[0].message.includes('Function order is incorrect'))
     })
 
-    it('should not raise error when external const goes before public ', function() {
+    it('should not raise error when external const goes before public ', () => {
       const code = contractWith(`
                 function a() external view {}
                 function b() public {}

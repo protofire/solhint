@@ -3,8 +3,8 @@ const linter = require('./../lib/index')
 const { funcWith, multiLine } = require('./common/contract-builder')
 const { noIndent } = require('./common/configs')
 
-describe('Linter - Statement Align Rules', function() {
-  describe('Incorrect Statements', function() {
+describe('Linter - Statement Align Rules', () => {
+  describe('Incorrect Statements', () => {
     const INCORRECT_STATEMENTS = [
       'if(a > b) {}',
       'if (a > b ) {} else {}',
@@ -30,7 +30,7 @@ describe('Linter - Statement Align Rules', function() {
     ]
 
     INCORRECT_STATEMENTS.forEach(curStatement =>
-      it(`${label(curStatement)} should raise statement indentation error`, function() {
+      it(`${label(curStatement)} should raise statement indentation error`, () => {
         const code = funcWith(curStatement)
 
         const report = linter.processStr(code, noIndent())
@@ -41,7 +41,7 @@ describe('Linter - Statement Align Rules', function() {
     )
   })
 
-  describe('Correct Statements', function() {
+  describe('Correct Statements', () => {
     const CORRECT_STATEMENTS = [
       'if (a > b) {}',
       'if (a > b) {} else {}',
@@ -66,7 +66,7 @@ describe('Linter - Statement Align Rules', function() {
     ]
 
     CORRECT_STATEMENTS.forEach(curStatement =>
-      it(`${label(curStatement)} should not raise statement indentation error`, function() {
+      it(`${label(curStatement)} should not raise statement indentation error`, () => {
         const code = funcWith(curStatement)
 
         const report = linter.processStr(code, noIndent())

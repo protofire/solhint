@@ -10,22 +10,22 @@ const {
   assertErrorCount
 } = require('./common/asserts')
 
-describe('Linter - SecurityRules', function() {
-  it('should return pragma error', function() {
+describe('Linter - SecurityRules', () => {
+  it('should return pragma error', () => {
     const report = linter.processStr('pragma solidity ^0.4.4;')
 
     assertWarnsCount(report, 1)
     assertErrorMessage(report, 'Compiler')
   })
 
-  it('should return compiler version error', function() {
+  it('should return compiler version error', () => {
     const report = linter.processStr('pragma solidity 0.3.4;')
 
     assert.equal(report.errorCount, 1)
     assert.ok(report.reports[0].message.includes('0.4'))
   })
 
-  it('should return "send" call verification error', function() {
+  it('should return "send" call verification error', () => {
     const code = funcWith('x.send(55);')
 
     const report = linter.processStr(code, noIndent())
@@ -34,7 +34,7 @@ describe('Linter - SecurityRules', function() {
     assert.ok(report.reports[0].message.includes('send'))
   })
 
-  it('should return "call.value" verification error', function() {
+  it('should return "call.value" verification error', () => {
     const code = funcWith('x.call.value(55)();')
 
     const report = linter.processStr(code, noIndent())
@@ -43,7 +43,7 @@ describe('Linter - SecurityRules', function() {
     assert.ok(report.reports[0].message.includes('call.value'))
   })
 
-  it('should return required visibility error', function() {
+  it('should return required visibility error', () => {
     const code = contractWith('function b() { }')
 
     const report = linter.processStr(code, noIndent())
@@ -52,7 +52,7 @@ describe('Linter - SecurityRules', function() {
     assert.ok(report.reports[0].message.includes('visibility'))
   })
 
-  it('should return required visibility error for state', function() {
+  it('should return required visibility error for state', () => {
     const code = contractWith('uint a;')
 
     const report = linter.processStr(code, noIndent())
@@ -61,7 +61,7 @@ describe('Linter - SecurityRules', function() {
     assert.ok(report.reports[0].message.includes('visibility'))
   })
 
-  it('should return that fallback must be simple', function() {
+  it('should return that fallback must be simple', () => {
     const code = contractWith(`function () public payable {
             make1();
             make2();
@@ -74,7 +74,7 @@ describe('Linter - SecurityRules', function() {
     assert.ok(report.reports[0].message.includes('Fallback'))
   })
 
-  it('should return error that function and event names are similar', function() {
+  it('should return error that function and event names are similar', () => {
     const code = contractWith(`
           event Name1();
           function name1() public payable { }
@@ -86,7 +86,7 @@ describe('Linter - SecurityRules', function() {
     assert.ok(report.reports[0].message.includes('Event and function names must be different'))
   })
 
-  it('should return error that function and event names are similar', function() {
+  it('should return error that function and event names are similar', () => {
     const code = contractWith(`
           function name1() public payable { }
           event Name1();
@@ -110,7 +110,7 @@ describe('Linter - SecurityRules', function() {
   const DEPRECATION_ERRORS = ['sha3("test");', 'throw;', 'suicide();']
 
   DEPRECATION_ERRORS.forEach(curText =>
-    it(`should return error that used deprecations ${curText}`, function() {
+    it(`should return error that used deprecations ${curText}`, () => {
       const code = funcWith(curText)
 
       const report = linter.processStr(code, noIndent())
@@ -123,7 +123,7 @@ describe('Linter - SecurityRules', function() {
   const ALMOST_DEPRECATION_ERRORS = ['sha33("test");', 'throwing;', 'suicides();']
 
   ALMOST_DEPRECATION_ERRORS.forEach(curText =>
-    it(`should not return error when doing ${curText}`, function() {
+    it(`should not return error when doing ${curText}`, () => {
       const code = funcWith(curText)
 
       const report = linter.processStr(code, noIndent())
@@ -132,7 +132,7 @@ describe('Linter - SecurityRules', function() {
     })
   )
 
-  it('should return error that multiple send calls used in transation', function() {
+  it('should return error that multiple send calls used in transation', () => {
     const code = funcWith(`
           uint aRes = a.send(1);
           uint bRes = b.send(2);
@@ -144,7 +144,7 @@ describe('Linter - SecurityRules', function() {
     assert.ok(report.reports[0].message.includes('multiple'))
   })
 
-  it('should return error that multiple send calls used in loop', function() {
+  it('should return error that multiple send calls used in loop', () => {
     const code = funcWith(`
           while (ac > b) { uint res = a.send(1); }
         `)
@@ -155,7 +155,7 @@ describe('Linter - SecurityRules', function() {
     assertErrorMessage(report, 'multiple')
   })
 
-  it('should return error that used tx.origin', function() {
+  it('should return error that used tx.origin', () => {
     const code = funcWith(`
           uint aRes = tx.origin;
         `)
@@ -172,7 +172,7 @@ describe('Linter - SecurityRules', function() {
   ]
 
   TIME_BASED_LOGIC.forEach(curCode =>
-    it('should return warn when business logic rely on time', function() {
+    it('should return warn when business logic rely on time', () => {
       const report = linter.processStr(curCode, noIndent())
 
       assertWarnsCount(report, 1)
@@ -180,7 +180,7 @@ describe('Linter - SecurityRules', function() {
     })
   )
 
-  it('should return warn when function use inline assembly', function() {
+  it('should return warn when function use inline assembly', () => {
     const code = funcWith(' assembly { "test" } ')
 
     const report = linter.processStr(code, noIndent())
@@ -189,7 +189,7 @@ describe('Linter - SecurityRules', function() {
     assertErrorMessage(report, 'assembly')
   })
 
-  it('should return warn when function rely on block has', function() {
+  it('should return warn when function rely on block has', () => {
     const code = funcWith('end >= block.blockhash + daysAfter * 1 days;')
 
     const report = linter.processStr(code, noIndent())
@@ -198,7 +198,7 @@ describe('Linter - SecurityRules', function() {
     assertErrorMessage(report, 'block.blockhash')
   })
 
-  describe('Reentrancy', function() {
+  describe('Reentrancy', () => {
     const REENTRANCY_ERROR = [
       contractWith(`
                 mapping(address => uint) private shares;
@@ -221,7 +221,7 @@ describe('Linter - SecurityRules', function() {
     ]
 
     REENTRANCY_ERROR.forEach(curCode =>
-      it('should return warn when code contains possible reentrancy', function() {
+      it('should return warn when code contains possible reentrancy', () => {
         const report = linter.processStr(curCode, noIndent())
 
         assertWarnsCount(report, 1)
@@ -257,7 +257,7 @@ describe('Linter - SecurityRules', function() {
     ]
 
     NO_REENTRANCY_ERRORS.forEach(curCode =>
-      it('should not return warn when code do not contains transfer', function() {
+      it('should not return warn when code do not contains transfer', () => {
         const report = linter.processStr(curCode, noIndent())
 
         assertNoWarnings(report)
@@ -265,7 +265,7 @@ describe('Linter - SecurityRules', function() {
     )
   })
 
-  describe('Avoid low level calls', function() {
+  describe('Avoid low level calls', () => {
     const LOW_LEVEL_CALLS = [
       funcWith('msg.sender.call(code);'),
       funcWith('a.callcode(test1);'),
@@ -273,7 +273,7 @@ describe('Linter - SecurityRules', function() {
     ]
 
     LOW_LEVEL_CALLS.forEach(curCode =>
-      it('should return warn when code contains possible reentrancy', function() {
+      it('should return warn when code contains possible reentrancy', () => {
         const report = linter.processStr(curCode, noIndent())
 
         assertWarnsCount(report, 1)

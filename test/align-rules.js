@@ -1,13 +1,13 @@
+const _ = require('lodash')
 const assert = require('assert')
 const { assertErrorMessage, assertNoErrors, assertErrorCount } = require('./common/asserts')
 const { noIndent } = require('./common/configs')
 const linter = require('./../lib/index')
 const { funcWith, contractWith, multiLine } = require('./common/contract-builder')
-const _ = require('lodash')
 
-describe('Linter', function() {
-  describe('Align Rules', function() {
-    it('should raise error when contract do not surrounds with two blank lines', function() {
+describe('Linter', () => {
+  describe('Align Rules', () => {
+    it('should raise error when contract do not surrounds with two blank lines', () => {
       const code = `
             contract A {}
             
@@ -20,7 +20,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 0, 'two blank')
     })
 
-    it('should not raise error when contract do not surrounds with two blank lines', function() {
+    it('should not raise error when contract do not surrounds with two blank lines', () => {
       const code = `
             contract A {}
             
@@ -36,7 +36,7 @@ describe('Linter', function() {
       assertNoErrors(report)
     })
 
-    it('should raise error about mixed tabs and spaces', function() {
+    it('should raise error about mixed tabs and spaces', () => {
       const code = ' \t import "lib.sol";'
 
       const report = linter.processStr(code, noIndent())
@@ -45,7 +45,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 0, 'Mixed tabs and spaces')
     })
 
-    it('should raise error when line indent is incorrect', function() {
+    it('should raise error when line indent is incorrect', () => {
       const code = '\t\timport "lib.sol";'
 
       const report = linter.processStr(code, { rules: { indent: ['error', 'tabs'] } })
@@ -54,7 +54,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 0, 'indent')
     })
 
-    it('should raise error when line indent is incorrect', function() {
+    it('should raise error when line indent is incorrect', () => {
       const code = '\t\timport "lib.sol";'
 
       const report = linter.processStr(code, { rules: { indent: ['error', 'tabs'] } })
@@ -63,7 +63,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 0, 'indent')
     })
 
-    it('should raise error when line indent is incorrect', function() {
+    it('should raise error when line indent is incorrect', () => {
       const code = multiLine(
         '    contract A {        ',
         '        uint private a; ',
@@ -78,7 +78,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 2, '0')
     })
 
-    it('should raise error when line indent is incorrect for function', function() {
+    it('should raise error when line indent is incorrect for function', () => {
       const code = multiLine(
         '    contract A {                  ',
         '        uint private a;           ',
@@ -99,7 +99,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 4, 'Expected indentation of 0')
     })
 
-    it('should raise error when line indent is incorrect for function with for loop', function() {
+    it('should raise error when line indent is incorrect for function with for loop', () => {
       const code = multiLine(
         '                     ', // 1
         '    contract A {                        ', // 2
@@ -124,7 +124,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 5, 'Expected indentation of 0 spaces')
     })
 
-    it('should raise error when line indent is incorrect for function with for while loop', function() {
+    it('should raise error when line indent is incorrect for function with for while loop', () => {
       const code = multiLine(
         '                   ', // 1
         '    contract A {                      ', // 2
@@ -150,7 +150,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 6, 'Expected indentation of 0')
     })
 
-    it('should raise error when line indent is incorrect for function with for if statement', function() {
+    it('should raise error when line indent is incorrect for function with for if statement', () => {
       const code = multiLine(
         '                  ', // 1
         '    contract A {                     ', // 2
@@ -179,7 +179,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 6, 'Expected indentation of 0')
     })
 
-    it('should not raise error when line indent is correct for function with for if-else statement', function() {
+    it('should not raise error when line indent is correct for function with for if-else statement', () => {
       const code = multiLine(
         '              ', // 1
         'contract A {                     ', // 2
@@ -200,7 +200,7 @@ describe('Linter', function() {
       assertNoErrors(report)
     })
 
-    it('should raise error when line indent is not correct for function with for assembly statement', function() {
+    it('should raise error when line indent is not correct for function with for assembly statement', () => {
       const code = multiLine(
         '              ', // 1
         'contract A {                     ', // 2
@@ -224,7 +224,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 0, 'Indentation is incorrect')
     })
 
-    it('should not raise error when indent is correct for function with non single line header', function() {
+    it('should not raise error when indent is correct for function with non single line header', () => {
       const code = multiLine(
         '              ', // 1
         'contract A {                     ', // 2
@@ -255,7 +255,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 3, 'Expected indentation of 8')
     })
 
-    it('should not raise error when line indent is correct for function with for if-else statement', function() {
+    it('should not raise error when line indent is correct for function with for if-else statement', () => {
       const code = multiLine(
         '               ', // 1
         'contract A {                      ', // 2
@@ -278,7 +278,7 @@ describe('Linter', function() {
       assertNoErrors(report)
     })
 
-    it('should not raise error for custom configured indent rules', function() {
+    it('should not raise error for custom configured indent rules', () => {
       const code = multiLine(
         '',
         'contract A {              ',
@@ -302,7 +302,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 0, 'Expected indentation of 2 tabs')
     })
 
-    it('should raise error when bracket incorrect aligned', function() {
+    it('should raise error when bracket incorrect aligned', () => {
       const code = funcWith(`
                 for (uint i = 0; i < a; i += 1) 
                 {
@@ -316,7 +316,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 0, 'Open bracket')
     })
 
-    it('should not raise error when function bracket correct aligned', function() {
+    it('should not raise error when function bracket correct aligned', () => {
       const code = contractWith(`
                 function a (
                     uint a
@@ -332,7 +332,7 @@ describe('Linter', function() {
       assertNoErrors(report)
     })
 
-    it('should raise error when function bracket incorrect aligned', function() {
+    it('should raise error when function bracket incorrect aligned', () => {
       const code = contractWith(`
                 function a (uint a) public{
                   continue;
@@ -346,7 +346,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 'bracket')
     })
 
-    it('should raise error when array declaration has spaces', function() {
+    it('should raise error when array declaration has spaces', () => {
       const code = contractWith('uint [] [] private a;')
 
       const report = linter.processStr(code, noIndent())
@@ -356,7 +356,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 1, 'Array declaration')
     })
 
-    it('should not raise error for array declaration', function() {
+    it('should not raise error for array declaration', () => {
       const code = contractWith('uint[][] private a;')
 
       const report = linter.processStr(code, noIndent())
@@ -364,7 +364,7 @@ describe('Linter', function() {
       assertNoErrors(report)
     })
 
-    it('should raise error when items inside contract do not separated by new line', function() {
+    it('should raise error when items inside contract do not separated by new line', () => {
       const code = contractWith(`
                 function a() public {
                 }
@@ -377,7 +377,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 0, 'must be separated by one line')
     })
 
-    it('should not raise error when items inside contract separated by new line', function() {
+    it('should not raise error when items inside contract separated by new line', () => {
       const code = contractWith(`
                 function a() public {
                 }
@@ -391,7 +391,7 @@ describe('Linter', function() {
       assertNoErrors(report)
     })
 
-    it('should not raise error when items inside contract separated by new line with comments', function() {
+    it('should not raise error when items inside contract separated by new line with comments', () => {
       const code = contractWith(`
                 function a() public {
                 }
@@ -407,7 +407,7 @@ describe('Linter', function() {
       assertNoErrors(report)
     })
 
-    it('should raise error when line length exceed 120', function() {
+    it('should raise error when line length exceed 120', () => {
       const code = ' '.repeat(121)
 
       const report = linter.processStr(code, noIndent())
@@ -416,7 +416,7 @@ describe('Linter', function() {
       assertErrorMessage(report, 0, 'Line length must be no more than')
     })
 
-    it('should not raise error when line length exceed 120 and custom config provided', function() {
+    it('should not raise error when line length exceed 120 and custom config provided', () => {
       const code = ' '.repeat(130)
 
       const report = linter.processStr(code, {
@@ -436,7 +436,7 @@ describe('Linter', function() {
     ]
 
     INCORRECT_COMMA_ALIGN.forEach(curExpr =>
-      it('should raise error when comma incorrect aligned', function() {
+      it('should raise error when comma incorrect aligned', () => {
         const report = linter.processStr(curExpr, noIndent())
 
         assertErrorCount(report, 1)
@@ -453,7 +453,7 @@ describe('Linter', function() {
     ]
 
     CORRECT_COMMA_ALIGN.forEach(curExpr =>
-      it('should raise error when comma incorrect aligned', function() {
+      it('should raise error when comma incorrect aligned', () => {
         const report = linter.processStr(curExpr, noIndent())
 
         assertNoErrors(report)
@@ -470,7 +470,7 @@ describe('Linter', function() {
     ]
 
     INCORRECT_SEMICOLON_ALIGN.forEach(curExpr =>
-      it('should raise error when semicolon incorrect aligned', function() {
+      it('should raise error when semicolon incorrect aligned', () => {
         const report = linter.processStr(curExpr, noIndent())
 
         assertErrorCount(report, 1)
@@ -484,7 +484,7 @@ describe('Linter', function() {
     ]
 
     CORRECT_SEMICOLON_ALIGN.forEach(curExpr =>
-      it('should raise error when semicolon incorrect aligned', function() {
+      it('should raise error when semicolon incorrect aligned', () => {
         const report = linter.processStr(curExpr, noIndent())
 
         assertNoErrors(report)

@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 const program = require('commander')
-const linter = require('./lib/index')
 const _ = require('lodash')
 const fs = require('fs')
 const process = require('process')
+const linter = require('./lib/index')
 
 function init() {
   program.version('1.1.10')
@@ -33,7 +33,9 @@ function init() {
 
   program.parse(process.argv)
 
-  program.args.length < 1 && program.help()
+  if (program.args.length < 1) {
+    program.help()
+  }
 }
 
 function execMainAction() {
@@ -101,7 +103,7 @@ function writeSampleConfigFile() {
   }
 }
 
-const readIgnore = _.memoize(function() {
+const readIgnore = _.memoize(() => {
   try {
     return fs
       .readFileSync('.solhintignore')
@@ -113,7 +115,7 @@ const readIgnore = _.memoize(function() {
   }
 })
 
-const readConfig = _.memoize(function() {
+const readConfig = _.memoize(() => {
   let config = {}
 
   try {
