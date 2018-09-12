@@ -16,7 +16,8 @@ function init() {
       '-w, --max-warnings [maxWarningsNumber]',
       'number of warnings to trigger nonzero exit code'
     )
-    .option('-q, --quiet', 'report errors only')
+    .option('-q, --quiet', 'report errors only - default: false')
+    .option('--ignore-path [file_name]', 'file to use as your .solhintignore')
     .description('Linter for Solidity programming language')
     .action(execMainAction)
 
@@ -104,13 +105,21 @@ function writeSampleConfigFile() {
 }
 
 const readIgnore = _.memoize(() => {
+  let ignoreFile = '.solhintignore'
   try {
+    if (program.ignorePath) {
+      ignoreFile = program.ignorePath
+    }
+
     return fs
-      .readFileSync('.solhintignore')
+      .readFileSync(ignoreFile)
       .toString()
       .split('\n')
       .map(i => i.trim())
   } catch (e) {
+    if (program.ignorePath && e.code === 'ENOENT') {
+      console.error(`\nERROR: ${ignoreFile} is not a valid path.`)
+    }
     return []
   }
 })
