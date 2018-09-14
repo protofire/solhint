@@ -1,106 +1,128 @@
-const { noIndent } = require('./common/configs');
-const { assertNoErrors, assertErrorCount, assertWarnsCount, assertErrorMessage } = require('./common/asserts');
-const linter = require('./../lib/index');
+const { noIndent } = require('./common/configs')
+const {
+  assertNoErrors,
+  assertErrorCount,
+  assertWarnsCount,
+  assertErrorMessage
+} = require('./common/asserts')
+const linter = require('./../lib/index')
 
+describe('Linter', () => {
+  describe('Comment Directives', () => {
+    it('should disable fixed compiler error', () => {
+      const report = linter.processStr('pragma solidity ^0.4.4; // solhint-disable-line')
 
-describe('Linter', function () {
-    describe('Comment Directives', function () {
+      assertNoErrors(report)
+    })
 
-        it('should disable fixed compiler error', function () {
-            const report = linter.processStr('pragma solidity ^0.4.4; // solhint-disable-line');
+    it('should disable fixed compiler error using multiline comment', () => {
+      const report = linter.processStr('pragma solidity ^0.4.4; /* solhint-disable-line */')
 
-            assertNoErrors(report);
-        });
+      assertNoErrors(report)
+    })
 
-        it('should disable fixed compiler error using multiline comment', function () {
-            const report = linter.processStr('pragma solidity ^0.4.4; /* solhint-disable-line */');
-
-            assertNoErrors(report);
-        });
-
-        it('should disable only one compiler error', function () {
-            const report = linter.processStr(`
+    it('should disable only one compiler error', () => {
+      const report = linter.processStr(
+        `
                 // solhint-disable-next-line
                 pragma solidity ^0.4.4; 
                 pragma solidity 0.3.4;
-            `, noIndent());
+            `,
+        noIndent()
+      )
 
-            assertErrorCount(report, 1);
-        });
+      assertErrorCount(report, 1)
+    })
 
-        it('should disable only one compiler error using multiline comment', function () {
-            const report = linter.processStr(`
+    it('should disable only one compiler error using multiline comment', () => {
+      const report = linter.processStr(
+        `
                 /* solhint-disable-next-line */
                 pragma solidity ^0.4.4; 
                 pragma solidity 0.3.4;
-            `, noIndent());
+            `,
+        noIndent()
+      )
 
-            assertErrorCount(report, 1);
-        });
+      assertErrorCount(report, 1)
+    })
 
-        it('should disable only compiler version error', function () {
-            const report = linter.processStr(`
+    it('should disable only compiler version error', () => {
+      const report = linter.processStr(
+        `
                 // solhint-disable compiler-gt-0_4
                 pragma solidity ^0.4.4; 
                 pragma solidity 0.3.4; // disabled error: Compiler version must be greater that 0.4
-            `, noIndent());
+            `,
+        noIndent()
+      )
 
-            assertWarnsCount(report, 1);
-            assertErrorMessage(report, 'Compiler version must be fixed');
-        });
+      assertWarnsCount(report, 1)
+      assertErrorMessage(report, 'Compiler version must be fixed')
+    })
 
-
-        it('should disable only one compiler version error', function () {
-            const report = linter.processStr(`
+    it('should disable only one compiler version error', () => {
+      const report = linter.processStr(
+        `
                 /* solhint-disable compiler-gt-0_4 */
                 pragma solidity 0.3.4;
                 /* solhint-enable compiler-gt-0_4 */
                 pragma solidity 0.3.4; 
-            `, noIndent());
+            `,
+        noIndent()
+      )
 
-            assertErrorCount(report, 1);
-            assertErrorMessage(report, '0.4');
-        });
+      assertErrorCount(report, 1)
+      assertErrorMessage(report, '0.4')
+    })
 
-        it('should not disable fixed compiler error', function () {
-            const report = linter.processStr(`
+    it('should not disable fixed compiler error', () => {
+      const report = linter.processStr(
+        `
                 /* solhint-disable compiler-gt-0_4 */
                 pragma solidity ^0.4.4;
                 /* solhint-enable compiler-gt-0_4 */
                 pragma solidity ^0.4.4; 
-            `, noIndent());
+            `,
+        noIndent()
+      )
 
-            assertWarnsCount(report, 2);
-            assertErrorMessage(report, 'fixed');
-        });
+      assertWarnsCount(report, 2)
+      assertErrorMessage(report, 'fixed')
+    })
 
-        it('should disable all errors', function () {
-            const report = linter.processStr(`
+    it('should disable all errors', () => {
+      const report = linter.processStr(
+        `
                 /* solhint-disable */
                 pragma solidity ^0.4.4;
                 pragma solidity 0.3.4; 
-            `, noIndent());
+            `,
+        noIndent()
+      )
 
-            assertNoErrors(report);
-        });
+      assertNoErrors(report)
+    })
 
-        it('should disable then enable all errors', function () {
-            const report = linter.processStr(`
+    it('should disable then enable all errors', () => {
+      const report = linter.processStr(
+        `
                 /* solhint-disable */
                 pragma solidity ^0.4.4;
                 /* solhint-enable */
                 pragma solidity ^0.4.4; 
-            `, noIndent());
+            `,
+        noIndent()
+      )
 
-            assertWarnsCount(report, 1);
-            assertErrorMessage(report, 'fixed');
-        });
+      assertWarnsCount(report, 1)
+      assertErrorMessage(report, 'fixed')
+    })
 
-        it('should not erase error', function () {
-            const report = linter.processStr('/* solhint-disable-next-line */');
+    it('should not erase error', () => {
+      const report = linter.processStr('/* solhint-disable-next-line */')
 
-            assertNoErrors(report);
-        });
-
-    });
-});
+      assertNoErrors(report)
+    })
+  })
+})

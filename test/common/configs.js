@@ -1,13 +1,10 @@
-
-
 function noIndent() {
-    return {
-        rules: {
-            'indent': false,
-            'no-empty-blocks': false
-        }
-    };
+  return {
+    rules: {
+      indent: false,
+      'no-empty-blocks': false
+    }
+  }
 }
 
-
-module.exports = { noIndent };
+module.exports = { noIndent }

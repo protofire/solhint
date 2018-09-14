@@ -1,29 +1,24 @@
-
-
 function contractWith(code) {
-    return `
+  return `
       pragma solidity 0.4.4;
         
         
       contract A {
         ${code}
       }
-    `;
+    `
 }
 
-
 function funcWith(statements) {
-    return contractWith(`
+  return contractWith(`
       function b() public {
         ${statements}
       }
-    `);
+    `)
 }
-
 
 function multiLine(...args) {
-    return args.join('\n');
+  return args.join('\n')
 }
 
-
-module.exports = { contractWith, funcWith, multiLine };
+module.exports = { contractWith, funcWith, multiLine }
