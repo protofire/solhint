@@ -68,7 +68,7 @@ Commands:
   init-config             create sample solhint config in current folder
 ```
 
-You can use any of the following formatter supported by ESLint. 
+You can use any of the following formatters supported by ESLint. 
 See EsLint docs about formatters [here](https://eslint.org/docs/user-guide/formatters/).
 
   -  checkstyle
