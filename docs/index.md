@@ -54,9 +54,12 @@ Linter for Solidity programming language
 
 Options:
 
-  -V, --version           output the version number
-  -f, --formatter [name]  report formatter name (stylish, table, tap, unix)
-  -h, --help              output usage information
+  -V, --version                              output the version number
+  -f, --formatter [name]                     report formatter name (stylish, table, tap, unix)
+  -w, --max-warnings [maxWarningsNumber]     number of warnings to trigger nonzero
+  -q --quiet                                 report errors only - default: false
+  --ignore-path [file_name]                  file to use as your .solhintignore
+  -h, --help                                 output usage information
 
 
 Commands:
@@ -65,8 +68,22 @@ Commands:
   init-config             create sample solhint config in current folder
 ```
 
-You can use any formatter supported by ESLint. See the full list
-[here](https://eslint.org/docs/user-guide/formatters/).
+You can use any of the following formatter supported by ESLint. 
+See EsLint docs about formatters [here](https://eslint.org/docs/user-guide/formatters/).
+
+  -  checkstyle
+  -  codeframe
+  -  compact
+  -  html
+  -  jslint-xml
+  -  junit
+  -  stylish
+  -  table
+  -  tap
+  -  unix
+  -  visualstudio
+
+
 
 ### Docs
 
