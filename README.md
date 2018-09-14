@@ -46,9 +46,13 @@ Linter for Solidity programming language
 
 Options:
 
-  -V, --version           output the version number
-  -f, --formatter [name]  report formatter name (stylish, table, tap, unix)
-  -h, --help              output usage information
+  -V, --version                              output the version number
+  -f, --formatter [name]                     report formatter name (stylish, table, tap, unix)
+  -w, --max-warnings [maxWarningsNumber]     number of warnings to trigger nonzero
+  -q --quiet                                 report errors only - default: false
+  --ignore-path [file_name]                  file to use as your .solhintignore
+  -h, --help                                 output usage information
+
 
 
 Commands:
