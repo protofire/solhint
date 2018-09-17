@@ -228,3 +228,8 @@ You can find it [here](https://github.com/solidityj/solidity-antlr4).
 ### Licence
 
 MIT
+
+### Projects that use solhint
+
+* [POA Network - Proof of Bank Account (PoBA)](https://github.com/poanetwork/poa-poba)
+
