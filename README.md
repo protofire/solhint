@@ -239,4 +239,4 @@ MIT
 - [0x](https://github.com/0xProject/0x-monorepo/tree/development/packages/contracts)
 - Gnosis:
   - [Gnosis Prediction Market Contracts](https://github.com/gnosis/pm-contracts)
-  - [https://github.com/gnosis/dex-contracts](https://github.com/gnosis/dex-contracts)
+  - [The DutchX decentralized trading protocol](https://github.com/gnosis/dex-contracts)
