@@ -228,3 +228,15 @@ You can find it [here](https://github.com/solidityj/solidity-antlr4).
 ### Licence
 
 MIT
+
+### Who uses solhint?
+
+[<img src="https://avatars2.githubusercontent.com/u/28943015?s=200&v=4" width="75px" height="75px" alt="POA Network - Public EVM Sidechain" title="POA Network - Public EVM Sidechain" style="margin: 20px 20px 0 0" />](https://github.com/poanetwork) [<img src="https://avatars3.githubusercontent.com/u/24832717?s=200&v=4" width="75px" height="75px" alt="0x" title="0x" style="margin: 20px 20px 0 0" />](https://github.com/0xProject) [<img src="https://avatars1.githubusercontent.com/u/24954468?s=200&v=4" width="75px" height="75px" alt="GNOSIS" title="GNOSIS" style="margin: 20px 20px 0 0"/>](https://github.com/gnosis)
+
+#### Projects
+
+- [POA Network - Proof of Bank Account (PoBA)](https://github.com/poanetwork/poa-poba)
+- [0x](https://github.com/0xProject/0x-monorepo/tree/development/packages/contracts)
+- Gnosis:
+  - [Gnosis Prediction Market Contracts](https://github.com/gnosis/pm-contracts)
+  - [The DutchX decentralized trading protocol](https://github.com/gnosis/dex-contracts)
