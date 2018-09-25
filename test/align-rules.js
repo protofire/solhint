@@ -1,5 +1,5 @@
-const _ = require('lodash')
 const assert = require('assert')
+const _ = require('lodash')
 const { assertErrorMessage, assertNoErrors, assertErrorCount } = require('./common/asserts')
 const { noIndent } = require('./common/configs')
 const linter = require('./../lib/index')
@@ -76,6 +76,50 @@ describe('Linter', () => {
       assertErrorMessage(report, 0, '0')
       assertErrorMessage(report, 1, '4')
       assertErrorMessage(report, 2, '0')
+    })
+
+    it('should not raise error for multiline multi variable functions with additional indent', () => {
+      const code = multiLine(
+        'contract A {                                       ',
+        '    function a() public view returns (uint, uint) {',
+        '        return (1, 2);                             ',
+        '    }                                              ',
+        '                                                   ',
+        '    function b() public view returns (uint, uint) {',
+        '        (                                          ',
+        '            uint c,                                ',
+        '            uint d                                 ',
+        '        ) = a();                                   ',
+        '        return (c, d);                             ',
+        '    }                                              ',
+        '}                                                  '
+      )
+
+      const report = linter.processStr(code)
+
+      assert.equal(report.errorCount, 0)
+    })
+
+    it('should not raise error for multiline multi variable functions with no additional indent', () => {
+      const code = multiLine(
+        'contract A {                                       ',
+        '    function a() public view returns (uint, uint) {',
+        '        return (1, 2);                             ',
+        '    }                                              ',
+        '                                                   ',
+        '    function b() public view returns (uint, uint) {',
+        '        (                                          ',
+        '        uint c,                                    ',
+        '        uint d                                     ',
+        '        ) = a();                                   ',
+        '        return (c, d);                             ',
+        '    }                                              ',
+        '}                                                  '
+      )
+
+      const report = linter.processStr(code)
+
+      assert.equal(report.errorCount, 0)
     })
 
     it('should raise error when line indent is incorrect for function', () => {

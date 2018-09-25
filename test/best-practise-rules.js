@@ -1,9 +1,9 @@
-const _ = require('lodash')
 const { assertNoWarnings, assertErrorMessage, assertWarnsCount } = require('./common/asserts')
+const _ = require('lodash')
 const { assertErrorCount, assertNoErrors } = require('./common/asserts')
 const { noIndent } = require('./common/configs')
 const linter = require('./../lib/index')
-const { contractWith, funcWith } = require('./common/contract-builder')
+const { contractWith, funcWith, multiLine } = require('./common/contract-builder')
 
 describe('Linter - Best Practises Rules', () => {
   describe('Fallback must be payable', () => {
@@ -90,6 +90,30 @@ describe('Linter - Best Practises Rules', () => {
       contractWith('function a(uint a, uint c) public returns (uint c);'),
       contractWith(
         'function a(address a) internal { assembly { t := eq(a, and(mask, calldataload(4))) } }'
+      ),
+      contractWith(
+        multiLine(
+          'function a() public view returns (uint, uint) {',
+          '  return (1, 2);                               ',
+          '}                                              ',
+          '                                               ',
+          'function b() public view returns (uint, uint) {',
+          '  (uint c, uint d) = a();                      ',
+          '  return (c, d);                               ',
+          '}                                              '
+        )
+      ),
+      contractWith(
+        multiLine(
+          'function a() public view returns (uint, uint) {    ',
+          '  return (1, 2);                                   ',
+          '}                                                  ',
+          '                                                   ',
+          'function b() public view returns (uint c, uint d) {',
+          '  (c, d) = a();                                    ',
+          '  return (c, d);                                   ',
+          '}                                                  '
+        )
       )
     ]
 
