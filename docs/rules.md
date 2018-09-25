@@ -58,7 +58,7 @@ description: List of validation rules for Solhint - Solidity security, style gui
  | **imports-on-top**            | Import statements must be on top                   | *[default](#options)*          |
  | **two-lines-top-level-separator** | Definition must be surrounded with two blank line indent | *[default](#options)*|
  | **func-order**                | Function order is incorrect                        | *[default](#options)*          |
- | **quotes**                    | Use double quotes for string literals. Default *quotes* values is **"double"**. Values must be 'single' or 'double'. |[*\<[default](#options)\>*,&nbsp;\<*quotes*\>] |
+ | **quotes**                    | Use double quotes for string literals. Values must be 'single' or 'double'. |[*\<[default](#options)\>*,&nbsp;\<*quotes*\>] Default *quotes* is **'double'**. |
  | **no-mix-tabs-and-spaces**    | Mixed tabs and spaces                              | *[default](#options)*          |
  | **indent**                    | Indentation is incorrect                           | [*\<[default](#options)\>*,&nbsp;*\<indent\>*] Default *indent* is **4**.|
  | **bracket-align**             | Open bracket must be on same line. It must be indented by other constructions by space | *[default](#options)* |

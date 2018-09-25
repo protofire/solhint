@@ -1,59 +1,53 @@
-const linter = require('./../lib/index');
-const assert = require('assert');
-const { assertNoErrors, assertErrorCount } = require('./common/asserts');
-const { contractWith } = require('./common/contract-builder');
-const { noIndent } = require('./common/configs');
-const os = require('os');
-const fs = require('fs');
+const assert = require('assert')
+const fs = require('fs')
+const os = require('os')
+const linter = require('./../lib/index')
+const { assertNoErrors, assertErrorCount } = require('./common/asserts')
+const { contractWith } = require('./common/contract-builder')
+const { noIndent } = require('./common/configs')
 
+describe('Linter', () => {
+  describe('File Linting', () => {
+    it('should raise no error', () => {
+      const filePath = storeAsFile(contractWith('string private a = "test";'))
 
-describe('Linter', function () {
+      const report = linter.processFile(filePath, noIndent())
 
-    describe('File Linting', function () {
+      assertNoErrors(report)
+      assert.equal(report.filePath, filePath)
+    })
 
-        it('should raise no error', function () {
-            const filePath = storeAsFile(contractWith('string private a = "test";'));
+    it('should raise an one error', () => {
+      const filePath = storeAsFile(contractWith("string private a = 'test';"))
 
-            const report = linter.processFile(filePath, noIndent());
+      const reports = linter.processPath(filePath, noIndent())
 
-            assertNoErrors(report);
-            assert.equal(report.filePath, filePath);
-        });
+      assertErrorCount(reports[0], 1)
+    })
 
-        it('should raise an one error', function () {
-            const filePath = storeAsFile(contractWith('string private a = \'test\';'));
+    after(() => {
+      removeTmpFiles()
+    })
+  })
 
-            const reports = linter.processPath(filePath, noIndent());
+  function tmpFilePath() {
+    const tempDirPath = os.tmpdir()
+    return `${tempDirPath}/test.sol`
+  }
 
-            assertErrorCount(reports[0], 1);
-        });
+  function storeAsFile(code) {
+    const filePath = tmpFilePath()
 
-        after(function () {
-            removeTmpFiles();
-        });
+    fs.writeFileSync(filePath, code, 'utf-8')
 
-    });
+    return filePath
+  }
 
-
-    function tmpFilePath() {
-        const tempDirPath = os.tmpdir();
-        return `${tempDirPath}/test.sol`;
+  function removeTmpFiles() {
+    try {
+      fs.unlinkSync(tmpFilePath())
+    } catch (err) {
+      // console.log(err);
     }
-
-    function storeAsFile(code) {
-        const filePath = tmpFilePath();
-
-        fs.writeFileSync(filePath, code, 'utf-8');
-
-        return filePath;
-    }
-
-    function removeTmpFiles() {
-        try {
-            fs.unlinkSync(tmpFilePath());
-        } catch (err) {
-            // console.log(err);
-        }
-    }
-
-});
+  }
+})
