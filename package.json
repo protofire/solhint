@@ -50,6 +50,6 @@
   },
   "optionalDependencies": {
     "prettier": "^1.14.3",
-    "prettier-plugin-solidity": "file:../prettier-plugin-solidity"
+    "prettier-plugin-solidity": "^1.0.0-alpha.4"
   }
 }
