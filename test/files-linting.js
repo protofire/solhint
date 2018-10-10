@@ -1,10 +1,9 @@
 const assert = require('assert')
-const fs = require('fs')
-const os = require('os')
 const linter = require('./../lib/index')
 const { assertNoErrors, assertErrorCount } = require('./common/asserts')
 const { contractWith } = require('./common/contract-builder')
 const { noIndent } = require('./common/configs')
+const { storeAsFile, removeTmpFiles } = require('./common/utils')
 
 describe('Linter', () => {
   describe('File Linting', () => {
@@ -29,25 +28,4 @@ describe('Linter', () => {
       removeTmpFiles()
     })
   })
-
-  function tmpFilePath() {
-    const tempDirPath = os.tmpdir()
-    return `${tempDirPath}/test.sol`
-  }
-
-  function storeAsFile(code) {
-    const filePath = tmpFilePath()
-
-    fs.writeFileSync(filePath, code, 'utf-8')
-
-    return filePath
-  }
-
-  function removeTmpFiles() {
-    try {
-      fs.unlinkSync(tmpFilePath())
-    } catch (err) {
-      // console.log(err);
-    }
-  }
 })
