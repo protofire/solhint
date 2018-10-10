@@ -26,12 +26,12 @@ s = w * h; p = 2 * (w + h);
       assert.equal(report.filePath, filePath)
       assert.ok(
         report.messages[0].message.includes(
-          `Replace ··string·constant·text·=·'abc' with string·text·=·"abc"`
+          'Replace ··string·constant·text·=·\'abc\' with string·constant·text·=·"abc"'
         )
       )
       assert.ok(
         report.messages[1].message.includes(
-          'Replace ····function·rectangle(uint·w,·uint·h)·returns· with ⏎··function·rectangle(uint·w,·uint·h)·returns'
+          'Replace ····function·rectangle(uint·w,·uint·h)·returns· with ··function·rectangle(uint·w,·uint·h)·returns'
         )
       )
       assert.ok(report.messages[2].message.includes('Replace s·=·w·*·h; with ····s·=·w·*·h;⏎···'))
