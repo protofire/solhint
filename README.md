@@ -144,6 +144,8 @@ Or disable all validations for a group of lines:
 [Full list with all supported Style Guide Rules](https://github.com/protofire/solhint/blob/master/docs/rules.md#style-guide-rules)
 ### Best Practices Rules
 [Full list with all supported Best Practices Rules](https://github.com/protofire/solhint/blob/master/docs/rules.md#best-practise-rules)
+### Prettier (experimental)
+If you have [prettier-plugin-solidity](https://github.com/prettier-solidity/prettier-plugin-solidity) installed, you can use the `prettier/prettier` rule for reporting differences between your code and how prettier would format it. If you enable this rule, you should disable some of the style guides rules (mainly `quotes`, `indent` and `two-lines-top-level-separator`).
 
 ## Documentation
 
