@@ -1,11 +1,8 @@
-const _ = require('lodash')
-const linter = require('./../lib/index')
-const { funcWith } = require('./common/contract-builder')
-const { noIndent } = require('./common/configs')
-const { assertErrorCount, assertErrorMessage, assertNoErrors } = require('./common/asserts')
-const { multiLine } = require('./common/contract-builder')
+const linter = require('./../../../lib/index')
+const { funcWith, multiLine } = require('./../../common/contract-builder')
+const { assertErrorCount, assertErrorMessage, assertNoErrors } = require('./../../common/asserts')
 
-describe('Linter - Code Complexity Rule', () => {
+describe('Linter - code-complexity', () => {
   const MAX_COMPLEXITY_EXCEEDED_CODE = funcWith(
     multiLine(
       ' if (a > b) {                   ',
@@ -24,7 +21,9 @@ describe('Linter - Code Complexity Rule', () => {
   )
 
   it('should raise error when cyclomatic complexity of code is too high', () => {
-    const report = linter.processStr(MAX_COMPLEXITY_EXCEEDED_CODE, noIndent())
+    const report = linter.processStr(MAX_COMPLEXITY_EXCEEDED_CODE, {
+      rules: { 'code-complexity': 'error' }
+    })
 
     assertErrorCount(report, 1)
     assertErrorMessage(report, 'complexity')
@@ -44,8 +43,10 @@ describe('Linter - Code Complexity Rule', () => {
     )
   )
 
-  it('should not raise error when cyclomatic complexity is equal to max allowed', () => {
-    const report = linter.processStr(MAX_COMPLEXITY_CODE, noIndent())
+  it('should not raise error when cyclomatic complexity is equal to max default allowed', () => {
+    const report = linter.processStr(MAX_COMPLEXITY_CODE, {
+      rules: { 'code-complexity': 'error' }
+    })
 
     assertNoErrors(report)
   })
@@ -68,9 +69,9 @@ describe('Linter - Code Complexity Rule', () => {
   )
 
   it('should not raise error when cyclomatic complexity is equal to max allowed', () => {
-    const config = _.defaultsDeep(noIndent(), { rules: { 'code-complexity': ['error', 12] } })
-
-    const report = linter.processStr(CUSTOM_CONFIG_CHECK_CODE, config)
+    const report = linter.processStr(CUSTOM_CONFIG_CHECK_CODE, {
+      rules: { 'code-complexity': ['error', 12] }
+    })
 
     assertNoErrors(report)
   })
