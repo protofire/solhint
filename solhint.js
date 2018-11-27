@@ -5,9 +5,11 @@ const _ = require('lodash')
 const fs = require('fs')
 const process = require('process')
 const linter = require('./lib/index')
+const packageJson = require('./package.json')
 
 function init() {
-  program.version('1.1.10')
+  const version = packageJson.version || '1.1.10'
+  program.version(version)
 
   program
     .usage('[options] <file> [...other_files]')
