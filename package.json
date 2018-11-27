@@ -19,7 +19,7 @@
     "exec-tests": "nyc -x \"**/grammar/**\" mocha && nyc report --reporter=text-lcov | coveralls",
     "test": "npm run exec-tests",
     "test-only": "mocha",
-    "generate": "(cd ./solidity-antlr4; java org.antlr.v4.Tool ./Solidity.g4 -Dlanguage=JavaScript -o ../lib/grammar)",
+    "generate": "scripts/build-grammar.sh",
     "lint": "eslint ."
   },
   "bin": {
