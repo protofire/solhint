@@ -144,12 +144,11 @@ const readConfig = _.memoize(() => {
   } catch (e) {
     if (e instanceof SyntaxError) {
       console.log('ERROR: Configuration file [.solhint.json] is not a valid JSON!\n')
-      process.exit(1)
     }
     if (e instanceof FileNotExistsError) {
       console.log(`ERROR: Configuration file [${program.config}] doesn't exist!\n`)
-      process.exit(1)
     }
+    process.exit(1)
   }
 
   const configExcludeFiles = _.flatten(config.excludedFiles)
