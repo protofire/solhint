@@ -1,11 +1,13 @@
 #!/usr/bin/env sh
 
+# download antlr4
 ANTLR_JAR="antlr4.jar"
-
 if [ ! -e "$ANTLR_JAR" ]; then
-  curl http://www.antlr.org/download/antlr-4.7-complete.jar -o "$ANTLR_JAR"
+  curl https://www.antlr.org/download/antlr-4.7.1-complete.jar -o "$ANTLR_JAR"
 fi
 
-java -jar $ANTLR_JAR -Dlanguage=JavaScript lib/grammar/Solidity.g4
+# build grammar based on solidity-antlr4 submodule
+cd ./solidity-antlr4; java -jar ../$ANTLR_JAR ./Solidity.g4 -Dlanguage=JavaScript -o ../lib/grammar; cd - > /dev/null
 
-find lib/grammar/ -name '*interp' -delete
+# cleanup
+rm lib/grammar/*.interp antlr4.jar
