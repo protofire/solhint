@@ -4,7 +4,7 @@ An overview of what the core Solhint team is looking to work on over the next fe
 
 As a caveat - this is a living doc, and will evolve as priorities grow and shift. The Solhint project will always be adapting to new use-cases and evolutions in the blockchain world - this roadmap is more of a "North Star" of what we're looking to work on than a strict timeline.
 
-Please feel free to file issues on this repository if you have questions, concerns, or suggestions.
+Please feel free to fill issues on this repository if you have questions, concerns, or suggestions.
 
 
 ## What's next?
