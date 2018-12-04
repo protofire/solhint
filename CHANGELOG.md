@@ -4,7 +4,7 @@
 
 ## [1.3.0] - 2018-09-25
 ### Added
-- Add "Proyects that use solhint" to README.md file [#64](https://github.com/protofire/solhint/issues/63)
+- Add "Projects that use solhint" to README.md file [#64](https://github.com/protofire/solhint/issues/63)
 - Add prettier and airbnb [#59](https://github.com/protofire/solhint/issues/59)
 - Add new feature --ignore-path option [#58](https://github.com/protofire/solhint/issues/58)
 - Add contribution formatter parameter validation [#54](https://github.com/protofire/solhint/pull/54)
