@@ -9,10 +9,12 @@ description: This is an open source project for validating Solidity code.
 ## Solhint Project
 
 [![Build Status](https://travis-ci.org/protofire/solhint.svg?branch=master)](https://travis-ci.org/protofire/solhint)
-[![npm version](http://img.shields.io/npm/v/solhint.svg?style=flat)](https://npmjs.org/package/solhint
-"View this project on npm")
+[![NPM version](https://badge.fury.io/js/solhint.svg)](https://npmjs.org/package/solhint)
 [![Coverage Status](https://coveralls.io/repos/github/protofire/solhint/badge.svg?branch=master)](
 https://coveralls.io/github/protofire/solhint?branch=master)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/protofire/solhint/master/LICENSE)
+[![dependencies Status](https://david-dm.org/protofire/solhint/status.svg)](https://david-dm.org/protofire/solhint)
+[![devDependencies Status](https://david-dm.org/protofire/solhint/dev-status.svg)](https://david-dm.org/protofire/solhint?type=dev)
 
 This is an open source project for linting [solidity](http://solidity.readthedocs.io/en/develop/) code. This project
 provide both **security** and **style guide** validations.
@@ -83,13 +85,16 @@ See EsLint docs about formatters [here](https://eslint.org/docs/user-guide/forma
   -  unix
   -  visualstudio
 
-
-
 ### Docs
 
  - [List of Rules](./rules.html)
  - [Configuration](./configuration.html)
  - [Use Solhint in Your Application](./use-in-app.html)
+
+### Table of Contents
+
+* [Roadmap](../ROADMAP.md): The core project's roadmap - what the core team is looking to work on in the near future.
+* [Contributing](../CONTRIBUTING.md): The core Solhint team :heart: contributions. This describes how you can contribute to the Solhint Project.
 
 ### IDE Integrations
 
