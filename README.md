@@ -162,6 +162,11 @@ Related documentation you may find [there](https://protofire.github.io/solhint/)
   - **[VS Code: Solidity Language Support by CodeChain.io](
          https://marketplace.visualstudio.com/items?itemName=kodebox.solidity-language-server)**
 
+## Table of Contents
+
+* [Roadmap](ROADMAP.md): The core project's roadmap - what the core team is looking to work on in the near future.
+* [Contributing](CONTRIBUTING.md): The core Solhint team :heart: contributions. This describes how you can contribute to the Solhint Project.
+
 ## Acknowledgements
 
 The grammar used by solhint was created and is maintained by [Federico Bond](https://github.com/federicobond).
