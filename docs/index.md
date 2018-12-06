@@ -93,8 +93,8 @@ See EsLint docs about formatters [here](https://eslint.org/docs/user-guide/forma
 
 ### Table of Contents
 
-* [Roadmap](../ROADMAP.md): The core project's roadmap - what the core team is looking to work on in the near future.
-* [Contributing](../CONTRIBUTING.md): The core Solhint team :heart: contributions. This describes how you can contribute to the Solhint Project.
+* [Roadmap](./roadmap.html): The core project's roadmap - what the core team is looking to work on in the near future.
+* [Contributing](./contributing.html): The core Solhint team :heart: contributions. This describes how you can contribute to the Solhint Project.
 
 ### IDE Integrations
 
