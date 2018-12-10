@@ -5,9 +5,12 @@ const _ = require('lodash')
 const fs = require('fs')
 const process = require('process')
 const linter = require('./lib/index')
+const packageJson = require('./package.json')
+const { FileNotExistsError } = require('./lib/common/errors')
 
 function init() {
-  program.version('1.1.10')
+  const version = packageJson.version
+  program.version(version)
 
   program
     .usage('[options] <file> [...other_files]')
@@ -16,6 +19,7 @@ function init() {
       '-w, --max-warnings [maxWarningsNumber]',
       'number of warnings to trigger nonzero exit code'
     )
+    .option('-c, --config [file_name]', 'file to use as your .solhint.json')
     .option('-q, --quiet', 'report errors only - default: false')
     .option('--ignore-path [file_name]', 'file to use as your .solhintignore')
     .description('Linter for Solidity programming language')
@@ -128,13 +132,23 @@ const readConfig = _.memoize(() => {
   let config = {}
 
   try {
-    const configStr = fs.readFileSync('.solhint.json').toString()
+    const configFile = program.config || '.solhint.json'
+
+    if (!fs.existsSync(configFile)) {
+      throw new FileNotExistsError('The config file doesnt exist')
+    }
+
+    const configStr = fs.readFileSync(configFile).toString()
+
     config = JSON.parse(configStr)
   } catch (e) {
     if (e instanceof SyntaxError) {
       console.log('ERROR: Configuration file [.solhint.json] is not a valid JSON!\n')
-      process.exit(0)
     }
+    if (e instanceof FileNotExistsError) {
+      console.log(`ERROR: Configuration file [${program.config}] doesn't exist!\n`)
+    }
+    process.exit(1)
   }
 
   const configExcludeFiles = _.flatten(config.excludedFiles)
