@@ -1,3 +1,11 @@
+## [1.4.1] - 2018-12-10
+### Added
+- Allow to specify the path to the config file [#78](https://github.com/protofire/solhint/issues/78)
+- Roadmap and changelog [#81](https://github.com/protofire/solhint/issues/81)
+
+### Changed
+- Upgrade grammar [#79](https://github.com/protofire/solhint/pull/79)
+
 ## [1.4.0] - 2018-10-10
 ### Added
 - Support prettier-solidity [#72](https://github.com/protofire/solhint/pull/72)
