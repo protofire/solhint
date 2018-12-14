@@ -4,7 +4,10 @@ const program = require('commander')
 const _ = require('lodash')
 const fs = require('fs')
 const process = require('process')
+
 const linter = require('./lib/index')
+const { applyExtends, loadConfig } = require('./lib/config/config-file')
+const { validate } = require('./lib/config/config-validator')
 
 function init() {
   program.version('1.1.10')
@@ -128,17 +131,23 @@ const readConfig = _.memoize(() => {
   let config = {}
 
   try {
-    const configStr = fs.readFileSync('.solhint.json').toString()
-    config = JSON.parse(configStr)
+    config = loadConfig()
   } catch (e) {
-    if (e instanceof SyntaxError) {
-      console.log('ERROR: Configuration file [.solhint.json] is not a valid JSON!\n')
-      process.exit(0)
-    }
+    console.log(e.message)
+    process.exit(0)
   }
 
   const configExcludeFiles = _.flatten(config.excludedFiles)
   config.excludedFiles = _.concat(configExcludeFiles, readIgnore())
+
+  // If an `extends` property is defined, it represents a configuration file to use as
+  // a "parent". Load the referenced file and merge the configuration recursively.
+  if (config.extends) {
+    config = applyExtends(config)
+  }
+
+  // validate the configuration before continuing
+  validate(config)
 
   return config
 })
