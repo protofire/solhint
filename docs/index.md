@@ -113,7 +113,7 @@ See EsLint docs about formatters [here](https://eslint.org/docs/user-guide/forma
 
 MIT
 
-## Back us
+### Back Us
 Solhint is free to use and open-sourced. If you value our effort and feel like helping us to keep pushing this tool forward, you can send us a small donation. We'll highly appreciate it :)
 
 [![Donate with Ethereum](https://en.cryptobadges.io/badge/micro/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)](https://en.cryptobadges.io/donate/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)
