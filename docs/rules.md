@@ -38,6 +38,7 @@ description: List of validation rules for Solhint - Solidity security, style gui
  | **avoid-tx-origin**           | Avoid to use tx.origin                          | *[default](#options)*     |
  | **no-inline-assembly**        | Avoid to use inline assembly. It is acceptable only in rare cases | *[default](#options)* |
  | **not-rely-on-block-hash**    | Do not rely on "block.blockhash". Miners can influence its value. | *[default](#options)* |
+ | **not-rely-on-time**          | Avoid to make time-based decisions in your business logic | *[default](#options)* |
  | **avoid-low-level-calls**     | Avoid to use low level calls.                                     | *[default](#options)* |
  
 \* \- All security rules implemented according [ConsenSys Guide for Smart Contracts](https://consensys.github.io/smart-contract-best-practices/recommendations/)
