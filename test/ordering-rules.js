@@ -66,6 +66,18 @@ describe('Linter', () => {
       assert.ok(report.messages[0].message.includes('Function order is incorrect'))
     })
 
+    it('should raise incorrect function order error for public constant funcs', () => {
+      const code = contractWith(`
+                function b() public pure {}
+                function c() public {}
+            `)
+
+      const report = linter.processStr(code, noIndent())
+
+      assert.equal(report.errorCount, 1)
+      assert.ok(report.messages[0].message.includes('Function order is incorrect'))
+    })
+
     it('should raise incorrect function order error for internal function', () => {
       const code = contractWith(`
                 function c() internal {}
