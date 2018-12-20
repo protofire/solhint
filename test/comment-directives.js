@@ -21,11 +21,24 @@ describe('Linter', () => {
       assertNoErrors(report)
     })
 
-    it('should disable only one compiler error', () => {
+    it('should disable only one compiler error on next line', () => {
       const report = linter.processStr(
         `
                 // solhint-disable-next-line
-                pragma solidity ^0.4.4; 
+                pragma solidity ^0.4.4;
+                pragma solidity 0.3.4;
+            `,
+        noIndent()
+      )
+
+      assertErrorCount(report, 1)
+    })
+
+    it('should disable only one compiler error on previous line', () => {
+      const report = linter.processStr(
+        `
+                pragma solidity ^0.4.4;
+                // solhint-disable-previous-line
                 pragma solidity 0.3.4;
             `,
         noIndent()
@@ -38,7 +51,7 @@ describe('Linter', () => {
       const report = linter.processStr(
         `
                 /* solhint-disable-next-line */
-                pragma solidity ^0.4.4; 
+                pragma solidity ^0.4.4;
                 pragma solidity 0.3.4;
             `,
         noIndent()
@@ -51,7 +64,7 @@ describe('Linter', () => {
       const report = linter.processStr(
         `
                 // solhint-disable compiler-gt-0_4
-                pragma solidity ^0.4.4; 
+                pragma solidity ^0.4.4;
                 pragma solidity 0.3.4; // disabled error: Compiler version must be greater that 0.4
             `,
         noIndent()
@@ -67,7 +80,7 @@ describe('Linter', () => {
                 /* solhint-disable compiler-gt-0_4 */
                 pragma solidity 0.3.4;
                 /* solhint-enable compiler-gt-0_4 */
-                pragma solidity 0.3.4; 
+                pragma solidity 0.3.4;
             `,
         noIndent()
       )
@@ -82,7 +95,7 @@ describe('Linter', () => {
                 /* solhint-disable compiler-gt-0_4 */
                 pragma solidity ^0.4.4;
                 /* solhint-enable compiler-gt-0_4 */
-                pragma solidity ^0.4.4; 
+                pragma solidity ^0.4.4;
             `,
         noIndent()
       )
@@ -96,7 +109,7 @@ describe('Linter', () => {
         `
                 /* solhint-disable */
                 pragma solidity ^0.4.4;
-                pragma solidity 0.3.4; 
+                pragma solidity 0.3.4;
             `,
         noIndent()
       )
@@ -110,7 +123,7 @@ describe('Linter', () => {
                 /* solhint-disable */
                 pragma solidity ^0.4.4;
                 /* solhint-enable */
-                pragma solidity ^0.4.4; 
+                pragma solidity ^0.4.4;
             `,
         noIndent()
       )
