@@ -59,8 +59,16 @@ describe('Linter', () => {
       assert.ok(report.messages[0].message.includes('Variable name'))
     })
 
-    it('should not raise var name error for constants', () => {
-      const code = contractWith('uint32 private constant D = 10;')
+    it('should not raise var name error for constants in snake case', () => {
+      const code = contractWith('uint32 private constant THE_CONSTANT = 10;')
+
+      const report = linter.processStr(code, noIndent())
+
+      assert.equal(report.errorCount, 0)
+    })
+
+    it('should not raise var name error for constants in snake case with leading underscore', () => {
+      const code = contractWith('uint32 private constant _THE_CONSTANT = 10;')
 
       const report = linter.processStr(code, noIndent())
 
