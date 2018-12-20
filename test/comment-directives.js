@@ -47,11 +47,24 @@ describe('Linter', () => {
       assertErrorCount(report, 1)
     })
 
-    it('should disable only one compiler error using multiline comment', () => {
+    it('should disable only one compiler error on next line using multiline comment', () => {
       const report = linter.processStr(
         `
                 /* solhint-disable-next-line */
                 pragma solidity ^0.4.4;
+                pragma solidity 0.3.4;
+            `,
+        noIndent()
+      )
+
+      assertErrorCount(report, 1)
+    })
+
+    it('should disable only one compiler error on previous line using multiline comment', () => {
+      const report = linter.processStr(
+        `
+                pragma solidity ^0.4.4;
+                /* solhint-disable-previous-line */
                 pragma solidity 0.3.4;
             `,
         noIndent()
