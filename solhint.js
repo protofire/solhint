@@ -17,7 +17,7 @@ function init() {
     .option('-f, --formatter [name]', 'report formatter name (stylish, table, tap, unix)')
     .option(
       '-w, --max-warnings [maxWarningsNumber]',
-      'number of allowed warnings to not trigger nonzero exit code'
+      'number of allowed warnings'
     )
     .option('-c, --config [file_name]', 'file to use as your .solhint.json')
     .option('-q, --quiet', 'report errors only - default: false')
