@@ -25,7 +25,7 @@ describe('Linter', () => {
       const report = linter.processStr(
         `
                 // solhint-disable-next-line
-                pragma solidity ^0.4.4; 
+                pragma solidity 0.3.4;
                 pragma solidity 0.3.4;
             `,
         noIndent()
@@ -38,7 +38,7 @@ describe('Linter', () => {
       const report = linter.processStr(
         `
                 /* solhint-disable-next-line */
-                pragma solidity ^0.4.4; 
+                pragma solidity 0.3.4;
                 pragma solidity 0.3.4;
             `,
         noIndent()
