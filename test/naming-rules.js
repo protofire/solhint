@@ -59,12 +59,37 @@ describe('Linter', () => {
       assert.ok(report.messages[0].message.includes('Variable name'))
     })
 
-    it('should not raise var name error for constants', () => {
-      const code = contractWith('uint32 private constant D = 10;')
+    it('should not raise var name error for constants in snake case', () => {
+      const code = contractWith('uint32 private constant THE_CONSTANT = 10;')
 
       const report = linter.processStr(code, noIndent())
 
       assert.equal(report.errorCount, 0)
+    })
+
+    it('should not raise var name error for constants in snake case with single leading underscore', () => {
+      const code = contractWith('uint32 private constant _THE_CONSTANT = 10;')
+
+      const report = linter.processStr(code, noIndent())
+
+      assert.equal(report.errorCount, 0)
+    })
+
+    it('should not raise var name error for constants in snake case with double leading underscore', () => {
+      const code = contractWith('uint32 private constant __THE_CONSTANT = 10;')
+
+      const report = linter.processStr(code, noIndent())
+
+      assert.equal(report.errorCount, 0)
+    })
+
+    it('should raise var name error for constants in snake case with more than two leading underscores', () => {
+      const code = contractWith('uint32 private constant ___THE_CONSTANT = 10;')
+
+      const report = linter.processStr(code, noIndent())
+
+      assert.equal(report.errorCount, 1)
+      assert.ok(report.messages[0].message.includes('SNAKE_CASE'))
     })
 
     it('should raise var name error for event arguments illegal styling', () => {
