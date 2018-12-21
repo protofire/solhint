@@ -83,7 +83,7 @@ describe('Linter', () => {
       assert.equal(report.errorCount, 0)
     })
 
-    it('should not var name error for constants in snake case with more than two leading underscores', () => {
+    it('should raise var name error for constants in snake case with more than two leading underscores', () => {
       const code = contractWith('uint32 private constant ___THE_CONSTANT = 10;')
 
       const report = linter.processStr(code, noIndent())
