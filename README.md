@@ -1,5 +1,7 @@
 # Solhint Project
+[![Donate with Ethereum](https://en.cryptobadges.io/badge/micro/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)](https://en.cryptobadges.io/donate/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)
 
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/solhint/Lobby)
 [![Build Status](https://travis-ci.org/protofire/solhint.svg?branch=master)](https://travis-ci.org/protofire/solhint)
 [![NPM version](https://badge.fury.io/js/solhint.svg)](https://npmjs.org/package/solhint)
 [![Coverage Status](https://coveralls.io/repos/github/protofire/solhint/badge.svg?branch=master)](
@@ -49,7 +51,8 @@ Options:
   -V, --version                              output the version number
   -f, --formatter [name]                     report formatter name (stylish, table, tap, unix)
   -w, --max-warnings [maxWarningsNumber]     number of warnings to trigger nonzero
-  -q --quiet                                 report errors only - default: false
+  -c, --config [file_name]                   file to use as your .solhint.json
+  -q, --quiet                                report errors only - default: false
   --ignore-path [file_name]                  file to use as your .solhintignore
   -h, --help                                 output usage information
 
@@ -162,6 +165,11 @@ Related documentation you may find [there](https://protofire.github.io/solhint/)
   - **[VS Code: Solidity Language Support by CodeChain.io](
          https://marketplace.visualstudio.com/items?itemName=kodebox.solidity-language-server)**
 
+## Table of Contents
+
+* [Roadmap](ROADMAP.md): The core project's roadmap - what the core team is looking to work on in the near future.
+* [Contributing](CONTRIBUTING.md): The core Solhint team :heart: contributions. This describes how you can contribute to the Solhint Project.
+
 ## Acknowledgements
 
 The grammar used by solhint was created and is maintained by [Federico Bond](https://github.com/federicobond).
@@ -170,6 +178,11 @@ You can find it [here](https://github.com/solidityj/solidity-antlr4).
 ## Licence
 
 MIT
+
+## Back us
+Solhint is free to use and open-sourced. If you value our effort and feel like helping us to keep pushing this tool forward, you can send us a small donation. We'll highly appreciate it :)
+
+[![Donate with Ethereum](https://en.cryptobadges.io/badge/micro/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)](https://en.cryptobadges.io/donate/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)
 
 ## Who uses solhint?
 
