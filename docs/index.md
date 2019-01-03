@@ -7,12 +7,16 @@ description: This is an open source project for validating Solidity code.
 ---
 
 ## Solhint Project
+[![Donate with Ethereum](https://en.cryptobadges.io/badge/micro/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)](https://en.cryptobadges.io/donate/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)
 
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/solhint/Lobby)
 [![Build Status](https://travis-ci.org/protofire/solhint.svg?branch=master)](https://travis-ci.org/protofire/solhint)
-[![npm version](http://img.shields.io/npm/v/solhint.svg?style=flat)](https://npmjs.org/package/solhint
-"View this project on npm")
+[![NPM version](https://badge.fury.io/js/solhint.svg)](https://npmjs.org/package/solhint)
 [![Coverage Status](https://coveralls.io/repos/github/protofire/solhint/badge.svg?branch=master)](
 https://coveralls.io/github/protofire/solhint?branch=master)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/protofire/solhint/master/LICENSE)
+[![dependencies Status](https://david-dm.org/protofire/solhint/status.svg)](https://david-dm.org/protofire/solhint)
+[![devDependencies Status](https://david-dm.org/protofire/solhint/dev-status.svg)](https://david-dm.org/protofire/solhint?type=dev)
 
 This is an open source project for linting [solidity](http://solidity.readthedocs.io/en/develop/) code. This project
 provide both **security** and **style guide** validations.
@@ -83,13 +87,16 @@ See EsLint docs about formatters [here](https://eslint.org/docs/user-guide/forma
   -  unix
   -  visualstudio
 
-
-
 ### Docs
 
  - [List of Rules](./rules.html)
  - [Configuration](./configuration.html)
  - [Use Solhint in Your Application](./use-in-app.html)
+
+### Table of Contents
+
+* [Roadmap](./roadmap.html): The core project's roadmap - what the core team is looking to work on in the near future.
+* [Contributing](./contributing.html): The core Solhint team :heart: contributions. This describes how you can contribute to the Solhint Project.
 
 ### IDE Integrations
 
@@ -105,3 +112,8 @@ See EsLint docs about formatters [here](https://eslint.org/docs/user-guide/forma
 ### Licence
 
 MIT
+
+### Back Us
+Solhint is free to use and open-sourced. If you value our effort and feel like helping us to keep pushing this tool forward, you can send us a small donation. We'll highly appreciate it :)
+
+[![Donate with Ethereum](https://en.cryptobadges.io/badge/micro/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)](https://en.cryptobadges.io/donate/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)

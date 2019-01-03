@@ -12,14 +12,6 @@ Issues and feature requests
 If you have any issues to report or features to request, please use the
 [issue tracker](https://github.com/protofire/solhint/issues).
 
-### Roadmap
-
-There's a (tentative) [roadmap](ROADMAP.md) in which we've put down what we envision to be the best-next functionalities.
-
-Since the project is constantly evolving and new features are requested/discovered as we go, this roadmap is open for discussions and we expect it to change over time.
-
-Roadmap-wise contributions via new issues are always welcomed.
-
 Development
 -----------
 
@@ -82,9 +74,6 @@ All code changes happen through pull requests. To create one:
 3. Ensure the tests are still passing. Please remember to add tests for new features.
 4. Create the pull request.
 
-### Considerations
-- It is highly encouraged to follow [The seven rules of a great Git commit message](https://chris.beams.io/posts/git-commit/#seven-rules)
-- Code should be self-documented. But, in case there is any code that may be hard to understand, it must include some comments to make it easier to review and maintain later on.
 
 License
 -------

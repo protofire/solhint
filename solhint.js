@@ -8,17 +8,20 @@ const process = require('process')
 const linter = require('./lib/index')
 const { applyExtends, loadConfig } = require('./lib/config/config-file')
 const { validate } = require('./lib/config/config-validator')
+const packageJson = require('./package.json')
 
 function init() {
-  program.version('1.1.10')
+  const version = packageJson.version
+  program.version(version)
 
   program
     .usage('[options] <file> [...other_files]')
     .option('-f, --formatter [name]', 'report formatter name (stylish, table, tap, unix)')
     .option(
       '-w, --max-warnings [maxWarningsNumber]',
-      'number of warnings to trigger nonzero exit code'
+      'number of allowed warnings'
     )
+    .option('-c, --config [file_name]', 'file to use as your .solhint.json')
     .option('-q, --quiet', 'report errors only - default: false')
     .option('--ignore-path [file_name]', 'file to use as your .solhintignore')
     .description('Linter for Solidity programming language')
@@ -56,7 +59,7 @@ function execMainAction() {
   const reportLists = program.args.filter(_.isString).map(processPath)
   const reports = _.flatten(reportLists)
   const warningsNumberExceeded =
-    program.maxWarnings >= 0 && reports[0].warningCount >= program.maxWarnings
+    program.maxWarnings >= 0 && reports[0].warningCount > program.maxWarnings
 
   if (program.quiet) {
     // filter the list of reports, to set errors only.
