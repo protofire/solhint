@@ -56,9 +56,9 @@ After adding this rule to the exported array, you can publish your package. Reme
 {
   "plugins": ["naming"],
   "rules": {
-    "no-foos": "error"
+    "naming/no-foos": "error"
   }
 }
 ```
 
-And that's it!
+And that's it! Notice that we have to qualify the rule name when we enable it, but in the rule definition we only set the rule name.
