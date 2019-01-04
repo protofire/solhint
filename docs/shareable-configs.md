@@ -12,7 +12,7 @@ This example shows the two kind of shareable configs that you can use: the ones 
 
 ## Creating your own shareable config
 
-Shareable configs are regular npm packages. There are only two confitions:
+Shareable configs are regular npm packages. There are only two conditions:
 
 - The name of the package must start with `solhint-config-`
 - The package must export a regular object with the same structure as a regular configuration object (i.e. the one in your `.solhint.json`).
