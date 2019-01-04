@@ -169,6 +169,8 @@ Related documentation you may find [there](https://protofire.github.io/solhint/)
 
 * [Roadmap](ROADMAP.md): The core project's roadmap - what the core team is looking to work on in the near future.
 * [Contributing](CONTRIBUTING.md): The core Solhint team :heart: contributions. This describes how you can contribute to the Solhint Project.
+* [Shareable configs](docs/shareable-configs.md): How to create and share your own configurations.
+* [Writing plugins](docs/writing-plugins.md): How to extend Solhint with your own rules.
 
 ## Acknowledgements
 
