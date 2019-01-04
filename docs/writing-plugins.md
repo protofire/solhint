@@ -1,6 +1,6 @@
 # Writing plugins
 
-You can write your own plugins to add new rules to SolHint. Plugins are just npm packages that export an array of new rules. A plugin can be as simple as:
+You can write your own plugins to add new rules to Solhint. Plugins are just npm packages that export an array of new rules. A plugin can be as simple as:
 
 ```javascript
 module.exports = [MyNewRule]
