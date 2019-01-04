@@ -1,7 +1,7 @@
 const assert = require('assert')
 const { applyExtends } = require('./../../lib/config/config-file')
 
-describe.only('applyExtends', () => {
+describe('applyExtends', () => {
   it('should use the given config if the extends array is empty', () => {
     const initialConfig = {
       extends: [],
