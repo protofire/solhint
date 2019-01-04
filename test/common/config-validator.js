@@ -38,15 +38,4 @@ describe('Config validator', () => {
     }
     assert.throws(() => validate(config), Error)
   })
-
-  it('should throw an error with wrong rule', () => {
-    const config = {
-      extends: [],
-      rules: {
-        'avoid-throw': 'off',
-        indent: 'lol'
-      }
-    }
-    assert.throws(() => validate(config), Error)
-  })
 })
