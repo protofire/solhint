@@ -1,9 +1,6 @@
 const linter = require('./../../../lib/index')
 const funcWith = require('./../../common/contract-builder').funcWith
-const {
-  assertWarnsCount,
-  assertErrorMessage
-} = require('./../../common/asserts')
+const { assertWarnsCount, assertErrorMessage } = require('./../../common/asserts')
 
 describe('Linter - avoid-low-level-calls', () => {
   const LOW_LEVEL_CALLS = [

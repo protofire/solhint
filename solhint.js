@@ -4,9 +4,11 @@ const program = require('commander')
 const _ = require('lodash')
 const fs = require('fs')
 const process = require('process')
+
 const linter = require('./lib/index')
+const { applyExtends, loadConfig } = require('./lib/config/config-file')
+const { validate } = require('./lib/config/config-validator')
 const packageJson = require('./package.json')
-const { FileNotExistsError } = require('./lib/common/errors')
 
 function init() {
   const version = packageJson.version
@@ -15,10 +17,7 @@ function init() {
   program
     .usage('[options] <file> [...other_files]')
     .option('-f, --formatter [name]', 'report formatter name (stylish, table, tap, unix)')
-    .option(
-      '-w, --max-warnings [maxWarningsNumber]',
-      'number of allowed warnings'
-    )
+    .option('-w, --max-warnings [maxWarningsNumber]', 'number of allowed warnings')
     .option('-c, --config [file_name]', 'file to use as your .solhint.json')
     .option('-q, --quiet', 'report errors only - default: false')
     .option('--ignore-path [file_name]', 'file to use as your .solhintignore')
@@ -132,27 +131,23 @@ const readConfig = _.memoize(() => {
   let config = {}
 
   try {
-    const configFile = program.config || '.solhint.json'
-
-    if (!fs.existsSync(configFile)) {
-      throw new FileNotExistsError('The config file doesnt exist')
-    }
-
-    const configStr = fs.readFileSync(configFile).toString()
-
-    config = JSON.parse(configStr)
+    config = loadConfig()
   } catch (e) {
-    if (e instanceof SyntaxError) {
-      console.log('ERROR: Configuration file [.solhint.json] is not a valid JSON!\n')
-    }
-    if (e instanceof FileNotExistsError) {
-      console.log(`ERROR: Configuration file [${program.config}] doesn't exist!\n`)
-    }
-    process.exit(1)
+    console.log(e.message)
+    process.exit(0)
   }
 
   const configExcludeFiles = _.flatten(config.excludedFiles)
   config.excludedFiles = _.concat(configExcludeFiles, readIgnore())
+
+  // If an `extends` property is defined, it represents a configuration file to use as
+  // a "parent". Load the referenced file and merge the configuration recursively.
+  if (config.extends) {
+    config = applyExtends(config)
+  }
+
+  // validate the configuration before continuing
+  validate(config)
 
   return config
 })
