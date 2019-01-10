@@ -87,19 +87,13 @@ function processStdin(options) {
 
 function writeSampleConfigFile() {
   const configPath = '.solhint.json'
-  const sampleConfig = [
-    '{                                              ',
-    '    "extends": "default",                      ',
-    '    "rules": {                                 ',
-    '        "indent": ["error", 4],                ',
-    '        "quotes": ["error", "double"],         ',
-    '        "max-line-length": ["error", 120]      ',
-    '    }                                          ',
-    '}                                              '
-  ]
+  const sampleConfig = `{
+  "extends": "solhint:default"
+}
+`
 
   if (!fs.existsSync(configPath)) {
-    fs.writeFileSync(configPath, sampleConfig.join('\n'))
+    fs.writeFileSync(configPath, sampleConfig)
 
     console.log('Configuration file created!')
   } else {
