@@ -97,6 +97,8 @@ See EsLint docs about formatters [here](https://eslint.org/docs/user-guide/forma
 
 * [Roadmap](./roadmap.html): The core project's roadmap - what the core team is looking to work on in the near future.
 * [Contributing](./contributing.html): The core Solhint team :heart: contributions. This describes how you can contribute to the Solhint Project.
+* [Shareable configs](docs/shareable-configs.md): How to create and share your own configurations.
+* [Writing plugins](docs/writing-plugins.md): How to extend Solhint with your own rules.
 
 ### IDE Integrations
 

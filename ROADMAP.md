@@ -15,9 +15,9 @@ This is our next releases plan:
 
 - 1.4.0 [released on Oct 10, 2018]
   - Support prettier-solidity [#72]
-- 2.0.0
+- 2.0.0.beta.1 [released beta version on Jan 31, 2019]
   - Switch from Blacklisting to Rulesets + Whitelisting [#73]
   - Plugins support [#70]
-  - Support prettier-solidity as a plugin
+  - Support prettier-solidity as a plugin [#72]
 - 2.1.0
   - Separate core library from CLI app [#69]

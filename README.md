@@ -71,12 +71,12 @@ format:
 
 ```json
   {
-    "extends": "default",
+    "extends": "solhint:default",
+    "plugins": [],
     "rules": {
       "avoid-throw": false,
       "avoid-suicide": "error",
-      "avoid-sha3": "warn",
-      "indent": ["warn", 4]
+      "avoid-sha3": "warn"
     }
   }
 ```
@@ -86,7 +86,7 @@ To ignore files / folders that do not require validation you may use `.solhintig
 
 ```git exclude
 node_modules/
-additiona-tests.sol
+additional-tests.sol
 ```
 
 ### Configure linter with comments
@@ -147,8 +147,6 @@ Or disable all validations for a group of lines:
 [Full list with all supported Style Guide Rules](https://github.com/protofire/solhint/blob/master/docs/rules.md#style-guide-rules)
 ### Best Practices Rules
 [Full list with all supported Best Practices Rules](https://github.com/protofire/solhint/blob/master/docs/rules.md#best-practise-rules)
-### Prettier (experimental)
-If you have [prettier-plugin-solidity](https://github.com/prettier-solidity/prettier-plugin-solidity) installed, you can use the `prettier/prettier` rule for reporting differences between your code and how prettier would format it. If you enable this rule, you should disable some of the style guides rules (mainly `quotes`, `indent` and `two-lines-top-level-separator`).
 
 ## Documentation
 
@@ -169,6 +167,13 @@ Related documentation you may find [there](https://protofire.github.io/solhint/)
 
 * [Roadmap](ROADMAP.md): The core project's roadmap - what the core team is looking to work on in the near future.
 * [Contributing](CONTRIBUTING.md): The core Solhint team :heart: contributions. This describes how you can contribute to the Solhint Project.
+* [Shareable configs](docs/shareable-configs.md): How to create and share your own configurations.
+* [Writing plugins](docs/writing-plugins.md): How to extend Solhint with your own rules.
+
+## Plugins
+
+- [solhint-plugin-prettier](https://github.com/fvictorio/solhint-plugin-prettier): Integrate Solhint
+  with the [Solidity plugin for Prettier](https://github.com/prettier-solidity/prettier-plugin-solidity).
 
 ## Acknowledgements
 
