@@ -71,12 +71,12 @@ format:
 
 ```json
   {
-    "extends": "default",
+    "extends": "solhint:default",
+    "plugins": [],
     "rules": {
       "avoid-throw": false,
       "avoid-suicide": "error",
-      "avoid-sha3": "warn",
-      "indent": ["warn", 4]
+      "avoid-sha3": "warn"
     }
   }
 ```
@@ -86,7 +86,7 @@ To ignore files / folders that do not require validation you may use `.solhintig
 
 ```git exclude
 node_modules/
-additiona-tests.sol
+additional-tests.sol
 ```
 
 ### Configure linter with comments
@@ -169,6 +169,11 @@ Related documentation you may find [there](https://protofire.github.io/solhint/)
 * [Contributing](CONTRIBUTING.md): The core Solhint team :heart: contributions. This describes how you can contribute to the Solhint Project.
 * [Shareable configs](docs/shareable-configs.md): How to create and share your own configurations.
 * [Writing plugins](docs/writing-plugins.md): How to extend Solhint with your own rules.
+
+## Plugins
+
+- [solhint-plugin-prettier](https://github.com/fvictorio/solhint-plugin-prettier): Integrate Solhint
+  with the [Solidity plugin for Prettier](https://github.com/prettier-solidity/prettier-plugin-solidity).
 
 ## Acknowledgements
 
