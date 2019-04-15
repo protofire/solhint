@@ -200,7 +200,7 @@ Solhint is free to use and open-sourced. If you value our effort and feel like h
 - POA Network - Public EVM Sidechain:
   - [Proof of Physical Address (PoPA)](https://github.com/poanetwork/poa-popa)
   - [Proof of Bank Account (PoBA)](https://github.com/poanetwork/poa-poba)
-- [0x](https://github.com/0xProject/0x-monorepo/tree/development/packages/contracts)
+- [0x](https://github.com/0xProject/0x-monorepo/tree/development/contracts)
 - Gnosis:
   - [Gnosis Prediction Market Contracts](https://github.com/gnosis/pm-contracts)
   - [The DutchX decentralized trading protocol](https://github.com/gnosis/dex-contracts)
