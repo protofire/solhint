@@ -133,7 +133,6 @@ describe('Linter - compiler-gt', () => {
     assert.ok(report.reports[0].message.includes('0.5.2'))
   })
 
-
   it('should not report compiler version error on exact match', () => {
     const report = linter.processStr('pragma solidity 0.5.2;', {
       rules: { 'compiler-gt': ['error', '0.5.2'] }
