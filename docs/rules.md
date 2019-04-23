@@ -8,7 +8,7 @@ description: List of validation rules for Solhint - Solidity security, style gui
 
 ### Options
  Default list of options are *false, "error", "warn"*. It supports by all rules.
- It provides in format 
+ It provides in format
  ```json
  {
     "rules": {
@@ -31,6 +31,7 @@ description: List of validation rules for Solhint - Solidity security, style gui
  | **avoid-call-value**          | Avoid to use ".call.value()()"                  | *[default](#options)*     |
  | **compiler-fixed**            | Compiler version must be fixed                  | *[default](#options)*     |
  | **compiler-gt-0_4**           | Use at least '0.4' compiler version             | *[default](#options)*     |
+ | **compiler-gt**               | Use at least a specified compiler version       | [*\<[default](#options)\>*,&nbsp;\<*version*\>] Default *version* is **'0.4'**. |
  | **no-complex-fallback**       | Fallback function must be simple                | *[default](#options)*     |
  | **mark-callable-contracts**   | Explicitly mark all external contracts as trusted or untrusted | *[default](#options)* |
  | **multiple-sends**            | Avoid multiple calls of "send" method in single transaction | *[default](#options)* |
@@ -40,13 +41,13 @@ description: List of validation rules for Solhint - Solidity security, style gui
  | **not-rely-on-block-hash**    | Do not rely on "block.blockhash". Miners can influence its value. | *[default](#options)* |
  | **not-rely-on-time**          | Avoid to make time-based decisions in your business logic | *[default](#options)* |
  | **avoid-low-level-calls**     | Avoid to use low level calls.                                     | *[default](#options)* |
- 
+
 \* \- All security rules implemented according [ConsenSys Guide for Smart Contracts](https://consensys.github.io/smart-contract-best-practices/recommendations/)
- 
+
 ### Style Guide Rules
- 
+
  | Rule ID                       |                      Error                         |     Options                    |
- |-------------------------------|----------------------------------------------------|--------------------------------| 
+ |-------------------------------|----------------------------------------------------|--------------------------------|
  | **func-name-mixedcase**       | Function name must be in camelCase                 | *[default](#options)*          |
  | **func-param-name-mixedcase** | Function param name must be in mixedCase           | *[default](#options)*          |
  | **var-name-mixedcase**        | Variable name must be in mixedCase                 | *[default](#options)*          |
@@ -69,15 +70,15 @@ description: List of validation rules for Solhint - Solidity security, style gui
  | **statement-indent**          | Statement indentation is incorrect.                | *[default](#options)*          |
  | **space-after-comma**         | Comma must be separated from next element by space | *[default](#options)*          |
  | **no-spaces-before-semicolon**| Semicolon must not have spaces before              | *[default](#options)*          |
- 
+
 \* \- All style guide rules implemented according [Solidity Style Guide](
 http://solidity.readthedocs.io/en/develop/style-guide.html)
- 
+
 ### Best Practise Rules
- 
+
  | Rule ID                       |                      Error                         |     Options                   |
- |-------------------------------|----------------------------------------------------|-------------------------------| 
- | **max-line-length**           | Line length must be no more than *maxlen*. | [*\<[default](#options)\>*,&nbsp;*\<maxlen\>*] Default *maxlen* is **120**. | 
+ |-------------------------------|----------------------------------------------------|-------------------------------|
+ | **max-line-length**           | Line length must be no more than *maxlen*. | [*\<[default](#options)\>*,&nbsp;*\<maxlen\>*] Default *maxlen* is **120**. |
  | **payable-fallback**          | When fallback is not payable you will not be able to receive ethers | *[default](#options)* |
  | **no-empty-blocks**           | Code contains empty block                          | *[default](#options)*         |
  | **no-unused-vars**            | Variable "name" is unused                          | *[default](#options)*         |
