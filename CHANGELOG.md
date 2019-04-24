@@ -1,3 +1,35 @@
+## [2.0.0-beta.1] - 2019-01-31
+### Fixed
+- Fix linter errors
+
+## [2.0.0-alpha.3] - 2019-01-23
+### Changed
+- Update config initializer [#103](https://github.com/protofire/solhint/pull/103) 
+
+## [2.0.0-alpha.2] - 2019-01-08
+### Changed
+- Remove prettier from rule
+
+## [2.0.0-alpha.1] - 2019-01-08
+### Fixed
+- Package version
+
+## [2.0.0-alpha.0] - 2019-01-08
+### Added
+- Add rulesets [#73](https://github.com/protofire/solhint/issues/73)
+- Add plugins support [#99](https://github.com/protofire/solhint/pull/99)
+- Update docs
+
+## [1.5.0] - 2018-12-26
+### Added
+- Add not-rely-on-time to rules documentation [#88](https://github.com/protofire/solhint/pull/88)
+- Have --max-warnings better reflect its name [#89](https://github.com/protofire/solhint/pull/89)
+- Added disable-previous-line [#91](https://github.com/protofire/solhint/pull/91)
+- Snake case now allows for a (single) leading underscore [#93](https://github.com/protofire/solhint/pull/93)
+
+### Fixed
+- Fixed some comment directive tests [#92](https://github.com/protofire/solhint/pull/92)
+
 ## [1.4.1] - 2018-12-10
 ### Added
 - Allow to specify the path to the config file [#78](https://github.com/protofire/solhint/issues/78)

@@ -14,12 +14,12 @@ format:
 
 ```json
   {
-    "extends": "default",
+    "extends": "solhint:default",
+    "plugins": [],
     "rules": {
       "avoid-throw": false,
       "avoid-suicide": "error",
-      "avoid-sha3": "warn",
-      "indent": ["warn", 4]
+      "avoid-sha3": "warn"
     }
   }
 ```
@@ -29,7 +29,7 @@ To ignore files / folders that do not require validation you may use `.solhintig
 
 ```git exclude
 node_modules/
-additiona-tests.sol
+additional-tests.sol
 ```
 
 ### Configure linter with comments
