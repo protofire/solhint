@@ -31,7 +31,7 @@ description: List of validation rules for Solhint - Solidity security, style gui
  | **avoid-call-value**          | Avoid to use ".call.value()()"                  | *[default](#options)*     |
  | **compiler-fixed**            | Compiler version must be fixed                  | *[default](#options)*     |
  | **compiler-gt-0_4**           | Use at least '0.4' compiler version             | *[default](#options)*     |
- | **compiler-gt**               | Use at least a specified compiler version       | [*\<[default](#options)\>*,&nbsp;\<*version*\>] Default *version* is **'0.4'**. |
+ | **compiler-gt**               | Use at least a specified compiler version       | [*\<[default](#options)\>*,&nbsp;\<*version*\>] Default *version* is **'0.5.7'**. |
  | **no-complex-fallback**       | Fallback function must be simple                | *[default](#options)*     |
  | **mark-callable-contracts**   | Explicitly mark all external contracts as trusted or untrusted | *[default](#options)* |
  | **multiple-sends**            | Avoid multiple calls of "send" method in single transaction | *[default](#options)* |
