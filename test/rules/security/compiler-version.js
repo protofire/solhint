@@ -7,7 +7,7 @@ const {
 } = require('./../../common/asserts')
 const linter = require('./../../../lib/index')
 
-describe('Linter - compiler-gt', () => {
+describe('Linter - compiler-version', () => {
   it('should disable only one compiler error on next line', () => {
     const report = linter.processStr(
       `
@@ -16,7 +16,7 @@ describe('Linter - compiler-gt', () => {
                 pragma solidity 0.3.4;
             `,
       {
-        rules: { 'compiler-gt': ['error', '0.5.2'] }
+        rules: { 'compiler-version': ['error', '^0.5.2'] }
       }
     )
 
@@ -31,7 +31,7 @@ describe('Linter - compiler-gt', () => {
               pragma solidity 0.3.4;
           `,
       {
-        rules: { 'compiler-gt': ['error', '0.5.2'] }
+        rules: { 'compiler-version': ['error', '^0.5.2'] }
       }
     )
 
@@ -46,7 +46,7 @@ describe('Linter - compiler-gt', () => {
                 pragma solidity 0.3.4;
             `,
       {
-        rules: { 'compiler-gt': ['error', '0.5.2'] }
+        rules: { 'compiler-version': ['error', '^0.5.2'] }
       }
     )
 
@@ -61,7 +61,7 @@ describe('Linter - compiler-gt', () => {
                 pragma solidity 0.3.4;
             `,
       {
-        rules: { 'compiler-gt': ['error', '0.5.2'] }
+        rules: { 'compiler-version': ['error', '^0.5.2'] }
       }
     )
 
@@ -71,13 +71,13 @@ describe('Linter - compiler-gt', () => {
   it('should disable only one compiler version error', () => {
     const report = linter.processStr(
       `
-                /* solhint-disable compiler-gt */
+                /* solhint-disable compiler-version */
                 pragma solidity 0.3.4;
-                /* solhint-enable compiler-gt */
+                /* solhint-enable compiler-version */
                 pragma solidity 0.3.4;
             `,
       {
-        rules: { 'compiler-gt': ['error', '0.5.2'] }
+        rules: { 'compiler-version': ['error', '^0.5.2'] }
       }
     )
 
@@ -93,7 +93,7 @@ describe('Linter - compiler-gt', () => {
                 pragma solidity 0.3.4;
             `,
       {
-        rules: { 'compiler-fixed': 'warn', 'compiler-gt': ['error', '0.5.2'] }
+        rules: { 'compiler-fixed': 'warn', 'compiler-version': ['error', '^0.5.2'] }
       }
     )
     assertNoErrors(report)
@@ -108,7 +108,7 @@ describe('Linter - compiler-gt', () => {
                 pragma solidity ^0.4.4;
             `,
       {
-        rules: { 'compiler-fixed': 'warn', 'compiler-gt': ['error', '0.5.2'] }
+        rules: { 'compiler-fixed': 'warn', 'compiler-version': ['error', '^0.5.2'] }
       }
     )
 
@@ -118,7 +118,7 @@ describe('Linter - compiler-gt', () => {
 
   it('should not erase error', () => {
     const report = linter.processStr('/* solhint-disable-next-line */', {
-      rules: { 'compiler-fixed': 'warn', 'compiler-gt': ['error', '0.5.2'] }
+      rules: { 'compiler-fixed': 'warn', 'compiler-version': ['error', '^0.5.2'] }
     })
 
     assertNoErrors(report)
@@ -126,7 +126,7 @@ describe('Linter - compiler-gt', () => {
 
   it('should return compiler version error', () => {
     const report = linter.processStr('pragma solidity 0.3.4;', {
-      rules: { 'compiler-gt': ['error', '0.5.2'] }
+      rules: { 'compiler-version': ['error', '^0.5.2'] }
     })
 
     assert.equal(report.errorCount, 1)
@@ -135,7 +135,7 @@ describe('Linter - compiler-gt', () => {
 
   it('should not report compiler version error on exact match', () => {
     const report = linter.processStr('pragma solidity 0.5.2;', {
-      rules: { 'compiler-gt': ['error', '0.5.2'] }
+      rules: { 'compiler-version': ['error', '0.5.2'] }
     })
 
     assert.equal(report.errorCount, 0)
@@ -143,7 +143,7 @@ describe('Linter - compiler-gt', () => {
 
   it('should not report compiler version error on range match', () => {
     const report = linter.processStr('pragma solidity ^0.5.2;', {
-      rules: { 'compiler-gt': ['error', '0.5.2'] }
+      rules: { 'compiler-version': ['error', '^0.5.2'] }
     })
 
     assert.equal(report.errorCount, 0)
@@ -151,7 +151,7 @@ describe('Linter - compiler-gt', () => {
 
   it('should not report compiler version error on patch bump', () => {
     const report = linter.processStr('pragma solidity 0.5.3;', {
-      rules: { 'compiler-gt': ['error', '0.5.2'] }
+      rules: { 'compiler-version': ['error', '^0.5.2'] }
     })
 
     assert.equal(report.errorCount, 0)
@@ -159,7 +159,7 @@ describe('Linter - compiler-gt', () => {
 
   it('should report compiler version error on minor bump', () => {
     const report = linter.processStr('pragma solidity 0.6.0;', {
-      rules: { 'compiler-gt': ['error', '0.5.2'] }
+      rules: { 'compiler-version': ['error', '^0.5.2'] }
     })
 
     assert.equal(report.errorCount, 1)
