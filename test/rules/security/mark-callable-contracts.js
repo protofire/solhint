@@ -33,7 +33,6 @@ describe('Linter - mark-callable-contracts', () => {
       rules: { 'mark-callable-contracts': 'warn' }
     })
 
-    console.log(report);
     assert.equal(report.warningCount, 0)
   })
 })
