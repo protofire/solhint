@@ -56,7 +56,7 @@ describe('Linter - mark-callable-contracts', () => {
     assert.equal(report.warningCount, 0)
   })
 
-  it('should not return error for a event', () => {
+  it('should not return error for an event', () => {
     const code = contractWith(`
   event UpdatedToken();
 
