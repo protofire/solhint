@@ -14,6 +14,26 @@ describe('Linter - mark-callable-contracts', () => {
     assert.ok(report.reports[0].message.includes('trusted'))
   })
 
+  it('should not return error for external contract that is marked as trusted', () => {
+    const code = funcWith('TrustedBank.withdraw(100);')
+
+    const report = linter.processStr(code, {
+      rules: { 'mark-callable-contracts': 'warn' }
+    })
+
+    assert.equal(report.warningCount, 0)
+  })
+
+  it('should not return error for external contract that is marked as untrusted', () => {
+    const code = funcWith('UntrustedBank.withdraw(100);')
+
+    const report = linter.processStr(code, {
+      rules: { 'mark-callable-contracts': 'warn' }
+    })
+
+    assert.equal(report.warningCount, 0)
+  })
+
   it('should not return error for a struct', () => {
     const code = contractWith(`
   struct Token {
