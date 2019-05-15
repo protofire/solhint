@@ -55,4 +55,20 @@ describe('Linter - mark-callable-contracts', () => {
 
     assert.equal(report.warningCount, 0)
   })
+
+  it('should not return error for an event', () => {
+    const code = contractWith(`
+  event UpdatedToken();
+
+  function b() public {
+    emit UpdatedToken();
+  }
+    `)
+
+    const report = linter.processStr(code, {
+      rules: { 'mark-callable-contracts': 'warn' }
+    })
+
+    assert.equal(report.warningCount, 0)
+  })
 })
