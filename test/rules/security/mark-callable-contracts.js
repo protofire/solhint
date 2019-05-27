@@ -71,4 +71,20 @@ describe('Linter - mark-callable-contracts', () => {
 
     assert.equal(report.warningCount, 0)
   })
+
+  it('should not return error for constant', () => {
+    const code = contractWith(`
+  uint8 private constant TOKEN_DECIMALS = 15;
+
+  function b() public view returns(uint8) {
+    return TOKEN_DECIMALS;
+  }
+    `)
+
+    const report = linter.processStr(code, {
+      rules: { 'mark-callable-contracts': 'warn' }
+    })
+
+    assert.equal(report.warningCount, 0)
+  })
 })
