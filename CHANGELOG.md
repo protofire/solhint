@@ -1,3 +1,17 @@
+## [2.1.0] - 2019-05-30
+
+### Added
+
+- New `compiler-version` rule (see PR #112)
+
+### Fixed
+
+- Several fixes for the `mark-callable-contracts` rule (PRs #115, #117 and #119)
+
+## [2.0.0] - 2019-02-15
+
+Stable release
+
 ## [2.0.0-beta.1] - 2019-01-31
 ### Fixed
 - Fix linter errors
