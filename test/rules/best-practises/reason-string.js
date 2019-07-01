@@ -72,7 +72,7 @@ describe('Linter - reason-string', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'reason-string': ['warn', { maxLength: 50 }] }
+      rules: { 'reason-string': ['warn', { maxLength: 31 }] }
     })
 
     assertNoWarnings(report)
