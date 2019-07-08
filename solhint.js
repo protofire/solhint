@@ -128,7 +128,7 @@ const readConfig = _.memoize(() => {
     config = loadConfig()
   } catch (e) {
     console.log(e.message)
-    process.exit(0)
+    process.exit(-1)
   }
 
   const configExcludeFiles = _.flatten(config.excludedFiles)
