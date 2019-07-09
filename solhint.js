@@ -125,7 +125,7 @@ const readConfig = _.memoize(() => {
   let config = {}
 
   try {
-    config = loadConfig()
+    config = loadConfig(program.config)
   } catch (e) {
     console.log(e.message)
     process.exit(0)
