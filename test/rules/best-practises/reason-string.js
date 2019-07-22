@@ -91,35 +91,4 @@ describe('Linter - reason-string', () => {
     assertNoWarnings(report)
     assertNoErrors(report)
   })
-
-  it('should not raise warning for require with text errors', () => {
-    const code = funcWith(`require     
-    (!has(role, account),       
-    
-    "Roles: account already has role");
-        role.bearer[account] = true;role.bearer[account] = true;
-    `)
-
-    const report = linter.processStr(code, {
-      rules: { 'reason-string': ['warn', { maxLength: 50 }] }
-    })
-
-    assertNoWarnings(report)
-    assertNoErrors(report)
-  })
-
-  it('should not raise error for revert with text errors', () => {
-    const code = funcWith(`     revert
-    (!has(role, account), 
-    "Roles: account already has role");
-        role.bearer[account] = true;role.bearer[account] = true;
-    `)
-
-    const report = linter.processStr(code, {
-      rules: { 'reason-string': ['error', { maxLength: 50 }] }
-    })
-
-    assertNoWarnings(report)
-    assertNoErrors(report)
-  })
 })
