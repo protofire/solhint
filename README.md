@@ -196,7 +196,7 @@ Solhint is free to use and open-sourced. If you value our effort and feel like h
 ### Projects
 
 - OpenZeppelin:
-  - [openzeppelin-solidity](https://github.com/OpenZeppelin/openzeppelin-solidity)
+  - [openzeppelin-contracts](https://github.com/OpenZeppelin/openzeppelin-contracts)
 - POA Network - Public EVM Sidechain:
   - [Proof of Physical Address (PoPA)](https://github.com/poanetwork/poa-popa)
   - [Proof of Bank Account (PoBA)](https://github.com/poanetwork/poa-poba)
