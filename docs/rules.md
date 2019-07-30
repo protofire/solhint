@@ -85,3 +85,4 @@ http://solidity.readthedocs.io/en/develop/style-guide.html)
  | **function-max-lines**        | Function body contains "count" lines but allowed no more than *maxlines*. | [*\<[default](#options)\>*,&nbsp;*\<maxlines\>*] Default *maxlines* is **45**. |
  | **code-complexity**           | Function has cyclomatic complexity "current" but allowed no more than *maxcompl*. | [*\<[default](#options)\>*,&nbsp;*\<maxcompl\>*] Default *maxcompl* is **7**. |
  | **max-states-count**          | Contract has "some count" states declarations but allowed no more than *maxstates* | [*\<[default](#options)\>*,&nbsp;*\<maxstates\>*] Default *maxstates* is **15**. |
+ | **reason-string**             | Ensure that revert and require statements contains error message but allowed no more than *maxLength* | [*\<[default](#options)\>*,&nbsp;*{ maxLength: 50}*] Default *maxLength* is **32**. |
