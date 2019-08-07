@@ -120,6 +120,54 @@ describe('Linter - no-unused-vars', () => {
     assert.ok(report.messages[0].message.includes('Avoid to use'))
   })
 
+  it('should not raise unused var error for calldata', () => {
+    const code = contractWith(`function setBitExample(byte calldata bar) public pure {
+        uint n = 0;
+        n = n.setBit(0); // Set the 0th bit.
+        assert(n == 1);  // 1
+        n = n.setBit(1); // Set the 1st bit.
+        assert(n == 3);  // 11
+        n = n.setBit(2); // Set the 2nd bit.
+        assert(n == 7);  // 111
+        n = n.setBit(3); // Set the 3rd bit.
+        assert(n == 15); // 1111
+
+        n = 1;
+        assert(n.setBit(0) == n);
+    }`)
+
+    const report = linter.processStr(code, {
+      rules: { 'no-unused-vars': 'error' }
+    })
+
+    assert.equal(report.errorCount, 0)
+  })
+
+  it('should raise var name error for some unused vars but not for calldata', () => {
+    const code = contractWith(`function setBitExample(bytes bar2, byte bar3, byte calldata bar4) public pure {
+        uint n = 0;
+        uint d;
+        n = n.setBit(0); // Set the 0th bit.
+        assert(n == 1);  // 1
+        n = n.setBit(1); // Set the 1st bit.
+        assert(n == 3);  // 11
+        n = n.setBit(2); // Set the 2nd bit.
+        assert(n == 7);  // 111
+        n = n.setBit(3); // Set the 3rd bit.
+        assert(n == 15); // 1111
+
+        // x.bit(y) == 1 => x.setBit(y) == x
+        n = 1;
+        assert(n.setBit(0) == n);
+    }`)
+
+    const report = linter.processStr(code, {
+      rules: { 'no-unused-vars': 'error' }
+    })
+
+    assert.equal(report.errorCount, 3)
+  })
+
   function label(data) {
     const items = data.split('\n')
     const lastItemIndex = items.length - 1
