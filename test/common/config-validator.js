@@ -38,4 +38,10 @@ describe('Config validator', () => {
     }
     assert.throws(() => validate(config), Error)
   })
+
+  it('should work with an empty config', () => {
+    const config = {}
+
+    validate(config) // should not throw
+  })
 })
