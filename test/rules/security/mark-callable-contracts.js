@@ -87,4 +87,20 @@ describe('Linter - mark-callable-contracts', () => {
 
     assert.equal(report.warningCount, 0)
   })
+
+  it('should not return error for enum', () => {
+    const code = contractWith(`
+  enum Status { Initial }
+
+  function b() public view returns(Status) {
+    return Status.Initial;
+  }
+    `)
+
+    const report = linter.processStr(code, {
+      rules: { 'mark-callable-contracts': 'warn' }
+    })
+
+    assert.equal(report.warningCount, 0)
+  })
 })
