@@ -22,4 +22,36 @@ describe('Linter - max-line-length', () => {
 
     assertNoErrors(report)
   })
+
+  it('should not raise error when line is exactly the max length', () => {
+    const code = ' '.repeat(120)
+
+    const report = linter.processStr(code, {
+      rules: { 'max-line-length': 'error' }
+    })
+
+    assertNoErrors(report)
+  })
+
+  it('should not count newlines', () => {
+    const line = ' '.repeat(120)
+    const code = `${line}\n${line}\n`
+
+    const report = linter.processStr(code, {
+      rules: { 'max-line-length': 'error' }
+    })
+
+    assertNoErrors(report)
+  })
+
+  it('should not count windows newlines', () => {
+    const line = ' '.repeat(120)
+    const code = `${line}\n\r${line}\n\r`
+
+    const report = linter.processStr(code, {
+      rules: { 'max-line-length': 'error' }
+    })
+
+    assertNoErrors(report)
+  })
 })
