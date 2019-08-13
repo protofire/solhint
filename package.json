@@ -30,6 +30,7 @@
   "dependencies": {
     "ajv": "^6.6.1",
     "antlr4": "4.7.1",
+    "chalk": "^2.4.2",
     "commander": "2.18.0",
     "cosmiconfig": "^5.0.7",
     "eslint": "^5.6.0",
