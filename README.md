@@ -129,7 +129,7 @@ Disable validation on current line:
 Disable validation of time and block hash based computation on current line:
 
 ```solidity
-   uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-next-line not-rely-on-time, not-rely-on-block-hash 
+   uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line not-rely-on-time, not-rely-on-block-hash 
 ```
 
 You can disable a rule for a group of lines:
