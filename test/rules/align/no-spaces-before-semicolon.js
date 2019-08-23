@@ -1,18 +1,8 @@
 const { assertErrorMessage, assertNoErrors, assertErrorCount } = require('./../../common/asserts')
 const linter = require('./../../../lib/index')
-const { funcWith } = require('./../../common/contract-builder')
 
 describe('Linter - no-spaces-before-semicolon', () => {
-  const INCORRECT_SEMICOLON_ALIGN = [
-    funcWith('var (a, b) = test1.test2() ; a + b;'),
-    funcWith('test(1, 2, b) ;'),
-    funcWith('test(1, 2, b)/* test */;'),
-    funcWith('for ( ;;) {}'),
-    funcWith('for (i = 0; ;) {}'),
-    funcWith('for ( ; a < b;) {}')
-  ]
-
-  INCORRECT_SEMICOLON_ALIGN.forEach(curExpr =>
+  require('../../fixtures/align/expressions_with_incorrect_semicolon_align').forEach(curExpr =>
     it('should raise error when semicolon incorrect aligned', () => {
       const report = linter.processStr(curExpr, {
         rules: { 'no-spaces-before-semicolon': 'error' }
@@ -23,12 +13,7 @@ describe('Linter - no-spaces-before-semicolon', () => {
     })
   )
 
-  const CORRECT_SEMICOLON_ALIGN = [
-    funcWith('var (a, b,) = test1.test2(); a + b;'),
-    funcWith('test(1, 2, b);')
-  ]
-
-  CORRECT_SEMICOLON_ALIGN.forEach(curExpr =>
+  require('../../fixtures/align/expressions_with_correct_semicolon_align').forEach(curExpr =>
     it('should raise error when semicolon incorrect aligned', () => {
       const report = linter.processStr(curExpr, {
         rules: { 'no-spaces-before-semicolon': 'error' }

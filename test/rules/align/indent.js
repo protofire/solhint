@@ -14,11 +14,7 @@ describe('Linter - indent', () => {
   })
 
   it('should raise error when line indent is incorrect with spaces', () => {
-    const code = multiLine(
-      '    contract A {        ',
-      '        uint private a; ',
-      '    }                   '
-    )
+    const code = require('../../fixtures/align/incorrectly_indented_contract')
 
     const report = linter.processStr(code, { rules: { indent: ['error', 'spaces'] } })
 
@@ -29,21 +25,7 @@ describe('Linter - indent', () => {
   })
 
   it('should not raise error for multiline multi variable functions with additional indent', () => {
-    const code = multiLine(
-      'contract A {                                       ',
-      '    function a() public view returns (uint, uint) {',
-      '        return (1, 2);                             ',
-      '    }                                              ',
-      '                                                   ',
-      '    function b() public view returns (uint, uint) {',
-      '        (                                          ',
-      '            uint c,                                ',
-      '            uint d                                 ',
-      '        ) = a();                                   ',
-      '        return (c, d);                             ',
-      '    }                                              ',
-      '}                                                  '
-    )
+    const code = require('../../fixtures/align/correctly_indented_contract')
 
     const report = linter.processStr(code, { rules: { indent: ['error', 'spaces'] } })
 

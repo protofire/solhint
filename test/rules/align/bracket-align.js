@@ -1,16 +1,10 @@
 const assert = require('assert')
 const { assertErrorMessage, assertNoErrors, assertErrorCount } = require('./../../common/asserts')
 const linter = require('./../../../lib/index')
-const { funcWith, contractWith } = require('./../../common/contract-builder')
 
 describe('Linter - bracket-align', () => {
   it('should raise error when bracket incorrect aligned', () => {
-    const code = funcWith(`
-                for (uint i = 0; i < a; i += 1) 
-                {
-                  continue;
-                }
-            `)
+    const code = require('../../fixtures/align/incorrectly_aligned_forloop_brackets')
 
     const report = linter.processStr(code, {
       rules: { 'bracket-align': 'error' }
@@ -21,15 +15,7 @@ describe('Linter - bracket-align', () => {
   })
 
   it('should not raise error when function bracket correct aligned', () => {
-    const code = contractWith(`
-                function a (
-                    uint a
-                ) 
-                    public  
-                {
-                  continue;
-                }
-            `)
+    const code = require('../../fixtures/align/correctly_aligned_function_brackets')
 
     const report = linter.processStr(code, { rules: { 'bracket-align': 'error' } })
 
@@ -37,11 +23,7 @@ describe('Linter - bracket-align', () => {
   })
 
   it('should raise error when function bracket incorrect aligned', () => {
-    const code = contractWith(`
-                function a (uint a) public{
-                  continue;
-                }
-            `)
+    const code = require('../../fixtures/align/incorrectly_aligned_function_brackets')
 
     const report = linter.processStr(code, { rules: { 'bracket-align': 'error' } })
 

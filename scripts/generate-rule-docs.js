@@ -89,15 +89,7 @@ ${loadOptions(rule)}
 
 ## Examples
 
-👍 Examples of **incorrect** code for this rule:
-\`\`\`solidity
-${loadIncorrectExample(rule)}
-\`\`\`
-
-👎 Examples of **correct** code for this rule:
-\`\`\`solidity
-${loadCorrectExample(rule)}
-\`\`\`
+${loadExamples(rule)}
 
 ## Version
 ${linkToVersion(version)}
@@ -166,12 +158,32 @@ function linkToTestCase(rule) {
     return `https://github.com/protofire/solhint/tree/master/test/rules${link}`;
 }
 
+function loadExamples(rule) {
+    if (!rule.meta.docs.examples) {
+        return "This rule does not have examples.";
+    }
+
+    return [loadCorrectExample(rule), loadIncorrectExample(rule)].filter(s => s !== '').join('\n\n');
+}
+
 function loadIncorrectExample(rule) {
-    return '';
+    if (rule.meta.docs.examples.bad && rule.meta.docs.examples.bad.length) {
+        return `### 👎 Examples of **incorrect** code for this rule
+
+${rule.meta.docs.examples.bad.map(ex => `#### ${ex.description}\n\n\`\`\`solidity\n${ex.code}\n\`\`\``).join("\n\n")}`;
+    } else {
+        return '';
+    }
 }
 
 function loadCorrectExample(rule) {
-    return '';
+    if (rule.meta.docs.examples.good && rule.meta.docs.examples.good.length) {
+        return `### 👍 Examples of **correct** code for this rule
+
+${rule.meta.docs.examples.good.map(ex => `#### ${ex.description}\n\n\`\`\`solidity\n${ex.code}\n\`\`\``).join("\n\n")}`;
+    } else {
+        return '';
+    }
 }
 
 function getDefaultSeverity(rule) {
@@ -185,8 +197,7 @@ function getDefaultSeverity(rule) {
 function main() {
     const rules = loadRules()
     rules.forEach(rule => {
-        if (rule.ruleId === 'reason-string')
-            console.log(generateRuleDoc(rule))
+        console.log(generateRuleDoc(rule))
     })
 }
 
