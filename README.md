@@ -40,7 +40,7 @@ solhint contracts/MyToken.sol
 
 Solhint command description:
 
-```text
+```console
 Usage: solhint [options] <file> [...other_files]
 
 Linter for Solidity programming language
@@ -96,7 +96,7 @@ You can use comments in the source code to configure solhint in a given line or 
 
 For example, to disable all validations in the line following a comment:
 
-```javascript
+```solidity
   // solhint-disable-next-line
   uint[] a;
 ```
@@ -104,26 +104,26 @@ For example, to disable all validations in the line following a comment:
 You can disable a single rule on a given line. For example, to disable validation of fixed compiler
 version in the next line:
 
-```text
+```solidity
   // solhint-disable-next-line compiler-fixed, compiler-gt-0_4
   pragma solidity ^0.4.4;
 ```
 
 Disable validation on current line:
 
-```text
+```solidity
   pragma solidity ^0.4.4; // solhint-disable-line
 ```
 
 Disable validation of fixed compiler version validation on current line:
 
-```text
+```solidity
   pragma solidity ^0.4.4; // solhint-disable-line compiler-fixed, compiler-gt-0_4
 ```
 
 You can disable a rule for a group of lines:
 
-```javascript
+```solidity
   /* solhint-disable avoid-tx-origin */
   function transferTo(address to, uint amount) public {
     require(tx.origin == owner);
@@ -134,7 +134,7 @@ You can disable a rule for a group of lines:
 
 Or disable all validations for a group of lines:
 
-```javascript
+```solidity
   /* solhint-disable */
   function transferTo(address to, uint amount) public {
     require(tx.origin == owner);
