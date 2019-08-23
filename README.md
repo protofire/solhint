@@ -76,7 +76,8 @@ format:
     "rules": {
       "avoid-throw": false,
       "avoid-suicide": "error",
-      "avoid-sha3": "warn"
+      "avoid-sha3": "warn",
+      "avoid-tx-origin:": "warn"
     }
   }
 ```
@@ -123,19 +124,22 @@ Disable validation of fixed compiler version validation on current line:
 You can disable a rule for a group of lines:
 
 ```javascript
-  /* solhint-disable avoid-throw */
-  if (a > 1) {
-    throw;
+  /* solhint-disable avoid-tx-origin */
+  function transferTo(address to, uint amount) public {
+    require(tx.origin == owner);
+    to.call.value(amount)();
   }
-  /* solhint-enable avoid-throw */
+  /* solhint-enable avoid-tx-origin */
 ```
 
 Or disable all validations for a group of lines:
 
 ```javascript
   /* solhint-disable */
-  if (a > 1) {
-    throw;
+  function transferTo(address to, uint amount) public {
+          require(tx.origin == owner);
+          to.call.value(amount)();
+  
   }
   /* solhint-enable */
 ```
