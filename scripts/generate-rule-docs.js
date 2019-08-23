@@ -195,7 +195,7 @@ function getDefaultSeverity(rule) {
 function main() {
     const rules = loadRules()
     rules.forEach(rule => {
-        if (rule.ruleId === 'reason-string')
+        if (rule.ruleId === 'quotes')
         console.log(generateRuleDoc(rule))
     })
 }

@@ -10,7 +10,7 @@ describe('Linter - quotes', () => {
   })
 
   it('should raise quotes error', () => {
-    const code = contractWith("string private a = 'test';")
+    const code = require('../../fixtures/miscellaneous/string-with-single-quotes')
 
     const report = linter.processStr(code, {
       rules: { quotes: 'error' }
@@ -76,7 +76,7 @@ describe('Linter - quotes', () => {
   )
 
   it('should raise no error', () => {
-    const filePath = storeAsFile(contractWith('string private a = "test";'))
+    const filePath = storeAsFile(require('../../fixtures/miscellaneous/string-with-double-quotes'))
 
     const report = linter.processFile(filePath, {
       rules: { quotes: 'error' }
