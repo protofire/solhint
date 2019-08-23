@@ -66,8 +66,16 @@ Commands:
 
 ## Configuration
 
-You can use a `.solhint.json` file to configure Solhint globally. This file has the following
+You can use a `.solhint.json` file to configure Solhint globally.
+ 
+To generate a new  sample `.solhint.json` file in current folder you can do:
+```sh
+solhint init-config
+```
+
+This file has the following
 format:
+
 
 ```json
   {
@@ -77,10 +85,13 @@ format:
       "const-name-snakecase": "off",
       "avoid-suicide": "error",
       "avoid-sha3": "warn",
-      "avoid-tx-origin:": "warn"
+      "avoid-tx-origin:": "warn",
+      "not-rely-on-time": "warn",
+      "not-rely-on-block-hash": "warn"
     }
   }
 ```
+A full list of all supported rules can be found [here](https://github.com/protofire/solhint/blob/master/docs/rules.md). 
 
 To ignore files / folders that do not require validation you may use `.solhintignore` file. It supports rules in
 `.gitignore` format.
@@ -101,24 +112,24 @@ For example, to disable all validations in the line following a comment:
   uint[] a;
 ```
 
-You can disable a single rule on a given line. For example, to disable validation of fixed compiler
-version in the next line:
+You can disable rules on a given line. For example, to disable validation of time and block hash based computation 
+in the next line:
 
 ```solidity
-  // solhint-disable-next-line compiler-fixed, compiler-gt-0_4
-  pragma solidity ^0.4.4;
+  // solhint-disable-next-line not-rely-on-time, not-rely-on-block-hash
+  uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number))));
 ```
 
 Disable validation on current line:
 
 ```solidity
-  pragma solidity ^0.4.4; // solhint-disable-line
+  uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line
 ```
 
-Disable validation of fixed compiler version validation on current line:
+Disable validation of time and block hash based computation on current line:
 
 ```solidity
-  pragma solidity ^0.4.4; // solhint-disable-line compiler-fixed, compiler-gt-0_4
+   uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-next-line not-rely-on-time, not-rely-on-block-hash 
 ```
 
 You can disable a rule for a group of lines:
