@@ -112,7 +112,7 @@ For example, to disable all validations in the line following a comment:
   uint[] a;
 ```
 
-You can disable rules on a given line. For example, to disable validation of time and block hash based computation 
+You can disable rules on a given line. For example, to disable validation of time and block hash based computations 
 in the next line:
 
 ```solidity
@@ -126,7 +126,7 @@ Disable validation on current line:
   uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line
 ```
 
-Disable validation of time and block hash based computation on current line:
+Disable validation of time and block hash based computations on current line:
 
 ```solidity
    uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line not-rely-on-time, not-rely-on-block-hash 
