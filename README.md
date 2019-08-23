@@ -40,7 +40,7 @@ solhint contracts/MyToken.sol
 
 Solhint command description:
 
-```console
+```sh
 Usage: solhint [options] <file> [...other_files]
 
 Linter for Solidity programming language
