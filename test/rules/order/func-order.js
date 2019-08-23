@@ -73,10 +73,7 @@ describe('Linter - func-order', () => {
   })
 
   it('should not raise incorrect function order error I', () => {
-    const code = contractWith(`
-                constructor() public {}
-                function () public payable {}
-            `)
+    const code = require('../../fixtures/order/func-order-constructor-first')
 
     const report = linter.processStr(code, {
       rules: { 'func-order': 'error' }
@@ -86,10 +83,7 @@ describe('Linter - func-order', () => {
   })
 
   it('should raise incorrect function order error', () => {
-    const code = contractWith(`
-                function () public payable {}
-                constructor() public {}
-            `)
+    const code = require('../../fixtures/order/func-order-constructor-not-first')
 
     const report = linter.processStr(code, {
       rules: { 'func-order': 'error' }

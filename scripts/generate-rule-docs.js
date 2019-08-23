@@ -195,7 +195,7 @@ function getDefaultSeverity(rule) {
 function main() {
     const rules = loadRules()
     rules.forEach(rule => {
-        if (rule.ruleId === 'quotes')
+        if (rule.ruleId === 'func-order')
         console.log(generateRuleDoc(rule))
     })
 }

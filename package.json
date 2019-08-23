@@ -20,7 +20,8 @@
     "test": "npm run exec-tests",
     "test-only": "mocha --recursive",
     "generate": "scripts/build-grammar.sh",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "docs": "node scripts/generate-rule-docs.js"
   },
   "bin": {
     "solhint": "solhint.js"
