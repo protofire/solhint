@@ -74,7 +74,7 @@ format:
     "extends": "solhint:default",
     "plugins": [],
     "rules": {
-      "avoid-throw": false,
+      "const-name-snakecase": "off",
       "avoid-suicide": "error",
       "avoid-sha3": "warn",
       "avoid-tx-origin:": "warn"
