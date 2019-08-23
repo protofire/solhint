@@ -1,11 +1,10 @@
-const _ = require('lodash')
 const { assertErrorCount, assertNoErrors, assertErrorMessage } = require('./../../common/asserts')
 const linter = require('./../../../lib/index')
-const { contractWith } = require('./../../common/contract-builder')
+const { contractWith, stateDef } = require('./../../common/contract-builder')
 
 describe('Linter - max-states-count', () => {
   it('should raise error when count of states too big', () => {
-    const code = contractWith(stateDef(16))
+    const code = require('../../fixtures/best-practises/number-of-states-high')
 
     const report = linter.processStr(code, {
       rules: { 'max-states-count': ['error', 15] }
@@ -16,7 +15,7 @@ describe('Linter - max-states-count', () => {
   })
 
   it('should not raise error for count of states that lower that max', () => {
-    const code = contractWith([stateDef(10), constantDef(10)].join('\n'))
+    const code = require('../../fixtures/best-practises/number-of-states-low')
 
     const report = linter.processStr(code, {
       rules: { 'max-states-count': 'error' }
@@ -32,18 +31,4 @@ describe('Linter - max-states-count', () => {
 
     assertNoErrors(report)
   })
-
-  function repeatLines(line, count) {
-    return _.times(count)
-      .map(() => line)
-      .join('\n')
-  }
-
-  function stateDef(count) {
-    return repeatLines('uint private a;', count)
-  }
-
-  function constantDef(count) {
-    return repeatLines('uint private constant TEST = 1;', count)
-  }
 })

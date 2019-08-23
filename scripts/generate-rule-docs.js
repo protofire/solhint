@@ -80,15 +80,12 @@ ${[
 ].filter(s => s !== '').join("\n")}
 
 ## Description
-
 ${rule.meta.docs.description}
 
 ## Options
-
 ${loadOptions(rule)}
 
 ## Examples
-
 ${loadExamples(rule)}
 
 ## Version
@@ -163,7 +160,8 @@ function loadExamples(rule) {
         return "This rule does not have examples.";
     }
 
-    return [loadCorrectExample(rule), loadIncorrectExample(rule)].filter(s => s !== '').join('\n\n');
+    const examples = [loadCorrectExample(rule), loadIncorrectExample(rule)].filter(s => s !== '').join('\n\n');
+    return examples === '' ? 'This rule does not have examples.' : examples;
 }
 
 function loadIncorrectExample(rule) {
@@ -197,6 +195,7 @@ function getDefaultSeverity(rule) {
 function main() {
     const rules = loadRules()
     rules.forEach(rule => {
+        if (rule.ruleId === 'reason-string')
         console.log(generateRuleDoc(rule))
     })
 }
