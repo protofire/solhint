@@ -137,9 +137,8 @@ Or disable all validations for a group of lines:
 ```javascript
   /* solhint-disable */
   function transferTo(address to, uint amount) public {
-          require(tx.origin == owner);
-          to.call.value(amount)();
-  
+    require(tx.origin == owner);
+    to.call.value(amount)();
   }
   /* solhint-enable */
 ```
