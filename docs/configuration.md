@@ -9,22 +9,34 @@ description: Configuration of solidity security and style guide verification,
 
 ### Configuration
 
-You can use a `.solhint.json` file to configure Solhint globally. This file has the following
+You can use a `.solhint.json` file to configure Solhint globally.
+ 
+To generate a new  sample `.solhint.json` file in current folder you can do:
+```sh
+solhint init-config
+```
+
+This file has the following
 format:
+
 
 ```json
   {
     "extends": "solhint:default",
     "plugins": [],
     "rules": {
-      "avoid-throw": false,
+      "const-name-snakecase": "off",
       "avoid-suicide": "error",
-      "avoid-sha3": "warn"
+      "avoid-sha3": "warn",
+      "avoid-tx-origin:": "warn",
+      "not-rely-on-time": "warn",
+      "not-rely-on-block-hash": "warn"
     }
   }
 ```
+A full list of all supported rules can be found [here](https://github.com/protofire/solhint/blob/master/docs/rules.md). 
 
-To ignore files / folders that do not require validation you may use `.solhintignore` file. It supports rules in 
+To ignore files / folders that do not require validation you may use `.solhintignore` file. It supports rules in
 `.gitignore` format.
 
 ```git exclude
@@ -38,47 +50,49 @@ You can use comments in the source code to configure solhint in a given line or 
 
 For example, to disable all validations in the line following a comment:
 
-```javascript
+```solidity
   // solhint-disable-next-line
   uint[] a;
 ```
 
-You can disable a single rule on a given line. For example, to disable validation of fixed compiler
-version in the next line:
+You can disable rules on a given line. For example, to disable validation of time and block hash based computation 
+in the next line:
 
-```text
-  // solhint-disable-next-line compiler-fixed, compiler-gt-0_4
-  pragma solidity ^0.4.4;
+```solidity
+  // solhint-disable-next-line not-rely-on-time, not-rely-on-block-hash
+  uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number))));
 ```
 
 Disable validation on current line:
 
-```text
-  pragma solidity ^0.4.4; // solhint-disable-line
+```solidity
+  uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line
 ```
 
-Disable validation of fixed compiler version validation on current line:
+Disable validation of time and block hash based computation on current line:
 
-```text
-  pragma solidity ^0.4.4; // solhint-disable-line compiler-fixed, compiler-gt-0_4
+```solidity
+   uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line not-rely-on-time, not-rely-on-block-hash 
 ```
 
 You can disable a rule for a group of lines:
 
-```javascript
-  /* solhint-disable avoid-throw */
-  if (a > 1) {
-    throw;
+```solidity
+  /* solhint-disable avoid-tx-origin */
+  function transferTo(address to, uint amount) public {
+    require(tx.origin == owner);
+    to.call.value(amount)();
   }
-  /* solhint-enable avoid-throw */
+  /* solhint-enable avoid-tx-origin */
 ```
 
 Or disable all validations for a group of lines:
 
-```javascript
+```solidity
   /* solhint-disable */
-  if (a > 1) {
-    throw;
+  function transferTo(address to, uint amount) public {
+    require(tx.origin == owner);
+    to.call.value(amount)();
   }
   /* solhint-enable */
 ```
