@@ -1,10 +1,8 @@
-const { funcWith } = require('./../../common/contract-builder')
-
 module.exports = [
-  funcWith('var (a, b) = test1.test2() ; a + b;'),
-  funcWith('test(1, 2, b) ;'),
-  funcWith('test(1, 2, b)/* test */;'),
-  funcWith('for ( ;;) {}'),
-  funcWith('for (i = 0; ;) {}'),
-  funcWith('for ( ; a < b;) {}')
+  'var (a, b) = test1.test2() ; a + b;',
+  'test(1, 2, b) ;',
+  'test(1, 2, b)/* test */;',
+  'for ( ;;) {}',
+  'for (i = 0; ;) {}',
+  'for ( ; a < b;) {}'
 ]

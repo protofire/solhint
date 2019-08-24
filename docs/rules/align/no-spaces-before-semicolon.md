@@ -2,7 +2,7 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "no-spaces-before-semicolon | Solhint"
-date:        "Sat, 24 Aug 2019 03:06:49 GMT"
+date:        "Sat, 24 Aug 2019 10:42:48 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
 ---
 
@@ -25,29 +25,8 @@ This rule does not have options.
 #### Expression with correct semicolon align
 
 ```solidity
-
-      pragma solidity 0.4.4;
-        
-        
-      contract A {
-        
-        function b() public {
-          var (a, b,) = test1.test2(); a + b;
-        }
-    
-      }
-    ,
-      pragma solidity 0.4.4;
-        
-        
-      contract A {
-        
-        function b() public {
-          test(1, 2, b);
-        }
-    
-      }
-    
+var (a, b,) = test1.test2(); a + b;
+test(1, 2, b);
 ```
 
 ### 👎 Examples of **incorrect** code for this rule
@@ -55,73 +34,12 @@ This rule does not have options.
 #### Expression with incorrect semicolon align
 
 ```solidity
-
-      pragma solidity 0.4.4;
-        
-        
-      contract A {
-        
-        function b() public {
-          var (a, b) = test1.test2() ; a + b;
-        }
-    
-      }
-    ,
-      pragma solidity 0.4.4;
-        
-        
-      contract A {
-        
-        function b() public {
-          test(1, 2, b) ;
-        }
-    
-      }
-    ,
-      pragma solidity 0.4.4;
-        
-        
-      contract A {
-        
-        function b() public {
-          test(1, 2, b)/* test */;
-        }
-    
-      }
-    ,
-      pragma solidity 0.4.4;
-        
-        
-      contract A {
-        
-        function b() public {
-          for ( ;;) {}
-        }
-    
-      }
-    ,
-      pragma solidity 0.4.4;
-        
-        
-      contract A {
-        
-        function b() public {
-          for (i = 0; ;) {}
-        }
-    
-      }
-    ,
-      pragma solidity 0.4.4;
-        
-        
-      contract A {
-        
-        function b() public {
-          for ( ; a < b;) {}
-        }
-    
-      }
-    
+var (a, b) = test1.test2() ; a + b;
+test(1, 2, b) ;
+test(1, 2, b)/* test */;
+for ( ;;) {}
+for (i = 0; ;) {}
+for ( ; a < b;) {}
 ```
 
 ## Version

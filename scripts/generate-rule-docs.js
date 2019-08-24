@@ -244,8 +244,22 @@ ${contents}
 }
 
 function main() {
+    const program = require('commander');
+    program.option('--rule-id <rule-id>', 'rule id');
+    program.parse(process.argv);
+    let ruleIds = [];
+    if (program.ruleId) {
+        ruleIds = program.ruleId.split(",");
+    }
+
     const rules = loadRules();
-    rules.forEach(rule => {
+    rules.filter(rule => {
+        if (ruleIds.length) {
+            return ruleIds.includes(rule.ruleId);
+        } else {
+            return true;
+        }
+    }).forEach(rule => {
         const ruleDoc = generateRuleDoc(rule);
         const dir = path.resolve(path.join(__dirname, '..', 'docs', 'rules', rule.meta.type));
         const fileName = `${rule.ruleId}.md`;
