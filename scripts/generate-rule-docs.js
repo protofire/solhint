@@ -212,6 +212,37 @@ function getDefaultSeverity(rule) {
     }
 }
 
+function generateRuleIndex(rulesIndexed) {
+    const date = new Date().toUTCString();
+    const authorName = GitHelper.getAuthorName();
+    const authorEmail = GitHelper.getAuthorEmail();
+
+    const contents = Object.keys(rulesIndexed).map(category => {
+        const rows = [["Rule Id", "Error"]];
+        rulesIndexed[category].map(rule => [`[${rule.ruleId}](./rules/${rule.meta.type}/${rule.ruleId}.html)`, rule.meta.docs.description]).forEach(row => rows.push(row));
+        return `## ${category}
+
+${table(rows)}
+        `;
+    }).join("\n\n");
+
+    return `---
+warning:     "This is a dynamically generated file. Do not edit manually."
+layout:      "default"
+title:       "Rule Index of Solhint"
+date:        "${date}"
+author:      "${authorName} <${authorEmail}>"
+---
+
+${contents}
+
+## References
+
+- [ConsenSys Guide for Smart Contracts](https://consensys.github.io/smart-contract-best-practices/recommendations/)
+- [Solidity Style Guide](http://solidity.readthedocs.io/en/develop/style-guide.html)
+`;
+}
+
 function main() {
     const rules = loadRules();
     rules.forEach(rule => {
@@ -227,6 +258,24 @@ function main() {
                 console.log(`Writed ${filePath}`)
             }
         });
+    });
+
+    const rulesIndexed = {};
+    rules.forEach(rule => {
+        if (!rulesIndexed[rule.meta.docs.category]) {
+            rulesIndexed[rule.meta.docs.category] = [rule];
+        } else {
+            rulesIndexed[rule.meta.docs.category].push(rule);
+        }
+    });
+    const ruleIndexDoc = generateRuleIndex(rulesIndexed);
+    const ruleIndexDocPath = path.resolve(path.join(__dirname, '..', 'docs', 'rules.md'));
+    fs.writeFile(ruleIndexDocPath, ruleIndexDoc, function (err) {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log(`Writed ${ruleIndexDocPath}`)
+        }
     });
 }
 

@@ -2,7 +2,7 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "code-complexity | Solhint"
-date:        "Sat, 24 Aug 2019 02:21:18 GMT"
+date:        "Sat, 24 Aug 2019 03:06:50 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
 ---
 

@@ -2,7 +2,7 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "no-simple-event-func-name | Solhint"
-date:        "Sat, 24 Aug 2019 02:21:24 GMT"
+date:        "Sat, 24 Aug 2019 03:06:56 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
 ---
 
