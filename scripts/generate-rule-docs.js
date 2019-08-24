@@ -1,6 +1,7 @@
 #!env node
 const { loadRules } = require('../lib/load-rules')
-const { exec } = require("shelljs");
+const fs = require('fs');
+const { exec, mkdir } = require("shelljs");
 const semver = require('semver');
 const path = require('path');
 const table = require('markdown-table');
@@ -70,9 +71,9 @@ function generateRuleDoc(rule) {
     return `
 # ${rule.ruleId}
 ${[
-    categoryBadge(rule.meta.docs.category), 
-    recommendedBadge(isRecommended), 
+    recommendedBadge(isRecommended),
     deprecatedBadge(isDeprecated),
+    categoryBadge(rule.meta.docs.category),
     defaultSeverityBadge(defaultSeverity),
     isDefault ? '> The {"extends": "solhint:default"} property in a configuration file enables this rule.\n' : '',
     isRecommended ? '> The {"extends": "solhint:recommended"} property in a configuration file enables this rule.\n' : '',
@@ -147,7 +148,8 @@ function linkToSource(rule) {
 }
 
 function linkToDocumentSource(rule) {
-    return '';
+    const link = rule.file.replace(path.resolve(path.join(__dirname, '..')), '').replace("lib/rules", "docs/rules").replace(/\.js$/, ".md");
+    return `https://github.com/protofire/solhint/tree/master${link}`;
 }
 
 function linkToTestCase(rule) {
@@ -188,16 +190,21 @@ function getDefaultSeverity(rule) {
     if (Array.isArray(rule.meta.defaultSetup)) {
         return rule.meta.defaultSetup[0];
     } else {
-        return rule.meta.defaultSetup
+        return rule.meta.defaultSetup;
     }
 }
 
 function main() {
-    const rules = loadRules()
+    const rules = loadRules();
     rules.forEach(rule => {
-        if (rule.ruleId === 'reentrancy')
-        console.log(generateRuleDoc(rule))
-    })
+        const ruleDoc = generateRuleDoc(rule);
+        const dir = path.resolve(path.join(__dirname, '..', 'docs', 'rules', rule.meta.type));
+        const fileName = `${rule.ruleId}.md`;
+        const filePath = path.resolve(path.join(dir, fileName));
+        mkdir('-p', dir);
+        fs.writeFileSync(filePath, ruleDoc);
+        console.log(`Writed ${filePath}`);
+    });
 }
 
 main();
