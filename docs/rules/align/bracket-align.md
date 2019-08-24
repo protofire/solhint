@@ -1,3 +1,8 @@
+<!---
+This is a dynamically generated file. Do not edit manually.
+date:        Sat, 24 Aug 2019 01:45:03 GMT
+author:      "Peter Chung <touhonoob@gmail.com>"
+--->
 
 # bracket-align
 ![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)

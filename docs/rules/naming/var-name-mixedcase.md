@@ -1,3 +1,8 @@
+<!---
+This is a dynamically generated file. Do not edit manually.
+date:        Sat, 24 Aug 2019 01:45:07 GMT
+author:      "Peter Chung <touhonoob@gmail.com>"
+--->
 
 # var-name-mixedcase
 ![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)

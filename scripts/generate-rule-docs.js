@@ -10,6 +10,14 @@ const table = require('markdown-table');
  * Borrowed from https://github.com/eslint/eslint/blob/master/Makefile.js
  */
 class GitHelper {
+    static getAuthorName() {
+        return GitHelper.execSilent('git config user.name').trim();
+    }
+
+    static getAuthorEmail() {
+        return GitHelper.execSilent('git config user.email').trim();
+    }
+
     /**
      * Gets the tag name where a given file was introduced first.
      * @param {string} filePath The file path to check.
@@ -62,13 +70,21 @@ class GitHelper {
 }
 
 function generateRuleDoc(rule) {
+    const date = new Date().toUTCString();
+    const authorName = GitHelper.getAuthorName();
+    const authorEmail = GitHelper.getAuthorEmail();
     const isDefault = !rule.meta.deprecated && rule.meta.isDefault;
     const isRecommended = !rule.meta.deprecated && rule.meta.recommended;
     const isDeprecated = rule.meta.deprecated;
     const version = GitHelper.getFirstVersionOfFile(rule.file);
     const defaultSeverity = getDefaultSeverity(rule);
 
-    return `
+    return `<!---
+This is a dynamically generated file. Do not edit manually.
+date:        ${date}
+author:      "${authorName} <${authorEmail}>"
+--->
+
 # ${rule.ruleId}
 ${[
     recommendedBadge(isRecommended),
@@ -202,8 +218,13 @@ function main() {
         const fileName = `${rule.ruleId}.md`;
         const filePath = path.resolve(path.join(dir, fileName));
         mkdir('-p', dir);
-        fs.writeFileSync(filePath, ruleDoc);
-        console.log(`Writed ${filePath}`);
+        fs.writeFile(filePath, ruleDoc, function (err) {
+            if (err) {
+                console.error(err);
+            } else {
+                console.log(`Writed ${filePath}`)
+            }
+        });
     });
 }
 

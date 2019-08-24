@@ -1,3 +1,8 @@
+<!---
+This is a dynamically generated file. Do not edit manually.
+date:        Sat, 24 Aug 2019 01:45:06 GMT
+author:      "Peter Chung <touhonoob@gmail.com>"
+--->
 
 # modifier-name-mixedcase
 ![Category Badge](https://img.shields.io/badge/-Style%20Guide%20Rules-informational)
