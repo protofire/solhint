@@ -1,8 +1,10 @@
-<!---
-This is a dynamically generated file. Do not edit manually.
-date:        Sat, 24 Aug 2019 01:45:06 GMT
+---
+warning:     "This is a dynamically generated file. Do not edit manually."
+layout:      "default"
+title:       "func-param-name-mixedcase | Solhint"
+date:        "Sat, 24 Aug 2019 02:21:21 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
---->
+---
 
 # func-param-name-mixedcase
 ![Category Badge](https://img.shields.io/badge/-Style%20Guide%20Rules-informational)

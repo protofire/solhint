@@ -1,8 +1,10 @@
-<!---
-This is a dynamically generated file. Do not edit manually.
-date:        Sat, 24 Aug 2019 01:45:10 GMT
+---
+warning:     "This is a dynamically generated file. Do not edit manually."
+layout:      "default"
+title:       "no-inline-assembly | Solhint"
+date:        "Sat, 24 Aug 2019 02:21:24 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
---->
+---
 
 # no-inline-assembly
 ![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)

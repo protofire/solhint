@@ -1,8 +1,10 @@
-<!---
-This is a dynamically generated file. Do not edit manually.
-date:        Sat, 24 Aug 2019 01:45:08 GMT
+---
+warning:     "This is a dynamically generated file. Do not edit manually."
+layout:      "default"
+title:       "avoid-sha3 | Solhint"
+date:        "Sat, 24 Aug 2019 02:21:22 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
---->
+---
 
 # avoid-sha3
 ![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)

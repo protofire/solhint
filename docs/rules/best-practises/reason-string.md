@@ -1,8 +1,10 @@
-<!---
-This is a dynamically generated file. Do not edit manually.
-date:        Sat, 24 Aug 2019 01:45:05 GMT
+---
+warning:     "This is a dynamically generated file. Do not edit manually."
+layout:      "default"
+title:       "reason-string | Solhint"
+date:        "Sat, 24 Aug 2019 02:21:19 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
---->
+---
 
 # reason-string
 ![Category Badge](https://img.shields.io/badge/-Best%20Practise%20Rules-informational)

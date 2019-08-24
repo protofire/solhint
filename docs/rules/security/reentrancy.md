@@ -1,8 +1,10 @@
-<!---
-This is a dynamically generated file. Do not edit manually.
-date:        Sat, 24 Aug 2019 01:45:11 GMT
+---
+warning:     "This is a dynamically generated file. Do not edit manually."
+layout:      "default"
+title:       "reentrancy | Solhint"
+date:        "Sat, 24 Aug 2019 02:21:25 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
---->
+---
 
 # reentrancy
 ![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
@@ -65,7 +67,23 @@ This rule does not have options.
 #### Invulnerable Contract 3
 
 ```solidity
-undefined
+
+      pragma solidity 0.4.4;
+        
+        
+      contract A {
+        
+        function b() public {
+          
+                uint[] shares;
+                uint amount = shares[msg.sender];
+                msg.sender.transfer(amount);
+                shares[msg.sender] = 0;
+            
+        }
+    
+      }
+    
 ```
 
 ### 👎 Examples of **incorrect** code for this rule

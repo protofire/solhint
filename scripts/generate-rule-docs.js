@@ -79,11 +79,13 @@ function generateRuleDoc(rule) {
     const version = GitHelper.getFirstVersionOfFile(rule.file);
     const defaultSeverity = getDefaultSeverity(rule);
 
-    return `<!---
-This is a dynamically generated file. Do not edit manually.
-date:        ${date}
+    return `---
+warning:     "This is a dynamically generated file. Do not edit manually."
+layout:      "default"
+title:       "${rule.ruleId} | Solhint"
+date:        "${date}"
 author:      "${authorName} <${authorEmail}>"
---->
+---
 
 # ${rule.ruleId}
 ${[

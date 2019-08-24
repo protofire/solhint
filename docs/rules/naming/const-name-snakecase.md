@@ -1,8 +1,10 @@
-<!---
-This is a dynamically generated file. Do not edit manually.
-date:        Sat, 24 Aug 2019 01:45:05 GMT
+---
+warning:     "This is a dynamically generated file. Do not edit manually."
+layout:      "default"
+title:       "const-name-snakecase | Solhint"
+date:        "Sat, 24 Aug 2019 02:21:20 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
---->
+---
 
 # const-name-snakecase
 ![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)

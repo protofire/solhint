@@ -1,8 +1,10 @@
-<!---
-This is a dynamically generated file. Do not edit manually.
-date:        Sat, 24 Aug 2019 01:45:04 GMT
+---
+warning:     "This is a dynamically generated file. Do not edit manually."
+layout:      "default"
+title:       "code-complexity | Solhint"
+date:        "Sat, 24 Aug 2019 02:21:18 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
---->
+---
 
 # code-complexity
 ![Category Badge](https://img.shields.io/badge/-Best%20Practise%20Rules-informational)

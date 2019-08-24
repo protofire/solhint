@@ -1,8 +1,10 @@
-<!---
-This is a dynamically generated file. Do not edit manually.
-date:        Sat, 24 Aug 2019 01:45:03 GMT
+---
+warning:     "This is a dynamically generated file. Do not edit manually."
+layout:      "default"
+title:       "no-mix-tabs-and-spaces | Solhint"
+date:        "Sat, 24 Aug 2019 02:21:18 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
---->
+---
 
 # no-mix-tabs-and-spaces
 ![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)

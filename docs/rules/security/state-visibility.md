@@ -1,8 +1,10 @@
-<!---
-This is a dynamically generated file. Do not edit manually.
-date:        Sat, 24 Aug 2019 01:45:11 GMT
+---
+warning:     "This is a dynamically generated file. Do not edit manually."
+layout:      "default"
+title:       "state-visibility | Solhint"
+date:        "Sat, 24 Aug 2019 02:21:25 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
---->
+---
 
 # state-visibility
 ![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)

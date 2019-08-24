@@ -1,8 +1,10 @@
-<!---
-This is a dynamically generated file. Do not edit manually.
-date:        Sat, 24 Aug 2019 01:45:04 GMT
+---
+warning:     "This is a dynamically generated file. Do not edit manually."
+layout:      "default"
+title:       "function-max-lines | Solhint"
+date:        "Sat, 24 Aug 2019 02:21:18 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
---->
+---
 
 # function-max-lines
 ![Category Badge](https://img.shields.io/badge/-Best%20Practise%20Rules-informational)

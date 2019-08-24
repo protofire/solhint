@@ -1,8 +1,10 @@
-<!---
-This is a dynamically generated file. Do not edit manually.
-date:        Sat, 24 Aug 2019 01:45:07 GMT
+---
+warning:     "This is a dynamically generated file. Do not edit manually."
+layout:      "default"
+title:       "separate-by-one-line-in-contract | Solhint"
+date:        "Sat, 24 Aug 2019 02:21:22 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
---->
+---
 
 # separate-by-one-line-in-contract
 ![Category Badge](https://img.shields.io/badge/-Style%20Guide%20Rules-informational)

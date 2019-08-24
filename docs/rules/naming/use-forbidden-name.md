@@ -1,8 +1,10 @@
-<!---
-This is a dynamically generated file. Do not edit manually.
-date:        Sat, 24 Aug 2019 01:45:06 GMT
+---
+warning:     "This is a dynamically generated file. Do not edit manually."
+layout:      "default"
+title:       "use-forbidden-name | Solhint"
+date:        "Sat, 24 Aug 2019 02:21:21 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
---->
+---
 
 # use-forbidden-name
 ![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
