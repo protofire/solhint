@@ -2,7 +2,7 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "array-declaration-spaces | Solhint"
-date:        "Sat, 24 Aug 2019 03:06:48 GMT"
+date:        "Sun, 25 Aug 2019 22:09:14 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
 ---
 
@@ -17,7 +17,17 @@ author:      "Peter Chung <touhonoob@gmail.com>"
 Array declaration must not contains spaces.
 
 ## Options
-This rule does not have options.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+
+### Example Config
+```json
+{
+  "rules": {
+    "array-declaration-spaces": "warn"
+  }
+}
+```
+
 
 ## Examples
 ### 👍 Examples of **correct** code for this rule

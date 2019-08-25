@@ -2,7 +2,7 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "max-states-count | Solhint"
-date:        "Sat, 24 Aug 2019 03:06:50 GMT"
+date:        "Sun, 25 Aug 2019 22:09:16 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
 ---
 
@@ -19,10 +19,20 @@ Contract has "some count" states declarations but allowed no more than maxstates
 ## Options
 This rule accepts an array of options:
 
-| Index | Description                                    | Default Value |
-| ----- | ---------------------------------------------- | ------------- |
-| 0     | Rule severity. Must be one of "error", "warn". | warn          |
-| 1     | Maximum allowed number of states declarations  | 15            |
+| Index | Description                                           | Default Value |
+| ----- | ----------------------------------------------------- | ------------- |
+| 0     | Rule severity. Must be one of "error", "warn", "off". | warn          |
+| 1     | Maximum allowed number of states declarations         | 15            |
+
+
+### Example Config
+```json
+{
+  "rules": {
+    "max-states-count": ["warn",15]
+  }
+}
+```
 
 
 ## Examples

@@ -5,6 +5,7 @@ const { exec, mkdir } = require("shelljs");
 const semver = require('semver');
 const path = require('path');
 const table = require('markdown-table');
+const { ruleSeverityEnum } = require('../lib/doc/utils');
 
 /**
  * Borrowed from https://github.com/eslint/eslint/blob/master/Makefile.js
@@ -104,6 +105,9 @@ ${rule.meta.docs.description}
 ## Options
 ${loadOptions(rule)}
 
+### Example Config
+${loadExampleConfig(rule)}
+
 ## Examples
 ${loadExamples(rule)}
 
@@ -138,18 +142,31 @@ function defaultSeverityBadge(severity) {
 }
 
 function loadOptions(rule) {
-    if (!Array.isArray(rule.meta.defaultSetup)) {
-        return 'This rule does not have options.';
-    }
-
-    const optionsTable = [['Index', 'Description', 'Default Value']];
-    rule.meta.docs.options.forEach((option, index) => {
-        optionsTable.push([index, option.description, option.default]);
-    });
-    return `This rule accepts an array of options:
+    if (Array.isArray(rule.meta.defaultSetup)) {
+        const optionsTable = [['Index', 'Description', 'Default Value']];
+        rule.meta.docs.options.forEach((option, index) => {
+            optionsTable.push([index, option.description, option.default]);
+        });
+        return `This rule accepts an array of options:
 
 ${table(optionsTable)}
 `;
+    } else if (typeof rule.meta.defaultSetup === 'string') {
+        return `This rule accepts a string option of rule severity. Must be one of ${ruleSeverityEnum}. Default to ${rule.meta.defaultSetup}.`
+    } else {
+        throw new Error(`Unhandled type of rule.meta.defaultSetup from rule ${rule.ruleId}`);
+    }
+}
+
+function loadExampleConfig(rule) {
+    return `\`\`\`json
+{
+  "rules": {
+    "${rule.ruleId}": ${JSON.stringify(rule.meta.defaultSetup)}
+  }
+}
+\`\`\`
+`
 }
 
 function linkToVersion(version) {

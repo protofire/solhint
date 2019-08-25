@@ -2,7 +2,7 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "func-order | Solhint"
-date:        "Sat, 24 Aug 2019 03:06:52 GMT"
+date:        "Sun, 25 Aug 2019 22:09:19 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
 ---
 
@@ -14,7 +14,17 @@ author:      "Peter Chung <touhonoob@gmail.com>"
 Function order is incorrect.
 
 ## Options
-This rule does not have options.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+
+### Example Config
+```json
+{
+  "rules": {
+    "func-order": "warn"
+  }
+}
+```
+
 
 ## Examples
 ### 👍 Examples of **correct** code for this rule

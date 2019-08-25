@@ -2,7 +2,7 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "bracket-align | Solhint"
-date:        "Sat, 24 Aug 2019 03:06:48 GMT"
+date:        "Sun, 25 Aug 2019 22:09:15 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
 ---
 
@@ -17,7 +17,17 @@ author:      "Peter Chung <touhonoob@gmail.com>"
 Open bracket must be on same line. It must be indented by other constructions by space.
 
 ## Options
-This rule does not have options.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+
+### Example Config
+```json
+{
+  "rules": {
+    "bracket-align": "warn"
+  }
+}
+```
+
 
 ## Examples
 ### 👍 Examples of **correct** code for this rule

@@ -2,7 +2,7 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "func-param-name-mixedcase | Solhint"
-date:        "Sat, 24 Aug 2019 03:06:52 GMT"
+date:        "Sun, 25 Aug 2019 22:09:18 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
 ---
 
@@ -14,7 +14,17 @@ author:      "Peter Chung <touhonoob@gmail.com>"
 Function name must be in camelCase.
 
 ## Options
-This rule does not have options.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+
+### Example Config
+```json
+{
+  "rules": {
+    "func-param-name-mixedcase": "warn"
+  }
+}
+```
+
 
 ## Examples
 This rule does not have examples.

@@ -2,7 +2,7 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "check-send-result | Solhint"
-date:        "Sat, 24 Aug 2019 03:06:54 GMT"
+date:        "Sun, 25 Aug 2019 22:09:20 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
 ---
 
@@ -17,7 +17,17 @@ author:      "Peter Chung <touhonoob@gmail.com>"
 Check result of "send" call.
 
 ## Options
-This rule does not have options.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+
+### Example Config
+```json
+{
+  "rules": {
+    "check-send-result": "warn"
+  }
+}
+```
+
 
 ## Examples
 ### 👍 Examples of **correct** code for this rule

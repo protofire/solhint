@@ -2,7 +2,7 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "compiler-version | Solhint"
-date:        "Sat, 24 Aug 2019 03:06:55 GMT"
+date:        "Sun, 25 Aug 2019 22:09:21 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
 ---
 
@@ -19,10 +19,20 @@ Compiler version must satisfy a semver requirement.
 ## Options
 This rule accepts an array of options:
 
-| Index | Description                                    | Default Value |
-| ----- | ---------------------------------------------- | ------------- |
-| 0     | Rule severity. Must be one of "error", "warn". | error         |
-| 1     | Semver requirement                             | ^0.5.8        |
+| Index | Description                                           | Default Value |
+| ----- | ----------------------------------------------------- | ------------- |
+| 0     | Rule severity. Must be one of "error", "warn", "off". | error         |
+| 1     | Semver requirement                                    | ^0.5.8        |
+
+
+### Example Config
+```json
+{
+  "rules": {
+    "compiler-version": ["error","^0.5.8"]
+  }
+}
+```
 
 
 ## Examples

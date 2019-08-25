@@ -2,7 +2,7 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "code-complexity | Solhint"
-date:        "Sat, 24 Aug 2019 03:06:50 GMT"
+date:        "Sun, 25 Aug 2019 22:09:16 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
 ---
 
@@ -16,10 +16,20 @@ Function has cyclomatic complexity "current" but allowed no more than maxcompl.
 ## Options
 This rule accepts an array of options:
 
-| Index | Description                                    | Default Value |
-| ----- | ---------------------------------------------- | ------------- |
-| 0     | Rule severity. Must be one of "error", "warn". | warn          |
-| 1     | Maximum allowed cyclomatic complexity          | 7             |
+| Index | Description                                           | Default Value |
+| ----- | ----------------------------------------------------- | ------------- |
+| 0     | Rule severity. Must be one of "error", "warn", "off". | warn          |
+| 1     | Maximum allowed cyclomatic complexity                 | 7             |
+
+
+### Example Config
+```json
+{
+  "rules": {
+    "code-complexity": ["warn",7]
+  }
+}
+```
 
 
 ## Examples

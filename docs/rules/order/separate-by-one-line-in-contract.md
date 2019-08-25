@@ -2,7 +2,7 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "separate-by-one-line-in-contract | Solhint"
-date:        "Sat, 24 Aug 2019 03:06:53 GMT"
+date:        "Sun, 25 Aug 2019 22:09:19 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
 ---
 
@@ -14,7 +14,17 @@ author:      "Peter Chung <touhonoob@gmail.com>"
 Definitions inside contract / library must be separated by one line.
 
 ## Options
-This rule does not have options.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+
+### Example Config
+```json
+{
+  "rules": {
+    "separate-by-one-line-in-contract": "warn"
+  }
+}
+```
+
 
 ## Examples
 This rule does not have examples.

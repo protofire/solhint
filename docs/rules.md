@@ -2,7 +2,7 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "Rule Index of Solhint"
-date:        "Sat, 24 Aug 2019 10:42:48 GMT"
+date:        "Sun, 25 Aug 2019 22:09:23 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
 ---
 

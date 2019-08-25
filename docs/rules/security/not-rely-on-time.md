@@ -2,7 +2,7 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "not-rely-on-time | Solhint"
-date:        "Sat, 24 Aug 2019 03:06:56 GMT"
+date:        "Sun, 25 Aug 2019 22:09:22 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
 ---
 
@@ -17,7 +17,17 @@ author:      "Peter Chung <touhonoob@gmail.com>"
 Avoid to make time-based decisions in your business logic.
 
 ## Options
-This rule does not have options.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+
+### Example Config
+```json
+{
+  "rules": {
+    "not-rely-on-time": "warn"
+  }
+}
+```
+
 
 ## Examples
 This rule does not have examples.

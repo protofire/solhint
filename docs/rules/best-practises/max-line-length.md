@@ -2,7 +2,7 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "max-line-length | Solhint"
-date:        "Sat, 24 Aug 2019 03:06:50 GMT"
+date:        "Sun, 25 Aug 2019 22:09:16 GMT"
 author:      "Peter Chung <touhonoob@gmail.com>"
 ---
 
@@ -18,10 +18,20 @@ Line length must be no more than maxlen.
 ## Options
 This rule accepts an array of options:
 
-| Index | Description                                    | Default Value |
-| ----- | ---------------------------------------------- | ------------- |
-| 0     | Rule severity. Must be one of "error", "warn". | error         |
-| 1     | Maximum allowed number of characters per line  | 120           |
+| Index | Description                                           | Default Value |
+| ----- | ----------------------------------------------------- | ------------- |
+| 0     | Rule severity. Must be one of "error", "warn", "off". | error         |
+| 1     | Maximum allowed number of characters per line         | 120           |
+
+
+### Example Config
+```json
+{
+  "rules": {
+    "max-line-length": ["error",120]
+  }
+}
+```
 
 
 ## Examples
