@@ -164,9 +164,7 @@ function getFormatter(formatter) {
   try {
     return require(`eslint/lib/formatters/${formatterName}`)
   } catch (ex) {
-    ex.message = `\nThere was a problem loading formatter option: ${program.formatter} \nError: ${
-      ex.message
-    }`
+    ex.message = `\nThere was a problem loading formatter option: ${program.formatter} \nError: ${ex.message}`
     throw ex
   }
 }
