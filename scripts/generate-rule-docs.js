@@ -286,7 +286,7 @@ function main() {
             if (err) {
                 console.error(err);
             } else {
-                console.log(`Writed ${filePath}`)
+                console.log(`Wrote ${filePath}`)
             }
         });
     });
@@ -305,7 +305,7 @@ function main() {
         if (err) {
             console.error(err);
         } else {
-            console.log(`Writed ${ruleIndexDocPath}`)
+            console.log(`Wrote ${ruleIndexDocPath}`)
         }
     });
 }
