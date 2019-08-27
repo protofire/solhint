@@ -1,11 +1,10 @@
 const assert = require('assert')
 const { assertErrorMessage, assertNoErrors } = require('./../../common/asserts')
 const linter = require('./../../../lib/index')
-const { contractWith } = require('./../../common/contract-builder')
 
 describe('Linter - array-declaration-spaces', () => {
   it('should raise error when array declaration has spaces', () => {
-    const code = contractWith('uint [] [] private a;')
+    const code = require('../../fixtures/align/array_declaration_with_spaces')
 
     const report = linter.processStr(code, { rules: { 'array-declaration-spaces': 'error' } })
 
@@ -15,7 +14,7 @@ describe('Linter - array-declaration-spaces', () => {
   })
 
   it('should not raise error for array declaration', () => {
-    const code = contractWith('uint[][] private a;')
+    const code = require('../../fixtures/align/array_declaration')
 
     const report = linter.processStr(code, { rules: { 'array-declaration-spaces': 'error' } })
 

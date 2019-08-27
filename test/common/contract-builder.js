@@ -1,3 +1,5 @@
+const { times } = require('lodash')
+
 function contractWith(code) {
   return `
       pragma solidity 0.4.4;
@@ -11,9 +13,9 @@ function contractWith(code) {
 
 function funcWith(statements) {
   return contractWith(`
-      function b() public {
-        ${statements}
-      }
+        function b() public {
+          ${statements}
+        }
     `)
 }
 
@@ -30,4 +32,26 @@ contract A {
 `
 }
 
-module.exports = { contractWith, funcWith, multiLine, contractWithPrettier }
+function stateDef(count) {
+  return repeatLines('        uint private a;', count)
+}
+
+function constantDef(count) {
+  return repeatLines('        uint private constant TEST = 1;', count)
+}
+
+function repeatLines(line, count) {
+  return times(count)
+    .map(() => line)
+    .join('\n')
+}
+
+module.exports = {
+  contractWith,
+  funcWith,
+  multiLine,
+  contractWithPrettier,
+  stateDef,
+  constantDef,
+  repeatLines
+}

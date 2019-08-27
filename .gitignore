@@ -8,3 +8,4 @@ convertLib.sol
 /docs/_site/
 /docs/Gemfile*
 antlr4.jar
+/docs/.sass-cache/

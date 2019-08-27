@@ -5,25 +5,7 @@ const { assertNoErrors } = require('./../../common/asserts')
 
 describe('Linter - expression-indent', () => {
   describe('Incorrect expression-indent', () => {
-    const INCORRECT_EXPRESSIONS = [
-      'new  TrustedContract',
-      'myArray[ 5 ]',
-      'myArray/* test */[5]',
-      'myFunc( 1, 2, 3 )',
-      'myFunc. call(1)',
-      'a = ( b + c )',
-      'a=b + 1',
-      'a+=1',
-      'a ==b',
-      '1** 2',
-      'a &&b',
-      'a > b ?a : b',
-      '! a',
-      'a ++',
-      'a +=1'
-    ]
-
-    INCORRECT_EXPRESSIONS.forEach(curExpr =>
+    require('../../fixtures/align/expressions_with_incorrect_indents').forEach(curExpr =>
       it(`should raise expression indentation error for ${curExpr}`, () => {
         const code = funcWith(curExpr + ';')
 
@@ -38,27 +20,7 @@ describe('Linter - expression-indent', () => {
   })
 
   describe('Correct expression-indent', () => {
-    const CORRECT_EXPRESSIONS = [
-      'new TrustedContract',
-      'myArray[5]',
-      'myFunc(1, 2, 3)',
-      'emit myEvent(1, 2, 3)',
-      'myFunc.call(1)',
-      'a = (b + c)',
-      'a = b + 1',
-      'a += 1',
-      'a == b',
-      '1**2',
-      'a && b',
-      'a > b ? a : b',
-      '!a',
-      'a++',
-      'a += 1',
-      'a += (b + c) * d',
-      'bytesStringTrimmed[j] = bytesString[j]'
-    ]
-
-    CORRECT_EXPRESSIONS.forEach(curExpr =>
+    require('../../fixtures/align/expressions_with_correct_indents').forEach(curExpr =>
       it(`should not raise expression indentation error for ${curExpr}`, () => {
         const code = funcWith(curExpr + ';')
 
