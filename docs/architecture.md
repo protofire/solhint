@@ -149,7 +149,10 @@ Thanks for your contribution to Solhint.
 
 To update the rules docs after adding new rules, run the below commands:
 
-```bash
-cd scripts
-node generate-rule-docs.js
-```
+1\. Update all rule docs and rule index pages
+
+`./scripts/generate-rule-docs.js or npm run docs`
+
+2\. Update rule doc for specific rule
+
+`./scripts/generate-rule-docs.js --rule-id no-spaces-before-semicolon or npm run docs -- --rule-id no-spaces-before-semicolon`
