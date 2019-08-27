@@ -118,7 +118,7 @@ class IndentChecker {
 
 ```
 
-The developer of the rules need to have basic understanding about how the AST nodes works, and create analyzer and parser according to make new rules.
+The developers of the new rules need to have basic understanding about how the AST works, and create analyzer and parser to serve the specific needs of the rules, such as best practices and security.
 
 You can see a list of the available AST nodes in [solidity-antlr4](https://github.com/solidityj/solidity-antlr4/blob/master/Solidity.g4) project.
 
@@ -141,7 +141,7 @@ Read the [document](https://github.com/protofire/solhint/blob/master/docs/sharea
 
 ## How to Contribute
 
-Solhint is a open source project, and you can follow the [instructions here](https://github.com/protofire/solhint/blob/master/docs/contributing.md) to contribute.
+Solhint is an open source project, and you can follow the [instructions here](https://github.com/protofire/solhint/blob/master/docs/contributing.md) to contribute.
 
 Thanks for your contribution to Solhint.
 
