@@ -144,3 +144,12 @@ Read the [document](https://github.com/protofire/solhint/blob/master/docs/sharea
 Solhint is a open source project, and you can follow the [instructions here](https://github.com/protofire/solhint/blob/master/docs/contributing.md) to contribute.
 
 Thanks for your contribution to Solhint.
+
+### Update Rules Doc
+
+To update the rules docs after adding new rules, run the below commands:
+
+```bash
+cd scripts
+node generate-rule-docs.js
+```
