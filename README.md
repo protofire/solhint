@@ -26,7 +26,13 @@ solhint -V
 
 ## Usage
 
-For linting Solidity files you need to run Solhint with one or more [Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside `contracts` directory, you can do:
+First initialize a configuration file, if you don't have one:
+
+```sh
+solhint init-config
+```
+
+This will create a `.solhint.json` file some default rules enabled. Then run Solhint with one or more [Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside `contracts` directory, you can do:
 
 ```sh
 solhint "contracts/**/*.sol"
