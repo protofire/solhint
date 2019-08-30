@@ -9,8 +9,7 @@ description: Introduction of the structure of the project, how it works, and how
 
 # Architecture
 
-This document is written for the developers who want to understand the structure and mechanism of this project, and how
-to contribute.
+This document is written for the developers who want to understand the structure and mechanism of this project, and how to contribute.
 
 
 ## Project Structure
@@ -57,9 +56,9 @@ Then execute `scripts/build-grammar.sh`. (Java Runtime Environment 7, or later, 
 
 ### How to Add A New Rule
 
-The Solhint rules in `lib/rules` follows contains the different aspects of lint requirements.
+The Solhint rules in `lib/rules` contains the different aspects of lint requirements, such as naming, best practices, security, etc.
 
-The rules are implemented with a visitor pattern. You can extends the `BaseChecker` class with the `ruleId` and `meta` fields to define a rule, and implement methods that are called when a node in the AST is entered or exited. The constructor accepts a reporter and a config, and `ruleId` field is present in the object. This `ruleId` is the one that will be used to activate and configure the rule.
+The rules are implemented with a visitor pattern. You can extend the `BaseChecker` class with the `ruleId` and `meta` fields to define a rule, and implement methods that are called when a node in the AST is entered or exited. The constructor accepts a reporter and a config, and `ruleId` field is present in the object. This `ruleId` is the one that will be used to activate and configure the rule.
 
 For example, `lib/rules/align/indent.js`:
 
@@ -126,7 +125,7 @@ class IndentChecker {
 
 ```
 
-The developers of the new rules need to have basic understanding about how the structure of the AST, and execute the proper logic when certain nodes in the AST are visited.
+The developers of the new rules need to have basic understanding about the concepts and structure of the AST, and execute the proper logic when certain nodes in the AST are visited.
 
 You can see a list of the available AST nodes in the [solidity-antlr4](https://github.com/solidityj/solidity-antlr4/blob/master/Solidity.g4) project.
 
@@ -142,7 +141,7 @@ Read [this document](https://github.com/protofire/solhint/blob/master/docs/writi
 
 Shareable configs are configurations that you can use and extend from. They can be useful for using the same base configuration in all your projects or for basing your configuration from a well-known one.
 
-You can either use a shared configuration from `solhint` or from a npm package with the prefix `solhint-config-<config-name>`.
+You can either use a shared configuration from `solhint` or from a npm package with the naming convention `solhint-config-<config-name>`.
 
 Read [this document](https://github.com/protofire/solhint/blob/master/docs/shareable-configs.md) to learn more about shared configurations.
 
