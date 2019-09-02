@@ -9,12 +9,12 @@ description: Introduction of the structure of the project, how it works, and how
 
 # Architecture
 
-This document is written for the developers who want to understand the structure and mechanism of this project, and how to contribute.
+This document is for developers who want to understand the structure and mechanisms of this project, and how to contribute.
 
 
 ## Project Structure
 
-Below describes the major structure of the project.
+The file structure below describes the major structure of the project.
 
 ```
 ├── docs                                 # documentation
@@ -36,14 +36,14 @@ Below describes the major structure of the project.
 └── test                                 # tests
 ```
 
-## How it Works
+## How solhint Works
 
 ### Solidity Grammar with ANTLR
 
 Solhint depends on [ANTLR4](http://www.antlr.org/) to generate the Solidity parser, following the grammar description taken from
 [solidity-antlr4](https://github.com/solidityj/solidity-antlr4).
 
-To update the Solidity grammar, you'll need to update the Git submodule solidity-antlr4:
+To update the Solidity grammar, you need to update the Git submodule solidity-antlr4:
 
 ```sh
 git submodule update --remote # update to latest version
@@ -52,13 +52,13 @@ git submodule update --remote # update to latest version
 # git checkout abc123
 ```
 
-Then execute `scripts/build-grammar.sh`. (Java Runtime Environment 7, or later, is required for running the script.)
+Then run `scripts/build-grammar.sh`. (Java Runtime Environment 7, or later, is required for running the script.)
 
 ### How to Add A New Rule
 
-The Solhint rules in `lib/rules` contains the different aspects of lint requirements, such as naming, best practices, security, etc.
+The Solhint rules in `lib/rules` contains the different lint requirements, such as naming, best practices, security, etc.
 
-The rules are implemented with a visitor pattern. You can extend the `BaseChecker` class with the `ruleId` and `meta` fields to define a rule, and implement methods that are called when a node in the AST is entered or exited. The constructor accepts a reporter and a config, and `ruleId` field is present in the object. This `ruleId` is the one that will be used to activate and configure the rule.
+The rules are implemented with a [visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern). You can extend the `BaseChecker` class with the `ruleId` and `meta` fields to define a rule, and implement methods that are called when a node in the AST is entered or exited. The constructor accepts a reporter and a config, and `ruleId` field is present in the object. This `ruleId` is the one that will be used to activate and configure the rule.
 
 For example, `lib/rules/align/indent.js`:
 
@@ -125,7 +125,7 @@ class IndentChecker {
 
 ```
 
-The developers of the new rules need to have basic understanding about the concepts and structure of the AST, and execute the proper logic when certain nodes in the AST are visited.
+Developers of new rules need to have a basic understanding about the concepts and structure of the AST, and execute the proper logic when certain nodes in the AST are visited.
 
 You can see a list of the available AST nodes in the [solidity-antlr4](https://github.com/solidityj/solidity-antlr4/blob/master/Solidity.g4) project.
 
