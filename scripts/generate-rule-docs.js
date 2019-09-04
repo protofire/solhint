@@ -235,8 +235,8 @@ function generateRuleIndex(rulesIndexed) {
     const authorEmail = GitHelper.getAuthorEmail();
 
     const contents = Object.keys(rulesIndexed).map(category => {
-        const rows = [["Rule Id", "Error"]];
-        rulesIndexed[category].map(rule => [`[${rule.ruleId}](./rules/${rule.meta.type}/${rule.ruleId}.html)`, rule.meta.docs.description]).forEach(row => rows.push(row));
+        const rows = [["Rule Id", "Error", "Recommended"]];
+        rulesIndexed[category].map(rule => [`[${rule.ruleId}](./rules/${rule.meta.type}/${rule.ruleId}.html)`, rule.meta.docs.description, (rule.meta.recommended && !rule.meta.deprecated) ? '✔️' : '']).forEach(row => rows.push(row));
         return `## ${category}
 
 ${table(rows)}
@@ -263,33 +263,37 @@ ${contents}
 function main() {
     const program = require('commander');
     program.option('--rule-id <rule-id>', 'rule id');
+    program.option('--index-only', 'only generate rule index');
     program.parse(process.argv);
-    let ruleIds = [];
-    if (program.ruleId) {
-        ruleIds = program.ruleId.split(",");
-    }
 
     const rules = loadRules();
-    rules.filter(rule => {
-        if (ruleIds.length) {
-            return ruleIds.includes(rule.ruleId);
-        } else {
-            return true;
+    if (!program.indexOnly) {
+        let ruleIds = [];
+        if (program.ruleId) {
+            ruleIds = program.ruleId.split(",");
         }
-    }).forEach(rule => {
-        const ruleDoc = generateRuleDoc(rule);
-        const dir = path.resolve(path.join(__dirname, '..', 'docs', 'rules', rule.meta.type));
-        const fileName = `${rule.ruleId}.md`;
-        const filePath = path.resolve(path.join(dir, fileName));
-        mkdir('-p', dir);
-        fs.writeFile(filePath, ruleDoc, function (err) {
-            if (err) {
-                console.error(err);
+
+        rules.filter(rule => {
+            if (ruleIds.length) {
+                return ruleIds.includes(rule.ruleId);
             } else {
-                console.log(`Wrote ${filePath}`)
+                return true;
             }
+        }).forEach(rule => {
+            const ruleDoc = generateRuleDoc(rule);
+            const dir = path.resolve(path.join(__dirname, '..', 'docs', 'rules', rule.meta.type));
+            const fileName = `${rule.ruleId}.md`;
+            const filePath = path.resolve(path.join(dir, fileName));
+            mkdir('-p', dir);
+            fs.writeFile(filePath, ruleDoc, function (err) {
+                if (err) {
+                    console.error(err);
+                } else {
+                    console.log(`Wrote ${filePath}`)
+                }
+            });
         });
-    });
+    }
 
     const rulesIndexed = {};
     rules.forEach(rule => {
