@@ -2,8 +2,8 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "Rule Index of Solhint"
-date:        "Fri, 30 Aug 2019 08:43:22 GMT"
-author:      "Peter Chung <touhonoob@gmail.com>"
+date:        "Wed, 04 Sep 2019 18:09:22 GMT"
+author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
 ## Style Guide Rules
@@ -60,8 +60,8 @@ author:      "Peter Chung <touhonoob@gmail.com>"
 | [avoid-throw](./rules/security/avoid-throw.html)                             | "throw" is deprecated, avoid to use it.                                  | ✔️          |
 | [avoid-tx-origin](./rules/security/avoid-tx-origin.html)                     | Avoid to use tx.origin.                                                  | ✔️          |
 | [check-send-result](./rules/security/check-send-result.html)                 | Check result of "send" call.                                             | ✔️          |
-| [compiler-fixed](./rules/security/compiler-fixed.html)                       | Compiler version must be fixed.                                          | ✔️          |
-| [compiler-gt-0_4](./rules/security/compiler-gt-0_4.html)                     | Compiler version must be fixed.                                          | ✔️          |
+| [compiler-fixed](./rules/security/compiler-fixed.html)                       | Compiler version must be fixed.                                          |             |
+| [compiler-gt-0_4](./rules/security/compiler-gt-0_4.html)                     | Compiler version must be fixed.                                          |             |
 | [compiler-version](./rules/security/compiler-version.html)                   | Compiler version must satisfy a semver requirement.                      | ✔️          |
 | [func-visibility](./rules/security/func-visibility.html)                     | Explicitly mark visibility in function.                                  | ✔️          |
 | [mark-callable-contracts](./rules/security/mark-callable-contracts.html)     | Explicitly mark all external contracts as trusted or untrusted.          | ✔️          |
