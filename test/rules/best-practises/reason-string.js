@@ -23,7 +23,7 @@ describe('Linter - reason-string', () => {
   })
 
   it('should raise reason string is mandatory for revert', () => {
-    const code = funcWith(`revert(!has(role, account));
+    const code = funcWith(`revert();
         role.bearer[account] = true;role.bearer[account] = true;
     `)
 
@@ -51,7 +51,7 @@ describe('Linter - reason-string', () => {
   })
 
   it('should raise reason string maxLength error for revert', () => {
-    const code = funcWith(`revert(!has(role, account), "Roles: account already has role");
+    const code = funcWith(`revert("Roles: account already has role");
         role.bearer[account] = true;role.bearer[account] = true;
     `)
 
@@ -76,7 +76,7 @@ describe('Linter - reason-string', () => {
   })
 
   it('should not raise error for revert', () => {
-    const code = funcWith(`revert(!has(role, account), "Roles: account already has role");
+    const code = funcWith(`revert("Roles: account already has role");
         role.bearer[account] = true;role.bearer[account] = true;
     `)
 
