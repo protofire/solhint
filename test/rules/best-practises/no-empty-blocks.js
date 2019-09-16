@@ -4,7 +4,6 @@ const { contractWith, funcWith } = require('./../../common/contract-builder')
 
 describe('Linter - no-empty-blocks', () => {
   const EMPTY_BLOCKS = [
-    contractWith('function () public payable {}'),
     funcWith('if (a < b) {  }'),
     contractWith('struct Abc {  }'),
     contractWith('enum Abc {  }'),
@@ -41,6 +40,15 @@ describe('Linter - no-empty-blocks', () => {
       assertNoWarnings(report)
     })
   )
+
+  it('should not raise error for default function', () => {
+    const defaultFunction = contractWith('function () public payable {}')
+    const report = linter.processStr(defaultFunction, {
+      rules: { 'no-empty-blocks': 'warn' }
+    })
+
+    assertNoWarnings(report)
+  })
 
   function label(data) {
     const items = data.split('\n')
