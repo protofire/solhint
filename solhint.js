@@ -55,8 +55,8 @@ function execMainAction() {
 
   const reportLists = program.args.filter(_.isString).map(processPath)
   const reports = _.flatten(reportLists)
-  const warningsNumberExceeded =
-    program.maxWarnings >= 0 && reports[0].warningCount > program.maxWarnings
+  const warningsCount = reports.reduce((acc, i) => acc + i.warningCount, 0)
+  const warningsNumberExceeded = program.maxWarnings >= 0 && warningsCount > program.maxWarnings
 
   if (program.quiet) {
     // filter the list of reports, to set errors only.
