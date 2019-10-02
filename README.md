@@ -195,6 +195,18 @@ Related documentation you may find [there](https://protofire.github.io/solhint/)
 - [solhint-plugin-prettier](https://github.com/fvictorio/solhint-plugin-prettier): Integrate Solhint
   with the [Solidity plugin for Prettier](https://github.com/prettier-solidity/prettier-plugin-solidity).
 
+## Projects
+
+- OpenZeppelin:
+  - [openzeppelin-contracts](https://github.com/OpenZeppelin/openzeppelin-contracts)
+- POA Network - Public EVM Sidechain:
+  - [Proof of Physical Address (PoPA)](https://github.com/poanetwork/poa-popa)
+  - [Proof of Bank Account (PoBA)](https://github.com/poanetwork/poa-poba)
+- [0x](https://github.com/0xProject/0x-monorepo/tree/development/contracts)
+- Gnosis:
+  - [Gnosis Prediction Market Contracts](https://github.com/gnosis/pm-contracts)
+  - [The DutchX decentralized trading protocol](https://github.com/gnosis/dex-contracts)
+
 ## Acknowledgements
 
 The grammar used by solhint was created and is maintained by [Federico Bond](https://github.com/federicobond).
@@ -213,14 +225,6 @@ Solhint is free to use and open-sourced. If you value our effort and feel like h
 [<img src="https://avatars0.githubusercontent.com/u/20820676?s=200&v=4" width="75px" height="75px" alt="OpenZeppelin" title="OpenZeppelin" style="margin: 20px 20px 0 0" />](https://github.com/OpenZeppelin) 
 [<img src="https://avatars2.githubusercontent.com/u/28943015?s=200&v=4" width="75px" height="75px" alt="POA Network - Public EVM Sidechain" title="POA Network - Public EVM Sidechain" style="margin: 20px 20px 0 0" />](https://github.com/poanetwork) [<img src="https://avatars3.githubusercontent.com/u/24832717?s=200&v=4" width="75px" height="75px" alt="0x" title="0x" style="margin: 20px 20px 0 0" />](https://github.com/0xProject) [<img src="https://avatars1.githubusercontent.com/u/24954468?s=200&v=4" width="75px" height="75px" alt="GNOSIS" title="GNOSIS" style="margin: 20px 20px 0 0"/>](https://github.com/gnosis)
 
-### Projects
+## Related projects
 
-- OpenZeppelin:
-  - [openzeppelin-contracts](https://github.com/OpenZeppelin/openzeppelin-contracts)
-- POA Network - Public EVM Sidechain:
-  - [Proof of Physical Address (PoPA)](https://github.com/poanetwork/poa-popa)
-  - [Proof of Bank Account (PoBA)](https://github.com/poanetwork/poa-poba)
-- [0x](https://github.com/0xProject/0x-monorepo/tree/development/contracts)
-- Gnosis:
-  - [Gnosis Prediction Market Contracts](https://github.com/gnosis/pm-contracts)
-  - [The DutchX decentralized trading protocol](https://github.com/gnosis/dex-contracts)
+- [eth-cli](https://github.com/protofire/eth-cli): CLI swiss army knife for Ethereum developers.
