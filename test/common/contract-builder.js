@@ -19,6 +19,14 @@ function funcWith(statements) {
     `)
 }
 
+function modifierWith(statements) {
+  return contractWith(`
+        modifier b() public {
+          ${statements}
+        }
+    `)
+}
+
 function multiLine(...args) {
   return args.join('\n')
 }
@@ -49,6 +57,7 @@ function repeatLines(line, count) {
 module.exports = {
   contractWith,
   funcWith,
+  modifierWith,
   multiLine,
   contractWithPrettier,
   stateDef,

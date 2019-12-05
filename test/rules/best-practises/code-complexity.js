@@ -1,9 +1,9 @@
 const linter = require('./../../../lib/index')
-const { funcWith, multiLine } = require('./../../common/contract-builder')
+const { funcWith, modifierWith, multiLine } = require('./../../common/contract-builder')
 const { assertErrorCount, assertErrorMessage, assertNoErrors } = require('./../../common/asserts')
 
 describe('Linter - code-complexity', () => {
-  it('should raise error when cyclomatic complexity of code is too high', () => {
+  it('should raise error when cyclomatic complexity of a function is too high', () => {
     const report = linter.processStr(
       funcWith(require('../../fixtures/best-practises/code-complexity-high')),
       {
@@ -15,7 +15,7 @@ describe('Linter - code-complexity', () => {
     assertErrorMessage(report, 'complexity')
   })
 
-  it('should not raise error when cyclomatic complexity is equal to max default allowed', () => {
+  it('should not raise error when cyclomatic complexity of a function is equal to max default allowed', () => {
     const report = linter.processStr(
       funcWith(require('../../fixtures/best-practises/code-complexity-low')),
       {
@@ -24,6 +24,18 @@ describe('Linter - code-complexity', () => {
     )
 
     assertNoErrors(report)
+  })
+
+  it('should raise error when cyclomatic complexity of a modifier is too high', () => {
+    const report = linter.processStr(
+      modifierWith(require('../../fixtures/best-practises/code-complexity-high')),
+      {
+        rules: { 'code-complexity': 'error' }
+      }
+    )
+
+    assertErrorCount(report, 1)
+    assertErrorMessage(report, 'complexity')
   })
 
   const CUSTOM_CONFIG_CHECK_CODE = funcWith(
