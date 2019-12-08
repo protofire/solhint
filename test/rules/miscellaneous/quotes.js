@@ -31,16 +31,7 @@ describe('Linter - quotes', () => {
     assert.ok(report.messages[0].message.includes('double quotes'))
   })
 
-  it('should raise quotes error in import for custom rules I', () => {
-    const code = 'import * from "lib.sol";'
-
-    const report = linter.processStr(code, { rules: { quotes: ['error', 'single'] } })
-
-    assert.equal(report.errorCount, 1)
-    assert.ok(report.messages[0].message.includes('single quotes'))
-  })
-
-  it('should raise quotes error in import for custom rules II', () => {
+  it('should raise quotes error in import for custom rules', () => {
     const code = 'import * from "lib.sol";'
 
     const report = linter.processStr(code, { rules: { quotes: ['error', 'single'] } })
