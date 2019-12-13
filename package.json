@@ -19,6 +19,7 @@
     "exec-tests": "nyc -x \"**/grammar/**\" mocha --recursive && nyc report --reporter=text-lcov | coveralls",
     "test": "npm run exec-tests",
     "test-only": "mocha --recursive",
+    "test-mutation": "stryker run",
     "generate": "scripts/build-grammar.sh",
     "lint": "eslint .",
     "docs": "node scripts/generate-rule-docs.js"
@@ -45,6 +46,9 @@
     "solidity-parser-antlr": "https://github.com/fvictorio/solidity-parser-antlr#stable"
   },
   "devDependencies": {
+    "@stryker-mutator/core": "^2.3.0",
+    "@stryker-mutator/javascript-mutator": "^2.3.0",
+    "@stryker-mutator/mocha-runner": "^2.3.0",
     "assert": "1.4.1",
     "coveralls": "^3.0.2",
     "eslint-config-airbnb-base": "^13.1.0",

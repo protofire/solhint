@@ -19,7 +19,7 @@ describe('Linter - function-max-lines', () => {
     const code = funcWith(emptyLines(50))
 
     const report = linter.processStr(code, {
-      rules: { 'function-max-lines': 'warn' }
+      rules: { 'function-max-lines': 'error' }
     })
 
     assertNoErrors(report)
