@@ -77,7 +77,7 @@ describe('Linter - quotes', () => {
     assert.equal(report.filePath, filePath)
   })
 
-  it('should raise an one error', () => {
+  it('should raise one error', () => {
     const filePath = storeAsFile(contractWith("string private a = 'test';"))
 
     const reports = linter.processPath(filePath, {
