@@ -1,4 +1,3 @@
-const assert = require('assert')
 const { assertNoWarnings, assertErrorMessage, assertWarnsCount } = require('./../../common/asserts')
 const linter = require('./../../../lib/index')
 const { contractWith, funcWith, multiLine } = require('./../../common/contract-builder')
