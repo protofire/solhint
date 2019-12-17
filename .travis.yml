@@ -4,6 +4,8 @@ node_js:
   - "10"
   - "stable"
 
+before_script: npm i -g npm@6.9
+
 script:
   - npm run lint
   - npm test
