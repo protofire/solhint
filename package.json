@@ -32,6 +32,7 @@
   "dependencies": {
     "ajv": "^6.6.1",
     "antlr4": "4.7.1",
+    "ast-parents": "0.0.1",
     "chalk": "^2.4.2",
     "commander": "2.18.0",
     "cosmiconfig": "^5.0.7",
@@ -41,7 +42,8 @@
     "ignore": "^4.0.6",
     "js-yaml": "^3.12.0",
     "lodash": "^4.17.11",
-    "semver": "^6.3.0"
+    "semver": "^6.3.0",
+    "solidity-parser-antlr": "https://github.com/fvictorio/solidity-parser-antlr#stable"
   },
   "devDependencies": {
     "@stryker-mutator/core": "^2.3.0",

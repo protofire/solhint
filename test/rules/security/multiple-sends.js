@@ -4,7 +4,7 @@ const funcWith = require('./../../common/contract-builder').funcWith
 const { assertErrorMessage, assertErrorCount } = require('./../../common/asserts')
 
 describe('Linter - multiple-sends', () => {
-  it('should return error that multiple send calls used in transation', () => {
+  it('should return the error that multiple send calls are being used in the same transaction', () => {
     const code = funcWith(`
           uint aRes = a.send(1);
           uint bRes = b.send(2);
@@ -18,7 +18,7 @@ describe('Linter - multiple-sends', () => {
     assert.ok(report.reports[0].message.includes('multiple'))
   })
 
-  it('should return error that multiple send calls used in loop', () => {
+  it('should return the error that multiple send calls are being used inside a loop', () => {
     const code = funcWith(`
           while (ac > b) { uint res = a.send(1); }
         `)

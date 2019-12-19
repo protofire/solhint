@@ -21,7 +21,7 @@ function funcWith(statements) {
 
 function modifierWith(statements) {
   return contractWith(`
-        modifier b() public {
+        modifier b() {
           ${statements}
         }
     `)
