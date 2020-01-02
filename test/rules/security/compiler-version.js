@@ -167,4 +167,24 @@ describe('Linter - compiler-version', () => {
 
     assert.equal(report.errorCount, 1)
   })
+
+  it(`should report compiler version error if pragma doesn't exist`, () => {
+    const report = linter.processStr('contract Foo {}', {
+      rules: { 'compiler-version': ['error', '^0.5.2'] }
+    })
+
+    assert.equal(report.errorCount, 1)
+  })
+
+  it(`should not report compiler version error if pragma exist`, () => {
+    const report = linter.processStr(
+      `pragma solidity 0.6.0;
+      contract Foo {}`,
+      {
+        rules: { 'compiler-version': ['error', '^0.6.0'] }
+      }
+    )
+
+    assert.equal(report.errorCount, 0)
+  })
 })
