@@ -9,6 +9,7 @@ const linter = require('./lib/index')
 const { applyExtends, loadConfig } = require('./lib/config/config-file')
 const { validate } = require('./lib/config/config-validator')
 const packageJson = require('./package.json')
+const ruleFixer = require('./lib/rule-fixer')
 
 function init() {
   const version = packageJson.version
@@ -21,6 +22,7 @@ function init() {
     .option('-c, --config [file_name]', 'file to use as your .solhint.json')
     .option('-q, --quiet', 'report errors only - default: false')
     .option('--ignore-path [file_name]', 'file to use as your .solhintignore')
+    .option('--fix', 'automatically fix problems')
     .description('Linter for Solidity programming language')
     .action(execMainAction)
 
@@ -42,6 +44,12 @@ function init() {
   }
 }
 
+function applyFix(report) {
+  if (typeof report.fix === 'function') {
+    report.fix(ruleFixer)
+  }
+}
+
 function execMainAction() {
   let formatterFn
 
@@ -57,6 +65,16 @@ function execMainAction() {
   const reports = _.flatten(reportLists)
   const warningsCount = reports.reduce((acc, i) => acc + i.warningCount, 0)
   const warningsNumberExceeded = program.maxWarnings >= 0 && warningsCount > program.maxWarnings
+
+  if (program.fix) {
+    const fixableRules = reports[0].reports.filter(r => r.fix !== null)
+
+    // filter the list of reports, to report those who are not fixable.
+    reports[0].reports = reports[0].reports.filter(r => r.fix === null)
+
+    // fixes those fixable rules
+    fixableRules.forEach(applyFix)
+  }
 
   if (program.quiet) {
     // filter the list of reports, to set errors only.
@@ -152,6 +170,10 @@ function processStr(input) {
 
 function processPath(path) {
   return linter.processPath(path, readConfig())
+}
+
+function processReports(reports, formatter) {
+  printReports(reports, formatter)
 }
 
 function printReports(reports, formatter) {
