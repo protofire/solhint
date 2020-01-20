@@ -8,8 +8,9 @@ const process = require('process')
 const linter = require('./lib/index')
 const { applyExtends, loadConfig } = require('./lib/config/config-file')
 const { validate } = require('./lib/config/config-validator')
-const packageJson = require('./package.json')
+const applyFixes = require('./lib/apply-fixes')
 const ruleFixer = require('./lib/rule-fixer')
+const packageJson = require('./package.json')
 
 function init() {
   const version = packageJson.version
@@ -44,12 +45,6 @@ function init() {
   }
 }
 
-function applyFix(report) {
-  if (typeof report.fix === 'function') {
-    report.fix(ruleFixer)
-  }
-}
-
 function execMainAction() {
   let formatterFn
 
@@ -67,13 +62,21 @@ function execMainAction() {
   const warningsNumberExceeded = program.maxWarnings >= 0 && warningsCount > program.maxWarnings
 
   if (program.fix) {
-    const fixableRules = reports[0].reports.filter(r => r.fix !== null)
+    for (const report of reports) {
+      const inputSrc = fs.readFileSync(report.filePath).toString()
 
-    // filter the list of reports, to report those who are not fixable.
-    reports[0].reports = reports[0].reports.filter(r => r.fix === null)
+      const fixes = _(report.reports)
+        .filter(x => x.fix)
+        .map(x => x.fix(ruleFixer))
+        .sort((a, b) => a.range[0] - b.range[0])
+        .value()
 
-    // fixes those fixable rules
-    fixableRules.forEach(applyFix)
+      const { fixed, output } = applyFixes(fixes, inputSrc)
+      if (fixed) {
+        report.reports = report.reports.filter(x => !x.fix)
+        fs.writeFileSync(report.filePath, output)
+      }
+    }
   }
 
   if (program.quiet) {
@@ -170,10 +173,6 @@ function processStr(input) {
 
 function processPath(path) {
   return linter.processPath(path, readConfig())
-}
-
-function processReports(reports, formatter) {
-  printReports(reports, formatter)
 }
 
 function printReports(reports, formatter) {
