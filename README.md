@@ -1,4 +1,4 @@
-![Solhint Logo](https://raw.github.com/protofire/solhint/add-logo/solhint.png)
+![Solhint Logo](solhint.png)
 
 By [Protofire](https://protofire.io/)
 
