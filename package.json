@@ -2,7 +2,7 @@
   "name": "solhint",
   "version": "2.3.0",
   "description": "Solidity Code Linter",
-  "main": "solhint.js",
+  "main": "lib/index.js",
   "keywords": [
     "solidity",
     "linter",
@@ -43,7 +43,7 @@
     "js-yaml": "^3.12.0",
     "lodash": "^4.17.11",
     "semver": "^6.3.0",
-    "solidity-parser-antlr": "https://github.com/fvictorio/solidity-parser-antlr#stable"
+    "@fvictorio/solidity-parser": "^0.4.15"
   },
   "devDependencies": {
     "@stryker-mutator/core": "^2.3.0",
