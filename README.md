@@ -1,4 +1,10 @@
-# Solhint Project
+<p align="center">
+  <img src="solhint.png">
+</p>
+<p align="center">
+  By <a href="https://protofire.io/">Protofire</a>
+</p>
+  
 [![Donate with Ethereum](https://en.cryptobadges.io/badge/micro/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)](https://en.cryptobadges.io/donate/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)
 
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/solhint/Lobby)
