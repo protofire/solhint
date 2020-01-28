@@ -71,6 +71,20 @@ describe('Linter - no-unused-vars', () => {
     })
   )
 
+  it('should not emit an error in override functions without parameter names', () => {
+    const code = contractWith(`
+function withdrawalAllowed(address) public view override returns (bool) {
+    return _state == State.Refunding;
+}
+    `)
+
+    const report = linter.processStr(code, {
+      rules: { 'no-unused-vars': 'warn' }
+    })
+
+    assertNoWarnings(report)
+  })
+
   function label(data) {
     const items = data.split('\n')
     const lastItemIndex = items.length - 1
