@@ -78,14 +78,9 @@ const meta = {
   recommended: true,
   defaultSetup: [DEFAULT_SEVERITY, DEFAULT_INDENTS],
 
-  schema: [
-    {
-      type: 'array',
-      items: [{ type: 'integer' }],
-      uniqueItems: true,
-      minItems: 2
-    }
-  ]
+  schema: {
+    type: 'integer'
+  }
 }
 
 class IndentChecker {
