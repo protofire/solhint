@@ -11,6 +11,17 @@ function contractWith(code) {
     `
 }
 
+function libraryWith(code) {
+  return `
+      pragma solidity 0.4.4;
+        
+        
+      library A {
+        ${code}
+      }
+    `
+}
+
 function funcWith(statements) {
   return contractWith(`
         function b() public {
@@ -56,6 +67,7 @@ function repeatLines(line, count) {
 
 module.exports = {
   contractWith,
+  libraryWith,
   funcWith,
   modifierWith,
   multiLine,
