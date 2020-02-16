@@ -14,14 +14,15 @@ describe('Linter - max-line-length', () => {
     assertErrorMessage(report, 0, 'Line length must be no more than')
   })
 
-  it('should not raise error with an empty file', () => {
+  it('should raise error with an empty file', () => {
     const code = ' '.repeat(121)
 
     const report = linter.processStr(code, {
       rules: { 'max-line-length': 'error' }
     })
 
-    assertNoErrors(report)
+    assert.equal(report.errorCount, 1)
+    assertErrorMessage(report, 0, 'Line length must be no more than')
   })
 
   it('should not raise error when line length exceed 120 and custom config provided', () => {
