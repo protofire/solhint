@@ -2,8 +2,8 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "state-visibility | Solhint"
-date:        "Sun, 25 Aug 2019 22:09:23 GMT"
-author:      "Peter Chung <touhonoob@gmail.com>"
+date:        "Wed, 19 Feb 2020 23:51:57 GMT"
+author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
 # state-visibility

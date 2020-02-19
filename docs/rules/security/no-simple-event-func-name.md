@@ -2,15 +2,15 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "no-simple-event-func-name | Solhint"
-date:        "Sun, 25 Aug 2019 22:09:22 GMT"
-author:      "Peter Chung <touhonoob@gmail.com>"
+date:        "Wed, 19 Feb 2020 23:51:56 GMT"
+author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
 # no-simple-event-func-name
-![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
+![Deprecated Badge](https://img.shields.io/badge/-Deprecated-yellow)
 ![Category Badge](https://img.shields.io/badge/-Security%20Rules-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
-> The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
+> This rule is **deprecated**
 
 
 ## Description

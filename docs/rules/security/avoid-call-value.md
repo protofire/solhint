@@ -2,8 +2,8 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "avoid-call-value | Solhint"
-date:        "Sun, 25 Aug 2019 22:09:19 GMT"
-author:      "Peter Chung <touhonoob@gmail.com>"
+date:        "Wed, 19 Feb 2020 23:51:52 GMT"
+author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
 # avoid-call-value

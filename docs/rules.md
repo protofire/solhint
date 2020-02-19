@@ -2,14 +2,14 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "Rule Index of Solhint"
-date:        "Wed, 04 Sep 2019 18:09:22 GMT"
+date:        "Wed, 19 Feb 2020 23:51:57 GMT"
 author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
 ## Style Guide Rules
 
-| Rule Id                                                                                 | Error                                                                                   | Recommended |
-| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ----------- |
+| Rule Id                                                                               | Error                                                                                   | Recommended |
+| ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ----------- |
 | [array-declaration-spaces](./rules/align/array-declaration-spaces.md)                 | Array declaration must not contains spaces.                                             | ✔️          |
 | [bracket-align](./rules/align/bracket-align.md)                                       | Open bracket must be on same line. It must be indented by other constructions by space. | ✔️          |
 | [expression-indent](./rules/align/expression-indent.md)                               | Expression indentation is incorrect.                                                    | ✔️          |
@@ -36,8 +36,8 @@ author:      "Franco Victorio <victorio.franco@gmail.com>"
 
 ## Best Practise Rules
 
-| Rule Id                                                              | Error                                                                                                                 | Recommended |
-| -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ----------- |
+| Rule Id                                                            | Error                                                                                                                 | Recommended |
+| ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- | ----------- |
 | [code-complexity](./rules/best-practises/code-complexity.md)       | Function has cyclomatic complexity "current" but allowed no more than maxcompl.                                       |             |
 | [function-max-lines](./rules/best-practises/function-max-lines.md) | Function body contains "count" lines but allowed no more than maxlines.                                               |             |
 | [max-line-length](./rules/best-practises/max-line-length.md)       | Line length must be no more than maxlen.                                                                              |             |
@@ -51,8 +51,8 @@ author:      "Franco Victorio <victorio.franco@gmail.com>"
 
 ## Security Rules
 
-| Rule Id                                                                      | Error                                                                    | Recommended |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------ | ----------- |
+| Rule Id                                                                    | Error                                                                    | Recommended |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------ | ----------- |
 | [avoid-call-value](./rules/security/avoid-call-value.md)                   | Avoid to use ".call.value()()".                                          | ✔️          |
 | [avoid-low-level-calls](./rules/security/avoid-low-level-calls.md)         | Avoid to use low level calls.                                            | ✔️          |
 | [avoid-sha3](./rules/security/avoid-sha3.md)                               | Use "keccak256" instead of deprecated "sha3".                            | ✔️          |
@@ -68,7 +68,7 @@ author:      "Franco Victorio <victorio.franco@gmail.com>"
 | [multiple-sends](./rules/security/multiple-sends.md)                       | Avoid multiple calls of "send" method in single transaction.             | ✔️          |
 | [no-complex-fallback](./rules/security/no-complex-fallback.md)             | Fallback function must be simple.                                        | ✔️          |
 | [no-inline-assembly](./rules/security/no-inline-assembly.md)               | Avoid to use inline assembly. It is acceptable only in rare cases.       | ✔️          |
-| [no-simple-event-func-name](./rules/security/no-simple-event-func-name.md) | Event and function names must be different.                              | ✔️          |
+| [no-simple-event-func-name](./rules/security/no-simple-event-func-name.md) | Event and function names must be different.                              |             |
 | [not-rely-on-block-hash](./rules/security/not-rely-on-block-hash.md)       | Do not rely on "block.blockhash". Miners can influence its value.        | ✔️          |
 | [not-rely-on-time](./rules/security/not-rely-on-time.md)                   | Avoid to make time-based decisions in your business logic.               | ✔️          |
 | [reentrancy](./rules/security/reentrancy.md)                               | Possible reentrancy vulnerabilities. Avoid state changes after transfer. | ✔️          |
@@ -78,4 +78,4 @@ author:      "Franco Victorio <victorio.franco@gmail.com>"
 ## References
 
 - [ConsenSys Guide for Smart Contracts](https://consensys.github.io/smart-contract-best-practices/recommendations/)
-- [Solidity Style Guide](http://solidity.readthedocs.io/en/develop/style-guide.md)
+- [Solidity Style Guide](http://solidity.readthedocs.io/en/develop/style-guide.html)
