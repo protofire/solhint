@@ -4,7 +4,7 @@
 <p align="center">
   By <a href="https://protofire.io/">Protofire</a>
 </p>
-  
+
 [![Donate with Ethereum](https://en.cryptobadges.io/badge/micro/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)](https://en.cryptobadges.io/donate/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)
 
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/solhint/Lobby)
@@ -79,7 +79,7 @@ Commands:
 ## Configuration
 
 You can use a `.solhint.json` file to configure Solhint globally.
- 
+
 To generate a new  sample `.solhint.json` file in current folder you can do:
 ```sh
 solhint init-config
@@ -91,19 +91,15 @@ format:
 
 ```json
   {
-    "extends": "solhint:default",
+    "extends": "solhint:recommended",
     "plugins": [],
     "rules": {
-      "const-name-snakecase": "off",
       "avoid-suicide": "error",
-      "avoid-sha3": "warn",
-      "avoid-tx-origin:": "warn",
-      "not-rely-on-time": "warn",
-      "not-rely-on-block-hash": "warn"
+      "avoid-sha3": "warn"
     }
   }
 ```
-A full list of all supported rules can be found [here](https://github.com/protofire/solhint/blob/master/docs/rules.md). 
+A full list of all supported rules can be found [here](https://github.com/protofire/solhint/blob/master/docs/rules.md).
 
 To ignore files / folders that do not require validation you may use `.solhintignore` file. It supports rules in
 `.gitignore` format.
@@ -124,7 +120,7 @@ For example, to disable all validations in the line following a comment:
   uint[] a;
 ```
 
-You can disable rules on a given line. For example, to disable validation of time and block hash based computations 
+You can disable rules on a given line. For example, to disable validation of time and block hash based computations
 in the next line:
 
 ```solidity
@@ -141,7 +137,7 @@ Disable validation on current line:
 Disable validation of time and block hash based computations on current line:
 
 ```solidity
-   uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line not-rely-on-time, not-rely-on-block-hash 
+   uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line not-rely-on-time, not-rely-on-block-hash
 ```
 
 You can disable a rule for a group of lines:
@@ -202,7 +198,7 @@ Related documentation you may find [there](https://protofire.github.io/solhint/)
   with the [Solidity plugin for Prettier](https://github.com/prettier-solidity/prettier-plugin-solidity).
 
 ## Who uses Solhint?
-[<img src="https://avatars0.githubusercontent.com/u/20820676?s=200&v=4" width="75px" height="75px" alt="OpenZeppelin" title="OpenZeppelin" style="margin: 20px 20px 0 0" />](https://github.com/OpenZeppelin) 
+[<img src="https://avatars0.githubusercontent.com/u/20820676?s=200&v=4" width="75px" height="75px" alt="OpenZeppelin" title="OpenZeppelin" style="margin: 20px 20px 0 0" />](https://github.com/OpenZeppelin)
 [<img src="https://avatars2.githubusercontent.com/u/28943015?s=200&v=4" width="75px" height="75px" alt="POA Network - Public EVM Sidechain" title="POA Network - Public EVM Sidechain" style="margin: 20px 20px 0 0" />](https://github.com/poanetwork) [<img src="https://avatars3.githubusercontent.com/u/24832717?s=200&v=4" width="75px" height="75px" alt="0x" title="0x" style="margin: 20px 20px 0 0" />](https://github.com/0xProject) [<img src="https://avatars1.githubusercontent.com/u/24954468?s=200&v=4" width="75px" height="75px" alt="GNOSIS" title="GNOSIS" style="margin: 20px 20px 0 0"/>](https://github.com/gnosis)
 
 ### Projects
