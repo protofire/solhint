@@ -43,7 +43,7 @@
     "js-yaml": "^3.12.0",
     "lodash": "^4.17.11",
     "semver": "^6.3.0",
-    "@fvictorio/solidity-parser": "^0.4.15"
+    "solidity-parser-diligence": "^0.4.18"
   },
   "devDependencies": {
     "@stryker-mutator/core": "^2.3.0",
