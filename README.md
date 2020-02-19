@@ -73,7 +73,7 @@ Commands:
 ## Configuration
 
 You can use a `.solhint.json` file to configure Solhint globally.
- 
+
 To generate a new  sample `.solhint.json` file in current folder you can do:
 ```sh
 solhint init-config
@@ -97,7 +97,7 @@ format:
     }
   }
 ```
-A full list of all supported rules can be found [here](https://github.com/protofire/solhint/blob/master/docs/rules.md). 
+A full list of all supported rules can be found [here](docs/rules.md).
 
 To ignore files / folders that do not require validation you may use `.solhintignore` file. It supports rules in
 `.gitignore` format.
@@ -118,7 +118,7 @@ For example, to disable all validations in the line following a comment:
   uint[] a;
 ```
 
-You can disable rules on a given line. For example, to disable validation of time and block hash based computations 
+You can disable rules on a given line. For example, to disable validation of time and block hash based computations
 in the next line:
 
 ```solidity
@@ -135,7 +135,7 @@ Disable validation on current line:
 Disable validation of time and block hash based computations on current line:
 
 ```solidity
-   uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line not-rely-on-time, not-rely-on-block-hash 
+   uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line not-rely-on-time, not-rely-on-block-hash
 ```
 
 You can disable a rule for a group of lines:
@@ -162,11 +162,11 @@ Or disable all validations for a group of lines:
 
 ## Rules
 ### Security Rules
-[Full list with all supported Security Rules](https://github.com/protofire/solhint/blob/master/docs/rules.md#security-rules)
+[Full list with all supported Security Rules](docs/rules.md#security-rules)
 ### Style Guide Rules
-[Full list with all supported Style Guide Rules](https://github.com/protofire/solhint/blob/master/docs/rules.md#style-guide-rules)
+[Full list with all supported Style Guide Rules](docs/rules.md#style-guide-rules)
 ### Best Practices Rules
-[Full list with all supported Best Practices Rules](https://github.com/protofire/solhint/blob/master/docs/rules.md#best-practise-rules)
+[Full list with all supported Best Practices Rules](docs/rules.md#best-practise-rules)
 
 ## Documentation
 
@@ -196,7 +196,7 @@ Related documentation you may find [there](https://protofire.github.io/solhint/)
   with the [Solidity plugin for Prettier](https://github.com/prettier-solidity/prettier-plugin-solidity).
 
 ## Who uses Solhint?
-[<img src="https://avatars0.githubusercontent.com/u/20820676?s=200&v=4" width="75px" height="75px" alt="OpenZeppelin" title="OpenZeppelin" style="margin: 20px 20px 0 0" />](https://github.com/OpenZeppelin) 
+[<img src="https://avatars0.githubusercontent.com/u/20820676?s=200&v=4" width="75px" height="75px" alt="OpenZeppelin" title="OpenZeppelin" style="margin: 20px 20px 0 0" />](https://github.com/OpenZeppelin)
 [<img src="https://avatars2.githubusercontent.com/u/28943015?s=200&v=4" width="75px" height="75px" alt="POA Network - Public EVM Sidechain" title="POA Network - Public EVM Sidechain" style="margin: 20px 20px 0 0" />](https://github.com/poanetwork) [<img src="https://avatars3.githubusercontent.com/u/24832717?s=200&v=4" width="75px" height="75px" alt="0x" title="0x" style="margin: 20px 20px 0 0" />](https://github.com/0xProject) [<img src="https://avatars1.githubusercontent.com/u/24954468?s=200&v=4" width="75px" height="75px" alt="GNOSIS" title="GNOSIS" style="margin: 20px 20px 0 0"/>](https://github.com/gnosis)
 
 ### Projects
