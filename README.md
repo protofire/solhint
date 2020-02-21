@@ -38,7 +38,7 @@ First initialize a configuration file, if you don't have one:
 solhint init-config
 ```
 
-This will create a `.solhint.json` file some default rules enabled. Then run Solhint with one or more [Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside `contracts` directory, you can do:
+This will create a `.solhint.json` file with some default rules enabled. Then run Solhint with one or more [Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside `contracts` directory, you can do:
 
 ```sh
 solhint "contracts/**/*.sol"
@@ -57,23 +57,21 @@ Usage: solhint [options] <file> [...other_files]
 
 Linter for Solidity programming language
 
-
 Options:
 
-  -V, --version                              output the version number
-  -f, --formatter [name]                     report formatter name (stylish, table, tap, unix)
-  -w, --max-warnings [maxWarningsNumber]     number of warnings to trigger nonzero
-  -c, --config [file_name]                   file to use as your .solhint.json
-  -q, --quiet                                report errors only - default: false
-  --ignore-path [file_name]                  file to use as your .solhintignore
-  -h, --help                                 output usage information
-
-
+  -V, --version                           output the version number
+  -f, --formatter [name]                  report formatter name (stylish, table, tap, unix)
+  -w, --max-warnings [maxWarningsNumber]  number of allowed warnings
+  -c, --config [file_name]                file to use as your .solhint.json
+  -q, --quiet                             report errors only - default: false
+  --ignore-path [file_name]               file to use as your .solhintignore
+  --fix                                   automatically fix problems
+  -h, --help                              output usage information
 
 Commands:
 
-  stdin [options]         put source code to stdin of this utility
-  init-config             create sample solhint config in current folder
+  stdin [options]                         linting of source code data provided to STDIN
+  init-config                             create in current directory configuration file for solhint
 ```
 
 ## Configuration
