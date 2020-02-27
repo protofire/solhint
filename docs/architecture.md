@@ -38,22 +38,6 @@ The file structure below describes the major structure of the project.
 
 ## How solhint Works
 
-### Solidity Grammar with ANTLR
-
-Solhint depends on [ANTLR4](http://www.antlr.org/) to generate the Solidity parser, following the grammar description taken from
-[solidity-antlr4](https://github.com/solidityj/solidity-antlr4).
-
-To update the Solidity grammar, you need to update the Git submodule solidity-antlr4:
-
-```sh
-git submodule update --remote # update to latest version
-# or checkout a specific commit or tag:
-# cd solidity-antlr4
-# git checkout abc123
-```
-
-Then run `scripts/build-grammar.sh`. (Java Runtime Environment 7, or later, is required for running the script.)
-
 ### How to Add A New Rule
 
 The Solhint rules in `lib/rules` contains the different lint requirements, such as naming, best practices, security, etc.

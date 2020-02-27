@@ -20,7 +20,6 @@
     "test": "npm run exec-tests",
     "test-only": "mocha --recursive",
     "test-mutation": "stryker run",
-    "generate": "scripts/build-grammar.sh",
     "lint": "eslint .",
     "docs": "node scripts/generate-rule-docs.js"
   },

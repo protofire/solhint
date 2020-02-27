@@ -97,7 +97,7 @@ format:
     }
   }
 ```
-A full list of all supported rules can be found [here](https://github.com/protofire/solhint/blob/master/docs/rules.md).
+A full list of all supported rules can be found [here](docs/rules.md).
 
 To ignore files / folders that do not require validation you may use `.solhintignore` file. It supports rules in
 `.gitignore` format.
@@ -162,11 +162,11 @@ Or disable all validations for a group of lines:
 
 ## Rules
 ### Security Rules
-[Full list with all supported Security Rules](https://github.com/protofire/solhint/blob/master/docs/rules.md#security-rules)
+[Full list with all supported Security Rules](docs/rules.md#security-rules)
 ### Style Guide Rules
-[Full list with all supported Style Guide Rules](https://github.com/protofire/solhint/blob/master/docs/rules.md#style-guide-rules)
+[Full list with all supported Style Guide Rules](docs/rules.md#style-guide-rules)
 ### Best Practices Rules
-[Full list with all supported Best Practices Rules](https://github.com/protofire/solhint/blob/master/docs/rules.md#best-practise-rules)
+[Full list with all supported Best Practices Rules](docs/rules.md#best-practise-rules)
 
 ## Documentation
 
@@ -186,7 +186,7 @@ Related documentation you may find [there](https://protofire.github.io/solhint/)
 ## Table of Contents
 
 * [Roadmap](ROADMAP.md): The core project's roadmap - what the core team is looking to work on in the near future.
-* [Contributing](CONTRIBUTING.md): The core Solhint team :heart: contributions. This describes how you can contribute to the Solhint Project.
+* [Contributing](docs/contributing.md): The core Solhint team :heart: contributions. This describes how you can contribute to the Solhint Project.
 * [Shareable configs](docs/shareable-configs.md): How to create and share your own configurations.
 * [Writing plugins](docs/writing-plugins.md): How to extend Solhint with your own rules.
 
