@@ -2,6 +2,17 @@ const assert = require('assert')
 const { applyExtends } = require('./../../lib/config/config-file')
 
 describe('applyExtends', () => {
+  it('should return the same config if the extends property does not exist', () => {
+    const initialConfig = {
+      rules: {
+        rule0: 'error'
+      }
+    }
+    const result = applyExtends(initialConfig)
+
+    assert.deepStrictEqual(result, initialConfig)
+  })
+
   it('should use the given config if the extends array is empty', () => {
     const initialConfig = {
       extends: [],

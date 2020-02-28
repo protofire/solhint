@@ -6,7 +6,7 @@ const fs = require('fs')
 const process = require('process')
 
 const linter = require('./lib/index')
-const { applyExtends, loadConfig } = require('./lib/config/config-file')
+const { loadConfig } = require('./lib/config/config-file')
 const { validate } = require('./lib/config/config-validator')
 const applyFixes = require('./lib/apply-fixes')
 const ruleFixer = require('./lib/rule-fixer')
@@ -154,12 +154,6 @@ const readConfig = _.memoize(() => {
 
   const configExcludeFiles = _.flatten(config.excludedFiles)
   config.excludedFiles = _.concat(configExcludeFiles, readIgnore())
-
-  // If an `extends` property is defined, it represents a configuration file to use as
-  // a "parent". Load the referenced file and merge the configuration recursively.
-  if (config.extends) {
-    config = applyExtends(config)
-  }
 
   // validate the configuration before continuing
   validate(config)
