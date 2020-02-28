@@ -213,8 +213,8 @@ Related documentation you may find [there](https://protofire.github.io/solhint/)
 
 ## Acknowledgements
 
-The grammar used by solhint was created and is maintained by [Federico Bond](https://github.com/federicobond).
-You can find it [here](https://github.com/solidityj/solidity-antlr4).
+The Solidity parser used is maintained by [ConsenSys Diligence Team](https://diligence.consensys.net/).
+You can find it [here](https://github.com/consensys/solidity-parser-antlr).
 
 ## Licence
 

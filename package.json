@@ -16,7 +16,7 @@
   "homepage": "https://protofire.github.io/solhint/",
   "repository": "https://github.com/protofire/solhint",
   "scripts": {
-    "exec-tests": "nyc -x \"**/grammar/**\" mocha --recursive && nyc report --reporter=text-lcov | coveralls",
+    "exec-tests": "mocha --recursive && nyc report --reporter=text-lcov | coveralls",
     "test": "npm run exec-tests",
     "test-only": "mocha --recursive",
     "test-mutation": "stryker run",
