@@ -2,8 +2,8 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "no-complex-fallback | Solhint"
-date:        "Sun, 25 Aug 2019 22:09:22 GMT"
-author:      "Peter Chung <touhonoob@gmail.com>"
+date:        "Wed, 19 Feb 2020 23:51:55 GMT"
+author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
 # no-complex-fallback
