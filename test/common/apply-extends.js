@@ -48,6 +48,29 @@ describe('applyExtends', () => {
     })
   })
 
+  it('should accept a string as the value of extends', () => {
+    const initialConfig = {
+      extends: 'config1',
+      rules: {
+        rule0: 'error'
+      }
+    }
+    const config1 = {
+      rules: {
+        rule1: 'warning'
+      }
+    }
+    const result = applyExtends(initialConfig, configName => ({ config1 }[configName]))
+
+    assert.deepStrictEqual(result, {
+      extends: ['config1'],
+      rules: {
+        rule0: 'error',
+        rule1: 'warning'
+      }
+    })
+  })
+
   it('should give higher priority to later configs', () => {
     const initialConfig = {
       extends: ['config1', 'config2'],
