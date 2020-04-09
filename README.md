@@ -213,8 +213,7 @@ Related documentation you may find [there](https://protofire.github.io/solhint/)
 
 ## Acknowledgements
 
-The Solidity parser used is maintained by [ConsenSys Diligence Team](https://diligence.consensys.net/).
-You can find it [here](https://github.com/consensys/solidity-parser-antlr).
+The Solidity parser used is [`@solidity-parser/parser`](https://github.com/solidity-parser/parser).
 
 ## Licence
 
