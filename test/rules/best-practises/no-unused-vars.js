@@ -26,6 +26,8 @@ describe('Linter - no-unused-vars', () => {
     contractWith('function a() public returns (uint c) { return 1; }'),
     contractWith('function a(uint d) public returns (uint c) { }'),
     contractWith('function a(uint a, uint c) public returns (uint c);'),
+    contractWith('function a(uint amount) public { foo.deposit{value: amount}(); }'),
+    contractWith('function a(uint amount) public { foo.deposit({value: amount}); }'),
     contractWith(
       multiLine(
         'function a(address a) internal {',
