@@ -45,6 +45,8 @@ class NoFoosAllowed {
     }
   }
 }
+
+module.exports = [NoFoosAllowed]
 ```
 
 _You can experiment with an AST by going to [AST explorer](https://astexplorer.net/) and selecting "Solidity" as the
