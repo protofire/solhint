@@ -2,7 +2,7 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "reason-string | Solhint"
-date:        "Wed, 19 Feb 2020 23:51:48 GMT"
+date:        "Thu, 23 Apr 2020 20:59:48 GMT"
 author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
@@ -76,7 +76,7 @@ This rule accepts an array of options:
 ```
 
 ## Version
-This rule was introduced in [Solhint 3.0.0-rc.1](https://github.com/protofire/solhint/tree/v3.0.0-rc.1)
+This rule was introduced in [Solhint 2.3.1](https://github.com/protofire/solhint/tree/v2.3.1)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/best-practises/reason-string.js)
