@@ -27,7 +27,7 @@ You can install Solhint using **npm**:
 npm install -g solhint
 
 # verify that it was installed correctly
-solhint -V
+solhint --version
 ```
 
 ## Usage
@@ -38,7 +38,7 @@ First initialize a configuration file, if you don't have one:
 solhint init-config
 ```
 
-This will create a `.solhint.json` file with some default rules enabled. Then run Solhint with one or more [Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside `contracts` directory, you can do:
+This will create a `.solhint.json` file with the default rules enabled. Then run Solhint with one or more [Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside `contracts` directory, you can do:
 
 ```sh
 solhint "contracts/**/*.sol"
@@ -50,7 +50,7 @@ To lint a single file:
 solhint contracts/MyToken.sol
 ```
 
-Solhint command description:
+Run `solhint` without arguments to get more information:
 
 ```text
 Usage: solhint [options] <file> [...other_files]
@@ -76,9 +76,10 @@ Commands:
 
 ## Configuration
 
-You can use a `.solhint.json` file to configure Solhint globally.
+You can use a `.solhint.json` file to configure Solhint for the whole project.
 
 To generate a new  sample `.solhint.json` file in current folder you can do:
+
 ```sh
 solhint init-config
 ```
@@ -99,15 +100,15 @@ format:
 ```
 A full list of all supported rules can be found [here](docs/rules.md).
 
-To ignore files / folders that do not require validation you may use `.solhintignore` file. It supports rules in
-`.gitignore` format.
+To ignore files that do not require validation you can use a `.solhintignore` file. It supports rules in
+the `.gitignore` format.
 
 ```git exclude
 node_modules/
 additional-tests.sol
 ```
 
-### Configure linter with comments
+### Configure the linter with comments
 
 You can use comments in the source code to configure solhint in a given line or file.
 
@@ -118,8 +119,7 @@ For example, to disable all validations in the line following a comment:
   uint[] a;
 ```
 
-You can disable rules on a given line. For example, to disable validation of time and block hash based computations
-in the next line:
+You can disable specific rules on a given line. For example:
 
 ```solidity
   // solhint-disable-next-line not-rely-on-time, not-rely-on-block-hash
@@ -132,7 +132,7 @@ Disable validation on current line:
   uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line
 ```
 
-Disable validation of time and block hash based computations on current line:
+Disable specific rules on current line:
 
 ```solidity
    uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line not-rely-on-time, not-rely-on-block-hash
@@ -170,7 +170,7 @@ Or disable all validations for a group of lines:
 
 ## Documentation
 
-Related documentation you may find [there](https://protofire.github.io/solhint/).
+Related documentation you may find [here](https://protofire.github.io/solhint/).
 
 ## IDE Integrations
 
