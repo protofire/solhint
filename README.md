@@ -5,8 +5,6 @@
   By <a href="https://protofire.io/">Protofire</a>
 </p>
 
-[![Donate with Ethereum](https://en.cryptobadges.io/badge/micro/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)](https://en.cryptobadges.io/donate/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)
-
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/solhint/Lobby)
 [![Build Status](https://travis-ci.org/protofire/solhint.svg?branch=master)](https://travis-ci.org/protofire/solhint)
 [![NPM version](https://badge.fury.io/js/solhint.svg)](https://npmjs.org/package/solhint)
@@ -16,8 +14,7 @@ https://coveralls.io/github/protofire/solhint?branch=master)
 [![dependencies Status](https://david-dm.org/protofire/solhint/status.svg)](https://david-dm.org/protofire/solhint)
 [![devDependencies Status](https://david-dm.org/protofire/solhint/dev-status.svg)](https://david-dm.org/protofire/solhint?type=dev)
 
-This is an open source project for linting [Solidity](http://solidity.readthedocs.io/en/develop/) code. This project
-provides both **Security** and **Style Guide** validations.
+Open source linter for [Solidity](http://solidity.readthedocs.io/en/develop/) providing both **Security** and **Style Guide** validations.
 
 ## Installation
 
@@ -89,14 +86,14 @@ format:
 
 
 ```json
-  {
-    "extends": "solhint:recommended",
-    "plugins": [],
-    "rules": {
-      "avoid-suicide": "error",
-      "avoid-sha3": "warn"
-    }
+{
+  "extends": "solhint:recommended",
+  "plugins": [],
+  "rules": {
+    "avoid-suicide": "error",
+    "avoid-sha3": "warn"
   }
+}
 ```
 A full list of all supported rules can be found [here](docs/rules.md).
 
@@ -115,49 +112,49 @@ You can use comments in the source code to configure solhint in a given line or 
 For example, to disable all validations in the line following a comment:
 
 ```solidity
-  // solhint-disable-next-line
-  uint[] a;
+// solhint-disable-next-line
+uint[] a;
 ```
 
 You can disable specific rules on a given line. For example:
 
 ```solidity
-  // solhint-disable-next-line not-rely-on-time, not-rely-on-block-hash
-  uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number))));
+// solhint-disable-next-line not-rely-on-time, not-rely-on-block-hash
+uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number))));
 ```
 
 Disable validation on current line:
 
 ```solidity
-  uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line
+uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line
 ```
 
 Disable specific rules on current line:
 
 ```solidity
-   uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line not-rely-on-time, not-rely-on-block-hash
+uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line not-rely-on-time, not-rely-on-block-hash
 ```
 
 You can disable a rule for a group of lines:
 
 ```solidity
-  /* solhint-disable avoid-tx-origin */
-  function transferTo(address to, uint amount) public {
-    require(tx.origin == owner);
-    to.call.value(amount)();
-  }
-  /* solhint-enable avoid-tx-origin */
+/* solhint-disable avoid-tx-origin */
+function transferTo(address to, uint amount) public {
+  require(tx.origin == owner);
+  to.call.value(amount)();
+}
+/* solhint-enable avoid-tx-origin */
 ```
 
 Or disable all validations for a group of lines:
 
 ```solidity
-  /* solhint-disable */
-  function transferTo(address to, uint amount) public {
-    require(tx.origin == owner);
-    to.call.value(amount)();
-  }
-  /* solhint-enable */
+/* solhint-disable */
+function transferTo(address to, uint amount) public {
+  require(tx.origin == owner);
+  to.call.value(amount)();
+}
+/* solhint-enable */
 ```
 
 ## Rules
