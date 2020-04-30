@@ -14,26 +14,19 @@ This document is for developers who want to understand the structure and mechani
 
 ## Project Structure
 
-The file structure below describes the major structure of the project.
+The file structure below describes the most important files and directories of the project.
 
 ```
+├── conf/rulesets                        # solhint official configs
 ├── docs                                 # documentation
-├── lib                                  # main source code
-│   ├── comment-directive-parser.js      # comment parsers
-│   ├── common                           # utility modules for syntax parsing, reporting, etc.
-│   ├── config                           # helpers for loading solhint configuration
-│   ├── config.js                        # load config
-│   ├── doc                              # documentation utilities
-│   ├── grammar                          # solidity grammar, generated with ANTLR
-│   ├── index.js                         # main entry point
-│   ├── load-rules.js                    # module for loading rules
-│   ├── reporter.js                      # module for reporting results
-│   ├── rules                            # source for solhint rules
-│   └── tree-listener.js                 # used for register all loaded rules
-├── scripts                              # script for generating grammar and rule docs
-├── solhint.js                           # solhint command line
-├── solidity-antlr4                      # git submodule for solidity-antlr4
-└── test                                 # tests
+├── lib
+│   ├── common                           # utility modules
+│   ├── config                           # configuration loading
+│   ├── rules                            # core rules
+│   └── index.js                         # lib entry point
+├── scripts                              # scripts for automating tasks
+├── test                                 # unit tests
+└── solhint.js                           # bin entry point
 ```
 
 ## How solhint Works
@@ -44,70 +37,7 @@ The Solhint rules in `lib/rules` contains the different lint requirements, such 
 
 The rules are implemented with a [visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern). You can extend the `BaseChecker` class with the `ruleId` and `meta` fields to define a rule, and implement methods that are called when a node in the AST is entered or exited. The constructor accepts a reporter and a config, and `ruleId` field is present in the object. This `ruleId` is the one that will be used to activate and configure the rule.
 
-For example, `lib/rules/align/indent.js`:
-
-```javascript
-
-const ruleId = 'indent'
-const DEFAULT_SEVERITY = 'error'
-const DEFAULT_INDENTS = 4
-const meta = {
-  type: 'align',
-
-  docs: {
-    // ...
-  },
-
-  isDefault: true,
-  recommended: true,
-  defaultSetup: [DEFAULT_SEVERITY, DEFAULT_INDENTS],
-
-  schema: {
-    type: 'integer'
-  }
-}
-
-class IndentChecker {
-  constructor(reporter, config) {
-    this.reporter = reporter
-    this.ruleId = ruleId
-    this.meta = meta
-    this.linesWithError = []
-
-    const indent = this.parseConfig(config).indent || 4
-    const indentUnit = this.parseConfig(config).unit || 'spaces'
-
-    this.blockValidator = new BlockValidator(indent, indentUnit, reporter, this.ruleId)
-
-    // ...
-  }
-
-  enterBlock(ctx) {
-    this.blockValidator.validateBlock(ctx)
-  }
-
-  enterContractDefinition(ctx) {
-    this.blockValidator.validateBlock(ctx)
-  }
-
-  enterStructDefinition(ctx) {
-    this.blockValidator.validateBlock(ctx)
-  }
-
-  enterEnumDefinition(ctx) {
-    this.blockValidator.validateBlock(ctx)
-  }
-
-  enterImportDirective(ctx) {
-    this.blockValidator.validateBlock(ctx)
-  }
-
-```
-
 Developers of new rules need to have a basic understanding about the concepts and structure of the AST, and execute the proper logic when certain nodes in the AST are visited.
-
-You can see a list of the available AST nodes in the [solidity-antlr4](https://github.com/solidityj/solidity-antlr4/blob/master/Solidity.g4) project.
-
 
 ### How to Add a Plugin
 
