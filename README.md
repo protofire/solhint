@@ -30,6 +30,14 @@ npm install -g solhint
 solhint --version
 ```
 
+### Solhint 3.0
+
+Solhint 3.0 is under development and will be released soon. You can try it out by doing:
+
+```sh
+npm install -g solhint@next
+```
+
 ## Usage
 
 First initialize a configuration file, if you don't have one:
