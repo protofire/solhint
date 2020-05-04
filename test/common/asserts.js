@@ -43,6 +43,10 @@ function assertWarnsCount(report, count) {
   )
 }
 
+function assertLineNumber(report, line) {
+  assert.equal(report.line, line, `Report must be in line ${line}.`)
+}
+
 function printReport(report) {
   const messages = report.messages.map((i, index) => `${index + 1}. ${i.message}`)
   return ['Errors / Warnings:', ...messages, ''].join('\n' + ' '.repeat(8))
@@ -53,5 +57,6 @@ module.exports = {
   assertNoWarnings,
   assertNoErrors,
   assertErrorCount,
-  assertWarnsCount
+  assertWarnsCount,
+  assertLineNumber
 }

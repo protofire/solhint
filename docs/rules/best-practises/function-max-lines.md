@@ -2,7 +2,7 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "function-max-lines | Solhint"
-date:        "Wed, 19 Feb 2020 23:51:46 GMT"
+date:        "Thu, 23 Apr 2020 20:59:47 GMT"
 author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 

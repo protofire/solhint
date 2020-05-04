@@ -1,4 +1,10 @@
-# Solhint Project
+<p align="center">
+  <img src="solhint.png">
+</p>
+<p align="center">
+  By <a href="https://protofire.io/">Protofire</a>
+</p>
+
 [![Donate with Ethereum](https://en.cryptobadges.io/badge/micro/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)](https://en.cryptobadges.io/donate/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)
 
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/solhint/Lobby)
@@ -21,7 +27,7 @@ You can install Solhint using **npm**:
 npm install -g solhint
 
 # verify that it was installed correctly
-solhint -V
+solhint --version
 ```
 
 ### Solhint 3.0
@@ -40,7 +46,7 @@ First initialize a configuration file, if you don't have one:
 solhint init-config
 ```
 
-This will create a `.solhint.json` file some default rules enabled. Then run Solhint with one or more [Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside `contracts` directory, you can do:
+This will create a `.solhint.json` file with the default rules enabled. Then run Solhint with one or more [Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside `contracts` directory, you can do:
 
 ```sh
 solhint "contracts/**/*.sol"
@@ -52,37 +58,36 @@ To lint a single file:
 solhint contracts/MyToken.sol
 ```
 
-Solhint command description:
+Run `solhint` without arguments to get more information:
 
 ```text
 Usage: solhint [options] <file> [...other_files]
 
 Linter for Solidity programming language
 
-
 Options:
 
-  -V, --version                              output the version number
-  -f, --formatter [name]                     report formatter name (stylish, table, tap, unix)
-  -w, --max-warnings [maxWarningsNumber]     number of warnings to trigger nonzero
-  -c, --config [file_name]                   file to use as your .solhint.json
-  -q, --quiet                                report errors only - default: false
-  --ignore-path [file_name]                  file to use as your .solhintignore
-  -h, --help                                 output usage information
-
-
+  -V, --version                           output the version number
+  -f, --formatter [name]                  report formatter name (stylish, table, tap, unix)
+  -w, --max-warnings [maxWarningsNumber]  number of allowed warnings
+  -c, --config [file_name]                file to use as your .solhint.json
+  -q, --quiet                             report errors only - default: false
+  --ignore-path [file_name]               file to use as your .solhintignore
+  --fix                                   automatically fix problems
+  -h, --help                              output usage information
 
 Commands:
 
-  stdin [options]         put source code to stdin of this utility
-  init-config             create sample solhint config in current folder
+  stdin [options]                         linting of source code data provided to STDIN
+  init-config                             create in current directory configuration file for solhint
 ```
 
 ## Configuration
 
-You can use a `.solhint.json` file to configure Solhint globally.
+You can use a `.solhint.json` file to configure Solhint for the whole project.
 
 To generate a new  sample `.solhint.json` file in current folder you can do:
+
 ```sh
 solhint init-config
 ```
@@ -93,29 +98,25 @@ format:
 
 ```json
   {
-    "extends": "solhint:default",
+    "extends": "solhint:recommended",
     "plugins": [],
     "rules": {
-      "const-name-snakecase": "off",
       "avoid-suicide": "error",
-      "avoid-sha3": "warn",
-      "avoid-tx-origin:": "warn",
-      "not-rely-on-time": "warn",
-      "not-rely-on-block-hash": "warn"
+      "avoid-sha3": "warn"
     }
   }
 ```
 A full list of all supported rules can be found [here](docs/rules.md).
 
-To ignore files / folders that do not require validation you may use `.solhintignore` file. It supports rules in
-`.gitignore` format.
+To ignore files that do not require validation you can use a `.solhintignore` file. It supports rules in
+the `.gitignore` format.
 
 ```git exclude
 node_modules/
 additional-tests.sol
 ```
 
-### Configure linter with comments
+### Configure the linter with comments
 
 You can use comments in the source code to configure solhint in a given line or file.
 
@@ -126,8 +127,7 @@ For example, to disable all validations in the line following a comment:
   uint[] a;
 ```
 
-You can disable rules on a given line. For example, to disable validation of time and block hash based computations
-in the next line:
+You can disable specific rules on a given line. For example:
 
 ```solidity
   // solhint-disable-next-line not-rely-on-time, not-rely-on-block-hash
@@ -140,7 +140,7 @@ Disable validation on current line:
   uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line
 ```
 
-Disable validation of time and block hash based computations on current line:
+Disable specific rules on current line:
 
 ```solidity
    uint pseudoRand = uint(keccak256(abi.encodePacked(now, blockhash(block.number)))); // solhint-disable-line not-rely-on-time, not-rely-on-block-hash
@@ -178,7 +178,7 @@ Or disable all validations for a group of lines:
 
 ## Documentation
 
-Related documentation you may find [there](https://protofire.github.io/solhint/).
+Related documentation you may find [here](https://protofire.github.io/solhint/).
 
 ## IDE Integrations
 
@@ -194,7 +194,7 @@ Related documentation you may find [there](https://protofire.github.io/solhint/)
 ## Table of Contents
 
 * [Roadmap](ROADMAP.md): The core project's roadmap - what the core team is looking to work on in the near future.
-* [Contributing](CONTRIBUTING.md): The core Solhint team :heart: contributions. This describes how you can contribute to the Solhint Project.
+* [Contributing](docs/contributing.md): The core Solhint team :heart: contributions. This describes how you can contribute to the Solhint Project.
 * [Shareable configs](docs/shareable-configs.md): How to create and share your own configurations.
 * [Writing plugins](docs/writing-plugins.md): How to extend Solhint with your own rules.
 
@@ -221,8 +221,7 @@ Related documentation you may find [there](https://protofire.github.io/solhint/)
 
 ## Acknowledgements
 
-The grammar used by solhint was created and is maintained by [Federico Bond](https://github.com/federicobond).
-You can find it [here](https://github.com/solidityj/solidity-antlr4).
+The Solidity parser used is [`@solidity-parser/parser`](https://github.com/solidity-parser/parser).
 
 ## Licence
 

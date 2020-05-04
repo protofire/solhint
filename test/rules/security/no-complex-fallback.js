@@ -7,7 +7,6 @@ describe('Linter - no-complex-fallback', () => {
     const code = contractWith(`function () public payable {
             make1();
             make2();
-            make3();
         }`)
 
     const report = linter.processStr(code, {

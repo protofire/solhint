@@ -2,16 +2,13 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "mark-callable-contracts | Solhint"
-date:        "Wed, 19 Feb 2020 23:51:55 GMT"
+date:        "Fri, 01 May 2020 22:04:10 GMT"
 author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
 # mark-callable-contracts
-![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
 ![Category Badge](https://img.shields.io/badge/-Security%20Rules-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
-> The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
-
 
 ## Description
 Explicitly mark all external contracts as trusted or untrusted.

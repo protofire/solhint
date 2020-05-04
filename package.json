@@ -1,8 +1,8 @@
 {
   "name": "solhint",
-  "version": "2.3.1",
+  "version": "3.0.0-rc.8",
   "description": "Solidity Code Linter",
-  "main": "solhint.js",
+  "main": "lib/index.js",
   "keywords": [
     "solidity",
     "linter",
@@ -16,11 +16,10 @@
   "homepage": "https://protofire.github.io/solhint/",
   "repository": "https://github.com/protofire/solhint",
   "scripts": {
-    "exec-tests": "nyc -x \"**/grammar/**\" mocha --recursive && nyc report --reporter=text-lcov | coveralls",
+    "exec-tests": "nyc mocha --recursive && nyc report --reporter=text-lcov | coveralls",
     "test": "npm run exec-tests",
     "test-only": "mocha --recursive",
     "test-mutation": "stryker run",
-    "generate": "scripts/build-grammar.sh",
     "lint": "eslint .",
     "docs": "node scripts/generate-rule-docs.js"
   },
@@ -30,8 +29,10 @@
   "author": "Ilya Drabenia <ilya.drobenya@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@solidity-parser/parser": "^0.6.0",
     "ajv": "^6.6.1",
     "antlr4": "4.7.1",
+    "ast-parents": "0.0.1",
     "chalk": "^2.4.2",
     "commander": "2.18.0",
     "cosmiconfig": "^5.0.7",
