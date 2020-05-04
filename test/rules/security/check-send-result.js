@@ -23,4 +23,54 @@ describe('Linter - check-send-result', () => {
 
     assert.equal(report.errorCount, 0)
   })
+
+  it('do not emit error when a require is used', () => {
+    const code = funcWith('require(x.send(1));')
+
+    const report = linter.processStr(code, {
+      rules: { 'check-send-result': 'error' }
+    })
+
+    assert.equal(report.errorCount, 0)
+  })
+
+  it('do not emit error when a require is used upper in the tree', () => {
+    const code = funcWith('require(!x.send(1));')
+
+    const report = linter.processStr(code, {
+      rules: { 'check-send-result': 'error' }
+    })
+
+    assert.equal(report.errorCount, 0)
+  })
+
+  it('do not emit error when an assert is used', () => {
+    const code = funcWith('assert(x.send(1));')
+
+    const report = linter.processStr(code, {
+      rules: { 'check-send-result': 'error' }
+    })
+
+    assert.equal(report.errorCount, 0)
+  })
+
+  it('do not emit error when an assert is used upper in the tree', () => {
+    const code = funcWith('assert(x.send(1) || something);')
+
+    const report = linter.processStr(code, {
+      rules: { 'check-send-result': 'error' }
+    })
+
+    assert.equal(report.errorCount, 0)
+  })
+
+  it('emit error when an arbitrary function surrounds the expression', () => {
+    const code = funcWith('f(x.send(1));')
+
+    const report = linter.processStr(code, {
+      rules: { 'check-send-result': 'error' }
+    })
+
+    assert.equal(report.errorCount, 1)
+  })
 })
