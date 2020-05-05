@@ -7,11 +7,12 @@ describe('Linter - no-unused-vars', () => {
     contractWith('function a(uint a, uint b) public { b += 1; }'),
     funcWith('uint a = 0;'),
     funcWith('var (a) = 1;'),
-    contractWith('function a(uint a, uint b) public { uint c = a + b; }')
+    contractWith('function a(uint a, uint b) public { uint c = a + b; }'),
+    contractWith('function foo(uint a) public {}')
   ]
 
-  UNUSED_VARS.forEach(curData =>
-    it(`should raise warn for vars ${label(curData)}`, () => {
+  UNUSED_VARS.forEach((curData, i) =>
+    it(`should raise warn for unused vars (${i})`, () => {
       const report = linter.processStr(curData, {
         rules: { 'no-unused-vars': 'warn' }
       })
@@ -24,7 +25,6 @@ describe('Linter - no-unused-vars', () => {
   const USED_VARS = [
     contractWith('function a(uint a) public { uint b = bytes32(a); b += 1; }'),
     contractWith('function a() public returns (uint c) { return 1; }'),
-    contractWith('function a(uint d) public returns (uint c) { }'),
     contractWith('function a(uint a, uint c) public returns (uint c);'),
     contractWith('function a(uint amount) public { foo.deposit{value: amount}(); }'),
     contractWith('function a(uint amount) public { foo.deposit({value: amount}); }'),
@@ -63,8 +63,8 @@ describe('Linter - no-unused-vars', () => {
     )
   ]
 
-  USED_VARS.forEach(curData =>
-    it(`should not raise warn for vars ${label(curData)}`, () => {
+  USED_VARS.forEach((curData, i) =>
+    it(`should not raise warn for vars (${i})`, () => {
       const report = linter.processStr(curData, {
         rules: { 'no-unused-vars': 'warn' }
       })
@@ -86,11 +86,4 @@ function withdrawalAllowed(address) public view override returns (bool) {
 
     assertNoWarnings(report)
   })
-
-  function label(data) {
-    const items = data.split('\n')
-    const lastItemIndex = items.length - 1
-    const labelIndex = Math.floor(lastItemIndex / 5) * 4
-    return items[labelIndex]
-  }
 })
