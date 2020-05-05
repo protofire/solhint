@@ -24,6 +24,7 @@ function init() {
     .option('-q, --quiet', 'report errors only - default: false')
     .option('--ignore-path [file_name]', 'file to use as your .solhintignore')
     .option('--fix', 'automatically fix problems')
+    .option('--init', 'create configuration file for solhint')
     .description('Linter for Solidity programming language')
     .action(execMainAction)
 
@@ -35,10 +36,14 @@ function init() {
 
   program
     .command('init-config')
-    .description('create in current directory configuration file for solhint')
+    .description('create configuration file for solhint')
     .action(writeSampleConfigFile)
 
   program.parse(process.argv)
+
+  if (program.init) {
+    writeSampleConfigFile()
+  }
 
   if (program.args.length < 1) {
     program.help()
@@ -46,6 +51,10 @@ function init() {
 }
 
 function execMainAction() {
+  if (program.init) {
+    writeSampleConfigFile()
+  }
+
   let formatterFn
 
   try {
@@ -120,6 +129,8 @@ function writeSampleConfigFile() {
   } else {
     console.log('Configuration file already exists')
   }
+
+  process.exit(0)
 }
 
 const readIgnore = _.memoize(() => {
