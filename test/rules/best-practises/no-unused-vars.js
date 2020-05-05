@@ -7,7 +7,9 @@ describe('Linter - no-unused-vars', () => {
     contractWith('function a(uint a, uint b) public { b += 1; }'),
     funcWith('uint a = 0;'),
     funcWith('var (a) = 1;'),
-    contractWith('function a(uint a, uint b) public { uint c = a + b; }')
+    contractWith('function a(uint a, uint b) public { uint c = a + b; }'),
+    contractWith('function foo(uint a) { assembly { let t := a } }'),
+    contractWith('function foo(uint a) { uint b = a; } '),
   ]
 
   UNUSED_VARS.forEach(curData =>
@@ -30,10 +32,11 @@ describe('Linter - no-unused-vars', () => {
     contractWith('function a(uint amount) public { foo.deposit({value: amount}); }'),
     contractWith(
       multiLine(
-        'function a(address a) internal {',
+        'function a(address a) internal returns (boolean) {',
         '  assembly {',
         '    let t := eq(a, and(mask, calldataload(4)))',
         '  }',
+        '  return t;',
         '}'
       )
     ),
