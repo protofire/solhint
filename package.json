@@ -17,8 +17,8 @@
   "repository": "https://github.com/protofire/solhint",
   "scripts": {
     "exec-tests": "nyc mocha --recursive && nyc report --reporter=text-lcov | coveralls",
-    "test": "npm run exec-tests",
-    "test-only": "mocha --recursive",
+    "test:coverage": "npm run exec-tests",
+    "test": "mocha --recursive",
     "test-mutation": "stryker run",
     "lint": "eslint .",
     "docs": "node scripts/generate-rule-docs.js"
