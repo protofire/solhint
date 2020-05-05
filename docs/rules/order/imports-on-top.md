@@ -2,8 +2,6 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "imports-on-top | Solhint"
-date:        "Thu, 23 Apr 2020 20:59:51 GMT"
-author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
 # imports-on-top

@@ -2,8 +2,6 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "not-rely-on-time | Solhint"
-date:        "Thu, 23 Apr 2020 20:59:53 GMT"
-author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
 # not-rely-on-time

@@ -2,8 +2,6 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "Rule Index of Solhint"
-date:        "Fri, 01 May 2020 22:04:11 GMT"
-author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
 ## Best Practise Rules

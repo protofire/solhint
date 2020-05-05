@@ -2,8 +2,6 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "code-complexity | Solhint"
-date:        "Thu, 23 Apr 2020 20:59:47 GMT"
-author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
 # code-complexity

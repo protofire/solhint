@@ -11,14 +11,6 @@ const { ruleSeverityEnum } = require('../lib/doc/utils');
  * Borrowed from https://github.com/eslint/eslint/blob/master/Makefile.js
  */
 class GitHelper {
-    static getAuthorName() {
-        return GitHelper.execSilent('git config user.name').trim();
-    }
-
-    static getAuthorEmail() {
-        return GitHelper.execSilent('git config user.email').trim();
-    }
-
     /**
      * Gets the tag name where a given file was introduced first.
      * @param {string} filePath The file path to check.
@@ -71,9 +63,6 @@ class GitHelper {
 }
 
 function generateRuleDoc(rule) {
-    const date = new Date().toUTCString();
-    const authorName = GitHelper.getAuthorName();
-    const authorEmail = GitHelper.getAuthorEmail();
     const isDefault = !rule.meta.deprecated && rule.meta.isDefault;
     const isRecommended = !rule.meta.deprecated && rule.meta.recommended;
     const isDeprecated = rule.meta.deprecated;
@@ -84,8 +73,6 @@ function generateRuleDoc(rule) {
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "${rule.ruleId} | Solhint"
-date:        "${date}"
-author:      "${authorName} <${authorEmail}>"
 ---
 
 # ${rule.ruleId}
@@ -230,10 +217,6 @@ function getDefaultSeverity(rule) {
 }
 
 function generateRuleIndex(rulesIndexed) {
-    const date = new Date().toUTCString();
-    const authorName = GitHelper.getAuthorName();
-    const authorEmail = GitHelper.getAuthorEmail();
-
     const contents = Object.keys(rulesIndexed).map(category => {
         const rows = [["Rule Id", "Error", "Recommended"]];
         rulesIndexed[category].map(rule => [`[${rule.ruleId}](./rules/${rule.meta.type}/${rule.ruleId}.md)`, rule.meta.docs.description, (rule.meta.recommended && !rule.meta.deprecated) ? '✔️' : '']).forEach(row => rows.push(row));
@@ -247,8 +230,6 @@ ${table(rows)}
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "Rule Index of Solhint"
-date:        "${date}"
-author:      "${authorName} <${authorEmail}>"
 ---
 
 ${contents}

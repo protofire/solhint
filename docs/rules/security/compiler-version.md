@@ -2,8 +2,6 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "compiler-version | Solhint"
-date:        "Thu, 23 Apr 2020 20:59:52 GMT"
-author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
 # compiler-version
