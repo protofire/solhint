@@ -5,8 +5,11 @@ title:       "mark-callable-contracts | Solhint"
 ---
 
 # mark-callable-contracts
+![Deprecated Badge](https://img.shields.io/badge/-Deprecated-yellow)
 ![Category Badge](https://img.shields.io/badge/-Security%20Rules-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
+> This rule is **deprecated**
+
 
 ## Description
 Explicitly mark all external contracts as trusted or untrusted.
