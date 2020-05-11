@@ -2,8 +2,6 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "func-param-name-mixedcase | Solhint"
-date:        "Wed, 19 Feb 2020 23:51:50 GMT"
-author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
 # func-param-name-mixedcase
@@ -11,7 +9,7 @@ author:      "Franco Victorio <victorio.franco@gmail.com>"
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 
 ## Description
-Function name must be in camelCase.
+Function param name must be in mixedCase
 
 ## Options
 This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.

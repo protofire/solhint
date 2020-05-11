@@ -31,4 +31,18 @@ describe('Linter - max-states-count', () => {
 
     assertNoErrors(report)
   })
+
+  it('should only count state declarations', () => {
+    const code = contractWith(`
+      uint private a;
+      uint private b;
+      uint private c;
+
+      function f() {}
+    `)
+
+    const report = linter.processStr(code, { rules: { 'max-states-count': ['error', 3] } })
+
+    assertNoErrors(report)
+  })
 })

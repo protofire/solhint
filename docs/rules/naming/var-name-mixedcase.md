@@ -2,8 +2,6 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "var-name-mixedcase | Solhint"
-date:        "Wed, 19 Feb 2020 23:51:50 GMT"
-author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
 # var-name-mixedcase

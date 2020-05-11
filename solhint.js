@@ -6,8 +6,10 @@ const fs = require('fs')
 const process = require('process')
 
 const linter = require('./lib/index')
-const { applyExtends, loadConfig } = require('./lib/config/config-file')
+const { loadConfig } = require('./lib/config/config-file')
 const { validate } = require('./lib/config/config-validator')
+const applyFixes = require('./lib/apply-fixes')
+const ruleFixer = require('./lib/rule-fixer')
 const packageJson = require('./package.json')
 
 function init() {
@@ -21,6 +23,7 @@ function init() {
     .option('-c, --config [file_name]', 'file to use as your .solhint.json')
     .option('-q, --quiet', 'report errors only - default: false')
     .option('--ignore-path [file_name]', 'file to use as your .solhintignore')
+    .option('--fix', 'automatically fix problems')
     .description('Linter for Solidity programming language')
     .action(execMainAction)
 
@@ -57,6 +60,24 @@ function execMainAction() {
   const reports = _.flatten(reportLists)
   const warningsCount = reports.reduce((acc, i) => acc + i.warningCount, 0)
   const warningsNumberExceeded = program.maxWarnings >= 0 && warningsCount > program.maxWarnings
+
+  if (program.fix) {
+    for (const report of reports) {
+      const inputSrc = fs.readFileSync(report.filePath).toString()
+
+      const fixes = _(report.reports)
+        .filter(x => x.fix)
+        .map(x => x.fix(ruleFixer))
+        .sort((a, b) => a.range[0] - b.range[0])
+        .value()
+
+      const { fixed, output } = applyFixes(fixes, inputSrc)
+      if (fixed) {
+        report.reports = report.reports.filter(x => !x.fix)
+        fs.writeFileSync(report.filePath, output)
+      }
+    }
+  }
 
   if (program.quiet) {
     // filter the list of reports, to set errors only.
@@ -133,12 +154,6 @@ const readConfig = _.memoize(() => {
 
   const configExcludeFiles = _.flatten(config.excludedFiles)
   config.excludedFiles = _.concat(configExcludeFiles, readIgnore())
-
-  // If an `extends` property is defined, it represents a configuration file to use as
-  // a "parent". Load the referenced file and merge the configuration recursively.
-  if (config.extends) {
-    config = applyExtends(config)
-  }
 
   // validate the configuration before continuing
   validate(config)

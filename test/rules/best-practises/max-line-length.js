@@ -1,14 +1,27 @@
 const assert = require('assert')
-const { assertErrorMessage, assertNoErrors } = require('./../../common/asserts')
+const { assertErrorMessage, assertLineNumber, assertNoErrors } = require('./../../common/asserts')
+const { contractWith } = require('./../../common/contract-builder')
 const linter = require('./../../../lib/index')
 
 describe('Linter - max-line-length', () => {
   it('should raise error when line length exceed 120', () => {
     const code = ' '.repeat(121)
 
+    const report = linter.processStr(contractWith(code), {
+      rules: { 'max-line-length': 'error' }
+    })
+    assert.equal(report.errorCount, 1)
+    assertErrorMessage(report, 0, 'Line length must be no more than')
+    assertLineNumber(report.reports[0], 6)
+  })
+
+  it('should raise error with an empty file', () => {
+    const code = ' '.repeat(121)
+
     const report = linter.processStr(code, {
       rules: { 'max-line-length': 'error' }
     })
+
     assert.equal(report.errorCount, 1)
     assertErrorMessage(report, 0, 'Line length must be no more than')
   })

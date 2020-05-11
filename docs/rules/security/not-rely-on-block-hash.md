@@ -2,8 +2,6 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "not-rely-on-block-hash | Solhint"
-date:        "Wed, 19 Feb 2020 23:51:56 GMT"
-author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
 # not-rely-on-block-hash

@@ -37,18 +37,20 @@ class NoFoosAllowed {
     this.config = config
   }
 
-  enterContractDefinition(ctx) {
-    const identifier = ctx.children[1]
-    const text = identifier.getText()
+  ContractDefinition(ctx) {
+    const { name } = ctx
 
-    if (text === 'Foo') {
+    if (name === 'Foo') {
       this.reporter.error(ctx, this.ruleId, 'Contracts cannot be named "Foo"')
     }
   }
 }
+
+module.exports = [NoFoosAllowed]
 ```
 
-_You can see a list of the available AST nodes [here](https://github.com/solidityj/solidity-antlr4/blob/master/Solidity.g4)._
+_You can experiment with an AST by going to [AST explorer](https://astexplorer.net/) and selecting "Solidity" as the
+language._
 
 After adding this rule to the exported array, you can publish your package. Remember to prefix the name with `solhint-plugin-`. Let's say our plugin is called `solhint-plugin-naming` and that we already published it and installed it in some project. Then, we can activate this rule in the configuration:
 

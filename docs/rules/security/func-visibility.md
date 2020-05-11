@@ -2,8 +2,6 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "func-visibility | Solhint"
-date:        "Wed, 19 Feb 2020 23:51:55 GMT"
-author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
 # func-visibility

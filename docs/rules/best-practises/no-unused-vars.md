@@ -2,8 +2,6 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "no-unused-vars | Solhint"
-date:        "Wed, 19 Feb 2020 23:51:47 GMT"
-author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
 # no-unused-vars

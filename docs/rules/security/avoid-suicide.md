@@ -2,8 +2,6 @@
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
 title:       "avoid-suicide | Solhint"
-date:        "Wed, 19 Feb 2020 23:51:53 GMT"
-author:      "Franco Victorio <victorio.franco@gmail.com>"
 ---
 
 # avoid-suicide

@@ -87,4 +87,18 @@ describe('Linter - reason-string', () => {
     assertNoWarnings(report)
     assertNoErrors(report)
   })
+
+  it('should ignore normal function calls', () => {
+    const code = funcWith(`
+      revertt();
+      requiree(true);
+    `)
+
+    const report = linter.processStr(code, {
+      rules: { 'reason-string': ['error', { maxLength: 50 }] }
+    })
+
+    assertNoWarnings(report)
+    assertNoErrors(report)
+  })
 })
