@@ -108,6 +108,15 @@ node_modules/
 additional-tests.sol
 ```
 
+### Extendable rulesets
+
+The default rulesets provided by solhint are the following:
+
++ solhint:default
++ solhint:recommended
+
+Use one of these as the value for the "extends" property in your configuration file.
+
 ### Configure the linter with comments
 
 You can use comments in the source code to configure solhint in a given line or file.
