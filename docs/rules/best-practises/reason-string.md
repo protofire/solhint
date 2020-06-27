@@ -5,8 +5,11 @@ title:       "reason-string | Solhint"
 ---
 
 # reason-string
+![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
 ![Category Badge](https://img.shields.io/badge/-Best%20Practise%20Rules-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
+> The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
+
 
 ## Description
 Require or revert statement must have a reason string and check that each reason string is at most N characters long.
