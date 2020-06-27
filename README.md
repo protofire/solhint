@@ -35,7 +35,7 @@ solhint --version
 First initialize a configuration file, if you don't have one:
 
 ```sh
-solhint init-config
+solhint --init
 ```
 
 This will create a `.solhint.json` file with the default rules enabled. Then run Solhint with one or more [Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside `contracts` directory, you can do:
@@ -66,12 +66,13 @@ Options:
   -q, --quiet                             report errors only - default: false
   --ignore-path [file_name]               file to use as your .solhintignore
   --fix                                   automatically fix problems
+  --init                                  create configuration file for solhint
   -h, --help                              output usage information
 
 Commands:
 
   stdin [options]                         linting of source code data provided to STDIN
-  init-config                             create in current directory configuration file for solhint
+  init-config                             create configuration file for solhint
 ```
 
 ## Configuration
