@@ -12,13 +12,19 @@ title:       "private-vars-leading-underscore | Solhint"
 Private and internal names must start with a single underscore.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+This rule accepts an array of options:
+
+| Index | Description                                                                                                                           | Default Value    |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| 0     | Rule severity. Must be one of "error", "warn", "off".                                                                                 | warn             |
+| 1     | A JSON object with a single property "strict" specifying if the rule should apply to non state variables. Default: { strict: false }. | {"strict":false} |
+
 
 ### Example Config
 ```json
 {
   "rules": {
-    "private-vars-leading-underscore": "warn"
+    "private-vars-leading-underscore": ["warn",{"strict":false}]
   }
 }
 ```

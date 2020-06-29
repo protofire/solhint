@@ -71,7 +71,7 @@ describe('Linter - private-vars-leading-underscore', () => {
   })
 
   SHOULD_WARN_STRICT_CASES.concat(SHOULD_NOT_WARN_CASES).forEach((code, index) => {
-    it(`should not emit a warning (${index})`, () => {
+    it(`should not emit a warning (strict) (${index})`, () => {
       const report = linter.processStr(code, {
         rules: { 'private-vars-leading-underscore': 'error' }
       })
@@ -91,7 +91,7 @@ describe('Linter - private-vars-leading-underscore', () => {
   })
 
   SHOULD_WARN_STRICT_CASES.forEach((code, index) => {
-    it(`should not emit a warning (${index})`, () => {
+    it(`should not emit a warning (strict) (${index})`, () => {
       const report = linter.processStr(code, {
         rules: { 'private-vars-leading-underscore': ['error', { strict: true }] }
       })
