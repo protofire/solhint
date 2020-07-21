@@ -35,7 +35,7 @@ function init() {
     .action(processStdin)
 
   program
-    .command('init-config')
+    .command('init-config', null, { noHelp:true })
     .description('create configuration file for solhint')
     .action(writeSampleConfigFile)
 

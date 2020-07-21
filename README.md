@@ -35,7 +35,7 @@ solhint --version
 First initialize a configuration file, if you don't have one:
 
 ```sh
-solhint --init
+solhint init-config
 ```
 
 This will create a `.solhint.json` file with the default rules enabled. Then run Solhint with one or more [Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside `contracts` directory, you can do:
@@ -72,7 +72,6 @@ Options:
 Commands:
 
   stdin [options]                         linting of source code data provided to STDIN
-  init-config                             create configuration file for solhint
 ```
 
 ## Configuration
@@ -82,23 +81,18 @@ You can use a `.solhint.json` file to configure Solhint for the whole project.
 To generate a new  sample `.solhint.json` file in current folder you can do:
 
 ```sh
-solhint init-config
+solhint --init 
 ```
 
 This file has the following
 format:
 
-
 ```json
   {
-    "extends": "solhint:recommended",
-    "plugins": [],
-    "rules": {
-      "avoid-suicide": "error",
-      "avoid-sha3": "warn"
-    }
+    "extends": "solhint:default"
   }
 ```
+
 A full list of all supported rules can be found [here](docs/rules.md).
 
 To ignore files that do not require validation you can use a `.solhintignore` file. It supports rules in
