@@ -75,14 +75,14 @@ function execMainAction() {
       const inputSrc = fs.readFileSync(report.filePath).toString()
 
       const fixes = _(report.reports)
-        .filter((x) => x.fix)
-        .map((x) => x.fix(ruleFixer))
+        .filter(x => x.fix)
+        .map(x => x.fix(ruleFixer))
         .sort((a, b) => a.range[0] - b.range[0])
         .value()
 
       const { fixed, output } = applyFixes(fixes, inputSrc)
       if (fixed) {
-        report.reports = report.reports.filter((x) => !x.fix)
+        report.reports = report.reports.filter(x => !x.fix)
         fs.writeFileSync(report.filePath, output)
       }
     }
@@ -90,7 +90,7 @@ function execMainAction() {
 
   if (program.quiet) {
     // filter the list of reports, to set errors only.
-    reports[0].reports = reports[0].reports.filter((i) => i.severity === 2)
+    reports[0].reports = reports[0].reports.filter(i => i.severity === 2)
   }
 
   if (printReports(reports, formatterFn)) {
@@ -144,7 +144,7 @@ const readIgnore = _.memoize(() => {
       .readFileSync(ignoreFile)
       .toString()
       .split('\n')
-      .map((i) => i.trim())
+      .map(i => i.trim())
   } catch (e) {
     if (program.ignorePath && e.code === 'ENOENT') {
       console.error(`\nERROR: ${ignoreFile} is not a valid path.`)
@@ -190,7 +190,9 @@ function getFormatter(formatter) {
   try {
     return require(`eslint/lib/formatters/${formatterName}`)
   } catch (ex) {
-    ex.message = `\nThere was a problem loading formatter option: ${program.formatter} \nError: ${ex.message}`
+    ex.message = `\nThere was a problem loading formatter option: ${program.formatter} \nError: ${
+      ex.message
+    }`
     throw ex
   }
 }
