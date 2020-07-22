@@ -87,12 +87,17 @@ solhint --init
 This file has the following
 format:
 
+
 ```json
   {
-    "extends": "solhint:default"
+    "extends": "solhint:recommended",
+    "plugins": [],
+    "rules": {
+      "avoid-suicide": "error",
+      "avoid-sha3": "warn"
+    }
   }
 ```
-
 A full list of all supported rules can be found [here](docs/rules.md).
 
 To ignore files that do not require validation you can use a `.solhintignore` file. It supports rules in
