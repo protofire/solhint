@@ -72,7 +72,6 @@ Options:
 Commands:
 
   stdin [options]                         linting of source code data provided to STDIN
-  init-config                             create configuration file for solhint
 ```
 
 ## Configuration
@@ -82,7 +81,7 @@ You can use a `.solhint.json` file to configure Solhint for the whole project.
 To generate a new  sample `.solhint.json` file in current folder you can do:
 
 ```sh
-solhint init-config
+solhint --init 
 ```
 
 This file has the following
