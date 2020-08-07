@@ -103,7 +103,7 @@ A full list of all supported rules can be found [here](docs/rules.md).
 To ignore files that do not require validation you can use a `.solhintignore` file. It supports rules in
 the `.gitignore` format.
 
-```git exclude
+```
 node_modules/
 additional-tests.sol
 ```
