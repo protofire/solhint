@@ -12,4 +12,16 @@ describe('Parse error', () => {
     assert.equal(error.column, 14)
     assert.ok(error.message.startsWith("Parse error: mismatched input '<EOF>'"))
   })
+
+  it('should report multiple parse errors', () => {
+    const report = linter.processStr('contract Foo { function constructor() }\n contract Bar {', {})
+
+    assertErrorCount(report, 3)
+    const messages = report.reports.map(error => error.message)
+    assert.ok(
+      messages[0].startsWith("Parse error: no viable alternative at input 'functionconstructor'")
+    )
+    assert.ok(messages[1].startsWith("Parse error: mismatched input '}'"))
+    assert.ok(messages[2].startsWith("Parse error: mismatched input '<EOF>'"))
+  })
 })
