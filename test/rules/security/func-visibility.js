@@ -27,4 +27,30 @@ describe('Linter - func-visibility', () => {
       assert.equal(report.warningCount, 0)
     })
   })
+
+  describe("when 'ignoreConstructors' is enabled", () => {
+    it('should ignore constructors without visibility', () => {
+      const code = contractWith('constructor () {}')
+
+      const report = linter.processStr(code, {
+        rules: {
+          'func-visibility': ['warn', { ignoreConstructors: true }]
+        }
+      })
+
+      assert.equal(report.warningCount, 0)
+    })
+
+    it('should still report functions without visibility', () => {
+      const code = contractWith('function foo() {}')
+
+      const report = linter.processStr(code, {
+        rules: {
+          'func-visibility': ['warn', { ignoreConstructors: true }]
+        }
+      })
+
+      assert.equal(report.warningCount, 1)
+    })
+  })
 })
