@@ -9,7 +9,7 @@ describe('Linter - no-unused-vars', () => {
     funcWith('var (a) = 1;'),
     contractWith('function a(uint a, uint b) public { uint c = a + b; }'),
     contractWith('function foo(uint a) { assembly { let t := a } }'),
-    contractWith('function foo(uint a) { uint b = a; } '),
+    contractWith('function foo(uint a) { uint b = a; } ')
   ]
 
   UNUSED_VARS.forEach(curData =>
