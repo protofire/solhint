@@ -21,6 +21,13 @@ describe('Linter - private-vars-leading-underscore', () => {
     libraryWith('function _foo() public {}'),
     libraryWith('function _foo() internal {}')
   ]
+  const SHOULD_WARN_STRICT_CASES = [
+    contractWith('function foo() { uint _bar; }'),
+    contractWith('function foo(uint _bar) {}'),
+    contractWith('function foo() returns (uint256 _bar) {}'),
+    libraryWith('function foo() returns (uint256 _bar) {}'),
+    libraryWith('function foo(uint _bar) {}')
+  ]
   const SHOULD_NOT_WARN_CASES = [
     // don't warn when private/internal names start with _
     contractWith('uint _foo;'),
@@ -44,19 +51,13 @@ describe('Linter - private-vars-leading-underscore', () => {
 
     // other names (variables, parameters, returns) shouldn't be affected by this rule
     contractWith('function foo(uint bar) {}'),
-    contractWith('function foo(uint _bar) {}'),
     contractWith('function foo() { uint bar; }'),
-    contractWith('function foo() { uint _bar; }'),
     contractWith('function foo() returns (uint256) {}'),
     contractWith('function foo() returns (uint256 bar) {}'),
-    contractWith('function foo() returns (uint256 _bar) {}'),
     libraryWith('function foo(uint bar) {}'),
-    libraryWith('function foo(uint _bar) {}'),
     libraryWith('function foo() { uint bar; }'),
-    libraryWith('function foo() { uint _bar; }'),
     libraryWith('function foo() returns (uint256) {}'),
-    libraryWith('function foo() returns (uint256 bar) {}'),
-    libraryWith('function foo() returns (uint256 _bar) {}')
+    libraryWith('function foo() returns (uint256 bar) {}')
   ]
 
   SHOULD_WARN_CASES.forEach((code, index) => {
@@ -69,13 +70,33 @@ describe('Linter - private-vars-leading-underscore', () => {
     })
   })
 
-  SHOULD_NOT_WARN_CASES.forEach((code, index) => {
-    it(`should not emit a warning (${index})`, () => {
+  SHOULD_WARN_STRICT_CASES.concat(SHOULD_NOT_WARN_CASES).forEach((code, index) => {
+    it(`should not emit a warning (strict) (${index})`, () => {
       const report = linter.processStr(code, {
         rules: { 'private-vars-leading-underscore': 'error' }
       })
 
       assert.equal(report.errorCount, 0)
+    })
+  })
+
+  SHOULD_NOT_WARN_CASES.forEach((code, index) => {
+    it(`should not emit a warning (${index})`, () => {
+      const report = linter.processStr(code, {
+        rules: { 'private-vars-leading-underscore': ['error', { strict: true }] }
+      })
+
+      assert.equal(report.errorCount, 0)
+    })
+  })
+
+  SHOULD_WARN_STRICT_CASES.forEach((code, index) => {
+    it(`should not emit a warning (strict) (${index})`, () => {
+      const report = linter.processStr(code, {
+        rules: { 'private-vars-leading-underscore': ['error', { strict: true }] }
+      })
+
+      assert.equal(report.errorCount, 1)
     })
   })
 })

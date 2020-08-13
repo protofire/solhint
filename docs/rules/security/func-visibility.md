@@ -15,13 +15,19 @@ title:       "func-visibility | Solhint"
 Explicitly mark visibility in function.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+This rule accepts an array of options:
+
+| Index | Description                                                                                                                                                                                    | Default Value                |
+| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| 0     | Rule severity. Must be one of "error", "warn", "off".                                                                                                                                          | warn                         |
+| 1     | A JSON object with a single property "ignoreConstructors" specifying if the rule should ignore constructors. (**Note: This is required to be true for Solidity >=0.7.0 and false for <0.7.0**) | {"ignoreConstructors":false} |
+
 
 ### Example Config
 ```json
 {
   "rules": {
-    "func-visibility": "warn"
+    "func-visibility": ["warn",{"ignoreConstructors":false}]
   }
 }
 ```
@@ -37,6 +43,7 @@ function b() internal { }
 function b() external { }
 function b() private { }
 function b() public { }
+constructor() public { }
 ```
 
 ### 👎 Examples of **incorrect** code for this rule
