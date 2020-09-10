@@ -5,8 +5,11 @@ title:       "func-order | Solhint"
 ---
 
 # func-order
+![Deprecated Badge](https://img.shields.io/badge/-Deprecated-yellow)
 ![Category Badge](https://img.shields.io/badge/-Style%20Guide%20Rules-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
+> This rule is **deprecated**
+
 
 ## Description
 Function order is incorrect.
