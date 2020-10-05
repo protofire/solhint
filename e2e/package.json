@@ -1,0 +1,17 @@
+{
+  "name": "solhint-e2e",
+  "version": "0.0.1",
+  "description": "E2E tests for solhint",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "fs-extra": "^9.0.1",
+    "mocha": "^8.1.3",
+    "shelljs": "^0.8.4"
+  }
+}
