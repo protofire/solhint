@@ -1,0 +1,16 @@
+name: E2E
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  e2e:
+    name: e2e
+    runs:
+      using: 'Docker'
+      image: 'e2e/Dockerfile'
