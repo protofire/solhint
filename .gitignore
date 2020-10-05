@@ -1,6 +1,5 @@
 node_modules/
 /.idea/
-.solhint.json
 test2.sol
 convertLib.sol
 /.nyc_output/
