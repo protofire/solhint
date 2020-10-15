@@ -108,7 +108,7 @@ describe('e2e', function() {
 
       const stdout = await stdoutPromise
 
-      expect(stdout.trim()).to.equal('Code contains empty blocks')
+      expect(stdout.trim()).to.contain('Code contains empty blocks')
     })
   })
 })
