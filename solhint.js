@@ -114,6 +114,8 @@ function processStdin(options) {
   report.file = options.filename || 'stdin'
   const formatterFn = getFormatter()
   printReports([report], formatterFn)
+
+  exitWithCode([report])
 }
 
 function writeSampleConfigFile() {
