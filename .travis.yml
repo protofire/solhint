@@ -8,7 +8,7 @@ before_install: npm i -g npm@6.9
 
 install:
   - npm install
-  - cd e2e && npm install
+  - cd e2e && npm install && cd ..
 
 script:
   - npm run lint
