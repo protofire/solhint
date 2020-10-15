@@ -112,7 +112,10 @@ function processStdin(options) {
 
   const report = processStr(stdinBuffer.toString())
   report.file = options.filename || 'stdin'
-  printReports([report])
+  const formatterFn = getFormatter()
+  printReports([report], formatterFn)
+
+  exitWithCode([report])
 }
 
 function writeSampleConfigFile() {
