@@ -2,7 +2,7 @@
 /* eslint-disable prefer-arrow-callback */
 /* eslint-disable no-unused-expressions */
 
-const {expect} = require('chai')
+const { expect } = require('chai')
 const cp = require('child_process')
 const fs = require('fs-extra')
 const getStream = require('get-stream')
@@ -31,13 +31,13 @@ describe('e2e', function() {
     useFixture('01-no-config')
 
     it('should fail', function() {
-      const {code} = shell.exec('solhint Foo.sol')
+      const { code } = shell.exec('solhint Foo.sol')
 
       expect(code).to.equal(1)
     })
 
     it('should create an initial config with --init', function() {
-      const {code} = shell.exec('solhint --init')
+      const { code } = shell.exec('solhint --init')
 
       expect(code).to.equal(0)
 
@@ -47,7 +47,7 @@ describe('e2e', function() {
     })
 
     it('should print usage if called without arguments', function() {
-      const {code, stdout} = shell.exec('solhint')
+      const { code, stdout } = shell.exec('solhint')
 
       expect(code).to.equal(0)
 
@@ -61,7 +61,7 @@ describe('e2e', function() {
     useFixture('02-empty-solhint-json')
 
     it('should print nothing', function() {
-      const {code, stdout} = shell.exec('solhint Foo.sol')
+      const { code, stdout } = shell.exec('solhint Foo.sol')
 
       expect(code).to.equal(0)
 
@@ -69,7 +69,7 @@ describe('e2e', function() {
     })
 
     it('should show warning when using --init', function() {
-      const {code, stdout} = shell.exec('solhint --init')
+      const { code, stdout } = shell.exec('solhint --init')
 
       expect(code).to.equal(0)
 
@@ -81,7 +81,7 @@ describe('e2e', function() {
     useFixture('03-no-empty-blocks')
 
     it('should exit with 1', function() {
-      const {code, stdout} = shell.exec('solhint Foo.sol')
+      const { code, stdout } = shell.exec('solhint Foo.sol')
 
       expect(code).to.equal(1)
 
