@@ -6,6 +6,10 @@ node_js:
 
 before_install: npm i -g npm@6.9
 
+install:
+  - npm install
+  - cd e2e && npm install
+
 script:
   - npm run lint
   - npm test
