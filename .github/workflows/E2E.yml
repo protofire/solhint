@@ -1,0 +1,28 @@
+name: E2E
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  e2e_linux:
+    runs-on: ubuntu-latest
+    name: Test on Linux with Node ${{ matrix.node }}
+    strategy:
+      matrix:
+        node: [10, 12]
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: actions/checkout@v2
+      - name: pack
+        run: npm pack
+      - name: install-globally
+        run: npm i -g solhint*tgz
+      - name: run-e2e-tests
+        run: cd e2e && npm install && npm test
