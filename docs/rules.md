@@ -19,6 +19,13 @@ title:       "Rule Index of Solhint"
 | [constructor-syntax](./rules/best-practises/constructor-syntax.md) | Constructors should use the new constructor keyword.                                                                  |             |
         
 
+## Miscellaneous
+
+| Rule Id                                                                     | Error                                                                                                                                  | Recommended |
+| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| [comprehensive-interface](./rules/miscellaneous/comprehensive-interface.md) | Check that all public or external functions are override. This is iseful to make sure that the whole API is extracted in an interface. |             |
+        
+
 ## Style Guide Rules
 
 | Rule Id                                                                              | Error                                                                                  | Recommended |
