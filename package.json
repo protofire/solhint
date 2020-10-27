@@ -26,6 +26,12 @@
   "bin": {
     "solhint": "solhint.js"
   },
+  "files": [
+    "/conf/",
+    "/lib/",
+    "/test/",
+    "/solhint.js"
+  ],
   "author": "Ilya Drabenia <ilya.drobenya@gmail.com>",
   "license": "MIT",
   "dependencies": {
