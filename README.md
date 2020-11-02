@@ -41,7 +41,7 @@ solhint --init
 This will create a `.solhint.json` file with the default rules enabled. Then run Solhint with one or more [Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside `contracts` directory, you can do:
 
 ```sh
-solhint "contracts/**/*.sol"
+solhint 'contracts/**/*.sol'
 ```
 
 To lint a single file:
