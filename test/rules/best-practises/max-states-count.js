@@ -45,4 +45,18 @@ describe('Linter - max-states-count', () => {
 
     assertNoErrors(report)
   })
+
+  it('should not count immutable variables', () => {
+    const code = contractWith(`
+      uint public immutable a;
+      uint public b;
+      uint public c;
+
+      function f() {}
+    `)
+
+    const report = linter.processStr(code, { rules: { 'max-states-count': ['error', 2] } })
+
+    assertNoErrors(report)
+  })
 })
