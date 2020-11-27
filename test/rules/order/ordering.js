@@ -85,6 +85,33 @@ describe('Linter - ordering', () => {
     assert.ok(report.messages[0].message.includes('Function order is incorrect'))
   })
 
+  it('should raise incorrect function order error for fallback before receive', () => {
+    const code = contractWith(`
+                fallback() external payable  {}
+                receive() external payable {}
+            `)
+
+    const report = linter.processStr(code, {
+      rules: { ordering: 'error' }
+    })
+
+    assert.equal(report.errorCount, 1)
+    assert.ok(report.messages[0].message.includes('Function order is incorrect'))
+  })
+
+  it('should not raise incorrect function order error', () => {
+    const code = contractWith(`
+                receive() external payable {}
+                fallback() external payable  {}
+            `)
+
+    const report = linter.processStr(code, {
+      rules: { ordering: 'error' }
+    })
+
+    assert.equal(report.errorCount, 0)
+  })
+
   it('should not raise incorrect function order error', () => {
     const code = contractWith(`
                 function A() public {}
