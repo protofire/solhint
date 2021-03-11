@@ -30,57 +30,76 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 #### All units are in order
 
 ```solidity
-
 pragma solidity ^0.6.0;
 
 import "./some/library.sol";
 import "./some/other-library.sol";
 
-enum MyEnum {
-  Foo,
-  Bar
-}
+    enum MyEnum {
+        Foo,
+        Bar
+    }
 
-struct MyStruct {
-  uint x;
-  uint y;
-}
+    struct MyStruct {
+        uint x;
+        uint y;
+    }
 
 interface IBox {
-  function getValue() public;
-  function setValue(uint) public;
+    function getValue() public;
+    function setValue(uint) public;
 }
 
 library MyLibrary {
-  function add(uint a, uint b, uint c) public returns (uint) {
-    return a + b + c;
-  }
+    function add(uint a, uint b, uint c) public returns (uint) {
+        return a + b + c;
+    }
 }
 
 contract MyContract {
-  struct InnerStruct {
-    bool flag;
-  }
+    using MyLibrary for uint;
 
-  enum InnerEnum {
-    A, B, C
-  }
+    struct InnerStruct {
+        bool flag;
+    }
 
-  uint public x;
-  uint public y;
+    enum InnerEnum {
+        A, B, C
+    }
 
-  event MyEvent(address a);
+    address payable owner;
+    uint public x;
+    uint public y;
 
-  constructor () public {}
+    event MyEvent(address a);
 
-  fallback () external {}
+    modifier onlyOwner {
+        require(
+            msg.sender == owner,
+            "Only owner can call this function."
+        );
+        _;
+    }
 
-  function myExternalFunction() external {}
-  function myExternalConstFunction() external const {}
-  function myPublicFunction() public {}
-  function myPublicConstFunction() public const {}
-  function myInternalFunction() internal {}
-  function myPrivateFunction() private {}
+    constructor () public {}
+
+    fallback () external {}
+
+    function myExternalFunction() external {}
+    function myExternalViewFunction() external view {}
+    function myExternalPureFunction() external pure {}
+
+    function myPublicFunction() public {}
+    function myPublicViewFunction() public view {}
+    function myPublicPureFunction() public pure {}
+
+    function myInternalFunction() internal {}
+    function myInternalViewFunction() internal view {}
+    function myInternalPureFunction() internal pure {}
+
+    function myPrivateFunction() private {}
+    function myPrivateViewFunction() private view {}
+    function myPrivatePureFunction() private pure {}
 }
 
 ```
