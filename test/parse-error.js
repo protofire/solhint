@@ -14,14 +14,17 @@ describe('Parse error', () => {
   })
 
   it('should report multiple parse errors', () => {
-    const report = linter.processStr('contract Foo { function constructor() }\n contract Bar {', {})
-
-    assertErrorCount(report, 3)
-    const messages = report.reports.map(error => error.message)
-    assert.ok(
-      messages[0].startsWith("Parse error: no viable alternative at input 'functionconstructor'")
+    const report = linter.processStr(
+      `
+ contract Foo {}}
+ contract Bar {
+ `,
+      {}
     )
-    assert.ok(messages[1].startsWith("Parse error: mismatched input '}'"))
-    assert.ok(messages[2].startsWith("Parse error: mismatched input '<EOF>'"))
+
+    assertErrorCount(report, 2)
+    const messages = report.reports.map(error => error.message)
+    assert.ok(messages[0].startsWith("Parse error: extraneous input '}' expecting"))
+    assert.ok(messages[1].startsWith("Parse error: mismatched input '<EOF>' expecting"))
   })
 })
