@@ -187,4 +187,19 @@ describe('Linter - compiler-version', () => {
 
     assert.equal(report.errorCount, 0)
   })
+
+  it(`should not report compiler version error with correct pragma and pragma experimental`, () => {
+    const report = linter.processStr(
+      `pragma solidity ^0.7.4;
+       pragma experimental ABIEncoderV2;
+       
+       contract Main {
+       }`,
+      {
+        rules: { 'compiler-version': ['error', '^0.7.4'] }
+      }
+    )
+
+    assert.equal(report.errorCount, 0)
+  })
 })
