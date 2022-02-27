@@ -76,7 +76,7 @@ function execMainAction() {
 
       const fixes = _(report.reports)
         .filter(x => x.fix)
-        .map(x => x.fix(ruleFixer))
+        .map(x => x.fix(ruleFixer, inputSrc))
         .sort((a, b) => a.range[0] - b.range[0])
         .value()
 
