@@ -163,7 +163,7 @@ function executeMainActionLogic() {
 
   printReports(reports, formatterFn)
 
-  exitWithCode(reports)
+  process.exit(0)
 }
 
 function processStdin(options) {
@@ -185,7 +185,7 @@ function processStdin(options) {
 
   printReports(reports, formatterFn)
 
-  exitWithCode(reports)
+  process.exit(0)
 }
 
 function writeSampleConfigFile() {
@@ -363,11 +363,6 @@ function listRules() {
       console.log('- ', key, ': ', orderedRules[key])
     })
   }
-}
-
-function exitWithCode(reports) {
-  const errorsCount = reports.reduce((acc, i) => acc + i.errorCount, 0)
-  process.exit(errorsCount > 0 ? 1 : 0)
 }
 
 function checkForUpdate() {
