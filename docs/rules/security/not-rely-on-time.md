@@ -12,7 +12,7 @@ title:       "not-rely-on-time | Solhint"
 
 
 ## Description
-Avoid to make time-based decisions in your business logic.
+Avoid making time-based decisions in your business logic.
 
 ## Options
 This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.

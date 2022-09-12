@@ -64,7 +64,7 @@ title:       "Rule Index of Solhint"
 | [no-complex-fallback](./rules/security/no-complex-fallback.md)         | Fallback function must be simple.                                        | ✔️          |
 | [no-inline-assembly](./rules/security/no-inline-assembly.md)           | Avoid to use inline assembly. It is acceptable only in rare cases.       | ✔️          |
 | [not-rely-on-block-hash](./rules/security/not-rely-on-block-hash.md)   | Do not rely on "block.blockhash". Miners can influence its value.        | ✔️          |
-| [not-rely-on-time](./rules/security/not-rely-on-time.md)               | Avoid to make time-based decisions in your business logic.               | ✔️          |
+| [not-rely-on-time](./rules/security/not-rely-on-time.md)               | Avoid making time-based decisions in your business logic.               | ✔️          |
 | [reentrancy](./rules/security/reentrancy.md)                           | Possible reentrancy vulnerabilities. Avoid state changes after transfer. | ✔️          |
 | [state-visibility](./rules/security/state-visibility.md)               | Explicitly mark visibility of state.                                     | ✔️          |
         
