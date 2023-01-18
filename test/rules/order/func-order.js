@@ -1,6 +1,6 @@
 const assert = require('assert')
-const linter = require('./../../../lib/index')
-const contractWith = require('./../../common/contract-builder').contractWith
+const linter = require('../../../lib/index')
+const contractWith = require('../../common/contract-builder').contractWith
 
 describe('Linter - func-order', () => {
   it('should raise incorrect function order error I', () => {
@@ -10,7 +10,7 @@ describe('Linter - func-order', () => {
             `)
 
     const report = linter.processStr(code, {
-      rules: { 'func-order': 'error' }
+      rules: { 'func-order': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -24,7 +24,7 @@ describe('Linter - func-order', () => {
             `)
 
     const report = linter.processStr(code, {
-      rules: { 'func-order': 'error' }
+      rules: { 'func-order': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -38,7 +38,7 @@ describe('Linter - func-order', () => {
           `)
 
     const report = linter.processStr(code, {
-      rules: { 'func-order': 'error' }
+      rules: { 'func-order': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -52,7 +52,7 @@ describe('Linter - func-order', () => {
             `)
 
     const report = linter.processStr(code, {
-      rules: { 'func-order': 'error' }
+      rules: { 'func-order': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -66,7 +66,7 @@ describe('Linter - func-order', () => {
             `)
 
     const report = linter.processStr(code, {
-      rules: { 'func-order': 'error' }
+      rules: { 'func-order': 'error' },
     })
 
     assert.equal(report.errorCount, 0)
@@ -76,7 +76,7 @@ describe('Linter - func-order', () => {
     const code = require('../../fixtures/order/func-order-constructor-first')
 
     const report = linter.processStr(code, {
-      rules: { 'func-order': 'error' }
+      rules: { 'func-order': 'error' },
     })
 
     assert.equal(report.errorCount, 0)
@@ -86,7 +86,7 @@ describe('Linter - func-order', () => {
     const code = require('../../fixtures/order/func-order-constructor-not-first')
 
     const report = linter.processStr(code, {
-      rules: { 'func-order': 'error' }
+      rules: { 'func-order': 'error' },
     })
     assert.equal(report.errorCount, 1)
     assert.ok(report.messages[0].message.includes('Function order is incorrect'))
@@ -99,7 +99,7 @@ describe('Linter - func-order', () => {
             `)
 
     const report = linter.processStr(code, {
-      rules: { 'func-order': 'error' }
+      rules: { 'func-order': 'error' },
     })
 
     assert.equal(report.errorCount, 0)

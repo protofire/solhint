@@ -7,7 +7,7 @@ module.exports = [
 
     uint a;
   }
-`
+`,
   },
   {
     description: 'Library after contract',
@@ -15,7 +15,7 @@ module.exports = [
   contract MyContract {}
 
   library MyLibrary {}
-`
+`,
   },
   {
     description: 'Interface after library',
@@ -23,7 +23,7 @@ module.exports = [
   library MyLibrary {}
 
   interface MyInterface {}
-`
+`,
   },
   {
     description: 'Use for after state variable',
@@ -33,7 +33,7 @@ contract MyContract {
   
   using MyMathLib for uint;
 }
-`
+`,
   },
   {
     description: 'External pure before external view',
@@ -43,7 +43,7 @@ contract MyContract {
   function myExternalPureFunction() external pure {}
   function myExternalViewFunction() external view {}
 }
-`
+`,
   },
   {
     description: 'Public pure before public view',
@@ -53,7 +53,7 @@ contract MyContract {
   function myPublicPureFunction() public pure {}
   function myPublicViewFunction() public view {}
 }
-`
+`,
   },
   {
     description: 'Internal pure before internal view',
@@ -63,7 +63,7 @@ contract MyContract {
   function myInternalPureFunction() internal pure {}
   function myInternalViewFunction() internal view {}
 }
-`
+`,
   },
   {
     description: 'Private pure before private view',
@@ -73,6 +73,6 @@ contract MyContract {
   function myPrivatePureFunction() private pure {}
   function myPrivateViewFunction() private view {}
 }
-`
-  }
+`,
+  },
 ]

@@ -1,13 +1,13 @@
 const assert = require('assert')
-const linter = require('./../../../lib/index')
-const funcWith = require('./../../common/contract-builder').funcWith
+const linter = require('../../../lib/index')
+const funcWith = require('../../common/contract-builder').funcWith
 
 describe('Linter - check-send-result', () => {
   it('should return "send" call verification error', () => {
     const code = funcWith(require('../../fixtures/security/send-result-ignored'))
 
     const report = linter.processStr(code, {
-      rules: { 'check-send-result': 'error' }
+      rules: { 'check-send-result': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -18,7 +18,7 @@ describe('Linter - check-send-result', () => {
     const code = funcWith(require('../../fixtures/security/send-result-checked'))
 
     const report = linter.processStr(code, {
-      rules: { 'check-send-result': 'error' }
+      rules: { 'check-send-result': 'error' },
     })
 
     assert.equal(report.errorCount, 0)
@@ -28,7 +28,7 @@ describe('Linter - check-send-result', () => {
     const code = funcWith('require(x.send(1));')
 
     const report = linter.processStr(code, {
-      rules: { 'check-send-result': 'error' }
+      rules: { 'check-send-result': 'error' },
     })
 
     assert.equal(report.errorCount, 0)
@@ -38,7 +38,7 @@ describe('Linter - check-send-result', () => {
     const code = funcWith('require(!x.send(1));')
 
     const report = linter.processStr(code, {
-      rules: { 'check-send-result': 'error' }
+      rules: { 'check-send-result': 'error' },
     })
 
     assert.equal(report.errorCount, 0)
@@ -48,7 +48,7 @@ describe('Linter - check-send-result', () => {
     const code = funcWith('assert(x.send(1));')
 
     const report = linter.processStr(code, {
-      rules: { 'check-send-result': 'error' }
+      rules: { 'check-send-result': 'error' },
     })
 
     assert.equal(report.errorCount, 0)
@@ -58,7 +58,7 @@ describe('Linter - check-send-result', () => {
     const code = funcWith('assert(x.send(1) || something);')
 
     const report = linter.processStr(code, {
-      rules: { 'check-send-result': 'error' }
+      rules: { 'check-send-result': 'error' },
     })
 
     assert.equal(report.errorCount, 0)
@@ -68,7 +68,7 @@ describe('Linter - check-send-result', () => {
     const code = funcWith('f(x.send(1));')
 
     const report = linter.processStr(code, {
-      rules: { 'check-send-result': 'error' }
+      rules: { 'check-send-result': 'error' },
     })
 
     assert.equal(report.errorCount, 1)

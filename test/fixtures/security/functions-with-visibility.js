@@ -3,5 +3,5 @@ module.exports = [
   'function b() external { }',
   'function b() private { }',
   'function b() public { }',
-  'constructor() public { }'
+  'constructor() public { }',
 ]

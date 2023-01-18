@@ -1,13 +1,13 @@
 const assert = require('assert')
-const linter = require('./../../../lib/index')
-const contractWith = require('./../../common/contract-builder').contractWith
+const linter = require('../../../lib/index')
+const contractWith = require('../../common/contract-builder').contractWith
 
 describe('Linter - contract-name-camelcase', () => {
   it('should raise struct name error', () => {
     const code = contractWith('struct a {}')
 
     const report = linter.processStr(code, {
-      rules: { 'contract-name-camelcase': 'error' }
+      rules: { 'contract-name-camelcase': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -18,7 +18,7 @@ describe('Linter - contract-name-camelcase', () => {
     const code = 'contract a {}'
 
     const report = linter.processStr(code, {
-      rules: { 'contract-name-camelcase': 'error' }
+      rules: { 'contract-name-camelcase': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -29,7 +29,7 @@ describe('Linter - contract-name-camelcase', () => {
     const code = contractWith('enum abc {}')
 
     const report = linter.processStr(code, {
-      rules: { 'contract-name-camelcase': 'error' }
+      rules: { 'contract-name-camelcase': 'error' },
     })
 
     assert.equal(report.errorCount, 1)

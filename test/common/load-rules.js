@@ -1,6 +1,6 @@
 const assert = require('assert')
 const _ = require('lodash')
-const { loadRule, loadRules } = require('./../../lib/load-rules')
+const { loadRule, loadRules } = require('../../lib/load-rules')
 
 describe('Load Rules', () => {
   it('should load all rules', () => {

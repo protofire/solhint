@@ -1,13 +1,13 @@
 const assert = require('assert')
-const linter = require('./../../../lib/index')
-const { contractWith } = require('./../../common/contract-builder')
+const linter = require('../../../lib/index')
+const { contractWith } = require('../../common/contract-builder')
 
 describe('Linter - visibility-modifier-order', () => {
   it('should raise visibility modifier error', () => {
     const code = require('../../fixtures/order/visibility-modifier-not-first')
 
     const report = linter.processStr(code, {
-      rules: { 'visibility-modifier-order': 'error' }
+      rules: { 'visibility-modifier-order': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -17,7 +17,7 @@ describe('Linter - visibility-modifier-order', () => {
     const code = require('../../fixtures/order/visibility-modifier-first')
 
     const report = linter.processStr(code, {
-      rules: { 'visibility-modifier-order': 'error' }
+      rules: { 'visibility-modifier-order': 'error' },
     })
 
     assert.equal(report.errorCount, 0)
@@ -27,7 +27,7 @@ describe('Linter - visibility-modifier-order', () => {
     const code = contractWith('function foo(address payable addr) public payable {}')
 
     const report = linter.processStr(code, {
-      rules: { 'visibility-modifier-order': 'error' }
+      rules: { 'visibility-modifier-order': 'error' },
     })
 
     assert.equal(report.errorCount, 0)

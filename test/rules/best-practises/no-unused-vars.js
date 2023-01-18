@@ -1,6 +1,6 @@
-const { assertNoWarnings, assertErrorMessage, assertWarnsCount } = require('./../../common/asserts')
-const linter = require('./../../../lib/index')
-const { contractWith, funcWith, multiLine } = require('./../../common/contract-builder')
+const { assertNoWarnings, assertErrorMessage, assertWarnsCount } = require('../../common/asserts')
+const linter = require('../../../lib/index')
+const { contractWith, funcWith, multiLine } = require('../../common/contract-builder')
 
 describe('Linter - no-unused-vars', () => {
   const UNUSED_VARS = [
@@ -9,13 +9,13 @@ describe('Linter - no-unused-vars', () => {
     funcWith('var (a) = 1;'),
     contractWith('function a(uint a, uint b) public { uint c = a + b; }'),
     contractWith('function foo(uint a) { assembly { let t := a } }'),
-    contractWith('function foo(uint a) { uint b = a; } ')
+    contractWith('function foo(uint a) { uint b = a; } '),
   ]
 
-  UNUSED_VARS.forEach(curData =>
+  UNUSED_VARS.forEach((curData) =>
     it(`should raise warn for vars ${label(curData)}`, () => {
       const report = linter.processStr(curData, {
-        rules: { 'no-unused-vars': 'warn' }
+        rules: { 'no-unused-vars': 'warn' },
       })
 
       assertWarnsCount(report, 1)
@@ -63,13 +63,13 @@ describe('Linter - no-unused-vars', () => {
         '  return (c, d);                                   ',
         '}                                                  '
       )
-    )
+    ),
   ]
 
-  USED_VARS.forEach(curData =>
+  USED_VARS.forEach((curData) =>
     it(`should not raise warn for vars ${label(curData)}`, () => {
       const report = linter.processStr(curData, {
-        rules: { 'no-unused-vars': 'warn' }
+        rules: { 'no-unused-vars': 'warn' },
       })
 
       assertNoWarnings(report)
@@ -84,7 +84,7 @@ function withdrawalAllowed(address) public view override returns (bool) {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'no-unused-vars': 'warn' }
+      rules: { 'no-unused-vars': 'warn' },
     })
 
     assertNoWarnings(report)

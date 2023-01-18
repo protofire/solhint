@@ -55,7 +55,7 @@ contract MyContract {
   function myInternalFunction() internal {}
   function myPrivateFunction() private {}
 }
-`
+`,
   },
   {
     description: 'All units are in order - ^0.5.0',
@@ -131,7 +131,7 @@ contract MyContract {
   function myPrivateViewFunction() private view {}
   function myPrivatePureFunction() private pure {}
 }
-`
+`,
   },
   {
     description: 'All units are in order - ^0.6.0',
@@ -209,6 +209,6 @@ contract MyContract {
   function myPrivateViewFunction() private view {}
   function myPrivatePureFunction() private pure {}
 }
-`
-  }
+`,
+  },
 ]

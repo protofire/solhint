@@ -74,5 +74,5 @@ module.exports = {
   contractWithPrettier,
   stateDef,
   constantDef,
-  repeatLines
+  repeatLines,
 }

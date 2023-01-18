@@ -1,4 +1,4 @@
-const { contractWith } = require('./../../common/contract-builder')
+const { contractWith } = require('../../common/contract-builder')
 
 module.exports = contractWith(`
                 constructor() public {}

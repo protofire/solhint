@@ -23,8 +23,8 @@ contract Foo {
     const fixes = [
       {
         range: [38, 42],
-        text: 'revert()'
-      }
+        text: 'revert()',
+      },
     ]
 
     const { fixed, output } = applyFixes(fixes, inputSrc)
@@ -53,12 +53,12 @@ contract Foo {
     const fixes = [
       {
         range: [38, 42],
-        text: 'revert()'
+        text: 'revert()',
       },
       {
         range: [49, 53],
-        text: 'revert()'
-      }
+        text: 'revert()',
+      },
     ]
 
     const { fixed, output } = applyFixes(fixes, inputSrc)

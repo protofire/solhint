@@ -1,5 +1,5 @@
 const assert = require('assert')
-const linter = require('./../../../lib/index')
+const linter = require('../../../lib/index')
 
 describe('Linter - imports-on-top', () => {
   it('should raise import not on top error', () => {
@@ -11,7 +11,7 @@ describe('Linter - imports-on-top', () => {
             `
 
     const report = linter.processStr(code, {
-      rules: { 'imports-on-top': 'error' }
+      rules: { 'imports-on-top': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -28,7 +28,7 @@ describe('Linter - imports-on-top', () => {
             `
 
     const report = linter.processStr(code, {
-      rules: { 'imports-on-top': 'error' }
+      rules: { 'imports-on-top': 'error' },
     })
 
     assert.equal(report.errorCount, 0)

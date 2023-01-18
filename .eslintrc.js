@@ -1,13 +1,13 @@
 module.exports = {
   parserOptions: {
-    ecmaVersion: 8
+    ecmaVersion: 8,
   },
   env: {
     browser: false,
     node: true,
     commonjs: true,
     es6: true,
-    mocha: true
+    mocha: true,
   },
   extends: ['airbnb-base', 'plugin:prettier/recommended'],
   rules: {
@@ -26,12 +26,13 @@ module.exports = {
     'no-use-before-define': ['error', { classes: false, functions: false }],
     'prefer-destructuring': 'off',
     'prefer-template': 'off',
+    'max-classes-per-file': 'off',
 
     // this rules were disabled to make it easier to add airbnb-base, but they are good ones; we should re-enable them
     // at some point
     'class-methods-use-this': 'off',
     'guard-for-in': 'off',
     'no-shadow': 'off',
-    'no-underscore-dangle': 'off'
-  }
+    'no-underscore-dangle': 'off',
+  },
 }

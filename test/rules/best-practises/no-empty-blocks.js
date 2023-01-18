@@ -1,6 +1,6 @@
-const { assertNoWarnings, assertErrorMessage, assertWarnsCount } = require('./../../common/asserts')
-const linter = require('./../../../lib/index')
-const { contractWith, funcWith } = require('./../../common/contract-builder')
+const { assertNoWarnings, assertErrorMessage, assertWarnsCount } = require('../../common/asserts')
+const linter = require('../../../lib/index')
+const { contractWith, funcWith } = require('../../common/contract-builder')
 
 describe('Linter - no-empty-blocks', () => {
   const EMPTY_BLOCKS = [
@@ -8,13 +8,13 @@ describe('Linter - no-empty-blocks', () => {
     contractWith('struct Abc {  }'),
     contractWith('enum Abc {  }'),
     'contract A { }',
-    funcWith('assembly {  }')
+    funcWith('assembly {  }'),
   ]
 
-  EMPTY_BLOCKS.forEach(curData =>
+  EMPTY_BLOCKS.forEach((curData) =>
     it(`should raise warn for empty blocks ${label(curData)}`, () => {
       const report = linter.processStr(curData, {
-        rules: { 'no-empty-blocks': 'warn' }
+        rules: { 'no-empty-blocks': 'warn' },
       })
 
       assertWarnsCount(report, 1)
@@ -28,13 +28,13 @@ describe('Linter - no-empty-blocks', () => {
     contractWith('struct Abc { uint a; }'),
     contractWith('enum Abc { Test1 }'),
     'contract A { uint private a; }',
-    funcWith('assembly { "literal" }')
+    funcWith('assembly { "literal" }'),
   ]
 
-  BLOCKS_WITH_DEFINITIONS.forEach(curData =>
+  BLOCKS_WITH_DEFINITIONS.forEach((curData) =>
     it(`should not raise warn for blocks ${label(curData)}`, () => {
       const report = linter.processStr(curData, {
-        rules: { 'no-empty-blocks': 'warn' }
+        rules: { 'no-empty-blocks': 'warn' },
       })
 
       assertNoWarnings(report)
@@ -44,7 +44,7 @@ describe('Linter - no-empty-blocks', () => {
   it('should not raise error for default function', () => {
     const defaultFunction = contractWith('function () public payable {}')
     const report = linter.processStr(defaultFunction, {
-      rules: { 'no-empty-blocks': 'warn' }
+      rules: { 'no-empty-blocks': 'warn' },
     })
 
     assertNoWarnings(report)
