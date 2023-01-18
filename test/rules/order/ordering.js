@@ -1,6 +1,6 @@
 const assert = require('assert')
-const linter = require('./../../../lib/index')
-const contractWith = require('./../../common/contract-builder').contractWith
+const linter = require('../../../lib/index')
+const contractWith = require('../../common/contract-builder').contractWith
 const correctExamples = require('../../fixtures/order/ordering-correct')
 const incorrectExamples = require('../../fixtures/order/ordering-incorrect')
 
@@ -9,7 +9,7 @@ describe('Linter - ordering', () => {
     correctExamples.forEach(({ code, description }) => {
       it(description, () => {
         const report = linter.processStr(code, {
-          rules: { ordering: 'error' }
+          rules: { ordering: 'error' },
         })
 
         assert.equal(report.errorCount, 0)
@@ -21,7 +21,7 @@ describe('Linter - ordering', () => {
     incorrectExamples.forEach(({ code, description }) => {
       it(description, () => {
         const report = linter.processStr(code, {
-          rules: { ordering: 'error' }
+          rules: { ordering: 'error' },
         })
 
         assert.equal(report.errorCount, 1)
@@ -36,7 +36,7 @@ describe('Linter - ordering', () => {
             `)
 
     const report = linter.processStr(code, {
-      rules: { ordering: 'error' }
+      rules: { ordering: 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -50,7 +50,7 @@ describe('Linter - ordering', () => {
             `)
 
     const report = linter.processStr(code, {
-      rules: { ordering: 'error' }
+      rules: { ordering: 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -64,7 +64,7 @@ describe('Linter - ordering', () => {
           `)
 
     const report = linter.processStr(code, {
-      rules: { ordering: 'error' }
+      rules: { ordering: 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -78,7 +78,7 @@ describe('Linter - ordering', () => {
             `)
 
     const report = linter.processStr(code, {
-      rules: { ordering: 'error' }
+      rules: { ordering: 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -92,7 +92,7 @@ describe('Linter - ordering', () => {
             `)
 
     const report = linter.processStr(code, {
-      rules: { ordering: 'error' }
+      rules: { ordering: 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -106,7 +106,7 @@ describe('Linter - ordering', () => {
             `)
 
     const report = linter.processStr(code, {
-      rules: { ordering: 'error' }
+      rules: { ordering: 'error' },
     })
 
     assert.equal(report.errorCount, 0)
@@ -119,7 +119,7 @@ describe('Linter - ordering', () => {
             `)
 
     const report = linter.processStr(code, {
-      rules: { ordering: 'error' }
+      rules: { ordering: 'error' },
     })
 
     assert.equal(report.errorCount, 0)
@@ -129,7 +129,7 @@ describe('Linter - ordering', () => {
     const code = require('../../fixtures/order/func-order-constructor-first')
 
     const report = linter.processStr(code, {
-      rules: { ordering: 'error' }
+      rules: { ordering: 'error' },
     })
 
     assert.equal(report.errorCount, 0)
@@ -139,7 +139,7 @@ describe('Linter - ordering', () => {
     const code = require('../../fixtures/order/func-order-constructor-not-first')
 
     const report = linter.processStr(code, {
-      rules: { ordering: 'error' }
+      rules: { ordering: 'error' },
     })
     assert.equal(report.errorCount, 1)
     assert.ok(report.messages[0].message.includes('Function order is incorrect'))
@@ -152,7 +152,7 @@ describe('Linter - ordering', () => {
             `)
 
     const report = linter.processStr(code, {
-      rules: { ordering: 'error' }
+      rules: { ordering: 'error' },
     })
 
     assert.equal(report.errorCount, 0)
@@ -166,7 +166,7 @@ describe('Linter - ordering', () => {
     `
 
     const report = linter.processStr(code, {
-      rules: { ordering: 'error' }
+      rules: { ordering: 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -180,7 +180,7 @@ describe('Linter - ordering', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { ordering: 'error' }
+      rules: { ordering: 'error' },
     })
 
     assert.equal(report.errorCount, 1)

@@ -1,12 +1,12 @@
 const assert = require('assert')
-const linter = require('./../../../lib/index')
+const linter = require('../../../lib/index')
 
 describe('Linter - comprehensive-interface', () => {
   it('should raise an error', () => {
     const code = require('../../fixtures/miscellaneous/public-function-no-override')
 
     const report = linter.processStr(code, {
-      rules: { 'comprehensive-interface': 'error' }
+      rules: { 'comprehensive-interface': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -21,7 +21,7 @@ describe('Linter - comprehensive-interface', () => {
     const code = require('../../fixtures/miscellaneous/public-function-with-override')
 
     const report = linter.processStr(code, {
-      rules: { 'comprehensive-interface': 'error' }
+      rules: { 'comprehensive-interface': 'error' },
     })
 
     assert.equal(report.errorCount, 0)

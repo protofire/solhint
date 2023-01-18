@@ -1,7 +1,7 @@
 const assert = require('assert')
-const linter = require('./../../../lib/index')
-const funcWith = require('./../../common/contract-builder').funcWith
-const { assertErrorMessage, assertErrorCount } = require('./../../common/asserts')
+const linter = require('../../../lib/index')
+const funcWith = require('../../common/contract-builder').funcWith
+const { assertErrorMessage, assertErrorCount } = require('../../common/asserts')
 
 describe('Linter - multiple-sends', () => {
   it('should return the error that multiple send calls are being used in the same transaction', () => {
@@ -11,7 +11,7 @@ describe('Linter - multiple-sends', () => {
         `)
 
     const report = linter.processStr(code, {
-      rules: { 'multiple-sends': 'error' }
+      rules: { 'multiple-sends': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -24,7 +24,7 @@ describe('Linter - multiple-sends', () => {
         `)
 
     const report = linter.processStr(code, {
-      rules: { 'multiple-sends': 'error' }
+      rules: { 'multiple-sends': 'error' },
     })
 
     assertErrorCount(report, 1)

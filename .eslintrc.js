@@ -1,13 +1,13 @@
 module.exports = {
   parserOptions: {
-    ecmaVersion: 8
+    ecmaVersion: 8,
   },
   env: {
     browser: false,
     node: true,
     commonjs: true,
     es6: true,
-    mocha: true
+    mocha: true,
   },
   extends: ['airbnb-base', 'plugin:prettier/recommended'],
   rules: {
@@ -32,6 +32,6 @@ module.exports = {
     'class-methods-use-this': 'off',
     'guard-for-in': 'off',
     'no-shadow': 'off',
-    'no-underscore-dangle': 'off'
-  }
+    'no-underscore-dangle': 'off',
+  },
 }

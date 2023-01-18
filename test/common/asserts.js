@@ -58,5 +58,5 @@ module.exports = {
   assertNoErrors,
   assertErrorCount,
   assertWarnsCount,
-  assertLineNumber
+  assertLineNumber,
 }

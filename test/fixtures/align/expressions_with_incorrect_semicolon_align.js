@@ -4,5 +4,5 @@ module.exports = [
   'test(1, 2, b)/* test */;',
   'for ( ;;) {}',
   'for (i = 0; ;) {}',
-  'for ( ; a < b;) {}'
+  'for ( ; a < b;) {}',
 ]

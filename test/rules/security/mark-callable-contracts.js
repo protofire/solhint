@@ -1,13 +1,13 @@
 const assert = require('assert')
-const linter = require('./../../../lib/index')
-const { funcWith, contractWith } = require('./../../common/contract-builder')
+const linter = require('../../../lib/index')
+const { funcWith, contractWith } = require('../../common/contract-builder')
 
 describe('Linter - mark-callable-contracts', () => {
   it('should return error that external contract is not marked as trusted / untrusted', () => {
     const code = funcWith(require('../../fixtures/security/external-contract-untrusted.js'))
 
     const report = linter.processStr(code, {
-      rules: { 'mark-callable-contracts': 'warn' }
+      rules: { 'mark-callable-contracts': 'warn' },
     })
 
     assert.equal(report.warningCount, 1)
@@ -18,7 +18,7 @@ describe('Linter - mark-callable-contracts', () => {
     const code = funcWith(require('../../fixtures/security/external-contract-trusted.js'))
 
     const report = linter.processStr(code, {
-      rules: { 'mark-callable-contracts': 'warn' }
+      rules: { 'mark-callable-contracts': 'warn' },
     })
 
     assert.equal(report.warningCount, 0)
@@ -28,7 +28,7 @@ describe('Linter - mark-callable-contracts', () => {
     const code = funcWith('UntrustedBank.withdraw(100);')
 
     const report = linter.processStr(code, {
-      rules: { 'mark-callable-contracts': 'warn' }
+      rules: { 'mark-callable-contracts': 'warn' },
     })
 
     assert.equal(report.warningCount, 0)
@@ -50,7 +50,7 @@ describe('Linter - mark-callable-contracts', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'mark-callable-contracts': 'warn' }
+      rules: { 'mark-callable-contracts': 'warn' },
     })
 
     assert.equal(report.warningCount, 0)
@@ -66,7 +66,7 @@ describe('Linter - mark-callable-contracts', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'mark-callable-contracts': 'warn' }
+      rules: { 'mark-callable-contracts': 'warn' },
     })
 
     assert.equal(report.warningCount, 0)
@@ -82,7 +82,7 @@ describe('Linter - mark-callable-contracts', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'mark-callable-contracts': 'warn' }
+      rules: { 'mark-callable-contracts': 'warn' },
     })
 
     assert.equal(report.warningCount, 0)
@@ -98,7 +98,7 @@ describe('Linter - mark-callable-contracts', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'mark-callable-contracts': 'warn' }
+      rules: { 'mark-callable-contracts': 'warn' },
     })
 
     assert.equal(report.warningCount, 0)
@@ -114,7 +114,7 @@ describe('Linter - mark-callable-contracts', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'mark-callable-contracts': 'warn' }
+      rules: { 'mark-callable-contracts': 'warn' },
     })
 
     assert.equal(report.warningCount, 0)
@@ -129,7 +129,7 @@ describe('Linter - mark-callable-contracts', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'mark-callable-contracts': 'warn' }
+      rules: { 'mark-callable-contracts': 'warn' },
     })
 
     assert.equal(report.warningCount, 0)

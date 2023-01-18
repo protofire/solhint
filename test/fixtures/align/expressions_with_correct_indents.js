@@ -15,5 +15,5 @@ module.exports = [
   'a++',
   'a += 1',
   'a += (b + c) * d',
-  'bytesStringTrimmed[j] = bytesString[j]'
+  'bytesStringTrimmed[j] = bytesString[j]',
 ]
