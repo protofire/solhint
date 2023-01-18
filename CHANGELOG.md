@@ -1,3 +1,19 @@
+## [3.3.8] - 2023-01-17
+### Fixed Docs and Typos
+- [#292](https://github.com/protofire/solhint/pull/292)
+- [#343](https://github.com/protofire/solhint/pull/343)
+- [#355](https://github.com/protofire/solhint/pull/355)
+- [#285](https://github.com/protofire/solhint/pull/285)
+  
+### Added
+- Lint rule for banning "console.sol" and "import hardhat/console.sol" [#372](https://github.com/protofire/solhint/pull/372)
+
+### Updated
+- Solidity Parser to 0.14.5 [#378](https://github.com/protofire/solhint/pull/378)
+
+
+<br><br>
+## TIME GAP
 ## [2.1.0] - 2019-05-30
 
 ### Added
