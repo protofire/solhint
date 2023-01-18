@@ -4,7 +4,7 @@ const { funcWith, contractWith } = require('../../common/contract-builder')
 
 describe('Linter - mark-callable-contracts', () => {
   it('should return error that external contract is not marked as trusted / untrusted', () => {
-    const code = funcWith(require('../../fixtures/security/external-contract-untrusted.js'))
+    const code = funcWith(require('../../fixtures/security/external-contract-untrusted'))
 
     const report = linter.processStr(code, {
       rules: { 'mark-callable-contracts': 'warn' },
@@ -15,7 +15,7 @@ describe('Linter - mark-callable-contracts', () => {
   })
 
   it('should not return error for external contract that is marked as trusted', () => {
-    const code = funcWith(require('../../fixtures/security/external-contract-trusted.js'))
+    const code = funcWith(require('../../fixtures/security/external-contract-trusted'))
 
     const report = linter.processStr(code, {
       rules: { 'mark-callable-contracts': 'warn' },

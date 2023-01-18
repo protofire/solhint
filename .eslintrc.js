@@ -13,6 +13,7 @@ module.exports = {
   rules: {
     'consistent-return': 'off',
     'import/no-dynamic-require': 'off',
+    'max-classes-per-file': 'off',
     'import/no-extraneous-dependencies': ['error', { optionalDependencies: true }],
     'global-require': 'off',
     'no-bitwise': 'off',
