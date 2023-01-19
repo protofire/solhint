@@ -41,17 +41,19 @@
     "chalk": "4.1.2",
     "commander": "10.0.0",
     "cosmiconfig": "8.0.0",
-    "eslint": "8.31.0",
     "fast-diff": "1.2.0",
     "glob": "8.0.3",
     "ignore": "5.2.4",
     "js-yaml": "4.1.0",
     "lodash": "4.17.21",
-    "semver": "^6.3.0"
+    "semver": "^6.3.0",
+    "strip-ansi": "^6.0.1",
+    "text-table": "^0.2.0"
   },
   "devDependencies": {
     "assert": "2.0.0",
     "coveralls": "3.1.1",
+    "eslint": "8.31.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.6.0",
     "eslint-plugin-import": "2.27.4",

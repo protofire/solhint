@@ -191,7 +191,7 @@ function printReports(reports, formatter) {
 function getFormatter(formatter) {
   const formatterName = formatter || 'stylish'
   try {
-    return require(`eslint/lib/formatters/${formatterName}`)
+    return require(`./lib/formatters/${formatterName}`)
   } catch (ex) {
     ex.message = `\nThere was a problem loading formatter option: ${program.formatter} \nError: ${
       ex.message
