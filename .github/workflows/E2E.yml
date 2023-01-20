@@ -14,7 +14,7 @@ jobs:
     name: Test on Linux with Node ${{ matrix.node }}
     strategy:
       matrix:
-        node: [10, 12]
+        node: [14, 16]
     steps:
       - uses: actions/setup-node@v1
         with:
