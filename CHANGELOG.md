@@ -1,3 +1,17 @@
+## [3.3.9] - TBD
+
+### Updated
+- Update solhint dependencies to support newer versions [#380](https://github.com/protofire/solhint/pull/380)
+- Linter fixed to get clearer source code [#381](https://github.com/protofire/solhint/pull/381)
+- Updated E2E, added formatters into repo, updated CI [#385](https://github.com/protofire/solhint/pull/385)
+
+### Added
+- Lint rule for banning "console.sol" and "import hardhat or foundry console.sol" [#372](https://github.com/protofire/solhint/pull/372)
+
+### Fixed
+- Directories with .sol in the name path treated as files [#352]()
+
+<br><br>
 ## [3.3.8] - 2023-01-17
 ### Fixed Docs and Typos
 - [#292](https://github.com/protofire/solhint/pull/292)
@@ -5,8 +19,6 @@
 - [#355](https://github.com/protofire/solhint/pull/355)
 - [#285](https://github.com/protofire/solhint/pull/285)
   
-### Added
-- Lint rule for banning "console.sol" and "import hardhat/console.sol" [#372](https://github.com/protofire/solhint/pull/372)
 
 ### Updated
 - Solidity Parser to 0.14.5 [#378](https://github.com/protofire/solhint/pull/378)
