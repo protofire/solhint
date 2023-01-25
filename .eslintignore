@@ -1,3 +1,5 @@
 coverage
 node_modules
 scripts
+e2e
+/_temp

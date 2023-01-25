@@ -1,5 +1,5 @@
 const assert = require('assert')
-const { ConfigMissingError } = require('./../../lib/common/errors')
+const { ConfigMissingError } = require('../../lib/common/errors')
 
 describe('errors', () => {
   it('should throw a ConfigMissingError and match the message', () => {

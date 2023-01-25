@@ -1,4 +1,4 @@
-const { multiLine } = require('./../../common/contract-builder')
+const { multiLine } = require('../../common/contract-builder')
 
 module.exports = [
   'if(a > b) {}',
@@ -21,5 +21,5 @@ module.exports = [
     '  test2();   ',
     '}            '
   ),
-  multiLine('do {           ', '  test1();     ', '}              ', 'while (a < b); ')
+  multiLine('do {           ', '  test1();     ', '}              ', 'while (a < b); '),
 ]

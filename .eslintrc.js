@@ -1,18 +1,19 @@
 module.exports = {
   parserOptions: {
-    ecmaVersion: 8
+    ecmaVersion: 8,
   },
   env: {
     browser: false,
     node: true,
     commonjs: true,
     es6: true,
-    mocha: true
+    mocha: true,
   },
   extends: ['airbnb-base', 'plugin:prettier/recommended'],
   rules: {
     'consistent-return': 'off',
     'import/no-dynamic-require': 'off',
+    'max-classes-per-file': 'off',
     'import/no-extraneous-dependencies': ['error', { optionalDependencies: true }],
     'global-require': 'off',
     'no-bitwise': 'off',
@@ -32,6 +33,6 @@ module.exports = {
     'class-methods-use-this': 'off',
     'guard-for-in': 'off',
     'no-shadow': 'off',
-    'no-underscore-dangle': 'off'
-  }
+    'no-underscore-dangle': 'off',
+  },
 }

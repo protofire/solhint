@@ -1,13 +1,13 @@
 const assert = require('assert')
-const linter = require('./../../../lib/index')
-const contractWith = require('./../../common/contract-builder').contractWith
+const linter = require('../../../lib/index')
+const contractWith = require('../../common/contract-builder').contractWith
 
 describe('Linter - func-param-name-mixedcase', () => {
   it('should raise incorrect func param name error', () => {
     const code = contractWith('function funcName (uint A) public {}')
 
     const report = linter.processStr(code, {
-      rules: { 'func-param-name-mixedcase': 'error' }
+      rules: { 'func-param-name-mixedcase': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -18,7 +18,7 @@ describe('Linter - func-param-name-mixedcase', () => {
     const code = contractWith('event Event1(uint B);')
 
     const report = linter.processStr(code, {
-      rules: { 'func-param-name-mixedcase': 'error' }
+      rules: { 'func-param-name-mixedcase': 'error' },
     })
 
     assert.equal(report.errorCount, 1)

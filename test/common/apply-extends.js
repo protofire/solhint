@@ -1,12 +1,12 @@
 const assert = require('assert')
-const { applyExtends } = require('./../../lib/config/config-file')
+const { applyExtends } = require('../../lib/config/config-file')
 
 describe('applyExtends', () => {
   it('should return the same config if the extends property does not exist', () => {
     const initialConfig = {
       rules: {
-        rule0: 'error'
-      }
+        rule0: 'error',
+      },
     }
     const result = applyExtends(initialConfig)
 
@@ -17,8 +17,8 @@ describe('applyExtends', () => {
     const initialConfig = {
       extends: [],
       rules: {
-        rule0: 'error'
-      }
+        rule0: 'error',
+      },
     }
     const result = applyExtends(initialConfig)
 
@@ -29,22 +29,22 @@ describe('applyExtends', () => {
     const initialConfig = {
       extends: ['config1'],
       rules: {
-        rule0: 'error'
-      }
+        rule0: 'error',
+      },
     }
     const config1 = {
       rules: {
-        rule1: 'warning'
-      }
+        rule1: 'warning',
+      },
     }
-    const result = applyExtends(initialConfig, configName => ({ config1 }[configName]))
+    const result = applyExtends(initialConfig, (configName) => ({ config1 }[configName]))
 
     assert.deepStrictEqual(result, {
       extends: ['config1'],
       rules: {
         rule0: 'error',
-        rule1: 'warning'
-      }
+        rule1: 'warning',
+      },
     })
   })
 
@@ -52,22 +52,22 @@ describe('applyExtends', () => {
     const initialConfig = {
       extends: 'config1',
       rules: {
-        rule0: 'error'
-      }
+        rule0: 'error',
+      },
     }
     const config1 = {
       rules: {
-        rule1: 'warning'
-      }
+        rule1: 'warning',
+      },
     }
-    const result = applyExtends(initialConfig, configName => ({ config1 }[configName]))
+    const result = applyExtends(initialConfig, (configName) => ({ config1 }[configName]))
 
     assert.deepStrictEqual(result, {
       extends: ['config1'],
       rules: {
         rule0: 'error',
-        rule1: 'warning'
-      }
+        rule1: 'warning',
+      },
     })
   })
 
@@ -75,27 +75,27 @@ describe('applyExtends', () => {
     const initialConfig = {
       extends: ['config1', 'config2'],
       rules: {
-        rule0: 'error'
-      }
+        rule0: 'error',
+      },
     }
     const config1 = {
       rules: {
-        rule1: 'warning'
-      }
+        rule1: 'warning',
+      },
     }
     const config2 = {
       rules: {
-        rule1: 'off'
-      }
+        rule1: 'off',
+      },
     }
-    const result = applyExtends(initialConfig, configName => ({ config1, config2 }[configName]))
+    const result = applyExtends(initialConfig, (configName) => ({ config1, config2 }[configName]))
 
     assert.deepStrictEqual(result, {
       extends: ['config1', 'config2'],
       rules: {
         rule0: 'error',
-        rule1: 'off'
-      }
+        rule1: 'off',
+      },
     })
   })
 
@@ -103,26 +103,26 @@ describe('applyExtends', () => {
     const initialConfig = {
       extends: ['config1', 'config2'],
       rules: {
-        rule0: 'error'
-      }
+        rule0: 'error',
+      },
     }
     const config1 = {
       rules: {
-        rule0: 'warning'
-      }
+        rule0: 'warning',
+      },
     }
     const config2 = {
       rules: {
-        rule0: 'off'
-      }
+        rule0: 'off',
+      },
     }
-    const result = applyExtends(initialConfig, configName => ({ config1, config2 }[configName]))
+    const result = applyExtends(initialConfig, (configName) => ({ config1, config2 }[configName]))
 
     assert.deepStrictEqual(result, {
       extends: ['config1', 'config2'],
       rules: {
-        rule0: 'error'
-      }
+        rule0: 'error',
+      },
     })
   })
 })

@@ -17,6 +17,7 @@ function init() {
   program.version(version)
 
   program
+    .name('solhint')
     .usage('[options] <file> [...other_files]')
     .option('-f, --formatter [name]', 'report formatter name (stylish, table, tap, unix)')
     .option('-w, --max-warnings [maxWarningsNumber]', 'number of allowed warnings')
@@ -39,19 +40,14 @@ function init() {
     .description('create configuration file for solhint')
     .action(writeSampleConfigFile)
 
-  program.parse(process.argv)
-
-  if (program.init) {
-    writeSampleConfigFile()
-  }
-
-  if (program.args.length < 1) {
+  if (process.argv.length <= 2) {
     program.help()
   }
+  program.parse(process.argv)
 }
 
 function execMainAction() {
-  if (program.init) {
+  if (program.opts().init) {
     writeSampleConfigFile()
   }
 
@@ -59,7 +55,7 @@ function execMainAction() {
 
   try {
     // to check if is a valid formatter before execute linter
-    formatterFn = getFormatter(program.formatter)
+    formatterFn = getFormatter(program.opts().formatter)
   } catch (ex) {
     console.error(ex.message)
     process.exit(1)
@@ -68,29 +64,30 @@ function execMainAction() {
   const reportLists = program.args.filter(_.isString).map(processPath)
   const reports = _.flatten(reportLists)
   const warningsCount = reports.reduce((acc, i) => acc + i.warningCount, 0)
-  const warningsNumberExceeded = program.maxWarnings >= 0 && warningsCount > program.maxWarnings
+  const warningsNumberExceeded =
+    program.opts().maxWarnings >= 0 && warningsCount > program.opts().maxWarnings
 
-  if (program.fix) {
+  if (program.opts().fix) {
     for (const report of reports) {
       const inputSrc = fs.readFileSync(report.filePath).toString()
 
       const fixes = _(report.reports)
-        .filter(x => x.fix)
-        .map(x => x.fix(ruleFixer))
+        .filter((x) => x.fix)
+        .map((x) => x.fix(ruleFixer))
         .sort((a, b) => a.range[0] - b.range[0])
         .value()
 
       const { fixed, output } = applyFixes(fixes, inputSrc)
       if (fixed) {
-        report.reports = report.reports.filter(x => !x.fix)
+        report.reports = report.reports.filter((x) => !x.fix)
         fs.writeFileSync(report.filePath, output)
       }
     }
   }
 
-  if (program.quiet) {
+  if (program.opts().quiet) {
     // filter the list of reports, to set errors only.
-    reports[0].reports = reports[0].reports.filter(i => i.severity === 2)
+    reports[0].reports = reports[0].reports.filter((i) => i.severity === 2)
   }
 
   if (printReports(reports, formatterFn)) {
@@ -103,7 +100,7 @@ function execMainAction() {
     ) {
       console.log(
         'Solhint found more warnings than the maximum specified (maximum: %s)',
-        program.maxWarnings
+        program.opts().maxWarnings
       )
       process.exit(1)
     }
@@ -145,17 +142,17 @@ function writeSampleConfigFile() {
 const readIgnore = _.memoize(() => {
   let ignoreFile = '.solhintignore'
   try {
-    if (program.ignorePath) {
-      ignoreFile = program.ignorePath
+    if (program.opts().ignorePath) {
+      ignoreFile = program.opts().ignorePath
     }
 
     return fs
       .readFileSync(ignoreFile)
       .toString()
       .split('\n')
-      .map(i => i.trim())
+      .map((i) => i.trim())
   } catch (e) {
-    if (program.ignorePath && e.code === 'ENOENT') {
+    if (program.opts().ignorePath && e.code === 'ENOENT') {
       console.error(`\nERROR: ${ignoreFile} is not a valid path.`)
     }
     return []
@@ -166,7 +163,7 @@ const readConfig = _.memoize(() => {
   let config = {}
 
   try {
-    config = loadConfig(program.config)
+    config = loadConfig(program.opts().config)
   } catch (e) {
     console.log(e.message)
     process.exit(1)
@@ -197,11 +194,11 @@ function printReports(reports, formatter) {
 function getFormatter(formatter) {
   const formatterName = formatter || 'stylish'
   try {
-    return require(`eslint/lib/formatters/${formatterName}`)
+    return require(`./lib/formatters/${formatterName}`)
   } catch (ex) {
-    ex.message = `\nThere was a problem loading formatter option: ${program.formatter} \nError: ${
-      ex.message
-    }`
+    ex.message = `\nThere was a problem loading formatter option: ${
+      program.opts().formatter
+    } \nError: ${ex.message}`
     throw ex
   }
 }

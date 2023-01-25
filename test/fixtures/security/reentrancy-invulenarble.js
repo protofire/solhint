@@ -1,4 +1,4 @@
-const { contractWith, funcWith } = require('./../../common/contract-builder')
+const { contractWith, funcWith } = require('../../common/contract-builder')
 
 module.exports = [
   contractWith(`
@@ -24,5 +24,5 @@ module.exports = [
                 uint amount = shares[msg.sender];
                 msg.sender.transfer(amount);
                 shares[msg.sender] = 0;
-            `)
+            `),
 ]

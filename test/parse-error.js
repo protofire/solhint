@@ -1,6 +1,6 @@
 const assert = require('assert')
 const { assertErrorCount } = require('./common/asserts')
-const linter = require('./../lib/index')
+const linter = require('../lib/index')
 
 describe('Parse error', () => {
   it('should report parse errors', () => {
@@ -23,7 +23,7 @@ describe('Parse error', () => {
     )
 
     assertErrorCount(report, 2)
-    const messages = report.reports.map(error => error.message)
+    const messages = report.reports.map((error) => error.message)
     assert.ok(messages[0].startsWith("Parse error: extraneous input '}' expecting"))
     assert.ok(messages[1].startsWith("Parse error: mismatched input '<EOF>' expecting"))
   })

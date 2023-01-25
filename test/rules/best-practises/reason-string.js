@@ -4,17 +4,17 @@ const {
   assertNoErrors,
   assertErrorMessage,
   assertWarnsCount,
-  assertErrorCount
-} = require('./../../common/asserts')
-const linter = require('./../../../lib/index')
-const { funcWith } = require('./../../common/contract-builder')
+  assertErrorCount,
+} = require('../../common/asserts')
+const linter = require('../../../lib/index')
+const { funcWith } = require('../../common/contract-builder')
 
 describe('Linter - reason-string', () => {
   it('should raise reason string is mandatory for require', () => {
     const code = require('../../fixtures/best-practises/require-without-reason')
 
     const report = linter.processStr(code, {
-      rules: { 'reason-string': ['warn', { maxLength: 5 }] }
+      rules: { 'reason-string': ['warn', { maxLength: 5 }] },
     })
 
     assert.ok(report.warningCount > 0)
@@ -28,7 +28,7 @@ describe('Linter - reason-string', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'reason-string': ['error', { maxLength: 5 }] }
+      rules: { 'reason-string': ['error', { maxLength: 5 }] },
     })
 
     assert.ok(report.errorCount > 0)
@@ -42,7 +42,7 @@ describe('Linter - reason-string', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'reason-string': ['warn', { maxLength: 5 }] }
+      rules: { 'reason-string': ['warn', { maxLength: 5 }] },
     })
 
     assert.ok(report.warningCount > 0)
@@ -56,7 +56,7 @@ describe('Linter - reason-string', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'reason-string': ['error', { maxLength: 5 }] }
+      rules: { 'reason-string': ['error', { maxLength: 5 }] },
     })
 
     assert.ok(report.errorCount > 0)
@@ -68,7 +68,7 @@ describe('Linter - reason-string', () => {
     const code = require('../../fixtures/best-practises/require-with-reason')
 
     const report = linter.processStr(code, {
-      rules: { 'reason-string': ['warn', { maxLength: 31 }] }
+      rules: { 'reason-string': ['warn', { maxLength: 31 }] },
     })
 
     assertNoWarnings(report)
@@ -81,7 +81,7 @@ describe('Linter - reason-string', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'reason-string': ['error', { maxLength: 50 }] }
+      rules: { 'reason-string': ['error', { maxLength: 50 }] },
     })
 
     assertNoWarnings(report)
@@ -95,7 +95,7 @@ describe('Linter - reason-string', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'reason-string': ['error', { maxLength: 50 }] }
+      rules: { 'reason-string': ['error', { maxLength: 50 }] },
     })
 
     assertNoWarnings(report)
