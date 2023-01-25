@@ -1,7 +1,7 @@
 const assert = require('assert')
-const linter = require('./../../../lib/index')
-const { assertErrorMessage } = require('./../../common/asserts')
-const { funcWith } = require('./../../common/contract-builder')
+const linter = require('../../../lib/index')
+const { assertErrorMessage } = require('../../common/asserts')
+const { funcWith } = require('../../common/contract-builder')
 
 const FUNCTION_CALL_ERROR = 'No console.logX or console2.log statements'
 const IMPORT_ERROR = 'No import "hardhat/console.sol" or "forge-std/console.sol" statements'
@@ -13,7 +13,7 @@ describe('Linter - no-console', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'no-console': ['error'] }
+      rules: { 'no-console': ['error'] },
     })
 
     assert.equal(report.errorCount, 1)
@@ -26,7 +26,7 @@ describe('Linter - no-console', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'no-console': ['error'] }
+      rules: { 'no-console': ['error'] },
     })
 
     assert.equal(report.errorCount, 1)
@@ -39,7 +39,7 @@ describe('Linter - no-console', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'no-console': ['error'] }
+      rules: { 'no-console': ['error'] },
     })
 
     assert.equal(report.errorCount, 1)
@@ -52,7 +52,7 @@ describe('Linter - no-console', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'no-console': ['error'] }
+      rules: { 'no-console': ['error'] },
     })
 
     assert.equal(report.errorCount, 1)
@@ -66,7 +66,7 @@ describe('Linter - no-console', () => {
     `
 
     const report = linter.processStr(code, {
-      rules: { 'no-console': ['error'] }
+      rules: { 'no-console': ['error'] },
     })
 
     assert.equal(report.errorCount, 1)
@@ -80,7 +80,7 @@ describe('Linter - no-console', () => {
     `
 
     const report = linter.processStr(code, {
-      rules: { 'no-console': ['error'] }
+      rules: { 'no-console': ['error'] },
     })
 
     assert.equal(report.errorCount, 1)
@@ -94,7 +94,7 @@ describe('Linter - no-console', () => {
     `
 
     const report = linter.processStr(code, {
-      rules: { 'no-console': ['error'] }
+      rules: { 'no-console': ['error'] },
     })
 
     assert.equal(report.errorCount, 1)
@@ -108,7 +108,7 @@ describe('Linter - no-console', () => {
     `
 
     const report = linter.processStr(code, {
-      rules: { 'no-console': ['error'] }
+      rules: { 'no-console': ['error'] },
     })
 
     assert.equal(report.errorCount, 0)
