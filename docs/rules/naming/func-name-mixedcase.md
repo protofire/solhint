@@ -12,7 +12,7 @@ title:       "func-name-mixedcase | Solhint"
 
 
 ## Description
-Function name must be in camelCase.
+Function name must be in mixedCase.
 
 ## Options
 This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.

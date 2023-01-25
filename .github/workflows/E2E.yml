@@ -20,10 +20,14 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - uses: actions/checkout@v2
+      - name: install
+        run: npm install --include=dev
+      - name: lint
+        run: npm run lint
+      - name: generate-docs
+        run: npm run docs 
       - name: pack
         run: npm pack
-      - name: lint
-        run: npm install && npm run lint
       - name: install-globally
         run: npm i -g solhint*tgz
       - name: run-e2e-tests

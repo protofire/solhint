@@ -9,7 +9,7 @@ title:       "comprehensive-interface | Solhint"
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 
 ## Description
-Check that all public or external functions are override. This is useful to make sure that the whole API is extracted in an interface.
+Check that all public or external functions are override. This is iseful to make sure that the whole API is extracted in an interface.
 
 ## Options
 This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.

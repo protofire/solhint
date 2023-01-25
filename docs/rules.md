@@ -4,7 +4,7 @@ layout:      "default"
 title:       "Rule Index of Solhint"
 ---
 
-## Best Practice Rules
+## Best Practise Rules
 
 | Rule Id                                                            | Error                                                                                                                 | Recommended |
 | ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- | ----------- |
@@ -12,6 +12,7 @@ title:       "Rule Index of Solhint"
 | [function-max-lines](./rules/best-practises/function-max-lines.md) | Function body contains "count" lines but allowed no more than maxlines.                                               |             |
 | [max-line-length](./rules/best-practises/max-line-length.md)       | Line length must be no more than maxlen.                                                                              |             |
 | [max-states-count](./rules/best-practises/max-states-count.md)     | Contract has "some count" states declarations but allowed no more than maxstates.                                     | ✔️          |
+| [no-console](./rules/best-practises/no-console.md)                 | No console.log/logInt/logBytesX/logString/etc & No hardhat and forge-std console.sol import statements                | ✔️          |
 | [no-empty-blocks](./rules/best-practises/no-empty-blocks.md)       | Code contains empty block.                                                                                            | ✔️          |
 | [no-unused-vars](./rules/best-practises/no-unused-vars.md)         | Variable "name" is unused.                                                                                            | ✔️          |
 | [payable-fallback](./rules/best-practises/payable-fallback.md)     | When fallback is not payable you will not be able to receive ethers.                                                  | ✔️          |
@@ -34,7 +35,7 @@ title:       "Rule Index of Solhint"
 | [const-name-snakecase](./rules/naming/const-name-snakecase.md)                       | Constant name must be in capitalized SNAKE_CASE.                                       | ✔️          |
 | [contract-name-camelcase](./rules/naming/contract-name-camelcase.md)                 | Contract name must be in CamelCase.                                                    | ✔️          |
 | [event-name-camelcase](./rules/naming/event-name-camelcase.md)                       | Event name must be in CamelCase.                                                       | ✔️          |
-| [func-name-mixedcase](./rules/naming/func-name-mixedcase.md)                         | Function name must be in camelCase.                                                    | ✔️          |
+| [func-name-mixedcase](./rules/naming/func-name-mixedcase.md)                         | Function name must be in mixedCase.                                                    | ✔️          |
 | [func-param-name-mixedcase](./rules/naming/func-param-name-mixedcase.md)             | Function param name must be in mixedCase                                               |             |
 | [modifier-name-mixedcase](./rules/naming/modifier-name-mixedcase.md)                 | Modifier name must be in mixedCase.                                                    |             |
 | [private-vars-leading-underscore](./rules/naming/private-vars-leading-underscore.md) | Private and internal names must start with a single underscore.                        |             |
@@ -64,7 +65,7 @@ title:       "Rule Index of Solhint"
 | [no-complex-fallback](./rules/security/no-complex-fallback.md)         | Fallback function must be simple.                                        | ✔️          |
 | [no-inline-assembly](./rules/security/no-inline-assembly.md)           | Avoid to use inline assembly. It is acceptable only in rare cases.       | ✔️          |
 | [not-rely-on-block-hash](./rules/security/not-rely-on-block-hash.md)   | Do not rely on "block.blockhash". Miners can influence its value.        | ✔️          |
-| [not-rely-on-time](./rules/security/not-rely-on-time.md)               | Avoid making time-based decisions in your business logic.               | ✔️          |
+| [not-rely-on-time](./rules/security/not-rely-on-time.md)               | Avoid making time-based decisions in your business logic.                | ✔️          |
 | [reentrancy](./rules/security/reentrancy.md)                           | Possible reentrancy vulnerabilities. Avoid state changes after transfer. | ✔️          |
 | [state-visibility](./rules/security/state-visibility.md)               | Explicitly mark visibility of state.                                     | ✔️          |
         
