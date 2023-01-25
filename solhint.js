@@ -91,7 +91,13 @@ function execMainAction() {
   }
 
   if (printReports(reports, formatterFn)) {
-    if (program.opts().maxWarnings && !reports[0].errorCount && warningsNumberExceeded) {
+    if (
+      program.maxWarnings &&
+      reports &&
+      reports.length > 0 &&
+      !reports[0].errorCount &&
+      warningsNumberExceeded
+    ) {
       console.log(
         'Solhint found more warnings than the maximum specified (maximum: %s)',
         program.opts().maxWarnings
