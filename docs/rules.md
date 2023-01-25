@@ -14,7 +14,7 @@ title:       "Rule Index of Solhint"
 | [max-states-count](./rules/best-practises/max-states-count.md)     | Contract has "some count" states declarations but allowed no more than maxstates.                                     | ✔️          |
 | [no-console](./rules/best-practises/no-console.md)                 | No console.log/logInt/logBytesX/logString/etc & No hardhat and forge-std console.sol import statements                | ✔️          |
 | [no-empty-blocks](./rules/best-practises/no-empty-blocks.md)       | Code contains empty block.                                                                                            | ✔️          |
-| [no-global-import](./rules/best-practises/no-global-import.md)     | Import statement includes an entire file instead of selected symbols                                                  |             |
+| [no-global-import](./rules/best-practises/no-global-import.md)     | Import statement includes an entire file instead of selected symbols                                                  | ✔️          |
 | [no-unused-vars](./rules/best-practises/no-unused-vars.md)         | Variable "name" is unused.                                                                                            | ✔️          |
 | [payable-fallback](./rules/best-practises/payable-fallback.md)     | When fallback is not payable you will not be able to receive ethers.                                                  | ✔️          |
 | [reason-string](./rules/best-practises/reason-string.md)           | Require or revert statement must have a reason string and check that each reason string is at most N characters long. | ✔️          |

@@ -5,8 +5,11 @@ title:       "no-global-import | Solhint"
 ---
 
 # no-global-import
+![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
 ![Category Badge](https://img.shields.io/badge/-Best%20Practise%20Rules-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
+> The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
+
 
 ## Description
 Import statement includes an entire file instead of selected symbols
