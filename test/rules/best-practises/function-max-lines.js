@@ -1,14 +1,14 @@
 const _ = require('lodash')
-const { assertErrorCount, assertNoErrors, assertErrorMessage } = require('./../../common/asserts')
-const linter = require('./../../../lib/index')
-const { funcWith } = require('./../../common/contract-builder')
+const { assertErrorCount, assertNoErrors, assertErrorMessage } = require('../../common/asserts')
+const linter = require('../../../lib/index')
+const { funcWith } = require('../../common/contract-builder')
 
 describe('Linter - function-max-lines', () => {
   it('should raise error for function with 51 lines', () => {
     const code = funcWith(emptyLines(51))
 
     const report = linter.processStr(code, {
-      rules: { 'function-max-lines': 'error' }
+      rules: { 'function-max-lines': 'error' },
     })
 
     assertErrorCount(report, 1)
@@ -19,7 +19,7 @@ describe('Linter - function-max-lines', () => {
     const code = funcWith(emptyLines(50))
 
     const report = linter.processStr(code, {
-      rules: { 'function-max-lines': 'error' }
+      rules: { 'function-max-lines': 'error' },
     })
 
     assertNoErrors(report)
@@ -29,7 +29,7 @@ describe('Linter - function-max-lines', () => {
     const code = funcWith(emptyLines(99))
 
     const report = linter.processStr(code, {
-      rules: { 'function-max-lines': ['error', 100] }
+      rules: { 'function-max-lines': ['error', 100] },
     })
 
     assertNoErrors(report)

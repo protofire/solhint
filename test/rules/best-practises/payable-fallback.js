@@ -1,13 +1,13 @@
-const { assertNoWarnings, assertErrorMessage, assertWarnsCount } = require('./../../common/asserts')
-const linter = require('./../../../lib/index')
-const { contractWith } = require('./../../common/contract-builder')
+const { assertNoWarnings, assertErrorMessage, assertWarnsCount } = require('../../common/asserts')
+const linter = require('../../../lib/index')
+const { contractWith } = require('../../common/contract-builder')
 
 describe('Linter - payable-fallback', () => {
   it('should raise warn when fallback is not payable', () => {
     const code = require('../../fixtures/best-practises/fallback-not-payable')
 
     const report = linter.processStr(code, {
-      rules: { 'payable-fallback': 'warn' }
+      rules: { 'payable-fallback': 'warn' },
     })
 
     assertWarnsCount(report, 1)
@@ -18,7 +18,7 @@ describe('Linter - payable-fallback', () => {
     const code = require('../../fixtures/best-practises/fallback-payable')
 
     const report = linter.processStr(code, {
-      rules: { 'payable-fallback': 'warn' }
+      rules: { 'payable-fallback': 'warn' },
     })
 
     assertNoWarnings(report)
@@ -28,7 +28,7 @@ describe('Linter - payable-fallback', () => {
     const code = contractWith('function f() {} function g() payable {}')
 
     const report = linter.processStr(code, {
-      rules: { 'payable-fallback': 'warn' }
+      rules: { 'payable-fallback': 'warn' },
     })
 
     assertNoWarnings(report)

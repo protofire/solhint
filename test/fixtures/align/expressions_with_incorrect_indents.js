@@ -13,5 +13,5 @@ module.exports = [
   'a > b ?a : b',
   '! a',
   'a ++',
-  'a +=1'
+  'a +=1',
 ]

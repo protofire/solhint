@@ -1,8 +1,8 @@
 const assert = require('assert')
-const linter = require('./../../../lib/index')
-const { multiLine } = require('./../../common/contract-builder')
-const { assertErrorMessage } = require('./../../common/asserts')
-const BaseDeprecation = require('./../../../lib/rules/deprecations/base-deprecation')
+const linter = require('../../../lib/index')
+const { multiLine } = require('../../common/contract-builder')
+const { assertErrorMessage } = require('../../common/asserts')
+const BaseDeprecation = require('../../../lib/rules/deprecations/base-deprecation')
 
 describe('Linter - constructor-syntax', () => {
   it('should raise a warning for old-style constructors', () => {
@@ -14,7 +14,7 @@ describe('Linter - constructor-syntax', () => {
       '}                                ' // 5
     )
     const report = linter.processStr(code, {
-      rules: { 'constructor-syntax': 'warn' }
+      rules: { 'constructor-syntax': 'warn' },
     })
 
     assert.equal(report.warningCount, 1)
@@ -30,7 +30,7 @@ describe('Linter - constructor-syntax', () => {
       '}                                ' // 5
     )
     const report = linter.processStr(code, {
-      rules: { 'constructor-syntax': 'warn' }
+      rules: { 'constructor-syntax': 'warn' },
     })
     assert.equal(report.warningCount, 0)
   })
@@ -44,7 +44,7 @@ describe('Linter - constructor-syntax', () => {
       '}                                ' // 5
     )
     const report = linter.processStr(code, {
-      rules: { 'constructor-syntax': 'warn' }
+      rules: { 'constructor-syntax': 'warn' },
     })
     assert.equal(report.warningCount, 0)
   })
@@ -58,7 +58,7 @@ describe('Linter - constructor-syntax', () => {
       '}                                ' // 5
     )
     const report = linter.processStr(code, {
-      rules: { 'constructor-syntax': 'error' }
+      rules: { 'constructor-syntax': 'error' },
     })
     assert.equal(report.errorCount, 1)
     assertErrorMessage(report, 0, 'Constructor keyword')

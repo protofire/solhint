@@ -64,21 +64,22 @@ function execMainAction() {
   const reportLists = program.args.filter(_.isString).map(processPath)
   const reports = _.flatten(reportLists)
   const warningsCount = reports.reduce((acc, i) => acc + i.warningCount, 0)
-  const warningsNumberExceeded = program.opts().maxWarnings >= 0 && warningsCount > program.opts().maxWarnings
+  const warningsNumberExceeded =
+    program.opts().maxWarnings >= 0 && warningsCount > program.opts().maxWarnings
 
   if (program.opts().fix) {
     for (const report of reports) {
       const inputSrc = fs.readFileSync(report.filePath).toString()
 
       const fixes = _(report.reports)
-        .filter(x => x.fix)
-        .map(x => x.fix(ruleFixer))
+        .filter((x) => x.fix)
+        .map((x) => x.fix(ruleFixer))
         .sort((a, b) => a.range[0] - b.range[0])
         .value()
 
       const { fixed, output } = applyFixes(fixes, inputSrc)
       if (fixed) {
-        report.reports = report.reports.filter(x => !x.fix)
+        report.reports = report.reports.filter((x) => !x.fix)
         fs.writeFileSync(report.filePath, output)
       }
     }
@@ -86,7 +87,7 @@ function execMainAction() {
 
   if (program.opts().quiet) {
     // filter the list of reports, to set errors only.
-    reports[0].reports = reports[0].reports.filter(i => i.severity === 2)
+    reports[0].reports = reports[0].reports.filter((i) => i.severity === 2)
   }
 
   if (printReports(reports, formatterFn)) {
@@ -143,7 +144,7 @@ const readIgnore = _.memoize(() => {
       .readFileSync(ignoreFile)
       .toString()
       .split('\n')
-      .map(i => i.trim())
+      .map((i) => i.trim())
   } catch (e) {
     if (program.opts().ignorePath && e.code === 'ENOENT') {
       console.error(`\nERROR: ${ignoreFile} is not a valid path.`)
@@ -189,9 +190,9 @@ function getFormatter(formatter) {
   try {
     return require(`./lib/formatters/${formatterName}`)
   } catch (ex) {
-    ex.message = `\nThere was a problem loading formatter option: ${program.opts().formatter} \nError: ${
-      ex.message
-    }`
+    ex.message = `\nThere was a problem loading formatter option: ${
+      program.opts().formatter
+    } \nError: ${ex.message}`
     throw ex
   }
 }

@@ -1,7 +1,7 @@
 const assert = require('assert')
-const linter = require('./../../../lib/index')
-const funcWith = require('./../../common/contract-builder').funcWith
-const { assertErrorMessage } = require('./../../common/asserts')
+const linter = require('../../../lib/index')
+const funcWith = require('../../common/contract-builder').funcWith
+const { assertErrorMessage } = require('../../common/asserts')
 
 describe('Linter - avoid-tx-origin', () => {
   it('should return error that used tx.origin', () => {
@@ -10,7 +10,7 @@ describe('Linter - avoid-tx-origin', () => {
         `)
 
     const report = linter.processStr(code, {
-      rules: { 'avoid-tx-origin': 'error' }
+      rules: { 'avoid-tx-origin': 'error' },
     })
 
     assert.equal(report.errorCount, 1)

@@ -3,8 +3,8 @@ const _ = require('lodash')
 const {
   validate,
   validSeverityMap,
-  defaultSchemaValueForRules
-} = require('./../../lib/config/config-validator')
+  defaultSchemaValueForRules,
+} = require('../../lib/config/config-validator')
 
 describe('Config validator', () => {
   it('should check validSeverityMap', () => {
@@ -13,7 +13,7 @@ describe('Config validator', () => {
 
   it('should check defaultSchemaValueForRules', () => {
     assert.deepStrictEqual(defaultSchemaValueForRules, {
-      oneOf: [{ type: 'string', enum: ['error', 'warn', 'off'] }, { const: false }]
+      oneOf: [{ type: 'string', enum: ['error', 'warn', 'off'] }, { const: false }],
     })
   })
 
@@ -22,8 +22,8 @@ describe('Config validator', () => {
       extends: [],
       rules: {
         'avoid-throw': 'off',
-        indent: ['error', 2]
-      }
+        indent: ['error', 2],
+      },
     }
     assert.deepStrictEqual(_.isUndefined(validate(config)), true)
   })
@@ -33,8 +33,8 @@ describe('Config validator', () => {
       test: [],
       rules: {
         'avoid-throw': 'off',
-        indent: ['error', 2]
-      }
+        indent: ['error', 2],
+      },
     }
     assert.throws(() => validate(config), Error)
   })

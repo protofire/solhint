@@ -1,8 +1,8 @@
 const assert = require('assert')
-const linter = require('./../../../lib/index')
-const { contractWith, funcWith } = require('./../../common/contract-builder')
-const { storeAsFile, removeTmpFiles } = require('./../../common/utils')
-const { assertNoErrors, assertErrorCount } = require('./../../common/asserts')
+const linter = require('../../../lib/index')
+const { contractWith, funcWith } = require('../../common/contract-builder')
+const { storeAsFile, removeTmpFiles } = require('../../common/utils')
+const { assertNoErrors, assertErrorCount } = require('../../common/asserts')
 
 describe('Linter - quotes', () => {
   after(() => {
@@ -13,7 +13,7 @@ describe('Linter - quotes', () => {
     const code = require('../../fixtures/miscellaneous/string-with-single-quotes')
 
     const report = linter.processStr(code, {
-      rules: { quotes: 'error' }
+      rules: { quotes: 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -24,7 +24,7 @@ describe('Linter - quotes', () => {
     const code = "import * from 'lib.sol';"
 
     const report = linter.processStr(code, {
-      rules: { quotes: 'error' }
+      rules: { quotes: 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -52,10 +52,10 @@ describe('Linter - quotes', () => {
   const ERROR_ASSEMBLY_CLAUSES = [
     "assembly { 'abc' }",
     "assembly { dataSize('uint') }",
-    "assembly { linkerSymbol('uint') }"
+    "assembly { linkerSymbol('uint') }",
   ]
 
-  ERROR_ASSEMBLY_CLAUSES.forEach(curText =>
+  ERROR_ASSEMBLY_CLAUSES.forEach((curText) =>
     it(`should raise quotes error in assembly clause ${curText}`, () => {
       const code = funcWith(curText)
 
@@ -70,7 +70,7 @@ describe('Linter - quotes', () => {
     const filePath = storeAsFile(require('../../fixtures/miscellaneous/string-with-double-quotes'))
 
     const report = linter.processFile(filePath, {
-      rules: { quotes: 'error' }
+      rules: { quotes: 'error' },
     })
 
     assertNoErrors(report)
@@ -81,7 +81,7 @@ describe('Linter - quotes', () => {
     const filePath = storeAsFile(contractWith("string private a = 'test';"))
 
     const reports = linter.processPath(filePath, {
-      rules: { quotes: 'error' }
+      rules: { quotes: 'error' },
     })
 
     assertErrorCount(reports[0], 1)

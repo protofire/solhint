@@ -1,6 +1,6 @@
 const assert = require('assert')
-const linter = require('./../../../lib/index')
-const contractWith = require('./../../common/contract-builder').contractWith
+const linter = require('../../../lib/index')
+const contractWith = require('../../common/contract-builder').contractWith
 
 describe('Linter - no-complex-fallback', () => {
   it('should return that fallback must be simple', () => {
@@ -10,7 +10,7 @@ describe('Linter - no-complex-fallback', () => {
         }`)
 
     const report = linter.processStr(code, {
-      rules: { 'no-complex-fallback': 'warn' }
+      rules: { 'no-complex-fallback': 'warn' },
     })
 
     assert.equal(report.warningCount, 1)

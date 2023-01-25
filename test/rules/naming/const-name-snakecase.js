@@ -1,13 +1,13 @@
 const assert = require('assert')
-const linter = require('./../../../lib/index')
-const contractWith = require('./../../common/contract-builder').contractWith
+const linter = require('../../../lib/index')
+const contractWith = require('../../common/contract-builder').contractWith
 
 describe('Linter - const-name-snakecase', () => {
   it('should raise const name error', () => {
     const code = contractWith('uint private constant a;')
 
     const report = linter.processStr(code, {
-      rules: { 'const-name-snakecase': 'error' }
+      rules: { 'const-name-snakecase': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -18,7 +18,7 @@ describe('Linter - const-name-snakecase', () => {
     const code = contractWith('uint32 private constant THE_CONSTANT = 10;')
 
     const report = linter.processStr(code, {
-      rules: { 'const-name-snakecase': 'error' }
+      rules: { 'const-name-snakecase': 'error' },
     })
 
     assert.equal(report.errorCount, 0)
@@ -28,7 +28,7 @@ describe('Linter - const-name-snakecase', () => {
     const code = contractWith('uint32 private constant _THE_CONSTANT = 10;')
 
     const report = linter.processStr(code, {
-      rules: { 'const-name-snakecase': 'error' }
+      rules: { 'const-name-snakecase': 'error' },
     })
 
     assert.equal(report.errorCount, 0)
@@ -38,7 +38,7 @@ describe('Linter - const-name-snakecase', () => {
     const code = contractWith('uint32 private constant __THE_CONSTANT = 10;')
 
     const report = linter.processStr(code, {
-      rules: { 'const-name-snakecase': 'error' }
+      rules: { 'const-name-snakecase': 'error' },
     })
 
     assert.equal(report.errorCount, 0)
@@ -48,7 +48,7 @@ describe('Linter - const-name-snakecase', () => {
     const code = contractWith('uint32 private constant ___THE_CONSTANT = 10;')
 
     const report = linter.processStr(code, {
-      rules: { 'const-name-snakecase': 'error' }
+      rules: { 'const-name-snakecase': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
