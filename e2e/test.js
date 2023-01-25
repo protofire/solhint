@@ -115,12 +115,10 @@ describe('e2e', function() {
   describe('.sol on path', function() {
     useFixture('04-dotSol-on-path')
 
-    it('should success', function() {
-      const { code, stdout } = shell.exec('solhint contracts/**/*.sol')
+    it('should handle directory names that end with .sol', function() {
+      const { code } = shell.exec('solhint contracts/**/*.sol')
 
       expect(code).to.equal(0)
-
-      console.log(stdout)
     })
   })
 })

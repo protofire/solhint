@@ -9,7 +9,7 @@
 - Lint rule for banning "console.sol" and "import hardhat or foundry console.sol" [#372](https://github.com/protofire/solhint/pull/372)
 
 ### Fixed
-- Directories with .sol in the name path treated as files [#352]()
+- Directories with .sol in the name path treated as files [#352](https://github.com/protofire/solhint/pull/388)
 
 <br><br>
 ## [3.3.8] - 2023-01-17
