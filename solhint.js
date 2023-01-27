@@ -87,7 +87,9 @@ function execMainAction() {
 
   if (program.opts().quiet) {
     // filter the list of reports, to set errors only.
-    reports[0].reports = reports[0].reports.filter((i) => i.severity === 2)
+    reports.forEach((reporter) => {
+      reporter.reports = reporter.reports.filter((i) => i.severity === 2)
+    })
   }
 
   if (printReports(reports, formatterFn)) {
