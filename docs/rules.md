@@ -9,7 +9,7 @@ title:       "Rule Index of Solhint"
 | Rule Id                                                            | Error                                                                                                                 | Recommended |
 | ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- | ----------- |
 | [code-complexity](./rules/best-practises/code-complexity.md)       | Function has cyclomatic complexity "current" but allowed no more than maxcompl.                                       |             |
-| [function-max-lines](./rules/best-practises/function-max-lines.md) | Function body contains "count" lines but allowed no more than maxlines.                                               |             |
+| [function-max-lines](./rules/best-practises/function-max-lines.md) | Function body contains "count" lines but allowed no more than maxlines. (comments and empty lines not considered)     |             |
 | [max-line-length](./rules/best-practises/max-line-length.md)       | Line length must be no more than maxlen.                                                                              |             |
 | [max-states-count](./rules/best-practises/max-states-count.md)     | Contract has "some count" states declarations but allowed no more than maxstates.                                     | ✔️          |
 | [no-console](./rules/best-practises/no-console.md)                 | No console.log/logInt/logBytesX/logString/etc & No hardhat and forge-std console.sol import statements                | ✔️          |
