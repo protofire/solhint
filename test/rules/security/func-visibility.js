@@ -2,6 +2,22 @@ const assert = require('assert')
 const linter = require('../../../lib/index')
 const contractWith = require('../../common/contract-builder').contractWith
 
+describe('Linter - func-visibility with free functions', () => {
+  const contractWithFreeFunction = require('../../fixtures/security/contracts-with-free-functions')
+
+  contractWithFreeFunction.forEach((code) =>
+    it('should return required visibility error skiping free functions', () => {
+      const report = linter.processStr(code, {
+        rules: { 'func-visibility': ['warn', { ignoreConstructors: true }] },
+      })
+
+      assert.equal(report.warningCount, 2)
+      assert.ok(report.reports[0].message.includes('visibility'))
+      assert.ok(report.reports[1].message.includes('visibility'))
+    })
+  )
+})
+
 describe('Linter - func-visibility', () => {
   it('should return required visibility error', () => {
     require('../../fixtures/security/functions-without-visibility').forEach((func) => {

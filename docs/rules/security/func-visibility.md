@@ -12,7 +12,7 @@ title:       "func-visibility | Solhint"
 
 
 ## Description
-Explicitly mark visibility in function.
+Explicitly mark visibility in function (free functions are skipped).
 
 ## Options
 This rule accepts an array of options:

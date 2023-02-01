@@ -59,7 +59,7 @@ title:       "Rule Index of Solhint"
 | [avoid-tx-origin](./rules/security/avoid-tx-origin.md)                 | Avoid to use tx.origin.                                                  | ✔️          |
 | [check-send-result](./rules/security/check-send-result.md)             | Check result of "send" call.                                             | ✔️          |
 | [compiler-version](./rules/security/compiler-version.md)               | Compiler version must satisfy a semver requirement.                      | ✔️          |
-| [func-visibility](./rules/security/func-visibility.md)                 | Explicitly mark visibility in function.                                  | ✔️          |
+| [func-visibility](./rules/security/func-visibility.md)                 | Explicitly mark visibility in function (free functions are skipped).     | ✔️          |
 | [mark-callable-contracts](./rules/security/mark-callable-contracts.md) | Explicitly mark all external contracts as trusted or untrusted.          |             |
 | [multiple-sends](./rules/security/multiple-sends.md)                   | Avoid multiple calls of "send" method in single transaction.             | ✔️          |
 | [no-complex-fallback](./rules/security/no-complex-fallback.md)         | Fallback function must be simple.                                        | ✔️          |
