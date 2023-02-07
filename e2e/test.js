@@ -111,4 +111,14 @@ describe('e2e', function() {
       expect(stdout.trim()).to.contain('Code contains empty blocks')
     })
   })
+
+  describe('.sol on path', function() {
+    useFixture('04-dotSol-on-path')
+
+    it('should handle directory names that end with .sol', function() {
+      const { code } = shell.exec('solhint contracts/**/*.sol')
+
+      expect(code).to.equal(0)
+    })
+  })
 })
