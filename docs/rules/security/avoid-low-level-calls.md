@@ -34,7 +34,6 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 
 ```solidity
 anyAddress.call{value: 1 ether}("");
-anyAddress.call.value(code)();
 ```
 
 ### 👎 Examples of **incorrect** code for this rule
@@ -45,6 +44,7 @@ anyAddress.call.value(code)();
 anyAddress.call(code);
 a.callcode(test1);
 a.delegatecall(test1);
+anyAddress.call.value(code)();
 ```
 
 ## Version

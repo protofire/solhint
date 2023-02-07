@@ -19,7 +19,7 @@ describe('Linter - avoid-low-level-calls', () => {
   )
 
   ALLOWED_LOW_LEVEL_CALLS.forEach((curCode) =>
-    it('should not return warn when code contains low level calls', () => {
+    it('should not return warn when code contains allowed low level calls', () => {
       const report = linter.processStr(curCode, {
         rules: { 'avoid-low-level-calls': 'warn' },
       })
