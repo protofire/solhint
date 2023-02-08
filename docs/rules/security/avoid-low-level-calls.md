@@ -28,14 +28,23 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 
 
 ## Examples
+### 👍 Examples of **correct** code for this rule
+
+#### Using low level calls to transfer funds
+
+```solidity
+anyAddress.call{value: 1 ether}("");
+```
+
 ### 👎 Examples of **incorrect** code for this rule
 
 #### Using low level calls
 
 ```solidity
-msg.sender.call(code);
+anyAddress.call(code);
 a.callcode(test1);
 a.delegatecall(test1);
+anyAddress.call.value(code)();
 ```
 
 ## Version
