@@ -3,8 +3,8 @@ const linter = require('../../../lib/index')
 const { assertErrorMessage } = require('../../common/asserts')
 const { funcWith } = require('../../common/contract-builder')
 
-const FUNCTION_CALL_ERROR = 'No console.logX or console2.log statements'
-const IMPORT_ERROR = 'No import "hardhat/console.sol" or "forge-std/console.sol" statements'
+const FUNCTION_CALL_ERROR = 'Unexpected console statement'
+const IMPORT_ERROR = 'Unexpected import of console file'
 
 describe('Linter - no-console', () => {
   it('should raise console.log() is not allowed', () => {
@@ -105,6 +105,29 @@ describe('Linter - no-console', () => {
     const code = `
     import "forge-std/xxxxx.sol";
     contract A {}
+    `
+
+    const report = linter.processStr(code, {
+      rules: { 'no-console': ['error'] },
+    })
+
+    assert.equal(report.errorCount, 0)
+  })
+
+  it('should NOT raise error when method invocation contains "console" string', () => {
+    const code = `
+    contract A {
+      struct Console {
+        uint256 one;
+        uint256 two;
+      }
+      Console[] public consoleTest;
+      Console[] public console;
+      function niceFunction() external {
+        consoleTest.push(0,0);
+        console.push = (1,1);
+      }
+    }
     `
 
     const report = linter.processStr(code, {
