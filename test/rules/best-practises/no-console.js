@@ -1,7 +1,7 @@
 const assert = require('assert')
 const linter = require('../../../lib/index')
 const { assertErrorMessage } = require('../../common/asserts')
-const { funcWith } = require('../../common/contract-builder')
+const { funcWith, funcWithV7V8Header } = require('../../common/contract-builder')
 
 const FUNCTION_CALL_ERROR = 'Unexpected console statement'
 const IMPORT_ERROR = 'Unexpected import of console file'
@@ -135,5 +135,59 @@ describe('Linter - no-console', () => {
     })
 
     assert.equal(report.errorCount, 0)
+  })
+})
+
+describe('Linter - no-console - V7 V8 additions', () => {
+  it('should raise console.log() is not allowed', () => {
+    const code = funcWithV7V8Header(`
+      console.log('test');
+    `)
+
+    const report = linter.processStr(code, {
+      rules: { 'no-console': ['error'] },
+    })
+
+    assert.equal(report.errorCount, 1)
+    assertErrorMessage(report, FUNCTION_CALL_ERROR)
+  })
+
+  it('should raise console.logString() is not allowed', () => {
+    const code = funcWithV7V8Header(`
+      console.logString('test');
+    `)
+
+    const report = linter.processStr(code, {
+      rules: { 'no-console': ['error'] },
+    })
+
+    assert.equal(report.errorCount, 1)
+    assertErrorMessage(report, FUNCTION_CALL_ERROR)
+  })
+
+  it('should raise console.logBytes12() is not allowed', () => {
+    const code = funcWithV7V8Header(`
+      console.logString('test');
+    `)
+
+    const report = linter.processStr(code, {
+      rules: { 'no-console': ['error'] },
+    })
+
+    assert.equal(report.errorCount, 1)
+    assertErrorMessage(report, FUNCTION_CALL_ERROR)
+  })
+
+  it('should raise console2.log is not allowed', () => {
+    const code = funcWithV7V8Header(`
+      console2.log('test');
+    `)
+
+    const report = linter.processStr(code, {
+      rules: { 'no-console': ['error'] },
+    })
+
+    assert.equal(report.errorCount, 1)
+    assertErrorMessage(report, FUNCTION_CALL_ERROR)
   })
 })

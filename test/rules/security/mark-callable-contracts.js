@@ -1,3 +1,5 @@
+// Deprecated rule
+
 const assert = require('assert')
 const linter = require('../../../lib/index')
 const { funcWith, contractWith } = require('../../common/contract-builder')

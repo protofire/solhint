@@ -1,4 +1,5 @@
 const { times } = require('lodash')
+const V7_V8_ADDITIONS = require('../helpers/v7-v8-solidity-additions')
 
 function contractWith(code) {
   return `
@@ -65,6 +66,30 @@ function repeatLines(line, count) {
     .join('\n')
 }
 
+function contractWithV7V8Header(code) {
+  return `
+    ${V7_V8_ADDITIONS}
+    ${code}
+  }
+  `
+}
+
+function funcWithV7V8Header(statements) {
+  return contractWithV7V8Header(`
+        function b() public {
+          ${statements}
+        }
+    `)
+}
+
+function modifierWithV7V8Header(statements) {
+  return contractWithV7V8Header(`
+        modifier b() {
+          ${statements}
+        }
+    `)
+}
+
 module.exports = {
   contractWith,
   libraryWith,
@@ -75,4 +100,7 @@ module.exports = {
   stateDef,
   constantDef,
   repeatLines,
+  contractWithV7V8Header,
+  funcWithV7V8Header,
+  modifierWithV7V8Header,
 }
