@@ -289,4 +289,142 @@ describe('Linter - ordering', () => {
 
     assert.equal(report.errorCount, 1)
   })
+
+  it('should raise error when custom error is before import', () => {
+    const code = `
+      // SPDX-License-Identifier: MIT
+      pragma solidity ^0.8.0;
+      error Unauthorized();
+      import "@openzeppelin/contracts/ownership/Ownable.sol";
+      contract OneNiceContract {}
+    `
+    const report = linter.processStr(code, {
+      rules: { ordering: 'error' },
+    })
+
+    assert.equal(report.errorCount, 1)
+    assert.ok(
+      report.messages[0].message.includes(
+        'Function order is incorrect, import directive can not go after custom error definition'
+      )
+    )
+  })
+
+  it('should not raise error when custom error is defined in correct order', () => {
+    const code = `
+      // SPDX-License-Identifier: MIT
+      pragma solidity ^0.8.0;
+      import "@openzeppelin/contracts/ownership/Ownable.sol";
+      error Unauthorized();
+      contract OneNiceContract {}
+    `
+    const report = linter.processStr(code, {
+      rules: { ordering: 'error' },
+    })
+
+    assert.equal(report.errorCount, 0)
+  })
+
+  it('should raise error when free function is before custom error', () => {
+    const code = `
+      // SPDX-License-Identifier: MIT
+      pragma solidity ^0.8.0;
+      import "@openzeppelin/contracts/ownership/Ownable.sol";
+      function freeFunction() pure returns (uint256) {
+        return 1;
+      }     
+      error Unauthorized();
+      contract OneNiceContract {}
+    `
+    const report = linter.processStr(code, {
+      rules: { ordering: 'error' },
+    })
+
+    assert.equal(report.errorCount, 1)
+    assert.ok(
+      report.messages[0].message.includes(
+        'Function order is incorrect, custom error definition can not go after free function definition'
+      )
+    )
+  })
+
+  it('should not raise error when free function is defined in correct order', () => {
+    const code = `
+      // SPDX-License-Identifier: MIT
+      pragma solidity ^0.8.0;
+      import "@openzeppelin/contracts/ownership/Ownable.sol";
+      error Unauthorized();
+      function freeFunction() pure returns (uint256) {
+        return 1;
+      }     
+      contract OneNiceContract {}
+    `
+    const report = linter.processStr(code, {
+      rules: { ordering: 'error' },
+    })
+
+    assert.equal(report.errorCount, 0)
+  })
+
+  it('should raise error when file level constant is defined after free function', () => {
+    const code = `
+      // SPDX-License-Identifier: MIT
+      pragma solidity ^0.8.0;
+      import "@openzeppelin/contracts/ownership/Ownable.sol";
+      function freeFunction() pure returns (uint256) {
+        return 1;
+      }     
+      uint256 constant oneNiceConstant = 1;
+      contract OneNiceContract {}
+    `
+    const report = linter.processStr(code, {
+      rules: { ordering: 'error' },
+    })
+
+    assert.equal(report.errorCount, 1)
+    assert.ok(
+      report.messages[0].message.includes(
+        'Function order is incorrect, file level constant can not go after free function definition'
+      )
+    )
+  })
+
+  it('should not raise error when file level constant is defined in correct order', () => {
+    const code = `
+      // SPDX-License-Identifier: MIT
+      pragma solidity ^0.8.0;
+      import "@openzeppelin/contracts/ownership/Ownable.sol";
+      uint256 constant oneNiceConstant = 1;
+      function freeFunction() pure returns (uint256) {
+        return 1;
+      }     
+      contract OneNiceContract {}
+    `
+    const report = linter.processStr(code, {
+      rules: { ordering: 'error' },
+    })
+
+    assert.equal(report.errorCount, 0)
+  })
+
+  it('should not raise error when all top level code is well placed', () => {
+    const code = `
+      // SPDX-License-Identifier: MIT
+      pragma solidity ^0.8.0;
+      import "@openzeppelin/contracts/ownership/Ownable.sol";
+      error Unauthorized();
+      enum MyEnum { A, B }
+      struct OneNiceStruct { uint256 a; uint256 b; }            
+      uint256 constant oneNiceConstant = 1;
+      function freeFunction() pure returns (uint256) {
+        return 1;
+      }     
+      contract OneNiceContract {}
+    `
+    const report = linter.processStr(code, {
+      rules: { ordering: 'error' },
+    })
+
+    assert.equal(report.errorCount, 0)
+  })
 })
