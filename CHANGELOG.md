@@ -1,15 +1,28 @@
-## [3.3.9] - TBD
-
+## [3.4.0] - 2023-02-17
 ### Updated
-- Update solhint dependencies to support newer versions [#380](https://github.com/protofire/solhint/pull/380)
+- Solhint dependencies to support newer versions [#380](https://github.com/protofire/solhint/pull/380)
 - Linter fixed to get clearer source code [#381](https://github.com/protofire/solhint/pull/381)
-- Updated E2E, added formatters into repo, updated CI [#385](https://github.com/protofire/solhint/pull/385)
-
+- E2E, added formatters into repo, updated CI [#385](https://github.com/protofire/solhint/pull/385)
+- Solhint dependencies to support newer versions [#403](https://github.com/protofire/solhint/pull/403)
+  
 ### Added
-- Lint rule for banning "console.sol" and "import hardhat or foundry console.sol" [#372](https://github.com/protofire/solhint/pull/372)
+- New Rule: For banning "console.sol" and "import hardhat or foundry console.sol" [#372](https://github.com/protofire/solhint/pull/372)
+- New Rule: No global imports [#390](https://github.com/protofire/solhint/pull/390)
+- New Rule: Named parameters in v0.8.18 solidity version [#403](https://github.com/protofire/solhint/pull/403)
 
 ### Fixed
+- TypeError: cannot read property 'errorCount' of undefined [#351](https://github.com/protofire/solhint/pull/351)
 - Directories with .sol in the name path treated as files [#352](https://github.com/protofire/solhint/pull/388)
+- Doc generator and added a CI step to avoid crashing [#389](https://github.com/protofire/solhint/pull/389)
+- Rule for banning "console.sol" and "import hardhat or foundry console.sol [#391](https://github.com/protofire/solhint/pull/391)
+- Option –quiet works now with all files [#392](https://github.com/protofire/solhint/pull/392)
+- Transfers with .call excluded from warning as low level code [#394](https://github.com/protofire/solhint/pull/394)
+- Made func-visibility skip free functions [#396](https://github.com/protofire/solhint/pull/396)
+- False positive on no-unused-vars for payable arguments without name [#399](https://github.com/protofire/solhint/pull/399)
+
+
+
+
 
 <br><br>
 ## [3.3.8] - 2023-01-17
