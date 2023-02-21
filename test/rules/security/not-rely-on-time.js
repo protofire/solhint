@@ -11,7 +11,7 @@ describe('Linter - not-rely-on-time', () => {
   TIME_BASED_LOGIC.forEach((curCode) =>
     it('should return warn when business logic rely on time', () => {
       const report = linter.processStr(curCode, {
-        rules: { 'not-rely-on-time': 'off' },
+        rules: { 'not-rely-on-time': 'warn' },
       })
 
       assertWarnsCount(report, 1)
