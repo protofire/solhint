@@ -50,6 +50,69 @@ describe('Linter - no-empty-blocks', () => {
     assertNoWarnings(report)
   })
 
+  it('should not raise error for inline assembly [for] statement with some content', () => {
+    const code = funcWith(`
+      assembly {  
+        for { } lt(i, 0x100) { } {     
+          i := add(i, 0x20)
+        } 
+      }`)
+
+    const report = linter.processStr(code, {
+      rules: { 'no-empty-blocks': 'warn' },
+    })
+
+    assertNoWarnings(report)
+  })
+
+  it('should raise error for inline assembly [for] statement with empty content', () => {
+    const code = funcWith(`
+      assembly {  
+        for { } lt(i, 0x100) { } {     
+        } 
+      }`)
+
+    const report = linter.processStr(code, {
+      rules: { 'no-empty-blocks': 'warn' },
+    })
+    assertWarnsCount(report, 1)
+    assertErrorMessage(report, 'empty block')
+  })
+
+  it('should raise error for inline assembly [for nested] statement with empty content', () => {
+    const code = funcWith(`
+      assembly {  
+        for { } lt(i, 0x100) { } {     
+          for { } lt(j, 0x100) { } {     
+          } 
+        } 
+      }`)
+
+    const report = linter.processStr(code, {
+      rules: { 'no-empty-blocks': 'warn' },
+    })
+    assertWarnsCount(report, 1)
+    assertErrorMessage(report, 'empty block')
+  })
+
+  it('should not raise error for inline assembly [for nested] statement with some content', () => {
+    const code = funcWith(`
+      assembly {  
+        for { } lt(i, 0x100) { } {
+          i := add(i, 0x20)     
+          for { } lt(i, 0x100) { } {     
+            j := add(j, 0x20)
+          } 
+        } 
+      }`)
+
+    const report = linter.processStr(code, {
+      rules: { 'no-empty-blocks': 'warn' },
+    })
+
+    assertNoWarnings(report)
+  })
+
   function label(data) {
     const items = data.split('\n')
     const lastItemIndex = items.length - 1
