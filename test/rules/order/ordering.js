@@ -412,10 +412,10 @@ describe('Linter - ordering', () => {
       // SPDX-License-Identifier: MIT
       pragma solidity ^0.8.0;
       import "@openzeppelin/contracts/ownership/Ownable.sol";
-      error Unauthorized();
+      uint256 constant oneNiceConstant = 1;
       enum MyEnum { A, B }
       struct OneNiceStruct { uint256 a; uint256 b; }            
-      uint256 constant oneNiceConstant = 1;
+      error Unauthorized();
       function freeFunction() pure returns (uint256) {
         return 1;
       }     
