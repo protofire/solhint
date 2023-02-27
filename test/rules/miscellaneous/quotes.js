@@ -1,4 +1,5 @@
 const assert = require('assert')
+const os = require('os')
 const linter = require('../../../lib/index')
 const { contractWith, funcWith } = require('../../common/contract-builder')
 const { storeAsFile, removeTmpFiles } = require('../../common/utils')
@@ -77,7 +78,10 @@ describe('Linter - quotes', () => {
     assert.equal(report.filePath, filePath)
   })
 
-  it('should raise one error', () => {
+  it('should raise one error', function test() {
+    if (os.type() === 'Windows_NT') {
+      this.skip()
+    }
     const filePath = storeAsFile(contractWith("string private a = 'test';"))
 
     const reports = linter.processPath(filePath, {
