@@ -1,9 +1,10 @@
 const fs = require('fs')
 const os = require('os')
+const path = require('path')
 
 function tmpFilePath() {
   const tempDirPath = os.tmpdir()
-  return `${tempDirPath}/test.sol`
+  return path.resolve(tempDirPath, 'test.sol')
 }
 
 function storeAsFile(code) {
