@@ -55,4 +55,20 @@ describe('Linter - no-global-import', () => {
     })
     assertNoWarnings(report)
   })
+  it('should not raise on import from "path" as NAME', () => {
+    const code = `import "../../src/Helpers.sol" as H;`
+
+    const report = linter.processStr(code, {
+      rules: { 'no-global-import': 'warn' },
+    })
+    assertNoWarnings(report)
+  })
+  it('should not raise on import * as NAME from "path" as NAME', () => {
+    const code = `import * as H from "../../src/Helpers.sol";`
+
+    const report = linter.processStr(code, {
+      rules: { 'no-global-import': 'warn' },
+    })
+    assertNoWarnings(report)
+  })
 })
