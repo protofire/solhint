@@ -7,6 +7,7 @@ describe('Linter - no-empty-blocks', () => {
     funcWith('if (a < b) {  }'),
     contractWith('struct Abc {  }'),
     contractWith('enum Abc {  }'),
+    contractWith('constructor () {  }'),
     'contract A { }',
     funcWith('assembly {  }'),
   ]
@@ -108,6 +109,16 @@ describe('Linter - no-empty-blocks', () => {
 
     const report = linter.processStr(code, {
       rules: { 'no-empty-blocks': 'warn' },
+    })
+
+    assertNoWarnings(report)
+  })
+
+  it('should not raise error for constructor when ignoreConstructors is set to true', () => {
+    const code = contractWith(`constructor () {}`)
+
+    const report = linter.processStr(code, {
+      rules: { 'no-empty-blocks': ['warn', { ignoreConstructors: true }] },
     })
 
     assertNoWarnings(report)

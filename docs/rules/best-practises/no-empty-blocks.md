@@ -18,10 +18,20 @@ Code contains empty block.
 This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
 
 ### Example Config
+#### Simple example for warning
 ```json
 {
   "rules": {
     "no-empty-blocks": "warn"
+  }
+}
+```
+
+#### Ignoring empty constructor
+```json
+{
+  "rules": {
+    "no-empty-blocks": ["warn", {ignoreConstructors: true}]
   }
 }
 ```
