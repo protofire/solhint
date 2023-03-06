@@ -17,7 +17,7 @@ jobs:
         node: [14, 16, 18]
     
     steps:
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
         with:
           node-version: ${{ matrix.node }}
       - uses: actions/checkout@v3
@@ -39,3 +39,50 @@ jobs:
       
       - name: run-e2e-tests
         run: cd e2e && npm install && npm test
+
+  e2e_windows:
+    runs-on: windows-latest
+    name: Run linter and e2e tests on Windows
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install --include=dev
+
+      - name: Install solhint
+        run: npm i -g solhint
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Run e2e Tests
+        run: cd e2e && npm install && npm test
+
+  e2e_macos:
+    runs-on: macos-latest
+    name: Run linter and e2e tests on MacOS
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install dependencies
+      run: npm install --include=dev
+
+    - name: pack
+      run: npm pack
+    
+    - name: Install solhint
+      run: npm i -g solhint*tgz
+
+    - name: Run linter
+      run: npm run lint
+
+    - name: Run Tests
+      run: cd e2e && npm install && npm test
