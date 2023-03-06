@@ -34,7 +34,7 @@
   "author": "Ilya Drabenia <ilya.drobenya@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@solidity-parser/parser": "^0.15.0",
+    "@solidity-parser/parser": "^0.16.0",
     "ajv": "^6.12.6",
     "antlr4": "^4.11.0",
     "ast-parents": "^0.0.1",
