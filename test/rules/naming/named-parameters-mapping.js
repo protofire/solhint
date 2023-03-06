@@ -16,16 +16,12 @@ const WRONG_DECLARATIONS = NO_NAMED_MAPPING_REGULAR.concat(
   OTHER_WRONG_DECLARATIONS
 )
 const MAIN_KEY_ERROR = 'Main key parameter in mapping XXXXX is not named'
-const NESTED_KEY_ERROR = 'Nested key parameter in mapping XXXXX is not named'
 const VALUE_ERROR = 'Value parameter in mapping XXXXX is not named'
 
 const getPositionErrors = (objectCode) => {
   const errorArray = []
   if (objectCode.error_mainKey)
     errorArray.push(MAIN_KEY_ERROR.replace('XXXXX', objectCode.mapping_name))
-
-  if (objectCode.error_nestedKey)
-    errorArray.push(NESTED_KEY_ERROR.replace('XXXXX', objectCode.mapping_name))
 
   if (objectCode.error_value) errorArray.push(VALUE_ERROR.replace('XXXXX', objectCode.mapping_name))
   return errorArray

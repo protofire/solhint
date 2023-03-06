@@ -39,28 +39,52 @@ mapping(string name => uint256 balance) public users;
 mapping(address owner => mapping(address token => uint256 balance)) public tokenBalances;
 ```
 
+#### Main key of mapping is enforced. On nested mappings other naming are not neccesary
+
+```solidity
+mapping(address owner => mapping(address => uint256)) public tokenBalances;
+```
+
+#### Main key of the parent mapping is enforced. No naming in nested mapping uint256
+
+```solidity
+mapping(address owner => mapping(address token => uint256)) public tokenBalances;
+```
+
+#### Main key of the parent mapping is enforced. No naming in nested mapping address
+
+```solidity
+mapping(address owner => mapping(address => uint256 balance)) public tokenBalances;
+```
+
 ### 👎 Examples of **incorrect** code for this rule
 
-#### No naming in regular mapping 
+#### No naming at all in regular mapping 
 
 ```solidity
 mapping(address => uint256)) public tokenBalances;
 ```
 
-#### No naming in nested mapping 
+#### Missing any variable name in regular mapping uint256
 
 ```solidity
-mapping(address => mapping(address => uint256)) public tokenBalances;
+mapping(address token => uint256)) public tokenBalances;
 ```
 
-#### No complete naming in nested mapping. Missing main key and value 
+#### Missing any variable name in regular mapping address
 
 ```solidity
-mapping(address => mapping(address token => uint256)) public tokenBalances;
+mapping(address => uint256 balance)) public tokenBalances;
+```
+
+#### No MAIN KEY naming in nested mapping. Other naming are not enforced
+
+```solidity
+mapping(address => mapping(address token => uint256 balance)) public tokenBalances;
 ```
 
 ## Version
-This rule is introduced in the latest version.
+This rule was introduced in [Solhint 3.4.0](https://github.com/protofire/solhint/tree/v3.4.0)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/naming/named-parameters-mapping.js)
