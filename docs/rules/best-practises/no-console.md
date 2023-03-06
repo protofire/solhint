@@ -51,7 +51,7 @@ import "forge-std/consoleN.sol"
 ```
 
 ## Version
-This rule is introduced in the latest version.
+This rule was introduced in [Solhint 3.4.0](https://github.com/protofire/solhint/tree/v3.4.0)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/best-practises/no-console.js)

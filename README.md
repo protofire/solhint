@@ -5,15 +5,11 @@
   By <a href="https://protofire.io/">Protofire</a>
 </p>
 
-[![Donate with Ethereum](https://en.cryptobadges.io/badge/micro/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)](https://en.cryptobadges.io/donate/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)
-
-[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/solhint/Lobby)
+[![Donate with Ethereum](https://img.shields.io/badge/Donate-ETH-blue)](https://etherscan.io/address/0xA81705c8C247C413a19A244938ae7f4A0393944e)
 [![NPM version](https://badge.fury.io/js/solhint.svg)](https://npmjs.org/package/solhint)
 [![Coverage Status](https://coveralls.io/repos/github/protofire/solhint/badge.svg?branch=master)](
 https://coveralls.io/github/protofire/solhint?branch=master)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/protofire/solhint/master/LICENSE)
-[![dependencies Status](https://david-dm.org/protofire/solhint/status.svg)](https://david-dm.org/protofire/solhint)
-[![devDependencies Status](https://david-dm.org/protofire/solhint/dev-status.svg)](https://david-dm.org/protofire/solhint?type=dev)
 
 This is an open source project for linting [Solidity](http://solidity.readthedocs.io/en/develop/) code. This project
 provides both **Security** and **Style Guide** validations.
@@ -83,10 +79,15 @@ To generate a new  sample `.solhint.json` file in current folder you can do:
 solhint --init 
 ```
 
-This file has the following
-format:
+This file has the following format:
+### Default 
+```json
+{
+  "extends": "solhint:default"
+}
+```
 
-
+### Sample
 ```json
   {
     "extends": "solhint:recommended",
@@ -214,7 +215,8 @@ Related documentation you may find [here](https://protofire.github.io/solhint/).
 - POA Network - Public EVM Sidechain:
   - [Proof of Physical Address (PoPA)](https://github.com/poanetwork/poa-popa)
   - [Proof of Bank Account (PoBA)](https://github.com/poanetwork/poa-poba)
-- [0x](https://github.com/0xProject/0x-monorepo/tree/development/contracts)
+- 0x-Project
+  - [0x-Monorepo](https://github.com/0xProject/0x-monorepo/tree/development/contracts)
 - Gnosis:
   - [Gnosis Prediction Market Contracts](https://github.com/gnosis/pm-contracts)
   - [The DutchX decentralized trading protocol](https://github.com/gnosis/dex-contracts)
@@ -230,7 +232,7 @@ MIT
 ## Back us
 Solhint is free to use and open-sourced. If you value our effort and feel like helping us to keep pushing this tool forward, you can send us a small donation. We'll highly appreciate it :)
 
-[![Donate with Ethereum](https://en.cryptobadges.io/badge/micro/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)](https://en.cryptobadges.io/donate/0xe8cdf02efd8ab0a490d7b2cb13553389c9bc932e)
+[![Donate with Ethereum](https://img.shields.io/badge/Donate-ETH-blue)](https://etherscan.io/address/0xA81705c8C247C413a19A244938ae7f4A0393944e)
 
 ## Related projects
 

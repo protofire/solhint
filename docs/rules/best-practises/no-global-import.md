@@ -36,6 +36,18 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 import {A} from "./A.sol"
 ```
 
+#### import entire file into a name
+
+```solidity
+import "./A.sol" as A
+```
+
+#### import entire file into a name
+
+```solidity
+import * as A from "./A.sol"
+```
+
 ### 👎 Examples of **incorrect** code for this rule
 
 #### import all members from a file
@@ -51,7 +63,7 @@ import "foo.sol"
 ```
 
 ## Version
-This rule is introduced in the latest version.
+This rule was introduced in [Solhint 3.4.0](https://github.com/protofire/solhint/tree/v3.4.0)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/best-practises/no-global-import.js)
