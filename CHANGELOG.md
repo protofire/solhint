@@ -1,3 +1,22 @@
+## [3.4.1] - 2023-03-06
+### Updated
+- Updated solidity parser to 0.16.0 [#420](https://github.com/protofire/solhint/pull/420)
+
+### Added
+- Added github workflow to execute unit tests on each PR [#412](https://github.com/protofire/solhint/pull/412)
+- Added macOS and windows into E2E github workflow [#422](https://github.com/protofire/solhint/pull/422)
+
+### Fixed
+- False positive on for-loop Yul [#400](https://github.com/protofire/solhint/pull/400)
+- Ordering-rule support for Top Level statements [#393](https://github.com/protofire/solhint/pull/393)
+- Fix no-global-import to accept named global imports [#416](https://github.com/protofire/solhint/pull/416)
+- Fix named-parameters-mapping to not enforce on nested mappings [#421](https://github.com/protofire/solhint/pull/421)
+
+
+
+
+
+<br><br>
 ## [3.4.0] - 2023-02-17
 ### Updated
 - Solhint dependencies to support newer versions [#380](https://github.com/protofire/solhint/pull/380)
@@ -34,7 +53,7 @@
   
 
 ### Updated
-- Solidity Parser to 0.14.5 [#378](https://github.com/protofire/solhint/pull/378)
+- Solidity Parser to 0.14.5 [#330](https://github.com/protofire/solhint/pull/330) - [#378](https://github.com/protofire/solhint/pull/378)
 
 
 <br><br>
