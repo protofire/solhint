@@ -30,6 +30,7 @@ describe('Linter - no-empty-blocks', () => {
     contractWith('enum Abc { Test1 }'),
     'contract A { uint private a; }',
     funcWith('assembly { "literal" }'),
+    contractWith('constructor () BaseContract() {  }'),
   ]
 
   BLOCKS_WITH_DEFINITIONS.forEach((curData) =>
@@ -114,11 +115,21 @@ describe('Linter - no-empty-blocks', () => {
     assertNoWarnings(report)
   })
 
-  it('should not raise error for constructor when ignoreConstructors is set to true', () => {
+  it('should raise error for empty block of [constructor]', () => {
     const code = contractWith(`constructor () {}`)
 
     const report = linter.processStr(code, {
-      rules: { 'no-empty-blocks': ['warn', { ignoreConstructors: true }] },
+      rules: { 'no-empty-blocks': 'warn' },
+    })
+
+    assertWarnsCount(report, 1)
+  })
+
+  it('should not raise error for empty block of inherited [constructor] having modifiers', () => {
+    const code = contractWith(`constructor (address addr) BaseContract(addr) {}`)
+
+    const report = linter.processStr(code, {
+      rules: { 'no-empty-blocks': 'warn' },
     })
 
     assertNoWarnings(report)
