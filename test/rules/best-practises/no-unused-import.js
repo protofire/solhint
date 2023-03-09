@@ -1,5 +1,10 @@
 const linter = require('../../../lib/index')
-const { assertNoErrors, assertErrorMessage, assertErrorCount } = require('../../common/asserts')
+const {
+  assertNoErrors,
+  assertErrorMessage,
+  assertErrorCount,
+  assertWarnsCount,
+} = require('../../common/asserts')
 
 describe('Linter - no-unused-import', () => {
   it('should raise when imported name is not used', () => {
@@ -9,6 +14,16 @@ describe('Linter - no-unused-import', () => {
       rules: { 'no-unused-import': 'error' },
     })
     assertErrorCount(report, 1)
+    assertErrorMessage(report, 'imported name A is not used')
+  })
+
+  it('should raise error when using solhint:recommended', () => {
+    const code = `pragma solidity ^0.5.8; import {A} from "./A.sol";`
+
+    const report = linter.processStr(code, {
+      extends: 'solhint:recommended',
+    })
+    assertWarnsCount(report, 1)
     assertErrorMessage(report, 'imported name A is not used')
   })
 
