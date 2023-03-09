@@ -17,6 +17,16 @@ describe('Linter - no-unused-import', () => {
     assertErrorMessage(report, 'imported name A is not used')
   })
 
+  it('should raise when name created in import "path" as name is not used', () => {
+    const code = `import './A.sol' as A;`
+
+    const report = linter.processStr(code, {
+      rules: { 'no-unused-import': 'error' },
+    })
+    assertErrorCount(report, 1)
+    assertErrorMessage(report, 'imported name A is not used')
+  })
+
   it('should raise error when using solhint:recommended', () => {
     const code = `pragma solidity ^0.5.8; import {A} from "./A.sol";`
 
