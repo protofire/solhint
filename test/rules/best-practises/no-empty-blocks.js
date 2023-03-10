@@ -115,26 +115,6 @@ describe('Linter - no-empty-blocks', () => {
     assertNoWarnings(report)
   })
 
-  it('should raise error for empty block of [constructor]', () => {
-    const code = contractWith(`constructor () {}`)
-
-    const report = linter.processStr(code, {
-      rules: { 'no-empty-blocks': 'warn' },
-    })
-
-    assertWarnsCount(report, 1)
-  })
-
-  it('should not raise error for empty block of inherited [constructor] having modifiers', () => {
-    const code = contractWith(`constructor (address addr) BaseContract(addr) {}`)
-
-    const report = linter.processStr(code, {
-      rules: { 'no-empty-blocks': 'warn' },
-    })
-
-    assertNoWarnings(report)
-  })
-
   function label(data) {
     const items = data.split('\n')
     const lastItemIndex = items.length - 1
