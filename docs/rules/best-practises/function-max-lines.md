@@ -9,7 +9,7 @@ title:       "function-max-lines | Solhint"
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 
 ## Description
-Function body contains "count" lines but allowed no more than maxlines.
+Function body contains "count" lines but allowed no more than maxlines. (comments and empty lines not considered)
 
 ## Options
 This rule accepts an array of options:
