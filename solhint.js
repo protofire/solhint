@@ -94,7 +94,7 @@ function execMainAction() {
 
   if (printReports(reports, formatterFn)) {
     if (
-      program.maxWarnings &&
+      program.opts().maxWarnings &&
       reports &&
       reports.length > 0 &&
       !reports[0].errorCount &&
