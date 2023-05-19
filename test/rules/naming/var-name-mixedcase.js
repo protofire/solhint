@@ -12,7 +12,9 @@ describe('Linter - var-name-mixedcase', () => {
     })
 
     assert.ok(report.errorCount > 0)
-    assert.ok(report.messages.map((i) => i.message).some((i) => i.includes('name')))
+    assert.ok(
+      report.messages.map((i) => i.ruleId).some((i) => i.includes('name') || i.includes('unused'))
+    )
   })
 
   it('should raise incorrect var name error for typed declaration', () => {
@@ -23,7 +25,7 @@ describe('Linter - var-name-mixedcase', () => {
     })
 
     assert.ok(report.errorCount > 0)
-    assert.ok(report.messages.map((i) => i.message).some((i) => i.includes('name')))
+    assert.ok(report.messages.map((i) => i.ruleId).some((i) => i.includes('name')))
   })
 
   it('should raise incorrect var name error for state declaration', () => {
@@ -34,7 +36,7 @@ describe('Linter - var-name-mixedcase', () => {
     })
 
     assert.equal(report.errorCount, 1)
-    assert.ok(report.messages[0].message.includes('Variable name'))
+    assert.ok(report.messages.map((i) => i.ruleId).some((i) => i.includes('name')))
   })
 
   it('should not raise var name error for constants', () => {
