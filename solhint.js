@@ -189,7 +189,7 @@ function processPath(path) {
 }
 
 function printReports(reports, formatter) {
-  console.log(formatter(reports))
+  process.stdout.write(formatter(reports));
   return reports
 }
 
