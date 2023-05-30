@@ -1,0 +1,5 @@
+{
+	"extends": "solhint:recommended",
+  "rules": {
+  }
+}
