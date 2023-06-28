@@ -7,6 +7,7 @@ describe('Linter - no-empty-blocks', () => {
     funcWith('if (a < b) {  }'),
     contractWith('struct Abc {  }'),
     contractWith('enum Abc {  }'),
+    contractWith('constructor () {  }'),
     'contract A { }',
     funcWith('assembly {  }'),
   ]
@@ -29,6 +30,7 @@ describe('Linter - no-empty-blocks', () => {
     contractWith('enum Abc { Test1 }'),
     'contract A { uint private a; }',
     funcWith('assembly { "literal" }'),
+    contractWith('constructor () BaseContract() {  }'),
   ]
 
   BLOCKS_WITH_DEFINITIONS.forEach((curData) =>
