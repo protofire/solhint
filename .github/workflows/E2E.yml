@@ -18,31 +18,31 @@ jobs:
     
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-      - uses: actions/checkout@v3
       
-      - name: install
+      - name: Install dependencies
         run: npm install --include=dev
       
-      - name: lint
+      - name: Run linter
         run: npm run lint
       
-      - name: generate-docs
+      - name: Generate Docs
         run: npm run docs 
       
-      - name: pack
+      - name: Pack
         run: npm pack
       
-      - name: install-globally
+      - name: Global Installation
         run: npm i -g solhint*tgz
       
-      - name: run-e2e-tests
+      - name: Run E2E Tests
         run: cd e2e && npm install && npm test
 
   e2e_windows:
     runs-on: windows-latest
-    name: Run linter and e2e tests on Windows
+    name: Run linter and E2E Tests on Windows
 
     steps:
       - uses: actions/checkout@v3
@@ -59,12 +59,12 @@ jobs:
       - name: Run linter
         run: npm run lint
 
-      - name: Run e2e Tests
+      - name: Run E2E Tests
         run: cd e2e && npm install && npm test
 
   e2e_macos:
     runs-on: macos-latest
-    name: Run linter and e2e tests on MacOS
+    name: Run linter and E2E Tests on MacOS
 
     steps:
     - uses: actions/checkout@v3
@@ -75,7 +75,7 @@ jobs:
     - name: Install dependencies
       run: npm install --include=dev
 
-    - name: pack
+    - name: Pack
       run: npm pack
     
     - name: Install solhint
