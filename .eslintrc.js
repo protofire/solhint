@@ -27,7 +27,9 @@ module.exports = {
     'no-use-before-define': ['error', { classes: false, functions: false }],
     'prefer-destructuring': 'off',
     'prefer-template': 'off',
-    "experimentalObjectRestSpread": true,
+    "parserOptions": {
+      "ecmaVersion": 2018
+    },
 
     // this rules were disabled to make it easier to add airbnb-base, but they are good ones; we should re-enable them
     // at some point
