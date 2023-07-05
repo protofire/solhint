@@ -1,6 +1,6 @@
 module.exports = {
   parserOptions: {
-    ecmaVersion: 8,
+    ecmaVersion: 2020,
   },
   env: {
     browser: false,
@@ -27,9 +27,6 @@ module.exports = {
     'no-use-before-define': ['error', { classes: false, functions: false }],
     'prefer-destructuring': 'off',
     'prefer-template': 'off',
-    "parserOptions": {
-      "ecmaVersion": 2018
-    },
 
     // this rules were disabled to make it easier to add airbnb-base, but they are good ones; we should re-enable them
     // at some point
