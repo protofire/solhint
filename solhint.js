@@ -19,7 +19,7 @@ function init() {
   program
     .name('solhint')
     .usage('[options] <file> [...other_files]')
-    .option('-f, --formatter [name]', 'report formatter name (stylish, table, tap, unix)')
+    .option('-f, --formatter [name]', 'report formatter name (stylish, table, tap, unix, json)')
     .option('-w, --max-warnings [maxWarningsNumber]', 'number of allowed warnings')
     .option('-c, --config [file_name]', 'file to use as your .solhint.json')
     .option('-q, --quiet', 'report errors only - default: false')
@@ -119,6 +119,7 @@ function processStdin(options) {
   const report = processStr(stdinBuffer.toString())
   report.file = options.filename || 'stdin'
   const formatterFn = getFormatter()
+
   printReports([report], formatterFn)
 
   exitWithCode([report])
