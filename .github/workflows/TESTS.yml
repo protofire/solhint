@@ -7,13 +7,13 @@ on:
   push:
     branches: [ "master" ]
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - "*"
 
 jobs:
   test_on_linux:
-    name: Run linter and tests on Linux
     runs-on: ubuntu-latest
-
+    name: Run linter and tests on Linux
     strategy:
       matrix:
         node-version: [14, 16, 18]
