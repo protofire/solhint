@@ -68,6 +68,8 @@ Commands:
 
   stdin [options]                         linting of source code data provided to STDIN
 ```
+### Note
+`--fix` option currently works only on "avoid-throw" and "avoid-sha3" rules
 
 ## Configuration
 
