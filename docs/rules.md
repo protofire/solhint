@@ -15,6 +15,7 @@ title:       "Rule Index of Solhint"
 | [no-console](./rules/best-practises/no-console.md)                 | No console.log/logInt/logBytesX/logString/etc & No hardhat and forge-std console.sol import statements                | ✔️          |
 | [no-empty-blocks](./rules/best-practises/no-empty-blocks.md)       | Code contains empty block.                                                                                            | ✔️          |
 | [no-global-import](./rules/best-practises/no-global-import.md)     | Import statement includes an entire file instead of selected symbols                                                  | ✔️          |
+| [no-unused-import](./rules/best-practises/no-unused-import.md)     | Imported name is not used                                                                                             | ✔️          |
 | [no-unused-vars](./rules/best-practises/no-unused-vars.md)         | Variable "name" is unused.                                                                                            | ✔️          |
 | [payable-fallback](./rules/best-practises/payable-fallback.md)     | When fallback is not payable you will not be able to receive ethers.                                                  | ✔️          |
 | [reason-string](./rules/best-practises/reason-string.md)           | Require or revert statement must have a reason string and check that each reason string is at most N characters long. | ✔️          |
@@ -26,13 +27,13 @@ title:       "Rule Index of Solhint"
 | Rule Id                                                                     | Error                                                                                                                                  | Recommended |
 | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
 | [comprehensive-interface](./rules/miscellaneous/comprehensive-interface.md) | Check that all public or external functions are override. This is iseful to make sure that the whole API is extracted in an interface. |             |
+| [quotes](./rules/miscellaneous/quotes.md)                                   | Use double quotes for string literals. Values must be 'single' or 'double'.                                                            | ✔️          |
         
 
 ## Style Guide Rules
 
 | Rule Id                                                                              | Error                                                                                  | Recommended |
 | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- | ----------- |
-| [quotes](./rules/miscellaneous/quotes.md)                                            | Use double quotes for string literals. Values must be 'single' or 'double'.            | ✔️          |
 | [const-name-snakecase](./rules/naming/const-name-snakecase.md)                       | Constant name must be in capitalized SNAKE_CASE.                                       | ✔️          |
 | [contract-name-camelcase](./rules/naming/contract-name-camelcase.md)                 | Contract name must be in CamelCase.                                                    | ✔️          |
 | [event-name-camelcase](./rules/naming/event-name-camelcase.md)                       | Event name must be in CamelCase.                                                       | ✔️          |

@@ -6,7 +6,7 @@ title:       "quotes | Solhint"
 
 # quotes
 ![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
-![Category Badge](https://img.shields.io/badge/-Style%20Guide%20Rules-informational)
+![Category Badge](https://img.shields.io/badge/-Miscellaneous-informational)
 ![Default Severity Badge error](https://img.shields.io/badge/Default%20Severity-error-red)
 > The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
 

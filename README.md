@@ -69,8 +69,8 @@ Commands:
   stdin [options]                         linting of source code data provided to STDIN
 ```
 ### Note
-`--fix` option currently works only on "avoid-throw" and "avoid-sha3" rules
-
+The `--fix`  option currently works only on "avoid-throw" and "avoid-sha3" rules
+<br><br>
 ## Configuration
 
 You can use a `.solhint.json` file to configure Solhint for the whole project.
@@ -88,6 +88,10 @@ This file has the following format:
   "extends": "solhint:default"
 }
 ```
+### Note
+The `solhint:default` configuration contains only two rules: max-line-length & no-console
+<br><br>
+
 
 ### Sample
 ```json
