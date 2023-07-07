@@ -6,4 +6,4 @@ files in this directory are pulled from eslint repository:
 - unix.js: eslint v8.32.0 oshi-shinobu
 - tap.js: eslint v8.32.0 Jonathan Kingston
 - stylish.js: eslint v8.32.0 by Sindre Sorhus
-
+- json.js: eslint v8.32.0 by Artur Lukianov & Diego Bale
