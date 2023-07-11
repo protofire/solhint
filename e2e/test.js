@@ -9,6 +9,7 @@ const getStream = require('get-stream')
 const os = require('os')
 const path = require('path')
 const shell = require('shelljs')
+const formattedResults = require('./05-formatters/results/formattedResults')
 
 function useFixture(dir) {
   beforeEach(`switch to ${dir}`, function() {
@@ -125,29 +126,31 @@ describe('e2e', function() {
   describe.only('formatter tests', function() {
     useFixture('05-formatters')
 
-    it('formatter STYLISH', function() {
+    xit('formatter STYLISH', function() {
       const { code } = shell.exec('solhint -f stylish contracts/*.sol')
       console.log('STYLISH :>> ', code)
     })
 
-    it('formatter TABLE', function() {
+    xit('formatter TABLE', function() {
       const { code } = shell.exec('solhint -f table contracts/*.sol')
       console.log('TABLE :>> ', code)
     })
 
-    it('formatter TAP', function() {
+    xit('formatter TAP', function() {
       const { code } = shell.exec('solhint -f tap contracts/*.sol')
       console.log('TAP :>> ', code)
     })
 
     it('formatter UNIX', function() {
       const { code } = shell.exec('solhint -f unix contracts/*.sol')
-      console.log('UNIX :>> ', code)
+      // console.log('UNIX :>> ', code)
+      expect(code).to.equal(formattedResults.unixForm)
     })
 
     it('formatter JSON', function() {
       const { code } = shell.exec('solhint -f json contracts/*.sol')
-      console.log('JSON :>> ', code)
+      // console.log('JSON :>> ', code)
+      expect(code).to.equal(formattedResults.jsonForm)
     })
   })
 })
