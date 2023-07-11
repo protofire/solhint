@@ -40,6 +40,11 @@ function init() {
     .description('create configuration file for solhint')
     .action(writeSampleConfigFile)
 
+  program
+    .command('list-rules', null, { noHelp: false })
+    .description('display covered rules of current .solhint.json')
+    .action(listRules)
+
   if (process.argv.length <= 2) {
     program.help()
   }
@@ -63,6 +68,7 @@ function execMainAction() {
 
   const reportLists = program.args.filter(_.isString).map(processPath)
   const reports = _.flatten(reportLists)
+
   const warningsCount = reports.reduce((acc, i) => acc + i.warningCount, 0)
   const warningsNumberExceeded =
     program.opts().maxWarnings >= 0 && warningsCount > program.opts().maxWarnings
@@ -205,6 +211,35 @@ function getFormatter(formatter) {
     } \nError: ${ex.message}`
     throw ex
   }
+}
+
+function listRules() {
+  const configPath = '.solhint.json'
+  if (!fs.existsSync(configPath)) {
+    console.log('Error!! Configuration does not exists')
+    process.exit(0)
+  } else {
+    const config = readConfig()
+    console.log('\nConfiguration File: \n', config)
+
+    const reportLists = linter.processPath(configPath, readConfig())
+    const rulesObject = reportLists[0].config
+
+    console.log('\nRules: \n')
+    const orderedRules = Object.keys(rulesObject)
+      .sort()
+      .reduce((obj, key) => {
+        obj[key] = rulesObject[key]
+        return obj
+      }, {})
+
+    // eslint-disable-next-line func-names
+    Object.keys(orderedRules).forEach(function (key) {
+      console.log('- ', key, ': ', orderedRules[key])
+    })
+  }
+
+  process.exit(0)
 }
 
 function exitWithCode(reports) {

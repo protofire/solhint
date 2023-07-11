@@ -67,6 +67,7 @@ Options:
 Commands:
 
   stdin [options]                         linting of source code data provided to STDIN
+  list-rules                              display covered rules of current .solhint.json
 ```
 ### Note
 The `--fix`  option currently works only on "avoid-throw" and "avoid-sha3" rules
