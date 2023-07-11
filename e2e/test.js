@@ -121,4 +121,33 @@ describe('e2e', function() {
       expect(code).to.equal(0)
     })
   })
+
+  describe.only('formatter tests', function() {
+    useFixture('05-formatters')
+
+    it('formatter STYLISH', function() {
+      const { code } = shell.exec('solhint -f stylish contracts/*.sol')
+      console.log('STYLISH :>> ', code)
+    })
+
+    it('formatter TABLE', function() {
+      const { code } = shell.exec('solhint -f table contracts/*.sol')
+      console.log('TABLE :>> ', code)
+    })
+
+    it('formatter TAP', function() {
+      const { code } = shell.exec('solhint -f tap contracts/*.sol')
+      console.log('TAP :>> ', code)
+    })
+
+    it('formatter UNIX', function() {
+      const { code } = shell.exec('solhint -f unix contracts/*.sol')
+      console.log('UNIX :>> ', code)
+    })
+
+    it('formatter JSON', function() {
+      const { code } = shell.exec('solhint -f json contracts/*.sol')
+      console.log('JSON :>> ', code)
+    })
+  })
 })
