@@ -46,4 +46,21 @@ describe('Linter - var-name-mixedcase', () => {
 
     assert.equal(report.errorCount, 0)
   })
+
+  const WITH_$ = {
+    $: contractWith('uint32 private $ = 10;'),
+    'starting with $': contractWith('uint32 private $D = 10;'),
+    'containing a $': contractWith('uint32 private testWith$Contained = 10;'),
+    'ending with $': contractWith('uint32 private testWithEnding$ = 10;'),
+  }
+
+  for (const [key, code] of Object.entries(WITH_$)) {
+    it(`should not raise var name error for variables ${key}`, () => {
+      const report = linter.processStr(code, {
+        rules: { 'no-unused-vars': 'error', 'var-name-mixedcase': 'error' },
+      })
+
+      assert.equal(report.errorCount, 0)
+    })
+  }
 })
