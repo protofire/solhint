@@ -30,9 +30,11 @@ function init() {
     .action(execMainAction)
 
   program
-    .command('stdin')
-    .description('linting of source code data provided to STDIN')
+    .command('stdin', null, { noHelp: false })
     .option('--filename [file_name]', 'name of file received using STDIN')
+    .description(
+      'linting of source code data provided to STDIN\nEx: echo "contract Foo { function f1()external view returns(uint256) {} }" | solhint stdin\nEx: solhint stdin --filename "./pathToFilename" -f table'
+    )
     .action(processStdin)
 
   program
@@ -69,10 +71,6 @@ function execMainAction() {
   const reportLists = program.args.filter(_.isString).map(processPath)
   const reports = _.flatten(reportLists)
 
-  const warningsCount = reports.reduce((acc, i) => acc + i.warningCount, 0)
-  const warningsNumberExceeded =
-    program.opts().maxWarnings >= 0 && warningsCount > program.opts().maxWarnings
-
   if (program.opts().fix) {
     for (const report of reports) {
       const inputSrc = fs.readFileSync(report.filePath).toString()
@@ -98,37 +96,31 @@ function execMainAction() {
     })
   }
 
-  if (printReports(reports, formatterFn)) {
-    if (
-      program.opts().maxWarnings &&
-      reports &&
-      reports.length > 0 &&
-      !reports[0].errorCount &&
-      warningsNumberExceeded
-    ) {
-      console.log(
-        'Solhint found more warnings than the maximum specified (maximum: %s, found: %s)',
-        program.opts().maxWarnings,
-        warningsCount
-      )
-      process.exit(1)
-    }
-  }
+  printReports(reports, formatterFn)
 
   exitWithCode(reports)
 }
 
 function processStdin(options) {
-  const STDIN_FILE = 0
+  const STDIN_FILE = options.filename || 0
   const stdinBuffer = fs.readFileSync(STDIN_FILE)
-
   const report = processStr(stdinBuffer.toString())
   report.file = options.filename || 'stdin'
-  const formatterFn = getFormatter()
 
-  printReports([report], formatterFn)
+  let formatterFn
+  try {
+    // to check if is a valid formatter before execute linter
+    formatterFn = getFormatter(program.opts().formatter)
+  } catch (ex) {
+    console.error(ex.message)
+    process.exit(1)
+  }
 
-  exitWithCode([report])
+  const reports = [report]
+
+  printReports(reports, formatterFn)
+
+  exitWithCode(reports)
 }
 
 function writeSampleConfigFile() {
@@ -171,7 +163,6 @@ const readIgnore = _.memoize(() => {
 
 const readConfig = _.memoize(() => {
   let config = {}
-
   try {
     config = loadConfig(program.opts().config)
   } catch (e) {
@@ -196,8 +187,41 @@ function processPath(path) {
   return linter.processPath(path, readConfig())
 }
 
+function areWarningsExceeded(reports) {
+  const warningsCount = reports.reduce((acc, i) => acc + i.warningCount, 0)
+  const warningsNumberExceeded =
+    program.opts().maxWarnings >= 0 && warningsCount > program.opts().maxWarnings
+
+  return { warningsNumberExceeded, warningsCount }
+}
+
 function printReports(reports, formatter) {
+  const warnings = areWarningsExceeded(reports)
+
   console.log(formatter(reports))
+
+  if (
+    program.opts().maxWarnings &&
+    reports &&
+    reports.length > 0 &&
+    warnings.warningsNumberExceeded
+  ) {
+    if (!reports[0].errorCount) {
+      console.log(
+        'Solhint found more warnings than the maximum specified (maximum: %s, found: %s)',
+        program.opts().maxWarnings,
+        warnings.warningsCount
+      )
+    } else {
+      console.log(
+        'Error/s found on rules! [max-warnings] rule ignored. Fixing errors enables max-warnings',
+        program.opts().maxWarnings,
+        warnings.warningsCount
+      )
+    }
+    process.exit(1)
+  }
+
   return reports
 }
 
@@ -214,6 +238,11 @@ function getFormatter(formatter) {
 }
 
 function listRules() {
+  if (process.argv.length !== 3) {
+    console.log('Error!! no additional parameters after list-rules command')
+    process.exit(0)
+  }
+
   const configPath = '.solhint.json'
   if (!fs.existsSync(configPath)) {
     console.log('Error!! Configuration does not exists')
@@ -222,7 +251,7 @@ function listRules() {
     const config = readConfig()
     console.log('\nConfiguration File: \n', config)
 
-    const reportLists = linter.processPath(configPath, readConfig())
+    const reportLists = linter.processPath(configPath, config)
     const rulesObject = reportLists[0].config
 
     console.log('\nRules: \n')
