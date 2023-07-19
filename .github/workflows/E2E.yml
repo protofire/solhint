@@ -14,7 +14,7 @@ jobs:
     name: Test on Linux with Node ${{ matrix.node }}
     strategy:
       matrix:
-        node: [14, 16, 18]
+        node: [16, 18, 20]
     
     steps:
       - uses: actions/checkout@v3
@@ -36,15 +36,21 @@ jobs:
       
       - name: Global Installation
         run: npm i -g solhint*tgz
+
+      - name: Check solhint version
+        run: solhint --version
       
       - name: Run E2E Tests
         run: cd e2e && npm install && npm test
 
   e2e_windows:
     runs-on: windows-latest
-    name: Run linter and E2E Tests on Windows
+    name: Test on Windows    
 
     steps:
+      - name: Enable Debugging
+        run: |
+          echo "::debug::Debugging enabled"
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -53,8 +59,23 @@ jobs:
       - name: Install dependencies
         run: npm install --include=dev
 
-      - name: Install solhint
-        run: npm i -g solhint
+      - name: Run linter
+        run: npm run lint
+
+      - name: Generate Docs
+        run: npm run docs 
+
+      - name: Pack
+        run: npm pack
+
+      - name: Global Installation
+        run: npm i -g @(Get-ChildItem -Filter *.tgz)
+
+      - name: Check solhint version
+        run: solhint --version
+
+      - name: List directory contents
+        run: dir
 
       - name: Run linter
         run: npm run lint
@@ -64,7 +85,7 @@ jobs:
 
   e2e_macos:
     runs-on: macos-latest
-    name: Run linter and E2E Tests on MacOS
+    name: Test on MacOS
 
     steps:
     - uses: actions/checkout@v3
