@@ -13,4 +13,33 @@ describe('Linter - event-name-camelcase', () => {
     assert.equal(report.errorCount, 1)
     assert.ok(report.messages[0].message.includes('CamelCase'))
   })
+
+  it('should not raise event name error for event in camelCase', () => {
+    const code = contractWith('event Event1(uint a);')
+
+    const report = linter.processStr(code, {
+      rules: { 'event-name-camelcase': 'error' },
+    })
+
+    assert.equal(report.errorCount, 0)
+  })
+
+  describe('with $ character', () => {
+    const WITH_$ = {
+      $: contractWith('event $(uint a);'),
+      'starting with $': contractWith('event $Event1(uint a);'),
+      'containing a $': contractWith('event Eve$nt1(uint a);'),
+      'ending with $': contractWith('event Event1$(uint a);'),
+    }
+
+    for (const [key, code] of Object.entries(WITH_$)) {
+      it(`should not raise event name error for events ${key}`, () => {
+        const report = linter.processStr(code, {
+          rules: { 'contract-name-camelcase': 'error' },
+        })
+
+        assert.equal(report.errorCount, 0)
+      })
+    }
+  })
 })

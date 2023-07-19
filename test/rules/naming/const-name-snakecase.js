@@ -54,4 +54,23 @@ describe('Linter - const-name-snakecase', () => {
     assert.equal(report.errorCount, 1)
     assert.ok(report.messages[0].message.includes('SNAKE_CASE'))
   })
+
+  describe('with $ character', () => {
+    const WITH_$ = {
+      $: contractWith('uint32 private constant $ = 10;'),
+      'starting with $': contractWith('uint32 private constant $THE_CONSTANT = 10;'),
+      'containing a $': contractWith('uint32 private constant THE_$_CONSTANT = 10;'),
+      'ending with $': contractWith('uint32 private constant THE_CONSTANT$ = 10;'),
+    }
+
+    for (const [key, code] of Object.entries(WITH_$)) {
+      it(`should not raise event name error for events ${key}`, () => {
+        const report = linter.processStr(code, {
+          rules: { 'const-name-snakecase': 'error' },
+        })
+
+        assert.equal(report.errorCount, 0)
+      })
+    }
+  })
 })
