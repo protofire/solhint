@@ -59,7 +59,6 @@ function execMainAction() {
   }
 
   let formatterFn
-
   try {
     // to check if is a valid formatter before execute linter
     formatterFn = getFormatter(program.opts().formatter)
@@ -137,8 +136,6 @@ function writeSampleConfigFile() {
   } else {
     console.log('Configuration file already exists')
   }
-
-  process.exit(0)
 }
 
 const readIgnore = _.memoize(() => {
@@ -197,9 +194,8 @@ function areWarningsExceeded(reports) {
 
 function printReports(reports, formatter) {
   const warnings = areWarningsExceeded(reports)
-
-  console.log(formatter(reports))
-
+  let finalMessage = ''
+  let exitWithOne = false
   if (
     program.opts().maxWarnings &&
     reports &&
@@ -207,21 +203,19 @@ function printReports(reports, formatter) {
     warnings.warningsNumberExceeded
   ) {
     if (!reports[0].errorCount) {
-      console.log(
-        'Solhint found more warnings than the maximum specified (maximum: %s, found: %s)',
-        program.opts().maxWarnings,
-        warnings.warningsCount
-      )
+      finalMessage = `Solhint found more warnings than the maximum specified (maximum: ${
+        program.opts().maxWarnings
+      }, found: ${warnings.warningsCount})`
+      exitWithOne = true
     } else {
-      console.log(
-        'Error/s found on rules! [max-warnings] rule ignored. Fixing errors enables max-warnings',
-        program.opts().maxWarnings,
-        warnings.warningsCount
-      )
+      finalMessage =
+        'Error/s found on rules! [max-warnings] param is ignored. Fixing errors enables max-warnings'
     }
-    process.exit(1)
   }
 
+  console.log(formatter(reports), finalMessage || '')
+
+  if (exitWithOne) process.exit(1)
   return reports
 }
 
@@ -240,13 +234,13 @@ function getFormatter(formatter) {
 function listRules() {
   if (process.argv.length !== 3) {
     console.log('Error!! no additional parameters after list-rules command')
-    process.exit(0)
+    process.exit(1)
   }
 
   const configPath = '.solhint.json'
   if (!fs.existsSync(configPath)) {
     console.log('Error!! Configuration does not exists')
-    process.exit(0)
+    process.exit(1)
   } else {
     const config = readConfig()
     console.log('\nConfiguration File: \n', config)
@@ -267,13 +261,10 @@ function listRules() {
       console.log('- ', key, ': ', orderedRules[key])
     })
   }
-
-  process.exit(0)
 }
 
 function exitWithCode(reports) {
   const errorsCount = reports.reduce((acc, i) => acc + i.errorCount, 0)
-
   process.exit(errorsCount > 0 ? 1 : 0)
 }
 
