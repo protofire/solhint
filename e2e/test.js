@@ -128,13 +128,15 @@ describe('e2e', function () {
     })
 
     it('should display [warnings exceeded] for max 3 warnings and exit error 1', function () {
-      const { code, stdout,  } = shell.exec('solhint contracts/Foo.sol --max-warnings 3')
+      const { code, stdout } = shell.exec('solhint contracts/Foo.sol --max-warnings 3')
+
       expect(code).to.equal(1)
       expect(stdout.trim()).to.contain(warningExceededMsg)
     })
 
     it('should return error for Compiler version rule, ignoring 3 --max-warnings', function () {
-      const { code, stdout } = shell.exec('solhint contracts/Foo2.sol --max-warnings 3')      
+      const { code, stdout } = shell.exec('solhint contracts/Foo2.sol --max-warnings 3')
+
       expect(code).to.equal(1)
       expect(stdout.trim()).to.contain(errorFound)
     })

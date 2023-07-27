@@ -19,7 +19,10 @@ function init() {
   program
     .name('solhint')
     .usage('[options] <file> [...other_files]')
-    .option('-f, --formatter [name]', 'report formatter name (stylish, table, tap, unix, json)')
+    .option(
+      '-f, --formatter [name]',
+      'report formatter name (stylish, table, tap, unix, json, compact)'
+    )
     .option('-w, --max-warnings [maxWarningsNumber]', 'number of allowed warnings')
     .option('-c, --config [file_name]', 'file to use as your .solhint.json')
     .option('-q, --quiet', 'report errors only - default: false')
