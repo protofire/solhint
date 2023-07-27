@@ -54,4 +54,24 @@ describe('Linter - const-name-snakecase', () => {
     assert.equal(report.errorCount, 1)
     assert.ok(report.messages[0].message.includes('SNAKE_CASE'))
   })
+
+  it('should not raise const name error for immutable variables in SNAKE_CASE', () => {
+    const code = contractWith('uint32 private immutable SNAKE_CASE;')
+
+    const report = linter.processStr(code, {
+      rules: { 'const-name-snakecase': 'error' },
+    })
+
+    assert.equal(report.errorCount, 0)
+  })
+
+  it('should not raise const name error for immutable variables in mixedCase', () => {
+    const code = contractWith('uint32 private immutable SNAKE_CASE;')
+
+    const report = linter.processStr(code, {
+      rules: { 'const-name-snakecase': 'error' },
+    })
+
+    assert.equal(report.errorCount, 0)
+  })
 })
