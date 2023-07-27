@@ -129,7 +129,6 @@ describe('e2e', function () {
 
     it('should display [warnings exceeded] for max 3 warnings and exit error 1', function () {
       const { code, stdout } = shell.exec('solhint contracts/Foo.sol --max-warnings 3')
-      const { code, stdout } = shell.exec('solhint contracts/Foo.sol --max-warnings 3')
 
       expect(code).to.equal(1)
       expect(stdout.trim()).to.contain(warningExceededMsg)
