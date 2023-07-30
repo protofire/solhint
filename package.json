@@ -21,7 +21,9 @@
     "test": "mocha --recursive",
     "lint": "eslint .",
     "generate-rulesets": "node scripts/generate-rulesets.js && prettier --write conf/rulesets",
-    "docs": "node scripts/generate-rule-docs.js"
+    "docs": "node scripts/generate-rule-docs.js",
+    "prepare": "husky install",
+    "prepublishOnly": "npm run lint && npm run test && npm run generate-rulesets"
   },
   "bin": {
     "solhint": "solhint.js"
@@ -61,6 +63,7 @@
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-import": "^2.27.4",
     "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
     "markdown-table": "^2.0.0",
     "mocha": "^10.2.0",
     "mocha-lcov-reporter": "^1.3.0",
