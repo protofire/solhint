@@ -9,7 +9,7 @@ title:       "func-param-name-mixedcase | Solhint"
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 
 ## Description
-Function param name must be in mixedCase
+Function param name must be in mixedCase.
 
 ## Options
 This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
