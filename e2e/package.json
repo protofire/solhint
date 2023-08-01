@@ -4,12 +4,13 @@
   "description": "E2E tests for solhint",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test.js"
+    "test": "mocha test.js formatters-test.js"    
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "chai": "^4.3.7",
+    "chai-spies": "^1.0.0",
     "fs-extra": "^11.1.0",
     "get-stream": "^6.0.0",
     "mocha": "^10.2.0",

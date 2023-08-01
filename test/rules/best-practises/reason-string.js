@@ -101,4 +101,25 @@ describe('Linter - reason-string', () => {
     assertNoWarnings(report)
     assertNoErrors(report)
   })
+
+  it('should raise reason string maxLength error with added data', () => {
+    const qtyChars = 'Roles: account already has role'.length
+    const maxLength = 5
+
+    const code = funcWith(`require(!has(role, account), "Roles: account already has role");
+        role.bearer[account] = true;role.bearer[account] = true;
+    `)
+
+    const report = linter.processStr(code, {
+      rules: { 'reason-string': ['warn', { maxLength: 5 }] },
+    })
+
+    assert.ok(report.warningCount > 0)
+    assertWarnsCount(report, 1)
+
+    assert.equal(
+      report.reports[0].message,
+      `Error message for require is too long: ${qtyChars} counted / ${maxLength} allowed`
+    )
+  })
 })

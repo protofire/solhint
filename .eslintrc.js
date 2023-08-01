@@ -1,6 +1,6 @@
 module.exports = {
   parserOptions: {
-    ecmaVersion: 8,
+    ecmaVersion: 2020,
   },
   env: {
     browser: false,
@@ -18,6 +18,7 @@ module.exports = {
     'global-require': 'off',
     'no-bitwise': 'off',
     'no-console': 'off',
+    'func-names': 'off',
     'no-continue': 'off',
     'no-else-return': 'off',
     'no-param-reassign': 'off',

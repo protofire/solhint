@@ -9,7 +9,7 @@ title:       "named-parameters-mapping | Solhint"
 ![Default Severity Badge off](https://img.shields.io/badge/Default%20Severity-off-undefined)
 
 ## Description
-Solidity v0.8.18 introduced named parameters on the mappings definition
+Solidity v0.8.18 introduced named parameters on the mappings definition.
 
 ## Options
 This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to off.

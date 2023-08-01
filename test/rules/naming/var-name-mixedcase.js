@@ -47,7 +47,27 @@ describe('Linter - var-name-mixedcase', () => {
     assert.equal(report.errorCount, 0)
   })
 
-  describe('with $ character', () => {
+  it('should not raise const name error for immutable variables in SNAKE_CASE', () => {
+    const code = contractWith('uint32 private immutable SNAKE_CASE;')
+
+    const report = linter.processStr(code, {
+      rules: { 'no-unused-vars': 'error', 'var-name-mixedcase': 'error' },
+    })
+
+    assert.equal(report.errorCount, 0)
+  })
+
+  it('should not raise const name error for immutable variables in mixedCase', () => {
+    const code = contractWith('uint32 private immutable SNAKE_CASE;')
+
+    const report = linter.processStr(code, {
+      rules: { 'no-unused-vars': 'error', 'var-name-mixedcase': 'error' },
+    })
+
+    assert.equal(report.errorCount, 0)
+  })
+  
+    describe('with $ character', () => {
     const WITH_$ = {
       $: contractWith('uint32 private $ = 10;'),
       'starting with $': contractWith('uint32 private $D = 10;'),
@@ -64,5 +84,4 @@ describe('Linter - var-name-mixedcase', () => {
         assert.equal(report.errorCount, 0)
       })
     }
-  })
 })
