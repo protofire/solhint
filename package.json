@@ -41,8 +41,6 @@
     "chalk": "^4.1.2",
     "commander": "^10.0.0",
     "cosmiconfig": "^8.0.0",
-    "cross-spawn": "^7.0.3",
-    "execa": "^4.1.0",
     "fast-diff": "^1.2.0",
     "glob": "^8.0.3",
     "ignore": "^5.2.4",

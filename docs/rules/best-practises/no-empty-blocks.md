@@ -12,7 +12,7 @@ title:       "no-empty-blocks | Solhint"
 
 
 ## Description
-Code contains empty block.
+Code block has zero statements inside. Exceptions apply.
 
 ## Options
 This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
@@ -28,7 +28,39 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 
 
 ## Examples
-This rule does not have examples.
+### 👍 Examples of **correct** code for this rule
+
+#### Empty fallback function
+
+```solidity
+fallback () external { }
+```
+
+#### Empty constructor with member initialization list
+
+```solidity
+constructor(uint param) Foo(param) Bar(param*2) { }
+```
+
+### 👎 Examples of **incorrect** code for this rule
+
+#### Empty block on if statement
+
+```solidity
+if (condition) { }
+```
+
+#### Empty contract
+
+```solidity
+contract Foo { }
+```
+
+#### Empty block in constructor without parent initialization
+
+```solidity
+constructor () { }
+```
 
 ## Version
 This rule was introduced in [Solhint 1.1.5](https://github.com/protofire/solhint/tree/v1.1.5)

@@ -1,3 +1,28 @@
+## [3.4.2] - 2023-08-04
+### Updated
+- Support `ignoreConstructors` option for `no-empty-blocks` [#418](https://github.com/protofire/solhint/pull/418)
+- Bump json5 from 2.1.3 to 2.2.3 [#376](https://github.com/protofire/solhint/pull/376)
+- Bump json-schema and jsprim [#370](https://github.com/protofire/solhint/pull/370)
+- Bump semver from 6.3.0 to 7.5.2 [#438](https://github.com/protofire/solhint/pull/438)
+- Corrected "Category" of `quotes` rule, added default rules list on readme [#443](https://github.com/protofire/solhint/pull/443)
+- 'Deprecated' column on `rules.md`` [#444](https://github.com/protofire/solhint/pull/444)
+- Information about maxCharacters allowed on `reason-string` rule [#446](https://github.com/protofire/solhint/pull/446)
+- E2E tests for `max-warnings` [#455](https://github.com/protofire/solhint/pull/455)
+- Replaced blacklist and whitelist words [#459](https://github.com/protofire/solhint/pull/459)
+### Added
+- New Rule: No unused imports [#417](https://github.com/protofire/solhint/pull/417)
+- New Rule: To treat immutable as constants [#458](https://github.com/protofire/solhint/pull/458)
+- JSON formatter support [#440](https://github.com/protofire/solhint/pull/440)
+- Rules List with `list-rules` command [#449](https://github.com/protofire/solhint/pull/449)
+- E2E tests for formatters and new `Compact formatter` [#457](https://github.com/protofire/solhint/pull/457)
+
+### Fixed
+- `maxWarnings` parameter waiting review [#439](https://github.com/protofire/solhint/pull/439)
+- `–fix` option not working in avoid-throw rule [#442](https://github.com/protofire/solhint/pull/442)
+- Formatter option fixed for `stdin` command [#450](https://github.com/protofire/solhint/pull/450)
+
+
+<br><br>
 ## [3.4.1] - 2023-03-06
 ### Updated
 - Updated solidity parser to 0.16.0 [#420](https://github.com/protofire/solhint/pull/420)
