@@ -65,53 +65,43 @@ describe('immutable-vars-naming', () => {
     assert.equal(report.errorCount, 0)
   })
 
-  describe('immutable-vars-naming ==> warnings (same as above)', () => {
-    it('should raise warning when immutablesAsConstants = false and variable is in snake case', () => {
-      const code = contractWith('uint32 private immutable SNAKE_CASE;')
+  describe('Immutable variable with $ character as mixedCase', () => {
+    const WITH_$ = {
+      'starting with $': contractWith('uint32 immutable private $D;'),
+      'containing a $': contractWith('uint32 immutable private testWith$Contained;'),
+      'ending with $': contractWith('uint32 immutable private testWithEnding$;'),
+      'only with $': contractWith('uint32 immutable private $;'),
+    }
 
-      const report = linter.processStr(code, {
-        rules: { 'immutable-vars-naming': ['warn', { immutablesAsConstants: false }] },
+    for (const [key, code] of Object.entries(WITH_$)) {
+      it(`should not raise immutable error for variables ${key}`, () => {
+        const report = linter.processStr(code, {
+          rules: { 'immutable-vars-naming': ['error', { immutablesAsConstants: false }] },
+        })
+
+        assert.equal(report.errorCount, 0)
       })
+    }
+  })
 
-      assert.equal(report.warningCount, 1)
-      assert.ok(
-        report.messages[0].message.includes('Immutable variables names are set to be in mixedCase')
-      )
-    })
+  describe('Immutable variable with $ character as SNAKE_CASE', () => {
+    const WITH_$ = {
+      'starting with $': contractWith('uint32 immutable private $_D;'),
+      'starting with $D': contractWith('uint32 immutable private $D;'),
+      'containing a $': contractWith('uint32 immutable private TEST_WITH_$_CONTAINED;'),
+      'ending with $': contractWith('uint32 immutable private TEST_WITH_ENDING_$;'),
+      'ending with D$': contractWith('uint32 immutable private TEST_WITH_ENDING_D$;'),
+      'only with $': contractWith('uint32 immutable private $;'),
+    }
 
-    it('should NOT raise warning when immutablesAsConstants = false and variable is in snake case', () => {
-      const code = contractWith('uint32 private immutable SNAKE_CASE;')
+    for (const [key, code] of Object.entries(WITH_$)) {
+      it(`should not raise immutable error for variables ${key}`, () => {
+        const report = linter.processStr(code, {
+          rules: { 'immutable-vars-naming': ['error', { immutablesAsConstants: true }] },
+        })
 
-      const report = linter.processStr(code, {
-        rules: { 'immutable-vars-naming': ['warn', { immutablesAsConstants: true }] },
+        assert.equal(report.errorCount, 0)
       })
-
-      assert.equal(report.warningCount, 0)
-    })
-
-    it('should raise warning when immutablesAsConstants = true and variable is in mixedCase', () => {
-      const code = contractWith('uint32 private immutable mixedCase;')
-
-      const report = linter.processStr(code, {
-        rules: { 'immutable-vars-naming': ['warn', { immutablesAsConstants: true }] },
-      })
-
-      assert.equal(report.warningCount, 1)
-      assert.ok(
-        report.messages[0].message.includes(
-          'Immutable variables name are set to be in capitalized SNAKE_CASE'
-        )
-      )
-    })
-
-    it('should NOT raise warning when immutablesAsConstants = false and variable is in mixedCase', () => {
-      const code = contractWith('uint32 private immutable mixedCase;')
-
-      const report = linter.processStr(code, {
-        rules: { 'immutable-vars-naming': ['warn', { immutablesAsConstants: false }] },
-      })
-
-      assert.equal(report.warningCount, 0)
-    })
+    }
   })
 })
