@@ -9,6 +9,7 @@ title:       "Rule Index of Solhint"
 | Rule Id                                                            | Error                                                                                                                 | Recommended  | Deprecated |
 | ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- | ------------ | ---------- |
 | [code-complexity](./rules/best-practises/code-complexity.md)       | Function has cyclomatic complexity "current" but allowed no more than maxcompl.                                       |              |            |
+| [explicit-types](./rules/best-practises/explicit-types.md)         | Forbid or enforce explicit types (like uint256) that have an alias (like uint).                                       | $~~~~~~~~$✔️ |            |
 | [function-max-lines](./rules/best-practises/function-max-lines.md) | Function body contains "count" lines but allowed no more than maxlines.                                               |              |            |
 | [max-line-length](./rules/best-practises/max-line-length.md)       | Line length must be no more than maxlen.                                                                              |              |            |
 | [max-states-count](./rules/best-practises/max-states-count.md)     | Contract has "some count" states declarations but allowed no more than maxstates.                                     | $~~~~~~~~$✔️ |            |
