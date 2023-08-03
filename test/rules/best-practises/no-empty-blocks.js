@@ -25,6 +25,8 @@ describe('Linter - no-empty-blocks', () => {
 
   const BLOCKS_WITH_DEFINITIONS = [
     contractWith('function () public payable { make1(); }'),
+    contractWith('receive() external payable {}'),
+    contractWith('fallback() external payable {}'),
     funcWith('if (a < b) { make1(); }'),
     contractWith('struct Abc { uint a; }'),
     contractWith('enum Abc { Test1 }'),
