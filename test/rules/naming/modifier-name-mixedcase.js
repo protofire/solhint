@@ -23,4 +23,23 @@ describe('Linter - modifier-name-mixedcase', () => {
 
     assert.equal(report.errorCount, 0)
   })
+
+  describe('with $ character', () => {
+    const WITH_$ = {
+      'starting with $': contractWith('modifier $ownedBy(address a) { }'),
+      'containing a $': contractWith('modifier owned$By(address a) { }'),
+      'ending with $': contractWith('modifier ownedBy$(address a) { }'),
+      'only with $': contractWith('modifier $(uint a) { }'),
+    }
+
+    for (const [key, code] of Object.entries(WITH_$)) {
+      it(`should not raise func name error for Modifiers ${key}`, () => {
+        const report = linter.processStr(code, {
+          rules: { 'modifier-name-mixedcase': 'error' },
+        })
+
+        assert.equal(report.errorCount, 0)
+      })
+    }
+  })
 })
