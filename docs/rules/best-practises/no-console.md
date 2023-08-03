@@ -14,7 +14,7 @@ title:       "no-console | Solhint"
 
 
 ## Description
-No console.log/logInt/logBytesX/logString/etc & No hardhat and forge-std console.sol import statements
+No console.log/logInt/logBytesX/logString/etc & No hardhat and forge-std console.sol import statements.
 
 ## Options
 This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to error.

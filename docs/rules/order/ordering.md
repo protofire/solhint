@@ -9,7 +9,7 @@ title:       "ordering | Solhint"
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 
 ## Description
-Check order of elements in file and inside each contract, according to the style guide
+Check order of elements in file and inside each contract, according to the style guide.
 
 ## Options
 This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.

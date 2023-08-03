@@ -2,8 +2,10 @@
 
 files in this directory are pulled from eslint repository:
 
-- table.js: eslint v5.6.0 Gajus Kuizinas <gajus@gajus.com>
-- unix.js: eslint v8.32.0 oshi-shinobu
-- tap.js: eslint v8.32.0 Jonathan Kingston
-- stylish.js: eslint v8.32.0 by Sindre Sorhus
-
+- table.js: eslint - Gajus Kuizinas
+- unix.js: eslint - oshi-shinobu
+- tap.js: eslint - Jonathan Kingston
+- stylish.js: eslint - Sindre Sorhus
+- json.js: eslint - Artur Lukianov
+- compact.js: eslint - Nicholas C. Zakas
+  
