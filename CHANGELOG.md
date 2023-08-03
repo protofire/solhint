@@ -12,6 +12,7 @@
 ### Added
 - New Rule: No unused imports [#417](https://github.com/protofire/solhint/pull/417)
 - New Rule: To treat immutable as constants [#458](https://github.com/protofire/solhint/pull/458)
+- New Rule: Explicit-types. To forbid/enforce full type or alias for variables declaration [#467](https://github.com/protofire/solhint/pull/467)
 - JSON formatter support [#440](https://github.com/protofire/solhint/pull/440)
 - Rules List with `list-rules` command [#449](https://github.com/protofire/solhint/pull/449)
 - E2E tests for formatters and new `Compact formatter` [#457](https://github.com/protofire/solhint/pull/457)
