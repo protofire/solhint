@@ -14,7 +14,6 @@ title:       "no-unused-import | Solhint"
 ## Description
 Imported name is not used.
 
-
 ## Options
 This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
 
