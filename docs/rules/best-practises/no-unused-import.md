@@ -12,7 +12,7 @@ title:       "no-unused-import | Solhint"
 
 
 ## Description
-Imported name is not used.
+Imported object name is not being used by the contract.
 
 ## Options
 This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
@@ -28,7 +28,27 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 
 
 ## Examples
-This rule does not have examples.
+### 👍 Examples of **correct** code for this rule
+
+#### Imported object is being used
+
+```solidity
+
+            import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+            contract MyToken is ERC20 {}
+          
+```
+
+### 👎 Examples of **incorrect** code for this rule
+
+#### Imported object is not being used
+
+```solidity
+
+          import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+            contract B {}
+          
+```
 
 ## Version
 This rule is introduced in the latest version.
