@@ -1,4 +1,4 @@
-## [3.5] - 2023-08-04
+## [3.5.1] - 2023-08-04
 ### Updated
 - Support `ignoreConstructors` option for `no-empty-blocks` [#418](https://github.com/protofire/solhint/pull/418)
 - Bump json5 from 2.1.3 to 2.2.3 [#376](https://github.com/protofire/solhint/pull/376)
