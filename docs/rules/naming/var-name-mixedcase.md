@@ -12,7 +12,7 @@ title:       "var-name-mixedcase | Solhint"
 
 
 ## Description
-Variable name must be in mixedCase.
+Variable name must be in mixedCase. (Does not check IMMUTABLES, use immutable-vars-naming)
 
 ## Options
 This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.

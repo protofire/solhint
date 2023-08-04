@@ -19,7 +19,10 @@ function init() {
   program
     .name('solhint')
     .usage('[options] <file> [...other_files]')
-    .option('-f, --formatter [name]', 'report formatter name (stylish, table, tap, unix)')
+    .option(
+      '-f, --formatter [name]',
+      'report formatter name (stylish, table, tap, unix, json, compact)'
+    )
     .option('-w, --max-warnings [maxWarningsNumber]', 'number of allowed warnings')
     .option('-c, --config [file_name]', 'file to use as your .solhint.json')
     .option('-q, --quiet', 'report errors only - default: false')
@@ -30,15 +33,22 @@ function init() {
     .action(execMainAction)
 
   program
-    .command('stdin')
-    .description('linting of source code data provided to STDIN')
+    .command('stdin', null, { noHelp: false })
     .option('--filename [file_name]', 'name of file received using STDIN')
+    .description(
+      'linting of source code data provided to STDIN\nEx: echo "contract Foo { function f1()external view returns(uint256) {} }" | solhint stdin\nEx: solhint stdin --filename "./pathToFilename" -f table'
+    )
     .action(processStdin)
 
   program
     .command('init-config', null, { noHelp: true })
     .description('create configuration file for solhint')
     .action(writeSampleConfigFile)
+
+  program
+    .command('list-rules', null, { noHelp: false })
+    .description('display covered rules of current .solhint.json')
+    .action(listRules)
 
   if (process.argv.length <= 2) {
     program.help()
@@ -52,7 +62,6 @@ function execMainAction() {
   }
 
   let formatterFn
-
   try {
     // to check if is a valid formatter before execute linter
     formatterFn = getFormatter(program.opts().formatter)
@@ -63,9 +72,6 @@ function execMainAction() {
 
   const reportLists = program.args.filter(_.isString).map(processPath)
   const reports = _.flatten(reportLists)
-  const warningsCount = reports.reduce((acc, i) => acc + i.warningCount, 0)
-  const warningsNumberExceeded =
-    program.opts().maxWarnings >= 0 && warningsCount > program.opts().maxWarnings
 
   if (program.opts().fix) {
     for (const report of reports) {
@@ -92,36 +98,31 @@ function execMainAction() {
     })
   }
 
-  if (printReports(reports, formatterFn)) {
-    if (
-      program.opts().maxWarnings &&
-      reports &&
-      reports.length > 0 &&
-      !reports[0].errorCount &&
-      warningsNumberExceeded
-    ) {
-      console.log(
-        'Solhint found more warnings than the maximum specified (maximum: %s, found: %s)',
-        program.opts().maxWarnings,
-        warningsCount
-      )
-      process.exit(1)
-    }
-  }
+  printReports(reports, formatterFn)
 
   exitWithCode(reports)
 }
 
 function processStdin(options) {
-  const STDIN_FILE = 0
+  const STDIN_FILE = options.filename || 0
   const stdinBuffer = fs.readFileSync(STDIN_FILE)
-
   const report = processStr(stdinBuffer.toString())
   report.file = options.filename || 'stdin'
-  const formatterFn = getFormatter()
-  printReports([report], formatterFn)
 
-  exitWithCode([report])
+  let formatterFn
+  try {
+    // to check if is a valid formatter before execute linter
+    formatterFn = getFormatter(program.opts().formatter)
+  } catch (ex) {
+    console.error(ex.message)
+    process.exit(1)
+  }
+
+  const reports = [report]
+
+  printReports(reports, formatterFn)
+
+  exitWithCode(reports)
 }
 
 function writeSampleConfigFile() {
@@ -138,8 +139,6 @@ function writeSampleConfigFile() {
   } else {
     console.log('Configuration file already exists')
   }
-
-  process.exit(0)
 }
 
 const readIgnore = _.memoize(() => {
@@ -164,7 +163,6 @@ const readIgnore = _.memoize(() => {
 
 const readConfig = _.memoize(() => {
   let config = {}
-
   try {
     config = loadConfig(program.opts().config)
   } catch (e) {
@@ -189,8 +187,38 @@ function processPath(path) {
   return linter.processPath(path, readConfig())
 }
 
+function areWarningsExceeded(reports) {
+  const warningsCount = reports.reduce((acc, i) => acc + i.warningCount, 0)
+  const warningsNumberExceeded =
+    program.opts().maxWarnings >= 0 && warningsCount > program.opts().maxWarnings
+
+  return { warningsNumberExceeded, warningsCount }
+}
+
 function printReports(reports, formatter) {
-  console.log(formatter(reports))
+  const warnings = areWarningsExceeded(reports)
+  let finalMessage = ''
+  let exitWithOne = false
+  if (
+    program.opts().maxWarnings &&
+    reports &&
+    reports.length > 0 &&
+    warnings.warningsNumberExceeded
+  ) {
+    if (!reports[0].errorCount) {
+      finalMessage = `Solhint found more warnings than the maximum specified (maximum: ${
+        program.opts().maxWarnings
+      }, found: ${warnings.warningsCount})`
+      exitWithOne = true
+    } else {
+      finalMessage =
+        'Error/s found on rules! [max-warnings] param is ignored. Fixing errors enables max-warnings'
+    }
+  }
+
+  console.log(formatter(reports), finalMessage || '')
+
+  if (exitWithOne) process.exit(1)
   return reports
 }
 
@@ -206,9 +234,40 @@ function getFormatter(formatter) {
   }
 }
 
+function listRules() {
+  if (process.argv.length !== 3) {
+    console.log('Error!! no additional parameters after list-rules command')
+    process.exit(1)
+  }
+
+  const configPath = '.solhint.json'
+  if (!fs.existsSync(configPath)) {
+    console.log('Error!! Configuration does not exists')
+    process.exit(1)
+  } else {
+    const config = readConfig()
+    console.log('\nConfiguration File: \n', config)
+
+    const reportLists = linter.processPath(configPath, config)
+    const rulesObject = reportLists[0].config
+
+    console.log('\nRules: \n')
+    const orderedRules = Object.keys(rulesObject)
+      .sort()
+      .reduce((obj, key) => {
+        obj[key] = rulesObject[key]
+        return obj
+      }, {})
+
+    // eslint-disable-next-line func-names
+    Object.keys(orderedRules).forEach(function (key) {
+      console.log('- ', key, ': ', orderedRules[key])
+    })
+  }
+}
+
 function exitWithCode(reports) {
   const errorsCount = reports.reduce((acc, i) => acc + i.errorCount, 0)
-
   process.exit(errorsCount > 0 ? 1 : 0)
 }
 

@@ -55,7 +55,7 @@ Linter for Solidity programming language
 Options:
 
   -V, --version                           output the version number
-  -f, --formatter [name]                  report formatter name (stylish, table, tap, unix)
+  -f, --formatter [name]                  report formatter name (stylish, table, tap, unix, json, compact)
   -w, --max-warnings [maxWarningsNumber]  number of allowed warnings
   -c, --config [file_name]                file to use as your .solhint.json
   -q, --quiet                             report errors only - default: false
@@ -67,8 +67,11 @@ Options:
 Commands:
 
   stdin [options]                         linting of source code data provided to STDIN
+  list-rules                              display covered rules of current .solhint.json
 ```
-
+### Note
+The `--fix`  option currently works only on "avoid-throw" and "avoid-sha3" rules
+<br><br>
 ## Configuration
 
 You can use a `.solhint.json` file to configure Solhint for the whole project.
@@ -86,6 +89,10 @@ This file has the following format:
   "extends": "solhint:default"
 }
 ```
+### Note
+The `solhint:default` configuration contains only two rules: max-line-length & no-console
+<br><br>
+
 
 ### Sample
 ```json

@@ -12,7 +12,7 @@ title:       "no-global-import | Solhint"
 
 
 ## Description
-Import statement includes an entire file instead of selected symbols
+Import statement includes an entire file instead of selected symbols.
 
 ## Options
 This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
