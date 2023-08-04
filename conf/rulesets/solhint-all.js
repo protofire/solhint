@@ -6,6 +6,7 @@
 module.exports = Object.freeze({
   rules: {
     'code-complexity': ['warn', 7],
+    'explicit-types': ['warn', 'explicit'],
     'function-max-lines': ['warn', 50],
     'max-line-length': ['error', 120],
     'max-states-count': ['warn', 15],
@@ -28,7 +29,14 @@ module.exports = Object.freeze({
     'contract-name-camelcase': 'warn',
     'event-name-camelcase': 'warn',
     'func-name-mixedcase': 'warn',
+    'func-named-parameters': ['warn', 2],
     'func-param-name-mixedcase': 'warn',
+    'immutable-vars-naming': [
+      'warn',
+      {
+        immutablesAsConstants: true,
+      },
+    ],
     'modifier-name-mixedcase': 'warn',
     'named-parameters-mapping': 'off',
     'private-vars-leading-underscore': [
