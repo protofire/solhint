@@ -150,6 +150,84 @@ describe('Linter - no-unused-import', () => {
       description: 'imported type is used in a function parameter declaration',
       code: `import {A} from './A.sol'; contract B { function (A.thing statevar) public {} }`,
     },
+    {
+      description: 'imported function is attached to a type',
+      code: `import {add} from './A.sol'; type Int is int; using {add} for Int global;`,
+    },
+    {
+      description: 'imported function is used as a user-defined operator',
+      code: `import {add} from './A.sol'; type Int is int; using {add as +} for Int global;`,
+    },
+    {
+      description: 'field of imported name is attached to a type',
+      code: `
+          import {Int, Math} from "./A.sol"; using {Math.add} for Int;
+          contract C {
+              Int public foo;
+          }
+      `,
+    },
+    {
+      description: 'Name is used in an override',
+      code: `
+        pragma solidity >=0.8.19;
+        import { ERC721 } from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+        import { IERC721Metadata } from "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
+        contract MyContract {
+            /// @inheritdoc ERC721
+            function tokenURI(uint256 streamId) public view override(IERC721Metadata, ERC721) returns (string memory uri) {
+                uri = "example.com";
+            }
+        }
+      `,
+    },
+    {
+      description: 'Type is used in a constructor initializator',
+      code: `
+        pragma solidity >=0.8.19;
+        import { ERC721 } from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+        contract MyContract {
+            constructor() ERC721("Sablier V2 Lockup Dynamic NFT", "SAB-V2-LOCKUP-DYN") { }
+        }
+      `,
+    },
+    {
+      description: 'Import is used as value in a function parameter',
+      code: `
+        pragma solidity >=0.8.19 <0.9.0;
+        import { UD60x18, ZERO } from "@prb/math/UD60x18.sol";
+        contract SetProtocolFee_Integration_Fuzz_Test {
+            function testFuzz_SetProtocolFee(UD60x18 newProtocolFee) external {
+                newProtocolFee = _bound(newProtocolFee, 1, MAX_FEE);
+                vm.expectEmit({ emitter: address(comptroller) });
+                emit SetProtocolFee({ admin: users.admin, asset: dai, oldProtocolFee: ZERO, newProtocolFee: newProtocolFee });
+            }
+        }
+      `,
+    },
+    {
+      description: 'Import is used as value in a binary expression',
+      code: `
+        import { ZERO } from "@prb/math/UD60x18.sol";
+        contract Foo {
+            function returnFifteen() public returns (uint){
+              return ZERO + 15;
+            }
+        }
+      `,
+    },
+    {
+      description: 'Import is used as value in an assignment',
+      code: `
+        import { ZERO } from "@prb/math/UD60x18.sol";
+        contract Foo {
+            uint256 public howMuch;
+            constructor () {
+              howMuch = ZERO;
+            }
+        }
+      `,
+    },
   ].forEach(({ description, code }) => {
     it(`should not raise when ${description}`, () => {
       const report = linter.processStr(code, {
