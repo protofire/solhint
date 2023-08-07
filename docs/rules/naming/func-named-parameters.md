@@ -5,29 +5,26 @@ title:       "func-named-parameters | Solhint"
 ---
 
 # func-named-parameters
-![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
 ![Category Badge](https://img.shields.io/badge/-Style%20Guide%20Rules-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
-> The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
-
 
 ## Description
-Enforce function calls with Named Parameters when containing more than the configured qty
+Enforce named parameters for function calls with 4 or more arguments. This rule may have some false positives
 
 ## Options
 This rule accepts an array of options:
 
-| Index | Description                                            | Default Value |
-| ----- | ------------------------------------------------------ | ------------- |
-| 0     | Rule severity. Must be one of "error", "warn", "off".  | warn          |
-| 1     | Maximum qty of unnamed parameters for a function call. | 2             |
+| Index | Description                                                                                              | Default Value |
+| ----- | -------------------------------------------------------------------------------------------------------- | ------------- |
+| 0     | Rule severity. Must be one of "error", "warn", "off".                                                    | warn          |
+| 1     | Minimum qty of unnamed parameters for a function call (to prevent false positives on builtin functions). | 4             |
 
 
 ### Example Config
 ```json
 {
   "rules": {
-    "func-named-parameters": ["warn",2]
+    "func-named-parameters": ["warn",4]
   }
 }
 ```
@@ -36,7 +33,7 @@ This rule accepts an array of options:
 ## Examples
 ### 👍 Examples of **correct** code for this rule
 
-#### Function call with two UNNAMED parameters (default is max 2)
+#### Function call with two UNNAMED parameters (default is 4)
 
 ```solidity
 functionName('0xA81705c8C247C413a19A244938ae7f4A0393944e', 1e18)
@@ -56,7 +53,7 @@ functionName({ sender: _senderAddress, amount: 1e18, token: _tokenAddress, recei
 
 ### 👎 Examples of **incorrect** code for this rule
 
-#### Function call with four UNNAMED parameters (default is max 2)
+#### Function call with four UNNAMED parameters (default 4)
 
 ```solidity
 functionName(_senderAddress, 1e18, _tokenAddress, _receiverAddress )

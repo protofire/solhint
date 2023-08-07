@@ -1,53 +1,64 @@
 const FUNCTION_CALLS_ERRORS = {
-  maxUnnamed_0_1u: {
-    code: 'funcName(_sender);',
-    maxUnnamed: 0,
+  err1: {
+    code: 'funcName(_sender, amount, receiver, token1, token2, token3);',
+    minUnnamed: 5,
   },
 
-  maxUnnamed_1_3u: {
-    code: 'funcName(_sender, amount, receiver);',
-    maxUnnamed: 1,
+  err2: {
+    code: 'funcName(_sender, amount, receiver, token1, token2);',
+    minUnnamed: 4,
   },
 
-  maxUnnamed_2_3u: {
-    code: 'funcName(_sender, amount, receiver);',
-    maxUnnamed: 2,
-  },
-
-  maxUnnamed_3_4u: {
-    code: 'funcName(_sender, amount, receiver, token);',
-    maxUnnamed: 3,
+  err3: {
+    code: 'funcName(_sender, amount, receiver, token1, token2);',
+    minUnnamed: 0,
   },
 }
 
 const FUNCTION_CALLS_OK = {
-  maxUnnamed_0_0u: {
+  ok1: {
     code: 'funcName();',
-    maxUnnamed: 0,
+    minUnnamed: 0,
   },
 
-  maxUnnamed_0_0uB: {
-    code: 'funcName();',
-    maxUnnamed: 10,
+  ok2: {
+    code: 'address(0);',
+    minUnnamed: 10,
   },
 
-  maxUnnamed_1_0u: {
+  ok3: {
     code: 'funcName({ sender: _sender, amount: _amount, receiver: _receiver });',
-    maxUnnamed: 1,
+    minUnnamed: 1,
   },
 
-  maxUnnamed_1_1u: {
-    code: 'funcName(sender);',
-    maxUnnamed: 1,
-  },
-  maxUnnamed_2_2u: {
-    code: 'funcName(sender, amount);',
-    maxUnnamed: 2,
+  ok4: {
+    code: 'assert(1 == 3);',
+    minUnnamed: 1,
   },
 
-  maxUnnamed3_0u: {
-    code: 'funcName({ sender: _sender, amount: _amount, receiver: _receiver });',
-    maxUnnamed: 3,
+  ok5: {
+    code: 'bytes foo = abi.encodeWithSelector(hex"0102030405060708", uint16(0xff00));',
+    minUnnamed: 2,
+  },
+
+  ok6: {
+    code: 'funcName({ sender: _sender, amount: _amount, receiver: _receiver, token1: _token1, token2: _token2 });',
+    minUnnamed: 5,
+  },
+
+  ok7: {
+    code: 'new BeaconProxy(address(0),abi.encodeWithSelector(bytes4(""),address(0),address(0),address(0)));',
+    minUnnamed: 2,
+  },
+
+  ok8: {
+    code: 'salt = keccak256(abi.encode(msg.sender, block.chainid, salt));',
+    minUnnamed: 0,
+  },
+
+  ok9: {
+    code: 'require(foobar != address(0), "foobar must a valid address");',
+    minUnnamed: 0,
   },
 }
 
