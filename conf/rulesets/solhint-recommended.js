@@ -24,7 +24,6 @@ module.exports = Object.freeze({
     'contract-name-camelcase': 'warn',
     'event-name-camelcase': 'warn',
     'func-name-mixedcase': 'warn',
-    'func-named-parameters': ['warn', 2],
     'immutable-vars-naming': [
       'warn',
       {
