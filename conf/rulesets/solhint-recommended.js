@@ -5,6 +5,7 @@
 
 module.exports = Object.freeze({
   rules: {
+    'custom-errors': 'warn',
     'explicit-types': ['warn', 'explicit'],
     'max-states-count': ['warn', 15],
     'no-console': 'error',
