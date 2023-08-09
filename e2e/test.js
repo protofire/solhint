@@ -147,4 +147,26 @@ describe('e2e', function () {
       expect(stdout.trim()).to.not.contain(errorFound)
     })
   })
+
+  describe('Linter - foundry-test-functions with shell', () => {
+    // Foo contract has 1 warning
+    // FooTest contract has 1 error
+    useFixture('07-foundry-test')
+
+    it(`should raise error for empty blocks only`, () => {
+      const { code, stdout } = shell.exec('solhint contracts/Foo.sol')
+
+      expect(code).to.equal(0)
+      expect(stdout.trim()).to.contain('Code contains empty blocks')
+    })
+
+    it(`should raise error for wrongFunctionDefinitionName() only`, () => {
+      const { code, stdout } = shell.exec('solhint -c test/.solhint.json test/FooTest.sol')
+
+      expect(code).to.equal(1)
+      expect(stdout.trim()).to.contain(
+        'Function wrongFunctionDefinitionName() must match Foundry test naming convention'
+      )
+    })
+  })
 })
