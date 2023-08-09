@@ -30,7 +30,7 @@ This rule accepts an array of options:
 
 ### Notes
 - This rule can be configured to skip certain function names in the SKIP array. In Example Config. ```setUp``` function will be skipped
-- Supported Regex: ```test(Fork)?(Fuzz)?_(Revert(If_|When_){1})?\w{1,}```
+- Supported Regex: ```test(Fork)?(Fuzz)?(Fail)?_(Revert(If_|When_){1})?\w{1,}```
 - This rule should be executed in a separate folder with a separate .solhint.json => ```solhint --config .solhint.json testFolder/**/*.sol```
 - This rule applies only to `external` and `public` functions
 - This rule skips the `setUp()` function
