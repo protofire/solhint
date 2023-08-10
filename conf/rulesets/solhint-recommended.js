@@ -53,7 +53,6 @@ module.exports = Object.freeze({
     'no-complex-fallback': 'warn',
     'no-inline-assembly': 'warn',
     'not-rely-on-block-hash': 'warn',
-    'not-rely-on-time': 'warn',
     reentrancy: 'warn',
     'state-visibility': 'warn',
   },
