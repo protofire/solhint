@@ -1,4 +1,3 @@
-const assert = require('assert')
 const linter = require('../../../lib/index')
 const contractWith = require('../../common/contract-builder').contractWith
 const { assertErrorCount, assertNoErrors, assertErrorMessage } = require('../../common/asserts')
@@ -21,30 +20,24 @@ const getZeroErrosObject = () => {
 }
 
 describe('Linter - explicit-types rule', () => {
-  it('should throw an error with a wrong configuration rule example 1', () => {
+  it('should throw an error with a wrong configuration rule', () => {
     const code = contractWith('uint256 public constant SNAKE_CASE = 1;')
-    try {
-      linter.processStr(code, {
-        rules: { 'explicit-types': ['error', 'implicito'] },
-      })
-    } catch (error) {
-      assert.ok(
-        error.toString().includes('Error: Config error on [explicit-types]. See explicit-types.md.')
-      )
-    }
+
+    const report = linter.processStr(code, {
+      rules: { 'explicit-types': ['error', 'implicito'] },
+    })
+
+    assertErrorCount(report, 1)
+    assertErrorMessage(report, `Error: Config error on [explicit-types]. See explicit-types.md.`)
   })
 
-  it('should throw an error with a wrong configuration rule example 2', () => {
+  it('should NOT throw error without the config array and default should take place', () => {
     const code = contractWith('uint256 public constant SNAKE_CASE = 1;')
-    try {
-      linter.processStr(code, {
-        rules: { 'explicit-types': 'error' },
-      })
-    } catch (error) {
-      assert.ok(
-        error.toString().includes('Error: Config error on [explicit-types]. See explicit-types.md.')
-      )
-    }
+    const report = linter.processStr(code, {
+      rules: { 'explicit-types': 'error' },
+    })
+
+    assertNoErrors(report)
   })
 
   for (const key in VAR_DECLARATIONS) {
