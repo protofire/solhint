@@ -6,6 +6,7 @@
 module.exports = Object.freeze({
   rules: {
     'code-complexity': ['warn', 7],
+    'custom-errors': 'warn',
     'explicit-types': ['warn', 'explicit'],
     'function-max-lines': ['warn', 50],
     'max-line-length': ['error', 120],
