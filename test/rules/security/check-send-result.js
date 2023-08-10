@@ -4,7 +4,7 @@ const funcWith = require('../../common/contract-builder').funcWith
 
 describe('Linter - check-send-result', () => {
   it('should return "send" call verification error', () => {
-    const code = funcWith(require('../../fixtures/security/send-result-ignored'))
+    const code = funcWith('x.send(55);')
 
     const report = linter.processStr(code, {
       rules: { 'check-send-result': 'error' },
@@ -15,7 +15,7 @@ describe('Linter - check-send-result', () => {
   })
 
   it('should not return "send" call verification error', () => {
-    const code = funcWith(require('../../fixtures/security/send-result-checked'))
+    const code = funcWith('if(x.send(55)) {}')
 
     const report = linter.processStr(code, {
       rules: { 'check-send-result': 'error' },
@@ -72,5 +72,15 @@ describe('Linter - check-send-result', () => {
     })
 
     assert.equal(report.errorCount, 1)
+  })
+
+  it('should not emit error when the send() is used for an ERC777', () => {
+    const code = funcWith('erc777.send(recipient, amount, "");')
+
+    const report = linter.processStr(code, {
+      rules: { 'check-send-result': 'error' },
+    })
+
+    assert.equal(report.errorCount, 0)
   })
 })
