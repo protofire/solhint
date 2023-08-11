@@ -16,6 +16,9 @@ You should add this rule manually:
 ```
 If not explicitly added, this rule will not be executed.
 
+### SPECIAL ATTENTION
+- RULE: `compiler-version` default was updated from ^0.5.8 to ^0.8.0
+
 ### Added
 - New Rule: Enforces the use of Custom Errors over Require and Revert statements [#475](https://github.com/protofire/solhint/pull/475)
 - New Rule: Enforces the test_ prefix on a file for Foundry users [#476](https://github.com/protofire/solhint/pull/476)
