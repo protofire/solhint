@@ -16,6 +16,9 @@ You should add this rule manually:
 ```
 If not explicitly added, this rule will not be executed.
 
+### SPECIAL ATTENTION
+- RULE: `compiler-version` default was updated from ^0.5.2 to ^0.8.0
+
 ### Added
 - New Rule: Enforces the use of Custom Errors over Require and Revert statements [#475](https://github.com/protofire/solhint/pull/475)
 - New Rule: Enforces the test_ prefix on a file for Foundry users [#476](https://github.com/protofire/solhint/pull/476)
@@ -26,6 +29,12 @@ If not explicitly added, this rule will not be executed.
 - `func-named-parameters` - false positives on builtin functions [#472](https://github.com/protofire/solhint/pull/472)
 - `ordering` - treat initializer weight same as constructor [#474](https://github.com/protofire/solhint/pull/474)
 - `check-send-result` - false positive on `erc777.send()`` function [#477](https://github.com/protofire/solhint/pull/477)
+- `explicit-types` - default value is now taking into account when no value is specified in config [#481](https://github.com/protofire/solhint/pull/481)
+- `compiler-version` - default value is now taking into account when no value is specified in config [#483](https://github.com/protofire/solhint/pull/483)
+
+### Updates
+- Rule: `check-send-result` added config clarification in the new `Notes` section [#482](https://github.com/protofire/solhint/pull/482)
+- Rule: `compiler-version` default was updated from ^0.5.2 to ^0.8.0 [#483](https://github.com/protofire/solhint/pull/483)
 
 
 

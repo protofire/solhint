@@ -48,7 +48,7 @@ describe('Linter - no-unused-import', () => {
   })
 
   it('should raise error when using solhint:recommended', () => {
-    const code = `pragma solidity ^0.5.8; import {A} from "./A.sol";`
+    const code = `pragma solidity ^0.8.0; import {A} from "./A.sol";`
 
     const report = linter.processStr(code, {
       extends: 'solhint:recommended',
