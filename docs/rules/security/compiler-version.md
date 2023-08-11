@@ -20,14 +20,14 @@ This rule accepts an array of options:
 | Index | Description                                           | Default Value |
 | ----- | ----------------------------------------------------- | ------------- |
 | 0     | Rule severity. Must be one of "error", "warn", "off". | error         |
-| 1     | Semver requirement                                    | ^0.5.8        |
+| 1     | Semver requirement                                    | ^0.8.0        |
 
 
 ### Example Config
 ```json
 {
   "rules": {
-    "compiler-version": ["error","^0.5.8"]
+    "compiler-version": ["error","^0.8.0"]
   }
 }
 ```
