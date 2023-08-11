@@ -63,7 +63,7 @@ uint256 public variableName
 ```
 
 ## Version
-This rule is introduced in the latest version.
+This rule was introduced in [Solhint 3.5.1](https://github.com/protofire/solhint/tree/v3.5.1)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/best-practises/explicit-types.js)

@@ -6,6 +6,7 @@
 module.exports = Object.freeze({
   rules: {
     'code-complexity': ['warn', 7],
+    'custom-errors': 'warn',
     'explicit-types': ['warn', 'explicit'],
     'function-max-lines': ['warn', 50],
     'max-line-length': ['error', 120],
@@ -28,8 +29,9 @@ module.exports = Object.freeze({
     'const-name-snakecase': 'warn',
     'contract-name-camelcase': 'warn',
     'event-name-camelcase': 'warn',
+    'foundry-test-functions': ['off', ['setUp']],
     'func-name-mixedcase': 'warn',
-    'func-named-parameters': ['warn', 2],
+    'func-named-parameters': ['warn', 4],
     'func-param-name-mixedcase': 'warn',
     'immutable-vars-naming': [
       'warn',
@@ -39,6 +41,7 @@ module.exports = Object.freeze({
     ],
     'modifier-name-mixedcase': 'warn',
     'named-parameters-mapping': 'off',
+    'named-return-values': 'warn',
     'private-vars-leading-underscore': [
       'warn',
       {
@@ -57,7 +60,7 @@ module.exports = Object.freeze({
     'avoid-throw': 'warn',
     'avoid-tx-origin': 'warn',
     'check-send-result': 'warn',
-    'compiler-version': ['error', '^0.5.8'],
+    'compiler-version': ['error', '^0.8.0'],
     'func-visibility': [
       'warn',
       {

@@ -28,7 +28,7 @@ describe('Linter - no-global-import', () => {
     assertErrorMessage(report, 'Specify names to import individually')
   })
   it('should raise warning when using solhint:recommended', () => {
-    const code = `pragma solidity ^0.5.8; import "./A.sol";`
+    const code = `pragma solidity ^0.8.0; import "./A.sol";`
 
     const report = linter.processStr(code, {
       extends: 'solhint:recommended',

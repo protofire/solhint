@@ -3,7 +3,7 @@ const foo1Output = [
     line: 2,
     column: 1,
     severity: 'Error',
-    message: 'Compiler version >=0.6.0 does not satisfy the ^0.5.8 semver requirement',
+    message: 'Compiler version >=0.6.0 does not satisfy the ^0.8.0 semver requirement',
     ruleId: 'compiler-version',
     fix: null,
     filePath: 'contracts/Foo.sol',

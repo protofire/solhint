@@ -1,3 +1,43 @@
+## [3.6.1] - 2023-08-11
+
+### BREAKING CHANGE
+- RULE: `not-rely-on-time` was REMOVED from RECOMMENDED ruleset<br>
+This was long overdue.<br> 
+Beware!! If you are relying on this rule and it is not explicitly configured (meaning there's only `solhint:recommended` option).<br>
+You should add this rule manually:
+```json
+  {
+    "extends": "solhint:recommended",
+    "rules": { 
+        "not-rely-on-time": "warn", 
+        "compiler-version": "off" 
+    },
+  }
+```
+If not explicitly added, this rule will not be executed.
+
+### SPECIAL ATTENTION
+- RULE: `compiler-version` default was updated from ^0.5.2 to ^0.8.0
+
+### Added
+- New Rule: Enforces the use of Custom Errors over Require and Revert statements [#475](https://github.com/protofire/solhint/pull/475)
+- New Rule: Enforces the test_ prefix on a file for Foundry users [#476](https://github.com/protofire/solhint/pull/476)
+- New Rule: Enforces the naming of function return values [#478](https://github.com/protofire/solhint/pull/478)
+- `Notes` option on docs to add more information of each rule. See `foundry-test-functions`. [#476](https://github.com/protofire/solhint/pull/476)
+  
+### Fixed
+- `func-named-parameters` - false positives on builtin functions [#472](https://github.com/protofire/solhint/pull/472)
+- `ordering` - treat initializer weight same as constructor [#474](https://github.com/protofire/solhint/pull/474)
+- `check-send-result` - false positive on `erc777.send()`` function [#477](https://github.com/protofire/solhint/pull/477)
+- `explicit-types` - default value is now taking into account when no value is specified in config [#481](https://github.com/protofire/solhint/pull/481)
+- `compiler-version` - default value is now taking into account when no value is specified in config [#483](https://github.com/protofire/solhint/pull/483)
+
+### Updates
+- Rule: `check-send-result` added config clarification in the new `Notes` section [#482](https://github.com/protofire/solhint/pull/482)
+- Rule: `compiler-version` default was updated from ^0.5.2 to ^0.8.0 [#483](https://github.com/protofire/solhint/pull/483)
+
+
+
 ## [3.5.1] - 2023-08-04
 ### Updated
 - Support `ignoreConstructors` option for `no-empty-blocks` [#418](https://github.com/protofire/solhint/pull/418)
@@ -30,7 +70,6 @@
 
 
 
-<br><br>
 ## [3.4.1] - 2023-03-06
 ### Updated
 - Updated solidity parser to 0.16.0 [#420](https://github.com/protofire/solhint/pull/420)
@@ -46,10 +85,6 @@
 - Fix named-parameters-mapping to not enforce on nested mappings [#421](https://github.com/protofire/solhint/pull/421)
 
 
-
-
-
-<br><br>
 ## [3.4.0] - 2023-02-17
 ### Updated
 - Solhint dependencies to support newer versions [#380](https://github.com/protofire/solhint/pull/380)
@@ -73,10 +108,6 @@
 - False positive on no-unused-vars for payable arguments without name [#399](https://github.com/protofire/solhint/pull/399)
 
 
-
-
-
-<br><br>
 ## [3.3.8] - 2023-01-17
 ### Fixed Docs and Typos
 - [#292](https://github.com/protofire/solhint/pull/292)
