@@ -26,6 +26,9 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 }
 ```
 
+### Notes
+- Rule will rise false positive on this: `bool success = walletAddress.send(amount); require(success, "Failed to send"); ` 
+- Rule will skip ERC777 "send" function to prevent false positives
 
 ## Examples
 ### 👍 Examples of **correct** code for this rule
@@ -34,6 +37,12 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 
 ```solidity
 if(x.send(55)) {}
+```
+
+#### result of "send" call checked within a require
+
+```solidity
+require(payable(walletAddress).send(moneyAmount), "Failed to send moneyAmount");
 ```
 
 ### 👎 Examples of **incorrect** code for this rule
