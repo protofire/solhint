@@ -90,4 +90,34 @@ describe('Linter - quotes', () => {
 
     assertErrorCount(reports[0], 1)
   })
+
+  describe('Double quotes inside single and viceversa', () => {
+    it('should not raise error when configured as single and there are double quotes inside', function test() {
+      const code = contractWith('string private constant STR = \'You shall "pass" !\';')
+
+      const report = linter.processStr(code, { rules: { quotes: ['error', 'single'] } })
+      assertNoErrors(report)
+    })
+
+    it('Should raise error when configured as single and string is with double quotes despite content', function test() {
+      const code = contractWith('string private constant STR = "You shall \'NOT\' pass";')
+
+      const report = linter.processStr(code, { rules: { quotes: ['error', 'single'] } })
+      assertErrorCount(report, 1)
+    })
+
+    it('should not raise error when configured as double and there are single quotes inside', function test() {
+      const code = contractWith('string private constant STR = "You shall \'pass\' !";')
+
+      const report = linter.processStr(code, { rules: { quotes: ['error', 'double'] } })
+      assertNoErrors(report)
+    })
+
+    it('Should raise error when configured as double and string is with single quotes despite content', function test() {
+      const code = contractWith('string private constant STR = \'You shall "pass" !\';')
+
+      const report = linter.processStr(code, { rules: { quotes: ['error', 'double'] } })
+      assertErrorCount(report, 1)
+    })
+  })
 })

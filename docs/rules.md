@@ -29,7 +29,7 @@ title:       "Rule Index of Solhint"
 | Rule Id                                                                     | Error                                                                                                                                  | Recommended  | Deprecated |
 | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ---------- |
 | [comprehensive-interface](./rules/miscellaneous/comprehensive-interface.md) | Check that all public or external functions are override. This is iseful to make sure that the whole API is extracted in an interface. |              |            |
-| [quotes](./rules/miscellaneous/quotes.md)                                   | Use double quotes for string literals. Values must be 'single' or 'double'.                                                            | $~~~~~~~~$✔️ |            |
+| [quotes](./rules/miscellaneous/quotes.md)                                   | Enforces the use of double or simple quotes as configured for string literals. Values must be 'single' or 'double'.                    | $~~~~~~~~$✔️ |            |
         
 
 ## Style Guide Rules
