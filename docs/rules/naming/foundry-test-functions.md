@@ -33,7 +33,7 @@ This rule accepts an array of options:
 - Supported Regex: ```test(Fork)?(Fuzz)?(Fail)?_(Revert(If_|When_){1})?\w{1,}```
 - This rule should be executed in a separate folder with a separate .solhint.json => ```solhint --config .solhint.json testFolder/**/*.sol```
 - This rule applies only to `external` and `public` functions
-- This rule skips the `setUp()` function
+- This rule skips the `setUp()` function by default
 
 ## Examples
 ### 👍 Examples of **correct** code for this rule
