@@ -4,6 +4,7 @@ const contractWith = require('../../common/contract-builder').contractWith
 const { assertErrorCount, assertNoErrors, assertErrorMessage } = require('../../common/asserts')
 
 const ALLOWED_FUNCTION_NAMES = [
+  'test',
   'test_',
   'testFork_',
   'testFuzz_',
@@ -20,9 +21,14 @@ const ALLOWED_FUNCTION_NAMES = [
   'testFuzz_Revert_',
   'testFuzz_If_',
   'testFuzz_When_',
+  'invariant',
+  'invariant_',
+  'invariantA',
+  'statefulFuzz',
+  'statefulFuzz_',
 ]
 
-const DISALLOWED_FUNCTION_NAMES = ['Test_', 'Test', 'test', 'testo_', '', 'any', 'setUp', 'other']
+const DISALLOWED_FUNCTION_NAMES = ['Test_', 'Test', '', 'any', 'setUp', 'other', '_']
 
 const composeFunctionName = (prefix, name, visibility) =>
   'function ' + prefix + name + ' ' + visibility + ' { testNumber = 42; }'
@@ -33,6 +39,7 @@ describe('Linter - foundry-test-functions', () => {
       const functionDefinition = composeFunctionName(prefix, 'FunctionName()', 'public')
       const code = contractWith(functionDefinition)
 
+      console.log('`code` :>> ', code)
       const report = linter.processStr(code, {
         rules: { 'foundry-test-functions': ['error', ['setUp', 'finish']] },
       })
@@ -171,7 +178,7 @@ describe('Linter - foundry-test-functions', () => {
     )
   })
 
-  it(`should NOT raise error only for setUp when rule is just on 'error'`, () => {
+  it(`should NOT raise error only for setUp when rule is just on 'error' (setUp is default)`, () => {
     const code = contractWith(`
       function setUp() public { testNumber = 42; }
       function finish() public { testNumber = 43; }
