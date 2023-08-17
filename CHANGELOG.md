@@ -1,3 +1,14 @@
+## [3.6.2] - 2023-08-17
+### Added
+- New Rule: `one-contract-per-file` - Enforces the use of ONE contract per file [#487](https://github.com/protofire/solhint/pull/487)
+
+  
+### Fixed
+- `foundry-test-functions` - Modified regex to include invariant and statefulFuzz tests [#484](https://github.com/protofire/solhint/pull/484)
+- `quotes` - To allow quotes inside double quotes and viceversa [#485](https://github.com/protofire/solhint/pull/485)
+
+
+
 ## [3.6.1] - 2023-08-11
 
 ### BREAKING CHANGE
