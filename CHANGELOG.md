@@ -9,6 +9,7 @@
 - `JSON` - Formatter returning JS object instead of standard json [#490](https://github.com/protofire/solhint/pull/490) 
 
 
+
 ## [3.6.1] - 2023-08-11
 
 ### BREAKING CHANGE
