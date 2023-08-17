@@ -12,7 +12,7 @@ title:       "quotes | Solhint"
 
 
 ## Description
-Use double quotes for string literals. Values must be 'single' or 'double'.
+Enforces the use of double or simple quotes as configured for string literals. Values must be 'single' or 'double'.
 
 ## Options
 This rule accepts an array of options:
@@ -32,11 +32,13 @@ This rule accepts an array of options:
 }
 ```
 
+### Notes
+- This rule allows to put a double quote inside single quote string and viceversa
 
 ## Examples
 ### 👍 Examples of **correct** code for this rule
 
-#### String with double quotes
+#### Configured with double quotes
 
 ```solidity
 
@@ -49,9 +51,47 @@ This rule accepts an array of options:
     
 ```
 
+#### Configured with single quotes
+
+```solidity
+
+      pragma solidity 0.4.4;
+        
+        
+      contract A {
+        string private a = 'test';
+      }
+    
+```
+
+#### Configured with double quotes
+
+```solidity
+string private constant STR = "You shall 'pass' !";
+```
+
+#### Configured with single quotes
+
+```solidity
+string private constant STR = 'You shall "pass" !';
+```
+
 ### 👎 Examples of **incorrect** code for this rule
 
-#### String with single quotes
+#### Configured with single quotes
+
+```solidity
+
+      pragma solidity 0.4.4;
+        
+        
+      contract A {
+        string private a = "test";
+      }
+    
+```
+
+#### Configured with double quotes
 
 ```solidity
 

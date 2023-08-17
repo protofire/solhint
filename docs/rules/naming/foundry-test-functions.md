@@ -33,7 +33,7 @@ This rule accepts an array of options:
 - Supported Regex: ```test(Fork)?(Fuzz)?(Fail)?_(Revert(If_|When_){1})?\w{1,}```
 - This rule should be executed in a separate folder with a separate .solhint.json => ```solhint --config .solhint.json testFolder/**/*.sol```
 - This rule applies only to `external` and `public` functions
-- This rule skips the `setUp()` function
+- This rule skips the `setUp()` function by default
 
 ## Examples
 ### 👍 Examples of **correct** code for this rule
@@ -65,7 +65,7 @@ function numberIs42() public {}
 ```
 
 ## Version
-This rule is introduced in the latest version.
+This rule was introduced in [Solhint 3.6.1](https://github.com/protofire/solhint/tree/v3.6.1)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/naming/foundry-test-functions.js)
