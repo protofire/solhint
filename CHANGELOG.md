@@ -6,6 +6,7 @@
 ### Fixed
 - `foundry-test-functions` - Modified regex to include invariant and statefulFuzz tests [#484](https://github.com/protofire/solhint/pull/484)
 - `quotes` - To allow quotes inside double quotes and viceversa [#485](https://github.com/protofire/solhint/pull/485)
+- `JSON` - Formatter returning JS object instead of standard json [#490](https://github.com/protofire/solhint/pull/490) 
 
 
 
