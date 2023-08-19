@@ -48,6 +48,12 @@ uint256 public variableName
 uint public variableName
 ```
 
+#### If explicit is selected
+
+```solidity
+uint256 public variableName = uint256(5)
+```
+
 ### 👎 Examples of **incorrect** code for this rule
 
 #### If explicit is selected
@@ -60,6 +66,12 @@ uint public variableName
 
 ```solidity
 uint256 public variableName
+```
+
+#### At any setting
+
+```solidity
+uint public variableName = uint256(5)
 ```
 
 ## Version
