@@ -119,6 +119,12 @@ const VAR_DECLARATIONS = {
     errorsExplicit: 1,
   },
 
+  fixedArrayCastInDeclaration: {
+    code: 'uint[] public arr = [uint(1),2,3];',
+    errorsImplicit: 0,
+    errorsExplicit: 2,
+  },
+
   fixedArrayOfArrays: {
     code: 'uint256[] public arr = [[1,2,3]];',
     errorsImplicit: 1,
@@ -129,6 +135,42 @@ const VAR_DECLARATIONS = {
     code: 'uint[] public arr = [1,2,3]; mapping(uint256 => arr) mapOfFixedArray;',
     errorsImplicit: 1,
     errorsExplicit: 1,
+  },
+
+  castInStateVariableDeclaration: {
+    code: 'uint256 public varUint256 = uint256(1); uint public varUint = uint(1);',
+    errorsImplicit: 2,
+    errorsExplicit: 2,
+  },
+
+  castInsideFunctionAtDeclarationUint256: {
+    code: 'function withUint256() external { uint256 varUint256 = uint256(1); }',
+    errorsImplicit: 2,
+    errorsExplicit: 0,
+  },
+
+  castInsideFunctionAtDeclarationUint: {
+    code: 'function withUint() external { uint varUint = uint(1); }',
+    errorsImplicit: 0,
+    errorsExplicit: 2,
+  },
+
+  castInsideFunctionUint: {
+    code: 'function withUint() external { uint varUint; varUint = uint(1);}',
+    errorsImplicit: 0,
+    errorsExplicit: 2,
+  },
+
+  castInsideFunctionUint256: {
+    code: 'function withUint256() external { uint256 varUint; varUint = uint256(1);}',
+    errorsImplicit: 2,
+    errorsExplicit: 0,
+  },
+
+  castInsideModifier: {
+    code: 'modifier withUint256() { _; uint256 varUint; varUint = uint256(1);}',
+    errorsImplicit: 2,
+    errorsExplicit: 0,
   },
 }
 
