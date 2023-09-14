@@ -52,7 +52,7 @@ If not explicitly added, this rule will not be executed.
 
 ## [3.5.1] - 2023-08-04
 ### Updated
-- Support `ignoreConstructors` option for `no-empty-blocks` [#418](https://github.com/protofire/solhint/pull/418)
+- Ignores empty constructors when inheriting a base contract [#418](https://github.com/protofire/solhint/pull/418)
 - Bump json5 from 2.1.3 to 2.2.3 [#376](https://github.com/protofire/solhint/pull/376)
 - Bump json-schema and jsprim [#370](https://github.com/protofire/solhint/pull/370)
 - Bump semver from 6.3.0 to 7.5.2 [#438](https://github.com/protofire/solhint/pull/438)
