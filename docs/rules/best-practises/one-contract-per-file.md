@@ -31,7 +31,7 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 This rule does not have examples.
 
 ## Version
-This rule is introduced in the latest version.
+This rule was introduced in [Solhint 3.6.2](https://github.com/protofire/solhint/tree/v3.6.2)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/best-practises/one-contract-per-file.js)

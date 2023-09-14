@@ -26,6 +26,8 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 }
 ```
 
+### Notes
+- The rule ignores an empty constructor by default as long as base contracts are being inherited. See "Empty Constructor" example.
 
 ## Examples
 ### 👍 Examples of **correct** code for this rule
