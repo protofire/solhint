@@ -29,9 +29,63 @@ This rule accepts an array of options:
 }
 ```
 
+### Notes
+- This rule skips external and public functions
+- This rule skips external and public state variables
+- See [here](https://docs.soliditylang.org/en/latest/style-guide.html#underscore-prefix-for-non-external-functions-and-variables) for further information
 
 ## Examples
-This rule does not have examples.
+### 👍 Examples of **correct** code for this rule
+
+#### Internal function with correct naming
+
+```solidity
+function _thisIsInternal() internal {}
+```
+
+#### Private function with correct naming
+
+```solidity
+function _thisIsPrivate() private {}
+```
+
+#### Internal state variable with correct naming
+
+```solidity
+uint256 internal _thisIsInternalVariable;
+```
+
+#### Internal state variable with correct naming (no visibility is considered internal)
+
+```solidity
+uint256 _thisIsInternalVariable;
+```
+
+### 👎 Examples of **incorrect** code for this rule
+
+#### Internal function with incorrect naming
+
+```solidity
+function thisIsInternal() internal {}
+```
+
+#### Private function with incorrect naming
+
+```solidity
+function thisIsPrivate() private {}
+```
+
+#### Internal state variable with incorrect naming
+
+```solidity
+uint256 internal thisIsInternalVariable;
+```
+
+#### Internal state variable with incorrect naming (no visibility is considered internal)
+
+```solidity
+uint256 thisIsInternalVariable;
+```
 
 ## Version
 This rule was introduced in [Solhint 3.0.0-rc.3](https://github.com/protofire/solhint/tree/v3.0.0-rc.3)
