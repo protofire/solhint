@@ -235,12 +235,20 @@ function getFormatter(formatter) {
 }
 
 function listRules() {
-  if (process.argv.length !== 3) {
+  const args = process.argv.slice(2)
+  let configPath = '.solhint.json'
+  const configFileIndex = args.findIndex((arg) => arg === '-c' || arg === '--config')
+  if (configFileIndex !== -1) {
+    configPath = args[configFileIndex + 1]
+    if (!configPath || configPath.startsWith('-')) {
+      console.error('Error: Invalid configuration file path after -c or --config flag.')
+      process.exit(1)
+    }
+  } else if (args.length !== 1) {
     console.log('Error!! no additional parameters after list-rules command')
     process.exit(1)
   }
 
-  const configPath = '.solhint.json'
   if (!fs.existsSync(configPath)) {
     console.log('Error!! Configuration does not exists')
     process.exit(1)
