@@ -27,7 +27,8 @@ function init() {
     .option('-c, --config [file_name]', 'file to use as your .solhint.json')
     .option('-q, --quiet', 'report errors only - default: false')
     .option('--ignore-path [file_name]', 'file to use as your .solhintignore')
-    .option('--fix', 'automatically fix problems')
+    .option('--fix', 'automatically fix problems. Skips fixes in report')
+    .option('--fixShow', 'automatically fix problems. Show fixes in report')
     .option('--init', 'create configuration file for solhint')
     .description('Linter for Solidity programming language')
     .action(execMainAction)
@@ -73,7 +74,7 @@ function execMainAction() {
   const reportLists = program.args.filter(_.isString).map(processPath)
   const reports = _.flatten(reportLists)
 
-  if (program.opts().fix) {
+  if (program.opts().fix || program.opts().fixShow) {
     for (const report of reports) {
       const inputSrc = fs.readFileSync(report.filePath).toString()
 
@@ -85,7 +86,17 @@ function execMainAction() {
 
       const { fixed, output } = applyFixes(fixes, inputSrc)
       if (fixed) {
-        report.reports = report.reports.filter((x) => !x.fix)
+        // skip or not the report when fixed
+        if (program.opts().fix) {
+          report.reports = report.reports.filter((x) => !x.fix)
+        } else {
+          // console.log('report.reports :>> ', report.reports)
+          report.reports.forEach((report) => {
+            if (report.fix !== null) {
+              report.message = `[FIXED] - ${report.message}`
+            }
+          })
+        }
         fs.writeFileSync(report.filePath, output)
       }
     }

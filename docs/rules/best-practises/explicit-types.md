@@ -32,6 +32,8 @@ This rule accepts an array of options:
 }
 ```
 
+### Notes
+- Solhint allows this rule to automatically fix the code with `--fix` or `--fixShow` option
 
 ## Examples
 ### 👍 Examples of **correct** code for this rule
