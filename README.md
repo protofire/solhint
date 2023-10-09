@@ -60,7 +60,8 @@ Options:
   -c, --config [file_name]                file to use as your .solhint.json
   -q, --quiet                             report errors only - default: false
   --ignore-path [file_name]               file to use as your .solhintignore
-  --fix                                   automatically fix problems
+  --fix                                   automatically fix problems. Skip report
+  --fixShow                               automatically fix problems. Show report
   --init                                  create configuration file for solhint
   -h, --help                              output usage information
 
