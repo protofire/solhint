@@ -5,6 +5,7 @@
   By <a href="https://protofire.io/">Protofire</a>
 </p>
 
+[![Join Discord](https://img.shields.io/badge/join-Discord-red)](https://discord.gg/4TYGq3zpjs)
 [![Donate with Ethereum](https://img.shields.io/badge/Donate-ETH-blue)](https://etherscan.io/address/0xA81705c8C247C413a19A244938ae7f4A0393944e)
 [![NPM version](https://badge.fury.io/js/solhint.svg)](https://npmjs.org/package/solhint)
 [![Coverage Status](https://coveralls.io/repos/github/protofire/solhint/badge.svg?branch=master)](
@@ -14,6 +15,7 @@ https://coveralls.io/github/protofire/solhint?branch=master)
 This is an open source project for linting [Solidity](http://solidity.readthedocs.io/en/develop/) code. This project
 provides both **Security** and **Style Guide** validations.
 
+[JOIN OUR DISCORD SERVER](https://discord.gg/4TYGq3zpjs)
 ## Installation
 
 You can install Solhint using **npm**:
@@ -63,6 +65,7 @@ Options:
   --fix                                   automatically fix problems. Skip report
   --fixShow                               automatically fix problems. Show report
   --init                                  create configuration file for solhint
+                                   do not check for solhint updates
   -h, --help                              output usage information
 
 Commands:
@@ -70,8 +73,9 @@ Commands:
   stdin [options]                         linting of source code data provided to STDIN
   list-rules                              display covered rules of current .solhint.json
 ```
-### Note
-The `--fix`  option currently works only on "avoid-throw" and "avoid-sha3" rules
+### Notes
+- Solhint checks if there are newer versions. The `--disc`  option avoids that check.
+- `--fix`  option currently works only on "avoid-throw" and "avoid-sha3" rules.
 <br><br>
 ## Configuration
 
