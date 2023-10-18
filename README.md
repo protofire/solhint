@@ -65,7 +65,8 @@ Options:
   --fix                                   automatically fix problems. Skip report
   --fixShow                               automatically fix problems. Show report
   --init                                  create configuration file for solhint
-                                   do not check for solhint updates
+  --disc                                  do not check for solhint updates
+  --save                                  save report to file on current folder
   -h, --help                              output usage information
 
 Commands:
@@ -76,6 +77,7 @@ Commands:
 ### Notes
 - Solhint checks if there are newer versions. The `--disc`  option avoids that check.
 - `--fix`  option currently works only on "avoid-throw" and "avoid-sha3" rules.
+- `--save` option will create a file named as `YYYYMMDDHHMMSS_solhintReport.txt` on current folder with default or specified format 
 <br><br>
 ## Configuration
 
