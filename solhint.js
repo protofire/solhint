@@ -31,6 +31,7 @@ function init() {
     .option('--fixShow', 'automatically fix problems. Show fixes in report')
     .option('--init', 'create configuration file for solhint')
     .option('--disc', 'do not check for solhint updates')
+    .option('--save', 'save report to file on current folder')
     .description('Linter for Solidity programming language')
     .action(execMainAction)
 
@@ -241,10 +242,38 @@ function printReports(reports, formatter) {
     }
   }
 
-  console.log(formatter(reports), finalMessage || '')
+  const fullReport = formatter(reports) + (finalMessage || '')
+  console.log(fullReport)
+
+  if (program.opts().save) {
+    writeStringToFile(fullReport)
+  }
 
   if (exitWithOne) process.exit(1)
   return reports
+}
+
+function writeStringToFile(data) {
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = String(now.getMonth() + 1).padStart(2, '0') // Months are zero-based
+  const day = String(now.getDate()).padStart(2, '0')
+  const hour = String(now.getHours()).padStart(2, '0')
+  const minute = String(now.getMinutes()).padStart(2, '0')
+  const second = String(now.getSeconds()).padStart(2, '0')
+
+  const fileName = `${year}${month}${day}${hour}${minute}${second}_solhintReport.txt`
+
+  // Remove ANSI escape codes from the data
+  // eslint-disable-next-line no-control-regex
+  const cleanedData = data.replace(/\x1B\[[0-?]*[ -/]*[@-~]/g, '')
+
+  try {
+    fs.writeFileSync(fileName, cleanedData, 'utf-8') // Specify the encoding (UTF-16)
+    // console.log('File written successfully:', fileName)
+  } catch (err) {
+    console.error('Error writing to file:', err)
+  }
 }
 
 function getFormatter(formatter) {
@@ -303,26 +332,6 @@ function exitWithCode(reports) {
   const errorsCount = reports.reduce((acc, i) => acc + i.errorCount, 0)
   process.exit(errorsCount > 0 ? 1 : 0)
 }
-
-// async function checkForUpdate() {
-//   try {
-//     // Dynamic import of latest-version
-//     // eslint-disable-next-line import/no-extraneous-dependencies
-//     const latestVersionModule = await import('latest-version')
-//     const latestVersion = latestVersionModule.default
-
-//     const currentVersion = require('./package.json').version
-
-//     const latest = await latestVersion('solhint')
-
-//     if (currentVersion !== latest) {
-//       console.log('\nA new version of Solhint is available:', latest)
-//       console.log('Please consider updating your Solhint package.')
-//     }
-//   } catch (error) {
-//     console.log('Error checking for updates: ', error.message)
-//   }
-// }
 
 function checkForUpdate() {
   // eslint-disable-next-line import/no-extraneous-dependencies
