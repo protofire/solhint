@@ -30,6 +30,7 @@ function init() {
     .option('--fix', 'automatically fix problems. Skips fixes in report')
     .option('--fixShow', 'automatically fix problems. Show fixes in report')
     .option('--init', 'create configuration file for solhint')
+    .option('--disc', 'do not check for solhint updates')
     .description('Linter for Solidity programming language')
     .action(execMainAction)
 
@@ -54,10 +55,23 @@ function init() {
   if (process.argv.length <= 2) {
     program.help()
   }
+
   program.parse(process.argv)
 }
 
 function execMainAction() {
+  if (!program.opts().disc) {
+    // Call checkForUpdate and wait for it to complete using .then()
+    checkForUpdate().then(() => {
+      // This block runs after checkForUpdate is complete
+      executeMainActionLogic()
+    })
+  } else {
+    executeMainActionLogic()
+  }
+}
+
+function executeMainActionLogic() {
   if (program.opts().init) {
     writeSampleConfigFile()
   }
@@ -288,6 +302,49 @@ function listRules() {
 function exitWithCode(reports) {
   const errorsCount = reports.reduce((acc, i) => acc + i.errorCount, 0)
   process.exit(errorsCount > 0 ? 1 : 0)
+}
+
+// async function checkForUpdate() {
+//   try {
+//     // Dynamic import of latest-version
+//     // eslint-disable-next-line import/no-extraneous-dependencies
+//     const latestVersionModule = await import('latest-version')
+//     const latestVersion = latestVersionModule.default
+
+//     const currentVersion = require('./package.json').version
+
+//     const latest = await latestVersion('solhint')
+
+//     if (currentVersion !== latest) {
+//       console.log('\nA new version of Solhint is available:', latest)
+//       console.log('Please consider updating your Solhint package.')
+//     }
+//   } catch (error) {
+//     console.log('Error checking for updates: ', error.message)
+//   }
+// }
+
+function checkForUpdate() {
+  // eslint-disable-next-line import/no-extraneous-dependencies
+  return import('latest-version')
+    .then((latestVersionModule) => {
+      const latestVersion = latestVersionModule.default
+      const currentVersion = require('./package.json').version
+
+      return latestVersion('solhint')
+        .then((latest) => {
+          if (currentVersion < latest) {
+            console.log('A new version of Solhint is available:', latest)
+            console.log('Please consider updating your Solhint package.')
+          }
+        })
+        .catch((error) => {
+          console.error('Error checking for updates:', error.message)
+        })
+    })
+    .catch((error) => {
+      console.error('Error importing latest-version:', error.message)
+    })
 }
 
 init()

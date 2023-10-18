@@ -1,6 +1,6 @@
 {
   "name": "solhint",
-  "version": "3.6.3",
+  "version": "4.0.0",
   "description": "Solidity Code Linter",
   "main": "lib/index.js",
   "keywords": [
@@ -35,6 +35,7 @@
     "/solhint.js"
   ],
   "author": "Ilya Drabenia <ilya.drobenya@gmail.com>",
+  "contributors": ["Diego Bale <diego.bale@protofire.io>"],
   "license": "MIT",
   "dependencies": {
     "@solidity-parser/parser": "^0.16.0",
@@ -48,6 +49,7 @@
     "glob": "^8.0.3",
     "ignore": "^5.2.4",
     "js-yaml": "^4.1.0",
+    "latest-version": "^7.0.0",
     "lodash": "^4.17.21",
     "pluralize": "^8.0.0",
     "semver": "^7.5.2",
