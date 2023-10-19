@@ -4,6 +4,7 @@ const program = require('commander')
 const _ = require('lodash')
 const fs = require('fs')
 const process = require('process')
+const readline = require('readline')
 
 const linter = require('./lib/index')
 const { loadConfig } = require('./lib/config/config-file')
@@ -29,6 +30,7 @@ function init() {
     .option('--ignore-path [file_name]', 'file to use as your .solhintignore')
     .option('--fix', 'automatically fix problems. Skips fixes in report')
     .option('--fixShow', 'automatically fix problems. Show fixes in report')
+    .option('--noPrompt', 'do not suggest to backup files when any `fix` option is selected')
     .option('--init', 'create configuration file for solhint')
     .option('--disc', 'do not check for solhint updates')
     .option('--save', 'save report to file on current folder')
@@ -60,15 +62,50 @@ function init() {
   program.parse(process.argv)
 }
 
+function askUserToContinue(callback) {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  })
+
+  rl.question(
+    '\nFIX option detected. Solhint will modify your files whenever it finds a fix for a rule error. Please BACKUP your contracts first. \nContinue ? (y/n) ',
+    (answer) => {
+      // Close the readline interface.
+      rl.close()
+
+      // Normalize and pass the user's answer to the callback function.
+      const normalizedAnswer = answer.trim().toLowerCase()
+      callback(normalizedAnswer)
+    }
+  )
+}
+
 function execMainAction() {
-  if (!program.opts().disc) {
-    // Call checkForUpdate and wait for it to complete using .then()
-    checkForUpdate().then(() => {
-      // This block runs after checkForUpdate is complete
-      executeMainActionLogic()
+  if ((program.opts().fix || program.opts().fixShow) && !program.opts().noPrompt) {
+    askUserToContinue((userAnswer) => {
+      if (userAnswer !== 'y') {
+        console.log('\nProcess terminated by user')
+      } else {
+        // User agreed, continue with the operation.
+        continueExecution()
+      }
     })
   } else {
-    executeMainActionLogic()
+    // No need for user input, continue with the operation.
+    continueExecution()
+  }
+
+  function continueExecution() {
+    if (program.opts().disc) {
+      executeMainActionLogic()
+    } else {
+      // Call checkForUpdate and wait for it to complete using .then()
+      checkForUpdate().then(() => {
+        // This block runs after checkForUpdate is complete
+        executeMainActionLogic()
+      })
+    }
   }
 }
 

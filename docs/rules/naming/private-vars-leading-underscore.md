@@ -9,15 +9,15 @@ title:       "private-vars-leading-underscore | Solhint"
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 
 ## Description
-Private and internal names must start with a single underscore.
+Non-external functions and state variables should start with a single underscore. Others, shouldn't.
 
 ## Options
 This rule accepts an array of options:
 
-| Index | Description                                                                                                                           | Default Value    |
-| ----- | ------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
-| 0     | Rule severity. Must be one of "error", "warn", "off".                                                                                 | warn             |
-| 1     | A JSON object with a single property "strict" specifying if the rule should apply to non state variables. Default: { strict: false }. | {"strict":false} |
+| Index | Description                                                                                                                               | Default Value    |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| 0     | Rule severity. Must be one of "error", "warn", "off".                                                                                     | warn             |
+| 1     | A JSON object with a single property "strict" specifying if the rule should apply to ALL non state variables. Default: { strict: false }. | {"strict":false} |
 
 
 ### Example Config
@@ -30,6 +30,7 @@ This rule accepts an array of options:
 ```
 
 ### Notes
+- This rule considers functions and variables in Libraries as well
 - This rule skips external and public functions
 - This rule skips external and public state variables
 - See [here](https://docs.soliditylang.org/en/latest/style-guide.html#underscore-prefix-for-non-external-functions-and-variables) for further information

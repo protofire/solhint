@@ -32,7 +32,6 @@ const foo1Output = [
     severity: 'Warning',
     message: "'TEST2' should start with _",
     ruleId: 'private-vars-leading-underscore',
-    fix: null,
     filePath: 'contracts/Foo.sol',
   },
   {
