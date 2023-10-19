@@ -35,7 +35,7 @@ describe('Linter - no-console', () => {
 
   it('should raise console.logBytes12() is not allowed', () => {
     const code = funcWith(`
-      console.logString('test');
+      console.logBytes12('test');
     `)
 
     const report = linter.processStr(code, {

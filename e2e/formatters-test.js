@@ -112,7 +112,7 @@ describe('e2e', function () {
         expect(strExpected).to.equal(strOutput)
         expect(code).to.equal(0)
       })
-      it('should make the output report with unix formatter for Foo and Foo2 and Foo3', () => {
+      it('should make the output report with json formatter for Foo and Foo2 and Foo3', () => {
         const { code, stdout } = shell.exec(
           `solhint ${PATH}contracts/Foo.sol ${PATH}contracts/Foo2.sol ${PATH}contracts/Foo3.sol -f ${formatterType}`
         )
