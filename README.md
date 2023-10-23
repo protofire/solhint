@@ -63,7 +63,6 @@ Options:
   -q, --quiet                             report errors only - default: false
   --ignore-path [file_name]               file to use as your .solhintignore
   --fix                                   automatically fix problems. Skip report
-  --fixShow                               automatically fix problems. Show report
   --noPrompt                              do not suggest to backup files when any `fix` option is selected
   --init                                  create configuration file for solhint
   --disc                                  do not check for solhint updates

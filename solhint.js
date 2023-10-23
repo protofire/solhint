@@ -29,7 +29,7 @@ function init() {
     .option('-q, --quiet', 'report errors only - default: false')
     .option('--ignore-path [file_name]', 'file to use as your .solhintignore')
     .option('--fix', 'automatically fix problems. Skips fixes in report')
-    .option('--fixShow', 'automatically fix problems. Show fixes in report')
+    // .option('--fixShow', 'automatically fix problems. Show fixes in report')
     .option('--noPrompt', 'do not suggest to backup files when any `fix` option is selected')
     .option('--init', 'create configuration file for solhint')
     .option('--disc', 'do not check for solhint updates')
@@ -82,10 +82,12 @@ function askUserToContinue(callback) {
 }
 
 function execMainAction() {
-  if ((program.opts().fix || program.opts().fixShow) && !program.opts().noPrompt) {
+  // if ((program.opts().fix || program.opts().fixShow) && !program.opts().noPrompt) {
+  if (program.opts().fix && !program.opts().noPrompt) {
     askUserToContinue((userAnswer) => {
       if (userAnswer !== 'y') {
         console.log('\nProcess terminated by user')
+        process.exit(0)
       } else {
         // User agreed, continue with the operation.
         continueExecution()
@@ -126,7 +128,8 @@ function executeMainActionLogic() {
   const reportLists = program.args.filter(_.isString).map(processPath)
   const reports = _.flatten(reportLists)
 
-  if (program.opts().fix || program.opts().fixShow) {
+  // if (program.opts().fix || program.opts().fixShow) {
+  if (program.opts().fix) {
     for (const report of reports) {
       const inputSrc = fs.readFileSync(report.filePath).toString()
 
@@ -138,17 +141,18 @@ function executeMainActionLogic() {
 
       const { fixed, output } = applyFixes(fixes, inputSrc)
       if (fixed) {
-        // skip or not the report when fixed
-        if (program.opts().fix) {
-          report.reports = report.reports.filter((x) => !x.fix)
-        } else {
-          // console.log('report.reports :>> ', report.reports)
-          report.reports.forEach((report) => {
-            if (report.fix !== null) {
-              report.message = `[FIXED] - ${report.message}`
-            }
-          })
-        }
+        // // skip or not the report when fixed
+        // // This was filtering fixed rules so status code was not 1
+        // if (program.opts().fix) {
+        //   report.reports = report.reports.filter((x) => !x.fix)
+        // } else {
+        // console.log('report.reports :>> ', report.reports)
+        report.reports.forEach((report) => {
+          if (report.fix !== null) {
+            report.message = `[FIXED] - ${report.message}`
+          }
+        })
+        // }
         fs.writeFileSync(report.filePath, output)
       }
     }

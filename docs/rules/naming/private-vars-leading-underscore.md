@@ -9,7 +9,7 @@ title:       "private-vars-leading-underscore | Solhint"
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 
 ## Description
-Non-external functions and state variables should start with a single underscore. Others, shouldn't.
+Non-external functions and state variables should start with a single underscore. Others, shouldn't
 
 ## Options
 This rule accepts an array of options:

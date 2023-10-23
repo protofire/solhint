@@ -6,7 +6,7 @@
 - Changelog and docs for `no-empty-blocks` rule to clarify its functionality
 
 ### Added
-- `fixShow` option to show report. `fix` option skips showing report on screen
+- `fix` option now shows the report on screen
 - `save` option to store report on disk with the standard or the specified format 
 - Check for updates on Solhint version to keep users with the last versin available. There's an option to disable this check (`--disc`)
 - Autofix for `explicit-types` rule [504](https://github.com/protofire/solhint/pull/504)
