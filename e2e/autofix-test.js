@@ -8,11 +8,17 @@ const spawnSync = require('spawn-sync')
 
 const E2E = true
 
-function retrieveParams() {
+let params
+let currentConfig
+let currentFile
+let beforeFixFile
+let afterFixFile
+
+function retrieveParams(subpath) {
   if (E2E) {
-    return { command: 'solhint', param1: '' }
+    return { command: 'solhint', param1: '', path: '', subpath }
   } else {
-    return { command: 'node', param1: 'solhint' }
+    return { command: 'node', param1: 'solhint', path: 'e2e/08-autofix/', subpath }
   }
 }
 
@@ -24,11 +30,7 @@ function compareTextFiles(file1Path, file2Path) {
 }
 
 function copyFile(sourcePath, destinationPath) {
-  // Read the content from the source file
-  const content = fs.readFileSync(sourcePath)
-
-  // Write the content to the destination file, overwriting it if it exists
-  fs.writeFileSync(destinationPath, content)
+  shell.cp(sourcePath, destinationPath)
 }
 
 function useFixture(dir) {
@@ -56,35 +58,28 @@ describe('e2e', function () {
     }
 
     describe('autofix command line options', () => {
-      const commands = retrieveParams()
-      let PATH = 'e2e/08-autofix/'
-      let SUBPATH = 'contracts/00-generic/'
-      let sourceFilePath = `${PATH}${SUBPATH}Foo1BeforeFix.sol`
-      let currentFile = `${PATH}${SUBPATH}Foo1.sol`
+      before(function () {
+        params = retrieveParams('commands/')
+        currentConfig = `${params.path}${params.subpath}.solhint.json`
+        currentFile = `${params.path}${params.subpath}Foo1.sol`
+        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+      })
 
       describe('--fix without noPrompt', () => {
         after(function () {
-          copyFile(sourceFilePath, currentFile)
+          if (!E2E) {
+            copyFile(beforeFixFile, currentFile)
+          }
         })
 
         it('should terminate with --fix and user choose NOT to continue', () => {
-
-          shell.exec(
-            `pwd`
-          )
-
           const solhintProcess = spawnSync(
-            `${commands.command}`,
-            [
-              `${commands.param1}`,
-              '-c',
-              `${PATH}${SUBPATH}.solhint.json`,
-              `${PATH}${SUBPATH}Foo1.sol`,
-              '--fix',
-              '--disc',
-            ],
+            `${params.command}`,
+            [`${params.param1}`, '-c', currentConfig, currentFile, '--fix', '--disc'],
             {
               input: 'n\n', // Provide 'n' as input
+              shell: true,
             }
           )
 
@@ -92,51 +87,45 @@ describe('e2e', function () {
           expect(solhintProcess.stdout.toString().includes('Process terminated by user'))
         })
 
-        it('should fix with --fix and user choose YES to continue', () => {
-          sourceFilePath = `${PATH}${SUBPATH}Foo1BeforeFix.sol`
-          currentFile = `${PATH}${SUBPATH}Foo1.sol`
-
-          result = compareTextFiles(sourceFilePath, `${PATH}${SUBPATH}Foo1.sol`)
+        it('should compare Foo1 file with template beforeFix file and they should match 1a', () => {
+          result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
+        })
 
+        it('should fix with --fix and user choose YES to continue', () => {
           const solhintProcess = spawnSync(
-            `${commands.command}`,
-            [
-              `${commands.param1}`,
-              '-c',
-              `${PATH}${SUBPATH}.solhint.json`,
-              currentFile,
-              '--fix',
-              '--disc',
-            ],
+            `${params.command}`,
+            [`${params.param1}`, '-c', currentConfig, currentFile, '--fix', '--disc'],
             {
               input: 'y\n', // Provide 'y' as input
+              shell: true,
             }
           )
 
           expect(solhintProcess.status).to.equal(1)
           expect(solhintProcess.stdout.toString().includes('5 problems (5 errors, 0 warnings)'))
         })
-
-        it('should compare resulted file with template file and they should match 1', () => {
-          result = compareTextFiles(currentFile, `${PATH}${SUBPATH}Foo1AfterFix.sol`)
-          expect(result).to.be.true
-        })
+      })
+      it('should check FOO1 does not change after test 1a', () => {
+        result = compareTextFiles(currentFile, beforeFixFile)
+        expect(result).to.be.true
       })
 
       describe('--fix with noPrompt', () => {
         after(function () {
-          copyFile(sourceFilePath, currentFile)
+          if (!E2E) {
+            copyFile(beforeFixFile, currentFile)
+          }
         })
-        it('should fix file when noPrompt', () => {
-          sourceFilePath = `${PATH}${SUBPATH}Foo1BeforeFix.sol`
-          currentFile = `${PATH}${SUBPATH}Foo1.sol`
 
-          result = compareTextFiles(sourceFilePath, `${PATH}${SUBPATH}Foo1.sol`)
+        it('should compare Foo1 file with template beforeFix file and they should match 1b', () => {
+          result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
+        })
 
+        it('should fix file when noPrompt 1b', () => {
           const { code, stdout } = shell.exec(
-            `${commands.command} ${commands.param1} -c ${PATH}${SUBPATH}.solhint.json ${currentFile} --fix --disc --noPrompt`
+            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           )
 
           expect(code).to.equal(1)
@@ -144,35 +133,41 @@ describe('e2e', function () {
           const reportLines = stdout.split('\n')
           const finalLine = '5 problems (5 errors, 0 warnings)'
           expect(reportLines[reportLines.length - 3]).to.contain(finalLine)
-        })
 
-        it('files should match', () => {
-          result = compareTextFiles(currentFile, `${PATH}${SUBPATH}Foo1AfterFix.sol`)
+          result = compareTextFiles(currentFile, afterFixFile)
           expect(result).to.be.true
         })
       })
 
+      it('should check FOO1 does not change after test 1b', () => {
+        result = compareTextFiles(currentFile, beforeFixFile)
+        expect(result).to.be.true
+      })
     })
 
     describe('autofix rule: explicit-types', () => {
+      before(function () {
+        params = retrieveParams('explicit-types/')
+        currentConfig = `${params.path}${params.subpath}.solhint.json`
+        currentFile = `${params.path}${params.subpath}Foo1.sol`
+        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+      })
       describe('--fix with noPrompt', () => {
-        const commands = retrieveParams()
-        let PATH = 'e2e/08-autofix/'
-        let SUBPATH = 'contracts/explicit-types/'
-        let sourceFilePath = `${PATH}${SUBPATH}Foo1BeforeFix.sol`
-        let currentFile = `${PATH}${SUBPATH}Foo1.sol`
         after(function () {
-          copyFile(sourceFilePath, currentFile)
+          if (!E2E) {
+            copyFile(beforeFixFile, currentFile)
+          }
         })
-        it('should fix file when noPrompt', () => {
-          sourceFilePath = `${PATH}${SUBPATH}Foo1BeforeFix.sol`
-          currentFile = `${PATH}${SUBPATH}Foo1.sol`
 
-          result = compareTextFiles(sourceFilePath, `${PATH}${SUBPATH}Foo1.sol`)
+        it('should compare Foo1 file with template BEFORE FIX file and they should match 2', () => {
+          result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
+        })
 
+        it('should compare Foo1 file with template AFTER FIX file and they should match 2', () => {
           const { code, stdout } = shell.exec(
-            `${commands.command} ${commands.param1} -c ${PATH}${SUBPATH}.solhint.json ${currentFile} --fix --disc --noPrompt`
+            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           )
 
           expect(code).to.equal(1)
@@ -180,34 +175,41 @@ describe('e2e', function () {
           const reportLines = stdout.split('\n')
           const finalLine = '5 problems (5 errors, 0 warnings)'
           expect(reportLines[reportLines.length - 3]).to.contain(finalLine)
-        })
 
-        it('files should match', () => {
-          result = compareTextFiles(currentFile, `${PATH}${SUBPATH}Foo1AfterFix.sol`)
+          result = compareTextFiles(currentFile, afterFixFile)
           expect(result).to.be.true
         })
+      })
+
+      it('should check FOO1 does not change after test 2', () => {
+        result = compareTextFiles(currentFile, beforeFixFile)
+        expect(result).to.be.true
       })
     })
 
     describe('autofix rule: no-console', () => {
+      before(function () {
+        params = retrieveParams('no-console/')
+        currentConfig = `${params.path}${params.subpath}.solhint.json`
+        currentFile = `${params.path}${params.subpath}Foo1.sol`
+        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+      })
       describe('--fix with noPrompt', () => {
-        const commands = retrieveParams()
-        let PATH = 'e2e/08-autofix/'
-        let SUBPATH = 'contracts/no-console/'
-        let sourceFilePath = `${PATH}${SUBPATH}Foo1BeforeFix.sol`
-        let currentFile = `${PATH}${SUBPATH}Foo1.sol`
         after(function () {
-          copyFile(sourceFilePath, currentFile)
+          if (!E2E) {
+            copyFile(beforeFixFile, currentFile)
+          }
         })
-        it('should fix file when noPrompt', () => {
-          sourceFilePath = `${PATH}${SUBPATH}Foo1BeforeFix.sol`
-          currentFile = `${PATH}${SUBPATH}Foo1.sol`
 
-          result = compareTextFiles(sourceFilePath, `${PATH}${SUBPATH}Foo1.sol`)
+        it('should compare Foo1 file with template BEFORE FIX file and they should match 3', () => {
+          result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
+        })
 
+        it('should compare Foo1 file with template AFTER FIX file and they should match 3', () => {
           const { code, stdout } = shell.exec(
-            `${commands.command} ${commands.param1} -c ${PATH}${SUBPATH}.solhint.json ${currentFile} --fix --disc --noPrompt`
+            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           )
 
           expect(code).to.equal(1)
@@ -215,34 +217,41 @@ describe('e2e', function () {
           const reportLines = stdout.split('\n')
           const finalLine = '9 problems (9 errors, 0 warnings)'
           expect(reportLines[reportLines.length - 3]).to.contain(finalLine)
-        })
 
-        it('files should match', () => {
-          result = compareTextFiles(currentFile, `${PATH}${SUBPATH}Foo1AfterFix.sol`)
+          result = compareTextFiles(currentFile, afterFixFile)
           expect(result).to.be.true
         })
+      })
+
+      it('should check FOO1 does not change after test 3', () => {
+        result = compareTextFiles(currentFile, beforeFixFile)
+        expect(result).to.be.true
       })
     })
 
     describe('autofix rule: private-vars-leading-underscore', () => {
+      before(function () {
+        params = retrieveParams('private-vars-underscore/')
+        currentConfig = `${params.path}${params.subpath}.solhint.json`
+        currentFile = `${params.path}${params.subpath}Foo1.sol`
+        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+      })
       describe('--fix with noPrompt', () => {
-        const commands = retrieveParams()
-        let PATH = 'e2e/08-autofix/'
-        let SUBPATH = 'contracts/private-vars-underscore/'
-        let sourceFilePath = `${PATH}${SUBPATH}Foo1BeforeFix.sol`
-        let currentFile = `${PATH}${SUBPATH}Foo1.sol`
         after(function () {
-          copyFile(sourceFilePath, currentFile)
+          if (!E2E) {
+            copyFile(beforeFixFile, currentFile)
+          }
         })
-        it('should fix file when noPrompt', () => {
-          sourceFilePath = `${PATH}${SUBPATH}Foo1BeforeFix.sol`
-          currentFile = `${PATH}${SUBPATH}Foo1.sol`
 
-          result = compareTextFiles(sourceFilePath, `${PATH}${SUBPATH}Foo1.sol`)
+        it('should compare Foo1 file with template BEFORE FIX file and they should match 4', () => {
+          result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
+        })
 
+        it('should compare Foo1 file with template AFTER FIX file and they should match 4', () => {
           const { code, stdout } = shell.exec(
-            `${commands.command} ${commands.param1} -c ${PATH}${SUBPATH}.solhint.json ${currentFile} --fix --disc --noPrompt`
+            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           )
 
           expect(code).to.equal(1)
@@ -250,13 +259,18 @@ describe('e2e', function () {
           const reportLines = stdout.split('\n')
           const finalLine = '27 problems (27 errors, 0 warnings)'
           expect(reportLines[reportLines.length - 3]).to.contain(finalLine)
-        })
 
-        it('files should match', () => {
-          result = compareTextFiles(currentFile, `${PATH}${SUBPATH}Foo1AfterFix.sol`)
+          result = compareTextFiles(currentFile, afterFixFile)
           expect(result).to.be.true
         })
+      })
+      it('should check FOO1 does not change after test 4', () => {
+        result = compareTextFiles(currentFile, beforeFixFile)
+        expect(result).to.be.true
       })
     })
   })
 })
+
+// FALTA LA COMPARACION DEL FIX CON EL TEMPLATE FIX
+// FALTA LA PRUEBA DEL STORE TO FILE

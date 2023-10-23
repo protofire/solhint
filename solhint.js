@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 const program = require('commander')
 const _ = require('lodash')
 const fs = require('fs')
@@ -153,7 +152,14 @@ function executeMainActionLogic() {
           }
         })
         // }
-        fs.writeFileSync(report.filePath, output)
+
+        // fs.writeFileSync(report.filePath, output)
+        try {
+          fs.writeFileSync(report.filePath, output)
+          // fs.writeFileSync('no-console/Foo1Modified.sol', output)
+        } catch (error) {
+          console.error('An error occurred while writing the file:', error)
+        }
       }
     }
   }

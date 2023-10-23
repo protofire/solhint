@@ -4,7 +4,7 @@
   "description": "E2E tests for solhint",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test.js formatters-test.js autofix-test.js"    
+    "test": "mocha test.js formatters-test.js autofix-test.js"
   },
   "author": "",
   "license": "MIT",
