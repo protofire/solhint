@@ -63,7 +63,7 @@ describe('e2e', function () {
         }
         expect(code).to.equal(0)
 
-        const finalLine = '3 problem/s (3 warning/s) '
+        const finalLine = '3 problem/s (3 warning/s)'
         expect(reportLines[reportLines.length - 2]).to.equal(finalLine)
       })
       it('should make the output report with unix formatter for Foo and Foo2 and Foo3', () => {
@@ -112,7 +112,7 @@ describe('e2e', function () {
         expect(strExpected).to.equal(strOutput)
         expect(code).to.equal(0)
       })
-      it('should make the output report with unix formatter for Foo and Foo2 and Foo3', () => {
+      it('should make the output report with json formatter for Foo and Foo2 and Foo3', () => {
         const { code, stdout } = shell.exec(
           `solhint ${PATH}contracts/Foo.sol ${PATH}contracts/Foo2.sol ${PATH}contracts/Foo3.sol -f ${formatterType}`
         )
@@ -157,7 +157,7 @@ describe('e2e', function () {
         }
         expect(code).to.equal(0)
 
-        const finalLine = '3 problem/s (3 warning/s) '
+        const finalLine = '3 problem/s (3 warning/s)'
         expect(reportLines[reportLines.length - 2]).to.equal(finalLine)
       })
       it('should make the output report with compact formatter for Foo and Foo2 and Foo3', () => {

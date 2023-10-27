@@ -9,4 +9,5 @@ convertLib.sol
 antlr4.jar
 /docs/.sass-cache/
 _temp/
+*solhintReport*.*
 

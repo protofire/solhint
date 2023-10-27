@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-
 const program = require('commander')
 const _ = require('lodash')
 const fs = require('fs')
 const process = require('process')
+const readline = require('readline')
 
 const linter = require('./lib/index')
 const { loadConfig } = require('./lib/config/config-file')
@@ -27,8 +27,12 @@ function init() {
     .option('-c, --config [file_name]', 'file to use as your .solhint.json')
     .option('-q, --quiet', 'report errors only - default: false')
     .option('--ignore-path [file_name]', 'file to use as your .solhintignore')
-    .option('--fix', 'automatically fix problems')
+    .option('--fix', 'automatically fix problems. Skips fixes in report')
+    // .option('--fixShow', 'automatically fix problems. Show fixes in report')
+    .option('--noPrompt', 'do not suggest to backup files when any `fix` option is selected')
     .option('--init', 'create configuration file for solhint')
+    .option('--disc', 'do not check for solhint updates')
+    .option('--save', 'save report to file on current folder')
     .description('Linter for Solidity programming language')
     .action(execMainAction)
 
@@ -53,10 +57,60 @@ function init() {
   if (process.argv.length <= 2) {
     program.help()
   }
+
   program.parse(process.argv)
 }
 
+function askUserToContinue(callback) {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  })
+
+  rl.question(
+    '\nFIX option detected. Solhint will modify your files whenever it finds a fix for a rule error. Please BACKUP your contracts first. \nContinue ? (y/n) ',
+    (answer) => {
+      // Close the readline interface.
+      rl.close()
+
+      // Normalize and pass the user's answer to the callback function.
+      const normalizedAnswer = answer.trim().toLowerCase()
+      callback(normalizedAnswer)
+    }
+  )
+}
+
 function execMainAction() {
+  // if ((program.opts().fix || program.opts().fixShow) && !program.opts().noPrompt) {
+  if (program.opts().fix && !program.opts().noPrompt) {
+    askUserToContinue((userAnswer) => {
+      if (userAnswer !== 'y') {
+        console.log('\nProcess terminated by user')
+        process.exit(0)
+      } else {
+        // User agreed, continue with the operation.
+        continueExecution()
+      }
+    })
+  } else {
+    // No need for user input, continue with the operation.
+    continueExecution()
+  }
+
+  function continueExecution() {
+    if (program.opts().disc) {
+      executeMainActionLogic()
+    } else {
+      // Call checkForUpdate and wait for it to complete using .then()
+      checkForUpdate().then(() => {
+        // This block runs after checkForUpdate is complete
+        executeMainActionLogic()
+      })
+    }
+  }
+}
+
+function executeMainActionLogic() {
   if (program.opts().init) {
     writeSampleConfigFile()
   }
@@ -73,6 +127,7 @@ function execMainAction() {
   const reportLists = program.args.filter(_.isString).map(processPath)
   const reports = _.flatten(reportLists)
 
+  // if (program.opts().fix || program.opts().fixShow) {
   if (program.opts().fix) {
     for (const report of reports) {
       const inputSrc = fs.readFileSync(report.filePath).toString()
@@ -85,8 +140,26 @@ function execMainAction() {
 
       const { fixed, output } = applyFixes(fixes, inputSrc)
       if (fixed) {
-        report.reports = report.reports.filter((x) => !x.fix)
-        fs.writeFileSync(report.filePath, output)
+        // // skip or not the report when fixed
+        // // This was filtering fixed rules so status code was not 1
+        // if (program.opts().fix) {
+        //   report.reports = report.reports.filter((x) => !x.fix)
+        // } else {
+        // console.log('report.reports :>> ', report.reports)
+        report.reports.forEach((report) => {
+          if (report.fix !== null) {
+            report.message = `[FIXED] - ${report.message}`
+          }
+        })
+        // }
+
+        // fs.writeFileSync(report.filePath, output)
+        try {
+          fs.writeFileSync(report.filePath, output)
+          // fs.writeFileSync('no-console/Foo1Modified.sol', output)
+        } catch (error) {
+          console.error('An error occurred while writing the file:', error)
+        }
       }
     }
   }
@@ -216,10 +289,38 @@ function printReports(reports, formatter) {
     }
   }
 
-  console.log(formatter(reports), finalMessage || '')
+  const fullReport = formatter(reports) + (finalMessage || '')
+  console.log(fullReport)
+
+  if (program.opts().save) {
+    writeStringToFile(fullReport)
+  }
 
   if (exitWithOne) process.exit(1)
   return reports
+}
+
+function writeStringToFile(data) {
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = String(now.getMonth() + 1).padStart(2, '0') // Months are zero-based
+  const day = String(now.getDate()).padStart(2, '0')
+  const hour = String(now.getHours()).padStart(2, '0')
+  const minute = String(now.getMinutes()).padStart(2, '0')
+  const second = String(now.getSeconds()).padStart(2, '0')
+
+  const fileName = `${year}${month}${day}${hour}${minute}${second}_solhintReport.txt`
+
+  // Remove ANSI escape codes from the data
+  // eslint-disable-next-line no-control-regex
+  const cleanedData = data.replace(/\x1B\[[0-?]*[ -/]*[@-~]/g, '')
+
+  try {
+    fs.writeFileSync(fileName, cleanedData, 'utf-8') // Specify the encoding (UTF-16)
+    // console.log('File written successfully:', fileName)
+  } catch (err) {
+    console.error('Error writing to file:', err)
+  }
 }
 
 function getFormatter(formatter) {
@@ -235,12 +336,20 @@ function getFormatter(formatter) {
 }
 
 function listRules() {
-  if (process.argv.length !== 3) {
+  const args = process.argv.slice(2)
+  let configPath = '.solhint.json'
+  const configFileIndex = args.findIndex((arg) => arg === '-c' || arg === '--config')
+  if (configFileIndex !== -1) {
+    configPath = args[configFileIndex + 1]
+    if (!configPath || configPath.startsWith('-')) {
+      console.error('Error: Invalid configuration file path after -c or --config flag.')
+      process.exit(1)
+    }
+  } else if (args.length !== 1) {
     console.log('Error!! no additional parameters after list-rules command')
     process.exit(1)
   }
 
-  const configPath = '.solhint.json'
   if (!fs.existsSync(configPath)) {
     console.log('Error!! Configuration does not exists')
     process.exit(1)
@@ -269,6 +378,29 @@ function listRules() {
 function exitWithCode(reports) {
   const errorsCount = reports.reduce((acc, i) => acc + i.errorCount, 0)
   process.exit(errorsCount > 0 ? 1 : 0)
+}
+
+function checkForUpdate() {
+  // eslint-disable-next-line import/no-extraneous-dependencies
+  return import('latest-version')
+    .then((latestVersionModule) => {
+      const latestVersion = latestVersionModule.default
+      const currentVersion = require('./package.json').version
+
+      return latestVersion('solhint')
+        .then((latest) => {
+          if (currentVersion < latest) {
+            console.log('A new version of Solhint is available:', latest)
+            console.log('Please consider updating your Solhint package.')
+          }
+        })
+        .catch((error) => {
+          console.error('Error checking for updates:', error.message)
+        })
+    })
+    .catch((error) => {
+      console.error('Error importing latest-version:', error.message)
+    })
 }
 
 init()

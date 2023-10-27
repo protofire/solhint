@@ -32,6 +32,8 @@ This rule accepts an array of options:
 }
 ```
 
+### Notes
+- Solhint allows this rule to automatically fix the code with `--fix` option
 
 ## Examples
 ### 👍 Examples of **correct** code for this rule
@@ -48,6 +50,12 @@ uint256 public variableName
 uint public variableName
 ```
 
+#### If explicit is selected
+
+```solidity
+uint256 public variableName = uint256(5)
+```
+
 ### 👎 Examples of **incorrect** code for this rule
 
 #### If explicit is selected
@@ -60,6 +68,12 @@ uint public variableName
 
 ```solidity
 uint256 public variableName
+```
+
+#### At any setting
+
+```solidity
+uint public variableName = uint256(5)
 ```
 
 ## Version
