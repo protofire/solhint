@@ -24,6 +24,7 @@ class MyNewRule {
 
     ...
   }
+}
 ```
 
 This is enough for the rule to work but, of course, this will do nothing. Rules are implemented using a visitor pattern: you implement methods that are called when a node in the AST is entered or exited. For example, let's make a rule that forbids naming contracts `Foo`:

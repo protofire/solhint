@@ -1,18 +1,22 @@
 ## [4.0] - 2023-10-01
 
 ### Updated
-- Enhance explicit types sensitivity [493](https://github.com/protofire/solhint/pull/493) (Thanks to @vladyan18)
+- Enhance explicit types sensitivity [#493](https://github.com/protofire/solhint/pull/493) (Thanks to [@vladyan18](https://github.com/vladyan18))
 - Docs on `private-vars-leading-underscore` rule to clarify its functionality
 - Changelog and docs for `no-empty-blocks` rule to clarify its functionality
+- Require package with full path [#515](https://github.com/protofire/solhint/pull/515) (Thanks to [@zouguangxian](@https://github.com/zouguangxian))
 
 ### Added
-- `fix` option now shows the report on screen
-- `save` option to store report on disk with the standard or the specified format 
-- Check for updates on Solhint version to keep users with the last versin available. There's an option to disable this check (`--disc`)
-- Autofix for `explicit-types` rule [504](https://github.com/protofire/solhint/pull/504)
+- Check for updates on Solhint version to keep users up to date. There's an option to disable this check (`--disc`) [#506](https://github.com/protofire/solhint/pull/506)
+- `fix` option now shows the report on screen [#509](https://github.com/protofire/solhint/pull/509)
+- `save` option to store report on disk with the standard or the specified format [#509](https://github.com/protofire/solhint/pull/509) 
+- Autofix for `explicit-types` rule [#504](https://github.com/protofire/solhint/pull/504)
+- Autofix for `no-console` rule [#513](https://github.com/protofire/solhint/pull/513)
+- Autofix for `private-vars-leading-underscore` rule [#511](https://github.com/protofire/solhint/pull/511)
 
 ### Fixed
-- Generate docs script on Windows OS [494](https://github.com/protofire/solhint/pull/494) (Thanks to @vladyan18)
+- Generate docs script on Windows OS [#494](https://github.com/protofire/solhint/pull/494) (Thanks to [@vladyan18](https://github.com/vladyan18))
+- `one-contract-per-file` ignore interfaces [#514](https://github.com/protofire/solhint/pull/514) (Thanks to [@cruzdanilo](https://github.com/cruzdanilo))
 
  
 
