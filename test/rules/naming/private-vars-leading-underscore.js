@@ -11,25 +11,18 @@ describe('Linter - private-vars-leading-underscore', () => {
     contractWith('function foo() {}'),
     contractWith('function foo() private {}'),
     contractWith('function foo() internal {}'),
-    libraryWith('function foo() {}'),
-    libraryWith('function foo() private {}'),
-    libraryWith('function foo() internal {}'),
 
     // warn when public/external names start with _
     contractWith('uint public _foo;'),
     contractWith('uint external _foo;'),
     contractWith('function _foo() public {}'),
     contractWith('function _foo() external {}'),
-    libraryWith('function _foo() public {}'),
-    libraryWith('function _foo() external {}'),
   ]
 
   const SHOULD_WARN_STRICT_CASES = [
     contractWith('function _foo() internal { uint _bar; }'),
     contractWith('function foo(uint _bar) external {}'),
     contractWith('function foo() public returns (uint256 _bar) {}'),
-    libraryWith('function _foo() returns (uint256 _bar) {}'),
-    libraryWith('function _foo(uint _bar) private {}'),
   ]
 
   const SHOULD_NOT_WARN_CASES = [

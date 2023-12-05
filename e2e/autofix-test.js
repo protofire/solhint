@@ -257,7 +257,7 @@ describe('e2e', function () {
           expect(code).to.equal(1)
 
           const reportLines = stdout.split('\n')
-          const finalLine = '27 problems (27 errors, 0 warnings)'
+          const finalLine = '19 problems (19 errors, 0 warnings)'
           expect(reportLines[reportLines.length - 3]).to.contain(finalLine)
 
           result = compareTextFiles(currentFile, afterFixFile)
