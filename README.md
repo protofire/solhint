@@ -198,8 +198,12 @@ Or disable all validations for a group of lines:
 ### Best Practices Rules
 [Full list with all supported Best Practices Rules](docs/rules.md#best-practise-rules)
 
-## Documentation
+## Docker
+### Solhint has an official Docker Image
+(Thanks [@keypee](https://github.com/kaypee90) for the contribution)
+Go to docker folder and follow [this](docker/docker.md) instructions.
 
+## Documentation
 Related documentation you may find [here](https://protofire.github.io/solhint/).
 
 ## IDE Integrations

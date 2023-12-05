@@ -10,5 +10,6 @@ antlr4.jar
 /docs/.sass-cache/
 _temp/
 *solhintReport*.*
+.env
 **/.DS_Store
 
