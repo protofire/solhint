@@ -200,7 +200,6 @@ Or disable all validations for a group of lines:
 
 ## Docker
 ### Solhint has an official Docker Image
-(Thanks [@keypee](https://github.com/kaypee90) for the contribution)
 Go to docker folder and follow [this](docker/docker.md) instructions.
 
 ## Documentation

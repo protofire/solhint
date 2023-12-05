@@ -1,4 +1,6 @@
 # Docker Instructions
+Thanks [@keypee](https://github.com/kaypee90) for the contribution<br><br>
+
 1. Get the image. Run:<br>
 `docker pull protodb/protofire-solhint:latest`
 
