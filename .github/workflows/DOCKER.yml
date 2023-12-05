@@ -1,0 +1,29 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'solhint version'
+        required: true
+      image_name:
+        description: 'Name of image to be used on docker hub'
+        required: true
+        default: 'protofire/solhint'
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Login to Docker Hub
+      run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_ACCESS_TOKEN }}
+
+    - name: Build Docker image
+      run: docker build . --file docker/Dockerfile --tag ${{ inputs.image_name }}:${{ inputs.version }} --build-arg VERSION=${{ inputs.version }}
+
+    - name: Push Docker image to Docker Hub
+      run: docker push ${{ inputs.image_name }}:${{ inputs.version }}
