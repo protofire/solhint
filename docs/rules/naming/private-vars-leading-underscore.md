@@ -30,7 +30,7 @@ This rule accepts an array of options:
 ```
 
 ### Notes
-- This rule considers functions and variables in Libraries as well
+- This rule DO NOT considers functions and variables in Libraries
 - This rule skips external and public functions
 - This rule skips external and public state variables
 - See [here](https://docs.soliditylang.org/en/latest/style-guide.html#underscore-prefix-for-non-external-functions-and-variables) for further information
