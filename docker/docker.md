@@ -14,7 +14,7 @@ Thanks to [@kaypee90](https://github.com/kaypee90) for the contribution<br><br>
 
 This command:<br>
 - Maps current folder to app/ inside container<br>
-- Executes solhint in ./contracts/*.sol<br>
+- Executes solhint in './contracts/*.sol'<br>
 
 - Navigate inside container sharing current folder into app/ container folder<br>
 `docker run -v ./:/app -w /app -it protodb/protofire-solhint /bin/sh`<br>
