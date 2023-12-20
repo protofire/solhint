@@ -272,7 +272,7 @@ describe('e2e', function () {
 
     describe('autofix rule: payable-fallback', () => {
       before(function () {
-        params = retrieveParams('private-vars-underscore/')
+        params = retrieveParams('payable-fallback/')
         currentConfig = `${params.path}${params.subpath}.solhint.json`
         currentFile = `${params.path}${params.subpath}Foo1.sol`
         beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
