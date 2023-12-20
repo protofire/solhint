@@ -33,4 +33,15 @@ describe('Linter - payable-fallback', () => {
 
     assertNoWarnings(report)
   })
+
+  it('should raise for other fallback types when are not payable', () => {
+    const code = contractWith('fallback() external {} receive() onlyOwner {}')
+
+    const report = linter.processStr(code, {
+      rules: { 'payable-fallback': 'warn' },
+    })
+
+    assertWarnsCount(report, 2)
+    assertErrorMessage(report, 'payable')
+  })
 })
