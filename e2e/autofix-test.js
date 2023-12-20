@@ -293,9 +293,9 @@ describe('e2e', function () {
         })
 
         it('should execute and exit with code 1 (5)', () => {
-          ({ code, stdout }) = shell.exec(
+          ({ code, stdout } = shell.exec(
             `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
-          )
+          ))
 
           expect(code).to.equal(1)
         })
@@ -311,7 +311,7 @@ describe('e2e', function () {
           expect(result).to.be.true
         })
       })
-      
+
       it('should check FOO1 does not change after test (5)', () => {
         result = compareTextFiles(currentFile, beforeFixFile)
         expect(result).to.be.true
