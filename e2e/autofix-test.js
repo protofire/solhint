@@ -294,11 +294,16 @@ describe('e2e', function () {
           expect(result).to.be.true
         })
 
-        it('should execute and exit with code 1 (5)', () => {
+        it('should execute and compare Foo1 with template AFTER FIX and they should match (5)', () => {
           ({ code, stdout } = shell.exec(
             `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
+          result = compareTextFiles(currentFile, afterFixFile)
+          expect(result).to.be.true
+        })
+
+        it('should execute and exit with code 1 (5)', () => {
           expect(code).to.equal(1)
         })
 
@@ -306,11 +311,6 @@ describe('e2e', function () {
           const reportLines = stdout.split('\n')
           const finalLine = '11 problems (11 errors, 0 warnings)'
           expect(reportLines[reportLines.length - 3]).to.contain(finalLine)
-        })
-
-        it('should compare Foo1 file with template AFTER FIX file and they should match (5)', () => {
-          result = compareTextFiles(currentFile, afterFixFile)
-          expect(result).to.be.true
         })
       })
 
