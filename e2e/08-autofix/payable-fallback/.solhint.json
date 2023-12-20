@@ -1,5 +1,5 @@
 {
   "rules": {
-    "payable-fallback": "warn"
+    "payable-fallback": "error"
   }
 }
