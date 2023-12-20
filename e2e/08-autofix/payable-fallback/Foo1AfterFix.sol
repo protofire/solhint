@@ -17,7 +17,7 @@ contract Generic {
     }
 
     //// fallback with no name
-    function() payable {}
+    function() payable public {}
 
     function() payable {
         uint256 anUintToFillSpace;
@@ -46,5 +46,5 @@ contract Generic {
 
     fallback() external payable {}
     function() external payable {}    
-    receive() external virtual payable {}
+    receive() public virtual payable {}
 }

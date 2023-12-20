@@ -46,5 +46,5 @@ contract Generic {
 
     fallback() external payable {}
     function() external payable {}    
-    receive() public  virtual payable {}
+    receive() public virtual payable {}
 }
