@@ -346,7 +346,7 @@ describe('e2e', function () {
       })
     })
 
-    describe.only('sarif formatter tests', () => {
+    describe('sarif formatter tests', () => {
       const formatterType = 'sarif'
 
       it('should always output with correct SARIF version and tool metadata', () => {

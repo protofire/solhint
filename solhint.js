@@ -279,8 +279,9 @@ function printReports(reports, formatter) {
     warnings.warningsNumberExceeded
   ) {
     if (!reports[0].errorCount) {
-      finalMessage = `Solhint found more warnings than the maximum specified (maximum: ${program.opts().maxWarnings
-        }, found: ${warnings.warningsCount})`
+      finalMessage = `Solhint found more warnings than the maximum specified (maximum: ${
+        program.opts().maxWarnings
+      }, found: ${warnings.warningsCount})`
       exitWithOne = true
     } else {
       finalMessage =
@@ -327,8 +328,9 @@ function getFormatter(formatter) {
   try {
     return require(`./lib/formatters/${formatterName}`)
   } catch (ex) {
-    ex.message = `\nThere was a problem loading formatter option: ${program.opts().formatter
-      } \nError: ${ex.message}`
+    ex.message = `\nThere was a problem loading formatter option: ${
+      program.opts().formatter
+    } \nError: ${ex.message}`
     throw ex
   }
 }
