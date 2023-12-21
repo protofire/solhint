@@ -21,7 +21,7 @@ function init() {
     .usage('[options] <file> [...other_files]')
     .option(
       '-f, --formatter [name]',
-      'report formatter name (stylish, table, tap, unix, json, compact)'
+      'report formatter name (stylish, table, tap, unix, json, compact, sarif)'
     )
     .option('-w, --max-warnings [maxWarningsNumber]', 'number of allowed warnings')
     .option('-c, --config [file_name]', 'file to use as your .solhint.json')

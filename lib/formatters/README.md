@@ -8,4 +8,5 @@ files in this directory are pulled from eslint repository:
 - stylish.js: eslint - Sindre Sorhus
 - json.js: eslint - Artur Lukianov
 - compact.js: eslint - Nicholas C. Zakas
+- sarif.js: [@microsoft/eslint-formatter-sarif](https://www.npmjs.com/package/@microsoft/eslint-formatter-sarif)
   
