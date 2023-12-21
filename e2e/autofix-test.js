@@ -60,7 +60,7 @@ describe('e2e', function () {
 
     describe('autofix command line options', () => {
       before(function () {
-        params = retrieveParams('commands/')
+        params = retrieveParams('_commands/')
         currentConfig = `${params.path}${params.subpath}.solhint.json`
         currentFile = `${params.path}${params.subpath}Foo1.sol`
         beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
