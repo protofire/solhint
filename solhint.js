@@ -21,7 +21,7 @@ function init() {
     .usage('[options] <file> [...other_files]')
     .option(
       '-f, --formatter [name]',
-      'report formatter name (stylish, table, tap, unix, json, compact)'
+      'report formatter name (stylish, table, tap, unix, json, compact, sarif)'
     )
     .option('-w, --max-warnings [maxWarningsNumber]', 'number of allowed warnings')
     .option('-c, --config [file_name]', 'file to use as your .solhint.json')
@@ -279,9 +279,8 @@ function printReports(reports, formatter) {
     warnings.warningsNumberExceeded
   ) {
     if (!reports[0].errorCount) {
-      finalMessage = `Solhint found more warnings than the maximum specified (maximum: ${
-        program.opts().maxWarnings
-      }, found: ${warnings.warningsCount})`
+      finalMessage = `Solhint found more warnings than the maximum specified (maximum: ${program.opts().maxWarnings
+        }, found: ${warnings.warningsCount})`
       exitWithOne = true
     } else {
       finalMessage =
@@ -328,9 +327,8 @@ function getFormatter(formatter) {
   try {
     return require(`./lib/formatters/${formatterName}`)
   } catch (ex) {
-    ex.message = `\nThere was a problem loading formatter option: ${
-      program.opts().formatter
-    } \nError: ${ex.message}`
+    ex.message = `\nThere was a problem loading formatter option: ${program.opts().formatter
+      } \nError: ${ex.message}`
     throw ex
   }
 }

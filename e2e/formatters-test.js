@@ -4,6 +4,7 @@ const fs = require('fs-extra')
 const os = require('os')
 const path = require('path')
 const shell = require('shelljs')
+const url = require('url')
 
 function useFixture(dir) {
   beforeEach(`switch to ${dir}`, function () {
@@ -343,6 +344,339 @@ describe('e2e', function () {
 
         expect(code).to.equal(1)
       })
+    })
+
+    describe.only('sarif formatter tests', () => {
+      const formatterType = 'sarif'
+
+      it('should always output with correct SARIF version and tool metadata', () => {
+        const { code, stdout } = shell.exec(`solhint -f ${formatterType}`)
+        const sarifOutput = JSON.parse(stdout)
+
+        expect(code).to.equal(0)
+        expect(sarifOutput['$schema']).to.eq('http://json.schemastore.org/sarif-2.1.0-rtm.5')
+        expect(sarifOutput.version).to.eq('2.1.0')
+        expect(sarifOutput.runs[0].tool.driver.name).to.eq('solhint')
+        expect(sarifOutput.runs[0].tool.driver.informationUri).to.eq('https://github.com/protofire/solhint')
+        expect(sarifOutput.runs[0].tool.driver.version).to.eq(require('../package.json').version)
+      })
+
+      it('should output with empty results and no artifacts when file does not exist and sarif is the formatter', () => {
+        const { code, stdout } = shell.exec(`solhint ${PATH}contracts/Foo1.sol -f ${formatterType}`)
+        const sarifOutput = JSON.parse(stdout)
+
+        expect(code).to.equal(0)
+        expect(sarifOutput.runs[0].artifacts).to.be.undefined
+        expect(sarifOutput.runs[0].results).to.be.empty
+      })
+
+      it('should output with sarif formatter for Foo2', () => {
+        const { code, stdout } = shell.exec(`solhint ${PATH}contracts/Foo2.sol -f ${formatterType}`)
+        const sarifOutput = JSON.parse(stdout)
+
+        const expectedUriPath = url.pathToFileURL(`${PATH}contracts/Foo2.sol`).toString()
+        const expectedResults = [
+          {
+            level: "warning",
+            message: {
+              text: "Constant name must be in capitalized SNAKE_CASE"
+            },
+            locations: [
+              {
+                physicalLocation: {
+                  artifactLocation: {
+                    uri: expectedUriPath,
+                    index: 0
+                  },
+                  region: {
+                    startLine: 5,
+                    startColumn: 5
+                  }
+                }
+              }
+            ],
+            ruleId: "const-name-snakecase"
+          },
+          {
+            level: "warning",
+            message: {
+              text: "Explicitly mark visibility in function (Set ignoreConstructors to true if using solidity >=0.7.0)"
+            },
+            locations: [
+              {
+                physicalLocation: {
+                  artifactLocation: {
+                    uri: expectedUriPath,
+                    index: 0
+                  },
+                  region: {
+                    startLine: 7,
+                    startColumn: 5
+                  }
+                }
+              }
+            ],
+            ruleId: "func-visibility"
+          },
+          {
+            level: "warning",
+            message: {
+              text: "Code contains empty blocks"
+            },
+            locations: [
+              {
+                physicalLocation: {
+                  artifactLocation: {
+                    uri: expectedUriPath,
+                    index: 0
+                  },
+                  region: {
+                    startLine: 7,
+                    startColumn: 19
+                  }
+                }
+              }
+            ],
+            ruleId: "no-empty-blocks"
+          }
+        ]
+
+        expect(code).to.equal(0)
+        expect(sarifOutput.runs[0].artifacts[0].location.uri).to.eq(expectedUriPath)
+        expect(sarifOutput.runs[0].results).to.deep.equal(expectedResults)
+      })
+
+
+      it('should output with sarif formatter for Foo and Foo2 and Foo3', () => {
+        const { code, stdout } = shell.exec(
+          `solhint ${PATH}contracts/Foo.sol ${PATH}contracts/Foo2.sol ${PATH}contracts/Foo3.sol -f ${formatterType}`
+        )
+        const sarifOutput = JSON.parse(stdout)
+
+        const expectedUriPathFoo = url.pathToFileURL(`${PATH}contracts/Foo.sol`).toString()
+        const expectedUriPathFoo2 = url.pathToFileURL(`${PATH}contracts/Foo2.sol`).toString()
+        const expectedUriPathFoo3 = url.pathToFileURL(`${PATH}contracts/Foo3.sol`).toString()
+        const expectedResults = [
+          {
+            level: "error",
+            message: {
+              text: "Compiler version >=0.6.0 does not satisfy the ^0.8.0 semver requirement"
+            },
+            locations: [
+              {
+                physicalLocation: {
+                  artifactLocation: {
+                    uri: expectedUriPathFoo,
+                    index: 0
+                  },
+                  region: {
+                    startLine: 2,
+                    startColumn: 1
+                  }
+                }
+              }
+            ],
+            ruleId: "compiler-version"
+          },
+          {
+            level: "warning",
+            message: {
+              text: "Constant name must be in capitalized SNAKE_CASE"
+            },
+            locations: [
+              {
+                physicalLocation: {
+                  artifactLocation: {
+                    uri: expectedUriPathFoo,
+                    index: 0
+                  },
+                  region: {
+                    startLine: 5,
+                    startColumn: 5
+                  }
+                }
+              }
+            ],
+            ruleId: "const-name-snakecase"
+          },
+          {
+            level: "warning",
+            message: {
+              text: "Explicitly mark visibility of state"
+            },
+            locations: [
+              {
+                physicalLocation: {
+                  artifactLocation: {
+                    uri: expectedUriPathFoo,
+                    index: 0
+                  },
+                  region: {
+                    startLine: 6,
+                    startColumn: 5
+                  }
+                }
+              }
+            ],
+            ruleId: "state-visibility"
+          },
+          {
+            level: "warning",
+            message: {
+              text: "'TEST2' should start with _"
+            },
+            locations: [
+              {
+                physicalLocation: {
+                  artifactLocation: {
+                    uri: expectedUriPathFoo,
+                    index: 0
+                  },
+                  region: {
+                    startLine: 6,
+                    startColumn: 5
+                  }
+                }
+              }
+            ],
+            ruleId: "private-vars-leading-underscore"
+          },
+          {
+            level: "warning",
+            message: {
+              text: "Variable name must be in mixedCase"
+            },
+            locations: [
+              {
+                physicalLocation: {
+                  artifactLocation: {
+                    uri: expectedUriPathFoo,
+                    index: 0
+                  },
+                  region: {
+                    startLine: 6,
+                    startColumn: 5
+                  }
+                }
+              }
+            ],
+            ruleId: "var-name-mixedcase"
+          },
+          {
+            level: "warning",
+            message: {
+              text: "Explicitly mark visibility in function (Set ignoreConstructors to true if using solidity >=0.7.0)"
+            },
+            locations: [
+              {
+                physicalLocation: {
+                  artifactLocation: {
+                    uri: expectedUriPathFoo,
+                    index: 0
+                  },
+                  region: {
+                    startLine: 8,
+                    startColumn: 5
+                  }
+                }
+              }
+            ],
+            ruleId: "func-visibility"
+          },
+          {
+            level: "warning",
+            message: {
+              text: "Code contains empty blocks"
+            },
+            locations: [
+              {
+                physicalLocation: {
+                  artifactLocation: {
+                    uri: expectedUriPathFoo,
+                    index: 0
+                  },
+                  region: {
+                    startLine: 8,
+                    startColumn: 19
+                  }
+                }
+              }
+            ],
+            ruleId: "no-empty-blocks"
+          },
+          {
+            level: "warning",
+            message: {
+              text: "Constant name must be in capitalized SNAKE_CASE"
+            },
+            locations: [
+              {
+                physicalLocation: {
+                  artifactLocation: {
+                    uri: expectedUriPathFoo2,
+                    index: 1
+                  },
+                  region: {
+                    startLine: 5,
+                    startColumn: 5
+                  }
+                }
+              }
+            ],
+            ruleId: "const-name-snakecase"
+          },
+          {
+            level: "warning",
+            message: {
+              text: "Explicitly mark visibility in function (Set ignoreConstructors to true if using solidity >=0.7.0)"
+            },
+            locations: [
+              {
+                physicalLocation: {
+                  artifactLocation: {
+                    uri: expectedUriPathFoo2,
+                    index: 1
+                  },
+                  region: {
+                    startLine: 7,
+                    startColumn: 5
+                  }
+                }
+              }
+            ],
+            ruleId: "func-visibility"
+          },
+          {
+            level: "warning",
+            message: {
+              text: "Code contains empty blocks"
+            },
+            locations: [
+              {
+                physicalLocation: {
+                  artifactLocation: {
+                    uri: expectedUriPathFoo2,
+                    index: 1
+                  },
+                  region: {
+                    startLine: 7,
+                    startColumn: 19
+                  }
+                }
+              }
+            ],
+            ruleId: "no-empty-blocks"
+          }
+        ]
+
+        // There's an error, that is why exit code is 1
+        expect(code).to.equal(1)
+        expect(sarifOutput.runs[0].artifacts[0].location.uri).to.eq(expectedUriPathFoo)
+        expect(sarifOutput.runs[0].artifacts[1].location.uri).to.eq(expectedUriPathFoo2)
+        expect(sarifOutput.runs[0].artifacts[2].location.uri).to.eq(expectedUriPathFoo3)
+        expect(sarifOutput.runs[0].results).to.deep.equal(expectedResults)
+      })
+
     })
   })
 })
