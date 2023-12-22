@@ -26,6 +26,8 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 }
 ```
 
+### Notes
+- Solhint allows this rule to automatically fix the code with `--fix` option
 
 ## Examples
 ### 👍 Examples of **correct** code for this rule
