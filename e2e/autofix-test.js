@@ -329,6 +329,93 @@ describe('e2e', function () {
         expect(result).to.be.true
       })
     })
+
+    describe('autofix rule: quotes', () => {
+      describe('--fix with noPrompt SINGLE QUOTES', () => {
+        before(function () {
+          params = retrieveParams('quotes/')
+          currentConfig = `${params.path}${params.subpath}.singleQuotes.json`
+          currentFile = `${params.path}${params.subpath}Foo1.sol`
+          beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+          afterFixFile = `${params.path}${params.subpath}Foo1AfterFixSingle.sol`
+        })
+
+        after(function () {
+          if (!E2E) {
+            copyFile(beforeFixFile, currentFile)
+          }
+        })
+
+        it('should compare Foo1 file with template BEFORE FIX file and they should match (6)', () => {
+          result = compareTextFiles(currentFile, beforeFixFile)
+          expect(result).to.be.true
+        })
+
+        it('should execute and compare Foo1 with template AFTER FIX and they should match (6)', () => {
+          ({ code, stdout } = shell.exec(
+            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+          ))
+
+          result = compareTextFiles(currentFile, afterFixFile)
+          expect(result).to.be.true
+        })
+
+        it('should execute and exit with code 1 (6)', () => {
+          expect(code).to.equal(1)
+        })
+
+        it('should get the right report (6)', () => {
+          const reportLines = stdout.split('\n')
+          const finalLine = '8 problems (8 errors, 0 warnings)'
+          expect(reportLines[reportLines.length - 3]).to.contain(finalLine)
+        })
+      })
+
+      describe('--fix with noPrompt DOUBLE QUOTES', () => {
+        before(function () {
+          params = retrieveParams('quotes/')
+          currentConfig = `${params.path}${params.subpath}.doubleQuotes.json`
+          currentFile = `${params.path}${params.subpath}Foo1.sol`
+          beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+          afterFixFile = `${params.path}${params.subpath}Foo1AfterFixDouble.sol`
+        })
+
+        after(function () {
+          if (!E2E) {
+            copyFile(beforeFixFile, currentFile)
+          }
+        })
+
+        it('should compare Foo1 file with template BEFORE FIX file and they should match (6)', () => {
+          result = compareTextFiles(currentFile, beforeFixFile)
+          expect(result).to.be.true
+        })
+
+        it('should execute and compare Foo1 with template AFTER FIX and they should match (6)', () => {
+          ({ code, stdout } = shell.exec(
+            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+          ))
+
+          result = compareTextFiles(currentFile, afterFixFile)
+          expect(result).to.be.true
+        })
+
+        it('should execute and exit with code 1 (6)', () => {
+          expect(code).to.equal(1)
+        })
+
+        it('should get the right report (6)', () => {
+          const reportLines = stdout.split('\n')
+          const finalLine = '8 problems (8 errors, 0 warnings)'
+          expect(reportLines[reportLines.length - 3]).to.contain(finalLine)
+        })
+      })
+
+      it('should check FOO1 does not change after test (6)', () => {
+        result = compareTextFiles(currentFile, beforeFixFile)
+        expect(result).to.be.true
+      })
+    })
   })
 })
 

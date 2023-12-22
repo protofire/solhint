@@ -54,6 +54,7 @@ describe('Linter - quotes', () => {
     "assembly { 'abc' }",
     "assembly { dataSize('uint') }",
     "assembly { linkerSymbol('uint') }",
+    "assembly { let hexString := '48656c6c6f2c2027576f726c64212722' }",
   ]
 
   ERROR_ASSEMBLY_CLAUSES.forEach((curText) =>
