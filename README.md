@@ -57,7 +57,7 @@ Linter for Solidity programming language
 Options:
 
   -V, --version                           output the version number
-  -f, --formatter [name]                  report formatter name (stylish, table, tap, unix, json, compact)
+  -f, --formatter [name]                  report formatter name (stylish, table, tap, unix, json, compact, sarif)
   -w, --max-warnings [maxWarningsNumber]  number of allowed warnings
   -c, --config [file_name]                file to use as your .solhint.json
   -q, --quiet                             report errors only - default: false
