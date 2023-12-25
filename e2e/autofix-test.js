@@ -418,7 +418,7 @@ describe('e2e', function () {
     })
   })
 
-  describe('autofix rule: contract-name-camecalse', () => {
+  describe('autofix rule: contract-name-camelcase', () => {
     before(function () {
       params = retrieveParams('avoid-suicide/')
       currentConfig = `${params.path}${params.subpath}.solhint.json`
@@ -466,7 +466,7 @@ describe('e2e', function () {
 
   describe('autofix rule: avoid-suicide', () => {
     before(function () {
-      params = retrieveParams('contract-name-camecalse/')
+      params = retrieveParams('contract-name-camelcase/')
       currentConfig = `${params.path}${params.subpath}.solhint.json`
       currentFile = `${params.path}${params.subpath}Foo1.sol`
       beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
