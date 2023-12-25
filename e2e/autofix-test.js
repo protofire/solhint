@@ -418,7 +418,7 @@ describe('e2e', function () {
     })
   })
 
-  describe('autofix rule: avoid-suicide', () => {
+  describe('autofix rule: contract-name-camecalse', () => {
     before(function () {
       params = retrieveParams('avoid-suicide/')
       currentConfig = `${params.path}${params.subpath}.solhint.json`
@@ -459,6 +459,52 @@ describe('e2e', function () {
     })
     
     it('should check FOO1 does not change after test (7)', () => {
+      result = compareTextFiles(currentFile, beforeFixFile)
+      expect(result).to.be.true
+    })
+  })
+
+  describe('autofix rule: avoid-suicide', () => {
+    before(function () {
+      params = retrieveParams('contract-name-camecalse/')
+      currentConfig = `${params.path}${params.subpath}.solhint.json`
+      currentFile = `${params.path}${params.subpath}Foo1.sol`
+      beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+      afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+    })
+    after(function () {
+      if (!E2E) {
+        copyFile(beforeFixFile, currentFile)
+      }
+    })
+
+    describe('--fix with noPrompt', () => {
+      it('should compare Foo1 file with template BEFORE FIX file and they should match (8)', () => {
+        result = compareTextFiles(currentFile, beforeFixFile)
+        expect(result).to.be.true
+      })
+
+      it('should execute and compare Foo1 with template AFTER FIX and they should match (8)', () => {
+        ;({ code, stdout } = shell.exec(
+          `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+        ))
+
+        result = compareTextFiles(currentFile, afterFixFile)
+        expect(result).to.be.true
+      })
+
+      it('should execute and exit with code 1 (8)', () => {
+        expect(code).to.equal(1)
+      })
+
+      it('should get the right report (8)', () => {
+        const reportLines = stdout.split('\n')
+        const finalLine = '5 problems (5 errors, 0 warnings)'
+        expect(reportLines[reportLines.length - 3]).to.contain(finalLine)
+      })
+    })
+    
+    it('should check FOO1 does not change after test (8)', () => {
       result = compareTextFiles(currentFile, beforeFixFile)
       expect(result).to.be.true
     })
