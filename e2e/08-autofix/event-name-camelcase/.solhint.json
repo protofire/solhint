@@ -1,5 +1,5 @@
 {
   "rules": {
-    "contract-name-camelcase": "error"
+    "event-name-camelcase": "error"
   }
 }
