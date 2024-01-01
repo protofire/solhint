@@ -1,0 +1,5 @@
+{
+  "rules": {
+    "event-name-camelcase": "error"
+  }
+}
