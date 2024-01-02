@@ -1,4 +1,25 @@
-## [4.0] - 2023-10-01
+## [4.1.0] - 2024-01- ????????????????????
+
+### Updated
+- Included `Sarif` formatter [#530](https://github.com/protofire/solhint/pull/530) (Thanks to [@eshaan7](https://github.com/eshaan7))
+- Cache `npm` on workflows [#534](https://github.com/protofire/solhint/pull/534)
+
+
+### Added
+- Official Docker Image [#524](https://github.com/protofire/solhint/pull/524) (Thanks to [@keypee](https://github.com/keypee90))
+- Autofix for `payable-fallback` rule [#528](https://github.com/protofire/solhint/pull/528)
+- Autofix for `quotes` rule [#529](https://github.com/protofire/solhint/pull/529)
+- Autofix for `avoid-suicide` rule [#531](https://github.com/protofire/solhint/pull/531)
+- Autofix for `contract-name-camelcase` rule [#532](https://github.com/protofire/solhint/pull/532)
+- Autofix for `event-name-camelcase` rule [#533](https://github.com/protofire/solhint/pull/533)
+
+### Fixed
+- Fix private vars leading underscore on libraries [#525](https://github.com/protofire/solhint/pull/525)
+
+ 
+
+
+## [4.0.0] - 2023-10-01
 
 ### Updated
 - Enhance explicit types sensitivity [#493](https://github.com/protofire/solhint/pull/493) (Thanks to [@vladyan18](https://github.com/vladyan18))
