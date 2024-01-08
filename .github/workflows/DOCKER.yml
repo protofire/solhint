@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'solhint version'
+        description: 'Solhint version'
         required: true
       image_name:
         description: 'Name of image to be used on docker hub'
         required: true
-        default: 'protofire/solhint'
+        default: 'protodb/protofire-solhint'
 jobs:
 
   build:
