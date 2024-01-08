@@ -23,7 +23,7 @@ jobs:
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
     - name: Build Docker image
-      run: docker build . --file docker/Dockerfile --tag ${{ inputs.image_name }}:${{ inputs.version }} --build-arg VERSION=${{ inputs.version }}
+      run: docker build . --file docker/Dockerfile --tag ${{ inputs.image_name }}:latest --build-arg VERSION=${{ inputs.version }}
 
     - name: Push Docker image to Docker Hub
-      run: docker push ${{ inputs.image_name }}:${{ inputs.version }}
+      run: docker push ${{ inputs.image_name }}:latest
