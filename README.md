@@ -1,8 +1,8 @@
 <p align="center">
-  <a href="https://protofire.io/projects/solhint"><img src="solhint.png"></a>
+  <a href="https://protofire.io/projects/solhint" target="_blank"><img src="solhint.png"></a>
 </p>
 <p align="center">
-  By <a href="https://protofire.io/">Protofire</a>
+  By <a href="https://protofire.io/" target="_blank">Protofire</a>
 </p>
 
 [![](https://img.shields.io/badge/Solhint%20Website-cyan)](https://protofire.io/projects/solhint)
