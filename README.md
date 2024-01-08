@@ -1,11 +1,12 @@
 <p align="center">
-  <img src="solhint.png">
+  <a href="https://protofire.io/projects/solhint"><img src="solhint.png"></a>
 </p>
 <p align="center">
   By <a href="https://protofire.io/">Protofire</a>
 </p>
 
-[![Join Discord](https://img.shields.io/badge/join-Discord-red)](https://discord.gg/4TYGq3zpjs)
+[![](https://img.shields.io/badge/Solhint%20Website-cyan)](https://protofire.io/projects/solhint)
+[![](https://img.shields.io/badge/Join%20Our%20Discord-magenta)](https://discord.gg/4TYGq3zpjs)
 [![Donate with Ethereum](https://img.shields.io/badge/Donate-ETH-blue)](https://etherscan.io/address/0xA81705c8C247C413a19A244938ae7f4A0393944e)
 [![NPM version](https://badge.fury.io/js/solhint.svg)](https://npmjs.org/package/solhint)
 [![Coverage Status](https://coveralls.io/repos/github/protofire/solhint/badge.svg?branch=master)](
@@ -14,8 +15,10 @@ https://coveralls.io/github/protofire/solhint?branch=master)
 
 This is an open source project for linting [Solidity](http://solidity.readthedocs.io/en/develop/) code. This project
 provides both **Security** and **Style Guide** validations.
-
+<br>
+[VISIT OUR WEBSITE](https://protofire.io/projects/solhint)<br>
 [JOIN OUR DISCORD SERVER](https://discord.gg/4TYGq3zpjs)
+<br>
 ## Installation
 
 You can install Solhint using **npm**:
@@ -57,7 +60,7 @@ Linter for Solidity programming language
 Options:
 
   -V, --version                           output the version number
-  -f, --formatter [name]                  report formatter name (stylish, table, tap, unix, json, compact)
+  -f, --formatter [name]                  report formatter name (stylish, table, tap, unix, json, compact, sarif)
   -w, --max-warnings [maxWarningsNumber]  number of allowed warnings
   -c, --config [file_name]                file to use as your .solhint.json
   -q, --quiet                             report errors only - default: false
@@ -198,8 +201,11 @@ Or disable all validations for a group of lines:
 ### Best Practices Rules
 [Full list with all supported Best Practices Rules](docs/rules.md#best-practise-rules)
 
-## Documentation
+## Docker
+### Solhint has an official Docker Image
+Go to docker folder and follow [this](docker/docker.md) instructions.
 
+## Documentation
 Related documentation you may find [here](https://protofire.github.io/solhint/).
 
 ## IDE Integrations

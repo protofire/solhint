@@ -1,21 +1,21 @@
 pragma solidity 0.8.0;
 
 library libraryName {
-    uint256 internal _lzarasa1;
-    uint256 internal _lzarasa2 = 2;
+    uint256 internal lzarasa1;
+    uint256 internal lzarasa2 = 2;
     uint256 internal _lzarasa3;
-    uint256 private _lzarasa4;
-    uint256 private _lzarasa5 = 5;
+    uint256 private lzarasa4;
+    uint256 private lzarasa5 = 5;
     uint256 private _lzarasa6;
 
-    uint256 public lzarasa7;
-    uint256 public lzarasa8 = 8;
+    uint256 public _lzarasa7;
+    uint256 public _lzarasa8 = 8;
     uint256 public lzarasa9;
 
     function fofo1() public {}
-    function fofo2() public {}
+    function _fofo2() public {}
     function _fofo3() internal {}
-    function _fofo4() internal {}
+    function fofo4() internal {}
 }
 
 contract Foo1 {
