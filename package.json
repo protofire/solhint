@@ -1,6 +1,6 @@
 {
   "name": "solhint",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Solidity Code Linter",
   "main": "lib/index.js",
   "keywords": [
@@ -18,7 +18,7 @@
   "scripts": {
     "exec-tests": "nyc mocha --recursive && nyc report --reporter=text-lcov | coveralls",
     "test:coverage": "npm run exec-tests",
-    "test": "mocha --recursive",
+    "test": "mocha --recursive --timeout 10000",
     "lint": "eslint .",
     "generate-rulesets": "node scripts/generate-rulesets.js && prettier --write conf/rulesets",
     "docs": "node scripts/generate-rule-docs.js",

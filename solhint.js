@@ -127,7 +127,6 @@ function executeMainActionLogic() {
   const reportLists = program.args.filter(_.isString).map(processPath)
   const reports = _.flatten(reportLists)
 
-  // if (program.opts().fix || program.opts().fixShow) {
   if (program.opts().fix) {
     for (const report of reports) {
       const inputSrc = fs.readFileSync(report.filePath).toString()
@@ -140,23 +139,13 @@ function executeMainActionLogic() {
 
       const { fixed, output } = applyFixes(fixes, inputSrc)
       if (fixed) {
-        // // skip or not the report when fixed
-        // // This was filtering fixed rules so status code was not 1
-        // if (program.opts().fix) {
-        //   report.reports = report.reports.filter((x) => !x.fix)
-        // } else {
-        // console.log('report.reports :>> ', report.reports)
         report.reports.forEach((report) => {
           if (report.fix !== null) {
             report.message = `[FIXED] - ${report.message}`
           }
         })
-        // }
-
-        // fs.writeFileSync(report.filePath, output)
         try {
           fs.writeFileSync(report.filePath, output)
-          // fs.writeFileSync('no-console/Foo1Modified.sol', output)
         } catch (error) {
           console.error('An error occurred while writing the file:', error)
         }
