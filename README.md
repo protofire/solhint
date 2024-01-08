@@ -1,11 +1,12 @@
 <p align="center">
-  <img src="solhint.png">
+  <a href="https://protofire.io/projects/solhint"><img src="solhint.png"></a>
 </p>
 <p align="center">
   By <a href="https://protofire.io/">Protofire</a>
 </p>
 
-[![Join Discord](https://img.shields.io/badge/join-Discord-red)](https://discord.gg/4TYGq3zpjs)
+[![](https://img.shields.io/badge/Solhint%20Website-cyan)](https://protofire.io/projects/solhint)
+[![](https://img.shields.io/badge/Join%20Our%20Discord-magenta)](https://discord.gg/4TYGq3zpjs)
 [![Donate with Ethereum](https://img.shields.io/badge/Donate-ETH-blue)](https://etherscan.io/address/0xA81705c8C247C413a19A244938ae7f4A0393944e)
 [![NPM version](https://badge.fury.io/js/solhint.svg)](https://npmjs.org/package/solhint)
 [![Coverage Status](https://coveralls.io/repos/github/protofire/solhint/badge.svg?branch=master)](
@@ -14,8 +15,10 @@ https://coveralls.io/github/protofire/solhint?branch=master)
 
 This is an open source project for linting [Solidity](http://solidity.readthedocs.io/en/develop/) code. This project
 provides both **Security** and **Style Guide** validations.
-
+<br>
+[VISIT OUR WEBSITE](https://protofire.io/projects/solhint)<br>
 [JOIN OUR DISCORD SERVER](https://discord.gg/4TYGq3zpjs)
+<br>
 ## Installation
 
 You can install Solhint using **npm**:
