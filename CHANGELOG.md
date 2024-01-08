@@ -1,4 +1,11 @@
-## [4.1.0] - 2024-01- ????????????????????
+## [4.1.1] - 2024-01-08
+
+### Fixed
+- Fix changelog typos
+
+
+
+## [4.1.0] - 2024-01-08
 
 ### Updated
 - Included `Sarif` formatter [#530](https://github.com/protofire/solhint/pull/530) (Thanks to [@eshaan7](https://github.com/eshaan7))
