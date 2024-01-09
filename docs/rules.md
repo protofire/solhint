@@ -25,6 +25,13 @@ title:       "Rule Index of Solhint"
 | [constructor-syntax](./rules/best-practises/constructor-syntax.md)       | Constructors should use the new constructor keyword.                                                                                       |              |            |
         
 
+## Gas Consumption Rules
+
+| Rule Id                                                             | Error                                               | Recommended | Deprecated |
+| ------------------------------------------------------------------- | --------------------------------------------------- | ----------- | ---------- |
+| [gas-multitoken1155](./rules/gas-consumption/gas-multitoken1155.md) | ERC1155 is a cheaper non-fungible token than ERC721 |             |            |
+        
+
 ## Miscellaneous
 
 | Rule Id                                                                     | Error                                                                                                                                  | Recommended  | Deprecated |
