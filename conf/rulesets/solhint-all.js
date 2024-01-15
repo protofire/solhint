@@ -26,6 +26,7 @@ module.exports = Object.freeze({
     ],
     'constructor-syntax': 'warn',
     'gas-multitoken1155': 'warn',
+    'gas-small-strings': 'warn',
     'comprehensive-interface': 'warn',
     quotes: ['error', 'double'],
     'const-name-snakecase': 'warn',
