@@ -25,6 +25,7 @@ module.exports = Object.freeze({
       },
     ],
     'constructor-syntax': 'warn',
+    'gas-indexed-events': 'warn',
     'gas-multitoken1155': 'warn',
     'gas-small-strings': 'warn',
     'comprehensive-interface': 'warn',
