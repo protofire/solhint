@@ -30,6 +30,7 @@ title:       "Rule Index of Solhint"
 | Rule Id                                                             | Error                                               | Recommended | Deprecated |
 | ------------------------------------------------------------------- | --------------------------------------------------- | ----------- | ---------- |
 | [gas-multitoken1155](./rules/gas-consumption/gas-multitoken1155.md) | ERC1155 is a cheaper non-fungible token than ERC721 |             |            |
+| [gas-small-strings](./rules/gas-consumption/gas-small-strings.md)   | Keep strings smaller than 32 bytes                  |             |            |
         
 
 ## Miscellaneous
