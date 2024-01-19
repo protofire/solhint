@@ -91,6 +91,48 @@ describe('Linter - gas-calldata-parameters', () => {
     assert.equal(report.messages[2].message, replaceErrorMsg('strVar', 'functionTest1'))
   })
 
+  it('should raise error on customStruct and strVar', () => {
+    const code = contractWith(`
+      function functionTest1(
+          uint256[] memory arrayUint,
+          bool active,
+          CustomStruct memory customStruct,
+          string memory strVar
+      ) external pure {
+        arrayUint[i]++;
+      }      
+      `)
+
+    const report = linter.processStr(code, {
+      rules: { 'gas-calldata-parameters': 'error' },
+    })
+
+    assert.equal(report.errorCount, 2)
+    assert.equal(report.messages[0].message, replaceErrorMsg('customStruct', 'functionTest1'))
+    assert.equal(report.messages[1].message, replaceErrorMsg('strVar', 'functionTest1'))
+  })
+
+  it('should raise error on arrayUint', () => {
+    const code = contractWith(`
+      function functionTest1(
+          uint256[] memory arrayUint,
+          bool active,
+          CustomStruct memory customStruct,
+          string memory strVar
+      ) external pure {
+        customStruct.field1 = "something";
+        strVar <<= active;
+      }      
+      `)
+
+    const report = linter.processStr(code, {
+      rules: { 'gas-calldata-parameters': 'error' },
+    })
+
+    assert.equal(report.errorCount, 1)
+    assert.equal(report.messages[0].message, replaceErrorMsg('arrayUint', 'functionTest1'))
+  })
+
   it('should NOT raise error', () => {
     const code = contractWith(`
       function function1(
