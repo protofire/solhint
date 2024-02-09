@@ -29,6 +29,7 @@ title:       "Rule Index of Solhint"
 
 | Rule Id                                                                       | Error                                                             | Recommended | Deprecated |
 | ----------------------------------------------------------------------------- | ----------------------------------------------------------------- | ----------- | ---------- |
+| [gas-struct-packing](./rules/gas-consumption/gas-struct-packing.md)           | Suggest to re-arrange struct packing order when it is inefficient |             |            |
 | [gas-calldata-parameters](./rules/gas-consumption/gas-calldata-parameters.md) | Suggest calldata keyword on function arguments when read only     |             |            |
 | [gas-increment-by-one](./rules/gas-consumption/gas-increment-by-one.md)       | Suggest incrementation by one like this ++i instead of other type |             |            |
 | [gas-indexed-events](./rules/gas-consumption/gas-indexed-events.md)           | Suggest indexed arguments on events for uint, bool and address    |             |            |

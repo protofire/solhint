@@ -38,3 +38,4 @@ This rule is introduced in the latest version.
 - [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/gas-consumption/gas-struct-packing.js)
 - [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/gas-consumption/gas-struct-packing.md)
 - [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/gas-consumption/gas-struct-packing.js)
+s)
