@@ -24,7 +24,7 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 ```
 
 ### Notes
-- This rule 
+- This rule assumes all UserDefinedTypeName take a new slot. (beware of Enums inside Structs) 
 - [source 1](https://coinsbench.com/comprehensive-guide-tips-and-tricks-for-gas-optimization-in-solidity-5380db734404) of the rule initiative (Variable Packing)
 - [source 2](https://www.rareskills.io/post/gas-optimization?postId=c9db474a-ff97-4fa3-a51d-fe13ccb8fe3b#viewer-f8m1r) of the rule initiative
 
@@ -38,4 +38,3 @@ This rule is introduced in the latest version.
 - [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/gas-consumption/gas-struct-packing.js)
 - [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/gas-consumption/gas-struct-packing.md)
 - [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/gas-consumption/gas-struct-packing.js)
-s)
