@@ -66,7 +66,7 @@ describe('Linter - explicit-types rule', () => {
     const { zeroErrorsImplicit, zeroErrorsExplicit } = getZeroErrosObject()
 
     for (const key in zeroErrorsExplicit) {
-      it(`should NOT raise error for ${key} on 'implicit' mode`, () => {
+      it(`should NOT raise error for ${key} on 'explicit' mode`, () => {
         const { code } = zeroErrorsExplicit[key]
         const report = linter.processStr(contractWith(code), {
           rules: { 'explicit-types': ['error', 'explicit'] },
