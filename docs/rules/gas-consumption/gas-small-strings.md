@@ -24,7 +24,7 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 ```
 
 ### Notes
-- [source](https://www.rareskills.io/post/gas-optimization?postId=c9db474a-ff97-4fa3-a51d-fe13ccb8fe3b#viewer-ck1vq) of the rule initiciative
+- [source](https://www.rareskills.io/post/gas-optimization?postId=c9db474a-ff97-4fa3-a51d-fe13ccb8fe3b#viewer-ck1vq) of the rule initiative
 
 ## Examples
 This rule does not have examples.

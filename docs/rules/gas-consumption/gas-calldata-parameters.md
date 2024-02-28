@@ -26,8 +26,8 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 ### Notes
 - Only applies for external functions when receiving arguments with [memory] keyword
 - This rule makes a soft check to see if argument is readOnly to make the suggestion. Check it manually before changing it.
-- [source 1](https://coinsbench.com/comprehensive-guide-tips-and-tricks-for-gas-optimization-in-solidity-5380db734404) of the rule initiciative (see Calldata vs Memory)
-- [source 2](https://www.rareskills.io/post/gas-optimization?postId=c9db474a-ff97-4fa3-a51d-fe13ccb8fe3b#viewer-6acr7) of the rule initiciative
+- [source 1](https://coinsbench.com/comprehensive-guide-tips-and-tricks-for-gas-optimization-in-solidity-5380db734404) of the rule initiative (see Calldata vs Memory)
+- [source 2](https://www.rareskills.io/post/gas-optimization?postId=c9db474a-ff97-4fa3-a51d-fe13ccb8fe3b#viewer-6acr7) of the rule initiative
 
 ## Examples
 This rule does not have examples.
