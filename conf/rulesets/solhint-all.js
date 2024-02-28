@@ -30,6 +30,7 @@ module.exports = Object.freeze({
     'gas-indexed-events': 'warn',
     'gas-multitoken1155': 'warn',
     'gas-small-strings': 'warn',
+    'gas-struct-packing': 'warn',
     'comprehensive-interface': 'warn',
     quotes: ['error', 'double'],
     'const-name-snakecase': 'warn',
