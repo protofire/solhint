@@ -9,7 +9,6 @@ title:       "Rule Index of Solhint"
 | Rule Id                                                                  | Error                                                                                                                                      | Recommended  | Deprecated |
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ---------- |
 | [code-complexity](./rules/best-practises/code-complexity.md)             | Function has cyclomatic complexity "current" but allowed no more than maxcompl.                                                            |              |            |
-| [custom-errors](./rules/best-practises/custom-errors.md)                 | Enforces the use of Custom Errors over Require and Revert statements                                                                       | $~~~~~~~~$✔️ |            |
 | [explicit-types](./rules/best-practises/explicit-types.md)               | Forbid or enforce explicit types (like uint256) that have an alias (like uint).                                                            | $~~~~~~~~$✔️ |            |
 | [function-max-lines](./rules/best-practises/function-max-lines.md)       | Function body contains "count" lines but allowed no more than maxlines.                                                                    |              |            |
 | [max-line-length](./rules/best-practises/max-line-length.md)             | Line length must be no more than maxlen.                                                                                                   |              |            |
@@ -27,15 +26,16 @@ title:       "Rule Index of Solhint"
 
 ## Gas Consumption Rules
 
-| Rule Id                                                                       | Error                                                             | Recommended | Deprecated |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------- | ----------- | ---------- |
-| [gas-calldata-parameters](./rules/gas-consumption/gas-calldata-parameters.md) | Suggest calldata keyword on function arguments when read only     |             |            |
-| [gas-increment-by-one](./rules/gas-consumption/gas-increment-by-one.md)       | Suggest incrementation by one like this ++i instead of other type |             |            |
-| [gas-indexed-events](./rules/gas-consumption/gas-indexed-events.md)           | Suggest indexed arguments on events for uint, bool and address    |             |            |
-| [gas-multitoken1155](./rules/gas-consumption/gas-multitoken1155.md)           | ERC1155 is a cheaper non-fungible token than ERC721               |             |            |
-| [gas-named-return-values](./rules/gas-consumption/gas-named-return-values.md) | Enforce the return values of a function to be named               |             |            |
-| [gas-small-strings](./rules/gas-consumption/gas-small-strings.md)             | Keep strings smaller than 32 bytes                                |             |            |
-| [gas-struct-packing](./rules/gas-consumption/gas-struct-packing.md)           | Suggest to re-arrange struct packing order when it is inefficient |             |            |
+| Rule Id                                                                       | Error                                                                | Recommended  | Deprecated |
+| ----------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------ | ---------- |
+| [gas-calldata-parameters](./rules/gas-consumption/gas-calldata-parameters.md) | Suggest calldata keyword on function arguments when read only        |              |            |
+| [gas-custom-errors](./rules/gas-consumption/gas-custom-errors.md)             | Enforces the use of Custom Errors over Require and Revert statements | $~~~~~~~~$✔️ |            |
+| [gas-increment-by-one](./rules/gas-consumption/gas-increment-by-one.md)       | Suggest incrementation by one like this ++i instead of other type    |              |            |
+| [gas-indexed-events](./rules/gas-consumption/gas-indexed-events.md)           | Suggest indexed arguments on events for uint, bool and address       |              |            |
+| [gas-multitoken1155](./rules/gas-consumption/gas-multitoken1155.md)           | ERC1155 is a cheaper non-fungible token than ERC721                  |              |            |
+| [gas-named-return-values](./rules/gas-consumption/gas-named-return-values.md) | Enforce the return values of a function to be named                  |              |            |
+| [gas-small-strings](./rules/gas-consumption/gas-small-strings.md)             | Keep strings smaller than 32 bytes                                   |              |            |
+| [gas-struct-packing](./rules/gas-consumption/gas-struct-packing.md)           | Suggest to re-arrange struct packing order when it is inefficient    |              |            |
         
 
 ## Miscellaneous

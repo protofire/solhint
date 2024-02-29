@@ -6,7 +6,6 @@
 module.exports = Object.freeze({
   rules: {
     'code-complexity': ['warn', 7],
-    'custom-errors': 'warn',
     'explicit-types': ['warn', 'explicit'],
     'function-max-lines': ['warn', 50],
     'max-line-length': ['error', 120],
@@ -26,6 +25,7 @@ module.exports = Object.freeze({
     ],
     'constructor-syntax': 'warn',
     'gas-calldata-parameters': 'warn',
+    'gas-custom-errors': 'warn',
     'gas-increment-by-one': 'warn',
     'gas-indexed-events': 'warn',
     'gas-multitoken1155': 'warn',

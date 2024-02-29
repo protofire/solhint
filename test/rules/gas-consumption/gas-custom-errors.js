@@ -9,31 +9,31 @@ const {
 const linter = require('../../../lib/index')
 const { funcWith } = require('../../common/contract-builder')
 
-describe('Linter - custom-errors', () => {
+describe('Linter - gas-custom-errors', () => {
   it('should raise error for revert()', () => {
     const code = funcWith(`revert();`)
     const report = linter.processStr(code, {
-      rules: { 'custom-errors': 'error' },
+      rules: { 'gas-custom-errors': 'error' },
     })
 
     assertErrorCount(report, 1)
-    assertErrorMessage(report, 'Use Custom Errors instead of revert statement')
+    assertErrorMessage(report, 'GC: Use Custom Errors instead of revert statement')
   })
 
   it('should raise error for revert([string])', () => {
     const code = funcWith(`revert("Insufficent funds");`)
     const report = linter.processStr(code, {
-      rules: { 'custom-errors': 'error' },
+      rules: { 'gas-custom-errors': 'error' },
     })
 
     assertErrorCount(report, 1)
-    assertErrorMessage(report, 'Use Custom Errors instead of revert statement')
+    assertErrorMessage(report, 'GC: Use Custom Errors instead of revert statement')
   })
 
   it('should NOT raise error for revert ErrorFunction()', () => {
     const code = funcWith(`revert ErrorFunction();`)
     const report = linter.processStr(code, {
-      rules: { 'custom-errors': 'error' },
+      rules: { 'gas-custom-errors': 'error' },
     })
 
     assertNoWarnings(report)
@@ -43,7 +43,7 @@ describe('Linter - custom-errors', () => {
   it('should NOT raise error for revert ErrorFunction() with arguments', () => {
     const code = funcWith(`revert ErrorFunction({ msg: "Insufficent funds msg" });`)
     const report = linter.processStr(code, {
-      rules: { 'custom-errors': 'error' },
+      rules: { 'gas-custom-errors': 'error' },
     })
 
     assertNoWarnings(report)
@@ -55,11 +55,11 @@ describe('Linter - custom-errors', () => {
         role.bearer[account] = true;role.bearer[account] = true;
     `)
     const report = linter.processStr(code, {
-      rules: { 'custom-errors': 'error' },
+      rules: { 'gas-custom-errors': 'error' },
     })
 
     assertErrorCount(report, 1)
-    assertErrorMessage(report, 'Use Custom Errors instead of require statement')
+    assertErrorMessage(report, 'GC: Use Custom Errors instead of require statement')
   })
 
   it('should NOT raise error for regular function call', () => {
@@ -67,7 +67,7 @@ describe('Linter - custom-errors', () => {
         role.bearer[account] = true;role.bearer[account] = true;
     `)
     const report = linter.processStr(code, {
-      rules: { 'custom-errors': 'error' },
+      rules: { 'gas-custom-errors': 'error' },
     })
     assertNoWarnings(report)
     assertNoErrors(report)
@@ -84,8 +84,8 @@ describe('Linter - custom-errors', () => {
     })
 
     assertWarnsCount(report, 2)
-    assert.equal(report.reports[0].message, 'Use Custom Errors instead of require statements')
-    assert.equal(report.reports[1].message, 'Use Custom Errors instead of revert statements')
+    assert.equal(report.reports[0].message, 'GC: Use Custom Errors instead of require statements')
+    assert.equal(report.reports[1].message, 'GC: Use Custom Errors instead of revert statements')
   })
 
   it('should NOT raise error for default config', () => {
