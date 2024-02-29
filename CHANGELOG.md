@@ -1,3 +1,12 @@
+## [4.2.0] - 2024-03-15
+
+### Updated
+- Rule: named-return-values rule was renamed to gas-named-return-values and now it is part of Gas Consumption ruleset
+
+
+
+
+
 ## [4.1.1] - 2024-01-08
 
 ### Fixed

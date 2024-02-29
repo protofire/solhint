@@ -29,6 +29,7 @@ module.exports = Object.freeze({
     'gas-increment-by-one': 'warn',
     'gas-indexed-events': 'warn',
     'gas-multitoken1155': 'warn',
+    'gas-named-return-values': 'warn',
     'gas-small-strings': 'warn',
     'gas-struct-packing': 'warn',
     'comprehensive-interface': 'warn',
@@ -48,7 +49,6 @@ module.exports = Object.freeze({
     ],
     'modifier-name-mixedcase': 'warn',
     'named-parameters-mapping': 'off',
-    'named-return-values': 'warn',
     'private-vars-leading-underscore': [
       'warn',
       {

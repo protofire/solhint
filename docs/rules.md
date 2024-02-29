@@ -33,6 +33,7 @@ title:       "Rule Index of Solhint"
 | [gas-increment-by-one](./rules/gas-consumption/gas-increment-by-one.md)       | Suggest incrementation by one like this ++i instead of other type |             |            |
 | [gas-indexed-events](./rules/gas-consumption/gas-indexed-events.md)           | Suggest indexed arguments on events for uint, bool and address    |             |            |
 | [gas-multitoken1155](./rules/gas-consumption/gas-multitoken1155.md)           | ERC1155 is a cheaper non-fungible token than ERC721               |             |            |
+| [gas-named-return-values](./rules/gas-consumption/gas-named-return-values.md) | Enforce the return values of a function to be named               |             |            |
 | [gas-small-strings](./rules/gas-consumption/gas-small-strings.md)             | Keep strings smaller than 32 bytes                                |             |            |
 | [gas-struct-packing](./rules/gas-consumption/gas-struct-packing.md)           | Suggest to re-arrange struct packing order when it is inefficient |             |            |
         
@@ -59,7 +60,6 @@ title:       "Rule Index of Solhint"
 | [immutable-vars-naming](./rules/naming/immutable-vars-naming.md)                     | Check Immutable variables. Capitalized SNAKE_CASE or mixedCase depending on configuration.                    | $~~~~~~~~$✔️ |             |
 | [modifier-name-mixedcase](./rules/naming/modifier-name-mixedcase.md)                 | Modifier name must be in mixedCase.                                                                           |              |             |
 | [named-parameters-mapping](./rules/naming/named-parameters-mapping.md)               | Solidity v0.8.18 introduced named parameters on the mappings definition.                                      |              |             |
-| [named-return-values](./rules/naming/named-return-values.md)                         | Enforce the return values of a function to be named                                                           |              |             |
 | [private-vars-leading-underscore](./rules/naming/private-vars-leading-underscore.md) | Non-external functions and state variables should start with a single underscore. Others, shouldn't           |              |             |
 | [use-forbidden-name](./rules/naming/use-forbidden-name.md)                           | Avoid to use letters 'I', 'l', 'O' as identifiers.                                                            | $~~~~~~~~$✔️ |             |
 | [var-name-mixedcase](./rules/naming/var-name-mixedcase.md)                           | Variable name must be in mixedCase. (Does not check IMMUTABLES, use immutable-vars-naming)                    | $~~~~~~~~$✔️ |             |
