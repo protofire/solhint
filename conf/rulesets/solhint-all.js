@@ -28,6 +28,7 @@ module.exports = Object.freeze({
     'gas-calldata-parameters': 'warn',
     'gas-increment-by-one': 'warn',
     'gas-indexed-events': 'warn',
+    'gas-length-in-loops': 'warn',
     'gas-multitoken1155': 'warn',
     'gas-small-strings': 'warn',
     'gas-struct-packing': 'warn',
