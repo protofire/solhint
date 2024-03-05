@@ -3,6 +3,7 @@
 
 ### Updated
 - Rule: named-return-values rule was renamed to gas-named-return-values and now it is part of Gas Consumption ruleset
+- Rule: custom-errors rule was renamed to gas-custom-errors and now it is part of Gas Consumption ruleset
 
 
 ## [4.1.2] - 2024-02-06
