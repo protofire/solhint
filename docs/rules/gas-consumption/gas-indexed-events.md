@@ -24,7 +24,7 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 ```
 
 ### Notes
-- [source](https://coinsbench.com/comprehensive-guide-tips-and-tricks-for-gas-optimization-in-solidity-5380db734404) of the rule initiciative (see Indexed Events)
+- [source](https://coinsbench.com/comprehensive-guide-tips-and-tricks-for-gas-optimization-in-solidity-5380db734404) of the rule initiative (see Indexed Events)
 
 ## Examples
 This rule does not have examples.
