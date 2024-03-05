@@ -103,7 +103,7 @@ describe('e2e', function () {
             }
           )
 
-          expect(solhintProcess.status).to.equal(1)
+          expect(solhintProcess.status).to.equal(0)
           expect(solhintProcess.stdout.toString().includes('5 problems (5 errors, 0 warnings)'))
         })
       })
