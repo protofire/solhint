@@ -1,3 +1,4 @@
+
 ## [4.2.0] - 2024-03-15
 
 ### Updated
@@ -5,7 +6,15 @@
 - Rule: custom-errors rule was renamed to gas-custom-errors and now it is part of Gas Consumption ruleset
 
 
+## [4.1.2] - 2024-02-06
 
+### Updated
+- Update references in package json [#530](https://github.com/protofire/solhint/pull/530)
+- Parser support up to Solidity 0.8.22 (*)
+
+(*) Note: Solhint can work with latest Solidity versions. 
+          If new grammar/syntax is added or changed, it could give some false positives or miss a rule. 
+          But overall functionality will work as expected.
 
 
 ## [4.1.1] - 2024-01-08
