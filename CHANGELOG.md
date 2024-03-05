@@ -1,3 +1,10 @@
+
+## [4.2.0] - 2024-03-15
+
+### Updated
+- Rule: named-return-values rule was renamed to gas-named-return-values and now it is part of Gas Consumption ruleset
+
+
 ## [4.1.2] - 2024-02-06
 
 ### Updated
@@ -7,7 +14,6 @@
 (*) Note: Solhint can work with latest Solidity versions. 
           If new grammar/syntax is added or changed, it could give some false positives or miss a rule. 
           But overall functionality will work as expected.
-
 
 
 ## [4.1.1] - 2024-01-08
