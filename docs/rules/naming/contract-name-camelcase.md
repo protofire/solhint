@@ -12,7 +12,7 @@ title:       "contract-name-camelcase | Solhint"
 
 
 ## Description
-Contract name must be in CamelCase.
+Contract, Structs and Enums should be in CamelCase.
 
 ## Options
 This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
@@ -26,6 +26,9 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 }
 ```
 
+### Notes
+- Solhint allows this rule to automatically fix the code with `--fix` option
+- The FIX will only change first letter and remove underscores
 
 ## Examples
 This rule does not have examples.
