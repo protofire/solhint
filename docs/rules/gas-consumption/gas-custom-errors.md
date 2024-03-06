@@ -26,6 +26,8 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 }
 ```
 
+### Notes
+- This rules applies to Solidity version 0.8.4 and higher
 
 ## Examples
 ### 👍 Examples of **correct** code for this rule
