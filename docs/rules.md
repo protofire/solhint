@@ -24,6 +24,30 @@ title:       "Rule Index of Solhint"
 | [constructor-syntax](./rules/best-practises/constructor-syntax.md)       | Constructors should use the new constructor keyword.                                                                                       |              |            |
         
 
+## Style Guide Rules
+
+| Rule Id                                                                              | Error                                                                                                         | Recommended  | Deprecated  |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | ------------ | ----------- |
+| [interface-starts-with-i](./rules/naming/interface-starts-with-i.md)                 | Solidity Interfaces names should start with an `I`                                                            |              |             |
+| [const-name-snakecase](./rules/naming/const-name-snakecase.md)                       | Constant name must be in capitalized SNAKE_CASE. (Does not check IMMUTABLES, use immutable-vars-naming)       | $~~~~~~~~$✔️ |             |
+| [contract-name-camelcase](./rules/naming/contract-name-camelcase.md)                 | Contract, Structs and Enums should be in CamelCase.                                                           | $~~~~~~~~$✔️ |             |
+| [event-name-camelcase](./rules/naming/event-name-camelcase.md)                       | Event name must be in CamelCase.                                                                              | $~~~~~~~~$✔️ |             |
+| [foundry-test-functions](./rules/naming/foundry-test-functions.md)                   | Enforce naming convention on functions for Foundry test cases                                                 |              |             |
+| [func-name-mixedcase](./rules/naming/func-name-mixedcase.md)                         | Function name must be in mixedCase.                                                                           | $~~~~~~~~$✔️ |             |
+| [func-named-parameters](./rules/naming/func-named-parameters.md)                     | Enforce named parameters for function calls with 4 or more arguments. This rule may have some false positives |              |             |
+| [func-param-name-mixedcase](./rules/naming/func-param-name-mixedcase.md)             | Function param name must be in mixedCase.                                                                     |              |             |
+| [immutable-vars-naming](./rules/naming/immutable-vars-naming.md)                     | Check Immutable variables. Capitalized SNAKE_CASE or mixedCase depending on configuration.                    | $~~~~~~~~$✔️ |             |
+| [modifier-name-mixedcase](./rules/naming/modifier-name-mixedcase.md)                 | Modifier name must be in mixedCase.                                                                           |              |             |
+| [named-parameters-mapping](./rules/naming/named-parameters-mapping.md)               | Solidity v0.8.18 introduced named parameters on the mappings definition.                                      |              |             |
+| [private-vars-leading-underscore](./rules/naming/private-vars-leading-underscore.md) | Non-external functions and state variables should start with a single underscore. Others, shouldn't           |              |             |
+| [use-forbidden-name](./rules/naming/use-forbidden-name.md)                           | Avoid to use letters 'I', 'l', 'O' as identifiers.                                                            | $~~~~~~~~$✔️ |             |
+| [var-name-mixedcase](./rules/naming/var-name-mixedcase.md)                           | Variable name must be in mixedCase. (Does not check IMMUTABLES, use immutable-vars-naming)                    | $~~~~~~~~$✔️ |             |
+| [func-order](./rules/order/func-order.md)                                            | Function order is incorrect.                                                                                  |              | $~~~~~~~$✔️ |
+| [imports-on-top](./rules/order/imports-on-top.md)                                    | Import statements must be on top.                                                                             | $~~~~~~~~$✔️ |             |
+| [ordering](./rules/order/ordering.md)                                                | Check order of elements in file and inside each contract, according to the style guide.                       |              |             |
+| [visibility-modifier-order](./rules/order/visibility-modifier-order.md)              | Visibility modifier must be first in list of modifiers.                                                       | $~~~~~~~~$✔️ |             |
+        
+
 ## Gas Consumption Rules
 
 | Rule Id                                                                       | Error                                                                | Recommended  | Deprecated |
@@ -44,29 +68,6 @@ title:       "Rule Index of Solhint"
 | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ---------- |
 | [comprehensive-interface](./rules/miscellaneous/comprehensive-interface.md) | Check that all public or external functions are override. This is iseful to make sure that the whole API is extracted in an interface. |              |            |
 | [quotes](./rules/miscellaneous/quotes.md)                                   | Enforces the use of double or simple quotes as configured for string literals. Values must be 'single' or 'double'.                    | $~~~~~~~~$✔️ |            |
-        
-
-## Style Guide Rules
-
-| Rule Id                                                                              | Error                                                                                                         | Recommended  | Deprecated  |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | ------------ | ----------- |
-| [const-name-snakecase](./rules/naming/const-name-snakecase.md)                       | Constant name must be in capitalized SNAKE_CASE. (Does not check IMMUTABLES, use immutable-vars-naming)       | $~~~~~~~~$✔️ |             |
-| [contract-name-camelcase](./rules/naming/contract-name-camelcase.md)                 | Contract, Structs and Enums should be in CamelCase.                                                           | $~~~~~~~~$✔️ |             |
-| [event-name-camelcase](./rules/naming/event-name-camelcase.md)                       | Event name must be in CamelCase.                                                                              | $~~~~~~~~$✔️ |             |
-| [foundry-test-functions](./rules/naming/foundry-test-functions.md)                   | Enforce naming convention on functions for Foundry test cases                                                 |              |             |
-| [func-name-mixedcase](./rules/naming/func-name-mixedcase.md)                         | Function name must be in mixedCase.                                                                           | $~~~~~~~~$✔️ |             |
-| [func-named-parameters](./rules/naming/func-named-parameters.md)                     | Enforce named parameters for function calls with 4 or more arguments. This rule may have some false positives |              |             |
-| [func-param-name-mixedcase](./rules/naming/func-param-name-mixedcase.md)             | Function param name must be in mixedCase.                                                                     |              |             |
-| [immutable-vars-naming](./rules/naming/immutable-vars-naming.md)                     | Check Immutable variables. Capitalized SNAKE_CASE or mixedCase depending on configuration.                    | $~~~~~~~~$✔️ |             |
-| [modifier-name-mixedcase](./rules/naming/modifier-name-mixedcase.md)                 | Modifier name must be in mixedCase.                                                                           |              |             |
-| [named-parameters-mapping](./rules/naming/named-parameters-mapping.md)               | Solidity v0.8.18 introduced named parameters on the mappings definition.                                      |              |             |
-| [private-vars-leading-underscore](./rules/naming/private-vars-leading-underscore.md) | Non-external functions and state variables should start with a single underscore. Others, shouldn't           |              |             |
-| [use-forbidden-name](./rules/naming/use-forbidden-name.md)                           | Avoid to use letters 'I', 'l', 'O' as identifiers.                                                            | $~~~~~~~~$✔️ |             |
-| [var-name-mixedcase](./rules/naming/var-name-mixedcase.md)                           | Variable name must be in mixedCase. (Does not check IMMUTABLES, use immutable-vars-naming)                    | $~~~~~~~~$✔️ |             |
-| [func-order](./rules/order/func-order.md)                                            | Function order is incorrect.                                                                                  |              | $~~~~~~~$✔️ |
-| [imports-on-top](./rules/order/imports-on-top.md)                                    | Import statements must be on top.                                                                             | $~~~~~~~~$✔️ |             |
-| [ordering](./rules/order/ordering.md)                                                | Check order of elements in file and inside each contract, according to the style guide.                       |              |             |
-| [visibility-modifier-order](./rules/order/visibility-modifier-order.md)              | Visibility modifier must be first in list of modifiers.                                                       | $~~~~~~~~$✔️ |             |
         
 
 ## Security Rules
