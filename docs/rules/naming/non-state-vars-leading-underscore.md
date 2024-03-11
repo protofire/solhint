@@ -12,18 +12,13 @@ title:       "non-state-vars-leading-underscore | Solhint"
 Variables that are not in contract state should start with underscore. Conversely, variables that can cause an SLOAD/SSTORE should NOT start with an underscore. This makes it evident which operations cause expensive storage access when hunting for gas optimizations
 
 ## Options
-This rule accepts an array of options:
-
-| Index | Description                                           | Default Value |
-| ----- | ----------------------------------------------------- | ------------- |
-| 0     | Rule severity. Must be one of "error", "warn", "off". | warn          |
-
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
 
 ### Example Config
 ```json
 {
   "rules": {
-    "non-state-vars-leading-underscore": ["warn"]
+    "non-state-vars-leading-underscore": "warn"
   }
 }
 ```
