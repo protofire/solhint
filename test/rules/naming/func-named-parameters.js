@@ -79,7 +79,12 @@ describe('Linter - func-named-parameters', () => {
 
     const report = linter.processStr(code, {
       extends: 'solhint:all',
-      rules: { 'compiler-version': 'off', 'comprehensive-interface': 'off' },
+      rules: {
+        'compiler-version': 'off',
+        'comprehensive-interface': 'off',
+        'foundry-test-functions': 'off',
+        'non-state-vars-leading-underscore': 'off',
+      },
     })
 
     assertWarnsCount(report, 1)
