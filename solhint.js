@@ -28,7 +28,6 @@ function init() {
     .option('-q, --quiet', 'report errors only - default: false')
     .option('--ignore-path [file_name]', 'file to use as your .solhintignore')
     .option('--fix', 'automatically fix problems. Skips fixes in report')
-    // .option('--fixShow', 'automatically fix problems. Show fixes in report')
     .option('--noPrompt', 'do not suggest to backup files when any `fix` option is selected')
     .option('--init', 'create configuration file for solhint')
     .option('--disc', 'do not check for solhint updates')
@@ -81,7 +80,6 @@ function askUserToContinue(callback) {
 }
 
 function execMainAction() {
-  // if ((program.opts().fix || program.opts().fixShow) && !program.opts().noPrompt) {
   if (program.opts().fix && !program.opts().noPrompt) {
     askUserToContinue((userAnswer) => {
       if (userAnswer !== 'y') {
@@ -162,7 +160,8 @@ function executeMainActionLogic() {
 
   printReports(reports, formatterFn)
 
-  exitWithCode(reports)
+  // exitWithCode(reports)
+  process.exit(0)
 }
 
 function processStdin(options) {
@@ -183,8 +182,8 @@ function processStdin(options) {
   const reports = [report]
 
   printReports(reports, formatterFn)
-
-  exitWithCode(reports)
+  process.exit(0)
+  // exitWithCode(reports)
 }
 
 function writeSampleConfigFile() {
@@ -364,10 +363,10 @@ function listRules() {
   }
 }
 
-function exitWithCode(reports) {
-  const errorsCount = reports.reduce((acc, i) => acc + i.errorCount, 0)
-  process.exit(errorsCount > 0 ? 1 : 0)
-}
+// function exitWithCode(reports) {
+//   const errorsCount = reports.reduce((acc, i) => acc + i.errorCount, 0)
+//   process.exit(errorsCount > 0 ? 1 : 0)
+// }
 
 function checkForUpdate() {
   // eslint-disable-next-line import/no-extraneous-dependencies

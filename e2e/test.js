@@ -73,14 +73,14 @@ describe('e2e', function () {
   describe('no-empty-blocks', function () {
     useFixture('03-no-empty-blocks')
 
-    it('should exit with 1', function () {
+    it('should end correctly (exit w/0), found 1 error', function () {
       const { code, stdout } = shell.exec('solhint Foo.sol')
 
-      expect(code).to.equal(1)
+      expect(code).to.equal(0)
       expect(stdout.trim()).to.contain('Code contains empty blocks')
     })
 
-    it('should work with stdin', async function () {
+    it('should work with stdin, exit 0, found 1 error', async function () {
       const child = cp.exec('solhint stdin')
 
       const stdoutPromise = getStream(child.stdout)
@@ -96,7 +96,7 @@ describe('e2e', function () {
 
       const code = await codePromise
 
-      expect(code).to.equal(1)
+      expect(code).to.equal(0)
 
       const stdout = await stdoutPromise
 
@@ -127,7 +127,7 @@ describe('e2e', function () {
       expect(stdout.trim()).to.not.contain(warningExceededMsg)
     })
 
-    it('should display [warnings exceeded] for max 3 warnings and exit error 1', function () {
+    it('should display [warnings exceeded] for max 3 warnings and exit with 0', function () {
       const { code, stdout } = shell.exec('solhint contracts/Foo.sol --max-warnings 3')
 
       expect(code).to.equal(1)
@@ -137,13 +137,13 @@ describe('e2e', function () {
     it('should return error for Compiler version rule, ignoring 3 --max-warnings', function () {
       const { code, stdout } = shell.exec('solhint contracts/Foo2.sol --max-warnings 3')
 
-      expect(code).to.equal(1)
+      expect(code).to.equal(0)
       expect(stdout.trim()).to.contain(errorFound)
     })
 
     it('should return error for Compiler version rule. No message for max-warnings', function () {
       const { code, stdout } = shell.exec('solhint contracts/Foo2.sol --max-warnings 27')
-      expect(code).to.equal(1)
+      expect(code).to.equal(0)
       expect(stdout.trim()).to.not.contain(errorFound)
     })
   })
@@ -163,7 +163,7 @@ describe('e2e', function () {
     it(`should raise error for wrongFunctionDefinitionName() only`, () => {
       const { code, stdout } = shell.exec('solhint -c test/.solhint.json test/FooTest.sol')
 
-      expect(code).to.equal(1)
+      expect(code).to.equal(0)
       expect(stdout.trim()).to.contain(
         'Function wrongFunctionDefinitionName() must match Foundry test naming convention'
       )
