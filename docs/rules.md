@@ -25,32 +25,11 @@ title:       "Rule Index of Solhint"
 | [non-state-vars-leading-underscore](./rules/naming/non-state-vars-leading-underscore.md) | Variables that are not in contract state should start with underscore. Conversely, variables that can cause an SLOAD/SSTORE should NOT start with an underscore. This makes it evident which operations cause expensive storage access when hunting for gas optimizations |              |            |
         
 
-## Gas Consumption Rules
-
-| Rule Id                                                                       | Error                                                                | Recommended  | Deprecated |
-| ----------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------ | ---------- |
-| [gas-calldata-parameters](./rules/gas-consumption/gas-calldata-parameters.md) | Suggest calldata keyword on function arguments when read only        |              |            |
-| [gas-custom-errors](./rules/gas-consumption/gas-custom-errors.md)             | Enforces the use of Custom Errors over Require and Revert statements | $~~~~~~~~$✔️ |            |
-| [gas-increment-by-one](./rules/gas-consumption/gas-increment-by-one.md)       | Suggest incrementation by one like this ++i instead of other type    |              |            |
-| [gas-indexed-events](./rules/gas-consumption/gas-indexed-events.md)           | Suggest indexed arguments on events for uint, bool and address       |              |            |
-| [gas-multitoken1155](./rules/gas-consumption/gas-multitoken1155.md)           | ERC1155 is a cheaper non-fungible token than ERC721                  |              |            |
-| [gas-named-return-values](./rules/gas-consumption/gas-named-return-values.md) | Enforce the return values of a function to be named                  |              |            |
-| [gas-small-strings](./rules/gas-consumption/gas-small-strings.md)             | Keep strings smaller than 32 bytes                                   |              |            |
-| [gas-struct-packing](./rules/gas-consumption/gas-struct-packing.md)           | Suggest to re-arrange struct packing order when it is inefficient    |              |            |
-        
-
-## Miscellaneous
-
-| Rule Id                                                                     | Error                                                                                                                                  | Recommended  | Deprecated |
-| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ---------- |
-| [comprehensive-interface](./rules/miscellaneous/comprehensive-interface.md) | Check that all public or external functions are override. This is iseful to make sure that the whole API is extracted in an interface. |              |            |
-| [quotes](./rules/miscellaneous/quotes.md)                                   | Enforces the use of double or simple quotes as configured for string literals. Values must be 'single' or 'double'.                    | $~~~~~~~~$✔️ |            |
-        
-
 ## Style Guide Rules
 
 | Rule Id                                                                              | Error                                                                                                         | Recommended  | Deprecated  |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | ------------ | ----------- |
+| [interface-starts-with-i](./rules/naming/interface-starts-with-i.md)                 | Solidity Interfaces names should start with an `I`                                                            |              |             |
 | [const-name-snakecase](./rules/naming/const-name-snakecase.md)                       | Constant name must be in capitalized SNAKE_CASE. (Does not check IMMUTABLES, use immutable-vars-naming)       | $~~~~~~~~$✔️ |             |
 | [contract-name-camelcase](./rules/naming/contract-name-camelcase.md)                 | Contract, Structs and Enums should be in CamelCase.                                                           | $~~~~~~~~$✔️ |             |
 | [event-name-camelcase](./rules/naming/event-name-camelcase.md)                       | Event name must be in CamelCase.                                                                              | $~~~~~~~~$✔️ |             |
@@ -68,6 +47,30 @@ title:       "Rule Index of Solhint"
 | [imports-on-top](./rules/order/imports-on-top.md)                                    | Import statements must be on top.                                                                             | $~~~~~~~~$✔️ |             |
 | [ordering](./rules/order/ordering.md)                                                | Check order of elements in file and inside each contract, according to the style guide.                       |              |             |
 | [visibility-modifier-order](./rules/order/visibility-modifier-order.md)              | Visibility modifier must be first in list of modifiers.                                                       | $~~~~~~~~$✔️ |             |
+        
+
+## Gas Consumption Rules
+
+| Rule Id                                                                       | Error                                                                | Recommended  | Deprecated |
+| ----------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------ | ---------- |
+| [gas-calldata-parameters](./rules/gas-consumption/gas-calldata-parameters.md) | Suggest calldata keyword on function arguments when read only        |              |            |
+| [gas-custom-errors](./rules/gas-consumption/gas-custom-errors.md)             | Enforces the use of Custom Errors over Require and Revert statements | $~~~~~~~~$✔️ |            |
+| [gas-increment-by-one](./rules/gas-consumption/gas-increment-by-one.md)       | Suggest incrementation by one like this ++i instead of other type    |              |            |
+| [gas-indexed-events](./rules/gas-consumption/gas-indexed-events.md)           | Suggest indexed arguments on events for uint, bool and address       |              |            |
+| [gas-multitoken1155](./rules/gas-consumption/gas-multitoken1155.md)           | ERC1155 is a cheaper non-fungible token than ERC721                  |              |            |
+| [gas-named-return-values](./rules/gas-consumption/gas-named-return-values.md) | Enforce the return values of a function to be named                  |              |            |
+| [gas-small-strings](./rules/gas-consumption/gas-small-strings.md)             | Keep strings smaller than 32 bytes                                   |              |            |
+| [gas-strict-inequalities](./rules/gas-consumption/gas-strict-inequalities.md) | Suggest Strict Inequalities over non Strict ones                     |              |            |
+| [gas-struct-packing](./rules/gas-consumption/gas-struct-packing.md)           | Suggest to re-arrange struct packing order when it is inefficient    |              |            |
+| [gas-length-in-loops](./rules/gas-consumption/gas-length-in-loops.md)         | Suggest replacing object.length in a loop condition to avoid calculation on each lap |             |            |
+        
+
+## Miscellaneous
+
+| Rule Id                                                                     | Error                                                                                                                                  | Recommended  | Deprecated |
+| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ---------- |
+| [comprehensive-interface](./rules/miscellaneous/comprehensive-interface.md) | Check that all public or external functions are override. This is iseful to make sure that the whole API is extracted in an interface. |              |            |
+| [quotes](./rules/miscellaneous/quotes.md)                                   | Enforces the use of double or simple quotes as configured for string literals. Values must be 'single' or 'double'.                    | $~~~~~~~~$✔️ |            |
         
 
 ## Security Rules
