@@ -5,7 +5,7 @@ title:       "non-state-vars-leading-underscore | Solhint"
 ---
 
 # non-state-vars-leading-underscore
-![Category Badge](https://img.shields.io/badge/-Best%20Practice%20Rules-informational)
+![Category Badge](https://img.shields.io/badge/-Best%20Practise%20Rules-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 
 ## Description
