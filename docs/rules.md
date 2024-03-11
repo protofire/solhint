@@ -35,6 +35,7 @@ title:       "Rule Index of Solhint"
 | [gas-multitoken1155](./rules/gas-consumption/gas-multitoken1155.md)           | ERC1155 is a cheaper non-fungible token than ERC721                  |              |            |
 | [gas-named-return-values](./rules/gas-consumption/gas-named-return-values.md) | Enforce the return values of a function to be named                  |              |            |
 | [gas-small-strings](./rules/gas-consumption/gas-small-strings.md)             | Keep strings smaller than 32 bytes                                   |              |            |
+| [gas-strict-inequalities](./rules/gas-consumption/gas-strict-inequalities.md) | Suggest Strict Inequalities over non Strict ones                     |              |            |
 | [gas-struct-packing](./rules/gas-consumption/gas-struct-packing.md)           | Suggest to re-arrange struct packing order when it is inefficient    |              |            |
         
 

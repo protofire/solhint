@@ -84,7 +84,12 @@ describe('Linter - gas-named-return-values', () => {
 
     const report = linter.processStr(code, {
       extends: 'solhint:all',
-      rules: { 'compiler-version': 'off' },
+      rules: {
+        'compiler-version': 'off',
+        'comprehensive-interface': 'off',
+        'foundry-test-functions': 'off',
+        'non-state-vars-leading-underscore': 'off',
+      },
     })
 
     assertWarnsCount(report, 2)
