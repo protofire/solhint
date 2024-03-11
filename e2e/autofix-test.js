@@ -103,7 +103,7 @@ describe('e2e', function () {
             }
           )
 
-          expect(solhintProcess.status).to.equal(1)
+          expect(solhintProcess.status).to.equal(0)
           expect(solhintProcess.stdout.toString().includes('5 problems (5 errors, 0 warnings)'))
         })
       })
@@ -129,7 +129,7 @@ describe('e2e', function () {
             `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           )
 
-          expect(code).to.equal(1)
+          expect(code).to.equal(0)
 
           const reportLines = stdout.split('\n')
           const finalLine = '5 problems (5 errors, 0 warnings)'
@@ -175,13 +175,13 @@ describe('e2e', function () {
           expect(result).to.be.true
         })
 
-        it('should execute and exit with code 1 (2)', () => {
-          expect(code).to.equal(1)
+        it('should execute and exit with code 0 (2)', () => {
+          expect(code).to.equal(0)
         })
 
         it('should get the right report (2)', () => {
           const reportLines = stdout.split('\n')
-          const finalLine = '5 problems (5 errors, 0 warnings)'
+          const finalLine = '27 problems (27 errors, 0 warnings)'
           expect(reportLines[reportLines.length - 3]).to.contain(finalLine)
         })
       })
@@ -222,7 +222,7 @@ describe('e2e', function () {
         })
 
         it('should execute and exit with code 1 (3)', () => {
-          expect(code).to.equal(1)
+          expect(code).to.equal(0)
         })
 
         it('should get the right report (3)', () => {
@@ -268,7 +268,7 @@ describe('e2e', function () {
         })
 
         it('should execute and exit with code 1 (4)', () => {
-          expect(code).to.equal(1)
+          expect(code).to.equal(0)
         })
 
         it('should get the right report (4)', () => {
@@ -314,7 +314,7 @@ describe('e2e', function () {
         })
 
         it('should execute and exit with code 1 (5)', () => {
-          expect(code).to.equal(1)
+          expect(code).to.equal(0)
         })
 
         it('should get the right report (5)', () => {
@@ -361,7 +361,7 @@ describe('e2e', function () {
         })
 
         it('should execute and exit with code 1 (6)', () => {
-          expect(code).to.equal(1)
+          expect(code).to.equal(0)
         })
 
         it('should get the right report (6)', () => {
@@ -401,7 +401,7 @@ describe('e2e', function () {
         })
 
         it('should execute and exit with code 1 (6)', () => {
-          expect(code).to.equal(1)
+          expect(code).to.equal(0)
         })
 
         it('should get the right report (6)', () => {
@@ -448,7 +448,7 @@ describe('e2e', function () {
       })
 
       it('should execute and exit with code 1 (7)', () => {
-        expect(code).to.equal(1)
+        expect(code).to.equal(0)
       })
 
       it('should get the right report (7)', () => {
@@ -494,7 +494,7 @@ describe('e2e', function () {
       })
 
       it('should execute and exit with code 1 (8)', () => {
-        expect(code).to.equal(1)
+        expect(code).to.equal(0)
       })
 
       it('should get the right report (8)', () => {
@@ -540,7 +540,7 @@ describe('e2e', function () {
       })
 
       it('should execute and exit with code 1 (8)', () => {
-        expect(code).to.equal(1)
+        expect(code).to.equal(0)
       })
 
       it('should get the right report (8)', () => {

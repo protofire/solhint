@@ -3,13 +3,13 @@ const linter = require('../../../lib/index')
 const contractWith = require('../../common/contract-builder').contractWith
 const { assertErrorCount, assertNoErrors, assertWarnsCount } = require('../../common/asserts')
 
-describe('Linter - named-return-values', () => {
+describe('Linter - gas-named-return-values', () => {
   it('should NOT raise error for named return values', () => {
     const code = contractWith(
       `function getBalanceFromTokens(address wallet) public returns(address token1, address token2, uint256 balance1, uint256 balance2) { balance = 1; }`
     )
     const report = linter.processStr(code, {
-      rules: { 'named-return-values': 'error' },
+      rules: { 'gas-named-return-values': 'error' },
     })
     assertNoErrors(report)
   })
@@ -19,19 +19,22 @@ describe('Linter - named-return-values', () => {
       `function getBalanceFromTokens(address wallet) public returns(address, address, uint256, uint256) { balance = 1; }`
     )
     const report = linter.processStr(code, {
-      rules: { 'named-return-values': 'error' },
+      rules: { 'gas-named-return-values': 'error' },
     })
 
     assertErrorCount(report, 4)
     for (let index = 0; index < report.reports.length; index++) {
-      assert.equal(report.reports[index].message, `Named return value is missing - Index ${index}`)
+      assert.equal(
+        report.reports[index].message,
+        `GC: Named return value is missing - Index ${index}`
+      )
     }
   })
 
   it('should NOT raise error for functions without return values', () => {
     const code = contractWith(`function writeOnStorage(address wallet) public { balance = 1; }`)
     const report = linter.processStr(code, {
-      rules: { 'named-return-values': 'error' },
+      rules: { 'gas-named-return-values': 'error' },
     })
     assertNoErrors(report)
   })
@@ -41,12 +44,12 @@ describe('Linter - named-return-values', () => {
       `function getBalanceFromTokens(address wallet) public returns(address user, address, uint256 amount, uint256) { balance = 1; }`
     )
     const report = linter.processStr(code, {
-      rules: { 'named-return-values': 'error' },
+      rules: { 'gas-named-return-values': 'error' },
     })
 
     assertErrorCount(report, 2)
-    assert.equal(report.reports[0].message, `Named return value is missing - Index 1`)
-    assert.equal(report.reports[1].message, `Named return value is missing - Index 3`)
+    assert.equal(report.reports[0].message, `GC: Named return value is missing - Index 1`)
+    assert.equal(report.reports[1].message, `GC: Named return value is missing - Index 3`)
   })
 
   it('should NOT raise error for solhint:recommended setup', () => {
@@ -81,12 +84,20 @@ describe('Linter - named-return-values', () => {
 
     const report = linter.processStr(code, {
       extends: 'solhint:all',
-      rules: { 'compiler-version': 'off' },
+      rules: {
+        'compiler-version': 'off',
+        'comprehensive-interface': 'off',
+        'foundry-test-functions': 'off',
+        'non-state-vars-leading-underscore': 'off',
+      },
     })
 
     assertWarnsCount(report, 2)
     for (let index = 0; index < report.reports.length; index++) {
-      assert.equal(report.reports[index].message, `Named return value is missing - Index ${index}`)
+      assert.equal(
+        report.reports[index].message,
+        `GC: Named return value is missing - Index ${index}`
+      )
     }
   })
 })

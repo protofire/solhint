@@ -9,7 +9,6 @@ title:       "Rule Index of Solhint"
 | Rule Id                                                                  | Error                                                                                                                                      | Recommended  | Deprecated |
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ---------- |
 | [code-complexity](./rules/best-practises/code-complexity.md)             | Function has cyclomatic complexity "current" but allowed no more than maxcompl.                                                            |              |            |
-| [custom-errors](./rules/best-practises/custom-errors.md)                 | Enforces the use of Custom Errors over Require and Revert statements                                                                       | $~~~~~~~~$✔️ |            |
 | [explicit-types](./rules/best-practises/explicit-types.md)               | Forbid or enforce explicit types (like uint256) that have an alias (like uint).                                                            | $~~~~~~~~$✔️ |            |
 | [function-max-lines](./rules/best-practises/function-max-lines.md)       | Function body contains "count" lines but allowed no more than maxlines.                                                                    |              |            |
 | [max-line-length](./rules/best-practises/max-line-length.md)             | Line length must be no more than maxlen.                                                                                                   |              |            |
@@ -27,15 +26,18 @@ title:       "Rule Index of Solhint"
 
 ## Gas Consumption Rules
 
-| Rule Id                                                                       | Error                                                                                | Recommended | Deprecated |
-| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------- | ---------- |
-| [gas-calldata-parameters](./rules/gas-consumption/gas-calldata-parameters.md) | Suggest calldata keyword on function arguments when read only                        |             |            |
-| [gas-increment-by-one](./rules/gas-consumption/gas-increment-by-one.md)       | Suggest incrementation by one like this ++i instead of other type                    |             |            |
-| [gas-indexed-events](./rules/gas-consumption/gas-indexed-events.md)           | Suggest indexed arguments on events for uint, bool and address                       |             |            |
+| Rule Id                                                                       | Error                                                                | Recommended  | Deprecated |
+| ----------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------ | ---------- |
+| [gas-calldata-parameters](./rules/gas-consumption/gas-calldata-parameters.md) | Suggest calldata keyword on function arguments when read only        |              |            |
+| [gas-custom-errors](./rules/gas-consumption/gas-custom-errors.md)             | Enforces the use of Custom Errors over Require and Revert statements | $~~~~~~~~$✔️ |            |
+| [gas-increment-by-one](./rules/gas-consumption/gas-increment-by-one.md)       | Suggest incrementation by one like this ++i instead of other type    |              |            |
+| [gas-indexed-events](./rules/gas-consumption/gas-indexed-events.md)           | Suggest indexed arguments on events for uint, bool and address       |              |            |
+| [gas-multitoken1155](./rules/gas-consumption/gas-multitoken1155.md)           | ERC1155 is a cheaper non-fungible token than ERC721                  |              |            |
+| [gas-named-return-values](./rules/gas-consumption/gas-named-return-values.md) | Enforce the return values of a function to be named                  |              |            |
+| [gas-small-strings](./rules/gas-consumption/gas-small-strings.md)             | Keep strings smaller than 32 bytes                                   |              |            |
+| [gas-strict-inequalities](./rules/gas-consumption/gas-strict-inequalities.md) | Suggest Strict Inequalities over non Strict ones                     |              |            |
+| [gas-struct-packing](./rules/gas-consumption/gas-struct-packing.md)           | Suggest to re-arrange struct packing order when it is inefficient    |              |            |
 | [gas-length-in-loops](./rules/gas-consumption/gas-length-in-loops.md)         | Suggest replacing object.length in a loop condition to avoid calculation on each lap |             |            |
-| [gas-multitoken1155](./rules/gas-consumption/gas-multitoken1155.md)           | ERC1155 is a cheaper non-fungible token than ERC721                                  |             |            |
-| [gas-small-strings](./rules/gas-consumption/gas-small-strings.md)             | Keep strings smaller than 32 bytes                                                   |             |            |
-| [gas-struct-packing](./rules/gas-consumption/gas-struct-packing.md)           | Suggest to re-arrange struct packing order when it is inefficient                    |             |            |
         
 
 ## Miscellaneous
@@ -60,7 +62,6 @@ title:       "Rule Index of Solhint"
 | [immutable-vars-naming](./rules/naming/immutable-vars-naming.md)                     | Check Immutable variables. Capitalized SNAKE_CASE or mixedCase depending on configuration.                    | $~~~~~~~~$✔️ |             |
 | [modifier-name-mixedcase](./rules/naming/modifier-name-mixedcase.md)                 | Modifier name must be in mixedCase.                                                                           |              |             |
 | [named-parameters-mapping](./rules/naming/named-parameters-mapping.md)               | Solidity v0.8.18 introduced named parameters on the mappings definition.                                      |              |             |
-| [named-return-values](./rules/naming/named-return-values.md)                         | Enforce the return values of a function to be named                                                           |              |             |
 | [private-vars-leading-underscore](./rules/naming/private-vars-leading-underscore.md) | Non-external functions and state variables should start with a single underscore. Others, shouldn't           |              |             |
 | [use-forbidden-name](./rules/naming/use-forbidden-name.md)                           | Avoid to use letters 'I', 'l', 'O' as identifiers.                                                            | $~~~~~~~~$✔️ |             |
 | [var-name-mixedcase](./rules/naming/var-name-mixedcase.md)                           | Variable name must be in mixedCase. (Does not check IMMUTABLES, use immutable-vars-naming)                    | $~~~~~~~~$✔️ |             |
