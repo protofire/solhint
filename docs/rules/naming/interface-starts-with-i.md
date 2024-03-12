@@ -6,19 +6,19 @@ title:       "interface-starts-with-i | Solhint"
 
 # interface-starts-with-i
 ![Category Badge](https://img.shields.io/badge/-Style%20Guide%20Rules-informational)
-![Default Severity Badge warning](https://img.shields.io/badge/Default%20Severity-warning-undefined)
+![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 
 ## Description
 Solidity Interfaces names should start with an `I`
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warning.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
 
 ### Example Config
 ```json
 {
   "rules": {
-    "interface-starts-with-i": "warning"
+    "interface-starts-with-i": "warn"
   }
 }
 ```

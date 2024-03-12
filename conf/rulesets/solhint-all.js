@@ -8,7 +8,7 @@ module.exports = Object.freeze({
     'code-complexity': ['warn', 7],
     'explicit-types': ['warn', 'explicit'],
     'function-max-lines': ['warn', 50],
-    'interface-starts-with-i': 'warning',
+    'interface-starts-with-i': 'warn',
     'max-line-length': ['error', 120],
     'max-states-count': ['warn', 15],
     'no-console': 'error',
