@@ -3,8 +3,8 @@ const linter = require('../../../lib/index')
 const { contractWith } = require('../../common/contract-builder')
 
 describe('Linter - payable-fallback', () => {
-  it('should raise warn when fallback is not payable', () => {
-    const code = require('../../fixtures/best-practises/fallback-not-payable')
+  it('should raise warn when fallback is not payable and no receive function is present', () => {
+    const code = contractWith('function() public {}')
 
     const report = linter.processStr(code, {
       rules: { 'payable-fallback': 'warn' },
@@ -14,8 +14,28 @@ describe('Linter - payable-fallback', () => {
     assertErrorMessage(report, 'payable')
   })
 
-  it('should not raise warn when fallback is payable', () => {
-    const code = require('../../fixtures/best-practises/fallback-payable')
+  it('should not raise warn when fallback is payable and no receive function is present', () => {
+    const code = contractWith('fallback() public payable {}')
+
+    const report = linter.processStr(code, {
+      rules: { 'payable-fallback': 'warn' },
+    })
+
+    assertNoWarnings(report)
+  })
+
+  it('should not raise warn when fallback is not payable but receive function is present', () => {
+    const code = contractWith('fallback() external {} receive() {}')
+
+    const report = linter.processStr(code, {
+      rules: { 'payable-fallback': 'warn' },
+    })
+
+    assertNoWarnings(report)
+  })
+
+  it('should not raise warn when fallback is payable and receive function is present', () => {
+    const code = contractWith('fallback() external payable {} receive() {}')
 
     const report = linter.processStr(code, {
       rules: { 'payable-fallback': 'warn' },
@@ -32,16 +52,5 @@ describe('Linter - payable-fallback', () => {
     })
 
     assertNoWarnings(report)
-  })
-
-  it('should raise for other fallback types when are not payable', () => {
-    const code = contractWith('fallback() external {} receive() onlyOwner {}')
-
-    const report = linter.processStr(code, {
-      rules: { 'payable-fallback': 'warn' },
-    })
-
-    assertWarnsCount(report, 2)
-    assertErrorMessage(report, 'payable')
   })
 })

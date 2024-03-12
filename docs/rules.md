@@ -19,7 +19,7 @@ title:       "Rule Index of Solhint"
 | [no-unused-import](./rules/best-practises/no-unused-import.md)           | Imported object name is not being used by the contract.                                                                                    | $~~~~~~~~$✔️ |            |
 | [no-unused-vars](./rules/best-practises/no-unused-vars.md)               | Variable "name" is unused.                                                                                                                 | $~~~~~~~~$✔️ |            |
 | [one-contract-per-file](./rules/best-practises/one-contract-per-file.md) | Enforces the use of ONE Contract per file see [here](https://docs.soliditylang.org/en/v0.8.21/style-guide.html#contract-and-library-names) | $~~~~~~~~$✔️ |            |
-| [payable-fallback](./rules/best-practises/payable-fallback.md)           | When fallback is not payable you will not be able to receive ethers.                                                                       | $~~~~~~~~$✔️ |            |
+| [payable-fallback](./rules/best-practises/payable-fallback.md)           | When fallback is not payable and there is no receive function you will not be able to receive currency.                                    | $~~~~~~~~$✔️ |            |
 | [reason-string](./rules/best-practises/reason-string.md)                 | Require or revert statement must have a reason string and check that each reason string is at most N characters long.                      | $~~~~~~~~$✔️ |            |
 | [constructor-syntax](./rules/best-practises/constructor-syntax.md)       | Constructors should use the new constructor keyword.                                                                                       |              |            |
         
@@ -50,18 +50,18 @@ title:       "Rule Index of Solhint"
 
 ## Gas Consumption Rules
 
-| Rule Id                                                                       | Error                                                                | Recommended  | Deprecated |
-| ----------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------ | ---------- |
-| [gas-calldata-parameters](./rules/gas-consumption/gas-calldata-parameters.md) | Suggest calldata keyword on function arguments when read only        |              |            |
-| [gas-custom-errors](./rules/gas-consumption/gas-custom-errors.md)             | Enforces the use of Custom Errors over Require and Revert statements | $~~~~~~~~$✔️ |            |
-| [gas-increment-by-one](./rules/gas-consumption/gas-increment-by-one.md)       | Suggest incrementation by one like this ++i instead of other type    |              |            |
-| [gas-indexed-events](./rules/gas-consumption/gas-indexed-events.md)           | Suggest indexed arguments on events for uint, bool and address       |              |            |
-| [gas-multitoken1155](./rules/gas-consumption/gas-multitoken1155.md)           | ERC1155 is a cheaper non-fungible token than ERC721                  |              |            |
-| [gas-named-return-values](./rules/gas-consumption/gas-named-return-values.md) | Enforce the return values of a function to be named                  |              |            |
-| [gas-small-strings](./rules/gas-consumption/gas-small-strings.md)             | Keep strings smaller than 32 bytes                                   |              |            |
-| [gas-strict-inequalities](./rules/gas-consumption/gas-strict-inequalities.md) | Suggest Strict Inequalities over non Strict ones                     |              |            |
-| [gas-struct-packing](./rules/gas-consumption/gas-struct-packing.md)           | Suggest to re-arrange struct packing order when it is inefficient    |              |            |
-| [gas-length-in-loops](./rules/gas-consumption/gas-length-in-loops.md)         | Suggest replacing object.length in a loop condition to avoid calculation on each lap |             |            |
+| Rule Id                                                                       | Error                                                                                | Recommended  | Deprecated |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------ | ---------- |
+| [gas-calldata-parameters](./rules/gas-consumption/gas-calldata-parameters.md) | Suggest calldata keyword on function arguments when read only                        |              |            |
+| [gas-custom-errors](./rules/gas-consumption/gas-custom-errors.md)             | Enforces the use of Custom Errors over Require and Revert statements                 | $~~~~~~~~$✔️ |            |
+| [gas-increment-by-one](./rules/gas-consumption/gas-increment-by-one.md)       | Suggest incrementation by one like this ++i instead of other type                    |              |            |
+| [gas-indexed-events](./rules/gas-consumption/gas-indexed-events.md)           | Suggest indexed arguments on events for uint, bool and address                       |              |            |
+| [gas-length-in-loops](./rules/gas-consumption/gas-length-in-loops.md)         | Suggest replacing object.length in a loop condition to avoid calculation on each lap |              |            |
+| [gas-multitoken1155](./rules/gas-consumption/gas-multitoken1155.md)           | ERC1155 is a cheaper non-fungible token than ERC721                                  |              |            |
+| [gas-named-return-values](./rules/gas-consumption/gas-named-return-values.md) | Enforce the return values of a function to be named                                  |              |            |
+| [gas-small-strings](./rules/gas-consumption/gas-small-strings.md)             | Keep strings smaller than 32 bytes                                                   |              |            |
+| [gas-strict-inequalities](./rules/gas-consumption/gas-strict-inequalities.md) | Suggest Strict Inequalities over non Strict ones                                     |              |            |
+| [gas-struct-packing](./rules/gas-consumption/gas-struct-packing.md)           | Suggest to re-arrange struct packing order when it is inefficient                    |              |            |
         
 
 ## Miscellaneous

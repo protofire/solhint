@@ -83,7 +83,6 @@ describe('Linter - func-named-parameters', () => {
         'compiler-version': 'off',
         'comprehensive-interface': 'off',
         'foundry-test-functions': 'off',
-        'non-state-vars-leading-underscore': 'off',
       },
     })
 

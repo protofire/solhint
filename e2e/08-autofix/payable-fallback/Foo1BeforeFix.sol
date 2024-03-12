@@ -1,22 +1,11 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity ^0.8.0;
 
-contract Generic {
-    
-    constructor()  {}
+contract FallbackNoReceive1 {
+    constructor() {}
 
     function anyFunction() {}
 
-    //// fallback with receive
-    receive() public {}
-    
-    receive() external onlyOwner {}
-
-    receive() external virtual {
-        uint256 anUintToFillSpace;
-    }
-
-    //// fallback with no name
     function() public {}
 
     function() {
@@ -29,22 +18,49 @@ contract Generic {
         uint256 anUintToFillSpace;
     }
 
-
     //// fallback explicit
-    fallback() {}
+    fallback() external {}
 
-    fallback() {
+    fallback() external {
         uint256 anUintToFillSpace;
     }
 
-    fallback() external onlyOwner{
+    fallback() external onlyOwner {
         uint256 anUintToFillSpace;
     }
 
-    fallback() virtual {}
-
+    fallback() external virtual {}
 
     fallback() external payable {}
-    function() external payable {}    
-    receive() public virtual payable {}
+    function() external payable {}
+}
+
+contract FallbackWithReceive {
+    constructor() {}
+
+    function() {
+        uint256 anUintToFillSpace;
+    }
+
+    function() external onlyOwner {}
+
+    fallback() external {
+        uint256 anUintToFillSpace;
+    }
+
+    receive() external payable onlyOwner {}
+}
+
+contract FallbackNoReceive2 {
+    constructor() {}
+
+    function() {
+        uint256 anUintToFillSpace;
+    }
+
+    function() external onlyOwner {}
+
+    fallback() external {
+        uint256 anUintToFillSpace;
+    }
 }
