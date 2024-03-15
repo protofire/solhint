@@ -1,4 +1,11 @@
 
+## [4.5.1] - 2024-03-15
+
+### Updated
+- Update Readme file to include all autofix rules
+
+
+
 ## [4.5.0] - 2024-03-15
 
 ### Updated
