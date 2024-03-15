@@ -12,7 +12,7 @@ title:       "payable-fallback | Solhint"
 
 
 ## Description
-When fallback is not payable you will not be able to receive ethers.
+When fallback is not payable and there is no receive function you will not be able to receive currency.
 
 ## Options
 This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
@@ -28,6 +28,7 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 
 ### Notes
 - Solhint allows this rule to automatically fix the code with `--fix` option
+- Instead of having a fallback function to receive native currency it is recommended to code a receive() function [[here]](https://docs.soliditylang.org/en/v0.8.24/contracts.html#fallback-function)
 
 ## Examples
 ### 👍 Examples of **correct** code for this rule
@@ -35,14 +36,13 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 #### Fallback is payable
 
 ```solidity
+function() public payable {}
+```
 
-      pragma solidity 0.4.4;
-        
-        
-      contract A {
-        function () public payable {}
-      }
-    
+#### Fallback is payable
+
+```solidity
+fallback() external payable {}
 ```
 
 ### 👎 Examples of **incorrect** code for this rule
@@ -50,14 +50,13 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 #### Fallback is not payable
 
 ```solidity
+function() {} function g() payable {}
+```
 
-      pragma solidity 0.4.4;
-        
-        
-      contract A {
-        function () public {}
-      }
-    
+#### Fallback is not payable
+
+```solidity
+fallback() {} function g() payable {}
 ```
 
 ## Version

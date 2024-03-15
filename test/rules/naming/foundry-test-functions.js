@@ -39,7 +39,6 @@ describe('Linter - foundry-test-functions', () => {
       const functionDefinition = composeFunctionName(prefix, 'FunctionName()', 'public')
       const code = contractWith(functionDefinition)
 
-      console.log('`code` :>> ', code)
       const report = linter.processStr(code, {
         rules: { 'foundry-test-functions': ['error', ['setUp', 'finish']] },
       })

@@ -1,22 +1,95 @@
 // SPDX-License-Identifier: Apache-2.0
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.0;
 
-import {ERC20Burnable} from '@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol';
+contract ExplicitTypes { 
+    uint256 public varUint256_1;
+    uint256 public varUint256_2 = uint256(1); 
 
-contract Foo1 is ERC20Burnable {
-    uint256 public hola;
-    uint256 public hola2;
-    int256 public constant hola3 = 2;
-    ufixed128x18 hola4;
-    fixed128x18 internal hola5;
+    uint256 public varUint_1;
+    uint256 public varUint_2 = uint256(1);
 
-    constructor() ERC20('MyToken', 'MTK') {}
+    int256 public varInt256;
+    int256 public varInt;
 
-    // solhint-disable no-empty-blocks
-    function payableTrue() public payable {}
+    ufixed128x18 public varUfixed128x18;
+    ufixed128x18 public varUfixed;
+    fixed128x18 public varFixed128x18;
+    fixed128x18 public varFixed;
 
-    // solhint-disable no-empty-blocks
-    function payableFalse() public {}
 
-    function zarasa() {}
+    event EventWithInt256(int256 varWithInt256, address addressVar, bool boolVat, int256 varWithInt);
+
+    mapping(uint256 => fixed128x18) public mapWithFixed128x18_1;
+
+    mapping(uint256 => fixed128x18) public mapWithFixed128x18_2;
+
+    mapping(uint256 => mapping(fixed128x18 => int256)) mapOfMap;
+    
+    mapping(uint256 => Estructura[]) mapOfArrayStructWithMap;
+
+    struct Estructura1 { 
+      ufixed128x18 varWithUfixed128x18; 
+      uint256 varUint; 
+    }
+
+    struct Estructura2 { 
+      ufixed128x18 varWithUfixed128x18; 
+      uint256 varUint; 
+      mapping(uint256 => Estructura) mapOfStruct; 
+    }
+
+    struct Estructura3 { 
+      ufixed128x18 varWithUfixed; 
+      uint256 varUint; 
+      mapping(address => uint256) structWithMap; 
+    } 
+
+    struct Estructura4 { 
+      ufixed128x18 varWithUfixed; 
+      uint256 varUint; 
+      mapping(address => uint256) structWithMap; 
+    } 
+    
+
+    uint256[] public arr1;
+
+    uint256[] public arr2 = [1,2,3];
+
+    uint256[] public arr3 = [uint256(1),2,3];
+
+    uint256[] public arr4 = [[1,2,3]];
+
+    uint256[] public arr5 = [1,2,3]; 
+    
+    mapping(uint256 => arr5) mapOfFixedArray;
+
+    modifier withUint256() { 
+      _; 
+      uint256 varUint; 
+      varUint = uint256(1);
+    
+    }
+
+    constructor() {}
+
+    function withUint256_1(uint256 varUint256, uint256 varUint) public returns(int256 returnInt256) {}
+
+    function withUint256_2(uint256 varUint, uint256 varUint) public returns(int256 returnInt) {}
+
+    function withUint256_3() external { 
+      uint256 varUint256 = uint256(1); 
+    }
+    
+    function withUint256_4() external { 
+      uint256 varUint; 
+      varUint = uint256(1);
+    }
+
+    function withUint_1() external { 
+      uint256 varUint = uint256(1); 
+    }
+
+    function withUint_2() external { 
+      uint256 varUint; varUint = uint256(1);
+    }
 }

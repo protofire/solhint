@@ -1,6 +1,6 @@
 {
   "name": "solhint",
-  "version": "4.1.1",
+  "version": "4.5.0",
   "description": "Solidity Code Linter",
   "main": "lib/index.js",
   "keywords": [
@@ -18,7 +18,7 @@
   "scripts": {
     "exec-tests": "nyc mocha --recursive && nyc report --reporter=text-lcov | coveralls",
     "test:coverage": "npm run exec-tests",
-    "test": "mocha --recursive --timeout 10000",
+    "test": "mocha --recursive",
     "lint": "eslint .",
     "generate-rulesets": "node scripts/generate-rulesets.js && prettier --write conf/rulesets",
     "docs": "node scripts/generate-rule-docs.js",
@@ -38,9 +38,9 @@
   "contributors": ["Diego Bale <diego.bale@protofire.io>"],
   "license": "MIT",
   "dependencies": {
-    "@solidity-parser/parser": "^0.16.0",
+    "@solidity-parser/parser": "^0.18.0",
     "ajv": "^6.12.6",
-    "antlr4": "^4.11.0",
+    "antlr4": "^4.13.1-patch-1",
     "ast-parents": "^0.0.1",
     "chalk": "^4.1.2",
     "commander": "^10.0.0",
@@ -60,10 +60,10 @@
   "devDependencies": {
     "assert": "^2.0.0",
     "coveralls": "^3.1.1",
-    "eslint": "^8.31.0",
+    "eslint": "^8.56.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.6.0",
-    "eslint-plugin-import": "^2.27.4",
+    "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.3",
     "markdown-table": "^2.0.0",
