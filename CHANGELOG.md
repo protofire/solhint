@@ -1,15 +1,9 @@
 
-## [4.2.0] - 2024-03-15
+## [4.5.0] - 2024-03-15
 
 ### Updated
-- Rule: named-return-values rule was renamed to gas-named-return-values and now it is part of Gas Consumption ruleset
-- Rule: custom-errors rule was renamed to gas-custom-errors and now it is part of Gas Consumption ruleset
-
-
-## [4.1.2] - 2024-02-06
-
-### Updated
-- Update references in package json [#530](https://github.com/protofire/solhint/pull/530)
+- Update dependencies in package json [#548](https://github.com/protofire/solhint/pull/548)
+- Custom errors rules checks from 0.8.4 forward before warning [#555](https://github.com/protofire/solhint/pull/555)
 - Parser support up to Solidity 0.8.22 (*)
 
 (*) Note: Solhint can work with latest Solidity versions. 
@@ -17,11 +11,42 @@
           But overall functionality will work as expected.
 
 
+### Added
+- New Rule: Interface starts with `i` [#557](https://github.com/protofire/solhint/pull/557)
+
+#### Gas Consumption Rules
+- New Rule: [GC] Mutlitoken1155 rule [#541](https://github.com/protofire/solhint/pull/541)
+- New Rule: [GC] Small strings check [#542](https://github.com/protofire/solhint/pull/542)
+- New Rule: [GC] Indexed events [#543](https://github.com/protofire/solhint/pull/543)
+- New Rule: [GC] Calldata parameters [#544](https://github.com/protofire/solhint/pull/544)
+- New Rule: [GC] Increment by one [#545](https://github.com/protofire/solhint/pull/545)
+- New Rule: [GC] Struct packing [#546](https://github.com/protofire/solhint/pull/546)
+- New Rule: [GC] Name Return Values [#552](https://github.com/protofire/solhint/pull/552)
+- New Rule: [GC] Custom Errors #553 [#555](https://github.com/protofire/solhint/pull/553)
+- New Rule: [GC] Dot Length in Loops [#559](https://github.com/protofire/solhint/pull/559)
+- New Rule: [GC] Gas Strict Inequalities [#560](https://github.com/protofire/solhint/pull/560)
+
+
+### Fixed
+- `explicit-types` logic improved and bug free [#551](https://github.com/protofire/solhint/pull/551)
+- `payable fallback`  Improved behavior [#561](https://github.com/protofire/solhint/pull/561)
+
+
+
+### BREAKING CHANGES
+- `named-return-values` rule was renamed to gas-named-return-values and now it is part of Gas Consumption ruleset [#552](https://github.com/protofire/solhint/pull/552)
+- `custom-errors` rule was renamed to gas-custom-errors and now it is part of Gas Consumption ruleset [#553](https://github.com/protofire/solhint/pull/553)
+- Return error 0 when executed correctly [#554](https://github.com/protofire/solhint/pull/554)
+- Default severity modified to `WARN` instead of `OFF` for 
+  `foundry-test-functions` and `named-parameters-mapping` rules [#556](https://github.com/protofire/solhint/pull/556)
+
+
+
+
 ## [4.1.1] - 2024-01-08
 
 ### Fixed
 - Fix changelog typos
-
 
 
 ## [4.1.0] - 2024-01-08
