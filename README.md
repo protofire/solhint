@@ -88,6 +88,11 @@ This option currently works on:
 - no-console
 - explicit-types
 - private-vars-underscore
+- payable-fallback
+- quotes
+- contract-name-camelcase
+- avoid-suicide
+  
 <br><br>
 ## Configuration
 
