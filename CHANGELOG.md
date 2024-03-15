@@ -3,6 +3,8 @@
 
 ### Updated
 - Update Readme file to include all autofix rules
+- Update docker file 
+- Update package json file
 
 
 
