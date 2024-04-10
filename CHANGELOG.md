@@ -1,7 +1,7 @@
-## [4.5.3] - 2024-04-10
+## [4.5.4] - 2024-04-10
 ### Fixed
-- `gas-custom-errors` improved logic to ranged pragma versions [#568](https://github.com/protofire/solhint/pull/568)
-- `gas-indexed-events`  [#568](https://github.com/protofire/solhint/pull/568)
+- `gas-custom-errors` improved logic to ranged pragma versions [#573](https://github.com/protofire/solhint/pull/573)
+- `gas-indexed-events`  [#573](https://github.com/protofire/solhint/pull/573)
 
 
 ## [4.5.2] - 2024-03-15
