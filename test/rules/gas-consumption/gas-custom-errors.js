@@ -210,5 +210,4 @@ describe('Linter - gas-custom-errors', () => {
 
     assertErrorCount(report, 1)
   })
-
 })
