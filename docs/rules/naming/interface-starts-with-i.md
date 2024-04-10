@@ -42,7 +42,7 @@ interface Foo { function foo () external; }
 ```
 
 ## Version
-This rule is introduced in the latest version.
+This rule was introduced in [Solhint 4.5.0](https://github.com/protofire/solhint/tree/v4.5.0)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/best-practises/interface-starts-with-i.js)

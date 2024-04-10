@@ -143,7 +143,7 @@ describe('Linter - gas-custom-errors', () => {
     assertErrorCount(report, 0)
   })
 
-  it('should NOT raise error for lower versions 0.8.3', () => {
+  it('should raise error for higher versions 0.8', () => {
     let code = funcWith(`revert();`)
     code = replaceSolidityVersion(code, '0.8')
 
@@ -152,6 +152,62 @@ describe('Linter - gas-custom-errors', () => {
     })
 
     assertErrorCount(report, 1)
-    assertErrorMessage(report, 'GC: Invalid Solidity version')
+    assert.equal(report.reports[0].message, 'GC: Use Custom Errors instead of revert statements')
+  })
+
+  it('should raise error for higher versions 0.9', () => {
+    let code = funcWith(`revert();`)
+    code = replaceSolidityVersion(code, '0.9')
+
+    const report = linter.processStr(code, {
+      rules: { 'gas-custom-errors': 'error' },
+    })
+
+    assertErrorCount(report, 1)
+    assert.equal(report.reports[0].message, 'GC: Use Custom Errors instead of revert statements')
+  })
+
+  it('should NOT raise error for lower versions 0.7', () => {
+    let code = funcWith(`revert();`)
+    code = replaceSolidityVersion(code, '0.7')
+
+    const report = linter.processStr(code, {
+      rules: { 'gas-custom-errors': 'error' },
+    })
+
+    assertErrorCount(report, 0)
+  })
+
+  it('should NOT raise error for range versions lower than 0.8.4', () => {
+    let code = funcWith(`revert();`)
+    code = replaceSolidityVersion(code, '>= 0.8.1 <= 0.8.3')
+
+    const report = linter.processStr(code, {
+      rules: { 'gas-custom-errors': 'error' },
+    })
+
+    assertErrorCount(report, 0)
+  })
+
+  it('should raise error for range versions higher than 0.8.4', () => {
+    let code = funcWith(`revert();`)
+    code = replaceSolidityVersion(code, '> 0.8.4 <= 0.9')
+
+    const report = linter.processStr(code, {
+      rules: { 'gas-custom-errors': 'error' },
+    })
+
+    assertErrorCount(report, 1)
+  })
+
+  it('should raise error for range versions containing 0.8.4', () => {
+    let code = funcWith(`revert();`)
+    code = replaceSolidityVersion(code, '> 0.8.1 <= 0.8.6')
+
+    const report = linter.processStr(code, {
+      rules: { 'gas-custom-errors': 'error' },
+    })
+
+    assertErrorCount(report, 1)
   })
 })

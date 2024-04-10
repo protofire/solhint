@@ -42,7 +42,7 @@ function checkBalance(address wallet) external view returns(uint256) {}
 ```
 
 ## Version
-This rule is introduced in the latest version.
+This rule was introduced in [Solhint 4.5.0](https://github.com/protofire/solhint/tree/v4.5.0)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/gas-consumption/gas-named-return-values.js)

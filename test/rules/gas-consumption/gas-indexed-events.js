@@ -79,4 +79,24 @@ describe('Linter - gas-indexed-events', () => {
 
     assert.equal(report.errorCount, 0)
   })
+
+  it('should NOT raise error, all variables are indexed', () => {
+    const code = contractWith('event Increment (address indexed sender, uint256 indexed value);')
+
+    const report = linter.processStr(code, {
+      rules: { 'gas-indexed-events': 'error' },
+    })
+
+    assert.equal(report.errorCount, 0)
+  })
+
+  it('should NOT raise error, all variables are indexed or not for suggestion', () => {
+    const code = contractWith('event Increment (address indexed sender, string whatever);')
+
+    const report = linter.processStr(code, {
+      rules: { 'gas-indexed-events': 'error' },
+    })
+
+    assert.equal(report.errorCount, 0)
+  })
 })
