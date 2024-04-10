@@ -32,7 +32,7 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 This rule does not have examples.
 
 ## Version
-This rule is introduced in the latest version.
+This rule was introduced in [Solhint 4.5.0](https://github.com/protofire/solhint/tree/v4.5.0)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/gas-consumption/gas-increment-by-one.js)
