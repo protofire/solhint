@@ -12,6 +12,8 @@ const applyFixes = require('./lib/apply-fixes')
 const ruleFixer = require('./lib/rule-fixer')
 const packageJson = require('./package.json')
 
+const EXIT_CODES = { BAD_OPTIONS: 255, OK: 0, REPORTED_ERRORS: 1 }
+
 function init() {
   const version = packageJson.version
   program.version(version)
@@ -84,7 +86,7 @@ function execMainAction() {
     askUserToContinue((userAnswer) => {
       if (userAnswer !== 'y') {
         console.log('\nProcess terminated by user')
-        process.exit(0)
+        process.exit(EXIT_CODES.OK)
       } else {
         // User agreed, continue with the operation.
         continueExecution()
@@ -119,11 +121,27 @@ function executeMainActionLogic() {
     formatterFn = getFormatter(program.opts().formatter)
   } catch (ex) {
     console.error(ex.message)
-    process.exit(1)
+    process.exit(EXIT_CODES.BAD_OPTIONS)
   }
 
-  const reportLists = program.args.filter(_.isString).map(processPath)
-  const reports = _.flatten(reportLists)
+  const customConfig = program.opts().config
+  if (customConfig && !fs.existsSync(customConfig)) {
+    console.error(`Config file "${customConfig}" couldnt be found.`)
+    process.exit(EXIT_CODES.BAD_OPTIONS)
+  }
+
+  let reports
+  try {
+    const reportLists = program.args.filter(_.isString).map(processPath)
+    reports = _.flatten(reportLists)
+  } catch (e) {
+    console.error(e)
+    process.exit(EXIT_CODES.BAD_OPTIONS)
+  }
+  if (reports.length === 0) {
+    console.error(`No files to lint! check glob arguments "${program.args}" and ignore files.`)
+    process.exit(EXIT_CODES.BAD_OPTIONS)
+  }
 
   if (program.opts().fix) {
     for (const report of reports) {
@@ -146,22 +164,25 @@ function executeMainActionLogic() {
           fs.writeFileSync(report.filePath, output)
         } catch (error) {
           console.error('An error occurred while writing the file:', error)
+          process.exit(EXIT_CODES.BAD_OPTIONS)
         }
       }
     }
   }
 
-  if (program.opts().quiet) {
-    // filter the list of reports, to set errors only.
-    reports.forEach((reporter) => {
-      reporter.reports = reporter.reports.filter((i) => i.severity === 2)
-    })
-  }
+  /// REMOVED THIS TO ALLOW PROCESS OF WARNINGS IN QUIET MODE
+  // if (program.opts().quiet) {
+  //   // filter the list of reports, to set errors only.
+  //   reports.forEach((reporter) => {
+  //     reporter.reports = reporter.reports.filter((i) => i.severity === 2)
+  //   })
+  // }
 
   printReports(reports, formatterFn)
 
-  // exitWithCode(reports)
-  process.exit(0)
+  if (reports[0].errorCount > 0) process.exit(EXIT_CODES.REPORTED_ERRORS)
+
+  process.exit(EXIT_CODES.OK)
 }
 
 function processStdin(options) {
@@ -176,14 +197,16 @@ function processStdin(options) {
     formatterFn = getFormatter(program.opts().formatter)
   } catch (ex) {
     console.error(ex.message)
-    process.exit(1)
+    process.exit(EXIT_CODES.BAD_OPTIONS)
   }
 
   const reports = [report]
 
   printReports(reports, formatterFn)
-  process.exit(0)
-  // exitWithCode(reports)
+
+  if (reports[0].errorCount > 0) process.exit(EXIT_CODES.REPORTED_ERRORS)
+
+  process.exit(EXIT_CODES.OK)
 }
 
 function writeSampleConfigFile() {
@@ -192,14 +215,16 @@ function writeSampleConfigFile() {
   "extends": "solhint:default"
 }
 `
-
   if (!fs.existsSync(configPath)) {
     fs.writeFileSync(configPath, sampleConfig)
 
     console.log('Configuration file created!')
   } else {
-    console.log('Configuration file already exists')
+    console.error('Configuration file already exists')
+    process.exit(EXIT_CODES.BAD_OPTIONS)
   }
+
+  process.exit(EXIT_CODES.OK)
 }
 
 const readIgnore = _.memoize(() => {
@@ -217,6 +242,7 @@ const readIgnore = _.memoize(() => {
   } catch (e) {
     if (program.opts().ignorePath && e.code === 'ENOENT') {
       console.error(`\nERROR: ${ignoreFile} is not a valid path.`)
+      process.exit(EXIT_CODES.BAD_OPTIONS)
     }
     return []
   }
@@ -227,8 +253,8 @@ const readConfig = _.memoize(() => {
   try {
     config = loadConfig(program.opts().config)
   } catch (e) {
-    console.log(e.message)
-    process.exit(1)
+    console.error(e.message)
+    process.exit(EXIT_CODES.BAD_OPTIONS)
   }
 
   const configExcludeFiles = _.flatten(config.excludedFiles)
@@ -259,7 +285,7 @@ function areWarningsExceeded(reports) {
 function printReports(reports, formatter) {
   const warnings = areWarningsExceeded(reports)
   let finalMessage = ''
-  let exitWithOne = false
+  let maxWarnsFound = false
   if (
     program.opts().maxWarnings &&
     reports &&
@@ -270,7 +296,7 @@ function printReports(reports, formatter) {
       finalMessage = `Solhint found more warnings than the maximum specified (maximum: ${
         program.opts().maxWarnings
       }, found: ${warnings.warningsCount})`
-      exitWithOne = true
+      maxWarnsFound = true
     } else {
       finalMessage =
         'Error/s found on rules! [max-warnings] param is ignored. Fixing errors enables max-warnings'
@@ -278,13 +304,12 @@ function printReports(reports, formatter) {
   }
 
   const fullReport = formatter(reports) + (finalMessage || '')
-  console.log(fullReport)
+  if (!program.opts().quiet) console.log(fullReport)
 
   if (program.opts().save) {
     writeStringToFile(fullReport)
   }
-
-  if (exitWithOne) process.exit(1)
+  if (maxWarnsFound) process.exit(EXIT_CODES.REPORTED_ERRORS)
   return reports
 }
 
@@ -308,7 +333,9 @@ function writeStringToFile(data) {
     // console.log('File written successfully:', fileName)
   } catch (err) {
     console.error('Error writing to file:', err)
+    process.exit(EXIT_CODES.BAD_OPTIONS)
   }
+  process.exit(EXIT_CODES.OK)
 }
 
 function getFormatter(formatter) {
@@ -331,16 +358,16 @@ function listRules() {
     configPath = args[configFileIndex + 1]
     if (!configPath || configPath.startsWith('-')) {
       console.error('Error: Invalid configuration file path after -c or --config flag.')
-      process.exit(1)
+      process.exit(EXIT_CODES.BAD_OPTIONS)
     }
   } else if (args.length !== 1) {
-    console.log('Error!! no additional parameters after list-rules command')
-    process.exit(1)
+    console.error('Error!! no additional parameters after list-rules command')
+    process.exit(EXIT_CODES.BAD_OPTIONS)
   }
 
   if (!fs.existsSync(configPath)) {
-    console.log('Error!! Configuration does not exists')
-    process.exit(1)
+    console.error('Error!! Configuration does not exists')
+    process.exit(EXIT_CODES.BAD_OPTIONS)
   } else {
     const config = readConfig()
     console.log('\nConfiguration File: \n', config)
@@ -362,11 +389,6 @@ function listRules() {
     })
   }
 }
-
-// function exitWithCode(reports) {
-//   const errorsCount = reports.reduce((acc, i) => acc + i.errorCount, 0)
-//   process.exit(errorsCount > 0 ? 1 : 0)
-// }
 
 function checkForUpdate() {
   // eslint-disable-next-line import/no-extraneous-dependencies

@@ -7,6 +7,7 @@ const shell = require('shelljs')
 const spawnSync = require('spawn-sync')
 
 const E2E = true
+const EXIT_CODES = { BAD_OPTIONS: 255, OK: 0, REPORTED_ERRORS: 1 }
 
 let params
 let currentConfig
@@ -103,7 +104,7 @@ describe('e2e', function () {
             }
           )
 
-          expect(solhintProcess.status).to.equal(0)
+          expect(solhintProcess.status).to.equal(EXIT_CODES.REPORTED_ERRORS)
           expect(solhintProcess.stdout.toString().includes('5 problems (5 errors, 0 warnings)'))
         })
       })
@@ -129,7 +130,7 @@ describe('e2e', function () {
             `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           )
 
-          expect(code).to.equal(0)
+          expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
 
           const reportLines = stdout.split('\n')
           const finalLine = '5 problems (5 errors, 0 warnings)'
@@ -175,8 +176,8 @@ describe('e2e', function () {
           expect(result).to.be.true
         })
 
-        it('should execute and exit with code 0 (2)', () => {
-          expect(code).to.equal(0)
+        it('should execute and exit with code 1 (2)', () => {
+          expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
         })
 
         it('should get the right report (2)', () => {
@@ -221,8 +222,8 @@ describe('e2e', function () {
           expect(result).to.be.true
         })
 
-        it('should execute and exit with code 1 (3)', () => {
-          expect(code).to.equal(0)
+        it('should execute and exit with code 0 (3)', () => {
+          expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
         })
 
         it('should get the right report (3)', () => {
@@ -268,7 +269,7 @@ describe('e2e', function () {
         })
 
         it('should execute and exit with code 1 (4)', () => {
-          expect(code).to.equal(0)
+          expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
         })
 
         it('should get the right report (4)', () => {
@@ -314,7 +315,7 @@ describe('e2e', function () {
         })
 
         it('should execute and exit with code 1 (5)', () => {
-          expect(code).to.equal(0)
+          expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
         })
 
         it('should get the right report (5)', () => {
@@ -361,7 +362,7 @@ describe('e2e', function () {
         })
 
         it('should execute and exit with code 1 (6)', () => {
-          expect(code).to.equal(0)
+          expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
         })
 
         it('should get the right report (6)', () => {
@@ -401,7 +402,7 @@ describe('e2e', function () {
         })
 
         it('should execute and exit with code 1 (6)', () => {
-          expect(code).to.equal(0)
+          expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
         })
 
         it('should get the right report (6)', () => {
@@ -448,7 +449,7 @@ describe('e2e', function () {
       })
 
       it('should execute and exit with code 1 (7)', () => {
-        expect(code).to.equal(0)
+        expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
       })
 
       it('should get the right report (7)', () => {
@@ -494,7 +495,7 @@ describe('e2e', function () {
       })
 
       it('should execute and exit with code 1 (8)', () => {
-        expect(code).to.equal(0)
+        expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
       })
 
       it('should get the right report (8)', () => {
@@ -540,7 +541,7 @@ describe('e2e', function () {
       })
 
       it('should execute and exit with code 1 (8)', () => {
-        expect(code).to.equal(0)
+        expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
       })
 
       it('should get the right report (8)', () => {
