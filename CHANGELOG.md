@@ -1,3 +1,20 @@
+## [5.0.0] - 2024-05-11
+### BREAKING CHANGES
+
+#### Solhint EXIT codes
+Solhint changed how the exit codes are implemented:
+
+`Exit with 0 code` When execution was ok and there were no errors when evaluating the code according to the rules<br>
+`Exit with 1 code` When execution was ok and there are errors reported<br>
+`Exit with 1 code` When execution was ok and max warnings is lower than the reported warnings<br>
+`Exit with 255 code` When there's an error in the execution (bad config, writing not allowed, wrong parameter, file not found, etc)<br>
+
+#### Solhint QUIET mode
+QUIET mode (-c quiet) option now works with the warnings and may exit with 1 if there are more than defined by user
+
+Thanks to [@juanpcapurro](https://github.com/juanpcapurro) for providing the code
+
+<br><br>
 ## [4.5.4] - 2024-04-10
 ### Fixed
 - `gas-custom-errors` improved logic to ranged pragma versions [#573](https://github.com/protofire/solhint/pull/573)
