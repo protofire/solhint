@@ -309,7 +309,6 @@ function printReports(reports, formatter) {
   if (program.opts().save) {
     writeStringToFile(fullReport)
   }
-  console.log('maxWarnsFound :>> ', maxWarnsFound)
   if (maxWarnsFound) process.exit(EXIT_CODES.REPORTED_ERRORS)
   return reports
 }

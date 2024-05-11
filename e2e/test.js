@@ -188,7 +188,7 @@ describe('e2e', function () {
       expect(stdout.trim()).to.not.contain(errorFound)
     })
 
-    it('should NOT display warningns nor error but exit with 1 because max is 3 warnings', function () {
+    it('should NOT display warnings nor error but exit with 1 because max is 3 warnings', function () {
       const { code } = shell.exec(
         `${NODE}solhint ${PREFIX}contracts/Foo.sol --max-warnings 3 ${SUFFIX} -q`
       )
