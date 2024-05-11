@@ -1,3 +1,7 @@
+## [5.0.0] - 2024-05-11
+### BREAKING CHANGES
+
+
 ## [4.5.4] - 2024-04-10
 ### Fixed
 - `gas-custom-errors` improved logic to ranged pragma versions [#573](https://github.com/protofire/solhint/pull/573)

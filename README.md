@@ -61,7 +61,7 @@ Options:
 
   -V, --version                           output the version number
   -f, --formatter [name]                  report formatter name (stylish, table, tap, unix, json, compact, sarif)
-  -w, --max-warnings [maxWarningsNumber]  number of allowed warnings
+  -w, --max-warnings [maxWarningsNumber]  number of allowed warnings, works in quiet mode as well
   -c, --config [file_name]                file to use as your .solhint.json
   -q, --quiet                             report errors only - default: false
   --ignore-path [file_name]               file to use as your .solhintignore
