@@ -112,7 +112,7 @@ describe('e2e', function () {
           expect(reportLines[i]).to.equal(expectedLine)
         }
         // because there's an error
-        expect(code).to.equal(EXIT_CODES.OK)
+        expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
 
         const finalLine = '10 problem/s (1 error/s, 9 warning/s)'
         expect(reportLines[reportLines.length - 2]).to.contain(finalLine)
@@ -167,7 +167,7 @@ describe('e2e', function () {
         const strExpected = JSON.stringify(expectedFinalOutput)
         expect(strExpected).to.equal(strOutput)
         // There's an error, that is why exit code is 1
-        expect(code).to.equal(EXIT_CODES.OK)
+        expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
       })
     })
 
@@ -221,7 +221,7 @@ describe('e2e', function () {
           expect(reportLines[i]).to.equal(expectedLine)
         }
         // because there's an error
-        expect(code).to.equal(EXIT_CODES.OK)
+        expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
 
         const finalLine = '10 problem/s (1 error/s, 9 warning/s)'
         expect(reportLines[reportLines.length - 2]).to.contain(finalLine)
@@ -293,7 +293,7 @@ describe('e2e', function () {
 
           expect(reportLines[i].replace(/\s/g, '')).to.equal(expectedLine.replace(/\s/g, ''))
         }
-        expect(code).to.equal(EXIT_CODES.OK)
+        expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
 
         const finalLine = '\u2716 10 problems (1 error, 9 warnings)'
         expect(reportLines[reportLines.length - 3]).to.equal(finalLine)
@@ -400,7 +400,7 @@ describe('e2e', function () {
         expect(reportLines[3]).to.eq(tableHeader1)
         expect(reportLines[4]).to.eq(tableHeader2)
 
-        expect(code).to.equal(EXIT_CODES.OK)
+        expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
       })
     })
 
@@ -717,7 +717,7 @@ describe('e2e', function () {
         ]
 
         // There's an error, that is why exit code is 1
-        expect(code).to.equal(EXIT_CODES.OK)
+        expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
         expect(sarifOutput.runs[0].artifacts[0].location.uri).to.eq(expectedUriPathFoo)
         expect(sarifOutput.runs[0].artifacts[1].location.uri).to.eq(expectedUriPathFoo2)
         expect(sarifOutput.runs[0].artifacts[2].location.uri).to.eq(expectedUriPathFoo3)

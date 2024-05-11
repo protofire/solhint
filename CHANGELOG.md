@@ -12,6 +12,7 @@ Solhint changed how the exit codes are implemented:
 #### Solhint QUIET mode
 QUIET mode (-c quiet) option now works with the warnings and may exit with 1 if there are more than defined by user
 
+Thanks to [@juanpcapurro](https://github.com/juanpcapurro) for providing the code
 
 <br><br>
 ## [4.5.4] - 2024-04-10

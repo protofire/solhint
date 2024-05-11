@@ -85,10 +85,10 @@ describe('e2e', function () {
     })
 
     it('should show warning when using --init', function () {
-      const { code, stdout } = shell.exec(`${NODE}solhint --init`)
-
+      const { code, stderr } = shell.exec(`${NODE}solhint --init`)
+      
       expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
-      expect(stdout.trim()).to.equal('Configuration file already exists')
+      expect(stderr).to.include('Configuration file already exists')
     })
   })
 
@@ -96,14 +96,12 @@ describe('e2e', function () {
     const PATH = '03-no-empty-blocks'
     const { PREFIX, SUFFIX } = prepareContext(PATH)
 
-    describe('No contracts to lint', function () {
-      it('should fail with appropiate message', function () {
-        const { code, stderr } = shell.exec(`${NODE}solhint Foo.sol ${SUFFIX}`)
-
+      it('No contracts to lint should fail with appropiate message', function () {
+        const { code, stderr } = shell.exec(`${NODE}solhint Foo1.sol ${SUFFIX}`)
+        
         expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
         expect(stderr).to.include('No files to lint!')
       })
-    })
 
     it('should end with REPORTED_ERRORS = 1 because report contains errors', function () {
       const { code, stdout } = shell.exec(`${NODE}solhint ${PREFIX}Foo.sol ${SUFFIX}`)
@@ -213,9 +211,10 @@ describe('e2e', function () {
 
     it(`should raise error for wrongFunctionDefinitionName() only`, () => {
       const SUFFIX2 = `-c ${PREFIX}test/.solhint.json --disc`
+      
       const { code, stdout } = shell.exec(`${NODE}solhint ${PREFIX}test/FooTest.sol ${SUFFIX2}`)
 
-      expect(code).to.equal(EXIT_CODES.OK)
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
       expect(stdout.trim()).to.contain(
         'Function wrongFunctionDefinitionName() must match Foundry test naming convention '
       )
