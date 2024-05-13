@@ -1,3 +1,9 @@
+## [5.0.1] - 2024-05-13
+### BREAKING CHANGES (refer to v5.0.0)
+Fixed an issue on the returining values where only was evaluating the first report instead of all of them.
+
+
+<br><br>
 ## [5.0.0] - 2024-05-11
 ### BREAKING CHANGES
 
