@@ -86,7 +86,7 @@ describe('e2e', function () {
 
     it('should show warning when using --init', function () {
       const { code, stderr } = shell.exec(`${NODE}solhint --init`)
-      
+
       expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
       expect(stderr).to.include('Configuration file already exists')
     })
@@ -96,12 +96,12 @@ describe('e2e', function () {
     const PATH = '03-no-empty-blocks'
     const { PREFIX, SUFFIX } = prepareContext(PATH)
 
-      it('No contracts to lint should fail with appropiate message', function () {
-        const { code, stderr } = shell.exec(`${NODE}solhint Foo1.sol ${SUFFIX}`)
-        
-        expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
-        expect(stderr).to.include('No files to lint!')
-      })
+    it('No contracts to lint should fail with appropiate message', function () {
+      const { code, stderr } = shell.exec(`${NODE}solhint Foo1.sol ${SUFFIX}`)
+
+      expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
+      expect(stderr).to.include('No files to lint!')
+    })
 
     it('should end with REPORTED_ERRORS = 1 because report contains errors', function () {
       const { code, stdout } = shell.exec(`${NODE}solhint ${PREFIX}Foo.sol ${SUFFIX}`)
@@ -193,6 +193,14 @@ describe('e2e', function () {
 
       expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
     })
+
+    it('should exit with code 1 if one of evaluated contracts contains errors', function () {
+      const { code } = shell.exec(
+        `${NODE}solhint ${PREFIX}contracts/Foo.sol ${PREFIX}contracts/Foo2.sol ${SUFFIX}`
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+    })
   })
 
   describe('Linter - foundry-test-functions with shell', () => {
@@ -211,7 +219,7 @@ describe('e2e', function () {
 
     it(`should raise error for wrongFunctionDefinitionName() only`, () => {
       const SUFFIX2 = `-c ${PREFIX}test/.solhint.json --disc`
-      
+
       const { code, stdout } = shell.exec(`${NODE}solhint ${PREFIX}test/FooTest.sol ${SUFFIX2}`)
 
       expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)

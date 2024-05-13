@@ -180,9 +180,10 @@ function executeMainActionLogic() {
 
   printReports(reports, formatterFn)
 
-  if (reports[0].errorCount > 0) process.exit(EXIT_CODES.REPORTED_ERRORS)
+  // check if there's any error reported
+  const reportedErrors = reports.some((obj) => obj.errorCount > 0)
 
-  process.exit(EXIT_CODES.OK)
+  process.exit(reportedErrors ? EXIT_CODES.REPORTED_ERRORS : EXIT_CODES.OK)
 }
 
 function processStdin(options) {
@@ -201,12 +202,12 @@ function processStdin(options) {
   }
 
   const reports = [report]
-
   printReports(reports, formatterFn)
 
-  if (reports[0].errorCount > 0) process.exit(EXIT_CODES.REPORTED_ERRORS)
+  // check if there's any error reported
+  const reportedErrors = reports.some((obj) => obj.errorCount > 0)
 
-  process.exit(EXIT_CODES.OK)
+  process.exit(reportedErrors ? EXIT_CODES.REPORTED_ERRORS : EXIT_CODES.OK)
 }
 
 function writeSampleConfigFile() {
