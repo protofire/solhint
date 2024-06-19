@@ -96,7 +96,7 @@ describe('e2e', function () {
     const PATH = '03-no-empty-blocks'
     const { PREFIX, SUFFIX } = prepareContext(PATH)
 
-    it('No contracts to lint should fail with appropiate message', function () {
+    it('No contracts to lint should fail with appropriate message', function () {
       const { code, stderr } = shell.exec(`${NODE}solhint Foo1.sol ${SUFFIX}`)
 
       expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
