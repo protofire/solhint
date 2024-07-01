@@ -26,6 +26,13 @@ function retrieveParams(subpath) {
 function compareTextFiles(file1Path, file2Path) {
   const file1Content = fs.readFileSync(file1Path, 'utf-8')
   const file2Content = fs.readFileSync(file2Path, 'utf-8')
+
+  console.log('=================================================================================')
+  console.log('=================================================================================')
+  console.log('=================================================================================')
+  console.log('file2Content: ', file2Content)
+  console.log('=================================================================================')
+  console.log('=================================================================================')
   return file1Content === file2Content
 }
 
@@ -582,13 +589,6 @@ describe('e2e', function () {
           ;({ code, stdout } = shell.exec(
             `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
-          console.log('=================================================================================');
-          console.log('=================================================================================');
-          console.log('=================================================================================');
-          console.log('currentFile :>> ', currentFile);
-          console.log('=================================================================================');
-          console.log('=================================================================================');
-          console.log('=================================================================================');
           result = compareTextFiles(currentFile, afterFixFile)
           expect(result).to.be.true
         })
