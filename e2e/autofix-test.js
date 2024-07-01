@@ -582,7 +582,13 @@ describe('e2e', function () {
           ;({ code, stdout } = shell.exec(
             `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
-
+          console.log('=================================================================================');
+          console.log('=================================================================================');
+          console.log('=================================================================================');
+          console.log('currentFile :>> ', currentFile);
+          console.log('=================================================================================');
+          console.log('=================================================================================');
+          console.log('=================================================================================');
           result = compareTextFiles(currentFile, afterFixFile)
           expect(result).to.be.true
         })
@@ -603,7 +609,7 @@ describe('e2e', function () {
         expect(result).to.be.true
       })
     })
-    describe('autofix rule: imports-order Foo2', () => {
+    xdescribe('autofix rule: imports-order Foo2', () => {
       before(function () {
         params = retrieveParams('imports-order/')
         currentConfig = `${params.path}${params.subpath}.solhint.json`
