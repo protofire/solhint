@@ -50,7 +50,7 @@ module.exports = Object.freeze({
         immutablesAsConstants: true,
       },
     ],
-    'import-order': ['warn', 4],
+    'import-order': 'warn',
     'modifier-name-mixedcase': 'warn',
     'named-parameters-mapping': 'warn',
     'private-vars-leading-underscore': [
