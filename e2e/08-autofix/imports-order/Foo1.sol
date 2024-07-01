@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import {Foo1} from './Foo1.sol';
-import '../token/interfaces/IXTokenWrapper2.sol';
+import '../token/interfaces/IXTokenWrapper3.sol';
 import {IXTokenFactory2} from '../../atoken/interfaces/IXTokenFactory2.sol';
 import {Initializable} from './openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol';
 import '../token/interfaces/IXTokenWrapper.sol';
