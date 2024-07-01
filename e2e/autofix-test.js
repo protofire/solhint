@@ -526,12 +526,12 @@ describe('e2e', function () {
     })
 
     describe('--fix with noPrompt', () => {
-      it('should compare Foo1 file with template BEFORE FIX file and they should match (8)', () => {
+      it('should compare Foo1 file with template BEFORE FIX file and they should match (9)', () => {
         result = compareTextFiles(currentFile, beforeFixFile)
         expect(result).to.be.true
       })
 
-      it('should execute and compare Foo1 with template AFTER FIX and they should match (8)', () => {
+      it('should execute and compare Foo1 with template AFTER FIX and they should match (9)', () => {
         ;({ code, stdout } = shell.exec(
           `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
         ))
@@ -540,24 +540,24 @@ describe('e2e', function () {
         expect(result).to.be.true
       })
 
-      it('should execute and exit with code 1 (8)', () => {
+      it('should execute and exit with code 1 (9)', () => {
         expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
       })
 
-      it('should get the right report (8)', () => {
+      it('should get the right report (9)', () => {
         const reportLines = stdout.split('\n')
         const finalLine = '6 problems (6 errors, 0 warnings)'
         expect(reportLines[reportLines.length - 3]).to.contain(finalLine)
       })
     })
 
-    it('should check FOO1 does not change after test (8)', () => {
+    it('should check FOO1 does not change after test (9)', () => {
       result = compareTextFiles(currentFile, beforeFixFile)
       expect(result).to.be.true
     })
   })
 
-  describe.only('autofix rule: imports-order P1', () => {
+  describe('autofix rule: imports-order P1', () => {
     describe('autofix rule: imports-order Foo1', () => {
       before(function () {
         params = retrieveParams('imports-order/')
@@ -565,51 +565,6 @@ describe('e2e', function () {
         currentFile = `${params.path}${params.subpath}Foo1.sol`
         beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
         afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
-      })
-      after(function () {
-        if (!E2E) {
-          copyFile(beforeFixFile, currentFile)
-        }
-      })
-
-      describe('--fix with noPrompt', () => {
-        it('should compare Foo1 file with template BEFORE FIX file and they should match (9)', () => {
-          result = compareTextFiles(currentFile, beforeFixFile)
-          expect(result).to.be.true
-        })
-
-        it('should execute and compare Foo1 with template AFTER FIX and they should match (9)', () => {
-          ;({ code, stdout } = shell.exec(
-            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
-          ))
-
-          result = compareTextFiles(currentFile, afterFixFile)
-          expect(result).to.be.true
-        })
-
-        it('should execute and exit with code 1 (9)', () => {
-          expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
-        })
-
-        it('should get the right report (9)', () => {
-          const reportLines = stdout.split('\n')
-          const finalLine = '10 problems (10 errors, 0 warnings)'
-          expect(reportLines[reportLines.length - 3]).to.contain(finalLine)
-        })
-      })
-
-      it('should check FOO1 does not change after test (9)', () => {
-        result = compareTextFiles(currentFile, beforeFixFile)
-        expect(result).to.be.true
-      })
-    })
-    describe('autofix rule: imports-order Foo2', () => {
-      before(function () {
-        params = retrieveParams('imports-order/')
-        currentConfig = `${params.path}${params.subpath}.solhint.json`
-        currentFile = `${params.path}${params.subpath}Foo2.sol`
-        beforeFixFile = `${params.path}${params.subpath}Foo2BeforeFix.sol`
-        afterFixFile = `${params.path}${params.subpath}Foo2AfterFix.sol`
       })
       after(function () {
         if (!E2E) {
@@ -638,12 +593,57 @@ describe('e2e', function () {
 
         it('should get the right report (10)', () => {
           const reportLines = stdout.split('\n')
-          const finalLine = '12 problems (12 errors, 0 warnings)'
+          const finalLine = '10 problems (10 errors, 0 warnings)'
           expect(reportLines[reportLines.length - 3]).to.contain(finalLine)
         })
       })
 
       it('should check FOO1 does not change after test (10)', () => {
+        result = compareTextFiles(currentFile, beforeFixFile)
+        expect(result).to.be.true
+      })
+    })
+    describe('autofix rule: imports-order Foo2', () => {
+      before(function () {
+        params = retrieveParams('imports-order/')
+        currentConfig = `${params.path}${params.subpath}.solhint.json`
+        currentFile = `${params.path}${params.subpath}Foo2.sol`
+        beforeFixFile = `${params.path}${params.subpath}Foo2BeforeFix.sol`
+        afterFixFile = `${params.path}${params.subpath}Foo2AfterFix.sol`
+      })
+      after(function () {
+        if (!E2E) {
+          copyFile(beforeFixFile, currentFile)
+        }
+      })
+
+      describe('--fix with noPrompt', () => {
+        it('should compare Foo1 file with template BEFORE FIX file and they should match (11)', () => {
+          result = compareTextFiles(currentFile, beforeFixFile)
+          expect(result).to.be.true
+        })
+
+        it('should execute and compare Foo1 with template AFTER FIX and they should match (11)', () => {
+          ;({ code, stdout } = shell.exec(
+            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+          ))
+
+          result = compareTextFiles(currentFile, afterFixFile)
+          expect(result).to.be.true
+        })
+
+        it('should execute and exit with code 1 (11)', () => {
+          expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+        })
+
+        it('should get the right report (11)', () => {
+          const reportLines = stdout.split('\n')
+          const finalLine = '12 problems (12 errors, 0 warnings)'
+          expect(reportLines[reportLines.length - 3]).to.contain(finalLine)
+        })
+      })
+
+      it('should check FOO1 does not change after test (11)', () => {
         result = compareTextFiles(currentFile, beforeFixFile)
         expect(result).to.be.true
       })
