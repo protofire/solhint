@@ -613,7 +613,7 @@ describe('e2e', function () {
         expect(result).to.be.true
       })
     })
-    xdescribe('autofix rule: imports-order Foo2', () => {
+    describe('autofix rule: imports-order Foo2', () => {
       before(function () {
         params = retrieveParams('imports-order/')
         currentConfig = `${params.path}${params.subpath}.solhint.json`
