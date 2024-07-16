@@ -26,7 +26,8 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 ### Notes
 - Order by hierarchy of directories first, e.g. ../../ comes before ../, which comes before ./, which comes before ./foo
 - Order alphabetically for each file at the same level, e.g. ./bar comes before ./foo
-- Rule support up to 10 folder levels "../../../../../../../../../../"
+- Rule supports up to 8 folder levels "../../../../../../../../"
+- Rule does NOT support this kind of import "import * as Alias from "./filename.sol"
 
 ## Examples
 This rule does not have examples.
