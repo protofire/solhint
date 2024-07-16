@@ -12,7 +12,7 @@ import '@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.
 import {FakeContract2} from '../../../token/interfaces/FakeContract2.sol';
 import {Afool1} from './Afool1.sol';
 import {IXTokenWrapper2} from '../token/interfaces/IXTokenWrapper2.sol';
-import {ReentrancyGuardUpgradeable2} from '@Apenzeppelin/ReentrancyGuardUpgradeable2.sol';
+import {ReentrancyGuardUpgradeable2} from '@apenzeppelin/ReentrancyGuardUpgradeable2.sol';
 
 contract ImportsOrder2 {
     constructor() {}

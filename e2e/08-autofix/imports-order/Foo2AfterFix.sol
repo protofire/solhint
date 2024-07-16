@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity ^0.8.0;
 
-import {ReentrancyGuardUpgradeable2} from '@Apenzeppelin/ReentrancyGuardUpgradeable2.sol';
+import {ReentrancyGuardUpgradeable2} from '@apenzeppelin/ReentrancyGuardUpgradeable2.sol';
 import '@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol';
 import '../../../../../token/interfaces/IXTokenWrapper3.sol';
 import '../../../../token/interfaces/FakeContract1.sol';
