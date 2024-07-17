@@ -13,7 +13,7 @@ import { IXTokenFactory, holaquetal } from '../../token/interfaces/IXTokenFactor
 import './../../bpath/otherfolder/otherfolder/aContract.sol';
 import '@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol';
 import { FakeContract2 } from '../../../token/interfaces/FakeContract2.sol';
-import './../../apath/zContract.sol';
+import '../../apath/zContract.sol';
 import 'http://github.com/owner/repo/blob/branch/path/to/Contract2.sol';
 import { Afool1 } from './Afool1.sol';
 import './Ownable.sol';
