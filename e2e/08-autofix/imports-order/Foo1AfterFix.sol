@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity ^0.8.0;
 
+import { ReentrancyGuardUpgradeable2 } from '@apenzeppelin/ReentrancyGuardUpgradeable2.sol';
 import '@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol';
 import 'http://github.com/owner/repo/blob/branch/path/to/Contract2.sol';
 import 'https://github.com/owner/repo/blob/branch/path/to/Contract.sol';
@@ -18,7 +19,6 @@ import { Unauthorized, add as func, Point } from './Foo.sol';
 import { Initializable } from './openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol';
 import './Ownable.sol';
 import './ThisIsAVeryLongFileOnPurposeToTestTheFirstPathShorterThanTheLastOnelooooooooooong.sol';
-import { ReentrancyGuardUpgradeable2 } from '@apenzeppelin/ReentrancyGuardUpgradeable2.sol';
 
 contract ImportsOrder {
     constructor() {}
