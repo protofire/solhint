@@ -24,8 +24,8 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 ```
 
 ### Notes
+- Paths starting with "@" like "@openzeppelin/" and urls ("http" and "https") will go first
 - Order by hierarchy of directories first, e.g. ./../../ comes before ./../, which comes before ./, which comes before ./foo
-- Paths starting with "@" like "@openzeppelin/" and urls ("http" and "https") will go at last
 - Order alphabetically for each path at the same level, e.g. ./contract/Zbar.sol comes before ./interface/Ifoo.sol
 - Rule does NOT support this kind of import "import * as Alias from "./filename.sol"
 - When "--fix",  rule will re-write this notation "../folder/file.sol" or this one "../file.sol" to "./../folder/file.sol" or this one "./../file.sol"
