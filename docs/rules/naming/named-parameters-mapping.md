@@ -39,7 +39,7 @@ mapping(string name => uint256 balance) public users;
 mapping(address owner => mapping(address token => uint256 balance)) public tokenBalances;
 ```
 
-#### Main key of mapping is enforced. On nested mappings other naming are not neccesary
+#### Main key of mapping is enforced. On nested mappings other naming are not necessary
 
 ```solidity
 mapping(address owner => mapping(address => uint256)) public tokenBalances;
