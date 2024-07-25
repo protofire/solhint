@@ -1,3 +1,13 @@
+## [5.0.2] - 2024-07-25
+### Fixed
+- `func-named-parameters` exclude abi.encodeX from the rule [#583](https://github.com/protofire/solhint/pull/583) (Thanks to [@0xCLARITY](https://github.com/0xCLARITY))
+- Several typos in comments [#586](https://github.com/protofire/solhint/pull/586) (Thanks to [@dropbigfish](https://github.com/dropbigfish))
+
+### Added
+- New Rule: Imports order [#587](https://github.com/protofire/solhint/pull/587)
+  
+<br><br>
+
 ## [5.0.1] - 2024-05-13
 ### BREAKING CHANGES (refer to v5.0.0)
 Fixed an issue on the returining values where only was evaluating the first report instead of all of them.
