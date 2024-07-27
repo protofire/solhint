@@ -12,7 +12,7 @@ title:       "compiler-version | Solhint"
 
 
 ## Description
-Compiler version must satisfy a semver requirement.
+Compiler version must satisfy a server requirement.
 
 ## Options
 This rule accepts an array of options:
@@ -20,7 +20,7 @@ This rule accepts an array of options:
 | Index | Description                                           | Default Value |
 | ----- | ----------------------------------------------------- | ------------- |
 | 0     | Rule severity. Must be one of "error", "warn", "off". | error         |
-| 1     | Semver requirement                                    | ^0.8.0        |
+| 1     | server requirement                                    | ^0.8.0        |
 
 
 ### Example Config
