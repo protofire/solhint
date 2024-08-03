@@ -1,3 +1,9 @@
+## [5.0.3] - 2024-08-03
+### Fixed
+- New Rule: Imports order [#593](https://github.com/protofire/solhint/pull/593)
+  
+<br><br>
+
 ## [5.0.2] - 2024-07-25
 ### Fixed
 - `func-named-parameters` exclude abi.encodeX from the rule [#583](https://github.com/protofire/solhint/pull/583) (Thanks to [@0xCLARITY](https://github.com/0xCLARITY))
