@@ -51,6 +51,12 @@ functionName({ sender: '0xA81705c8C247C413a19A244938ae7f4A0393944e', amount: 1e1
 functionName({ sender: _senderAddress, amount: 1e18, token: _tokenAddress, receiver: _receiverAddress })
 ```
 
+#### abi.encodeX call with four UNNAMED parameters
+
+```solidity
+abi.encodePacked(_senderAddress, 1e18, _tokenAddress, _receiverAddress )
+```
+
 ### 👎 Examples of **incorrect** code for this rule
 
 #### Function call with four UNNAMED parameters (default 4)

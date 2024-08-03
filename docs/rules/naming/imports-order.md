@@ -26,6 +26,7 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 ### Notes
 - Paths starting with "@" like "@openzeppelin/" and urls ("http" and "https") will go first
 - Order by hierarchy of directories first, e.g. ./../../ comes before ./../, which comes before ./, which comes before ./foo
+- Direct imports come before relative imports
 - Order alphabetically for each path at the same level, e.g. ./contract/Zbar.sol comes before ./interface/Ifoo.sol
 - Rule does NOT support this kind of import "import * as Alias from "./filename.sol"
 - When "--fix",  rule will re-write this notation "../folder/file.sol" or this one "../file.sol" to "./../folder/file.sol" or this one "./../file.sol"
@@ -34,7 +35,7 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 This rule does not have examples.
 
 ## Version
-This rule is introduced in the latest version.
+This rule was introduced in [Solhint 5.0.2](https://github.com/protofire/solhint/tree/v5.0.2)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/naming/imports-order.js)
