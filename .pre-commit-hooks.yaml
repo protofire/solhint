@@ -1,0 +1,6 @@
+- id: solhint
+  name: solhint
+  description: Lint Solidity files with Solhint
+  entry: solhint
+  files: \.sol$
+  language: node

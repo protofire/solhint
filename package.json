@@ -22,7 +22,6 @@
     "lint": "eslint .",
     "generate-rulesets": "node scripts/generate-rulesets.js && prettier --write conf/rulesets",
     "docs": "node scripts/generate-rule-docs.js",
-    "prepare": "husky install",
     "prepublishOnly": "npm run lint && npm run test && npm run generate-rulesets"
   },
   "bin": {

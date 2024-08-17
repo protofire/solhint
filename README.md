@@ -210,6 +210,18 @@ Or disable all validations for a group of lines:
 ### Solhint has an official Docker Image
 Go to docker folder and follow [this](docker/docker.md) instructions.
 
+## pre-commit
+### Solhint can also be used as [pre-commit](https://pre-commit.com/) hook
+
+Replace `$GIT_TAG` with real tag:
+
+```YAML
+- repo: https://github.com/protofire/solhint
+  rev: $GIT_TAG
+  hooks:
+    - id: solhint
+```
+
 ## Documentation
 Related documentation you may find [here](https://protofire.github.io/solhint/).
 
