@@ -2,5 +2,5 @@
   name: solhint
   description: Lint Solidity files with Solhint
   entry: solhint
-  files: \.sol$
+  types: ["solidity"]
   language: node
