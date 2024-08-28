@@ -24,7 +24,7 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 ```
 
 ### Notes
-- This rule only works for expressions like this: [ j = j + 1 ] but will fail is the code is written like this: [ j = 1 + j ]
+- This rule only works for expressions like this: [ j = j + 1 ] but will fail if the code is written like this: [ j = 1 + j ]
 - [source 1](https://coinsbench.com/comprehensive-guide-tips-and-tricks-for-gas-optimization-in-solidity-5380db734404) of the rule initiative (Incrementing/Decrementing By 1)
 - [source 2](https://www.rareskills.io/post/gas-optimization?postId=c9db474a-ff97-4fa3-a51d-fe13ccb8fe3b#viewer-8rekj) of the rule initiative
 
