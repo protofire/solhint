@@ -32,5 +32,5 @@ This rule was introduced in [Solhint 1.2.0](https://github.com/protofire/solhint
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/deprecations/constructor-syntax.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/deprecations/constructor-syntax.md)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/best-practises/constructor-syntax.md)
 - [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/deprecations/constructor-syntax.js)
