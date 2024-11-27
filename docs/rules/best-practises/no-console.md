@@ -6,7 +6,7 @@ title:       "no-console | Solhint"
 
 # no-console
 ![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
-![Category Badge](https://img.shields.io/badge/-Best%20Practise%20Rules-informational)
+![Category Badge](https://img.shields.io/badge/-Best%20Practice%20Rules-informational)
 ![Default Severity Badge error](https://img.shields.io/badge/Default%20Severity-error-red)
 > The {"extends": "solhint:default"} property in a configuration file enables this rule.
 
