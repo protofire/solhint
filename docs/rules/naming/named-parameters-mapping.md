@@ -12,7 +12,7 @@ title:       "named-parameters-mapping | Solhint"
 Solidity v0.8.18 introduced named parameters on the mappings definition.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
@@ -39,7 +39,7 @@ mapping(string name => uint256 balance) public users;
 mapping(address owner => mapping(address token => uint256 balance)) public tokenBalances;
 ```
 
-#### Main key of mapping is enforced. On nested mappings other naming are not necessary
+#### Main key of mapping is enforced. On nested mappings other names are not necessary
 
 ```solidity
 mapping(address owner => mapping(address => uint256)) public tokenBalances;
@@ -77,7 +77,7 @@ mapping(address token => uint256)) public tokenBalances;
 mapping(address => uint256 balance)) public tokenBalances;
 ```
 
-#### No MAIN KEY naming in nested mapping. Other naming are not enforced
+#### No MAIN KEY naming in nested mapping. Other names are not enforced
 
 ```solidity
 mapping(address => mapping(address token => uint256 balance)) public tokenBalances;
