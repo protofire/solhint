@@ -98,5 +98,5 @@ title:       "Rule Index of Solhint"
 
 ## References
 
-- [ConsenSys Guide for Smart Contracts](https://consensys.github.io/smart-contract-best-practices/recommendations/)
+- [ConsenSys Guide for Smart Contracts](https://consensys.github.io/smart-contract-best-practices/development-recommendations/)
 - [Solidity Style Guide](http://solidity.readthedocs.io/en/develop/style-guide.html)
