@@ -12,7 +12,7 @@ title:       "gas-custom-errors | Solhint"
 
 
 ## Description
-Enforces the use of Custom Errors over Require and Revert statements
+Enforces the use of Custom Errors over Require with strings error and Revert statements
 
 ## Options
 This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
@@ -42,6 +42,24 @@ revert CustomErrorFunction();
 
 ```solidity
 revert CustomErrorFunction({ msg: "Insufficient Balance" });
+```
+
+#### Use of Require with Custom Error with arguments
+
+```solidity
+require(success, CustomErrorFunction({ msg: "Insufficient Balance" });
+```
+
+#### Use of Require with function call and Custom Error
+
+```solidity
+require(isAuthorized(account), CustomErrorFunction();
+```
+
+#### Use of Require with binary comparison and Custom Error
+
+```solidity
+require(a > b, CustomErrorFunction();
 ```
 
 ### 👎 Examples of **incorrect** code for this rule
