@@ -17,7 +17,7 @@ function replaceSolidityVersion(code, newVersion) {
 }
 
 describe('Linter - gas-custom-errors', () => {
-  it('should raise error for revert()', () => {
+  it('should NOT raise error for require with comparison and custom error()', () => {
     let code = funcWith(`require(a > b, CustomErrorEmitted());`)
     code = replaceSolidityVersion(code, '^0.8.4')
 
@@ -29,7 +29,7 @@ describe('Linter - gas-custom-errors', () => {
     assertNoErrors(report)
   })
 
-  it('should raise error for revert()', () => {
+  it('should NOT raise error for require with function call and comparison along with custom error', () => {
     let code = funcWith(`require(isAok(a) > b, CustomErrorEmitted(param1));`)
     code = replaceSolidityVersion(code, '^0.8.4')
 
@@ -41,7 +41,7 @@ describe('Linter - gas-custom-errors', () => {
     assertNoErrors(report)
   })
 
-  it('should raise error for revert()', () => {
+  it('should NOT raise error for require with boolean check and custom error call', () => {
     let code = funcWith(`require(success, CustomErrorEmitted(param1, param2));`)
     code = replaceSolidityVersion(code, '^0.8.4')
 
@@ -53,7 +53,7 @@ describe('Linter - gas-custom-errors', () => {
     assertNoErrors(report)
   })
 
-  it('should raise error for revert()', () => {
+  it('should NOT raise error for require with function call and custom error call', () => {
     let code = funcWith(
       `require(isSuccess(param1) == true && value > 10, CustomErrorEmitted(param1, param2));`
     )
@@ -67,7 +67,7 @@ describe('Linter - gas-custom-errors', () => {
     assertNoErrors(report)
   })
 
-  it('should raise error for revert()', () => {
+  it('should NOT raise error for require and mapping access with boolean value check and custom error call', () => {
     let code = funcWith(
       `require(users[msg.sender].isRegistered, CustomErrorEmitted(param1, param2));`
     )
