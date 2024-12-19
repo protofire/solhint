@@ -23,4 +23,6 @@ if (changed()) {
     console.error('Error running npm commands:', error);
     process.exit(1);
   }
+} else {
+  console.log('No changes detected in lib/rules.');
 }
