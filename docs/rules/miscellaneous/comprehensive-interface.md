@@ -9,10 +9,10 @@ title:       "comprehensive-interface | Solhint"
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 
 ## Description
-Check that all public or external functions are override. This is iseful to make sure that the whole API is extracted in an interface.
+Check that all public or external functions are overridden. This is useful to make sure that the whole API is extracted in an interface.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
@@ -52,9 +52,9 @@ contract Foo {
 ```
 
 ## Version
-This rule was introduced in [Solhint 3.3.0](https://github.com/protofire/solhint/tree/v3.3.0)
+This rule was introduced in [Solhint 3.3.0](https://github.com/protofire/solhint/blob/v3.3.0)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/miscellaneous/comprehensive-interface.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/miscellaneous/comprehensive-interface.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/miscellaneous/comprehensive-interface.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/miscellaneous/comprehensive-interface.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/miscellaneous/comprehensive-interface.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/miscellaneous/comprehensive-interface.js)

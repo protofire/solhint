@@ -12,7 +12,7 @@ title:       "not-rely-on-time | Solhint"
 Avoid making time-based decisions in your business logic.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
@@ -28,9 +28,9 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 This rule does not have examples.
 
 ## Version
-This rule was introduced in [Solhint 1.1.5](https://github.com/protofire/solhint/tree/v1.1.5)
+This rule was introduced in [Solhint 1.1.5](https://github.com/protofire/solhint/blob/v1.1.5)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/security/not-rely-on-time.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/security/not-rely-on-time.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/security/not-rely-on-time.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/security/not-rely-on-time.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/security/not-rely-on-time.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/security/not-rely-on-time.js)

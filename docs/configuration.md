@@ -4,7 +4,7 @@ title:       Solhint Configuration
 date:        2017-10-23 14:16:00 +0300
 author:      "@drabenia"
 description: Configuration of solidity security and style guide verification, 
-             best practise validations.
+             best practice validations.
 ---
 
 ### Configuration

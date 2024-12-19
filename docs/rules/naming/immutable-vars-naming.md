@@ -37,9 +37,9 @@ This rule accepts an array of options:
 This rule does not have examples.
 
 ## Version
-This rule was introduced in [Solhint 3.5.1](https://github.com/protofire/solhint/tree/v3.5.1)
+This rule was introduced in [Solhint 3.5.1](https://github.com/protofire/solhint/blob/v3.5.1)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/naming/immutable-vars-naming.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/naming/immutable-vars-naming.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/naming/immutable-vars-naming.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/naming/immutable-vars-naming.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/naming/immutable-vars-naming.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/naming/immutable-vars-naming.js)

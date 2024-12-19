@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://protofire.io/projects/solhint" target="_blank"><img src="solhint.png"></a>
+  <a href="https://protofire.io/solhint" target="_blank"><img src="solhint.png"></a>
 </p>
 <p align="center">
   By <a href="https://protofire.io/" target="_blank">Protofire</a>
@@ -16,7 +16,7 @@ https://coveralls.io/github/protofire/solhint?branch=master)
 This is an open source project for linting [Solidity](http://solidity.readthedocs.io/en/develop/) code. This project
 provides both **Security** and **Style Guide** validations.
 <br>
-[VISIT OUR WEBSITE](https://protofire.io/projects/solhint)<br>
+[VISIT OUR WEBSITE](https://protofire.io/solhint)<br>
 [JOIN OUR DISCORD SERVER](https://discord.gg/4TYGq3zpjs)
 <br>
 ## Installation

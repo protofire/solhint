@@ -15,7 +15,7 @@ title:       "event-name-camelcase | Solhint"
 Event name must be in CamelCase.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
@@ -34,9 +34,9 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 This rule does not have examples.
 
 ## Version
-This rule was introduced in [Solhint 2.0.0-alpha.0](https://github.com/protofire/solhint/tree/v2.0.0-alpha.0)
+This rule was introduced in [Solhint 2.0.0-alpha.0](https://github.com/protofire/solhint/blob/v2.0.0-alpha.0)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/naming/event-name-camelcase.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/naming/event-name-camelcase.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/naming/event-name-camelcase.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/naming/event-name-camelcase.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/naming/event-name-camelcase.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/naming/event-name-camelcase.js)

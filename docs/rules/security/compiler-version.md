@@ -37,9 +37,9 @@ This rule accepts an array of options:
 This rule does not have examples.
 
 ## Version
-This rule was introduced in [Solhint 2.1.0](https://github.com/protofire/solhint/tree/v2.1.0)
+This rule was introduced in [Solhint 2.1.0](https://github.com/protofire/solhint/blob/v2.1.0)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/security/compiler-version.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/security/compiler-version.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/security/compiler-version.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/security/compiler-version.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/security/compiler-version.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/security/compiler-version.js)
