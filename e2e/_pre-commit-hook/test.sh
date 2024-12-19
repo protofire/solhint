@@ -19,9 +19,13 @@ trap cleanup EXIT
 
 # Filling the mock repo
 pushd "$MOCK_REPO" >/dev/null || exit 1
-git init --initial-branch=master
-git config user.email "test@example.com"
-git config user.name "pre-commit test"
+git init --initial-branch=master || { echo "Failed to initialize git repo"; exit 1; }
+git config user.email "test@example.com" || { echo "Failed to set git email"; exit 1; }
+git config user.name "pre-commit test" || { echo "Failed to set git name"; exit 1; }
+if [[ ! -f "$SCRIPT_DIR/.solhint.json" || ! -f "$SCRIPT_DIR/Counter.sol" ]]; then
+    echo "Required files are missing in the script directory"
+    exit 1
+fi
 cp "$SCRIPT_DIR/.solhint.json" "$SCRIPT_DIR/Counter.sol" .
 git add .
 git commit -m "Initial commit"

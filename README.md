@@ -269,7 +269,7 @@ Related documentation you may find [here](https://protofire.github.io/solhint/).
 
 The Solidity parser used is [`@solidity-parser/parser`](https://github.com/solidity-parser/parser).
 
-## Licence
+## License
 
 MIT
 

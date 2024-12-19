@@ -31,4 +31,4 @@ jobs:
           python -m pip install pre-commit
       - name: Test hooks
         run: |
-          ./e2e/pre-commit-hook/test.sh
+          ./e2e/_pre-commit-hook/test.sh
