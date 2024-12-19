@@ -204,7 +204,7 @@ Or disable all validations for a group of lines:
 ### Style Guide Rules
 [Full list with all supported Style Guide Rules](docs/rules.md#style-guide-rules)
 ### Best Practices Rules
-[Full list with all supported Best Practices Rules](docs/rules.md#best-practise-rules)
+[Full list with all supported Best Practices Rules](docs/rules.md#best-practices-rules)
 
 ## Docker
 ### Solhint has an official Docker Image
@@ -269,7 +269,7 @@ Related documentation you may find [here](https://protofire.github.io/solhint/).
 
 The Solidity parser used is [`@solidity-parser/parser`](https://github.com/solidity-parser/parser).
 
-## Licence
+## License
 
 MIT
 
