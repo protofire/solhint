@@ -12,7 +12,7 @@ title:       "gas-length-in-loops | Solhint"
 Suggest replacing object.length in a loop condition to avoid calculation on each lap
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
@@ -30,9 +30,9 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 This rule does not have examples.
 
 ## Version
-This rule was introduced in [Solhint 4.5.0](https://github.com/protofire/solhint/tree/v4.5.0)
+This rule was introduced in [Solhint 4.5.0](https://github.com/protofire/solhint/blob/v4.5.0)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/gas-consumption/gas-length-in-loops.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/gas-consumption/gas-length-in-loops.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/gas-consumption/gas-length-in-loops.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/gas-consumption/gas-length-in-loops.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/gas-consumption/gas-length-in-loops.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/gas-consumption/gas-length-in-loops.js)

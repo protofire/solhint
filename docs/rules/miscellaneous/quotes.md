@@ -105,9 +105,9 @@ string private constant STR = 'You shall "pass" !';
 ```
 
 ## Version
-This rule was introduced in [Solhint 1.4.0](https://github.com/protofire/solhint/tree/v1.4.0)
+This rule was introduced in [Solhint 1.4.0](https://github.com/protofire/solhint/blob/v1.4.0)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/miscellaneous/quotes.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/miscellaneous/quotes.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/miscellaneous/quotes.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/miscellaneous/quotes.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/miscellaneous/quotes.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/miscellaneous/quotes.js)

@@ -15,7 +15,7 @@ title:       "gas-custom-errors | Solhint"
 Enforces the use of Custom Errors over Require and Revert statements
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
@@ -65,9 +65,9 @@ revert("Insufficient Balance");
 ```
 
 ## Version
-This rule was introduced in [Solhint 4.5.0](https://github.com/protofire/solhint/tree/v4.5.0)
+This rule was introduced in [Solhint 4.5.0](https://github.com/protofire/solhint/blob/v4.5.0)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/gas-consumption/gas-custom-errors.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/gas-consumption/gas-custom-errors.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/gas-consumption/gas-custom-errors.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/gas-consumption/gas-custom-errors.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/gas-consumption/gas-custom-errors.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/gas-consumption/gas-custom-errors.js)

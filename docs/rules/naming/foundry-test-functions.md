@@ -65,9 +65,9 @@ function numberIs42() public {}
 ```
 
 ## Version
-This rule was introduced in [Solhint 3.6.1](https://github.com/protofire/solhint/tree/v3.6.1)
+This rule was introduced in [Solhint 3.6.1](https://github.com/protofire/solhint/blob/v3.6.1)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/naming/foundry-test-functions.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/naming/foundry-test-functions.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/naming/foundry-test-functions.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/naming/foundry-test-functions.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/naming/foundry-test-functions.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/naming/foundry-test-functions.js)
