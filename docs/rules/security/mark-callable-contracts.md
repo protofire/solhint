@@ -15,7 +15,7 @@ title:       "mark-callable-contracts | Solhint"
 Explicitly mark all external contracts as trusted or untrusted.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
@@ -45,9 +45,9 @@ Bank.withdraw(100);
 ```
 
 ## Version
-This rule was introduced in [Solhint 2.0.0-alpha.0](https://github.com/protofire/solhint/tree/v2.0.0-alpha.0)
+This rule was introduced in [Solhint 2.0.0-alpha.0](https://github.com/protofire/solhint/blob/v2.0.0-alpha.0)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/security/mark-callable-contracts.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/security/mark-callable-contracts.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/security/mark-callable-contracts.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/security/mark-callable-contracts.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/security/mark-callable-contracts.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/security/mark-callable-contracts.js)

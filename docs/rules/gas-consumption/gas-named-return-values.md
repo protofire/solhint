@@ -12,7 +12,7 @@ title:       "gas-named-return-values | Solhint"
 Enforce the return values of a function to be named
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
@@ -42,9 +42,9 @@ function checkBalance(address wallet) external view returns(uint256) {}
 ```
 
 ## Version
-This rule was introduced in [Solhint 4.5.0](https://github.com/protofire/solhint/tree/v4.5.0)
+This rule was introduced in [Solhint 4.5.0](https://github.com/protofire/solhint/blob/v4.5.0)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/gas-consumption/gas-named-return-values.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/gas-consumption/gas-named-return-values.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/gas-consumption/gas-named-return-values.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/gas-consumption/gas-named-return-values.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/gas-consumption/gas-named-return-values.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/gas-consumption/gas-named-return-values.js)

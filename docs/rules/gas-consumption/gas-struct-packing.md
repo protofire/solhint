@@ -12,7 +12,7 @@ title:       "gas-struct-packing | Solhint"
 Suggest to re-arrange struct packing order when it is inefficient
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
@@ -32,9 +32,9 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 This rule does not have examples.
 
 ## Version
-This rule was introduced in [Solhint 4.5.0](https://github.com/protofire/solhint/tree/v4.5.0)
+This rule was introduced in [Solhint 4.5.0](https://github.com/protofire/solhint/blob/v4.5.0)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/gas-consumption/gas-struct-packing.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/gas-consumption/gas-struct-packing.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/gas-consumption/gas-struct-packing.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/gas-consumption/gas-struct-packing.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/gas-consumption/gas-struct-packing.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/gas-consumption/gas-struct-packing.js)

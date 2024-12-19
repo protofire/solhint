@@ -16,7 +16,7 @@
 
 ## [5.0.1] - 2024-05-13
 ### BREAKING CHANGES (refer to v5.0.0)
-Fixed an issue on the returining values where only was evaluating the first report instead of all of them.
+Fixed an issue on the returning values where only was evaluating the first report instead of all of them.
 
 
 <br><br>
@@ -68,7 +68,7 @@ Thanks to [@juanpcapurro](https://github.com/juanpcapurro) for providing the cod
 - New Rule: Interface starts with `i` [#557](https://github.com/protofire/solhint/pull/557)
 
 #### Gas Consumption Rules
-- New Rule: [GC] Mutlitoken1155 rule [#541](https://github.com/protofire/solhint/pull/541)
+- New Rule: [GC] Multitoken1155 rule [#541](https://github.com/protofire/solhint/pull/541)
 - New Rule: [GC] Small strings check [#542](https://github.com/protofire/solhint/pull/542)
 - New Rule: [GC] Indexed events [#543](https://github.com/protofire/solhint/pull/543)
 - New Rule: [GC] Calldata parameters [#544](https://github.com/protofire/solhint/pull/544)
@@ -153,7 +153,7 @@ Thanks to [@juanpcapurro](https://github.com/juanpcapurro) for providing the cod
   
 ### Fixed
 - `foundry-test-functions` - Modified regex to include invariant and statefulFuzz tests [#484](https://github.com/protofire/solhint/pull/484)
-- `quotes` - To allow quotes inside double quotes and viceversa [#485](https://github.com/protofire/solhint/pull/485)
+- `quotes` - To allow quotes inside double quotes and vice versa [#485](https://github.com/protofire/solhint/pull/485)
 - `JSON` - Formatter returning JS object instead of standard json [#490](https://github.com/protofire/solhint/pull/490) 
 
 
