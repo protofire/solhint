@@ -70,6 +70,6 @@ while (d > e) { }
 This rule is introduced in the latest version.
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/best-practices/code-complexity.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/best-practises/code-complexity.js)
 - [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/best-practices/code-complexity.md)
 - [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/best-practices/code-complexity.js)
