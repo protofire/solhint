@@ -2,38 +2,38 @@ const assert = require('assert')
 const linter = require('../../../lib/index')
 const contractWith = require('../../common/contract-builder').contractWith
 
-describe('Linter - contract-name-pascalcase', () => {
+describe('Linter - contract-name-capwords', () => {
   it('should raise struct name error', () => {
     const code = contractWith('struct a {}')
 
     const report = linter.processStr(code, {
-      rules: { 'contract-name-pascalcase': 'error' },
+      rules: { 'contract-name-capwords': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
-    assert.ok(report.messages[0].message.includes('PascalCase'))
+    assert.ok(report.messages[0].message.includes('CapWords'))
   })
 
   it('should raise contract name error', () => {
     const code = 'contract a {}'
 
     const report = linter.processStr(code, {
-      rules: { 'contract-name-pascalcase': 'error' },
+      rules: { 'contract-name-capwords': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
-    assert.ok(report.messages[0].message.includes('PascalCase'))
+    assert.ok(report.messages[0].message.includes('CapWords'))
   })
 
   it('should raise enum name error', () => {
     const code = contractWith('enum abc {}')
 
     const report = linter.processStr(code, {
-      rules: { 'contract-name-pascalcase': 'error' },
+      rules: { 'contract-name-capwords': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
-    assert.ok(report.messages[0].message.includes('PascalCase'))
+    assert.ok(report.messages[0].message.includes('CapWords'))
   })
 
   describe('Struct name with $ character', () => {
@@ -47,7 +47,7 @@ describe('Linter - contract-name-pascalcase', () => {
     for (const [key, code] of Object.entries(WITH_$)) {
       it(`should not raise contract name error for Structs ${key}`, () => {
         const report = linter.processStr(code, {
-          rules: { 'contract-name-pascalcase': 'error' },
+          rules: { 'contract-name-capwords': 'error' },
         })
 
         assert.equal(report.errorCount, 0)
@@ -66,7 +66,7 @@ describe('Linter - contract-name-pascalcase', () => {
     for (const [key, code] of Object.entries(WITH_$)) {
       it(`should not raise contract name error for Enums ${key}`, () => {
         const report = linter.processStr(code, {
-          rules: { 'contract-name-pascalcase': 'error' },
+          rules: { 'contract-name-capwords': 'error' },
         })
 
         assert.equal(report.errorCount, 0)
@@ -85,7 +85,7 @@ describe('Linter - contract-name-pascalcase', () => {
     for (const [key, code] of Object.entries(WITH_$)) {
       it(`should not raise contract name error for Contracts ${key}`, () => {
         const report = linter.processStr(code, {
-          rules: { 'contract-name-pascalcase': 'error' },
+          rules: { 'contract-name-capwords': 'error' },
         })
 
         assert.equal(report.errorCount, 0)

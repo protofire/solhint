@@ -2,12 +2,12 @@ const assert = require('assert')
 const linter = require('../../../lib/index')
 const contractWith = require('../../common/contract-builder').contractWith
 
-describe('Linter - event-name-pascalcase', () => {
+describe('Linter - event-name-capwords', () => {
   it('should raise event name error for event in mixedCase', () => {
     const code = contractWith('event EventCap(uint a);')
 
     const report = linter.processStr(code, {
-      rules: { 'event-name-pascalcase': 'error' },
+      rules: { 'event-name-capwords': 'error' },
     })
 
     assert.equal(report.errorCount, 0)
@@ -17,11 +17,11 @@ describe('Linter - event-name-pascalcase', () => {
     const code = contractWith('event event1(uint a);')
 
     const report = linter.processStr(code, {
-      rules: { 'event-name-pascalcase': 'error' },
+      rules: { 'event-name-capwords': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
-    assert.ok(report.messages[0].message.includes('PascalCase'))
+    assert.ok(report.messages[0].message.includes('CapWords'))
   })
 
   describe('Event name with $ character', () => {
@@ -35,7 +35,7 @@ describe('Linter - event-name-pascalcase', () => {
     for (const [key, code] of Object.entries(WITH_$)) {
       it(`should not raise event name error for Events ${key}`, () => {
         const report = linter.processStr(code, {
-          rules: { 'event-name-pascalcase': 'error' },
+          rules: { 'event-name-capwords': 'error' },
         })
 
         assert.equal(report.errorCount, 0)

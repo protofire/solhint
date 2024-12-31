@@ -23,8 +23,8 @@ module.exports = Object.freeze({
     'gas-custom-errors': 'warn',
     quotes: ['error', 'double'],
     'const-name-snakecase': 'warn',
-    'contract-name-pascalcase': 'warn',
-    'event-name-pascalcase': 'warn',
+    'contract-name-capwords': 'warn',
+    'event-name-capwords': 'warn',
     'func-name-mixedcase': 'warn',
     'immutable-vars-naming': [
       'warn',

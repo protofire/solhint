@@ -1,5 +1,5 @@
 {
   "rules": {
-    "contract-name-pascalcase": "error"
+    "contract-name-capwords": "error"
   }
 }

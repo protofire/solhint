@@ -476,9 +476,9 @@ describe('e2e', function () {
     })
   })
 
-  describe('autofix rule: contract-name-pascalcase', () => {
+  describe('autofix rule: contract-name-capwords', () => {
     before(function () {
-      params = retrieveParams('contract-name-pascalcase/')
+      params = retrieveParams('contract-name-capwords/')
       currentConfig = `${params.path}${params.subpath}.solhint.json`
       currentFile = `${params.path}${params.subpath}Foo1.sol`
       beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
@@ -522,9 +522,9 @@ describe('e2e', function () {
     })
   })
 
-  describe('autofix rule: event-name-pascalcase', () => {
+  describe('autofix rule: event-name-capwords', () => {
     before(function () {
-      params = retrieveParams('event-name-pascalcase/')
+      params = retrieveParams('event-name-capwords/')
       currentConfig = `${params.path}${params.subpath}.solhint.json`
       currentFile = `${params.path}${params.subpath}Foo1.sol`
       beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
