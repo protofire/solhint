@@ -8,7 +8,7 @@ To use a shareable config, you have to add it to your Solhint configuration:
   "extends": ["solhint:recommended", "protofire"]
 ```
 
-This example shows the two kind of shareable configs that you can use: the ones included with Solhint, that start with `solhint:`, and the ones that you can install from npm. The latter are packages that are prefixed with `solhint-config-`, so in this case the package would be installed doing `npm install solhint-config-protofire` but used as just `protofire` when adding it.
+This example shows the two types of shareable configs that you can use: the ones included with Solhint, that start with `solhint:`, and the ones that you can install from npm. The latter are packages that are prefixed with `solhint-config-`, so in this case the package would be installed doing `npm install solhint-config-protofire` but used as just `protofire` when adding it.
 
 ## Creating your own shareable config
 
