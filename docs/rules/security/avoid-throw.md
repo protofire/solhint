@@ -15,7 +15,7 @@ title:       "avoid-throw | Solhint"
 "throw" is deprecated, avoid to use it.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
@@ -33,9 +33,9 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 This rule does not have examples.
 
 ## Version
-This rule was introduced in [Solhint 2.0.0-alpha.0](https://github.com/protofire/solhint/tree/v2.0.0-alpha.0)
+This rule was introduced in [Solhint 2.0.0-alpha.0](https://github.com/protofire/solhint/blob/v2.0.0-alpha.0)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/security/avoid-throw.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/security/avoid-throw.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/security/avoid-throw.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/security/avoid-throw.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/security/avoid-throw.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/security/avoid-throw.js)

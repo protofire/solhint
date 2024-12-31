@@ -12,10 +12,10 @@ title:       "gas-custom-errors | Solhint"
 
 
 ## Description
-Enforces the use of Custom Errors over Require and Revert statements
+Enforces the use of Custom Errors over Require with strings error and Revert statements
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
@@ -44,6 +44,24 @@ revert CustomErrorFunction();
 revert CustomErrorFunction({ msg: "Insufficient Balance" });
 ```
 
+#### Use of Require with Custom Error with arguments
+
+```solidity
+require(success, CustomErrorFunction({ msg: "Insufficient Balance" });
+```
+
+#### Use of Require with function call and Custom Error
+
+```solidity
+require(isAuthorized(account), CustomErrorFunction();
+```
+
+#### Use of Require with binary comparison and Custom Error
+
+```solidity
+require(a > b, CustomErrorFunction();
+```
+
 ### 👎 Examples of **incorrect** code for this rule
 
 #### Use of require statement
@@ -65,9 +83,9 @@ revert("Insufficient Balance");
 ```
 
 ## Version
-This rule was introduced in [Solhint 4.5.0](https://github.com/protofire/solhint/tree/v4.5.0)
+This rule was introduced in [Solhint 4.5.0](https://github.com/protofire/solhint/blob/v4.5.0)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/gas-consumption/gas-custom-errors.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/gas-consumption/gas-custom-errors.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/gas-consumption/gas-custom-errors.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/gas-consumption/gas-custom-errors.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/gas-consumption/gas-custom-errors.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/gas-consumption/gas-custom-errors.js)

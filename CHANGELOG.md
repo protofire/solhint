@@ -1,6 +1,21 @@
+## [5.0.4] - 2024-12-31
+### Fixed
+- `imports-order` [#595](https://github.com/protofire/solhint/pull/595) - Replaced single quotes with double quotes
+- `gas-custom-errors` [#613](https://github.com/protofire/solhint/pull/613) - Allows the use of Requirement with Custom Errors
+- Typos and broken links [#611](https://github.com/protofire/solhint/pull/611) - [#617](https://github.com/protofire/solhint/pull/617)
+- Upgraded `solidity-parser` dependency [#612](https://github.com/protofire/solhint/pull/612) 
+
+
+### Added
+- `.pre-commit-hooks.yaml` to allow projects to run Solhint via pre-commit [#596](https://github.com/protofire/solhint/pull/596) (Thanks to [@dbast](https://github.com/dbast))
+- Removed `husky` since it is not needed [#612](https://github.com/protofire/solhint/pull/612)
+  
+<br><br>
+
+
 ## [5.0.3] - 2024-08-03
 ### Fixed
-- New Rule: Imports order [#593](https://github.com/protofire/solhint/pull/593)
+- `imports-order` [#593](https://github.com/protofire/solhint/pull/593)
   
 <br><br>
 
@@ -16,10 +31,11 @@
 
 ## [5.0.1] - 2024-05-13
 ### BREAKING CHANGES (refer to v5.0.0)
-Fixed an issue on the returining values where only was evaluating the first report instead of all of them.
+Fixed an issue on the returning values where only was evaluating the first report instead of all of them.
 
 
 <br><br>
+
 ## [5.0.0] - 2024-05-11
 ### BREAKING CHANGES
 
@@ -37,6 +53,7 @@ QUIET mode (-c quiet) option now works with the warnings and may exit with 1 if 
 Thanks to [@juanpcapurro](https://github.com/juanpcapurro) for providing the code
 
 <br><br>
+
 ## [4.5.4] - 2024-04-10
 ### Fixed
 - `gas-custom-errors` improved logic to ranged pragma versions [#573](https://github.com/protofire/solhint/pull/573)
@@ -68,7 +85,7 @@ Thanks to [@juanpcapurro](https://github.com/juanpcapurro) for providing the cod
 - New Rule: Interface starts with `i` [#557](https://github.com/protofire/solhint/pull/557)
 
 #### Gas Consumption Rules
-- New Rule: [GC] Mutlitoken1155 rule [#541](https://github.com/protofire/solhint/pull/541)
+- New Rule: [GC] Multitoken1155 rule [#541](https://github.com/protofire/solhint/pull/541)
 - New Rule: [GC] Small strings check [#542](https://github.com/protofire/solhint/pull/542)
 - New Rule: [GC] Indexed events [#543](https://github.com/protofire/solhint/pull/543)
 - New Rule: [GC] Calldata parameters [#544](https://github.com/protofire/solhint/pull/544)
@@ -153,7 +170,7 @@ Thanks to [@juanpcapurro](https://github.com/juanpcapurro) for providing the cod
   
 ### Fixed
 - `foundry-test-functions` - Modified regex to include invariant and statefulFuzz tests [#484](https://github.com/protofire/solhint/pull/484)
-- `quotes` - To allow quotes inside double quotes and viceversa [#485](https://github.com/protofire/solhint/pull/485)
+- `quotes` - To allow quotes inside double quotes and vice versa [#485](https://github.com/protofire/solhint/pull/485)
 - `JSON` - Formatter returning JS object instead of standard json [#490](https://github.com/protofire/solhint/pull/490) 
 
 

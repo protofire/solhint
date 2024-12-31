@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://protofire.io/projects/solhint" target="_blank"><img src="solhint.png"></a>
+  <a href="https://protofire.io/solhint" target="_blank"><img src="solhint.png"></a>
 </p>
 <p align="center">
   By <a href="https://protofire.io/" target="_blank">Protofire</a>
@@ -16,7 +16,7 @@ https://coveralls.io/github/protofire/solhint?branch=master)
 This is an open source project for linting [Solidity](http://solidity.readthedocs.io/en/develop/) code. This project
 provides both **Security** and **Style Guide** validations.
 <br>
-[VISIT OUR WEBSITE](https://protofire.io/projects/solhint)<br>
+[VISIT OUR WEBSITE](https://protofire.io/solhint)<br>
 [JOIN OUR DISCORD SERVER](https://discord.gg/4TYGq3zpjs)
 <br>
 ## Installation
@@ -204,11 +204,23 @@ Or disable all validations for a group of lines:
 ### Style Guide Rules
 [Full list with all supported Style Guide Rules](docs/rules.md#style-guide-rules)
 ### Best Practices Rules
-[Full list with all supported Best Practices Rules](docs/rules.md#best-practise-rules)
+[Full list with all supported Best Practices Rules](docs/rules.md#best-practices-rules)
 
 ## Docker
 ### Solhint has an official Docker Image
 Go to docker folder and follow [this](docker/docker.md) instructions.
+
+## pre-commit
+### Solhint can also be used as [pre-commit](https://pre-commit.com/) hook
+
+Replace `$GIT_TAG` with real tag:
+
+```YAML
+- repo: https://github.com/protofire/solhint
+  rev: $GIT_TAG
+  hooks:
+    - id: solhint
+```
 
 ## Documentation
 Related documentation you may find [here](https://protofire.github.io/solhint/).
@@ -257,7 +269,7 @@ Related documentation you may find [here](https://protofire.github.io/solhint/).
 
 The Solidity parser used is [`@solidity-parser/parser`](https://github.com/solidity-parser/parser).
 
-## Licence
+## License
 
 MIT
 

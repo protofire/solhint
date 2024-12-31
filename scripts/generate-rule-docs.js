@@ -151,7 +151,7 @@ function loadOptions(rule) {
 ${table(optionsTable)}
 `
   } else if (typeof rule.meta.defaultSetup === 'string') {
-    return `This rule accepts a string option of rule severity. Must be one of ${ruleSeverityEnum}. Default to ${rule.meta.defaultSetup}.`
+    return `This rule accepts a string option of rule severity. Must be one of ${ruleSeverityEnum}. Defaults to ${rule.meta.defaultSetup}.`
   } else {
     throw new Error(`Unhandled type of rule.meta.defaultSetup from rule ${rule.ruleId}`)
   }
@@ -184,7 +184,7 @@ function loadNotes(rule) {
 
 function linkToVersion(version) {
   if (version) {
-    return `This rule was introduced in [Solhint ${version}](https://github.com/protofire/solhint/tree/v${version})`
+    return `This rule was introduced in [Solhint ${version}](https://github.com/protofire/solhint/blob/v${version})`
   } else {
     return `This rule is introduced in the latest version.`
   }
@@ -192,19 +192,19 @@ function linkToVersion(version) {
 
 function linkToSource(rule) {
   const link = localPathToUri(rule.file)
-  return `https://github.com/protofire/solhint/tree/master${link}`
+  return `https://github.com/protofire/solhint/blob/master${link}`
 }
 
 function linkToDocumentSource(rule) {
   const link = localPathToUri(rule.file)
     .replace('lib/rules', 'docs/rules')
     .replace(/\.js$/, '.md')
-  return `https://github.com/protofire/solhint/tree/master${link}`
+  return `https://github.com/protofire/solhint/blob/master${link}`
 }
 
 function linkToTestCase(rule) {
   const link = localPathToUri(rule.file).replace('lib/rules/', '')
-  return `https://github.com/protofire/solhint/tree/master/test/rules${link}`
+  return `https://github.com/protofire/solhint/blob/master/test/rules${link}`
 }
 
 function localPathToUri(file) {
@@ -283,7 +283,7 @@ ${contents}
 
 ## References
 
-- [ConsenSys Guide for Smart Contracts](https://consensys.github.io/smart-contract-best-practices/recommendations/)
+- [ConsenSys Guide for Smart Contracts](https://consensys.github.io/smart-contract-best-practices/development-recommendations/)
 - [Solidity Style Guide](http://solidity.readthedocs.io/en/develop/style-guide.html)
 `
 }
