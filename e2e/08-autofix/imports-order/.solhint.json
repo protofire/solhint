@@ -1,5 +1,6 @@
 {
   "rules": {
-    "imports-order": "error"
+    "imports-order": "error",
+    "compiler-version": "off"
   }
 }
