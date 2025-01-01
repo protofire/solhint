@@ -2,7 +2,7 @@ const assert = require('assert')
 const { assertNoErrors, assertErrorCount, assertErrorMessage } = require('../../common/asserts')
 const linter = require('../../../lib/index')
 
-const DEFAULT_SEMVER = '^0.8.0'
+const DEFAULT_SEMVER = '^0.8.24'
 
 describe('Linter - compiler-version', () => {
   it('should disable only one compiler error on next line', () => {
@@ -123,15 +123,15 @@ describe('Linter - compiler-version', () => {
   })
 
   it('should not report compiler version error on exact match', () => {
-    const report = linter.processStr('pragma solidity 0.8.0;', {
-      rules: { 'compiler-version': ['error', '0.8.0'] },
+    const report = linter.processStr('pragma solidity 0.8.24;', {
+      rules: { 'compiler-version': ['error', '0.8.24'] },
     })
 
     assert.equal(report.errorCount, 0)
   })
 
   it('should not report compiler version error on range match', () => {
-    const report = linter.processStr('pragma solidity ^0.8.0;', {
+    const report = linter.processStr('pragma solidity ^0.8.24;', {
       rules: { 'compiler-version': ['error', DEFAULT_SEMVER] },
     })
 
@@ -139,7 +139,7 @@ describe('Linter - compiler-version', () => {
   })
 
   it('should not report compiler version error on patch bump', () => {
-    const report = linter.processStr('pragma solidity 0.8.1;', {
+    const report = linter.processStr('pragma solidity 0.8.25;', {
       rules: { 'compiler-version': ['error', DEFAULT_SEMVER] },
     })
 
@@ -147,7 +147,7 @@ describe('Linter - compiler-version', () => {
   })
 
   it('should not report compiler version error on range match', () => {
-    const report = linter.processStr('pragma solidity ^0.8.2;', {
+    const report = linter.processStr('pragma solidity ^0.8.25;', {
       rules: { 'compiler-version': ['error', DEFAULT_SEMVER] },
     })
 
@@ -207,7 +207,7 @@ describe('Linter - compiler-version', () => {
 
   it(`should not report compiler version error using default and correct pragma`, () => {
     const report = linter.processStr(
-      `pragma solidity ^0.8.1;
+      `pragma solidity ^0.8.25;
        pragma experimental ABIEncoderV2;
        
        contract Main {
@@ -237,7 +237,7 @@ describe('Linter - compiler-version', () => {
 
   it(`should not report compiler version error using >= and default and correct pragma`, () => {
     const report = linter.processStr(
-      `pragma solidity >=0.8.0;
+      `pragma solidity >=0.8.24;
        
        contract Main {
        }`,

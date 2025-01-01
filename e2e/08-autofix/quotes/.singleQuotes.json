@@ -1,5 +1,6 @@
 {
   "rules": {
-    "quotes": ["error", "single"]
+    "quotes": ["error", "single"],
+    "compiler-version": "off"
   }
 }
