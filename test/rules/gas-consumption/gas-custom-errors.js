@@ -17,6 +17,39 @@ function replaceSolidityVersion(code, newVersion) {
 }
 
 describe('Linter - gas-custom-errors', () => {
+  it('should raise error for require with a non-function-call second argument', () => {
+    // second arg is a numeric literal instead of a function call
+    const code = `
+      pragma solidity 0.8.5;
+      contract A {
+        function test() external {
+          require(msg.sender != address(0), 123);
+        }
+      }
+    `
+    const report = linter.processStr(code, {
+      rules: { 'gas-custom-errors': 'error' },
+    })
+    assertErrorCount(report, 1)
+    assertErrorMessage(report, 'Use Custom Errors instead of require statements')
+  })
+
+  it('should raise error for require with no second argument', () => {
+    const code = `
+      pragma solidity 0.8.5;
+      contract A {
+        function test() external {
+          require(msg.sender != address(0));
+        }
+      }
+    `
+    const report = linter.processStr(code, {
+      rules: { 'gas-custom-errors': 'error' },
+    })
+    assertErrorCount(report, 1)
+    assertErrorMessage(report, 'Use Custom Errors instead of require statements')
+  })
+
   it('should NOT raise error for require with comparison and custom error()', () => {
     let code = funcWith(`require(a > b, CustomErrorEmitted());`)
     code = replaceSolidityVersion(code, '^0.8.4')
