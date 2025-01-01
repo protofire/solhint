@@ -1,3 +1,6 @@
 {
-  "extends": "solhint:all"
+  "extends": "solhint:all",
+  "rules": {
+    "compiler-version": "off"
+  }
 }

@@ -1,5 +1,6 @@
 {
   "rules": {
-    "no-empty-blocks": "error"
+    "no-empty-blocks": "error",
+    "compiler-version": "off"
   }
 }

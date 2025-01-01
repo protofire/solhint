@@ -1,5 +1,6 @@
 {
   "rules": {
-    "no-empty-blocks": "off"
+    "no-empty-blocks": "off",
+    "compiler-version": "off"
   }
 }
