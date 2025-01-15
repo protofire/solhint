@@ -35,9 +35,9 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 This rule does not have examples.
 
 ## Version
-This rule was introduced in [Solhint 5.0.2](https://github.com/protofire/solhint/blob/v5.0.2)
+This rule is introduced in the latest version.
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/naming/imports-order.js)
-- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/naming/imports-order.md)
-- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/naming/imports-order.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/order/imports-order.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/order/imports-order.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/order/imports-order.js)

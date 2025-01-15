@@ -77,7 +77,7 @@ This rule accepts an array of options:
 ```
 
 ## Version
-This rule is introduced in the latest version.
+This rule was introduced in [Solhint 5.0.4](https://github.com/protofire/solhint/blob/v5.0.4)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/best-practices/reason-string.js)

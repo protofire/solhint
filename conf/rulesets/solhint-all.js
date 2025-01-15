@@ -50,7 +50,6 @@ module.exports = Object.freeze({
         immutablesAsConstants: true,
       },
     ],
-    'imports-order': 'warn',
     'modifier-name-mixedcase': 'warn',
     'named-parameters-mapping': 'warn',
     'private-vars-leading-underscore': [
@@ -62,6 +61,7 @@ module.exports = Object.freeze({
     'use-forbidden-name': 'warn',
     'var-name-mixedcase': 'warn',
     'imports-on-top': 'warn',
+    'imports-order': 'warn',
     ordering: 'warn',
     'visibility-modifier-order': 'warn',
     'avoid-call-value': 'warn',
