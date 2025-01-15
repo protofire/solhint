@@ -46,7 +46,7 @@ describe('e2e', function () {
       const { code, stderr } = shell.exec(`${NODE}solhint Foo.sol -c ./noconfig/.solhint.json`)
 
       expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
-      expect(stderr).to.include('couldnt be found')
+      expect(stderr).to.include("couldn't be found")
     })
 
     it('should create an initial config with --init', function () {

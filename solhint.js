@@ -126,13 +126,14 @@ function executeMainActionLogic() {
 
   const customConfig = program.opts().config
   if (customConfig && !fs.existsSync(customConfig)) {
-    console.error(`Config file "${customConfig}" couldnt be found.`)
+    console.error(`Config file "${customConfig}" couldn't be found.`)
     process.exit(EXIT_CODES.BAD_OPTIONS)
   }
 
   let reports
   try {
     const reportLists = program.args.filter(_.isString).map(processPath)
+    // console.log('reportLists :>> ', reportLists)
     reports = _.flatten(reportLists)
   } catch (e) {
     console.error(e)
