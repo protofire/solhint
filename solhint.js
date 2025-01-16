@@ -310,7 +310,7 @@ function printReports(reports, formatter) {
 
   if (!program.opts().quiet) {
     console.log(fullReport)
-    if (fullReport) {
+    if (fullReport && !program.opts().formatter) {
       console.log(
         chalk.italic.bgYellow.black.bold(
           ' -------------------------------------------------------------------------- '
