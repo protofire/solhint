@@ -36,6 +36,7 @@ module.exports = Object.freeze({
     'gas-strict-inequalities': 'warn',
     'gas-struct-packing': 'warn',
     'comprehensive-interface': 'warn',
+    'duplicated-imports': 'warn',
     quotes: ['error', 'double'],
     'const-name-snakecase': 'warn',
     'contract-name-capwords': 'warn',
