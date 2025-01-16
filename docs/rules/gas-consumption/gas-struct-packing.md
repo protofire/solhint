@@ -25,6 +25,7 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 
 ### Notes
 - This rule assumes all UserDefinedTypeName take a new slot. (beware of Enums inside Structs) 
+- Simple cases like a struct with three addresses might be reported as false positive. (needs to be fixed)
 - [source 1](https://coinsbench.com/comprehensive-guide-tips-and-tricks-for-gas-optimization-in-solidity-5380db734404) of the rule initiative (Variable Packing)
 - [source 2](https://www.rareskills.io/post/gas-optimization?postId=c9db474a-ff97-4fa3-a51d-fe13ccb8fe3b#viewer-f8m1r) of the rule initiative
 

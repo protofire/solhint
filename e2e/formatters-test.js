@@ -507,7 +507,7 @@ describe('e2e', function () {
           {
             level: 'error',
             message: {
-              text: 'Compiler version >=0.6.0 does not satisfy the ^0.8.0 semver requirement',
+              text: 'Compiler version >=0.6.0 does not satisfy the ^0.8.24 semver requirement',
             },
             locations: [
               {

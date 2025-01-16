@@ -4,6 +4,7 @@ const _ = require('lodash')
 const fs = require('fs')
 const process = require('process')
 const readline = require('readline')
+const chalk = require('chalk')
 
 const linter = require('./lib/index')
 const { loadConfig } = require('./lib/config/config-file')
@@ -126,13 +127,14 @@ function executeMainActionLogic() {
 
   const customConfig = program.opts().config
   if (customConfig && !fs.existsSync(customConfig)) {
-    console.error(`Config file "${customConfig}" couldnt be found.`)
+    console.error(`Config file "${customConfig}" couldn't be found.`)
     process.exit(EXIT_CODES.BAD_OPTIONS)
   }
 
   let reports
   try {
     const reportLists = program.args.filter(_.isString).map(processPath)
+    // console.log('reportLists :>> ', reportLists)
     reports = _.flatten(reportLists)
   } catch (e) {
     console.error(e)
@@ -305,7 +307,29 @@ function printReports(reports, formatter) {
   }
 
   const fullReport = formatter(reports) + (finalMessage || '')
-  if (!program.opts().quiet) console.log(fullReport)
+
+  if (!program.opts().quiet) {
+    console.log(fullReport)
+    if (fullReport && !program.opts().formatter) {
+      console.log(
+        chalk.italic.bgYellow.black.bold(
+          ' -------------------------------------------------------------------------- '
+        )
+      )
+
+      console.log(
+        chalk.italic.bgYellow.black.bold(
+          ' ===> Join SOLHINT Community at: https://discord.com/invite/4TYGq3zpjs <=== '
+        )
+      )
+
+      console.log(
+        chalk.italic.bgYellow.black.bold(
+          ' -------------------------------------------------------------------------- \n'
+        )
+      )
+    }
+  }
 
   if (program.opts().save) {
     writeStringToFile(fullReport)

@@ -36,6 +36,7 @@ module.exports = Object.freeze({
     'gas-strict-inequalities': 'warn',
     'gas-struct-packing': 'warn',
     'comprehensive-interface': 'warn',
+    'duplicated-imports': 'warn',
     quotes: ['error', 'double'],
     'const-name-snakecase': 'warn',
     'contract-name-capwords': 'warn',
@@ -50,7 +51,6 @@ module.exports = Object.freeze({
         immutablesAsConstants: true,
       },
     ],
-    'imports-order': 'warn',
     'modifier-name-mixedcase': 'warn',
     'named-parameters-mapping': 'warn',
     'private-vars-leading-underscore': [
@@ -62,6 +62,7 @@ module.exports = Object.freeze({
     'use-forbidden-name': 'warn',
     'var-name-mixedcase': 'warn',
     'imports-on-top': 'warn',
+    'imports-order': 'warn',
     ordering: 'warn',
     'visibility-modifier-order': 'warn',
     'avoid-call-value': 'warn',
@@ -71,7 +72,7 @@ module.exports = Object.freeze({
     'avoid-throw': 'warn',
     'avoid-tx-origin': 'warn',
     'check-send-result': 'warn',
-    'compiler-version': ['error', '^0.8.0'],
+    'compiler-version': ['error', '^0.8.24'],
     'func-visibility': [
       'warn',
       {

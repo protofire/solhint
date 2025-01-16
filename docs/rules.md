@@ -28,6 +28,7 @@ title:       "Rule Index of Solhint"
 | Rule Id                                                                              | Error                                                                                                         | Recommended  | Deprecated  |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | ------------ | ----------- |
 | [interface-starts-with-i](./rules/naming/interface-starts-with-i.md)                 | Solidity Interfaces names should start with an `I`                                                            |              |             |
+| [duplicated-imports](./rules/miscellaneous/duplicated-imports.md)                    | Check if an import is done twice in the same file and there is no alias                                       |              |             |
 | [const-name-snakecase](./rules/naming/const-name-snakecase.md)                       | Constant name must be in capitalized SNAKE_CASE. (Does not check IMMUTABLES, use immutable-vars-naming)       | $~~~~~~~~$✔️ |             |
 | [contract-name-capwords](./rules/naming/contract-name-capwords.md)                   | Contract, Structs and Enums should be in CapWords.                                                            | $~~~~~~~~$✔️ |             |
 | [event-name-capwords](./rules/naming/event-name-capwords.md)                         | Event name must be in CapWords.                                                                               | $~~~~~~~~$✔️ |             |
@@ -36,7 +37,6 @@ title:       "Rule Index of Solhint"
 | [func-named-parameters](./rules/naming/func-named-parameters.md)                     | Enforce named parameters for function calls with 4 or more arguments. This rule may have some false positives |              |             |
 | [func-param-name-mixedcase](./rules/naming/func-param-name-mixedcase.md)             | Function param name must be in mixedCase.                                                                     |              |             |
 | [immutable-vars-naming](./rules/naming/immutable-vars-naming.md)                     | Check Immutable variables. Capitalized SNAKE_CASE or mixedCase depending on configuration.                    | $~~~~~~~~$✔️ |             |
-| [imports-order](./rules/naming/imports-order.md)                                     | Order the imports of the contract to follow a certain hierarchy (read "Notes section")                        |              |             |
 | [modifier-name-mixedcase](./rules/naming/modifier-name-mixedcase.md)                 | Modifier name must be in mixedCase.                                                                           |              |             |
 | [named-parameters-mapping](./rules/naming/named-parameters-mapping.md)               | Solidity v0.8.18 introduced named parameters on the mappings definition.                                      |              |             |
 | [private-vars-leading-underscore](./rules/naming/private-vars-leading-underscore.md) | Non-external functions and state variables should start with a single underscore. Others, shouldn't           |              |             |
@@ -44,6 +44,7 @@ title:       "Rule Index of Solhint"
 | [var-name-mixedcase](./rules/naming/var-name-mixedcase.md)                           | Variable names must be in mixedCase. (Does not check IMMUTABLES, use immutable-vars-naming)                   | $~~~~~~~~$✔️ |             |
 | [func-order](./rules/order/func-order.md)                                            | Function order is incorrect.                                                                                  |              | $~~~~~~~$✔️ |
 | [imports-on-top](./rules/order/imports-on-top.md)                                    | Import statements must be on top.                                                                             | $~~~~~~~~$✔️ |             |
+| [imports-order](./rules/naming/imports-order.md)                                     | Order the imports of the contract to follow a certain hierarchy (read "Notes section")                        |              |             |
 | [ordering](./rules/order/ordering.md)                                                | Check order of elements in file and inside each contract, according to the style guide.                       |              |             |
 | [visibility-modifier-order](./rules/order/visibility-modifier-order.md)              | Visibility modifier must be first in list of modifiers.                                                       | $~~~~~~~~$✔️ |             |
         
