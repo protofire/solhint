@@ -310,24 +310,25 @@ function printReports(reports, formatter) {
 
   if (!program.opts().quiet) {
     console.log(fullReport)
-
-    console.log(
-      chalk.italic.bgYellow.black.bold(
-        ' -------------------------------------------------------------------------- '
+    if (fullReport) {
+      console.log(
+        chalk.italic.bgYellow.black.bold(
+          ' -------------------------------------------------------------------------- '
+        )
       )
-    )
 
-    console.log(
-      chalk.italic.bgYellow.black.bold(
-        ' ===> Join SOLHINT Community at: https://discord.com/invite/4TYGq3zpjs <=== '
+      console.log(
+        chalk.italic.bgYellow.black.bold(
+          ' ===> Join SOLHINT Community at: https://discord.com/invite/4TYGq3zpjs <=== '
+        )
       )
-    )
 
-    console.log(
-      chalk.italic.bgYellow.black.bold(
-        ' -------------------------------------------------------------------------- \n'
+      console.log(
+        chalk.italic.bgYellow.black.bold(
+          ' -------------------------------------------------------------------------- \n'
+        )
       )
-    )
+    }
   }
 
   if (program.opts().save) {
