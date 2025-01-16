@@ -27,7 +27,7 @@ report.messages.forEach(curError => console.log(curError.message));
   **linter.processStr**:
    
    - Arguments:
-     - code {String} - Source code to validation
+     - code {String} - Source code for validation
      - config {Object} - Object representation of .solhint.json configuration
    - Returns: 
      - report {Report} - object that contains list of errors and warnings
