@@ -1,3 +1,19 @@
+## [5.0.5] - 2025-01-16
+### Fixed
+- `gas-custom-errors` [#620](https://github.com/protofire/solhint/pull/620) - Support for Custom Errors inside `require` statements
+- `compiler-version` [#621](https://github.com/protofire/solhint/pull/621) - Upgraded minimum requirement for the rule
+- `reentrancy` [#622](https://github.com/protofire/solhint/pull/622) - Fixed path and typos 
+- Typos [#623](https://github.com/protofire/solhint/pull/623) - Fixed typos 
+- Typo [#625](https://github.com/protofire/solhint/pull/625) - Fixed typo 
+
+
+### Added
+- New Rule: Duplicated Imports [#626](https://github.com/protofire/solhint/pull/626)
+- Cute Message on console report to gather community into discord channel
+  
+<br><br>
+
+
 ## [5.0.4] - 2024-12-31
 ### Fixed
 - `imports-order` [#595](https://github.com/protofire/solhint/pull/595) - Replaced single quotes with double quotes
