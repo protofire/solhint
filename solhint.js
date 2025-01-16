@@ -4,6 +4,7 @@ const _ = require('lodash')
 const fs = require('fs')
 const process = require('process')
 const readline = require('readline')
+const chalk = require('chalk')
 
 const linter = require('./lib/index')
 const { loadConfig } = require('./lib/config/config-file')
@@ -306,7 +307,28 @@ function printReports(reports, formatter) {
   }
 
   const fullReport = formatter(reports) + (finalMessage || '')
-  if (!program.opts().quiet) console.log(fullReport)
+
+  if (!program.opts().quiet) {
+    console.log(fullReport)
+
+    console.log(
+      chalk.italic.bgYellow.black.bold(
+        ' -------------------------------------------------------------------------- '
+      )
+    )
+
+    console.log(
+      chalk.italic.bgYellow.black.bold(
+        ' ===> Join SOLHINT Community at: https://discord.com/invite/4TYGq3zpjs <=== '
+      )
+    )
+
+    console.log(
+      chalk.italic.bgYellow.black.bold(
+        ' -------------------------------------------------------------------------- \n'
+      )
+    )
+  }
 
   if (program.opts().save) {
     writeStringToFile(fullReport)
