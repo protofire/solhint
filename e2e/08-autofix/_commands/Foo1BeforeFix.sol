@@ -7,7 +7,7 @@ contract Foo1 is ERC20Burnable {
     uint public hola;
     uint public hola2;
     int public constant hola3 = 2;
-    ufixed hola4;
+    ufixed public hola4;
     fixed internal hola5;
 
     constructor() ERC20('MyToken', 'MTK') {}
@@ -18,5 +18,5 @@ contract Foo1 is ERC20Burnable {
     // solhint-disable no-empty-blocks
     function payableFalse() public {}
 
-    function zarasa() {}
+    function zarasa() public {}
 }
