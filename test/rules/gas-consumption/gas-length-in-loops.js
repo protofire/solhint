@@ -8,7 +8,7 @@ const ERROR_MSG =
 describe('Linter - gas-length-in-loops', () => {
   it('should raise error on ForLoop with .length in condition', () => {
     const code = funcWith(`
-      for (uint256 length = 0; length > object.length; legnth++) {
+      for (uint256 length = 0; length > object.length; length++) {
         // code block to be executed
       }`)
 
