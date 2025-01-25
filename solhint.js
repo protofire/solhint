@@ -4,7 +4,7 @@ const _ = require('lodash')
 const fs = require('fs')
 const process = require('process')
 const readline = require('readline')
-const chalk = require('chalk')
+const picocolors = require('picocolors')
 
 const linter = require('./lib/index')
 const { loadConfig } = require('./lib/config/config-file')
@@ -312,19 +312,19 @@ function printReports(reports, formatter) {
     console.log(fullReport)
     if (fullReport && !program.opts().formatter) {
       console.log(
-        chalk.italic.bgYellow.black.bold(
+        picocolors.italic.bgYellow.black.bold(
           ' -------------------------------------------------------------------------- '
         )
       )
 
       console.log(
-        chalk.italic.bgYellow.black.bold(
+        picocolors.italic.bgYellow.black.bold(
           ' ===> Join SOLHINT Community at: https://discord.com/invite/4TYGq3zpjs <=== '
         )
       )
 
       console.log(
-        chalk.italic.bgYellow.black.bold(
+        picocolors.italic.bgYellow.black.bold(
           ' -------------------------------------------------------------------------- \n'
         )
       )
