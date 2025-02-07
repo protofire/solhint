@@ -682,7 +682,7 @@ describe('e2e', function () {
 
       it('should execute and compare Foo1 with template AFTER FIX and they should match (11)', () => {
         ;({ code, stdout } = shell.exec(
-            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+          `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
         ))
 
         result = compareTextFiles(currentFile, afterFixFile)
@@ -695,8 +695,7 @@ describe('e2e', function () {
 
       it('should get the right report (11)', () => {
         const reportLines = stdout.split('\n')
-        // TODO: fix `finalLine`
-        const finalLine = '9 problems (9 errors, 0 warnings)'
+        const finalLine = '2 problems (2 errors, 0 warnings)'
         expect(reportLines[reportLines.length - 7]).to.contain(finalLine)
       })
     })
