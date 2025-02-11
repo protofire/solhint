@@ -37,6 +37,6 @@ This rule does not have examples.
 This rule is introduced in the latest version.
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/naming/contract-name-pascalcase.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/naming/contract-name-capwords.js)
 - [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/naming/contract-name-pascalcase.md)
 - [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/naming/contract-name-pascalcase.js)
