@@ -35,7 +35,7 @@ interface IFoo { function foo () external; }
 
 ### 👎 Examples of **incorrect** code for this rule
 
-#### Interface name doesnt start with I
+#### Interface name doesn't start with I
 
 ```solidity
 interface Foo { function foo () external; }
