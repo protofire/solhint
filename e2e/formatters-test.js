@@ -131,12 +131,12 @@ describe('e2e', function () {
         expect(stdout.trim()).to.be.empty
         expect(stderr).to.include('No files to lint! check glob arguments')
       })
-      it('should return nothing when file exists and there is no error/warning', () => {
+      it('should return empty array when file exists and there is no error/warning', () => {
         const { code, stdout } = shell.exec(
           `${NODE}solhint ${PATH}contracts/Foo3.sol -f ${formatterType}${SUFFIX}`
         )
         expect(code).to.equal(EXIT_CODES.OK)
-        expect(stdout.trim()).to.be.empty
+        expect(stdout.trim()).to.equal('[]')
       })
       it('should make the output report with json formatter for Foo2', () => {
         const { code, stdout } = shell.exec(
