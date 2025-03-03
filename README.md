@@ -90,7 +90,7 @@ This option currently works on:
 - private-vars-underscore
 - payable-fallback
 - quotes
-- contract-name-camelcase
+- contract-name-capwords
 - avoid-suicide
   
 <br><br>
