@@ -17,13 +17,13 @@
   "repository": "https://github.com/protofire/solhint",
   "scripts": {
     "exec-tests": "nyc mocha --recursive && nyc report --reporter=text-lcov | coveralls",
-    "test:coverage": "npm run exec-tests",
-    "test:e2e": "bash -c 'set -xeuo pipefail && rm solhint*tgz && npm pack && npm i -g solhint*tgz && (cd e2e && npm run test)'",
+    "test:coverage": "npm run exec-tests",    
     "test": "mocha --recursive",
     "lint": "eslint .",
     "generate-rulesets": "node scripts/generate-rulesets.js && prettier --write conf/rulesets",
     "docs": "node scripts/generate-rule-docs.js",
-    "prepublishOnly": "npm run lint && npm run test && npm run generate-rulesets"
+    "prepublishOnly": "npm run lint && npm run test && npm run generate-rulesets",
+    "test:e2e": "bash -c 'set -xeuo pipefail && rm solhint*tgz -f && npm pack && npm i -g solhint*tgz && (cd e2e && npm install && npm run test);npm uninstall -g solhint'"
   },
   "bin": {
     "solhint": "solhint.js"
