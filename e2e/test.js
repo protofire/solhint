@@ -108,6 +108,15 @@ describe('e2e', function () {
 
       expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
       expect(stdout.trim()).to.contain('Code contains empty blocks')
+      expect(stdout.trim()).to.contain('Join SOLHINT Community')
+    })
+
+    it('should end with REPORTED_ERRORS = 1 and no Poster to join Discord', function () {
+      const { code, stdout } = shell.exec(`${NODE}solhint --noPoster ${PREFIX}Foo.sol ${SUFFIX}`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout.trim()).to.contain('Code contains empty blocks')
+      expect(stdout.trim()).to.not.contain('Join SOLHINT Community')
     })
 
     it('should work with stdin, exit 0, found 1 error', async function () {
