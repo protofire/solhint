@@ -34,7 +34,7 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 This rule does not have examples.
 
 ## Version
-This rule is introduced in the latest version.
+This rule was introduced in the latest version.
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/naming/event-name-pascalcase.js)
