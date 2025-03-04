@@ -4,6 +4,10 @@ const path = require('path')
 const shell = require('shelljs')
 
 function useFixture(dir) {
+
+  console.log('\n\ndiR :>> ', dir);
+  console.log('\n\n');
+
   beforeEach(`switch to ${dir}`, function () {
     const fixturePath = path.join(__dirname, dir).replace('/_common', '')
 
