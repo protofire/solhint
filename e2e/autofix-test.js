@@ -14,10 +14,6 @@ let currentFile
 let beforeFixFile
 let afterFixFile
 
-function retrieveParams(subpath) {
-  return { command: 'solhint', param1: '', path: '', subpath }
-}
-
 function compareTextFiles(file1Path, file2Path) {
   const file1Content = fs.readFileSync(file1Path, 'utf-8')
   const file2Content = fs.readFileSync(file2Path, 'utf-8')
@@ -55,8 +51,8 @@ describe('e2e', function () {
       describe('--fix without noPrompt', () => {
         it('should terminate with --fix and user choose NOT to continue', () => {
           const solhintProcess = spawnSync(
-            `${params.command}`,
-            [`${params.param1}`, '-c', currentConfig, currentFile, '--fix', '--disc'],
+            `solhint`,
+            ['-c', currentConfig, currentFile, '--fix', '--disc'],
             {
               input: 'n\n', // Provide 'n' as input
               shell: true,
@@ -74,8 +70,8 @@ describe('e2e', function () {
 
         it('should fix with --fix and user choose YES to continue', () => {
           const solhintProcess = spawnSync(
-            `${params.command}`,
-            [`${params.param1}`, '-c', currentConfig, currentFile, '--fix', '--disc'],
+            `solhint`,
+            ['-c', currentConfig, currentFile, '--fix', '--disc'],
             {
               input: 'y\n', // Provide 'y' as input
               shell: true,
@@ -99,7 +95,7 @@ describe('e2e', function () {
 
         it('should fix file when noPrompt 1b', () => {
           const { code, stdout } = shell.exec(
-            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           )
 
           expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
@@ -135,7 +131,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (2)', () => {
           ;({ code, stdout } = shell.exec(
-            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -175,7 +171,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (3)', () => {
           ;({ code, stdout } = shell.exec(
-            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -215,7 +211,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (4)', () => {
           ;({ code, stdout } = shell.exec(
-            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -255,7 +251,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (5)', () => {
           ;({ code, stdout } = shell.exec(
-            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -296,7 +292,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (6)', () => {
           ;({ code, stdout } = shell.exec(
-            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -330,7 +326,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (6)', () => {
           ;({ code, stdout } = shell.exec(
-            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -371,7 +367,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (7)', () => {
           ;({ code, stdout } = shell.exec(
-            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -412,7 +408,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (8)', () => {
           ;({ code, stdout } = shell.exec(
-            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -453,7 +449,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (9)', () => {
           ;({ code, stdout } = shell.exec(
-            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -495,7 +491,7 @@ describe('e2e', function () {
 
           it('should execute and compare Foo1 with template AFTER FIX and they should match (10)', () => {
             ;({ code, stdout } = shell.exec(
-              `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+              `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
             ))
             result = compareTextFiles(currentFile, afterFixFile)
             expect(result).to.be.true
@@ -536,7 +532,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (11)', () => {
           ;({ code, stdout } = shell.exec(
-            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
