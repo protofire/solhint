@@ -4,7 +4,6 @@ const path = require('path')
 const shell = require('shelljs')
 
 function useFixture(dir) {
-  beforeEach(`switch to ${dir}`, function () {
     const fixturePath = path.join(__dirname, dir).replace('/_common', '')
 
     const tmpDirContainer = os.tmpdir()
@@ -16,7 +15,6 @@ function useFixture(dir) {
     fs.copySync(fixturePath, this.testDirPath)
 
     shell.cd(this.testDirPath)
-  })
 }
 
 module.exports = { useFixture }
