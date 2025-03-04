@@ -11,10 +11,15 @@ function useFixture(dir) {
     const fixturePath = path.join(__dirname, dir).replace('/_common', '')
     
     console.log('\n\nfixturePath :>> ', fixturePath);
-    console.log('\n\n');
-
+    
     const tmpDirContainer = os.tmpdir()
+    
+    console.log('tmpDirContainer :>> ', tmpDirContainer);
+    
     this.testDirPath = path.join(tmpDirContainer, `solhint-tests-${dir}`)
+    
+    console.log('this.testDirPath :>> ', this.testDirPath);
+    console.log('\n\n');
 
     fs.ensureDirSync(this.testDirPath)
     fs.emptyDirSync(this.testDirPath)
