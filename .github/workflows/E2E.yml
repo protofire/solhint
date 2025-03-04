@@ -9,6 +9,41 @@ on:
       - "*"
 
 jobs:
+  e2e_linux:
+    runs-on: ubuntu-latest
+    name: Test on Linux with Node ${{ matrix.node }}
+    strategy:
+      matrix:
+        node: [16, 18, 20]
+    
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm install --include=dev
+      
+      - name: Run linter
+        run: npm run lint
+      
+      - name: Generate Docs
+        run: npm run docs 
+      
+      - name: Pack
+        run: npm pack
+      
+      - name: Global Installation
+        run: npm i -g solhint*tgz
+
+      - name: Check solhint version
+        run: solhint --version
+      
+      - name: Run E2E Tests
+        run: npm run ci:e2e
+
   e2e_windows:
     runs-on: windows-latest
     name: Test on Windows    
@@ -49,4 +84,29 @@ jobs:
 
       - name: Run E2E Tests
         run: npm run ci:e2e2
-        
+
+  e2e_macos:
+    runs-on: macos-latest
+    name: Test on MacOS
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm install --include=dev
+
+    - name: Pack
+      run: npm pack
+    
+    - name: Install solhint
+      run: npm i -g solhint*tgz
+
+    - name: Run linter
+      run: npm run lint
+
+    - name: Run Tests
+      run: npm run ci:e2e
