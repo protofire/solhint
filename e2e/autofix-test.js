@@ -561,7 +561,7 @@ describe('e2e', function () {
 
 function useFixture(dir) {
   beforeEach(`switch to ${dir}`, function () {
-    const fixturePath = path.join(__dirname, dir)
+    const fixturePath = path.join(__dirname, dir).replace('/_common', '')
 
     const tmpDirContainer = os.tmpdir()
     this.testDirPath = path.join(tmpDirContainer, `solhint-tests-${dir}`)
