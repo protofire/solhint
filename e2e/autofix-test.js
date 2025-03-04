@@ -66,7 +66,7 @@ describe('e2e', function () {
           expect(solhintProcess.stdout.toString().includes('Process terminated by user'))
         })
 
-        it('should compare Foo1 file with template beforeFix file and they should match 1a', () => {
+        it('should compare Foo1 file with template beforeFix file and they should match (1a)', () => {
           result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
         })
@@ -85,13 +85,13 @@ describe('e2e', function () {
           expect(solhintProcess.stdout.toString().includes('5 problems (5 errors, 0 warnings)'))
         })
       })
-      it('should check FOO1 does not change after test 1a', () => {
+      it('should check FOO1 does not change after test (1a)', () => {
         result = compareTextFiles(currentFile, beforeFixFile)
         expect(result).to.be.true
       })
 
       describe('--fix with noPrompt', () => {
-        it('should compare Foo1 file with template beforeFix file and they should match 1b', () => {
+        it('should compare Foo1 file with template beforeFix file and they should match (1b)', () => {
           result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
         })
@@ -112,7 +112,7 @@ describe('e2e', function () {
         })
       })
 
-      it('should check FOO1 does not change after test 1b', () => {
+      it('should check FOO1 does not change after test (1b)', () => {
         result = compareTextFiles(currentFile, beforeFixFile)
         expect(result).to.be.true
       })
@@ -354,7 +354,7 @@ describe('e2e', function () {
     })
   })
 
-  xdescribe('autofix rule: avoid-suicide', () => {
+  describe('autofix rule: avoid-suicide', () => {
     before(function () {
       params = retrieveParams('avoid-suicide/')
       currentConfig = `${params.path}${params.subpath}.solhint.json`

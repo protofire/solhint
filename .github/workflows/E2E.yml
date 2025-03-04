@@ -83,7 +83,7 @@ jobs:
         run: npm run lint
 
       - name: Run E2E Tests
-        run: npm run ci:e2e
+        run: npm run ci:e2e2
 
   e2e_macos:
     runs-on: macos-latest
