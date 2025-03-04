@@ -1,12 +1,10 @@
 const chai = require('chai')
 const { expect } = chai
 const fs = require('fs-extra')
-const os = require('os')
-const path = require('path')
 const shell = require('shelljs')
 const spawnSync = require('spawn-sync')
+const { useFixture } = require('./_common/common')
 
-const E2E = true
 const EXIT_CODES = { BAD_OPTIONS: 255, OK: 0, REPORTED_ERRORS: 1 }
 
 let params
@@ -16,11 +14,7 @@ let beforeFixFile
 let afterFixFile
 
 function retrieveParams(subpath) {
-  if (E2E) {
-    return { command: 'solhint', param1: '', path: '', subpath }
-  } else {
-    return { command: 'node', param1: 'solhint', path: 'e2e/08-autofix/', subpath }
-  }
+  return { command: 'solhint', param1: '', path: '', subpath }
 }
 
 function compareTextFiles(file1Path, file2Path) {
@@ -40,35 +34,13 @@ function compareTextFiles(file1Path, file2Path) {
   return file1Content === file2Content
 }
 
-function copyFile(sourcePath, destinationPath) {
-  shell.cp(sourcePath, destinationPath)
-}
-
-function useFixture(dir) {
-  beforeEach(`switch to ${dir}`, function () {
-    const fixturePath = path.join(__dirname, dir)
-
-    const tmpDirContainer = os.tmpdir()
-    this.testDirPath = path.join(tmpDirContainer, `solhint-tests-${dir}`)
-
-    fs.ensureDirSync(this.testDirPath)
-    fs.emptyDirSync(this.testDirPath)
-
-    fs.copySync(fixturePath, this.testDirPath)
-
-    shell.cd(this.testDirPath)
-  })
-}
-
 describe('e2e', function () {
   let result = false
   let code
   let stdout
 
   describe('autofix tests', () => {
-    if (E2E) {
-      useFixture('08-autofix')
-    }
+    useFixture('08-autofix')
 
     describe('autofix command line options', () => {
       before(function () {
@@ -80,12 +52,6 @@ describe('e2e', function () {
       })
 
       describe('--fix without noPrompt', () => {
-        after(function () {
-          if (!E2E) {
-            copyFile(beforeFixFile, currentFile)
-          }
-        })
-
         it('should terminate with --fix and user choose NOT to continue', () => {
           const solhintProcess = spawnSync(
             `${params.command}`,
@@ -125,12 +91,6 @@ describe('e2e', function () {
       })
 
       describe('--fix with noPrompt', () => {
-        after(function () {
-          if (!E2E) {
-            copyFile(beforeFixFile, currentFile)
-          }
-        })
-
         it('should compare Foo1 file with template beforeFix file and they should match 1b', () => {
           result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
@@ -167,12 +127,6 @@ describe('e2e', function () {
         afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
       })
       describe('--fix with noPrompt', () => {
-        after(function () {
-          if (!E2E) {
-            copyFile(beforeFixFile, currentFile)
-          }
-        })
-
         it('should compare Foo1 file with template BEFORE FIX file and they should match (2)', () => {
           result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
@@ -213,12 +167,6 @@ describe('e2e', function () {
         afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
       })
       describe('--fix with noPrompt', () => {
-        after(function () {
-          if (!E2E) {
-            copyFile(beforeFixFile, currentFile)
-          }
-        })
-
         it('should compare Foo1 file with template BEFORE FIX file and they should match (3)', () => {
           result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
@@ -259,12 +207,6 @@ describe('e2e', function () {
         afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
       })
       describe('--fix with noPrompt', () => {
-        after(function () {
-          if (!E2E) {
-            copyFile(beforeFixFile, currentFile)
-          }
-        })
-
         it('should compare Foo1 file with template BEFORE FIX file and they should match (4)', () => {
           result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
@@ -305,12 +247,6 @@ describe('e2e', function () {
         afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
       })
       describe('--fix with noPrompt', () => {
-        after(function () {
-          if (!E2E) {
-            copyFile(beforeFixFile, currentFile)
-          }
-        })
-
         it('should compare Foo1 file with template BEFORE FIX file and they should match (5)', () => {
           result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
@@ -352,12 +288,6 @@ describe('e2e', function () {
           afterFixFile = `${params.path}${params.subpath}Foo1AfterFixSingle.sol`
         })
 
-        after(function () {
-          if (!E2E) {
-            copyFile(beforeFixFile, currentFile)
-          }
-        })
-
         it('should compare Foo1 file with template BEFORE FIX file and they should match (6)', () => {
           result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
@@ -390,12 +320,6 @@ describe('e2e', function () {
           currentFile = `${params.path}${params.subpath}Foo1.sol`
           beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
           afterFixFile = `${params.path}${params.subpath}Foo1AfterFixDouble.sol`
-        })
-
-        after(function () {
-          if (!E2E) {
-            copyFile(beforeFixFile, currentFile)
-          }
         })
 
         it('should compare Foo1 file with template BEFORE FIX file and they should match (6)', () => {
@@ -438,11 +362,6 @@ describe('e2e', function () {
       beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
       afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
     })
-    after(function () {
-      if (!E2E) {
-        copyFile(beforeFixFile, currentFile)
-      }
-    })
 
     describe('--fix with noPrompt', () => {
       it('should compare Foo1 file with template BEFORE FIX file and they should match (7)', () => {
@@ -484,11 +403,6 @@ describe('e2e', function () {
       beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
       afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
     })
-    after(function () {
-      if (!E2E) {
-        copyFile(beforeFixFile, currentFile)
-      }
-    })
 
     describe('--fix with noPrompt', () => {
       it('should compare Foo1 file with template BEFORE FIX file and they should match (8)', () => {
@@ -529,11 +443,6 @@ describe('e2e', function () {
       currentFile = `${params.path}${params.subpath}Foo1.sol`
       beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
       afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
-    })
-    after(function () {
-      if (!E2E) {
-        copyFile(beforeFixFile, currentFile)
-      }
     })
 
     describe('--fix with noPrompt', () => {
@@ -577,11 +486,6 @@ describe('e2e', function () {
         beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
         afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
       })
-      after(function () {
-        if (!E2E) {
-          copyFile(beforeFixFile, currentFile)
-        }
-      })
 
       describe('--fix with noPrompt', () => {
         it('should compare Foo1 file with template BEFORE FIX file and they should match (10)', () => {
@@ -613,51 +517,6 @@ describe('e2e', function () {
         expect(result).to.be.true
       })
     })
-    // describe('autofix rule: imports-order Foo2', () => {
-    //   before(function () {
-    //     params = retrieveParams('imports-order/')
-    //     currentConfig = `${params.path}${params.subpath}.solhint.json`
-    //     currentFile = `${params.path}${params.subpath}Foo2.sol`
-    //     beforeFixFile = `${params.path}${params.subpath}Foo2BeforeFix.sol`
-    //     afterFixFile = `${params.path}${params.subpath}Foo2AfterFix.sol`
-    //   })
-    //   after(function () {
-    //     if (!E2E) {
-    //       copyFile(beforeFixFile, currentFile)
-    //     }
-    //   })
-
-    //   describe('--fix with noPrompt', () => {
-    //     it('should compare Foo1 file with template BEFORE FIX file and they should match (11)', () => {
-    //       result = compareTextFiles(currentFile, beforeFixFile)
-    //       expect(result).to.be.true
-    //     })
-
-    //     it('should execute and compare Foo1 with template AFTER FIX and they should match (11)', () => {
-    //       ;({ code, stdout } = shell.exec(
-    //         `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
-    //       ))
-
-    //       result = compareTextFiles(currentFile, afterFixFile)
-    //       expect(result).to.be.true
-    //     })
-
-    //     it('should execute and exit with code 1 (11)', () => {
-    //       expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
-    //     })
-
-    //     it('should get the right report (11)', () => {
-    //       const reportLines = stdout.split('\n')
-    //       const finalLine = '12 problems (12 errors, 0 warnings)'
-    //       expect(reportLines[reportLines.length - 7]).to.contain(finalLine)
-    //     })
-    //   })
-
-    //   it('should check FOO1 does not change after test (11)', () => {
-    //     result = compareTextFiles(currentFile, beforeFixFile)
-    //     expect(result).to.be.true
-    //   })
-    // })
   })
 
   describe('autofix rule: no-unused-import', () => {
@@ -668,13 +527,8 @@ describe('e2e', function () {
       beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
       afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
     })
-    describe('--fix with noPrompt', () => {
-      after(function () {
-        if (!E2E) {
-          copyFile(beforeFixFile, currentFile)
-        }
-      })
 
+    describe('--fix with noPrompt', () => {
       it('should compare Foo1 file with template BEFORE FIX file and they should match (11)', () => {
         result = compareTextFiles(currentFile, beforeFixFile)
         expect(result).to.be.true
@@ -706,5 +560,3 @@ describe('e2e', function () {
     })
   })
 })
-
-// FALTA LA PRUEBA DEL STORE TO FILE
