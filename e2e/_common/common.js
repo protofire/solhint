@@ -6,10 +6,12 @@ const shell = require('shelljs')
 function useFixture(dir) {
 
   console.log('\n\ndiR :>> ', dir);
-  console.log('\n\n');
-
+  
   beforeEach(`switch to ${dir}`, function () {
     const fixturePath = path.join(__dirname, dir).replace('/_common', '')
+    
+    console.log('\n\nfixturePath :>> ', fixturePath);
+    console.log('\n\n');
 
     const tmpDirContainer = os.tmpdir()
     this.testDirPath = path.join(tmpDirContainer, `solhint-tests-${dir}`)
