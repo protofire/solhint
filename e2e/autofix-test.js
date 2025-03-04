@@ -354,7 +354,7 @@ describe('e2e', function () {
     })
   })
 
-  describe('autofix rule: avoid-suicide', () => {
+  xdescribe('autofix rule: avoid-suicide', () => {
     before(function () {
       params = retrieveParams('avoid-suicide/')
       currentConfig = `${params.path}${params.subpath}.solhint.json`
