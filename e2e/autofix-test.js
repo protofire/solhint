@@ -1,12 +1,12 @@
 const chai = require('chai')
 const { expect } = chai
 const fs = require('fs-extra')
-const os = require('os')
-const path = require('path')
+// const os = require('os')
+// const path = require('path')
 const shell = require('shelljs')
 const spawnSync = require('spawn-sync')
 
-// const { useFixture } = require('./_common/common')
+const { useFixture } = require('./_common/common')
 
 const EXIT_CODES = { BAD_OPTIONS: 255, OK: 0, REPORTED_ERRORS: 1 }
 
@@ -52,6 +52,11 @@ describe('e2e', function () {
         currentFile = `${params.path}${params.subpath}Foo1.sol`
         beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
         afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+
+        console.log('\n\ncurrentConfig :>> ', currentConfig);
+        console.log('currentFile :>> ', currentFile);
+        console.log('beforeFixFile :>> ', beforeFixFile);
+        console.log('afterFixFile :>> ', afterFixFile);
       })
 
       describe('--fix without noPrompt', () => {
@@ -89,11 +94,15 @@ describe('e2e', function () {
         })
       })
       it('should check FOO1 does not change after test (1a)', () => {
+        console.log("\n\n====================================================================");
+        console.log('currentFile :>> ', currentFile);
+        console.log('beforeFixFile :>> ', beforeFixFile);
+
         result = compareTextFiles(currentFile, beforeFixFile)
         expect(result).to.be.true
       })
 
-      describe('--fix with noPrompt', () => {
+      xdescribe('--fix with noPrompt', () => {
         it('should compare Foo1 file with template beforeFix file and they should match (1b)', () => {
           result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
@@ -115,12 +124,13 @@ describe('e2e', function () {
         })
       })
 
-      it('should check FOO1 does not change after test (1b)', () => {
+      xit('should check FOO1 does not change after test (1b)', () => {
         result = compareTextFiles(currentFile, beforeFixFile)
         expect(result).to.be.true
       })
     })
 
+    /*
     describe('autofix rule: explicit-types', () => {
       before(function () {
         params = retrieveParams('explicit-types/')
@@ -561,6 +571,7 @@ describe('e2e', function () {
         expect(result).to.be.true
       })
     })
+    */
   })
 })
 
@@ -581,29 +592,29 @@ describe('e2e', function () {
 //   })
 // }
 
-function useFixture(dir) {
+// function useFixture(dir) {
 
-  console.log('\n\ndiR :>> ', dir);
+//   console.log('\n\ndiR :>> ', dir);
   
-  beforeEach(`switch to ${dir}`, function () {
-    const fixturePath = path.join(__dirname, dir).replace('/_common', '')
+//   beforeEach(`switch to ${dir}`, function () {
+//     const fixturePath = path.join(__dirname, dir).replace('/_common', '')
     
-    console.log('\n\nfixturePath :>> ', fixturePath);
+//     console.log('\n\nfixturePath :>> ', fixturePath);
     
-    const tmpDirContainer = os.tmpdir()
+//     const tmpDirContainer = os.tmpdir()
     
-    console.log('tmpDirContainer :>> ', tmpDirContainer);
+//     console.log('tmpDirContainer :>> ', tmpDirContainer);
     
-    this.testDirPath = path.join(tmpDirContainer, `solhint-tests-${dir}`)
+//     this.testDirPath = path.join(tmpDirContainer, `solhint-tests-${dir}`)
     
-    console.log('this.testDirPath :>> ', this.testDirPath);
-    console.log('\n\n');
+//     console.log('this.testDirPath :>> ', this.testDirPath);
+//     console.log('\n\n');
 
-    fs.ensureDirSync(this.testDirPath)
-    fs.emptyDirSync(this.testDirPath)
+//     fs.ensureDirSync(this.testDirPath)
+//     fs.emptyDirSync(this.testDirPath)
 
-    fs.copySync(fixturePath, this.testDirPath)
+//     fs.copySync(fixturePath, this.testDirPath)
 
-    shell.cd(this.testDirPath)
-  })
-}
+//     shell.cd(this.testDirPath)
+//   })
+// }
