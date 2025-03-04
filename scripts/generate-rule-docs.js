@@ -1,10 +1,10 @@
 #!env node
-const { loadRules } = require('../lib/load-rules')
 const fs = require('fs')
 const { exec, mkdir } = require('shelljs')
 const semver = require('semver')
 const path = require('path')
 const table = require('markdown-table')
+const { loadRules } = require('../lib/load-rules')
 const { ruleSeverityEnum } = require('../lib/doc/utils')
 
 /**
@@ -175,7 +175,7 @@ function loadNotes(rule) {
     textToReturn = `### Notes\n`
     for (let i = 0; i < rule.meta.docs.notes.length; i++) {
       noteValue = rule.meta.docs.notes[i].note
-      textToReturn = textToReturn + `- ${noteValue}\n`
+      textToReturn += `- ${noteValue}\n`
     }
   }
 
@@ -196,9 +196,7 @@ function linkToSource(rule) {
 }
 
 function linkToDocumentSource(rule) {
-  const link = localPathToUri(rule.file)
-    .replace('lib/rules', 'docs/rules')
-    .replace(/\.js$/, '.md')
+  const link = localPathToUri(rule.file).replace('lib/rules', 'docs/rules').replace(/\.js$/, '.md')
   return `https://github.com/protofire/solhint/blob/master${link}`
 }
 
@@ -208,7 +206,10 @@ function linkToTestCase(rule) {
 }
 
 function localPathToUri(file) {
-  return file.replace(path.resolve(path.join(__dirname, '..')), '').split(path.sep).join('/')
+  return file
+    .replace(path.resolve(path.join(__dirname, '..')), '')
+    .split(path.sep)
+    .join('/')
 }
 
 function loadExamples(rule) {
