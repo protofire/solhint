@@ -8,7 +8,7 @@ const spawnSync = require('spawn-sync')
 
 const EXIT_CODES = { BAD_OPTIONS: 255, OK: 0, REPORTED_ERRORS: 1 }
 
-let params
+let subPath
 let currentConfig
 let currentFile
 let beforeFixFile
@@ -45,11 +45,11 @@ describe('e2e', function () {
 
     describe('autofix command line options', () => {
       before(function () {
-        params = retrieveParams('_commands/')
-        currentConfig = `${params.path}${params.subpath}.solhint.json`
-        currentFile = `${params.path}${params.subpath}Foo1.sol`
-        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
-        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+        subPath = '_commands/'
+        currentConfig = `${subPath}.solhint.json`
+        currentFile = `${subPath}Foo1.sol`
+        beforeFixFile = `${subPath}Foo1BeforeFix.sol`
+        afterFixFile = `${subPath}Foo1AfterFix.sol`
       })
 
       describe('--fix without noPrompt', () => {
@@ -121,11 +121,11 @@ describe('e2e', function () {
 
     describe('autofix rule: explicit-types', () => {
       before(function () {
-        params = retrieveParams('explicit-types/')
-        currentConfig = `${params.path}${params.subpath}.solhint.json`
-        currentFile = `${params.path}${params.subpath}Foo1.sol`
-        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
-        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+        subPath = 'explicit-types/'
+        currentConfig = `${subPath}.solhint.json`
+        currentFile = `${subPath}Foo1.sol`
+        beforeFixFile = `${subPath}Foo1BeforeFix.sol`
+        afterFixFile = `${subPath}Foo1AfterFix.sol`
       })
       describe('--fix with noPrompt', () => {
         it('should compare Foo1 file with template BEFORE FIX file and they should match (2)', () => {
@@ -161,11 +161,11 @@ describe('e2e', function () {
 
     describe('autofix rule: no-console', () => {
       before(function () {
-        params = retrieveParams('no-console/')
-        currentConfig = `${params.path}${params.subpath}.solhint.json`
-        currentFile = `${params.path}${params.subpath}Foo1.sol`
-        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
-        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+        subPath = 'no-console/'
+        currentConfig = `${subPath}.solhint.json`
+        currentFile = `${subPath}Foo1.sol`
+        beforeFixFile = `${subPath}Foo1BeforeFix.sol`
+        afterFixFile = `${subPath}Foo1AfterFix.sol`
       })
       describe('--fix with noPrompt', () => {
         it('should compare Foo1 file with template BEFORE FIX file and they should match (3)', () => {
@@ -201,11 +201,11 @@ describe('e2e', function () {
 
     describe('autofix rule: private-vars-leading-underscore', () => {
       before(function () {
-        params = retrieveParams('private-vars-underscore/')
-        currentConfig = `${params.path}${params.subpath}.solhint.json`
-        currentFile = `${params.path}${params.subpath}Foo1.sol`
-        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
-        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+        subPath = 'private-vars-underscore/'
+        currentConfig = `${subPath}.solhint.json`
+        currentFile = `${subPath}Foo1.sol`
+        beforeFixFile = `${subPath}Foo1BeforeFix.sol`
+        afterFixFile = `${subPath}Foo1AfterFix.sol`
       })
       describe('--fix with noPrompt', () => {
         it('should compare Foo1 file with template BEFORE FIX file and they should match (4)', () => {
@@ -241,11 +241,11 @@ describe('e2e', function () {
 
     describe('autofix rule: payable-fallback', () => {
       before(function () {
-        params = retrieveParams('payable-fallback/')
-        currentConfig = `${params.path}${params.subpath}.solhint.json`
-        currentFile = `${params.path}${params.subpath}Foo1.sol`
-        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
-        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+        subPath = 'payable-fallback/'
+        currentConfig = `${subPath}.solhint.json`
+        currentFile = `${subPath}Foo1.sol`
+        beforeFixFile = `${subPath}Foo1BeforeFix.sol`
+        afterFixFile = `${subPath}Foo1AfterFix.sol`
       })
       describe('--fix with noPrompt', () => {
         it('should compare Foo1 file with template BEFORE FIX file and they should match (5)', () => {
@@ -282,11 +282,11 @@ describe('e2e', function () {
     describe('autofix rule: quotes', () => {
       describe('--fix with noPrompt SINGLE QUOTES', () => {
         before(function () {
-          params = retrieveParams('quotes/')
-          currentConfig = `${params.path}${params.subpath}.singleQuotes.json`
-          currentFile = `${params.path}${params.subpath}Foo1.sol`
-          beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
-          afterFixFile = `${params.path}${params.subpath}Foo1AfterFixSingle.sol`
+          subPath = 'quotes/'
+          currentConfig = `${subPath}.singleQuotes.json`
+          currentFile = `${subPath}Foo1.sol`
+          beforeFixFile = `${subPath}Foo1BeforeFix.sol`
+          afterFixFile = `${subPath}Foo1AfterFixSingle.sol`
         })
 
         it('should compare Foo1 file with template BEFORE FIX file and they should match (6)', () => {
@@ -316,11 +316,11 @@ describe('e2e', function () {
 
       describe('--fix with noPrompt DOUBLE QUOTES', () => {
         before(function () {
-          params = retrieveParams('quotes/')
-          currentConfig = `${params.path}${params.subpath}.doubleQuotes.json`
-          currentFile = `${params.path}${params.subpath}Foo1.sol`
-          beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
-          afterFixFile = `${params.path}${params.subpath}Foo1AfterFixDouble.sol`
+          subPath = 'quotes/'
+          currentConfig = `${subPath}.doubleQuotes.json`
+          currentFile = `${subPath}Foo1.sol`
+          beforeFixFile = `${subPath}Foo1BeforeFix.sol`
+          afterFixFile = `${subPath}Foo1AfterFixDouble.sol`
         })
 
         it('should compare Foo1 file with template BEFORE FIX file and they should match (6)', () => {
@@ -356,11 +356,11 @@ describe('e2e', function () {
 
     describe('autofix rule: avoid-suicide', () => {
       before(function () {
-        params = retrieveParams('avoid-suicide/')
-        currentConfig = `${params.path}${params.subpath}.solhint.json`
-        currentFile = `${params.path}${params.subpath}Foo1.sol`
-        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
-        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+        subPath = 'avoid-suicide/'
+        currentConfig = `${subPath}.solhint.json`
+        currentFile = `${subPath}Foo1.sol`
+        beforeFixFile = `${subPath}Foo1BeforeFix.sol`
+        afterFixFile = `${subPath}Foo1AfterFix.sol`
       })
 
       describe('--fix with noPrompt', () => {
@@ -397,11 +397,11 @@ describe('e2e', function () {
 
     describe('autofix rule: contract-name-capwords', () => {
       before(function () {
-        params = retrieveParams('contract-name-capwords/')
-        currentConfig = `${params.path}${params.subpath}.solhint.json`
-        currentFile = `${params.path}${params.subpath}Foo1.sol`
-        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
-        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+        subPath = 'contract-name-capwords/'
+        currentConfig = `${subPath}.solhint.json`
+        currentFile = `${subPath}Foo1.sol`
+        beforeFixFile = `${subPath}Foo1BeforeFix.sol`
+        afterFixFile = `${subPath}Foo1AfterFix.sol`
       })
 
       describe('--fix with noPrompt', () => {
@@ -438,11 +438,11 @@ describe('e2e', function () {
 
     describe('autofix rule: event-name-capwords', () => {
       before(function () {
-        params = retrieveParams('event-name-capwords/')
-        currentConfig = `${params.path}${params.subpath}.solhint.json`
-        currentFile = `${params.path}${params.subpath}Foo1.sol`
-        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
-        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+        subPath = 'event-name-capwords/'
+        currentConfig = `${subPath}.solhint.json`
+        currentFile = `${subPath}Foo1.sol`
+        beforeFixFile = `${subPath}Foo1BeforeFix.sol`
+        afterFixFile = `${subPath}Foo1AfterFix.sol`
       })
 
       describe('--fix with noPrompt', () => {
@@ -480,11 +480,11 @@ describe('e2e', function () {
     describe('autofix rule: imports-order', () => {
       describe('autofix rule: imports-order Foo1', () => {
         before(function () {
-          params = retrieveParams('imports-order/')
-          currentConfig = `${params.path}${params.subpath}.solhint.json`
-          currentFile = `${params.path}${params.subpath}Foo1.sol`
-          beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
-          afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+          subPath = 'imports-order/'
+          currentConfig = `${subPath}.solhint.json`
+          currentFile = `${subPath}Foo1.sol`
+          beforeFixFile = `${subPath}Foo1BeforeFix.sol`
+          afterFixFile = `${subPath}Foo1AfterFix.sol`
         })
 
         describe('--fix with noPrompt', () => {
@@ -521,11 +521,11 @@ describe('e2e', function () {
 
     describe('autofix rule: no-unused-import', () => {
       before(function () {
-        params = retrieveParams('no-unused-import/')
-        currentConfig = `${params.path}${params.subpath}.solhint.json`
-        currentFile = `${params.path}${params.subpath}Foo1.sol`
-        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
-        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+        subPath = 'no-unused-import/'
+        currentConfig = `${subPath}.solhint.json`
+        currentFile = `${subPath}Foo1.sol`
+        beforeFixFile = `${subPath}Foo1BeforeFix.sol`
+        afterFixFile = `${subPath}Foo1AfterFix.sol`
       })
 
       describe('--fix with noPrompt', () => {
