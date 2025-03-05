@@ -6,13 +6,22 @@ const path = require('path')
 const shell = require('shelljs')
 const spawnSync = require('spawn-sync')
 
+const E2E = true
 const EXIT_CODES = { BAD_OPTIONS: 255, OK: 0, REPORTED_ERRORS: 1 }
 
-let subPath
+let params
 let currentConfig
 let currentFile
 let beforeFixFile
 let afterFixFile
+
+function retrieveParams(subpath) {
+  if (E2E) {
+    return { command: 'solhint', param1: '', path: '', subpath }
+  } else {
+    return { command: 'node', param1: 'solhint', path: 'e2e/08-autofix/', subpath }
+  }
+}
 
 function compareTextFiles(file1Path, file2Path) {
   const file1Content = fs.readFileSync(file1Path, 'utf-8')
@@ -31,28 +40,56 @@ function compareTextFiles(file1Path, file2Path) {
   return file1Content === file2Content
 }
 
+function copyFile(sourcePath, destinationPath) {
+  shell.cp(sourcePath, destinationPath)
+}
+
+function useFixture(dir) {
+  beforeEach(`switch to ${dir}`, function () {
+    const fixturePath = path.join(__dirname, dir)
+
+    const tmpDirContainer = os.tmpdir()
+    this.testDirPath = path.join(tmpDirContainer, `solhint-tests-${dir}`)
+
+    fs.ensureDirSync(this.testDirPath)
+    fs.emptyDirSync(this.testDirPath)
+
+    fs.copySync(fixturePath, this.testDirPath)
+
+    shell.cd(this.testDirPath)
+  })
+}
+
 describe('e2e', function () {
   let result = false
   let code
   let stdout
 
   describe('autofix tests', () => {
-    useFixture('08-autofix')
+    if (E2E) {
+      useFixture('08-autofix')
+    }
 
     describe('autofix command line options', () => {
       before(function () {
-        subPath = '_commands/'
-        currentConfig = `${subPath}.solhint.json`
-        currentFile = `${subPath}Foo1.sol`
-        beforeFixFile = `${subPath}Foo1BeforeFix.sol`
-        afterFixFile = `${subPath}Foo1AfterFix.sol`
+        params = retrieveParams('_commands/')
+        currentConfig = `${params.path}${params.subpath}.solhint.json`
+        currentFile = `${params.path}${params.subpath}Foo1.sol`
+        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
       })
 
       describe('--fix without noPrompt', () => {
+        after(function () {
+          if (!E2E) {
+            copyFile(beforeFixFile, currentFile)
+          }
+        })
+
         it('should terminate with --fix and user choose NOT to continue', () => {
           const solhintProcess = spawnSync(
-            `solhint`,
-            ['-c', currentConfig, currentFile, '--fix', '--disc'],
+            `${params.command}`,
+            [`${params.param1}`, '-c', currentConfig, currentFile, '--fix', '--disc'],
             {
               input: 'n\n', // Provide 'n' as input
               shell: true,
@@ -63,15 +100,15 @@ describe('e2e', function () {
           expect(solhintProcess.stdout.toString().includes('Process terminated by user'))
         })
 
-        it('should compare Foo1 file with template beforeFix file and they should match (1a)', () => {
+        it('should compare Foo1 file with template beforeFix file and they should match 1a', () => {
           result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
         })
 
         it('should fix with --fix and user choose YES to continue', () => {
           const solhintProcess = spawnSync(
-            `solhint`,
-            ['-c', currentConfig, currentFile, '--fix', '--disc'],
+            `${params.command}`,
+            [`${params.param1}`, '-c', currentConfig, currentFile, '--fix', '--disc'],
             {
               input: 'y\n', // Provide 'y' as input
               shell: true,
@@ -82,20 +119,26 @@ describe('e2e', function () {
           expect(solhintProcess.stdout.toString().includes('5 problems (5 errors, 0 warnings)'))
         })
       })
-      it('should check FOO1 does not change after test (1a)', () => {
+      it('should check FOO1 does not change after test 1a', () => {
         result = compareTextFiles(currentFile, beforeFixFile)
         expect(result).to.be.true
       })
 
       describe('--fix with noPrompt', () => {
-        it('should compare Foo1 file with template beforeFix file and they should match (1b)', () => {
+        after(function () {
+          if (!E2E) {
+            copyFile(beforeFixFile, currentFile)
+          }
+        })
+
+        it('should compare Foo1 file with template beforeFix file and they should match 1b', () => {
           result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
         })
 
         it('should fix file when noPrompt 1b', () => {
           const { code, stdout } = shell.exec(
-            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           )
 
           expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
@@ -109,7 +152,7 @@ describe('e2e', function () {
         })
       })
 
-      it('should check FOO1 does not change after test (1b)', () => {
+      it('should check FOO1 does not change after test 1b', () => {
         result = compareTextFiles(currentFile, beforeFixFile)
         expect(result).to.be.true
       })
@@ -117,13 +160,19 @@ describe('e2e', function () {
 
     describe('autofix rule: explicit-types', () => {
       before(function () {
-        subPath = 'explicit-types/'
-        currentConfig = `${subPath}.solhint.json`
-        currentFile = `${subPath}Foo1.sol`
-        beforeFixFile = `${subPath}Foo1BeforeFix.sol`
-        afterFixFile = `${subPath}Foo1AfterFix.sol`
+        params = retrieveParams('explicit-types/')
+        currentConfig = `${params.path}${params.subpath}.solhint.json`
+        currentFile = `${params.path}${params.subpath}Foo1.sol`
+        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
       })
       describe('--fix with noPrompt', () => {
+        after(function () {
+          if (!E2E) {
+            copyFile(beforeFixFile, currentFile)
+          }
+        })
+
         it('should compare Foo1 file with template BEFORE FIX file and they should match (2)', () => {
           result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
@@ -131,7 +180,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (2)', () => {
           ;({ code, stdout } = shell.exec(
-            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -157,13 +206,19 @@ describe('e2e', function () {
 
     describe('autofix rule: no-console', () => {
       before(function () {
-        subPath = 'no-console/'
-        currentConfig = `${subPath}.solhint.json`
-        currentFile = `${subPath}Foo1.sol`
-        beforeFixFile = `${subPath}Foo1BeforeFix.sol`
-        afterFixFile = `${subPath}Foo1AfterFix.sol`
+        params = retrieveParams('no-console/')
+        currentConfig = `${params.path}${params.subpath}.solhint.json`
+        currentFile = `${params.path}${params.subpath}Foo1.sol`
+        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
       })
       describe('--fix with noPrompt', () => {
+        after(function () {
+          if (!E2E) {
+            copyFile(beforeFixFile, currentFile)
+          }
+        })
+
         it('should compare Foo1 file with template BEFORE FIX file and they should match (3)', () => {
           result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
@@ -171,7 +226,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (3)', () => {
           ;({ code, stdout } = shell.exec(
-            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -197,13 +252,19 @@ describe('e2e', function () {
 
     describe('autofix rule: private-vars-leading-underscore', () => {
       before(function () {
-        subPath = 'private-vars-underscore/'
-        currentConfig = `${subPath}.solhint.json`
-        currentFile = `${subPath}Foo1.sol`
-        beforeFixFile = `${subPath}Foo1BeforeFix.sol`
-        afterFixFile = `${subPath}Foo1AfterFix.sol`
+        params = retrieveParams('private-vars-underscore/')
+        currentConfig = `${params.path}${params.subpath}.solhint.json`
+        currentFile = `${params.path}${params.subpath}Foo1.sol`
+        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
       })
       describe('--fix with noPrompt', () => {
+        after(function () {
+          if (!E2E) {
+            copyFile(beforeFixFile, currentFile)
+          }
+        })
+
         it('should compare Foo1 file with template BEFORE FIX file and they should match (4)', () => {
           result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
@@ -211,7 +272,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (4)', () => {
           ;({ code, stdout } = shell.exec(
-            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -237,13 +298,19 @@ describe('e2e', function () {
 
     describe('autofix rule: payable-fallback', () => {
       before(function () {
-        subPath = 'payable-fallback/'
-        currentConfig = `${subPath}.solhint.json`
-        currentFile = `${subPath}Foo1.sol`
-        beforeFixFile = `${subPath}Foo1BeforeFix.sol`
-        afterFixFile = `${subPath}Foo1AfterFix.sol`
+        params = retrieveParams('payable-fallback/')
+        currentConfig = `${params.path}${params.subpath}.solhint.json`
+        currentFile = `${params.path}${params.subpath}Foo1.sol`
+        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
       })
       describe('--fix with noPrompt', () => {
+        after(function () {
+          if (!E2E) {
+            copyFile(beforeFixFile, currentFile)
+          }
+        })
+
         it('should compare Foo1 file with template BEFORE FIX file and they should match (5)', () => {
           result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
@@ -251,7 +318,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (5)', () => {
           ;({ code, stdout } = shell.exec(
-            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -278,11 +345,17 @@ describe('e2e', function () {
     describe('autofix rule: quotes', () => {
       describe('--fix with noPrompt SINGLE QUOTES', () => {
         before(function () {
-          subPath = 'quotes/'
-          currentConfig = `${subPath}.singleQuotes.json`
-          currentFile = `${subPath}Foo1.sol`
-          beforeFixFile = `${subPath}Foo1BeforeFix.sol`
-          afterFixFile = `${subPath}Foo1AfterFixSingle.sol`
+          params = retrieveParams('quotes/')
+          currentConfig = `${params.path}${params.subpath}.singleQuotes.json`
+          currentFile = `${params.path}${params.subpath}Foo1.sol`
+          beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+          afterFixFile = `${params.path}${params.subpath}Foo1AfterFixSingle.sol`
+        })
+
+        after(function () {
+          if (!E2E) {
+            copyFile(beforeFixFile, currentFile)
+          }
         })
 
         it('should compare Foo1 file with template BEFORE FIX file and they should match (6)', () => {
@@ -292,7 +365,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (6)', () => {
           ;({ code, stdout } = shell.exec(
-            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -312,11 +385,17 @@ describe('e2e', function () {
 
       describe('--fix with noPrompt DOUBLE QUOTES', () => {
         before(function () {
-          subPath = 'quotes/'
-          currentConfig = `${subPath}.doubleQuotes.json`
-          currentFile = `${subPath}Foo1.sol`
-          beforeFixFile = `${subPath}Foo1BeforeFix.sol`
-          afterFixFile = `${subPath}Foo1AfterFixDouble.sol`
+          params = retrieveParams('quotes/')
+          currentConfig = `${params.path}${params.subpath}.doubleQuotes.json`
+          currentFile = `${params.path}${params.subpath}Foo1.sol`
+          beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+          afterFixFile = `${params.path}${params.subpath}Foo1AfterFixDouble.sol`
+        })
+
+        after(function () {
+          if (!E2E) {
+            copyFile(beforeFixFile, currentFile)
+          }
         })
 
         it('should compare Foo1 file with template BEFORE FIX file and they should match (6)', () => {
@@ -326,7 +405,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (6)', () => {
           ;({ code, stdout } = shell.exec(
-            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -352,11 +431,16 @@ describe('e2e', function () {
 
     describe('autofix rule: avoid-suicide', () => {
       before(function () {
-        subPath = 'avoid-suicide/'
-        currentConfig = `${subPath}.solhint.json`
-        currentFile = `${subPath}Foo1.sol`
-        beforeFixFile = `${subPath}Foo1BeforeFix.sol`
-        afterFixFile = `${subPath}Foo1AfterFix.sol`
+        params = retrieveParams('avoid-suicide/')
+        currentConfig = `${params.path}${params.subpath}.solhint.json`
+        currentFile = `${params.path}${params.subpath}Foo1.sol`
+        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+      })
+      after(function () {
+        if (!E2E) {
+          copyFile(beforeFixFile, currentFile)
+        }
       })
 
       describe('--fix with noPrompt', () => {
@@ -367,7 +451,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (7)', () => {
           ;({ code, stdout } = shell.exec(
-            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -393,11 +477,16 @@ describe('e2e', function () {
 
     describe('autofix rule: contract-name-capwords', () => {
       before(function () {
-        subPath = 'contract-name-capwords/'
-        currentConfig = `${subPath}.solhint.json`
-        currentFile = `${subPath}Foo1.sol`
-        beforeFixFile = `${subPath}Foo1BeforeFix.sol`
-        afterFixFile = `${subPath}Foo1AfterFix.sol`
+        params = retrieveParams('contract-name-capwords/')
+        currentConfig = `${params.path}${params.subpath}.solhint.json`
+        currentFile = `${params.path}${params.subpath}Foo1.sol`
+        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+      })
+      after(function () {
+        if (!E2E) {
+          copyFile(beforeFixFile, currentFile)
+        }
       })
 
       describe('--fix with noPrompt', () => {
@@ -408,7 +497,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (8)', () => {
           ;({ code, stdout } = shell.exec(
-            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -434,11 +523,16 @@ describe('e2e', function () {
 
     describe('autofix rule: event-name-capwords', () => {
       before(function () {
-        subPath = 'event-name-capwords/'
-        currentConfig = `${subPath}.solhint.json`
-        currentFile = `${subPath}Foo1.sol`
-        beforeFixFile = `${subPath}Foo1BeforeFix.sol`
-        afterFixFile = `${subPath}Foo1AfterFix.sol`
+        params = retrieveParams('event-name-capwords/')
+        currentConfig = `${params.path}${params.subpath}.solhint.json`
+        currentFile = `${params.path}${params.subpath}Foo1.sol`
+        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+      })
+      after(function () {
+        if (!E2E) {
+          copyFile(beforeFixFile, currentFile)
+        }
       })
 
       describe('--fix with noPrompt', () => {
@@ -449,7 +543,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (9)', () => {
           ;({ code, stdout } = shell.exec(
-            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -476,11 +570,16 @@ describe('e2e', function () {
     describe('autofix rule: imports-order', () => {
       describe('autofix rule: imports-order Foo1', () => {
         before(function () {
-          subPath = 'imports-order/'
-          currentConfig = `${subPath}.solhint.json`
-          currentFile = `${subPath}Foo1.sol`
-          beforeFixFile = `${subPath}Foo1BeforeFix.sol`
-          afterFixFile = `${subPath}Foo1AfterFix.sol`
+          params = retrieveParams('imports-order/')
+          currentConfig = `${params.path}${params.subpath}.solhint.json`
+          currentFile = `${params.path}${params.subpath}Foo1.sol`
+          beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+          afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
+        })
+        after(function () {
+          if (!E2E) {
+            copyFile(beforeFixFile, currentFile)
+          }
         })
 
         describe('--fix with noPrompt', () => {
@@ -491,7 +590,7 @@ describe('e2e', function () {
 
           it('should execute and compare Foo1 with template AFTER FIX and they should match (10)', () => {
             ;({ code, stdout } = shell.exec(
-              `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+              `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
             ))
             result = compareTextFiles(currentFile, afterFixFile)
             expect(result).to.be.true
@@ -517,14 +616,19 @@ describe('e2e', function () {
 
     describe('autofix rule: no-unused-import', () => {
       before(function () {
-        subPath = 'no-unused-import/'
-        currentConfig = `${subPath}.solhint.json`
-        currentFile = `${subPath}Foo1.sol`
-        beforeFixFile = `${subPath}Foo1BeforeFix.sol`
-        afterFixFile = `${subPath}Foo1AfterFix.sol`
+        params = retrieveParams('no-unused-import/')
+        currentConfig = `${params.path}${params.subpath}.solhint.json`
+        currentFile = `${params.path}${params.subpath}Foo1.sol`
+        beforeFixFile = `${params.path}${params.subpath}Foo1BeforeFix.sol`
+        afterFixFile = `${params.path}${params.subpath}Foo1AfterFix.sol`
       })
-
       describe('--fix with noPrompt', () => {
+        after(function () {
+          if (!E2E) {
+            copyFile(beforeFixFile, currentFile)
+          }
+        })
+
         it('should compare Foo1 file with template BEFORE FIX file and they should match (11)', () => {
           result = compareTextFiles(currentFile, beforeFixFile)
           expect(result).to.be.true
@@ -532,7 +636,7 @@ describe('e2e', function () {
 
         it('should execute and compare Foo1 with template AFTER FIX and they should match (11)', () => {
           ;({ code, stdout } = shell.exec(
-            `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
+            `${params.command} ${params.param1} -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           ))
 
           result = compareTextFiles(currentFile, afterFixFile)
@@ -558,19 +662,4 @@ describe('e2e', function () {
   })
 })
 
-
-function useFixture(dir) {
-  beforeEach(`switch to ${dir}`, function () {
-    const fixturePath = path.join(__dirname, dir).replace('/_common', '')
-
-    const tmpDirContainer = os.tmpdir()
-    this.testDirPath = path.join(tmpDirContainer, `solhint-tests-${dir}`)
-
-    fs.ensureDirSync(this.testDirPath)
-    fs.emptyDirSync(this.testDirPath)
-
-    fs.copySync(fixturePath, this.testDirPath)
-
-    shell.cd(this.testDirPath)
-  })
-}
+// FALTA LA PRUEBA DEL STORE TO FILE
