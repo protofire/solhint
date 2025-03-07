@@ -1,60 +1,31 @@
 const chai = require('chai')
 const { expect } = chai
 const fs = require('fs-extra')
-const os = require('os')
-const path = require('path')
 const shell = require('shelljs')
 const url = require('url')
-
+const os = require('os')
+const path = require('path')
 const EXIT_CODES = { BAD_OPTIONS: 255, OK: 0, REPORTED_ERRORS: 1 }
-
-// ==================================================================
-// use these lines and function to execute locally in TEST directory
-// ==================================================================
-// const E2E = false
-// const PATH = './e2e/06-formatters/'
-// const NODE = 'node '
-// const SUFFIX = ` -c ${PATH}.solhint.json  `
-
-function updateFilePath(jsonObject, prefix) {
-  return jsonObject.map((jsonObject) => ({
-    ...jsonObject,
-    filePath: prefix + jsonObject.filePath,
-  }))
-}
-
-// ==================================================================
-// use these two lines to E2E
-// ==================================================================
-const E2E = true
-const PATH = ''
-const NODE = ''
-const SUFFIX = ''
 
 let foo1Output
 let foo2Output
 
 describe('e2e', function () {
   describe('formatter tests', () => {
-    if (E2E) {
-      const outputs = require('./06-formatters/helpers/helpers.js')
-      foo1Output = outputs.foo1Output
-      foo2Output = outputs.foo2Output
-    } else {
-      const outputsE2E = require('../e2e/06-formatters/helpers/helpers')
-      foo1Output = updateFilePath(outputsE2E.foo1Output, PATH)
-      foo2Output = updateFilePath(outputsE2E.foo2Output, PATH)
-    }
+    const outputs = require('./06-formatters/helpers/helpers.js')
+    foo1Output = outputs.foo1Output
+    foo2Output = outputs.foo2Output
+
     // Foo contract has 1 error and 6 warnings
     // Foo2 contract has 3 warnings
     // Foo3 contract has no warnings and no errors
 
-    if (E2E) useFixture('06-formatters')
+    useFixture('06-formatters')
 
     it('should give an error msg when wrong formatter is specify', () => {
       const formatterType = 'wrongOne'
       const { code, stderr } = shell.exec(
-        `${NODE}solhint ${PATH}contracts/Foo2.sol -f ${formatterType}${SUFFIX}`
+        `solhint contracts/Foo2.sol -f ${formatterType}`
       )
       expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
       expect(stderr).to.include('There was a problem loading formatter option')
@@ -65,7 +36,7 @@ describe('e2e', function () {
 
       it('should return error when file does not exist and unix is the formatter', () => {
         const { code, stdout, stderr } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo1.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo1.sol -f ${formatterType}`
         )
         expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
         expect(stdout.trim()).to.be.empty
@@ -74,7 +45,7 @@ describe('e2e', function () {
 
       it('should return nothing when file exists and there is no error/warning', () => {
         const { code, stdout } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo3.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo3.sol -f ${formatterType}`
         )
         expect(code).to.equal(EXIT_CODES.OK)
         expect(stdout.trim()).to.be.empty
@@ -82,7 +53,7 @@ describe('e2e', function () {
 
       it('should make the output report with unix formatter for Foo2', () => {
         const { code, stdout } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo2.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo2.sol -f ${formatterType}`
         )
 
         const reportLines = stdout.split('\n')
@@ -100,7 +71,7 @@ describe('e2e', function () {
 
       it('should make the output report with unix formatter for Foo and Foo2 and Foo3', () => {
         const { code, stdout } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo.sol ${PATH}contracts/Foo2.sol ${PATH}contracts/Foo3.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo.sol contracts/Foo2.sol contracts/Foo3.sol -f ${formatterType}`
         )
 
         const reportLines = stdout.split('\n')
@@ -124,23 +95,23 @@ describe('e2e', function () {
 
       it('should return error when file does not exist and json is the formatter', () => {
         const { code, stdout, stderr } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo1.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo1.sol -f ${formatterType}`
         )
 
         expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
         expect(stdout.trim()).to.be.empty
         expect(stderr).to.include('No files to lint! check glob arguments')
       })
-      it('should return nothing when file exists and there is no error/warning', () => {
+      it('should return empty array when file exists and there is no error/warning', () => {
         const { code, stdout } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo3.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo3.sol -f ${formatterType}`
         )
         expect(code).to.equal(EXIT_CODES.OK)
-        expect(stdout.trim()).to.be.empty
+        expect(stdout.trim()).to.equal('[]')
       })
       it('should make the output report with json formatter for Foo2', () => {
         const { code, stdout } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo2.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo2.sol -f ${formatterType}`
         )
 
         const expectedFinalOutput = foo2Output.concat([{ conclusion: '3 problem/s (3 warning/s)' }])
@@ -154,7 +125,7 @@ describe('e2e', function () {
       })
       it('should make the output report with json formatter for Foo and Foo2 and Foo3', () => {
         const { code, stdout } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo.sol ${PATH}contracts/Foo2.sol ${PATH}contracts/Foo3.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo.sol contracts/Foo2.sol contracts/Foo3.sol -f ${formatterType}`
         )
 
         const expectedFinalOutput = foo1Output
@@ -176,7 +147,7 @@ describe('e2e', function () {
 
       it('should return error when file does not exist and compact is the formatter', () => {
         const { code, stdout, stderr } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo1.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo1.sol -f ${formatterType}`
         )
         expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
         expect(stdout.trim()).to.be.empty
@@ -185,14 +156,14 @@ describe('e2e', function () {
 
       it('should return nothing when file exists and there is no error/warning', () => {
         const { code, stdout } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo3.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo3.sol -f ${formatterType}`
         )
         expect(code).to.equal(EXIT_CODES.OK)
         expect(stdout.trim()).to.be.empty
       })
       it('should make the output report with compact formatter for Foo2', () => {
         const { code, stdout } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo2.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo2.sol -f ${formatterType}`
         )
 
         const reportLines = stdout.split('\n')
@@ -209,7 +180,7 @@ describe('e2e', function () {
       })
       it('should make the output report with compact formatter for Foo and Foo2 and Foo3', () => {
         const { code, stdout } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo.sol ${PATH}contracts/Foo2.sol ${PATH}contracts/Foo3.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo.sol contracts/Foo2.sol contracts/Foo3.sol -f ${formatterType}`
         )
 
         const reportLines = stdout.split('\n')
@@ -233,7 +204,7 @@ describe('e2e', function () {
 
       it('should return error when file does not exist and stylish is the formatter', () => {
         const { code, stdout, stderr } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo1.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo1.sol -f ${formatterType}`
         )
         expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
         expect(stdout.trim()).to.be.empty
@@ -242,14 +213,14 @@ describe('e2e', function () {
 
       it('should return nothing when file exists and there is no error/warning', () => {
         const { code, stdout } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo3.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo3.sol -f ${formatterType}`
         )
         expect(code).to.equal(EXIT_CODES.OK)
         expect(stdout.trim()).to.be.empty
       })
       it('should make the output report with stylish formatter for Foo2', () => {
         const { code, stdout } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo2.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo2.sol -f ${formatterType}`
         )
 
         const reportLines = stdout.split('\n')
@@ -270,7 +241,7 @@ describe('e2e', function () {
       })
       it('should make the output report with stylish formatter for Foo and Foo2 and Foo3', () => {
         const { code, stdout } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo.sol ${PATH}contracts/Foo2.sol ${PATH}contracts/Foo3.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo.sol contracts/Foo2.sol contracts/Foo3.sol -f ${formatterType}`
         )
 
         const reportLines = stdout.split('\n')
@@ -305,7 +276,7 @@ describe('e2e', function () {
 
       it('should return error when file does not exist and tap is the formatter', () => {
         const { code, stdout, stderr } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo1.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo1.sol -f ${formatterType}`
         )
 
         expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
@@ -315,18 +286,18 @@ describe('e2e', function () {
 
       it('should return TAP header [ok 1] when file exists and there is no error/warning', () => {
         const { code, stdout } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo3.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo3.sol -f ${formatterType}`
         )
         const reportLines = stdout.split('\n')
         expect(reportLines[0]).to.eq('TAP version 13')
         expect(reportLines[1]).to.eq('1..1')
-        expect(reportLines[2]).to.eq(`ok 1 - ${PATH}contracts/Foo3.sol`)
+        expect(reportLines[2]).to.eq(`ok 1 - contracts/Foo3.sol`)
 
         expect(code).to.equal(EXIT_CODES.OK)
       })
       it('should make the output report with tap formatter for Foo2', () => {
         const { code, stdout } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo2.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo2.sol -f ${formatterType}`
         )
 
         const reportLines = stdout.split('\n')
@@ -361,7 +332,7 @@ describe('e2e', function () {
 
       it('should return error when file does not exist and table is the formatter', () => {
         const { code, stdout, stderr } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo1.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo1.sol -f ${formatterType}`
         )
         expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
         expect(stdout.trim()).to.be.empty
@@ -370,7 +341,7 @@ describe('e2e', function () {
 
       it('should return TABLE Footer when file exists and there is no error/warning', () => {
         const { code, stdout } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo3.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo3.sol -f ${formatterType}`
         )
         const reportLines = stdout.split('\n')
         expect(reportLines[1]).to.eq(tableFooter1)
@@ -383,7 +354,7 @@ describe('e2e', function () {
       })
       it('should make the output report with table formatter for Foo', () => {
         const { code, stdout } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo.sol -f ${formatterType}`
         )
         const reportLines = stdout.split('\n')
 
@@ -409,7 +380,7 @@ describe('e2e', function () {
 
       it('should return error when file does not exist and sarif is the formatter', () => {
         const { code, stdout, stderr } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo1.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo1.sol -f ${formatterType}`
         )
         expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
         expect(stdout.trim()).to.be.empty
@@ -418,11 +389,11 @@ describe('e2e', function () {
 
       it('should output with sarif formatter for Foo2', () => {
         const { code, stdout } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo2.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo2.sol -f ${formatterType}`
         )
         const sarifOutput = JSON.parse(stdout)
 
-        const expectedUriPath = url.pathToFileURL(`${PATH}contracts/Foo2.sol`).toString()
+        const expectedUriPath = url.pathToFileURL(`contracts/Foo2.sol`).toString()
         const expectedResults = [
           {
             level: 'warning',
@@ -496,13 +467,13 @@ describe('e2e', function () {
 
       it('should output with sarif formatter for Foo and Foo2 and Foo3', () => {
         const { code, stdout } = shell.exec(
-          `${NODE}solhint ${PATH}contracts/Foo.sol ${PATH}contracts/Foo2.sol ${PATH}contracts/Foo3.sol -f ${formatterType}${SUFFIX}`
+          `solhint contracts/Foo.sol contracts/Foo2.sol contracts/Foo3.sol -f ${formatterType}`
         )
         const sarifOutput = JSON.parse(stdout)
 
-        const expectedUriPathFoo = url.pathToFileURL(`${PATH}contracts/Foo.sol`).toString()
-        const expectedUriPathFoo2 = url.pathToFileURL(`${PATH}contracts/Foo2.sol`).toString()
-        const expectedUriPathFoo3 = url.pathToFileURL(`${PATH}contracts/Foo3.sol`).toString()
+        const expectedUriPathFoo = url.pathToFileURL(`contracts/Foo.sol`).toString()
+        const expectedUriPathFoo2 = url.pathToFileURL(`contracts/Foo2.sol`).toString()
+        const expectedUriPathFoo3 = url.pathToFileURL(`contracts/Foo3.sol`).toString()
         const expectedResults = [
           {
             level: 'error',

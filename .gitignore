@@ -12,4 +12,4 @@ _temp/
 *solhintReport*.*
 .env
 **/.DS_Store
-
+solhint*.tgz

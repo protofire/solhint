@@ -1,4 +1,4 @@
-const fs = require("fs")
+const fs = require('fs')
 
 const { loadRules } = require('../lib/load-rules')
 
@@ -26,11 +26,11 @@ function writeRuleset(ruleset, filename) {
 */
 
 module.exports = Object.freeze(${JSON.stringify({ rules: ruleset }, null, 2)})
-`;
+`
 
-  fs.writeFileSync(`./conf/rulesets/solhint-${filename}.js`, code, "utf8");
+  fs.writeFileSync(`./conf/rulesets/solhint-${filename}.js`, code, 'utf8')
 }
 
-writeRuleset(allRules, "all")
-writeRuleset(recommendedRules, "recommended")
-writeRuleset(defaultRules, "default")
+writeRuleset(allRules, 'all')
+writeRuleset(recommendedRules, 'recommended')
+writeRuleset(defaultRules, 'default')
