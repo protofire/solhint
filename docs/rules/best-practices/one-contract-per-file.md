@@ -15,7 +15,7 @@ title:       "one-contract-per-file | Solhint"
 Enforces the use of ONE Contract per file see [here](https://docs.soliditylang.org/en/v0.8.21/style-guide.html#contract-and-library-names)
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json

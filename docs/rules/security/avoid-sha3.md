@@ -15,7 +15,7 @@ title:       "avoid-sha3 | Solhint"
 Use "keccak256" instead of deprecated "sha3".
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json

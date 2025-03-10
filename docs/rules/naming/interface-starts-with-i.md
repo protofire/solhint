@@ -12,7 +12,7 @@ title:       "interface-starts-with-i | Solhint"
 Solidity Interfaces names should start with an `I`
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
@@ -35,7 +35,7 @@ interface IFoo { function foo () external; }
 
 ### 👎 Examples of **incorrect** code for this rule
 
-#### Interface name doesnt start with I
+#### Interface name doesn't start with I
 
 ```solidity
 interface Foo { function foo () external; }

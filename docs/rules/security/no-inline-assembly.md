@@ -15,7 +15,7 @@ title:       "no-inline-assembly | Solhint"
 Avoid to use inline assembly. It is acceptable only in rare cases.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
