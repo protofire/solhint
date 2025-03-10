@@ -314,22 +314,41 @@ function printReports(reports, formatter) {
     if (fullReport && !program.opts().formatter) {
       if (!program.opts().noPoster) {
         console.log(
-          chalk.italic.bgYellow.black.bold(
-            ' -------------------------------------------------------------------------- '
+          picocolors.italic(
+            picocolors.bgYellow(
+              picocolors.black(
+                picocolors.bold(
+                  ' -------------------------------------------------------------------------- '
+                )
+              )
+            )
           )
         )
 
         console.log(
-          chalk.italic.bgYellow.black.bold(
-            ' ===> Join SOLHINT Community at: https://discord.com/invite/4TYGq3zpjs <=== '
+          picocolors.italic(
+            picocolors.bgYellow(
+              picocolors.black(
+                picocolors.bold(
+                  ' ===> Join SOLHINT Community at: https://discord.com/invite/4TYGq3zpjs <=== '
+                )
+              )
+            )
           )
         )
 
         console.log(
-          chalk.italic.bgYellow.black.bold(
-            ' -------------------------------------------------------------------------- \n'
+          picocolors.italic(
+            picocolors.bgYellow(
+              picocolors.black(
+                picocolors.bold(
+                  ' -------------------------------------------------------------------------- '
+                )
+              )
+            )
           )
         )
+        console.log('\n')
       }
     }
   }
