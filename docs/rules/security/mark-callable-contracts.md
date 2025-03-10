@@ -15,7 +15,7 @@ title:       "mark-callable-contracts | Solhint"
 Explicitly mark all external contracts as trusted or untrusted.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json

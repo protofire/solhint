@@ -12,7 +12,7 @@ title:       "interface-starts-with-i | Solhint"
 Solidity Interfaces names should start with an `I`
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json

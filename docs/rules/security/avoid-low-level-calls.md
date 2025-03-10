@@ -15,7 +15,7 @@ title:       "avoid-low-level-calls | Solhint"
 Avoid to use low level calls.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
