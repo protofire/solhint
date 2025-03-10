@@ -12,7 +12,7 @@ title:       "named-parameters-mapping | Solhint"
 Solidity v0.8.18 introduced named parameters on the mappings definition.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json

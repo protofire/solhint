@@ -15,7 +15,7 @@ title:       "not-rely-on-block-hash | Solhint"
 Do not rely on "block.blockhash". Miners can influence its value.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json

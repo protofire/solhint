@@ -151,7 +151,7 @@ function loadOptions(rule) {
 ${table(optionsTable)}
 `
   } else if (typeof rule.meta.defaultSetup === 'string') {
-    return `This rule accepts a string option of rule severity. Must be one of ${ruleSeverityEnum}. Defaults to ${rule.meta.defaultSetup}.`
+    return `This rule accepts a string option for rule severity. Must be one of ${ruleSeverityEnum}. Defaults to ${rule.meta.defaultSetup}.`
   } else {
     throw new Error(`Unhandled type of rule.meta.defaultSetup from rule ${rule.ruleId}`)
   }
@@ -186,7 +186,7 @@ function linkToVersion(version) {
   if (version) {
     return `This rule was introduced in [Solhint ${version}](https://github.com/protofire/solhint/blob/v${version})`
   } else {
-    return `This rule is introduced in the latest version.`
+    return `This rule was introduced in the latest version.`
   }
 }
 

@@ -12,7 +12,7 @@ title:       "gas-named-return-values | Solhint"
 Enforce the return values of a function to be named
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json

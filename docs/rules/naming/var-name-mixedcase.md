@@ -15,7 +15,7 @@ title:       "var-name-mixedcase | Solhint"
 Variable names must be in mixedCase. (Does not check IMMUTABLES, use immutable-vars-naming)
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
