@@ -38,7 +38,7 @@ First initialize a configuration file, if you don't have one:
 solhint --init
 ```
 
-This will create a `.solhint.json` file with the default rules enabled. Then run Solhint with one or more [Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside `contracts` directory, you can do:
+This will create a `.solhint.json` file with the recommended rules enabled. Then run Solhint with one or more [Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside `contracts` directory, you can do:
 
 ```sh
 solhint 'contracts/**/*.sol'
@@ -108,11 +108,12 @@ This file has the following format:
 ### Default 
 ```json
 {
-  "extends": "solhint:default"
+  "extends": "solhint:recommended"
 }
 ```
 ### Note
 The `solhint:default` configuration contains only two rules: max-line-length & no-console
+It is now deprecated since version 5.1.0
 <br><br>
 
 
@@ -139,9 +140,9 @@ additional-tests.sol
 
 ### Extendable rulesets
 
-The default rulesets provided by solhint are the following:
+The rulesets provided by solhint are the following:
 
-+ solhint:default
++ solhint:default (deprecated since version v5.1.0)
 + solhint:recommended
 
 Use one of these as the value for the "extends" property in your configuration file.
