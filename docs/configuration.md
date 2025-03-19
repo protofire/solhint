@@ -22,7 +22,7 @@ format:
 
 ```json
   {
-    "extends": "solhint:default",
+    "extends": "solhint:recommended",
     "plugins": [],
     "rules": {
       "const-name-snakecase": "off",

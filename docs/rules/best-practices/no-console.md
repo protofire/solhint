@@ -8,7 +8,7 @@ title:       "no-console | Solhint"
 ![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
 ![Category Badge](https://img.shields.io/badge/-Best%20Practice%20Rules-informational)
 ![Default Severity Badge error](https://img.shields.io/badge/Default%20Severity-error-red)
-> The {"extends": "solhint:default"} property in a configuration file enables this rule.
+> The {"extends": "solhint:default"} property in a configuration file enables this rule. THIS IS DEPRECATED SINCE VERSION 5.1.0
 
 > The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
 
