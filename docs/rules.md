@@ -44,7 +44,7 @@ title:       "Rule Index of Solhint"
 | [var-name-mixedcase](./rules/naming/var-name-mixedcase.md)                           | Variable names must be in mixedCase. (Does not check IMMUTABLES, use immutable-vars-naming)                   | $~~~~~~~~$✔️ |            |
 | [imports-on-top](./rules/order/imports-on-top.md)                                    | Import statements must be on top.                                                                             | $~~~~~~~~$✔️ |            |
 | [imports-order](./rules/naming/imports-order.md)                                     | Order the imports of the contract to follow a certain hierarchy (read "Notes section")                        |              |            |
-| [ordering](./rules/order/ordering.md)                                                | Check order of elements in file and inside each contract, according to the style guide.                       |              |            |
+| [ordering](./rules/order/ordering.md)                                                | Check order of elements in file and inside each contract, according to the style guide                        |              |            |
 | [visibility-modifier-order](./rules/order/visibility-modifier-order.md)              | Visibility modifier must be first in list of modifiers.                                                       | $~~~~~~~~$✔️ |            |
         
 
