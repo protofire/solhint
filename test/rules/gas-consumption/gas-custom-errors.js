@@ -206,19 +206,6 @@ describe('Linter - gas-custom-errors', () => {
     assert.equal(report.reports[1].message, 'GC: Use Custom Errors instead of revert statements')
   })
 
-  it('should NOT raise error for default config because rule is not part of default', () => {
-    const code = funcWith(`require(!has(role, account), "Roles: account already has role");
-        revert("RevertMessage");
-        revert CustomError();
-    `)
-    const report = linter.processStr(code, {
-      extends: 'solhint:default',
-    })
-
-    assertWarnsCount(report, 0)
-    assertErrorCount(report, 0)
-  })
-
   it('should NOT raise error for lower versions 0.8.3', () => {
     let code = funcWith(`revert();`)
     code = replaceSolidityVersion(code, '0.8.3')

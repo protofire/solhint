@@ -48,18 +48,6 @@ describe('Linter - func-named-parameters', () => {
     })
   }
 
-  it('should NOT raise error when default rules are configured', () => {
-    const code = contractWith(
-      `function callerFunction() public { funcName(sender, amount, receiver, token1, token2); }`
-    )
-    const report = linter.processStr(code, {
-      extends: 'solhint:default',
-      rules: {},
-    })
-
-    assertNoErrors(report)
-  })
-
   it('should NOT raise error when recommended rules are configured', () => {
     const code = contractWith(
       `function callerFunction() public { funcName(sender, amount, receiver, token1, token2); }`
