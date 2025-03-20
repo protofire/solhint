@@ -15,7 +15,7 @@ title:       "visibility-modifier-order | Solhint"
 Visibility modifier must be first in list of modifiers.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
@@ -59,9 +59,9 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 ```
 
 ## Version
-This rule was introduced in [Solhint 1.1.5](https://github.com/protofire/solhint/tree/v1.1.5)
+This rule was introduced in [Solhint 1.1.5](https://github.com/protofire/solhint/blob/v1.1.5)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/order/visibility-modifier-order.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/order/visibility-modifier-order.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/order/visibility-modifier-order.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/order/visibility-modifier-order.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/order/visibility-modifier-order.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/order/visibility-modifier-order.js)

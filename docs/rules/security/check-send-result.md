@@ -15,7 +15,7 @@ title:       "check-send-result | Solhint"
 Check result of "send" call.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
@@ -54,9 +54,9 @@ x.send(55);
 ```
 
 ## Version
-This rule was introduced in [Solhint 2.0.0-alpha.0](https://github.com/protofire/solhint/tree/v2.0.0-alpha.0)
+This rule was introduced in [Solhint 2.0.0-alpha.0](https://github.com/protofire/solhint/blob/v2.0.0-alpha.0)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/security/check-send-result.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/security/check-send-result.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/security/check-send-result.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/security/check-send-result.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/security/check-send-result.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/security/check-send-result.js)

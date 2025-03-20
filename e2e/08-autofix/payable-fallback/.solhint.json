@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "payable-fallback": "error",
+    "compiler-version": "off"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "explicit-types": ["error", "explicit"],
+    "compiler-version": "off"
+  }
+}

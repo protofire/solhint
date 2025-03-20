@@ -3,7 +3,7 @@ const foo1Output = [
     line: 2,
     column: 1,
     severity: 'Error',
-    message: 'Compiler version >=0.6.0 does not satisfy the ^0.8.0 semver requirement',
+    message: 'Compiler version >=0.6.0 does not satisfy the ^0.8.24 semver requirement',
     ruleId: 'compiler-version',
     fix: null,
     filePath: 'contracts/Foo.sol',
@@ -32,7 +32,6 @@ const foo1Output = [
     severity: 'Warning',
     message: "'TEST2' should start with _",
     ruleId: 'private-vars-leading-underscore',
-    fix: null,
     filePath: 'contracts/Foo.sol',
   },
   {

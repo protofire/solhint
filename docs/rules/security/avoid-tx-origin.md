@@ -15,7 +15,7 @@ title:       "avoid-tx-origin | Solhint"
 Avoid to use tx.origin.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
@@ -31,9 +31,9 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 This rule does not have examples.
 
 ## Version
-This rule was introduced in [Solhint 1.1.5](https://github.com/protofire/solhint/tree/v1.1.5)
+This rule was introduced in [Solhint 1.1.5](https://github.com/protofire/solhint/blob/v1.1.5)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/security/avoid-tx-origin.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/security/avoid-tx-origin.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/security/avoid-tx-origin.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/security/avoid-tx-origin.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/security/avoid-tx-origin.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/security/avoid-tx-origin.js)

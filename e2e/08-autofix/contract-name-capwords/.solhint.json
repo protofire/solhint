@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "contract-name-capwords": "error",
+    "compiler-version": "off"
+  }
+}

@@ -27,7 +27,7 @@ describe('Linter - func-named-parameters', () => {
       assertErrorCount(report, 1)
       assertErrorMessage(
         report,
-        `Named parameters missing. MIN unnamed argumenst is ${
+        `Named parameters missing. MIN unnamed arguments is ${
           minUnnamed < DEFAULT_MIN_UNNAMED_ARGUMENTS ? DEFAULT_MIN_UNNAMED_ARGUMENTS : minUnnamed
         }`
       )
@@ -79,14 +79,18 @@ describe('Linter - func-named-parameters', () => {
 
     const report = linter.processStr(code, {
       extends: 'solhint:all',
-      rules: { 'compiler-version': 'off', 'comprehensive-interface': 'off' },
+      rules: {
+        'compiler-version': 'off',
+        'comprehensive-interface': 'off',
+        'foundry-test-functions': 'off',
+      },
     })
 
     assertWarnsCount(report, 1)
 
     assertErrorMessage(
       report,
-      `Named parameters missing. MIN unnamed argumenst is ${DEFAULT_MIN_UNNAMED_ARGUMENTS}`
+      `Named parameters missing. MIN unnamed arguments is ${DEFAULT_MIN_UNNAMED_ARGUMENTS}`
     )
   })
 
@@ -102,7 +106,7 @@ describe('Linter - func-named-parameters', () => {
 
     assertErrorMessage(
       report,
-      `Named parameters missing. MIN unnamed argumenst is ${DEFAULT_MIN_UNNAMED_ARGUMENTS}`
+      `Named parameters missing. MIN unnamed arguments is ${DEFAULT_MIN_UNNAMED_ARGUMENTS}`
     )
   })
 })

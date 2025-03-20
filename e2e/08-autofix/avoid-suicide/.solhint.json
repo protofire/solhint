@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "avoid-suicide": "error",
+    "compiler-version": "off"
+  }
+}

@@ -1,18 +1,180 @@
-## [4.0] - 2023-10-01
+## [5.0.5] - 2025-01-16
+### Fixed
+- `gas-custom-errors` [#620](https://github.com/protofire/solhint/pull/620) - Support for Custom Errors inside `require` statements
+- `compiler-version` [#621](https://github.com/protofire/solhint/pull/621) - Upgraded minimum requirement for the rule
+- `reentrancy` [#622](https://github.com/protofire/solhint/pull/622) - Fixed path and typos 
+- Typos [#623](https://github.com/protofire/solhint/pull/623) - Fixed typos 
+- Typo [#625](https://github.com/protofire/solhint/pull/625) - Fixed typo 
 
-### Updated
-- Enhance explicit types sensitivity [493](https://github.com/protofire/solhint/pull/493) (Thanks to @vladyan18)
-- Docs on `private-vars-leading-underscore` rule to clarify its functionality
-- Changelog and docs for `no-empty-blocks` rule to clarify its functionality
 
 ### Added
-- `fixShow` option to show report. `fix` option skips showing report on screen
-- `save` option to store report on disk with the standard or the specified format 
-- Check for updates on Solhint version to keep users with the last versin available. There's an option to disable this check (`--disc`)
-- Autofix for `explicit-types` rule [504](https://github.com/protofire/solhint/pull/504)
+- New Rule: Duplicated Imports [#626](https://github.com/protofire/solhint/pull/626)
+- Cute Message on console report to gather community into discord channel
+  
+<br><br>
+
+
+## [5.0.4] - 2024-12-31
+### Fixed
+- `imports-order` [#595](https://github.com/protofire/solhint/pull/595) - Replaced single quotes with double quotes
+- `gas-custom-errors` [#613](https://github.com/protofire/solhint/pull/613) - Allows the use of Requirement with Custom Errors
+- Typos and broken links [#611](https://github.com/protofire/solhint/pull/611) - [#617](https://github.com/protofire/solhint/pull/617)
+- Upgraded `solidity-parser` dependency [#612](https://github.com/protofire/solhint/pull/612) 
+
+
+### Added
+- `.pre-commit-hooks.yaml` to allow projects to run Solhint via pre-commit [#596](https://github.com/protofire/solhint/pull/596) (Thanks to [@dbast](https://github.com/dbast))
+- Removed `husky` since it is not needed [#612](https://github.com/protofire/solhint/pull/612)
+  
+<br><br>
+
+
+## [5.0.3] - 2024-08-03
+### Fixed
+- `imports-order` [#593](https://github.com/protofire/solhint/pull/593)
+  
+<br><br>
+
+## [5.0.2] - 2024-07-25
+### Fixed
+- `func-named-parameters` exclude abi.encodeX from the rule [#583](https://github.com/protofire/solhint/pull/583) (Thanks to [@0xCLARITY](https://github.com/0xCLARITY))
+- Several typos in comments [#586](https://github.com/protofire/solhint/pull/586) (Thanks to [@dropbigfish](https://github.com/dropbigfish))
+
+### Added
+- New Rule: Imports order [#587](https://github.com/protofire/solhint/pull/587)
+  
+<br><br>
+
+## [5.0.1] - 2024-05-13
+### BREAKING CHANGES (refer to v5.0.0)
+Fixed an issue on the returning values where only was evaluating the first report instead of all of them.
+
+
+<br><br>
+
+## [5.0.0] - 2024-05-11
+### BREAKING CHANGES
+
+#### Solhint EXIT codes
+Solhint changed how the exit codes are implemented:
+
+`Exit with 0 code` When execution was ok and there were no errors when evaluating the code according to the rules<br>
+`Exit with 1 code` When execution was ok and there are errors reported<br>
+`Exit with 1 code` When execution was ok and max warnings is lower than the reported warnings<br>
+`Exit with 255 code` When there's an error in the execution (bad config, writing not allowed, wrong parameter, file not found, etc)<br>
+
+#### Solhint QUIET mode
+QUIET mode (-c quiet) option now works with the warnings and may exit with 1 if there are more than defined by user
+
+Thanks to [@juanpcapurro](https://github.com/juanpcapurro) for providing the code
+
+<br><br>
+
+## [4.5.4] - 2024-04-10
+### Fixed
+- `gas-custom-errors` improved logic to ranged pragma versions [#573](https://github.com/protofire/solhint/pull/573)
+- `gas-indexed-events`  [#573](https://github.com/protofire/solhint/pull/573)
+
+
+## [4.5.2] - 2024-03-15
+
+### Updated
+- Update Readme file to include all autofix rules
+- Update docker file 
+- Update package json file
+
+
+
+## [4.5.0] - 2024-03-15
+
+### Updated
+- Update dependencies in package json [#548](https://github.com/protofire/solhint/pull/548)
+- Custom errors rules checks from 0.8.4 forward before warning [#555](https://github.com/protofire/solhint/pull/555)
+- Parser support up to Solidity 0.8.22 (*)
+
+(*) Note: Solhint can work with latest Solidity versions. 
+          If new grammar/syntax is added or changed, it could give some false positives or miss a rule. 
+          But overall functionality will work as expected.
+
+
+### Added
+- New Rule: Interface starts with `i` [#557](https://github.com/protofire/solhint/pull/557)
+
+#### Gas Consumption Rules
+- New Rule: [GC] Multitoken1155 rule [#541](https://github.com/protofire/solhint/pull/541)
+- New Rule: [GC] Small strings check [#542](https://github.com/protofire/solhint/pull/542)
+- New Rule: [GC] Indexed events [#543](https://github.com/protofire/solhint/pull/543)
+- New Rule: [GC] Calldata parameters [#544](https://github.com/protofire/solhint/pull/544)
+- New Rule: [GC] Increment by one [#545](https://github.com/protofire/solhint/pull/545)
+- New Rule: [GC] Struct packing [#546](https://github.com/protofire/solhint/pull/546)
+- New Rule: [GC] Name Return Values [#552](https://github.com/protofire/solhint/pull/552)
+- New Rule: [GC] Custom Errors #553 [#555](https://github.com/protofire/solhint/pull/553)
+- New Rule: [GC] Dot Length in Loops [#559](https://github.com/protofire/solhint/pull/559)
+- New Rule: [GC] Gas Strict Inequalities [#560](https://github.com/protofire/solhint/pull/560)
+
 
 ### Fixed
-- Generate docs script on Windows OS [494](https://github.com/protofire/solhint/pull/494) (Thanks to @vladyan18)
+- `explicit-types` logic improved and bug free [#551](https://github.com/protofire/solhint/pull/551)
+- `payable fallback`  Improved behavior [#561](https://github.com/protofire/solhint/pull/561)
+
+
+
+### BREAKING CHANGES
+- `named-return-values` rule was renamed to gas-named-return-values and now it is part of Gas Consumption ruleset [#552](https://github.com/protofire/solhint/pull/552)
+- `custom-errors` rule was renamed to gas-custom-errors and now it is part of Gas Consumption ruleset [#553](https://github.com/protofire/solhint/pull/553)
+- Return error 0 when executed correctly [#554](https://github.com/protofire/solhint/pull/554)
+- Default severity modified to `WARN` instead of `OFF` for 
+  `foundry-test-functions` and `named-parameters-mapping` rules [#556](https://github.com/protofire/solhint/pull/556)
+
+
+
+
+## [4.1.1] - 2024-01-08
+
+### Fixed
+- Fix changelog typos
+
+
+## [4.1.0] - 2024-01-08
+
+### Updated
+- Included `Sarif` formatter [#530](https://github.com/protofire/solhint/pull/530) (Thanks to [@eshaan7](https://github.com/eshaan7))
+- Cache `npm` on workflows [#534](https://github.com/protofire/solhint/pull/534)
+
+
+### Added
+- Official Docker Image [#524](https://github.com/protofire/solhint/pull/524) (Thanks to [@keypee](https://github.com/keypee90))
+- Autofix for `payable-fallback` rule [#528](https://github.com/protofire/solhint/pull/528)
+- Autofix for `quotes` rule [#529](https://github.com/protofire/solhint/pull/529)
+- Autofix for `avoid-suicide` rule [#531](https://github.com/protofire/solhint/pull/531)
+- Autofix for `contract-name-camelcase` rule [#532](https://github.com/protofire/solhint/pull/532)
+- Autofix for `event-name-camelcase` rule [#533](https://github.com/protofire/solhint/pull/533)
+
+### Fixed
+- Fix private vars leading underscore on libraries [#525](https://github.com/protofire/solhint/pull/525)
+
+ 
+
+
+## [4.0.0] - 2023-10-01
+
+### Updated
+- Enhance explicit types sensitivity [#493](https://github.com/protofire/solhint/pull/493) (Thanks to [@vladyan18](https://github.com/vladyan18))
+- Docs on `private-vars-leading-underscore` rule to clarify its functionality
+- Changelog and docs for `no-empty-blocks` rule to clarify its functionality
+- Require package with full path [#515](https://github.com/protofire/solhint/pull/515) (Thanks to [@zouguangxian](@https://github.com/zouguangxian))
+
+### Added
+- Check for updates on Solhint version to keep users up to date. There's an option to disable this check (`--disc`) [#506](https://github.com/protofire/solhint/pull/506)
+- `fix` option now shows the report on screen [#509](https://github.com/protofire/solhint/pull/509)
+- `save` option to store report on disk with the standard or the specified format [#509](https://github.com/protofire/solhint/pull/509) 
+- Autofix for `explicit-types` rule [#504](https://github.com/protofire/solhint/pull/504)
+- Autofix for `no-console` rule [#513](https://github.com/protofire/solhint/pull/513)
+- Autofix for `private-vars-leading-underscore` rule [#511](https://github.com/protofire/solhint/pull/511)
+
+### Fixed
+- Generate docs script on Windows OS [#494](https://github.com/protofire/solhint/pull/494) (Thanks to [@vladyan18](https://github.com/vladyan18))
+- `one-contract-per-file` ignore interfaces [#514](https://github.com/protofire/solhint/pull/514) (Thanks to [@cruzdanilo](https://github.com/cruzdanilo))
 
  
 
@@ -24,7 +186,7 @@
   
 ### Fixed
 - `foundry-test-functions` - Modified regex to include invariant and statefulFuzz tests [#484](https://github.com/protofire/solhint/pull/484)
-- `quotes` - To allow quotes inside double quotes and viceversa [#485](https://github.com/protofire/solhint/pull/485)
+- `quotes` - To allow quotes inside double quotes and vice versa [#485](https://github.com/protofire/solhint/pull/485)
 - `JSON` - Formatter returning JS object instead of standard json [#490](https://github.com/protofire/solhint/pull/490) 
 
 

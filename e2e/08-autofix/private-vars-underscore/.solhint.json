@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "private-vars-leading-underscore": ["error",{"strict":false}],
+    "compiler-version": "off"
+  }
+}

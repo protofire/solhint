@@ -6,19 +6,19 @@ title:       "named-parameters-mapping | Solhint"
 
 # named-parameters-mapping
 ![Category Badge](https://img.shields.io/badge/-Style%20Guide%20Rules-informational)
-![Default Severity Badge off](https://img.shields.io/badge/Default%20Severity-off-undefined)
+![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 
 ## Description
 Solidity v0.8.18 introduced named parameters on the mappings definition.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to off.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
 {
   "rules": {
-    "named-parameters-mapping": "off"
+    "named-parameters-mapping": "warn"
   }
 }
 ```
@@ -39,7 +39,7 @@ mapping(string name => uint256 balance) public users;
 mapping(address owner => mapping(address token => uint256 balance)) public tokenBalances;
 ```
 
-#### Main key of mapping is enforced. On nested mappings other naming are not neccesary
+#### Main key of mapping is enforced. On nested mappings other names are not necessary
 
 ```solidity
 mapping(address owner => mapping(address => uint256)) public tokenBalances;
@@ -77,16 +77,16 @@ mapping(address token => uint256)) public tokenBalances;
 mapping(address => uint256 balance)) public tokenBalances;
 ```
 
-#### No MAIN KEY naming in nested mapping. Other naming are not enforced
+#### No MAIN KEY naming in nested mapping. Other names are not enforced
 
 ```solidity
 mapping(address => mapping(address token => uint256 balance)) public tokenBalances;
 ```
 
 ## Version
-This rule was introduced in [Solhint 3.4.0](https://github.com/protofire/solhint/tree/v3.4.0)
+This rule was introduced in [Solhint 3.4.0](https://github.com/protofire/solhint/blob/v3.4.0)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/naming/named-parameters-mapping.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/naming/named-parameters-mapping.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/naming/named-parameters-mapping.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/naming/named-parameters-mapping.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/naming/named-parameters-mapping.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/naming/named-parameters-mapping.js)

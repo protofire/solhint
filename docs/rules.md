@@ -4,42 +4,34 @@ layout:      "default"
 title:       "Rule Index of Solhint"
 ---
 
-## Best Practise Rules
+## Best Practice Rules
 
 | Rule Id                                                                  | Error                                                                                                                                      | Recommended  | Deprecated |
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ---------- |
-| [code-complexity](./rules/best-practises/code-complexity.md)             | Function has cyclomatic complexity "current" but allowed no more than maxcompl.                                                            |              |            |
-| [custom-errors](./rules/best-practises/custom-errors.md)                 | Enforces the use of Custom Errors over Require and Revert statements                                                                       | $~~~~~~~~$✔️ |            |
-| [explicit-types](./rules/best-practises/explicit-types.md)               | Forbid or enforce explicit types (like uint256) that have an alias (like uint).                                                            | $~~~~~~~~$✔️ |            |
-| [function-max-lines](./rules/best-practises/function-max-lines.md)       | Function body contains "count" lines but allowed no more than maxlines.                                                                    |              |            |
-| [max-line-length](./rules/best-practises/max-line-length.md)             | Line length must be no more than maxlen.                                                                                                   |              |            |
-| [max-states-count](./rules/best-practises/max-states-count.md)           | Contract has "some count" states declarations but allowed no more than maxstates.                                                          | $~~~~~~~~$✔️ |            |
-| [no-console](./rules/best-practises/no-console.md)                       | No console.log/logInt/logBytesX/logString/etc & No hardhat and forge-std console.sol import statements.                                    | $~~~~~~~~$✔️ |            |
-| [no-empty-blocks](./rules/best-practises/no-empty-blocks.md)             | Code block has zero statements inside. Exceptions apply.                                                                                   | $~~~~~~~~$✔️ |            |
-| [no-global-import](./rules/best-practises/no-global-import.md)           | Import statement includes an entire file instead of selected symbols.                                                                      | $~~~~~~~~$✔️ |            |
-| [no-unused-import](./rules/best-practises/no-unused-import.md)           | Imported object name is not being used by the contract.                                                                                    | $~~~~~~~~$✔️ |            |
-| [no-unused-vars](./rules/best-practises/no-unused-vars.md)               | Variable "name" is unused.                                                                                                                 | $~~~~~~~~$✔️ |            |
-| [one-contract-per-file](./rules/best-practises/one-contract-per-file.md) | Enforces the use of ONE Contract per file see [here](https://docs.soliditylang.org/en/v0.8.21/style-guide.html#contract-and-library-names) | $~~~~~~~~$✔️ |            |
-| [payable-fallback](./rules/best-practises/payable-fallback.md)           | When fallback is not payable you will not be able to receive ethers.                                                                       | $~~~~~~~~$✔️ |            |
-| [reason-string](./rules/best-practises/reason-string.md)                 | Require or revert statement must have a reason string and check that each reason string is at most N characters long.                      | $~~~~~~~~$✔️ |            |
-| [constructor-syntax](./rules/best-practises/constructor-syntax.md)       | Constructors should use the new constructor keyword.                                                                                       |              |            |
-        
-
-## Miscellaneous
-
-| Rule Id                                                                     | Error                                                                                                                                  | Recommended  | Deprecated |
-| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ---------- |
-| [comprehensive-interface](./rules/miscellaneous/comprehensive-interface.md) | Check that all public or external functions are override. This is iseful to make sure that the whole API is extracted in an interface. |              |            |
-| [quotes](./rules/miscellaneous/quotes.md)                                   | Enforces the use of double or simple quotes as configured for string literals. Values must be 'single' or 'double'.                    | $~~~~~~~~$✔️ |            |
+| [code-complexity](./rules/best-practices/code-complexity.md)             | Function has cyclomatic complexity "current" but allowed no more than maxcompl.                                                            |              |            |
+| [explicit-types](./rules/best-practices/explicit-types.md)               | Forbid or enforce explicit types (like uint256) that have an alias (like uint).                                                            | $~~~~~~~~$✔️ |            |
+| [function-max-lines](./rules/best-practices/function-max-lines.md)       | Function body contains "count" lines but allowed no more than maxlines.                                                                    |              |            |
+| [max-line-length](./rules/best-practices/max-line-length.md)             | Line length must be no more than maxlen.                                                                                                   |              |            |
+| [max-states-count](./rules/best-practices/max-states-count.md)           | Contract has "some count" states declarations but allowed no more than maxstates.                                                          | $~~~~~~~~$✔️ |            |
+| [no-console](./rules/best-practices/no-console.md)                       | No console.log/logInt/logBytesX/logString/etc & No hardhat and forge-std console.sol import statements.                                    | $~~~~~~~~$✔️ |            |
+| [no-empty-blocks](./rules/best-practices/no-empty-blocks.md)             | Code block has zero statements inside. Exceptions apply.                                                                                   | $~~~~~~~~$✔️ |            |
+| [no-global-import](./rules/best-practices/no-global-import.md)           | Import statement includes an entire file instead of selected symbols.                                                                      | $~~~~~~~~$✔️ |            |
+| [no-unused-import](./rules/best-practices/no-unused-import.md)           | Imported object name is not being used by the contract.                                                                                    | $~~~~~~~~$✔️ |            |
+| [no-unused-vars](./rules/best-practices/no-unused-vars.md)               | Variable "name" is unused.                                                                                                                 | $~~~~~~~~$✔️ |            |
+| [one-contract-per-file](./rules/best-practices/one-contract-per-file.md) | Enforces the use of ONE Contract per file see [here](https://docs.soliditylang.org/en/v0.8.21/style-guide.html#contract-and-library-names) | $~~~~~~~~$✔️ |            |
+| [payable-fallback](./rules/best-practices/payable-fallback.md)           | When fallback is not payable and there is no receive function you will not be able to receive currency.                                    | $~~~~~~~~$✔️ |            |
+| [reason-string](./rules/best-practices/reason-string.md)                 | Require or revert statement must have a reason string and check that each reason string is at most N characters long.                      | $~~~~~~~~$✔️ |            |
         
 
 ## Style Guide Rules
 
 | Rule Id                                                                              | Error                                                                                                         | Recommended  | Deprecated  |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | ------------ | ----------- |
+| [interface-starts-with-i](./rules/naming/interface-starts-with-i.md)                 | Solidity Interfaces names should start with an `I`                                                            |              |             |
+| [duplicated-imports](./rules/miscellaneous/duplicated-imports.md)                    | Check if an import is done twice in the same file and there is no alias                                       |              |             |
 | [const-name-snakecase](./rules/naming/const-name-snakecase.md)                       | Constant name must be in capitalized SNAKE_CASE. (Does not check IMMUTABLES, use immutable-vars-naming)       | $~~~~~~~~$✔️ |             |
-| [contract-name-camelcase](./rules/naming/contract-name-camelcase.md)                 | Contract name must be in CamelCase.                                                                           | $~~~~~~~~$✔️ |             |
-| [event-name-camelcase](./rules/naming/event-name-camelcase.md)                       | Event name must be in CamelCase.                                                                              | $~~~~~~~~$✔️ |             |
+| [contract-name-capwords](./rules/naming/contract-name-capwords.md)                   | Contract, Structs and Enums should be in CapWords.                                                            | $~~~~~~~~$✔️ |             |
+| [event-name-capwords](./rules/naming/event-name-capwords.md)                         | Event name must be in CapWords.                                                                               | $~~~~~~~~$✔️ |             |
 | [foundry-test-functions](./rules/naming/foundry-test-functions.md)                   | Enforce naming convention on functions for Foundry test cases                                                 |              |             |
 | [func-name-mixedcase](./rules/naming/func-name-mixedcase.md)                         | Function name must be in mixedCase.                                                                           | $~~~~~~~~$✔️ |             |
 | [func-named-parameters](./rules/naming/func-named-parameters.md)                     | Enforce named parameters for function calls with 4 or more arguments. This rule may have some false positives |              |             |
@@ -47,14 +39,45 @@ title:       "Rule Index of Solhint"
 | [immutable-vars-naming](./rules/naming/immutable-vars-naming.md)                     | Check Immutable variables. Capitalized SNAKE_CASE or mixedCase depending on configuration.                    | $~~~~~~~~$✔️ |             |
 | [modifier-name-mixedcase](./rules/naming/modifier-name-mixedcase.md)                 | Modifier name must be in mixedCase.                                                                           |              |             |
 | [named-parameters-mapping](./rules/naming/named-parameters-mapping.md)               | Solidity v0.8.18 introduced named parameters on the mappings definition.                                      |              |             |
-| [named-return-values](./rules/naming/named-return-values.md)                         | Enforce the return values of a function to be named                                                           |              |             |
-| [private-vars-leading-underscore](./rules/naming/private-vars-leading-underscore.md) | Private and internal names must start with a single underscore.                                               |              |             |
+| [private-vars-leading-underscore](./rules/naming/private-vars-leading-underscore.md) | Non-external functions and state variables should start with a single underscore. Others, shouldn't           |              |             |
 | [use-forbidden-name](./rules/naming/use-forbidden-name.md)                           | Avoid to use letters 'I', 'l', 'O' as identifiers.                                                            | $~~~~~~~~$✔️ |             |
-| [var-name-mixedcase](./rules/naming/var-name-mixedcase.md)                           | Variable name must be in mixedCase. (Does not check IMMUTABLES, use immutable-vars-naming)                    | $~~~~~~~~$✔️ |             |
+| [var-name-mixedcase](./rules/naming/var-name-mixedcase.md)                           | Variable names must be in mixedCase. (Does not check IMMUTABLES, use immutable-vars-naming)                   | $~~~~~~~~$✔️ |             |
 | [func-order](./rules/order/func-order.md)                                            | Function order is incorrect.                                                                                  |              | $~~~~~~~$✔️ |
 | [imports-on-top](./rules/order/imports-on-top.md)                                    | Import statements must be on top.                                                                             | $~~~~~~~~$✔️ |             |
+| [imports-order](./rules/naming/imports-order.md)                                     | Order the imports of the contract to follow a certain hierarchy (read "Notes section")                        |              |             |
 | [ordering](./rules/order/ordering.md)                                                | Check order of elements in file and inside each contract, according to the style guide.                       |              |             |
 | [visibility-modifier-order](./rules/order/visibility-modifier-order.md)              | Visibility modifier must be first in list of modifiers.                                                       | $~~~~~~~~$✔️ |             |
+        
+
+## Best Practices Rules
+
+| Rule Id                                                            | Error                                                | Recommended | Deprecated |
+| ------------------------------------------------------------------ | ---------------------------------------------------- | ----------- | ---------- |
+| [constructor-syntax](./rules/best-practices/constructor-syntax.md) | Constructors should use the new constructor keyword. |             |            |
+        
+
+## Gas Consumption Rules
+
+| Rule Id                                                                       | Error                                                                                   | Recommended  | Deprecated |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------ | ---------- |
+| [gas-calldata-parameters](./rules/gas-consumption/gas-calldata-parameters.md) | Suggest calldata keyword on function arguments when read only                           |              |            |
+| [gas-custom-errors](./rules/gas-consumption/gas-custom-errors.md)             | Enforces the use of Custom Errors over Require with strings error and Revert statements | $~~~~~~~~$✔️ |            |
+| [gas-increment-by-one](./rules/gas-consumption/gas-increment-by-one.md)       | Suggest increments by one, like this ++i instead of other type                          |              |            |
+| [gas-indexed-events](./rules/gas-consumption/gas-indexed-events.md)           | Suggest indexed arguments on events for uint, bool and address                          |              |            |
+| [gas-length-in-loops](./rules/gas-consumption/gas-length-in-loops.md)         | Suggest replacing object.length in a loop condition to avoid calculation on each lap    |              |            |
+| [gas-multitoken1155](./rules/gas-consumption/gas-multitoken1155.md)           | ERC1155 is a cheaper non-fungible token than ERC721                                     |              |            |
+| [gas-named-return-values](./rules/gas-consumption/gas-named-return-values.md) | Enforce the return values of a function to be named                                     |              |            |
+| [gas-small-strings](./rules/gas-consumption/gas-small-strings.md)             | Keep strings smaller than 32 bytes                                                      |              |            |
+| [gas-strict-inequalities](./rules/gas-consumption/gas-strict-inequalities.md) | Suggest Strict Inequalities over non Strict ones                                        |              |            |
+| [gas-struct-packing](./rules/gas-consumption/gas-struct-packing.md)           | Suggest to re-arrange struct packing order when it is inefficient                       |              |            |
+        
+
+## Miscellaneous
+
+| Rule Id                                                                     | Error                                                                                                                                    | Recommended  | Deprecated |
+| --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ---------- |
+| [comprehensive-interface](./rules/miscellaneous/comprehensive-interface.md) | Check that all public or external functions are overridden. This is useful to make sure that the whole API is extracted in an interface. |              |            |
+| [quotes](./rules/miscellaneous/quotes.md)                                   | Enforces the use of double or simple quotes as configured for string literals. Values must be 'single' or 'double'.                      | $~~~~~~~~$✔️ |            |
         
 
 ## Security Rules
@@ -82,5 +105,5 @@ title:       "Rule Index of Solhint"
 
 ## References
 
-- [ConsenSys Guide for Smart Contracts](https://consensys.github.io/smart-contract-best-practices/recommendations/)
+- [ConsenSys Guide for Smart Contracts](https://consensys.github.io/smart-contract-best-practices/development-recommendations/)
 - [Solidity Style Guide](http://solidity.readthedocs.io/en/develop/style-guide.html)

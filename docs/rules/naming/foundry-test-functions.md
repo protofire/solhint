@@ -6,7 +6,7 @@ title:       "foundry-test-functions | Solhint"
 
 # foundry-test-functions
 ![Category Badge](https://img.shields.io/badge/-Style%20Guide%20Rules-informational)
-![Default Severity Badge off](https://img.shields.io/badge/Default%20Severity-off-undefined)
+![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 
 ## Description
 Enforce naming convention on functions for Foundry test cases
@@ -16,14 +16,14 @@ This rule accepts an array of options:
 
 | Index | Description                                           | Default Value |
 | ----- | ----------------------------------------------------- | ------------- |
-| 0     | Rule severity. Must be one of "error", "warn", "off". | off           |
+| 0     | Rule severity. Must be one of "error", "warn", "off". | warn          |
 
 
 ### Example Config
 ```json
 {
   "rules": {
-    "foundry-test-functions": ["off",["setUp"]]
+    "foundry-test-functions": ["warn",["setUp"]]
   }
 }
 ```
@@ -65,9 +65,9 @@ function numberIs42() public {}
 ```
 
 ## Version
-This rule was introduced in [Solhint 3.6.1](https://github.com/protofire/solhint/tree/v3.6.1)
+This rule was introduced in [Solhint 3.6.1](https://github.com/protofire/solhint/blob/v3.6.1)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/naming/foundry-test-functions.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/naming/foundry-test-functions.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/naming/foundry-test-functions.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/naming/foundry-test-functions.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/naming/foundry-test-functions.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/naming/foundry-test-functions.js)

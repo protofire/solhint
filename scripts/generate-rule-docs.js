@@ -1,10 +1,10 @@
 #!env node
-const { loadRules } = require('../lib/load-rules')
 const fs = require('fs')
 const { exec, mkdir } = require('shelljs')
 const semver = require('semver')
 const path = require('path')
 const table = require('markdown-table')
+const { loadRules } = require('../lib/load-rules')
 const { ruleSeverityEnum } = require('../lib/doc/utils')
 
 /**
@@ -84,7 +84,7 @@ ${[
   categoryBadge(rule.meta.docs.category),
   defaultSeverityBadge(defaultSeverity),
   isDefault
-    ? '> The {"extends": "solhint:default"} property in a configuration file enables this rule.\n'
+    ? '> The {"extends": "solhint:default"} property in a configuration file enables this rule. THIS IS DEPRECATED SINCE VERSION 5.1.0\n'
     : '',
   isRecommended
     ? '> The {"extends": "solhint:recommended"} property in a configuration file enables this rule.\n'
@@ -151,7 +151,7 @@ function loadOptions(rule) {
 ${table(optionsTable)}
 `
   } else if (typeof rule.meta.defaultSetup === 'string') {
-    return `This rule accepts a string option of rule severity. Must be one of ${ruleSeverityEnum}. Default to ${rule.meta.defaultSetup}.`
+    return `This rule accepts a string option for rule severity. Must be one of ${ruleSeverityEnum}. Defaults to ${rule.meta.defaultSetup}.`
   } else {
     throw new Error(`Unhandled type of rule.meta.defaultSetup from rule ${rule.ruleId}`)
   }
@@ -175,7 +175,7 @@ function loadNotes(rule) {
     textToReturn = `### Notes\n`
     for (let i = 0; i < rule.meta.docs.notes.length; i++) {
       noteValue = rule.meta.docs.notes[i].note
-      textToReturn = textToReturn + `- ${noteValue}\n`
+      textToReturn += `- ${noteValue}\n`
     }
   }
 
@@ -184,31 +184,32 @@ function loadNotes(rule) {
 
 function linkToVersion(version) {
   if (version) {
-    return `This rule was introduced in [Solhint ${version}](https://github.com/protofire/solhint/tree/v${version})`
+    return `This rule was introduced in [Solhint ${version}](https://github.com/protofire/solhint/blob/v${version})`
   } else {
-    return `This rule is introduced in the latest version.`
+    return `This rule was introduced in the latest version.`
   }
 }
 
 function linkToSource(rule) {
   const link = localPathToUri(rule.file)
-  return `https://github.com/protofire/solhint/tree/master${link}`
+  return `https://github.com/protofire/solhint/blob/master${link}`
 }
 
 function linkToDocumentSource(rule) {
-  const link = localPathToUri(rule.file)
-    .replace('lib/rules', 'docs/rules')
-    .replace(/\.js$/, '.md')
-  return `https://github.com/protofire/solhint/tree/master${link}`
+  const link = localPathToUri(rule.file).replace('lib/rules', 'docs/rules').replace(/\.js$/, '.md')
+  return `https://github.com/protofire/solhint/blob/master${link}`
 }
 
 function linkToTestCase(rule) {
   const link = localPathToUri(rule.file).replace('lib/rules/', '')
-  return `https://github.com/protofire/solhint/tree/master/test/rules${link}`
+  return `https://github.com/protofire/solhint/blob/master/test/rules${link}`
 }
 
 function localPathToUri(file) {
-  return file.replace(path.resolve(path.join(__dirname, '..')), '').split(path.sep).join('/')
+  return file
+    .replace(path.resolve(path.join(__dirname, '..')), '')
+    .split(path.sep)
+    .join('/')
 }
 
 function loadExamples(rule) {
@@ -283,7 +284,7 @@ ${contents}
 
 ## References
 
-- [ConsenSys Guide for Smart Contracts](https://consensys.github.io/smart-contract-best-practices/recommendations/)
+- [ConsenSys Guide for Smart Contracts](https://consensys.github.io/smart-contract-best-practices/development-recommendations/)
 - [Solidity Style Guide](http://solidity.readthedocs.io/en/develop/style-guide.html)
 `
 }

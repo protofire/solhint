@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "event-name-capwords": "error",
+    "compiler-version": "off"
+  }
+}

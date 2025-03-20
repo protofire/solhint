@@ -12,7 +12,7 @@ title:       "ordering | Solhint"
 Check order of elements in file and inside each contract, according to the style guide.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Default to warn.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
@@ -340,9 +340,9 @@ contract MyContract {
 ```
 
 ## Version
-This rule was introduced in [Solhint 3.2.0](https://github.com/protofire/solhint/tree/v3.2.0)
+This rule was introduced in [Solhint 3.2.0](https://github.com/protofire/solhint/blob/v3.2.0)
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/tree/master/lib/rules/order/ordering.js)
-- [Document source](https://github.com/protofire/solhint/tree/master/docs/rules/order/ordering.md)
-- [Test cases](https://github.com/protofire/solhint/tree/master/test/rules/order/ordering.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/order/ordering.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/order/ordering.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/order/ordering.js)
