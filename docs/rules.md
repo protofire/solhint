@@ -25,28 +25,27 @@ title:       "Rule Index of Solhint"
 
 ## Style Guide Rules
 
-| Rule Id                                                                              | Error                                                                                                         | Recommended  | Deprecated  |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | ------------ | ----------- |
-| [interface-starts-with-i](./rules/naming/interface-starts-with-i.md)                 | Solidity Interfaces names should start with an `I`                                                            |              |             |
-| [duplicated-imports](./rules/miscellaneous/duplicated-imports.md)                    | Check if an import is done twice in the same file and there is no alias                                       |              |             |
-| [const-name-snakecase](./rules/naming/const-name-snakecase.md)                       | Constant name must be in capitalized SNAKE_CASE. (Does not check IMMUTABLES, use immutable-vars-naming)       | $~~~~~~~~$✔️ |             |
-| [contract-name-capwords](./rules/naming/contract-name-capwords.md)                   | Contract, Structs and Enums should be in CapWords.                                                            | $~~~~~~~~$✔️ |             |
-| [event-name-capwords](./rules/naming/event-name-capwords.md)                         | Event name must be in CapWords.                                                                               | $~~~~~~~~$✔️ |             |
-| [foundry-test-functions](./rules/naming/foundry-test-functions.md)                   | Enforce naming convention on functions for Foundry test cases                                                 |              |             |
-| [func-name-mixedcase](./rules/naming/func-name-mixedcase.md)                         | Function name must be in mixedCase.                                                                           | $~~~~~~~~$✔️ |             |
-| [func-named-parameters](./rules/naming/func-named-parameters.md)                     | Enforce named parameters for function calls with 4 or more arguments. This rule may have some false positives |              |             |
-| [func-param-name-mixedcase](./rules/naming/func-param-name-mixedcase.md)             | Function param name must be in mixedCase.                                                                     |              |             |
-| [immutable-vars-naming](./rules/naming/immutable-vars-naming.md)                     | Check Immutable variables. Capitalized SNAKE_CASE or mixedCase depending on configuration.                    | $~~~~~~~~$✔️ |             |
-| [modifier-name-mixedcase](./rules/naming/modifier-name-mixedcase.md)                 | Modifier name must be in mixedCase.                                                                           |              |             |
-| [named-parameters-mapping](./rules/naming/named-parameters-mapping.md)               | Solidity v0.8.18 introduced named parameters on the mappings definition.                                      |              |             |
-| [private-vars-leading-underscore](./rules/naming/private-vars-leading-underscore.md) | Non-external functions and state variables should start with a single underscore. Others, shouldn't           |              |             |
-| [use-forbidden-name](./rules/naming/use-forbidden-name.md)                           | Avoid to use letters 'I', 'l', 'O' as identifiers.                                                            | $~~~~~~~~$✔️ |             |
-| [var-name-mixedcase](./rules/naming/var-name-mixedcase.md)                           | Variable names must be in mixedCase. (Does not check IMMUTABLES, use immutable-vars-naming)                   | $~~~~~~~~$✔️ |             |
-| [func-order](./rules/order/func-order.md)                                            | Function order is incorrect.                                                                                  |              | $~~~~~~~$✔️ |
-| [imports-on-top](./rules/order/imports-on-top.md)                                    | Import statements must be on top.                                                                             | $~~~~~~~~$✔️ |             |
-| [imports-order](./rules/naming/imports-order.md)                                     | Order the imports of the contract to follow a certain hierarchy (read "Notes section")                        |              |             |
-| [ordering](./rules/order/ordering.md)                                                | Check order of elements in file and inside each contract, according to the style guide.                       |              |             |
-| [visibility-modifier-order](./rules/order/visibility-modifier-order.md)              | Visibility modifier must be first in list of modifiers.                                                       | $~~~~~~~~$✔️ |             |
+| Rule Id                                                                              | Error                                                                                                         | Recommended  | Deprecated |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | ------------ | ---------- |
+| [interface-starts-with-i](./rules/naming/interface-starts-with-i.md)                 | Solidity Interfaces names should start with an `I`                                                            |              |            |
+| [duplicated-imports](./rules/miscellaneous/duplicated-imports.md)                    | Check if an import is done twice in the same file and there is no alias                                       |              |            |
+| [const-name-snakecase](./rules/naming/const-name-snakecase.md)                       | Constant name must be in capitalized SNAKE_CASE. (Does not check IMMUTABLES, use immutable-vars-naming)       | $~~~~~~~~$✔️ |            |
+| [contract-name-capwords](./rules/naming/contract-name-capwords.md)                   | Contract, Structs and Enums should be in CapWords.                                                            | $~~~~~~~~$✔️ |            |
+| [event-name-capwords](./rules/naming/event-name-capwords.md)                         | Event name must be in CapWords.                                                                               | $~~~~~~~~$✔️ |            |
+| [foundry-test-functions](./rules/naming/foundry-test-functions.md)                   | Enforce naming convention on functions for Foundry test cases                                                 |              |            |
+| [func-name-mixedcase](./rules/naming/func-name-mixedcase.md)                         | Function name must be in mixedCase.                                                                           | $~~~~~~~~$✔️ |            |
+| [func-named-parameters](./rules/naming/func-named-parameters.md)                     | Enforce named parameters for function calls with 4 or more arguments. This rule may have some false positives |              |            |
+| [func-param-name-mixedcase](./rules/naming/func-param-name-mixedcase.md)             | Function param name must be in mixedCase.                                                                     |              |            |
+| [immutable-vars-naming](./rules/naming/immutable-vars-naming.md)                     | Check Immutable variables. Capitalized SNAKE_CASE or mixedCase depending on configuration.                    | $~~~~~~~~$✔️ |            |
+| [modifier-name-mixedcase](./rules/naming/modifier-name-mixedcase.md)                 | Modifier name must be in mixedCase.                                                                           |              |            |
+| [named-parameters-mapping](./rules/naming/named-parameters-mapping.md)               | Solidity v0.8.18 introduced named parameters on the mappings definition.                                      |              |            |
+| [private-vars-leading-underscore](./rules/naming/private-vars-leading-underscore.md) | Non-external functions and state variables should start with a single underscore. Others, shouldn't           |              |            |
+| [use-forbidden-name](./rules/naming/use-forbidden-name.md)                           | Avoid to use letters 'I', 'l', 'O' as identifiers.                                                            | $~~~~~~~~$✔️ |            |
+| [var-name-mixedcase](./rules/naming/var-name-mixedcase.md)                           | Variable names must be in mixedCase. (Does not check IMMUTABLES, use immutable-vars-naming)                   | $~~~~~~~~$✔️ |            |
+| [imports-on-top](./rules/order/imports-on-top.md)                                    | Import statements must be on top.                                                                             | $~~~~~~~~$✔️ |            |
+| [imports-order](./rules/naming/imports-order.md)                                     | Order the imports of the contract to follow a certain hierarchy (read "Notes section")                        |              |            |
+| [ordering](./rules/order/ordering.md)                                                | Check order of elements in file and inside each contract, according to the style guide.                       |              |            |
+| [visibility-modifier-order](./rules/order/visibility-modifier-order.md)              | Visibility modifier must be first in list of modifiers.                                                       | $~~~~~~~~$✔️ |            |
         
 
 ## Best Practices Rules
@@ -82,25 +81,24 @@ title:       "Rule Index of Solhint"
 
 ## Security Rules
 
-| Rule Id                                                                | Error                                                                    | Recommended  | Deprecated  |
-| ---------------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------ | ----------- |
-| [avoid-call-value](./rules/security/avoid-call-value.md)               | Avoid to use ".call.value()()".                                          | $~~~~~~~~$✔️ |             |
-| [avoid-low-level-calls](./rules/security/avoid-low-level-calls.md)     | Avoid to use low level calls.                                            | $~~~~~~~~$✔️ |             |
-| [avoid-sha3](./rules/security/avoid-sha3.md)                           | Use "keccak256" instead of deprecated "sha3".                            | $~~~~~~~~$✔️ |             |
-| [avoid-suicide](./rules/security/avoid-suicide.md)                     | Use "selfdestruct" instead of deprecated "suicide".                      | $~~~~~~~~$✔️ |             |
-| [avoid-throw](./rules/security/avoid-throw.md)                         | "throw" is deprecated, avoid to use it.                                  | $~~~~~~~~$✔️ |             |
-| [avoid-tx-origin](./rules/security/avoid-tx-origin.md)                 | Avoid to use tx.origin.                                                  | $~~~~~~~~$✔️ |             |
-| [check-send-result](./rules/security/check-send-result.md)             | Check result of "send" call.                                             | $~~~~~~~~$✔️ |             |
-| [compiler-version](./rules/security/compiler-version.md)               | Compiler version must satisfy a semver requirement.                      | $~~~~~~~~$✔️ |             |
-| [func-visibility](./rules/security/func-visibility.md)                 | Explicitly mark visibility in function.                                  | $~~~~~~~~$✔️ |             |
-| [mark-callable-contracts](./rules/security/mark-callable-contracts.md) | Explicitly mark all external contracts as trusted or untrusted.          |              | $~~~~~~~$✔️ |
-| [multiple-sends](./rules/security/multiple-sends.md)                   | Avoid multiple calls of "send" method in single transaction.             | $~~~~~~~~$✔️ |             |
-| [no-complex-fallback](./rules/security/no-complex-fallback.md)         | Fallback function must be simple.                                        | $~~~~~~~~$✔️ |             |
-| [no-inline-assembly](./rules/security/no-inline-assembly.md)           | Avoid to use inline assembly. It is acceptable only in rare cases.       | $~~~~~~~~$✔️ |             |
-| [not-rely-on-block-hash](./rules/security/not-rely-on-block-hash.md)   | Do not rely on "block.blockhash". Miners can influence its value.        | $~~~~~~~~$✔️ |             |
-| [not-rely-on-time](./rules/security/not-rely-on-time.md)               | Avoid making time-based decisions in your business logic.                |              |             |
-| [reentrancy](./rules/security/reentrancy.md)                           | Possible reentrancy vulnerabilities. Avoid state changes after transfer. | $~~~~~~~~$✔️ |             |
-| [state-visibility](./rules/security/state-visibility.md)               | Explicitly mark visibility of state.                                     | $~~~~~~~~$✔️ |             |
+| Rule Id                                                              | Error                                                                    | Recommended  | Deprecated |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------ | ---------- |
+| [avoid-call-value](./rules/security/avoid-call-value.md)             | Avoid to use ".call.value()()".                                          | $~~~~~~~~$✔️ |            |
+| [avoid-low-level-calls](./rules/security/avoid-low-level-calls.md)   | Avoid to use low level calls.                                            | $~~~~~~~~$✔️ |            |
+| [avoid-sha3](./rules/security/avoid-sha3.md)                         | Use "keccak256" instead of deprecated "sha3".                            | $~~~~~~~~$✔️ |            |
+| [avoid-suicide](./rules/security/avoid-suicide.md)                   | Use "selfdestruct" instead of deprecated "suicide".                      | $~~~~~~~~$✔️ |            |
+| [avoid-throw](./rules/security/avoid-throw.md)                       | "throw" is deprecated, avoid to use it.                                  | $~~~~~~~~$✔️ |            |
+| [avoid-tx-origin](./rules/security/avoid-tx-origin.md)               | Avoid to use tx.origin.                                                  | $~~~~~~~~$✔️ |            |
+| [check-send-result](./rules/security/check-send-result.md)           | Check result of "send" call.                                             | $~~~~~~~~$✔️ |            |
+| [compiler-version](./rules/security/compiler-version.md)             | Compiler version must satisfy a semver requirement.                      | $~~~~~~~~$✔️ |            |
+| [func-visibility](./rules/security/func-visibility.md)               | Explicitly mark visibility in function.                                  | $~~~~~~~~$✔️ |            |
+| [multiple-sends](./rules/security/multiple-sends.md)                 | Avoid multiple calls of "send" method in single transaction.             | $~~~~~~~~$✔️ |            |
+| [no-complex-fallback](./rules/security/no-complex-fallback.md)       | Fallback function must be simple.                                        | $~~~~~~~~$✔️ |            |
+| [no-inline-assembly](./rules/security/no-inline-assembly.md)         | Avoid to use inline assembly. It is acceptable only in rare cases.       | $~~~~~~~~$✔️ |            |
+| [not-rely-on-block-hash](./rules/security/not-rely-on-block-hash.md) | Do not rely on "block.blockhash". Miners can influence its value.        | $~~~~~~~~$✔️ |            |
+| [not-rely-on-time](./rules/security/not-rely-on-time.md)             | Avoid making time-based decisions in your business logic.                |              |            |
+| [reentrancy](./rules/security/reentrancy.md)                         | Possible reentrancy vulnerabilities. Avoid state changes after transfer. | $~~~~~~~~$✔️ |            |
+| [state-visibility](./rules/security/state-visibility.md)             | Explicitly mark visibility of state.                                     | $~~~~~~~~$✔️ |            |
         
 
 ## References

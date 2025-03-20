@@ -28,3 +28,11 @@ describe('Parse error', () => {
     assert.ok(messages[1].startsWith("Parse error: mismatched input '<EOF>' expecting"))
   })
 })
+
+describe('New Parsers support', () => {
+  it('0.19.0 parser should support transient variable', () => {
+    const report = linter.processStr('contract Foo { uint256 transient counter; }', {})
+
+    assertErrorCount(report, 0)
+  })
+})
