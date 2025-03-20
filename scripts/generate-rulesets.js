@@ -5,7 +5,6 @@ const { loadRules } = require('../lib/load-rules')
 const rulesConstants = loadRules()
 const allRules = {}
 const recommendedRules = {}
-const defaultRules = {}
 
 rulesConstants.forEach((rule) => {
   if (!rule.meta.deprecated) {
@@ -13,9 +12,6 @@ rulesConstants.forEach((rule) => {
   }
   if (!rule.meta.deprecated && rule.meta.recommended) {
     recommendedRules[rule.ruleId] = rule.meta.defaultSetup
-  }
-  if (!rule.meta.deprecated && rule.meta.isDefault) {
-    defaultRules[rule.ruleId] = rule.meta.defaultSetup
   }
 })
 
@@ -33,4 +29,3 @@ module.exports = Object.freeze(${JSON.stringify({ rules: ruleset }, null, 2)})
 
 writeRuleset(allRules, 'all')
 writeRuleset(recommendedRules, 'recommended')
-writeRuleset(defaultRules, 'default')
