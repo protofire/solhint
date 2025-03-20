@@ -126,7 +126,10 @@ describe('Linter - ordering', () => {
   })
 
   it('should not raise incorrect function order error I', () => {
-    const code = require('../../fixtures/order/func-order-constructor-first')
+    const code = contractWith(`
+      constructor() public {}
+      function () public payable {}
+  `)
 
     const report = linter.processStr(code, {
       rules: { ordering: 'error' },
@@ -136,7 +139,10 @@ describe('Linter - ordering', () => {
   })
 
   it('should raise incorrect function order error', () => {
-    const code = require('../../fixtures/order/func-order-constructor-not-first')
+    const code = contractWith(`
+      function () public payable {}
+      constructor() public {}
+  `)
 
     const report = linter.processStr(code, {
       rules: { ordering: 'error' },
