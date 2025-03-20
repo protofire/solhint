@@ -75,4 +75,74 @@ contract MyContract {
 }
 `,
   },
+
+  {
+    description: 'file-level constant before import',
+    code: `
+uint256 constant FOO_BAR = 42;
+import {A} from "./A.sol";
+`,
+  },
+  {
+    description: 'file-level constant after type definition',
+    code: `
+struct foo { uint x; }
+uint256 constant FOO_BAR = 42;
+`,
+  },
+  {
+    description: 'immutable after mutable',
+    code: `
+contract Foo {
+uint bar;
+uint immutable foo;
+}
+`,
+  },
+  {
+    description: 'constant after immutable',
+    code: `
+contract Foo {
+uint immutable bar;
+uint constant foo;
+}
+`,
+  },
+  {
+    description: 'constant after mutable',
+    code: `
+contract Foo {
+uint bar;
+uint constant foo;
+}
+`,
+  },
+  {
+    description: 'file-scoped struct before enum',
+    code: `
+  struct MyStruct {
+    uint x;
+    uint y;
+  }
+  enum MyEnum {
+    Foo,
+    Bar
+  }
+`,
+  },
+  {
+    description: 'contract-scoped struct before enum',
+    code: `
+contract MyContract {
+  struct MyStruct {
+    uint x;
+    uint y;
+  }
+  enum MyEnum {
+    Foo,
+    Bar
+  }
+}
+`,
+  },
 ]
