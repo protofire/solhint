@@ -21,6 +21,7 @@ module.exports = Object.freeze({
       },
     ],
     'gas-custom-errors': 'warn',
+    'import-path-check': ['warn', ['node_modules']],
     quotes: ['error', 'double'],
     'const-name-snakecase': 'warn',
     'contract-name-capwords': 'warn',
