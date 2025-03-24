@@ -32,7 +32,9 @@ describe('Linter - no-global-import', () => {
 
     const report = linter.processStr(code, {
       extends: 'solhint:recommended',
+      rules: { 'import-path-check': 'off' },
     })
+
     assertWarnsCount(report, 1)
     assertErrorMessage(report, 'global import')
     assertErrorMessage(report, 'Specify names to import individually')

@@ -52,6 +52,7 @@ describe('Linter - no-unused-import', () => {
 
     const report = linter.processStr(code, {
       extends: 'solhint:recommended',
+      rules: { 'import-path-check': 'off' },
     })
     assertWarnsCount(report, 1)
     assertErrorMessage(report, 'imported name A is not used')

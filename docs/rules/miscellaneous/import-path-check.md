@@ -6,7 +6,7 @@ title:       "import-path-check | Solhint"
 
 # import-path-check
 ![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
-![Category Badge](https://img.shields.io/badge/-Style%20Guide%20Rules-informational)
+![Category Badge](https://img.shields.io/badge/-Miscellaneous-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 > The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
 
@@ -26,16 +26,30 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "import-path-check": ["warn",{"baseDepPath":"./git/project","deps":["node_modules","lib"]}]
+    "import-path-check": ["warn",{"searchOn":["/node_modules","/lib"],"includeDefaults":true}]
   }
 }
 ```
 
 ### Notes
 - Rule checks relative and absolute path first. Then checks for each dependency path in config file
-- `baseDepPath:` is the base path of the dependencies
-- `deps:` is an array of dependency paths to check in specified order
-- `baseDepPath` will concatenate with `deps` to check the import path
+- `searchOn`: an array of paths to check in specified order
+- `searchOn` will concatenate with `default path locations` to check
+
+     Default Locations:
+    - /[`~current-project`]
+    - /[`~current-project`]/contracts
+    - /[`~current-project`]/src
+    - /[`~current-project`]/node_modules
+    - /[`~current-project`]/artifacts
+    - /[`~current-project`]/cache
+    - /[`~current-project`]/lib
+    - /[`~current-project`]/out
+    - /usr/local/lib/node_modules
+    - /home/[`~user`]/.nvm/versions/node/[~node-version]/lib/node_modules
+    - /home/[`~user`]/.yarn/global/node_modules
+    - /npm/node_modules
+    - /Yarn/Data/global/node_modules
 
 ## Examples
 This rule does not have examples.
