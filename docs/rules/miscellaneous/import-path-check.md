@@ -26,7 +26,7 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "import-path-check": ["warn",{"searchOn":["/node_modules","/lib"],"includeDefaults":true}]
+    "import-path-check": ["warn",["[~dependenciesPath]"]]
   }
 }
 ```
@@ -36,7 +36,7 @@ This rule accepts an array of options:
 - `searchOn`: an array of paths to check in specified order
 - `searchOn` will concatenate with `default path locations` to check
 
-     Default Locations:
+     *Default Locations:*
     - /[`~current-project`]
     - /[`~current-project`]/contracts
     - /[`~current-project`]/src
@@ -48,8 +48,8 @@ This rule accepts an array of options:
     - /usr/local/lib/node_modules
     - /home/[`~user`]/.nvm/versions/node/[~node-version]/lib/node_modules
     - /home/[`~user`]/.yarn/global/node_modules
-    - /npm/node_modules
-    - /Yarn/Data/global/node_modules
+    - /npm/node_modules (for Windows)
+    - /Yarn/Data/global/node_modules (for Windows)
 
 ## Examples
 This rule does not have examples.
