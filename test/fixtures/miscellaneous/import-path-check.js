@@ -1,4 +1,3 @@
-// test/data/import-path-cases.js
 const { multiLine } = require('../../common/contract-builder')
 
 const successCases = [

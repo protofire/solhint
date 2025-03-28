@@ -1,3 +1,4 @@
+const path = require('path')
 const assert = require('assert')
 const sinon = require('sinon')
 const linter = require('../../../lib/index')
@@ -5,13 +6,19 @@ const { assertNoErrors, assertErrorCount, assertWarnsCount } = require('../../co
 const { successCases, errorCases } = require('../../fixtures/miscellaneous/import-path-check')
 const { multiLine } = require('../../common/contract-builder')
 
-describe.only('import-path-check (mocked fs)', () => {
+describe('import-path-check (mocked fs)', () => {
   let existsStub
   let currentFakeFileSystem = new Set()
 
+  // Normalize paths
+  const normalizePath = (p) => {
+    const resolved = path.resolve(p)
+    return process.platform === 'win32' ? resolved.toLowerCase() : resolved
+  }
+
   beforeEach(() => {
     existsStub = sinon.stub(require('fs'), 'existsSync').callsFake((filePath) => {
-      return currentFakeFileSystem.has(filePath)
+      return currentFakeFileSystem.has(normalizePath(filePath))
     })
   })
 
@@ -26,7 +33,7 @@ describe.only('import-path-check (mocked fs)', () => {
       '/project/Lib.sol': true,
     }
     const fileName = '/project/Test.sol'
-    currentFakeFileSystem = new Set(Object.keys(fakeFileSystem))
+    currentFakeFileSystem = new Set(Object.keys(fakeFileSystem).map(normalizePath))
 
     const code = multiLine('pragma solidity ^0.8.0;', 'import "./Lib.sol";', 'contract Test {}')
 
@@ -50,7 +57,7 @@ describe.only('import-path-check (mocked fs)', () => {
     }
     const fileName = '/project/Test.sol'
 
-    currentFakeFileSystem = new Set(Object.keys(fakeFileSystem))
+    currentFakeFileSystem = new Set(Object.keys(fakeFileSystem).map(normalizePath))
 
     const code = multiLine('pragma solidity ^0.8.24;', 'import "./Lib.sol";', 'contract Test {}')
 
@@ -71,7 +78,7 @@ describe.only('import-path-check (mocked fs)', () => {
 
   successCases.forEach((testCase) => {
     it(`${testCase.name}`, () => {
-      currentFakeFileSystem = new Set(Object.keys(testCase.fakeFileSystem))
+      currentFakeFileSystem = new Set(Object.keys(testCase.fakeFileSystem).map(normalizePath))
 
       const config = {
         rules: {
@@ -86,7 +93,7 @@ describe.only('import-path-check (mocked fs)', () => {
 
   errorCases.forEach((testCase) => {
     it(`${testCase.name}`, () => {
-      currentFakeFileSystem = new Set(Object.keys(testCase.fakeFileSystem))
+      currentFakeFileSystem = new Set(Object.keys(testCase.fakeFileSystem).map(normalizePath))
 
       const config = {
         rules: {
