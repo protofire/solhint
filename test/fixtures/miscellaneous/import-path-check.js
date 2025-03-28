@@ -144,7 +144,7 @@ const errorCases = [
     },
     searchOn: ['/project'],
     expectedErrors: 1,
-    message: ["Import in /project/Test.sol doesn't exist in: ./Lib.sol"],
+    message: ["Import in /project/Test.sol doesn't exist in: ./Libb.sol"],
   },
   {
     name: 'Should fail when importing from yarn global with wrong subpath',
