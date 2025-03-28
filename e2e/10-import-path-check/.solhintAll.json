@@ -1,0 +1,4 @@
+{
+  "extends": "solhint:all",
+  "rules": { "import-path-check": [ "error", [] ] }
+}
