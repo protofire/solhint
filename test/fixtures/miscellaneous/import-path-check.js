@@ -136,7 +136,7 @@ const errorCases = [
   },
   {
     name: 'Should fail when importing with typo in filename',
-    code: multiLine('pragma solidity ^0.8.0;', 'import "./Lib.sol";', 'contract Test {}'),
+    code: multiLine('pragma solidity ^0.8.0;', 'import "./Libb.sol";', 'contract Test {}'), // typo on import
     fileName: '/project/Test.sol',
     fakeFileSystem: {
       '/project/Test.sol': true,
@@ -144,7 +144,7 @@ const errorCases = [
     },
     searchOn: ['/project'],
     expectedErrors: 1,
-    message: ["Import in /project/Test.sol doesn't exist in: ./Libb.sol"], // typo on import
+    message: ["Import in /project/Test.sol doesn't exist in: ./Lib.sol"],
   },
   {
     name: 'Should fail when importing from yarn global with wrong subpath',
