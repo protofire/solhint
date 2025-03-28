@@ -140,11 +140,11 @@ const errorCases = [
     fileName: '/project/Test.sol',
     fakeFileSystem: {
       '/project/Test.sol': true,
-      '/project/lib.sol': true, // typo: lowercase "l"
+      '/project/Lib.sol': true,
     },
     searchOn: ['/project'],
     expectedErrors: 1,
-    message: ["Import in /project/Test.sol doesn't exist in: ./Lib.sol"],
+    message: ["Import in /project/Test.sol doesn't exist in: ./Libb.sol"], // typo on import
   },
   {
     name: 'Should fail when importing from yarn global with wrong subpath',

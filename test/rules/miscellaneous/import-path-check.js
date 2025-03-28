@@ -3,8 +3,8 @@ const assert = require('assert')
 const sinon = require('sinon')
 const linter = require('../../../lib/index')
 const { assertNoErrors, assertErrorCount, assertWarnsCount } = require('../../common/asserts')
-const { successCases, errorCases } = require('../../fixtures/miscellaneous/import-path-check')
 const { multiLine } = require('../../common/contract-builder')
+const { successCases, errorCases } = require('../../fixtures/miscellaneous/import-path-check')
 
 describe('import-path-check (mocked fs)', () => {
   let existsStub
