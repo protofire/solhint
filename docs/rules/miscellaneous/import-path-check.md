@@ -34,7 +34,9 @@ This rule accepts an array of options:
 ### Notes
 - Rule checks relative and absolute path first. Then checks for each dependency path in config file
 - `searchOn`: an array of paths to check in specified order
-- `searchOn` will concatenate with `default path locations` to check
+- If `searchOn` is empty only `DEFAULT_LOCATIONS` are used.
+- If `searchOn` has value, will be concatenated with DEFAULT_LOCATIONS.
+- If config has `extends:recommended` or `all` and rule is overwritten with `searchOn`, values are concatenated with DEFAULT_LOCATIONS.
 
      *Default Locations:*
     - /[`~current-project`]
@@ -50,6 +52,7 @@ This rule accepts an array of options:
     - /home/[`~user`]/.yarn/global/node_modules
     - /npm/node_modules (for Windows)
     - /Yarn/Data/global/node_modules (for Windows)
+- WINDOWS OS file structure has not been thoroughly tested.
 
 ## Examples
 This rule does not have examples.

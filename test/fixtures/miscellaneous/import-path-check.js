@@ -176,7 +176,7 @@ const errorCases = [
     searchOn: ['/project'],
     expectedErrors: 1,
     message: [
-      "Import in /project/src/modules/test/MyContract.sol doesn't exist in: ./../../../common/Ownable.sol",
+      "Import in /project/src/modules/test/MyContract.sol doesn't exist in: ../../../common/Ownable.sol",
     ],
   },
 ]

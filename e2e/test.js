@@ -167,7 +167,7 @@ describe('e2e general tests', function () {
     })
   })
 
-  describe('Linter - foundry-test-functions with shell', () => {
+  describe('foundry-test-functions with shell', () => {
     const PATH = '07-foundry-test'
     useFixture(PATH)
 
@@ -191,6 +191,44 @@ describe('e2e general tests', function () {
         'Function wrongFunctionDefinitionName() must match Foundry test naming convention '
       )
     })
+  })
+
+  describe.only('import-path-check', () => {
+    const PATH = '10-import-path-check/filesystem'
+    useFixture(PATH)
+
+    it('Should succeed when relative import (same folder) - s01', () => {
+      const { code, stdout } = shell.exec(`solhint -c "./s01/.solhintS01.json" "./s01/project/Test.sol"`)
+
+      expect(code).to.equal(EXIT_CODES.OK)
+      expect(stdout.trim()).to.be.empty
+    })
+
+    it('Should succeed when relative import with parent folder - s02', () => {
+      const { code, stdout } = shell.exec(`solhint -c "./s02/.solhintS02.json" "./s02/project/contracts/Test.sol"`)
+
+      expect(code).to.equal(EXIT_CODES.OK)
+      expect(stdout.trim()).to.be.empty
+    })
+
+    it('Should succeed when absolute path import', () => {
+      const { code, stdout } = shell.exec(`solhint -c "./s03/.solhintS03.json" "./s03/project/Test.sol"`)
+
+      expect(code).to.equal(EXIT_CODES.OK)
+      expect(stdout.trim()).to.be.empty
+    })
+
+    it('Should fail when missing import (relative path) - f01', () => {
+      const { code, stdout } = shell.exec(`solhint -c "./f01/.solhintF01.json" "./f01/project/Test.sol"`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout.trim()).to.contain(
+        'Import in ./f01/project/Test.sol doesn\'t exist in: ./Missing.sol'
+      )
+      
+    })
+
+    
   })
 })
 

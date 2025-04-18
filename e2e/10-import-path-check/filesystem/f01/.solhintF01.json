@@ -1,0 +1,3 @@
+{
+  "rules": { "import-path-check": [ "error", ["/f01/project"] ] }
+}
