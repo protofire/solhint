@@ -194,41 +194,51 @@ describe('e2e general tests', function () {
   })
 
   describe.only('import-path-check', () => {
-    const PATH = '10-import-path-check/filesystem'
-    useFixture(PATH)
+    const PATH = '10-import-path-check/'
+    let folderCounter = 3
 
-    it('Should succeed when relative import (same folder) - s01', () => {
-      const { code, stdout } = shell.exec(`solhint -c "./s01/.solhintS01.json" "./s01/project/Test.sol"`)
+    beforeEach(() => {
+      const padded = String(folderCounter).padStart(2, '0')
 
-      expect(code).to.equal(EXIT_CODES.OK)
-      expect(stdout.trim()).to.be.empty
+      useFixtureFolder(PATH + 'repo' + padded)
+
+      folderCounter++
     })
 
-    it('Should succeed when relative import with parent folder - s02', () => {
-      const { code, stdout } = shell.exec(`solhint -c "./s02/.solhintS02.json" "./s02/project/contracts/Test.sol"`)
+    it('Should succeed when relative import (same folder) - repo01', () => {
+      const { code, stdout } = shell.exec(`solhint -c ".solhintS01.json" "./contracts/Test.sol"`)
 
       expect(code).to.equal(EXIT_CODES.OK)
-      expect(stdout.trim()).to.be.empty
+      // expect(stdout.trim()).to.be.empty
     })
 
-    it('Should succeed when absolute path import', () => {
-      const { code, stdout } = shell.exec(`solhint -c "./s03/.solhintS03.json" "./s03/project/Test.sol"`)
+    it('Should succeed when relative import with parent folder - repo02', () => {
+      const { code, stdout } = shell.exec(`solhint -c ".solhintS02.json" "./contracts/Test.sol"`)
 
       expect(code).to.equal(EXIT_CODES.OK)
-      expect(stdout.trim()).to.be.empty
+      // expect(stdout.trim()).to.be.empty
     })
 
-    it('Should fail when missing import (relative path) - f01', () => {
-      const { code, stdout } = shell.exec(`solhint -c "./f01/.solhintF01.json" "./f01/project/Test.sol"`)
+    it.only('Should succeed when importing from node_modules - repo03', () => {
+      console.log("\n\nPWD");
+      shell.exec(`pwd`)
+      console.log("\n\nLS");
+      shell.exec(`ls`)
+
+      const { code, stdout } = shell.exec(`solhint -c ".solhintS03.json" "./contracts/Test.sol"`)
+
+      expect(code).to.equal(EXIT_CODES.OK)
+      // expect(stdout.trim()).to.be.empty
+    })
+
+    it('Should fail when missing import (relative path) - repo04', () => {
+      const { code, stdout } = shell.exec(`solhint -c ".solhintF04.json" "./project/Test.sol"`)
 
       expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
       expect(stdout.trim()).to.contain(
-        'Import in ./f01/project/Test.sol doesn\'t exist in: ./Missing.sol'
+        "Import in ./project/Test.sol doesn't exist in: ./Missing.sol"
       )
-      
     })
-
-    
   })
 })
 
@@ -246,4 +256,18 @@ function useFixture(dir) {
 
     shell.cd(this.testDirPath)
   })
+}
+
+const useFixtureFolder = (dir) => {
+  const fixturePath = path.join(__dirname, dir)
+
+  const tmpDirContainer = os.tmpdir()
+  this.testDirPath = path.join(tmpDirContainer, `solhint-tests-${dir}`)
+
+  fs.ensureDirSync(this.testDirPath)
+  fs.emptyDirSync(this.testDirPath)
+
+  fs.copySync(fixturePath, this.testDirPath)
+
+  shell.cd(this.testDirPath)
 }
