@@ -14,7 +14,7 @@ describe('e2e general tests', function () {
     useFixture(PATH)
 
     it('should fail when config file does not exists', function () {
-      const { code, stderr } = shell.exec(`solhint Foo.sol -c ./noconfig/.solhint.json`)
+      const { code, stderr } = shell.exec(`solhint Foo.sol -c ./no-config/.solhint.json`)
 
       expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
       expect(stderr).to.include("couldn't be found")
@@ -193,9 +193,9 @@ describe('e2e general tests', function () {
     })
   })
 
-  describe.only('import-path-check', () => {
+  describe('import-path-check', () => {
     const PATH = '10-import-path-check/'
-    let folderCounter = 3
+    let folderCounter = 1
 
     beforeEach(() => {
       const padded = String(folderCounter).padStart(2, '0')
@@ -209,30 +209,24 @@ describe('e2e general tests', function () {
       const { code, stdout } = shell.exec(`solhint -c ".solhintS01.json" "./contracts/Test.sol"`)
 
       expect(code).to.equal(EXIT_CODES.OK)
-      // expect(stdout.trim()).to.be.empty
+      expect(stdout.trim()).to.be.empty
     })
 
     it('Should succeed when relative import with parent folder - repo02', () => {
       const { code, stdout } = shell.exec(`solhint -c ".solhintS02.json" "./contracts/Test.sol"`)
 
       expect(code).to.equal(EXIT_CODES.OK)
-      // expect(stdout.trim()).to.be.empty
+      expect(stdout.trim()).to.be.empty
     })
 
-    it.only('Should succeed when importing from node_modules - repo03', () => {
-      
+    it('Should succeed when importing from node_modules - repo03', () => {
       const fileName = "node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
       createDummyFile(fileName)
       
-      console.log("\n\nPWD");
-      shell.exec(`pwd`)
-      console.log("\n\nLS");
-      shell.exec(`ls -R`)
-
       const { code, stdout } = shell.exec(`solhint -c ".solhintS03.json" "./contracts/Test.sol"`)
 
       expect(code).to.equal(EXIT_CODES.OK)
-      // expect(stdout.trim()).to.be.empty
+      expect(stdout.trim()).to.be.empty
     })
 
     it('Should fail when missing import (relative path) - repo04', () => {
@@ -248,17 +242,6 @@ describe('e2e general tests', function () {
 
 function useFixture(dir) {
   beforeEach(`switch to ${dir}`, function () {
-    // const fixturePath = path.join(__dirname, dir)
-
-    // const tmpDirContainer = os.tmpdir()
-    // this.testDirPath = path.join(tmpDirContainer, `solhint-tests-${dir}`)
-
-    // fs.ensureDirSync(this.testDirPath)
-    // fs.emptyDirSync(this.testDirPath)
-
-    // fs.copySync(fixturePath, this.testDirPath)
-
-    // shell.cd(this.testDirPath)
     useFixtureFolder(dir);
   })
 }
