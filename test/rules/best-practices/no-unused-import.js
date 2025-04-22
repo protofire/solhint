@@ -156,7 +156,7 @@ describe('Linter - no-unused-import', () => {
       code: `import {A as B} from './A.sol'; contract C is B {}`,
     },
     {
-      description: 'libary name is used in a using ... for statement',
+      description: 'library name is used in a using ... for statement',
       code: `import {A} from './A.sol'; contract B { using A for uint256; }`,
     },
     {
