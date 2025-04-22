@@ -220,10 +220,14 @@ describe('e2e general tests', function () {
     })
 
     it.only('Should succeed when importing from node_modules - repo03', () => {
+      
+      const fileName = "node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
+      createDummyFile(fileName)
+      
       console.log("\n\nPWD");
       shell.exec(`pwd`)
       console.log("\n\nLS");
-      shell.exec(`ls`)
+      shell.exec(`ls -R`)
 
       const { code, stdout } = shell.exec(`solhint -c ".solhintS03.json" "./contracts/Test.sol"`)
 
@@ -244,17 +248,18 @@ describe('e2e general tests', function () {
 
 function useFixture(dir) {
   beforeEach(`switch to ${dir}`, function () {
-    const fixturePath = path.join(__dirname, dir)
+    // const fixturePath = path.join(__dirname, dir)
 
-    const tmpDirContainer = os.tmpdir()
-    this.testDirPath = path.join(tmpDirContainer, `solhint-tests-${dir}`)
+    // const tmpDirContainer = os.tmpdir()
+    // this.testDirPath = path.join(tmpDirContainer, `solhint-tests-${dir}`)
 
-    fs.ensureDirSync(this.testDirPath)
-    fs.emptyDirSync(this.testDirPath)
+    // fs.ensureDirSync(this.testDirPath)
+    // fs.emptyDirSync(this.testDirPath)
 
-    fs.copySync(fixturePath, this.testDirPath)
+    // fs.copySync(fixturePath, this.testDirPath)
 
-    shell.cd(this.testDirPath)
+    // shell.cd(this.testDirPath)
+    useFixtureFolder(dir);
   })
 }
 
@@ -270,4 +275,10 @@ const useFixtureFolder = (dir) => {
   fs.copySync(fixturePath, this.testDirPath)
 
   shell.cd(this.testDirPath)
+}
+
+function createDummyFile(fullFilePath, content = '// dummy file\npragma solidity ^0.8.0;') {
+  const dir = path.dirname(fullFilePath);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(fullFilePath, content);
 }
