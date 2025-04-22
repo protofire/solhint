@@ -25,7 +25,7 @@ describe('Linter - func-param-name-mixedcase', () => {
     assert.ok(report.messages[0].message.includes('mixedCase'))
   })
 
-  describe('Function Paramters name with $ character', () => {
+  describe('Function Parameters name with $ character', () => {
     const WITH_$ = {
       'starting with $': contractWith('function funcName (uint $param) public {}'),
       'containing a $': contractWith('function funcName (uint pa$ram) public {}'),
