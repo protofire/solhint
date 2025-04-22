@@ -1,3 +1,0 @@
-{
-  "rules": { "import-path-check": [ "error", ["/project"] ] }
-}

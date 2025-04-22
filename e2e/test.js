@@ -194,32 +194,35 @@ describe('e2e general tests', function () {
   })
 
   describe('import-path-check', () => {
-    const PATH = '10-import-path-check/'
+    const PATH = '10-import-path-check/filesystem'
+
     let folderCounter = 1
 
     beforeEach(() => {
       const padded = String(folderCounter).padStart(2, '0')
+      
+      const ROOT = PATH + padded + '/'
 
-      useFixtureFolder(this, PATH + 'repo' + padded)
+      useFixtureFolder(this, ROOT + 'project')
 
       folderCounter++
     })
 
-    it('Should succeed when relative import (same folder) - repo01', () => {
+    it('Should succeed when relative import (same folder) - filesystem01', () => {
       const { code, stdout } = shell.exec(`solhint -c ".solhintS01.json" "./contracts/Test.sol"`)
 
       expect(code).to.equal(EXIT_CODES.OK)
       expect(stdout.trim()).to.be.empty
     })
 
-    it('Should succeed when relative import with parent folder - repo02', () => {
+    it('Should succeed when relative import with parent folder - filesystem02', () => {
       const { code, stdout } = shell.exec(`solhint -c ".solhintS02.json" "./contracts/Test.sol"`)
 
       expect(code).to.equal(EXIT_CODES.OK)
       expect(stdout.trim()).to.be.empty
     })
 
-    it('Should succeed when importing from node_modules - repo03', () => {
+    it('Should succeed when importing from node_modules - filesystem03', () => {
       const fileName = "node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
       createDummyFile(fileName)
       
@@ -229,12 +232,12 @@ describe('e2e general tests', function () {
       expect(stdout.trim()).to.be.empty
     })
 
-    it('Should fail when missing import (relative path) - repo04', () => {
-      const { code, stdout } = shell.exec(`solhint -c ".solhintF04.json" "./project/Test.sol"`)
+    it('Should fail when missing import (relative path) - filesystem04', () => {
+      const { code, stdout } = shell.exec(`solhint -c ".solhintF04.json" "./contracts/Test.sol"`)
 
       expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
       expect(stdout.trim()).to.contain(
-        "Import in ./project/Test.sol doesn't exist in: ./Missing.sol"
+        "Import in ./contracts/Test.sol doesn't exist in: ./Missing.sol"
       )
     })
   })
