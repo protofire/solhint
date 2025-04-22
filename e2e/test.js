@@ -200,7 +200,7 @@ describe('e2e general tests', function () {
     beforeEach(() => {
       const padded = String(folderCounter).padStart(2, '0')
 
-      useFixtureFolder(PATH + 'repo' + padded)
+      useFixtureFolder(this, PATH + 'repo' + padded)
 
       folderCounter++
     })
@@ -242,22 +242,23 @@ describe('e2e general tests', function () {
 
 function useFixture(dir) {
   beforeEach(`switch to ${dir}`, function () {
-    useFixtureFolder(dir);
+    useFixtureFolder(this, dir);
   })
 }
 
-const useFixtureFolder = (dir) => {
+function useFixtureFolder(ctx, dir) {
   const fixturePath = path.join(__dirname, dir)
 
   const tmpDirContainer = os.tmpdir()
-  this.testDirPath = path.join(tmpDirContainer, `solhint-tests-${dir}`)
+  const testDirPath = path.join(tmpDirContainer, `solhint-tests-${dir}`)
 
-  fs.ensureDirSync(this.testDirPath)
-  fs.emptyDirSync(this.testDirPath)
+  ctx.testDirPath = testDirPath
 
-  fs.copySync(fixturePath, this.testDirPath)
+  fs.ensureDirSync(testDirPath)
+  fs.emptyDirSync(testDirPath)
+  fs.copySync(fixturePath, testDirPath)
 
-  shell.cd(this.testDirPath)
+  shell.cd(testDirPath)
 }
 
 function createDummyFile(fullFilePath, content = '// dummy file\npragma solidity ^0.8.0;') {
