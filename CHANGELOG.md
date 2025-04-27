@@ -143,7 +143,7 @@ Thanks to [@juanpcapurro](https://github.com/juanpcapurro) for providing the cod
 
 
 ### Added
-- Official Docker Image [#524](https://github.com/protofire/solhint/pull/524) (Thanks to [@keypee](https://github.com/keypee90))
+- Official Docker Image [#524](https://github.com/protofire/solhint/pull/524) (Thanks to [@kaypee90](https://github.com/kaypee90))
 - Autofix for `payable-fallback` rule [#528](https://github.com/protofire/solhint/pull/528)
 - Autofix for `quotes` rule [#529](https://github.com/protofire/solhint/pull/529)
 - Autofix for `avoid-suicide` rule [#531](https://github.com/protofire/solhint/pull/531)
