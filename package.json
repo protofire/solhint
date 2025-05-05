@@ -41,7 +41,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@solidity-parser/parser": "^0.19.0",
+    "@solidity-parser/parser": "^0.20.0",
     "ajv": "^6.12.6",
     "antlr4": "^4.13.1-patch-1",
     "ast-parents": "^0.0.1",
