@@ -4,7 +4,7 @@ layout:      "default"
 title:       "Rule Index of Solhint"
 ---
 
-## Best Practice Rules
+## Best Practices Rules
 
 | Rule Id                                                                  | Error                                                                                                                                      | Recommended  | Deprecated |
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ---------- |
@@ -21,6 +21,7 @@ title:       "Rule Index of Solhint"
 | [one-contract-per-file](./rules/best-practices/one-contract-per-file.md) | Enforces the use of ONE Contract per file see [here](https://docs.soliditylang.org/en/v0.8.21/style-guide.html#contract-and-library-names) | $~~~~~~~~$✔️ |            |
 | [payable-fallback](./rules/best-practices/payable-fallback.md)           | When fallback is not payable and there is no receive function you will not be able to receive currency.                                    | $~~~~~~~~$✔️ |            |
 | [reason-string](./rules/best-practices/reason-string.md)                 | Require or revert statement must have a reason string and check that each reason string is at most N characters long.                      | $~~~~~~~~$✔️ |            |
+| [constructor-syntax](./rules/best-practices/constructor-syntax.md)       | Constructors should use the new constructor keyword.                                                                                       |              |            |
         
 
 ## Style Guide Rules
@@ -48,13 +49,6 @@ title:       "Rule Index of Solhint"
 | [visibility-modifier-order](./rules/order/visibility-modifier-order.md)              | Visibility modifier must be first in list of modifiers.                                                       | $~~~~~~~~$✔️ |            |
         
 
-## Best Practices Rules
-
-| Rule Id                                                            | Error                                                | Recommended | Deprecated |
-| ------------------------------------------------------------------ | ---------------------------------------------------- | ----------- | ---------- |
-| [constructor-syntax](./rules/best-practices/constructor-syntax.md) | Constructors should use the new constructor keyword. |             |            |
-        
-
 ## Gas Consumption Rules
 
 | Rule Id                                                                       | Error                                                                                   | Recommended  | Deprecated |
@@ -76,6 +70,7 @@ title:       "Rule Index of Solhint"
 | Rule Id                                                                     | Error                                                                                                                                    | Recommended  | Deprecated |
 | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ---------- |
 | [comprehensive-interface](./rules/miscellaneous/comprehensive-interface.md) | Check that all public or external functions are overridden. This is useful to make sure that the whole API is extracted in an interface. |              |            |
+| [import-path-check](./rules/miscellaneous/import-path-check.md)             | Check if an import file exits in target path                                                                                             | $~~~~~~~~$✔️ |            |
 | [quotes](./rules/miscellaneous/quotes.md)                                   | Enforces the use of double or simple quotes as configured for string literals. Values must be 'single' or 'double'.                      | $~~~~~~~~$✔️ |            |
         
 

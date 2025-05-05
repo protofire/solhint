@@ -170,12 +170,28 @@ function loadExampleConfig(rule) {
 
 function loadNotes(rule) {
   let textToReturn = ''
-  let noteValue = ''
+
   if (rule.meta.docs.notes) {
     textToReturn = `### Notes\n`
+
     for (let i = 0; i < rule.meta.docs.notes.length; i++) {
-      noteValue = rule.meta.docs.notes[i].note
-      textToReturn += `- ${noteValue}\n`
+      const noteValue = rule.meta.docs.notes[i].note
+
+      if (Array.isArray(noteValue)) {
+        // If note is an array
+        if (noteValue.length > 0) {
+          // First element highlighted with backticks
+          textToReturn += `\n     ${noteValue[0]}\n`
+
+          // Remaining elements as bullet points, indented
+          for (let j = 1; j < noteValue.length; j++) {
+            textToReturn += `    - ${noteValue[j]}\n`
+          }
+        }
+      } else {
+        // If note is a simple string
+        textToReturn += `- ${noteValue}\n`
+      }
     }
   }
 

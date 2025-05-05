@@ -37,6 +37,7 @@ module.exports = Object.freeze({
     'gas-struct-packing': 'warn',
     'comprehensive-interface': 'warn',
     'duplicated-imports': 'warn',
+    'import-path-check': ['warn', ['[~dependenciesPath]']],
     quotes: ['error', 'double'],
     'const-name-snakecase': 'warn',
     'contract-name-capwords': 'warn',
