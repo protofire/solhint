@@ -14,7 +14,7 @@ describe('e2e general tests', function () {
     useFixture(PATH)
 
     it('should fail when config file does not exists', function () {
-      const { code, stderr } = shell.exec(`solhint Foo.sol -c ./noconfig/.solhint.json`)
+      const { code, stderr } = shell.exec(`solhint Foo.sol -c ./no-config/.solhint.json`)
 
       expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
       expect(stderr).to.include("couldn't be found")
@@ -167,7 +167,7 @@ describe('e2e general tests', function () {
     })
   })
 
-  describe('Linter - foundry-test-functions with shell', () => {
+  describe('foundry-test-functions with shell', () => {
     const PATH = '07-foundry-test'
     useFixture(PATH)
 
@@ -192,20 +192,80 @@ describe('e2e general tests', function () {
       )
     })
   })
+
+  describe('import-path-check', () => {
+    const PATH = '10-import-path-check/filesystem'
+
+    let folderCounter = 1
+
+    beforeEach(() => {
+      const padded = String(folderCounter).padStart(2, '0')
+      
+      const ROOT = PATH + padded + '/'
+
+      useFixtureFolder(this, ROOT + 'project')
+
+      folderCounter++
+    })
+
+    it('Should succeed when relative import (same folder) - filesystem01', () => {
+      const { code, stdout } = shell.exec(`solhint -c ".solhintS01.json" "./contracts/Test.sol"`)
+
+      expect(code).to.equal(EXIT_CODES.OK)
+      expect(stdout.trim()).to.be.empty
+    })
+
+    it('Should succeed when relative import with parent folder - filesystem02', () => {
+      const { code, stdout } = shell.exec(`solhint -c ".solhintS02.json" "./contracts/Test.sol"`)
+
+      expect(code).to.equal(EXIT_CODES.OK)
+      expect(stdout.trim()).to.be.empty
+    })
+
+    it('Should succeed when importing from node_modules - filesystem03', () => {
+      const fileName = "node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
+      createDummyFile(fileName)
+      
+      const { code, stdout } = shell.exec(`solhint -c ".solhintS03.json" "./contracts/Test.sol"`)
+
+      expect(code).to.equal(EXIT_CODES.OK)
+      expect(stdout.trim()).to.be.empty
+    })
+
+    it('Should fail when missing import (relative path) - filesystem04', () => {
+      const { code, stdout } = shell.exec(`solhint -c ".solhintF04.json" "./contracts/Test.sol"`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout.trim()).to.contain(
+        "Import in ./contracts/Test.sol doesn't exist in: ./Missing.sol"
+      )
+    })
+  })
 })
 
 function useFixture(dir) {
   beforeEach(`switch to ${dir}`, function () {
-    const fixturePath = path.join(__dirname, dir)
-
-    const tmpDirContainer = os.tmpdir()
-    this.testDirPath = path.join(tmpDirContainer, `solhint-tests-${dir}`)
-
-    fs.ensureDirSync(this.testDirPath)
-    fs.emptyDirSync(this.testDirPath)
-
-    fs.copySync(fixturePath, this.testDirPath)
-
-    shell.cd(this.testDirPath)
+    useFixtureFolder(this, dir);
   })
+}
+
+function useFixtureFolder(ctx, dir) {
+  const fixturePath = path.join(__dirname, dir)
+
+  const tmpDirContainer = os.tmpdir()
+  const testDirPath = path.join(tmpDirContainer, `solhint-tests-${dir}`)
+
+  ctx.testDirPath = testDirPath
+
+  fs.ensureDirSync(testDirPath)
+  fs.emptyDirSync(testDirPath)
+  fs.copySync(fixturePath, testDirPath)
+
+  shell.cd(testDirPath)
+}
+
+function createDummyFile(fullFilePath, content = '// dummy file\npragma solidity ^0.8.0;') {
+  const dir = path.dirname(fullFilePath);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(fullFilePath, content);
 }
