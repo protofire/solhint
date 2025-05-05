@@ -1,11 +1,10 @@
-const fs = require("fs")
+const fs = require('fs')
 
 const { loadRules } = require('../lib/load-rules')
 
 const rulesConstants = loadRules()
 const allRules = {}
 const recommendedRules = {}
-const defaultRules = {}
 
 rulesConstants.forEach((rule) => {
   if (!rule.meta.deprecated) {
@@ -13,9 +12,6 @@ rulesConstants.forEach((rule) => {
   }
   if (!rule.meta.deprecated && rule.meta.recommended) {
     recommendedRules[rule.ruleId] = rule.meta.defaultSetup
-  }
-  if (!rule.meta.deprecated && rule.meta.isDefault) {
-    defaultRules[rule.ruleId] = rule.meta.defaultSetup
   }
 })
 
@@ -26,11 +22,10 @@ function writeRuleset(ruleset, filename) {
 */
 
 module.exports = Object.freeze(${JSON.stringify({ rules: ruleset }, null, 2)})
-`;
+`
 
-  fs.writeFileSync(`./conf/rulesets/solhint-${filename}.js`, code, "utf8");
+  fs.writeFileSync(`./conf/rulesets/solhint-${filename}.js`, code, 'utf8')
 }
 
-writeRuleset(allRules, "all")
-writeRuleset(recommendedRules, "recommended")
-writeRuleset(defaultRules, "default")
+writeRuleset(allRules, 'all')
+writeRuleset(recommendedRules, 'recommended')

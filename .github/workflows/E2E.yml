@@ -17,7 +17,7 @@ jobs:
         node: [16, 18, 20]
     
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
@@ -42,7 +42,7 @@ jobs:
         run: solhint --version
       
       - name: Run E2E Tests
-        run: cd e2e && npm install && npm test
+        run: npm run ci:e2e
 
   e2e_windows:
     runs-on: windows-latest
@@ -52,7 +52,7 @@ jobs:
       - name: Enable Debugging
         run: |
           echo "::debug::Debugging enabled"
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: 18
@@ -83,14 +83,14 @@ jobs:
         run: npm run lint
 
       - name: Run E2E Tests
-        run: cd e2e && npm install && npm test
+        run: npm run ci:e2e
 
   e2e_macos:
     runs-on: macos-latest
     name: Test on MacOS
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: actions/setup-node@v3
       with:
         node-version: 18
@@ -109,4 +109,4 @@ jobs:
       run: npm run lint
 
     - name: Run Tests
-      run: cd e2e && npm install && npm test
+      run: npm run ci:e2e

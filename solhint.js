@@ -35,6 +35,7 @@ function init() {
     .option('--init', 'create configuration file for solhint')
     .option('--disc', 'do not check for solhint updates')
     .option('--save', 'save report to file on current folder')
+    .option('--noPoster', 'remove discord poster')
     .description('Linter for Solidity programming language')
     .action(execMainAction)
 
@@ -215,7 +216,7 @@ function processStdin(options) {
 function writeSampleConfigFile() {
   const configPath = '.solhint.json'
   const sampleConfig = `{
-  "extends": "solhint:default"
+  "extends": "solhint:recommended"
 }
 `
   if (!fs.existsSync(configPath)) {
@@ -311,23 +312,25 @@ function printReports(reports, formatter) {
   if (!program.opts().quiet) {
     console.log(fullReport)
     if (fullReport && !program.opts().formatter) {
-      console.log(
-        chalk.italic.bgYellow.black.bold(
-          ' -------------------------------------------------------------------------- '
+      if (!program.opts().noPoster) {
+        console.log(
+          chalk.italic.bgYellow.black.bold(
+            ' -------------------------------------------------------------------------- '
+          )
         )
-      )
 
-      console.log(
-        chalk.italic.bgYellow.black.bold(
-          ' ===> Join SOLHINT Community at: https://discord.com/invite/4TYGq3zpjs <=== '
+        console.log(
+          chalk.italic.bgYellow.black.bold(
+            ' ===> Join SOLHINT Community at: https://discord.com/invite/4TYGq3zpjs <=== '
+          )
         )
-      )
 
-      console.log(
-        chalk.italic.bgYellow.black.bold(
-          ' -------------------------------------------------------------------------- \n'
+        console.log(
+          chalk.italic.bgYellow.black.bold(
+            ' -------------------------------------------------------------------------- \n'
+          )
         )
-      )
+      }
     }
   }
 

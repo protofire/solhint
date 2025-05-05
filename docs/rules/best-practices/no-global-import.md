@@ -6,7 +6,7 @@ title:       "no-global-import | Solhint"
 
 # no-global-import
 ![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
-![Category Badge](https://img.shields.io/badge/-Best%20Practice%20Rules-informational)
+![Category Badge](https://img.shields.io/badge/-Best%20Practices%20Rules-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 > The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
 
@@ -15,7 +15,7 @@ title:       "no-global-import | Solhint"
 Import statement includes an entire file instead of selected symbols.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json

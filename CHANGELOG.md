@@ -1,3 +1,28 @@
+## [5.1.0] - 2025-05-05
+### Added
+- Argument to avoid discord poster - [#646](https://github.com/protofire/solhint/pull/646)
+- Auto-fix for `no-unused-import` -  [#648](https://github.com/protofire/solhint/pull/648) (Thanks to [@DenisGorbachev](https://github.com/DenisGorbachev))
+- New Rule: import-path-check - [#657](https://github.com/protofire/solhint/pull/657)
+
+
+### Updated
+- yml and parser update - [#668](https://github.com/protofire/solhint/pull/668) (Thanks to [@zeevick10](https://github.com/zeevick10))
+- cleanup deprecated code - [#655](https://github.com/protofire/solhint/pull/655)
+- Improved `ordering` rule - [#656](https://github.com/protofire/solhint/pull/656)
+
+
+### BREAKING CHANGE
+
+ - Removed code for `solhint:default` ruleset - [#654](https://github.com/protofire/solhint/pull/654)
+
+
+Thanks to [@fanqiaojun](https://github.com/fanqiaojun), [@maximevtush](https://github.com/maximevtush), [@MaxweLL22-22](https://github.com/MaxweLL22-22), [@PixelPil0t1](https://github.com/PixelPil0t1), [@wgyt](https://github.com/wgyt), [@operagxsasha](https://github.com/operagxsasha), [@Hopium21](https://github.com/Hopium21), [@leopardracer](https://github.com/leopardracer), [@omahs](https://github.com/omahs), [@zeevick10](https://github.com/zeevick10), [@gap-editor](https://github.com/gap-editor), [@Olexandr88](https://github.com/Olexandr88), [@jirutka](https://github.com/jirutka)
+
+For making the time of pointing out typos, license update, broken links, unused code, copyright, small reviews, etc. We really appreciate your contributions!
+
+<br><br>
+
+
 ## [5.0.5] - 2025-01-16
 ### Fixed
 - `gas-custom-errors` [#620](https://github.com/protofire/solhint/pull/620) - Support for Custom Errors inside `require` statements
@@ -143,7 +168,7 @@ Thanks to [@juanpcapurro](https://github.com/juanpcapurro) for providing the cod
 
 
 ### Added
-- Official Docker Image [#524](https://github.com/protofire/solhint/pull/524) (Thanks to [@keypee](https://github.com/keypee90))
+- Official Docker Image [#524](https://github.com/protofire/solhint/pull/524) (Thanks to [@kaypee90](https://github.com/kaypee90))
 - Autofix for `payable-fallback` rule [#528](https://github.com/protofire/solhint/pull/528)
 - Autofix for `quotes` rule [#529](https://github.com/protofire/solhint/pull/529)
 - Autofix for `avoid-suicide` rule [#531](https://github.com/protofire/solhint/pull/531)

@@ -12,7 +12,7 @@ title:       "duplicated-imports | Solhint"
 Check if an import is done twice in the same file and there is no alias
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json
@@ -33,7 +33,7 @@ This rule accepts a string option of rule severity. Must be one of "error", "war
 This rule does not have examples.
 
 ## Version
-This rule is introduced in the latest version.
+This rule was introduced in the latest version.
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/miscellaneous/duplicated-imports.js)

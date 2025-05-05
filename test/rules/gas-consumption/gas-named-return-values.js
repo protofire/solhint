@@ -65,18 +65,6 @@ describe('Linter - gas-named-return-values', () => {
     assertNoErrors(report)
   })
 
-  it('should NOT raise error for solhint:default setup', () => {
-    const code = contractWith(
-      `function getBalance(address wallet) public returns(uint256) { balance = 1; }`
-    )
-
-    const report = linter.processStr(code, {
-      extends: 'solhint:default',
-    })
-
-    assertNoErrors(report)
-  })
-
   it('should raise error for solhint:all setup', () => {
     const code = contractWith(
       `function getBalance(uint256 wallet) public override returns(uint256, address) { wallet = 1; }`

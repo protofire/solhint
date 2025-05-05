@@ -126,7 +126,10 @@ describe('Linter - ordering', () => {
   })
 
   it('should not raise incorrect function order error I', () => {
-    const code = require('../../fixtures/order/func-order-constructor-first')
+    const code = contractWith(`
+      constructor() public {}
+      function () public payable {}
+  `)
 
     const report = linter.processStr(code, {
       rules: { ordering: 'error' },
@@ -136,7 +139,10 @@ describe('Linter - ordering', () => {
   })
 
   it('should raise incorrect function order error', () => {
-    const code = require('../../fixtures/order/func-order-constructor-not-first')
+    const code = contractWith(`
+      function () public payable {}
+      constructor() public {}
+  `)
 
     const report = linter.processStr(code, {
       rules: { ordering: 'error' },
@@ -421,65 +427,6 @@ describe('Linter - ordering', () => {
       }     
       contract OneNiceContract {}
     `
-    const report = linter.processStr(code, {
-      rules: { ordering: 'error' },
-    })
-
-    assert.equal(report.errorCount, 0)
-  })
-
-  it('should raise error when INITIALIZER is NOT well located', () => {
-    const code = `
-      // SPDX-License-Identifier: MIT
-      pragma solidity ^0.8.0;
-      import "@openzeppelin/contracts/ownership/Ownable.sol";
-      uint256 constant oneNiceConstant = 1;
-      struct OneNiceStruct { uint256 a; uint256 b; }            
-      enum MyEnum { A, B }
-      error Unauthorized();
-      function freeFunction() pure returns (uint256) {
-        return 1;
-      }     
-      contract OneNiceContract {
-        function initialize() initializer {
-          oneNiceConstant;
-        }
-        struct OneNiceStruct { uint256 a; uint256 b; }            
-      }
-    `
-
-    const report = linter.processStr(code, {
-      rules: { ordering: 'error' },
-    })
-
-    assert.equal(report.errorCount, 1)
-    assert.ok(
-      report.messages[0].message.includes(
-        'Function order is incorrect, struct definition can not go after constructor/initializer'
-      )
-    )
-  })
-
-  it('should NOT raise error when INITIALIZER is well located', () => {
-    const code = `
-      // SPDX-License-Identifier: MIT
-      pragma solidity ^0.8.0;
-      import "@openzeppelin/contracts/ownership/Ownable.sol";
-      uint256 constant oneNiceConstant = 1;
-      enum MyEnum { A, B }
-      struct OneNiceStruct { uint256 a; uint256 b; }            
-      error Unauthorized();
-            function freeFunction() pure returns (uint256) {
-        return 1;
-      }     
-      contract OneNiceContract {
-        struct OneNiceStruct { uint256 a; uint256 b; }            
-        function initialize() initializer {
-          oneNiceConstant;
-        }
-      }
-    `
-
     const report = linter.processStr(code, {
       rules: { ordering: 'error' },
     })

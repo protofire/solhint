@@ -5,7 +5,7 @@
   By <a href="https://protofire.io/" target="_blank">Protofire</a>
 </p>
 
-[![](https://img.shields.io/badge/Solhint%20Website-cyan)](https://protofire.io/projects/solhint)
+[![](https://img.shields.io/badge/Solhint%20Website-cyan)](https://protofire.io/solhint)
 [![](https://img.shields.io/badge/Join%20Our%20Discord-magenta)](https://discord.gg/4TYGq3zpjs)
 [![Donate with Ethereum](https://img.shields.io/badge/Donate-ETH-blue)](https://etherscan.io/address/0xA81705c8C247C413a19A244938ae7f4A0393944e)
 [![NPM version](https://badge.fury.io/js/solhint.svg)](https://npmjs.org/package/solhint)
@@ -38,7 +38,7 @@ First initialize a configuration file, if you don't have one:
 solhint --init
 ```
 
-This will create a `.solhint.json` file with the default rules enabled. Then run Solhint with one or more [Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside `contracts` directory, you can do:
+This will create a `.solhint.json` file with the recommended rules enabled. Then run Solhint with one or more [Globs](https://en.wikipedia.org/wiki/Glob_(programming)) as arguments. For example, to lint all files inside `contracts` directory, you can do:
 
 ```sh
 solhint 'contracts/**/*.sol'
@@ -90,7 +90,7 @@ This option currently works on:
 - private-vars-underscore
 - payable-fallback
 - quotes
-- contract-name-camelcase
+- contract-name-capwords
 - avoid-suicide
   
 <br><br>
@@ -108,11 +108,12 @@ This file has the following format:
 ### Default 
 ```json
 {
-  "extends": "solhint:default"
+  "extends": "solhint:recommended"
 }
 ```
 ### Note
 The `solhint:default` configuration contains only two rules: max-line-length & no-console
+It is now deprecated since version 5.1.0
 <br><br>
 
 
@@ -139,9 +140,9 @@ additional-tests.sol
 
 ### Extendable rulesets
 
-The default rulesets provided by solhint are the following:
+The rulesets provided by solhint are the following:
 
-+ solhint:default
++ solhint:default (deprecated since version v5.1.0)
 + solhint:recommended
 
 Use one of these as the value for the "extends" property in your configuration file.
@@ -238,7 +239,6 @@ Related documentation you may find [here](https://protofire.github.io/solhint/).
 
 ## Table of Contents
 
-* [Roadmap](ROADMAP.md): The core project's roadmap - what the core team is looking to work on in the near future.
 * [Contributing](docs/contributing.md): The core Solhint team :heart: contributions. This describes how you can contribute to the Solhint Project.
 * [Shareable configs](docs/shareable-configs.md): How to create and share your own configurations.
 * [Writing plugins](docs/writing-plugins.md): How to extend Solhint with your own rules.

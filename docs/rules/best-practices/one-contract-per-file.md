@@ -6,7 +6,7 @@ title:       "one-contract-per-file | Solhint"
 
 # one-contract-per-file
 ![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
-![Category Badge](https://img.shields.io/badge/-Best%20Practice%20Rules-informational)
+![Category Badge](https://img.shields.io/badge/-Best%20Practices%20Rules-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 > The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
 
@@ -15,7 +15,7 @@ title:       "one-contract-per-file | Solhint"
 Enforces the use of ONE Contract per file see [here](https://docs.soliditylang.org/en/v0.8.21/style-guide.html#contract-and-library-names)
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to warn.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
 
 ### Example Config
 ```json

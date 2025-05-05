@@ -5,7 +5,7 @@ title:       "function-max-lines | Solhint"
 ---
 
 # function-max-lines
-![Category Badge](https://img.shields.io/badge/-Best%20Practice%20Rules-informational)
+![Category Badge](https://img.shields.io/badge/-Best%20Practices%20Rules-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 
 ## Description

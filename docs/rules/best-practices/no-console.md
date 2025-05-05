@@ -6,9 +6,9 @@ title:       "no-console | Solhint"
 
 # no-console
 ![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
-![Category Badge](https://img.shields.io/badge/-Best%20Practice%20Rules-informational)
+![Category Badge](https://img.shields.io/badge/-Best%20Practices%20Rules-informational)
 ![Default Severity Badge error](https://img.shields.io/badge/Default%20Severity-error-red)
-> The {"extends": "solhint:default"} property in a configuration file enables this rule.
+> The {"extends": "solhint:default"} property in a configuration file enables this rule. THIS IS DEPRECATED SINCE VERSION 5.1.0
 
 > The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
 
@@ -17,7 +17,7 @@ title:       "no-console | Solhint"
 No console.log/logInt/logBytesX/logString/etc & No hardhat and forge-std console.sol import statements.
 
 ## Options
-This rule accepts a string option of rule severity. Must be one of "error", "warn", "off". Defaults to error.
+This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to error.
 
 ### Example Config
 ```json
