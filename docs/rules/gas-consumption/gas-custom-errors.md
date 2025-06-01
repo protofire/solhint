@@ -47,19 +47,19 @@ revert CustomErrorFunction({ msg: "Insufficient Balance" });
 #### Use of Require with Custom Error with arguments
 
 ```solidity
-require(success, CustomErrorFunction({ msg: "Insufficient Balance" });
+require(success, CustomErrorFunction({ msg: "Insufficient Balance" }));
 ```
 
 #### Use of Require with function call and Custom Error
 
 ```solidity
-require(isAuthorized(account), CustomErrorFunction();
+require(isAuthorized(account), CustomErrorFunction());
 ```
 
 #### Use of Require with binary comparison and Custom Error
 
 ```solidity
-require(a > b, CustomErrorFunction();
+require(a > b, CustomErrorFunction());
 ```
 
 ### 👎 Examples of **incorrect** code for this rule
