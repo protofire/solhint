@@ -98,7 +98,7 @@ This option currently works on:
 
 You can use a `.solhint.json` file to configure Solhint for the whole project.
 
-To generate a new  sample `.solhint.json` file in current folder you can do:
+To generate a new sample `.solhint.json` file in current folder you can do:
 
 ```sh
 solhint --init 
