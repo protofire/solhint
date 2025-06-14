@@ -3,7 +3,7 @@ const contractWith = require('../../common/contract-builder').contractWith
 const { assertErrorCount, assertNoErrors, assertErrorMessage } = require('../../common/asserts')
 const VAR_DECLARATIONS = require('../../fixtures/best-practices/explicit-types')
 
-const getZeroErrosObject = () => {
+const getZeroErrorsObject = () => {
   const zeroErrorsExplicit = {}
   const zeroErrorsImplicit = {}
   for (const key in VAR_DECLARATIONS) {
