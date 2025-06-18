@@ -7,7 +7,7 @@ const readline = require('readline')
 const chalk = require('chalk')
 
 const linter = require('./lib/index')
-const { loadConfig } = require('./lib/config/config-file')
+const { loadConfig, loadConfigForFile } = require('./lib/config/config-file')
 const { validate } = require('./lib/config/config-validator')
 const applyFixes = require('./lib/apply-fixes')
 const ruleFixer = require('./lib/rule-fixer')
@@ -134,9 +134,26 @@ function executeMainActionLogic() {
 
   let reports
   try {
-    const reportLists = program.args.filter(_.isString).map(processPath)
-    // console.log('reportLists :>> ', reportLists)
-    reports = _.flatten(reportLists)
+    // Cambios aquí: cargar la config general SOLO para excludedFiles, y luego usar por-archivo para cada uno
+    const baseConfig = readConfig()
+    const patterns = program.args.filter(_.isString)
+    let allFiles = []
+    const glob = require('glob')
+    const ignore = require('ignore')
+    const ignoreFilter = ignore({ allowRelativePaths: true }).add(baseConfig.excludedFiles || [])
+
+    for (const pattern of patterns) {
+      const matchedFiles = glob.sync(pattern, { nodir: true })
+      allFiles = allFiles.concat(matchedFiles)
+    }
+    // Filtrar archivos ignorados
+    const filesToLint = ignoreFilter.filter(allFiles)
+
+    reports = filesToLint.map((file) => {
+      const configForFile = loadConfigForFile(file, process.cwd())
+      // Si quieres validar la config, puedes llamar a validate(configForFile)
+      return require('./lib/index').processFile(file, process.cwd())
+    })
   } catch (e) {
     console.error(e)
     process.exit(EXIT_CODES.BAD_OPTIONS)
@@ -272,10 +289,6 @@ const readConfig = _.memoize(() => {
 
 function processStr(input) {
   return linter.processStr(input, readConfig())
-}
-
-function processPath(path) {
-  return linter.processPath(path, readConfig())
 }
 
 function areWarningsExceeded(reports) {
