@@ -64,6 +64,45 @@ function init() {
   program.parse(process.argv)
 }
 
+const readIgnore = _.memoize(() => {
+  let ignoreFile = '.solhintignore'
+  try {
+    if (program.opts().ignorePath) {
+      ignoreFile = program.opts().ignorePath
+    }
+
+    return fs
+      .readFileSync(ignoreFile)
+      .toString()
+      .split('\n')
+      .map((i) => i.trim())
+  } catch (e) {
+    if (program.opts().ignorePath && e.code === 'ENOENT') {
+      console.error(`\nERROR: ${ignoreFile} is not a valid path.`)
+      process.exit(EXIT_CODES.BAD_OPTIONS)
+    }
+    return []
+  }
+})
+
+const readConfig = _.memoize(() => {
+  let config = {}
+  try {
+    config = loadConfig(program.opts().config)
+  } catch (e) {
+    console.error(e.message)
+    process.exit(EXIT_CODES.BAD_OPTIONS)
+  }
+
+  const configExcludeFiles = _.flatten(config.excludedFiles)
+  config.excludedFiles = _.concat(configExcludeFiles, readIgnore())
+
+  // validate the configuration before continuing
+  validate(config)
+
+  return config
+})
+
 function askUserToContinue(callback) {
   const rl = readline.createInterface({
     input: process.stdin,
@@ -134,7 +173,7 @@ function executeMainActionLogic() {
 
   let reports
   try {
-    // Cambios aquí: cargar la config general SOLO para excludedFiles, y luego usar por-archivo para cada uno
+    // load general config only to exclude files, then use per-file config for each file
     const baseConfig = readConfig()
     const patterns = program.args.filter(_.isString)
     let allFiles = []
@@ -146,13 +185,13 @@ function executeMainActionLogic() {
       const matchedFiles = glob.sync(pattern, { nodir: true })
       allFiles = allFiles.concat(matchedFiles)
     }
-    // Filtrar archivos ignorados
+    // filter the files that match the ignore rules
     const filesToLint = ignoreFilter.filter(allFiles)
 
     reports = filesToLint.map((file) => {
       const configForFile = loadConfigForFile(file, process.cwd())
-      // Si quieres validar la config, puedes llamar a validate(configForFile)
-      return require('./lib/index').processFile(file, process.cwd())
+      validate(configForFile)
+      return require('./lib/index').processFile(file, configForFile, process.cwd())
     })
   } catch (e) {
     console.error(e)
@@ -247,45 +286,6 @@ function writeSampleConfigFile() {
 
   process.exit(EXIT_CODES.OK)
 }
-
-const readIgnore = _.memoize(() => {
-  let ignoreFile = '.solhintignore'
-  try {
-    if (program.opts().ignorePath) {
-      ignoreFile = program.opts().ignorePath
-    }
-
-    return fs
-      .readFileSync(ignoreFile)
-      .toString()
-      .split('\n')
-      .map((i) => i.trim())
-  } catch (e) {
-    if (program.opts().ignorePath && e.code === 'ENOENT') {
-      console.error(`\nERROR: ${ignoreFile} is not a valid path.`)
-      process.exit(EXIT_CODES.BAD_OPTIONS)
-    }
-    return []
-  }
-})
-
-const readConfig = _.memoize(() => {
-  let config = {}
-  try {
-    config = loadConfig(program.opts().config)
-  } catch (e) {
-    console.error(e.message)
-    process.exit(EXIT_CODES.BAD_OPTIONS)
-  }
-
-  const configExcludeFiles = _.flatten(config.excludedFiles)
-  config.excludedFiles = _.concat(configExcludeFiles, readIgnore())
-
-  // validate the configuration before continuing
-  validate(config)
-
-  return config
-})
 
 function processStr(input) {
   return linter.processStr(input, readConfig())
