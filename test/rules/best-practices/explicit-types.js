@@ -3,7 +3,7 @@ const contractWith = require('../../common/contract-builder').contractWith
 const { assertErrorCount, assertNoErrors, assertErrorMessage } = require('../../common/asserts')
 const VAR_DECLARATIONS = require('../../fixtures/best-practices/explicit-types')
 
-const getZeroErrosObject = () => {
+const getZeroErrorsObject = () => {
   const zeroErrorsExplicit = {}
   const zeroErrorsImplicit = {}
   for (const key in VAR_DECLARATIONS) {
@@ -63,7 +63,7 @@ describe('Linter - explicit-types rule', () => {
   }
 
   describe('Rule [explicit-types] - should not raise any error', () => {
-    const { zeroErrorsImplicit, zeroErrorsExplicit } = getZeroErrosObject()
+    const { zeroErrorsImplicit, zeroErrorsExplicit } = getZeroErrorsObject()
 
     for (const key in zeroErrorsExplicit) {
       it(`should NOT raise error for ${key} on 'explicit' mode`, () => {
