@@ -193,7 +193,7 @@ describe('e2e general tests', function () {
     })
   })
 
-  describe('import-path-check', () => {
+  describe.only('import-path-check', () => {
     const PATH = '10-import-path-check/filesystem'
 
     let folderCounter = 1
@@ -202,7 +202,7 @@ describe('e2e general tests', function () {
       const padded = String(folderCounter).padStart(2, '0')
       
       const ROOT = PATH + padded + '/'
-
+      console.log('ROOT :>> ', ROOT + 'project');
       useFixtureFolder(this, ROOT + 'project')
 
       folderCounter++
