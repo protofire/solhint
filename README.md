@@ -115,12 +115,14 @@ This file has the following format:
 The `solhint:default` configuration contains only two rules: max-line-length & no-console
 It is now deprecated since version 5.1.0
 <br>
+
 ### Note 2
 Multiple configs files can be used at once. All config files should be named `.solhint.json`.
+If not done like this, multiple hierarchy configuration will not work.
 Solhint will go though all config files automatically.
 
 Given this structure:
-
+```
 Project ROOT =>
 /contracts
 ---> RootAndContractRules.sol
@@ -133,13 +135,13 @@ Project ROOT =>
 ------->solhint.json  
 
 .solhint.json  
-
+```
 - Solhint config located on `root` will be the main one.
-- When analyzing `RooRules.sol` will be using that file.
-- `InterfaceRules.sol` will be using the one inside its folder taking precedence over the `root` folder one
-- Rules not present in `interfaces/` folder and present in `root` will be active
-- Rules not present in `root` folder and present in `interfaces/` folder will be active
-- If rule is present in both files, the closest to the analyzed file will take precedence
+- When analyzing `RootRules.sol`, `root` file config will be used that file.
+- `InterfaceRules.sol` will be using the one inside its own folder taking precedence over the `root` folder one.
+- Rules not present in `interfaces/` folder and present in `root` will be active.
+- Rules not present in `root` folder and present in `interfaces/` folder will be active.
+- If rule is present in both files, the closest to the analyzed file will take precedence. Meaning when analyzing `InterfaceRules.sol` the config file located in `Interfaces/` will be used with the remaining rules of the `root` one.
 <br><br>
 
 
