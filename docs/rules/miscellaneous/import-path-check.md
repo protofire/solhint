@@ -58,7 +58,7 @@ This rule accepts an array of options:
 This rule does not have examples.
 
 ## Version
-This rule was introduced in the latest version.
+This rule was introduced in [Solhint 5.1.0](https://github.com/protofire/solhint/blob/v5.1.0)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/miscellaneous/import-path-check.js)
