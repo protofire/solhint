@@ -22,6 +22,10 @@ function createTempProject(
   return root
 }
 
+function toGlobPattern(filePath) {
+  return path.relative(process.cwd(), filePath).replace(/\\/g, '/')
+}
+
 describe('Solhint config hierarchy (unit)', function () {
   let tmpProject
   afterEach(() => {
@@ -38,8 +42,7 @@ describe('Solhint config hierarchy (unit)', function () {
     })
 
     const filePath = path.join(tmpProject, 'Foo.sol')
-    const reports = linter.processPath(filePath)
-    // Expects error for using single quotes
+    const reports = linter.processPath(toGlobPattern(filePath))
     assertErrorCount(reports[0], 1)
   })
 
@@ -57,7 +60,7 @@ describe('Solhint config hierarchy (unit)', function () {
     })
 
     const filePath = path.join(tmpProject, 'src', 'Bar.sol')
-    const reports = linter.processPath(filePath)
+    const reports = linter.processPath(toGlobPattern(filePath))
     // Expects error for using double quotes (should be single)
     assertErrorCount(reports[0], 1)
   })
@@ -76,7 +79,7 @@ describe('Solhint config hierarchy (unit)', function () {
     })
 
     const filePath = path.join(tmpProject, 'test', 'Test.sol')
-    const reports = linter.processPath(filePath)
+    const reports = linter.processPath(toGlobPattern(filePath))
     // Expects two errors: one for double quotes (should be single), one for missing visibility
     assertErrorCount(reports[0], 2)
   })
@@ -92,7 +95,7 @@ describe('Solhint config hierarchy (unit)', function () {
     })
 
     const filePath = path.join(tmpProject, 'src', 'Bar.sol')
-    const reports = linter.processPath(filePath)
+    const reports = linter.processPath(toGlobPattern(filePath))
     assertErrorCount(reports[0], 1)
   })
 
@@ -116,7 +119,7 @@ describe('Solhint config hierarchy (unit)', function () {
 
     // contracts/lib/Lib.sol should use "double" due to the config in contracts/lib/.solhint.json
     const filePath = path.join(tmpProject, 'contracts', 'lib', 'Lib.sol')
-    const reports = linter.processPath(filePath)
+    const reports = linter.processPath(toGlobPattern(filePath))
     // single quote, valid only if double is required
     assertErrorCount(reports[0], 1)
   })
@@ -135,7 +138,7 @@ describe('Solhint config hierarchy (unit)', function () {
     })
 
     const filePath = path.join(tmpProject, 'test', 'Test.sol')
-    const reports = linter.processPath(filePath)
+    const reports = linter.processPath(toGlobPattern(filePath))
     // single quote, valid for the subdir
     assertErrorCount(reports[0], 0)
   })
@@ -151,7 +154,7 @@ describe('Solhint config hierarchy (unit)', function () {
     })
 
     const filePath = path.join(tmpProject, 'src', 'Bar.sol')
-    const reports = linter.processPath(filePath)
+    const reports = linter.processPath(toGlobPattern(filePath))
     assertErrorCount(reports[0], 1)
   })
 
@@ -169,8 +172,14 @@ describe('Solhint config hierarchy (unit)', function () {
       },
     })
 
-    const rootFile = path.join(tmpProject, 'Root.sol')
-    const subFile = path.join(tmpProject, 'contracts', 'Sub.sol')
+    // normalize paths for glob: relative and with "/"
+    const rootFile = path
+      .relative(process.cwd(), path.join(tmpProject, 'Root.sol'))
+      .replace(/\\/g, '/')
+    const subFile = path
+      .relative(process.cwd(), path.join(tmpProject, 'contracts', 'Sub.sol'))
+      .replace(/\\/g, '/')
+
     const rootReports = linter.processPath(rootFile)
     const subReports = linter.processPath(subFile)
     // root: should be double
