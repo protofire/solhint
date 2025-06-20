@@ -200,7 +200,7 @@ describe('e2e general tests', function () {
 
     beforeEach(() => {
       const padded = String(folderCounter).padStart(2, '0')
-      
+
       const ROOT = PATH + padded + '/'
       useFixtureFolder(this, ROOT + 'project')
 
@@ -222,9 +222,9 @@ describe('e2e general tests', function () {
     })
 
     it('Should succeed when importing from node_modules - filesystem03', () => {
-      const fileName = "node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
+      const fileName = 'node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol'
       createDummyFile(fileName)
-      
+
       const { code, stdout } = shell.exec(`solhint -c ".solhintS03.json" "./contracts/Test.sol"`)
 
       expect(code).to.equal(EXIT_CODES.OK)
@@ -240,11 +240,42 @@ describe('e2e general tests', function () {
       )
     })
   })
+
+  describe('config-hierarchy-test', () => {
+    const PATH = '11-multiple-configs'
+    const ERROR_CONSOLE = 'Unexpected console statement'
+    const ERROR_QUOTES = 'quotes for string literals'
+
+    useFixture(PATH)
+
+    it(`should inherit no-console rule from root and add contract folder config rules`, () => {
+      const { code, stdout } = shell.exec(`solhint contracts/RootAndContractRules.sol`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout.trim()).to.contain(ERROR_CONSOLE)
+      expect(stdout.trim()).to.contain(ERROR_QUOTES)
+    })
+
+    it(`should inherit both rules from root `, () => {
+      const { code, stdout } = shell.exec(`solhint src/RootRules.sol`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout.trim()).to.contain(ERROR_CONSOLE)
+      expect(stdout.trim()).to.contain(ERROR_QUOTES)
+    })
+
+    it(`should override no console and quotes rules`, () => {
+      const { code, stdout } = shell.exec(`solhint src/interfaces/InterfaceRules.sol`)
+
+      expect(code).to.equal(EXIT_CODES.OK)
+      expect(stdout.trim()).to.be.empty
+    })
+  })
 })
 
 function useFixture(dir) {
   beforeEach(`switch to ${dir}`, function () {
-    useFixtureFolder(this, dir);
+    useFixtureFolder(this, dir)
   })
 }
 
@@ -264,7 +295,7 @@ function useFixtureFolder(ctx, dir) {
 }
 
 function createDummyFile(fullFilePath, content = '// dummy file\npragma solidity ^0.8.0;') {
-  const dir = path.dirname(fullFilePath);
-  fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(fullFilePath, content);
+  const dir = path.dirname(fullFilePath)
+  fs.mkdirSync(dir, { recursive: true })
+  fs.writeFileSync(fullFilePath, content)
 }

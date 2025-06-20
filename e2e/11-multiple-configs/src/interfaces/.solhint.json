@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "compiler-version": "off",
+    "quotes": ["error", "single"],
+    "no-console": "off"
+  }
+}
+
