@@ -8,5 +8,7 @@ contract InterfaceRules {
 
         console.log('NO error: no-console is OFF');
     }
+    
+    function emptyBlocksToFail() external {}
 }
 

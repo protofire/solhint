@@ -245,6 +245,7 @@ describe('e2e general tests', function () {
     const PATH = '11-multiple-configs'
     const ERROR_CONSOLE = 'Unexpected console statement'
     const ERROR_QUOTES = 'quotes for string literals'
+    const ERROR_EMPTY_BLOCKS = 'Code contains empty blocks'
 
     useFixture(PATH)
 
@@ -267,8 +268,10 @@ describe('e2e general tests', function () {
     it(`should override no console and quotes rules`, () => {
       const { code, stdout } = shell.exec(`solhint src/interfaces/InterfaceRules.sol`)
 
-      expect(code).to.equal(EXIT_CODES.OK)
-      expect(stdout.trim()).to.be.empty
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout.trim()).to.contain(ERROR_EMPTY_BLOCKS)
+      expect(stdout.trim()).to.not.contain(ERROR_CONSOLE)
+      expect(stdout.trim()).to.not.contain(ERROR_QUOTES)
     })
   })
 })
