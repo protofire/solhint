@@ -54,7 +54,7 @@ function init() {
 
   program
     .command('list-rules', null, { noHelp: false })
-    .description('display covered rules of current .solhint.json')
+    .description('display covered rules of current configuration files')
     .action(listRules)
 
   if (process.argv.length <= 2) {
@@ -188,10 +188,16 @@ function executeMainActionLogic() {
     // filter the files that match the ignore rules
     const filesToLint = ignoreFilter.filter(allFiles)
 
+    // explicit config is used if the user passed -c or --config
     reports = filesToLint.map((file) => {
-      const configForFile = loadConfigForFile(file, process.cwd())
+      const configForFile = loadConfigForFile(file, process.cwd(), program.opts().config)
       validate(configForFile)
-      return require('./lib/index').processFile(file, configForFile, process.cwd())
+      return require('./lib/index').processFile(
+        file,
+        configForFile,
+        process.cwd(),
+        program.opts().config // explicitConfigPath al final
+      )
     })
   } catch (e) {
     console.error(e)
@@ -410,11 +416,12 @@ function listRules() {
     console.error('Error!! Configuration does not exists')
     process.exit(EXIT_CODES.BAD_OPTIONS)
   } else {
-    const config = readConfig()
+    // load the config using the same function that the linter uses
+    const config = require('./lib/config/config-file').loadConfig(configPath)
+
     console.log('\nConfiguration File: \n', config)
 
-    const reportLists = linter.processPath(configPath, config)
-    const rulesObject = reportLists[0].config
+    const rulesObject = config.rules || {}
 
     console.log('\nRules: \n')
     const orderedRules = Object.keys(rulesObject)
@@ -424,7 +431,6 @@ function listRules() {
         return obj
       }, {})
 
-    // eslint-disable-next-line func-names
     Object.keys(orderedRules).forEach(function (key) {
       console.log('- ', key, ': ', orderedRules[key])
     })
