@@ -7,7 +7,7 @@ title:       "var-name-mixedcase | Solhint"
 # var-name-mixedcase
 ![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
 ![Category Badge](https://img.shields.io/badge/-Style%20Guide%20Rules-informational)
-![Default Severity Badge error](https://img.shields.io/badge/Default%20Severity-error-red)
+![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 > The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
 
 
@@ -19,7 +19,7 @@ This rule accepts an array of options:
 
 | Index | Description                                                                                                                                                        | Default Value                  |
 | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------ |
-| 0     | Rule severity. Must be one of "error", "warn", "off".                                                                                                              | error                          |
+| 0     | Rule severity. Must be one of "error", "warn", "off".                                                                                                              | warn                           |
 | 1     | A JSON object with a single property "prefixForImmutables" specifying the prefix to put to consider a variable as kind of immutable to allow it to be in all CAPS. | {"prefixForImmutables":"IMM_"} |
 
 
@@ -27,7 +27,7 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "var-name-mixedcase": ["error",{"prefixForImmutables":"IMM_"}]
+    "var-name-mixedcase": ["warn",{"prefixForImmutables":"IMM_"}]
   }
 }
 ```
