@@ -85,4 +85,71 @@ describe('Linter - var-name-mixedcase', () => {
       })
     }
   })
+
+  describe('for new as "immutable" configuration', () => {
+    it('should not raise error for immutable variables in mixedCase', () => {
+      const code = contractWith('uint32 private immutable SNAKE_CASE;')
+
+      const report = linter.processStr(code, {
+        rules: { 'no-unused-vars': 'error', 'var-name-mixedcase': 'error' },
+      })
+
+      assert.equal(report.errorCount, 0)
+    })
+
+    it('should not raise error for constants variables in mixedCase', () => {
+      const code = contractWith('uint32 private constant mixedCase = 10;')
+
+      const report = linter.processStr(code, {
+        rules: { 'no-unused-vars': 'error', 'var-name-mixedcase': 'error' },
+      })
+
+      assert.equal(report.errorCount, 0)
+    })
+
+    it('should raise error for regular variable in caps without prefix', () => {
+      const code = contractWith('string public MSG;')
+
+      const report = linter.processStr(code, {
+        rules: { 'no-unused-vars': 'error', 'var-name-mixedcase': 'error' },
+      })
+
+      assert.equal(report.errorCount, 1)
+      assert.ok(report.messages[0].message.includes('Variable name must be in mixedCase MSG'))
+    })
+
+    it('should raise error for regular variable in caps with prefix different to default', () => {
+      const code = contractWith('string public AA_MSG;')
+
+      const report = linter.processStr(code, {
+        rules: { 'no-unused-vars': 'error', 'var-name-mixedcase': 'error' },
+      })
+
+      assert.equal(report.errorCount, 1)
+      assert.ok(report.messages[0].message.includes('Variable name must be in mixedCase AA_MSG'))
+    })
+
+    it('should not raise error for regular variables when prefix is default', () => {
+      const code = contractWith('string public IMM_MSG;')
+
+      const report = linter.processStr(code, {
+        rules: { 'no-unused-vars': 'error', 'var-name-mixedcase': 'error' },
+      })
+
+      assert.equal(report.errorCount, 0)
+    })
+
+    it('should not raise error for regular variables when prefix match the configured one', () => {
+      const code = contractWith('string public RESULT_MSG;')
+
+      const report = linter.processStr(code, {
+        rules: { 'no-unused-vars': 'error', 'var-name-mixedcase': 'error' },
+      })
+
+      assert.equal(report.errorCount, 1)
+      assert.ok(
+        report.messages[0].message.includes('Variable name must be in mixedCase RESULT_MSG')
+      )
+    })
+  })
 })

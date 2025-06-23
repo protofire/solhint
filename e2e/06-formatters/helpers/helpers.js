@@ -38,7 +38,7 @@ const foo1Output = [
     line: 6,
     column: 5,
     severity: 'Warning',
-    message: 'Variable name must be in mixedCase',
+    message: 'Variable name must be in mixedCase TEST2',
     ruleId: 'var-name-mixedcase',
     fix: null,
     filePath: 'contracts/Foo.sol',
