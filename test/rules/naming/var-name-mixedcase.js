@@ -86,7 +86,7 @@ describe('Linter - var-name-mixedcase', () => {
     }
   })
 
-  describe.only('for new as "immutable" configuration', () => {
+  describe('for new as "immutable" configuration', () => {
     it('should not raise error for immutable variables in mixedCase', () => {
       const code = contractWith('uint32 private immutable SNAKE_CASE;')
 

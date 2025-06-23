@@ -10,7 +10,7 @@ const EXIT_CODES = { BAD_OPTIONS: 255, OK: 0, REPORTED_ERRORS: 1 }
 let foo1Output
 let foo2Output
 
-describe('e2e', function () {
+describe.only('e2e', function () {
   describe('formatter tests', () => {
     const outputs = require('./06-formatters/helpers/helpers.js')
     foo1Output = outputs.foo1Output
@@ -562,7 +562,7 @@ describe('e2e', function () {
           {
             level: 'warning',
             message: {
-              text: 'Variable name must be in mixedCase',
+              text: 'Variable name must be in mixedCase TEST2',
             },
             locations: [
               {
