@@ -9,7 +9,7 @@ title:       "code-complexity | Solhint"
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 
 ## Description
-Function has cyclomatic complexity "current" but allowed no more than maxcompl.
+Function has cyclomatic complexity "current" but allowed no more than configured max complexity.
 
 ## Options
 This rule accepts an array of options:
@@ -17,7 +17,7 @@ This rule accepts an array of options:
 | Index | Description                                           | Default Value |
 | ----- | ----------------------------------------------------- | ------------- |
 | 0     | Rule severity. Must be one of "error", "warn", "off". | warn          |
-| 1     | Maximum allowed cyclomatic complexity                 | 7             |
+| 1     | Function cyclomatic complexity reached.               | 7             |
 
 
 ### Example Config

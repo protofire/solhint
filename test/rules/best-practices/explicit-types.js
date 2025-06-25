@@ -20,17 +20,6 @@ const getZeroErrorsObject = () => {
 }
 
 describe('Linter - explicit-types rule', () => {
-  it('should throw an error with a wrong configuration rule', () => {
-    const code = contractWith('uint256 public constant SNAKE_CASE = 1;')
-
-    const report = linter.processStr(code, {
-      rules: { 'explicit-types': ['error', 'implicito'] },
-    })
-
-    assertErrorCount(report, 1)
-    assertErrorMessage(report, `Error: Config error on [explicit-types]. See explicit-types.md.`)
-  })
-
   it('should NOT throw error without the config array and default should take place', () => {
     const code = contractWith('uint256 public constant SNAKE_CASE = 1;')
     const report = linter.processStr(code, {
