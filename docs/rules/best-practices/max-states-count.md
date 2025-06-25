@@ -12,7 +12,7 @@ title:       "max-states-count | Solhint"
 
 
 ## Description
-Contract has "some count" states declarations but allowed no more than maxstates.
+Contract has "some count" states declarations but allowed no more than defined max states.
 
 ## Options
 This rule accepts an array of options:

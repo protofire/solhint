@@ -17,9 +17,10 @@ Check if an import file exits in target path
 ## Options
 This rule accepts an array of options:
 
-| Index | Description                                           | Default Value |
-| ----- | ----------------------------------------------------- | ------------- |
-| 0     | Rule severity. Must be one of "error", "warn", "off". | warn          |
+| Index | Description                                           | Default Value          |
+| ----- | ----------------------------------------------------- | ---------------------- |
+| 0     | Rule severity. Must be one of "error", "warn", "off". | warn                   |
+| 1     | Array of allowed base path patterns for imports.      | read DEFAULT_LOCATIONS |
 
 
 ### Example Config
