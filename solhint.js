@@ -438,7 +438,6 @@ function listRules() {
 }
 
 function checkForUpdate() {
-  // eslint-disable-next-line import/no-extraneous-dependencies
   return import('latest-version')
     .then((latestVersionModule) => {
       const latestVersion = latestVersionModule.default

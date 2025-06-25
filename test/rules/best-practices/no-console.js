@@ -13,7 +13,7 @@ describe('Linter - no-console', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'no-console': ['error'] },
+      rules: { 'no-console': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -26,7 +26,7 @@ describe('Linter - no-console', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'no-console': ['error'] },
+      rules: { 'no-console': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -39,7 +39,7 @@ describe('Linter - no-console', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'no-console': ['error'] },
+      rules: { 'no-console': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -52,7 +52,7 @@ describe('Linter - no-console', () => {
     `)
 
     const report = linter.processStr(code, {
-      rules: { 'no-console': ['error'] },
+      rules: { 'no-console': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -66,7 +66,7 @@ describe('Linter - no-console', () => {
     `
 
     const report = linter.processStr(code, {
-      rules: { 'no-console': ['error'] },
+      rules: { 'no-console': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -80,7 +80,7 @@ describe('Linter - no-console', () => {
     `
 
     const report = linter.processStr(code, {
-      rules: { 'no-console': ['error'] },
+      rules: { 'no-console': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -94,7 +94,7 @@ describe('Linter - no-console', () => {
     `
 
     const report = linter.processStr(code, {
-      rules: { 'no-console': ['error'] },
+      rules: { 'no-console': 'error' },
     })
 
     assert.equal(report.errorCount, 1)
@@ -108,7 +108,7 @@ describe('Linter - no-console', () => {
     `
 
     const report = linter.processStr(code, {
-      rules: { 'no-console': ['error'] },
+      rules: { 'no-console': 'error' },
     })
 
     assert.equal(report.errorCount, 0)
@@ -131,7 +131,7 @@ describe('Linter - no-console', () => {
     `
 
     const report = linter.processStr(code, {
-      rules: { 'no-console': ['error'] },
+      rules: { 'no-console': 'error' },
     })
 
     assert.equal(report.errorCount, 0)

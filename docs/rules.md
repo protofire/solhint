@@ -8,11 +8,11 @@ title:       "Rule Index of Solhint"
 
 | Rule Id                                                                  | Error                                                                                                                                      | Recommended  | Deprecated |
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ---------- |
-| [code-complexity](./rules/best-practices/code-complexity.md)             | Function has cyclomatic complexity "current" but allowed no more than maxcompl.                                                            |              |            |
+| [code-complexity](./rules/best-practices/code-complexity.md)             | Function has cyclomatic complexity "current" but allowed no more than configured max complexity.                                           |              |            |
 | [explicit-types](./rules/best-practices/explicit-types.md)               | Forbid or enforce explicit types (like uint256) that have an alias (like uint).                                                            | $~~~~~~~~$✔️ |            |
 | [function-max-lines](./rules/best-practices/function-max-lines.md)       | Function body contains "count" lines but allowed no more than maxlines.                                                                    |              |            |
-| [max-line-length](./rules/best-practices/max-line-length.md)             | Line length must be no more than maxlen.                                                                                                   |              |            |
-| [max-states-count](./rules/best-practices/max-states-count.md)           | Contract has "some count" states declarations but allowed no more than maxstates.                                                          | $~~~~~~~~$✔️ |            |
+| [max-line-length](./rules/best-practices/max-line-length.md)             | Line length should not exceed configured number of characters.                                                                             |              |            |
+| [max-states-count](./rules/best-practices/max-states-count.md)           | Contract has "some count" states declarations but allowed no more than defined max states.                                                 | $~~~~~~~~$✔️ |            |
 | [no-console](./rules/best-practices/no-console.md)                       | No console.log/logInt/logBytesX/logString/etc & No hardhat and forge-std console.sol import statements.                                    | $~~~~~~~~$✔️ |            |
 | [no-empty-blocks](./rules/best-practices/no-empty-blocks.md)             | Code block has zero statements inside. Exceptions apply.                                                                                   | $~~~~~~~~$✔️ |            |
 | [no-global-import](./rules/best-practices/no-global-import.md)           | Import statement includes an entire file instead of selected symbols.                                                                      | $~~~~~~~~$✔️ |            |
@@ -85,7 +85,7 @@ title:       "Rule Index of Solhint"
 | [avoid-throw](./rules/security/avoid-throw.md)                       | "throw" is deprecated, avoid to use it.                                  | $~~~~~~~~$✔️ |            |
 | [avoid-tx-origin](./rules/security/avoid-tx-origin.md)               | Avoid to use tx.origin.                                                  | $~~~~~~~~$✔️ |            |
 | [check-send-result](./rules/security/check-send-result.md)           | Check result of "send" call.                                             | $~~~~~~~~$✔️ |            |
-| [compiler-version](./rules/security/compiler-version.md)             | Compiler version must satisfy a semver requirement.                      | $~~~~~~~~$✔️ |            |
+| [compiler-version](./rules/security/compiler-version.md)             | Compiler version must satisfy a semver requirement at least ^0.8.24.     | $~~~~~~~~$✔️ |            |
 | [func-visibility](./rules/security/func-visibility.md)               | Explicitly mark visibility in function.                                  | $~~~~~~~~$✔️ |            |
 | [multiple-sends](./rules/security/multiple-sends.md)                 | Avoid multiple calls of "send" method in single transaction.             | $~~~~~~~~$✔️ |            |
 | [no-complex-fallback](./rules/security/no-complex-fallback.md)       | Fallback function must be simple.                                        | $~~~~~~~~$✔️ |            |
