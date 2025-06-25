@@ -5,7 +5,7 @@ title:       "constructor-syntax | Solhint"
 ---
 
 # constructor-syntax
-![Category Badge](https://img.shields.io/badge/-Best%20Practices%20Rules-informational)
+![Category Badge](https://img.shields.io/badge/-Deprecations-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 
 ## Description

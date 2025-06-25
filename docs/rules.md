@@ -21,7 +21,6 @@ title:       "Rule Index of Solhint"
 | [one-contract-per-file](./rules/best-practices/one-contract-per-file.md) | Enforces the use of ONE Contract per file see [here](https://docs.soliditylang.org/en/v0.8.21/style-guide.html#contract-and-library-names) | $~~~~~~~~$✔️ |            |
 | [payable-fallback](./rules/best-practices/payable-fallback.md)           | When fallback is not payable and there is no receive function you will not be able to receive currency.                                    | $~~~~~~~~$✔️ |            |
 | [reason-string](./rules/best-practices/reason-string.md)                 | Require or revert statement must have a reason string and check that each reason string is at most N characters long.                      | $~~~~~~~~$✔️ |            |
-| [constructor-syntax](./rules/best-practices/constructor-syntax.md)       | Constructors should use the new constructor keyword.                                                                                       |              |            |
         
 
 ## Style Guide Rules
@@ -47,6 +46,13 @@ title:       "Rule Index of Solhint"
 | [imports-order](./rules/naming/imports-order.md)                                     | Order the imports of the contract to follow a certain hierarchy (read "Notes section")                        |              |            |
 | [ordering](./rules/order/ordering.md)                                                | Check order of elements in file and inside each contract, according to the style guide                        |              |            |
 | [visibility-modifier-order](./rules/order/visibility-modifier-order.md)              | Visibility modifier must be first in list of modifiers.                                                       | $~~~~~~~~$✔️ |            |
+        
+
+## Deprecations
+
+| Rule Id                                                          | Error                                                | Recommended | Deprecated |
+| ---------------------------------------------------------------- | ---------------------------------------------------- | ----------- | ---------- |
+| [constructor-syntax](./rules/deprecations/constructor-syntax.md) | Constructors should use the new constructor keyword. |             |            |
         
 
 ## Gas Consumption Rules

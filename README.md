@@ -83,15 +83,18 @@ Commands:
 
 ### Fix
 This option currently works on:
-- avoid-throw
 - avoid-sha3
-- no-console
-- explicit-types
-- private-vars-underscore
-- payable-fallback
-- quotes
-- contract-name-capwords
 - avoid-suicide
+- avoid-throw
+- contract-name-capwords
+- event-name-capwords
+- explicit-types
+- imports-order
+- no-console
+- no-unused-imports
+- payable-fallback
+- private-vars-underscore
+- quotes
   
 <br><br>
 ## Configuration
