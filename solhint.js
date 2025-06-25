@@ -376,7 +376,7 @@ function writeStringToFile(data) {
   const cleanedData = data.replace(/\x1B\[[0-?]*[ -/]*[@-~]/g, '')
 
   try {
-    fs.writeFileSync(fileName, cleanedData, 'utf-8') // Specify the encoding (UTF-16)
+    fs.writeFileSync(fileName, cleanedData, 'utf-8') // Specify the encoding (UTF-8)
     // console.log('File written successfully:', fileName)
   } catch (err) {
     console.error('Error writing to file:', err)
