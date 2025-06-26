@@ -1,3 +1,4 @@
+const assert = require('assert')
 const linter = require('../../../lib/index')
 const {
   assertNoErrors,
@@ -25,6 +26,31 @@ describe('Linter - no-unused-import', () => {
     })
     assertErrorCount(report, 1)
     assertErrorMessage(report, 'imported name A is not used')
+  })
+
+  it('should raise only on unused imports and not raise for imports order if they are correct', () => {
+    const code = `
+    // SPDX-License-Identifier: GPL-3.0-or-later
+    pragma solidity >=0.8.22;
+
+    import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
+    import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+    import { IERC721 } from "@openzeppelin/contracts/token/ERC721/IERC721.sol";
+
+    contract Aave {
+        address public immutable MEV_PROTECTION_ADMIN;
+
+        function zarasa() {}
+    }
+    `
+    const report = linter.processStr(code, {
+      rules: { 'imports-order': 'error', 'no-unused-import': 'error' },
+    })
+
+    assertErrorCount(report, 3)
+    assert.ok(report.reports[0].message, 'imported name AccessControl is not used')
+    assert.ok(report.reports[1].message, 'imported name IERC20 is not used')
+    assert.ok(report.reports[2].message, 'imported name IERC721 is not used')
   })
 
   it('should not crash on, but also not recognize, malformed inheritdoc statements', () => {
