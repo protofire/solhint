@@ -274,6 +274,81 @@ describe('e2e general tests', function () {
       expect(stdout.trim()).to.not.contain(ERROR_QUOTES)
     })
   })
+
+  describe('cache support', () => {
+    const PATH = '12-cache-support'
+    let cacheFilePath
+
+    useFixture(PATH)
+
+    beforeEach(() => {
+      cacheFilePath = path.join(shell.pwd().toString(), '.solhintcache.json')
+      if (fs.existsSync(cacheFilePath)) fs.unlinkSync(cacheFilePath)
+    })
+
+    it('should create cache file and lint normally on first run', () => {
+      const { code, stdout } = shell.exec(`solhint Foo.sol --cache --noPoster`)
+      expect(fs.existsSync(cacheFilePath)).to.be.true
+
+      const cache = JSON.parse(fs.readFileSync(cacheFilePath, 'utf8'))
+
+      expect(stdout.trim()).to.equal('')
+      expect(code).to.equal(EXIT_CODES.OK)
+      expect(Object.keys(cache).length).to.equal(1)
+    })
+
+    it('should skip linting on second run if file unchanged', () => {
+      shell.exec(`solhint Foo.sol --cache --noPoster`) // populate cache
+
+      const cacheBefore = JSON.parse(fs.readFileSync(cacheFilePath, 'utf8'))
+
+      const { code, stdout } = shell.exec(`solhint Foo.sol --cache --noPoster`)
+
+      const cacheAfter = JSON.parse(fs.readFileSync(cacheFilePath, 'utf8'))
+
+      expect(code).to.equal(EXIT_CODES.OK)
+      expect(stdout.trim()).to.equal('')
+      expect(cacheAfter).to.deep.equal(cacheBefore)
+    })
+
+    it('should re-lint if file content changes', () => {
+      let code
+      let stdout
+      // first run no error, populate cache
+      shell.exec(`solhint Foo.sol --cache --noPoster`) // first run
+
+      // replace file with an error one
+      const cacheBefore = JSON.parse(fs.readFileSync(cacheFilePath, 'utf8'))
+      fs.copyFileSync('FooError.sol', 'Foo.sol') // overwrite Foo.sol
+
+      // check cache was not updated yet
+      const cacheMid = JSON.parse(fs.readFileSync(cacheFilePath, 'utf8'))
+      expect(cacheMid).to.deep.equal(cacheBefore, 'error cache mid')
+
+      // cache will not be updated because now Foo.sol has an error
+      let result = shell.exec(`solhint Foo.sol --cache --noPoster`)
+      code = result.code
+      stdout = result.stdout
+      const cacheAfter1 = JSON.parse(fs.readFileSync(cacheFilePath, 'utf8'))
+
+      // assert the errors
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout.trim()).to.contain('Compiler version')
+      expect(cacheAfter1).to.deep.equal(cacheBefore, "error cacheAfter1")
+      
+      // now replace Foo.sol with a valid file
+      fs.copyFileSync('FooValid.sol','Foo.sol') // restore Foo.sol
+      result = shell.exec(`solhint Foo.sol --cache --noPoster`)
+      code = result.code
+      stdout = result.stdout
+      const cacheAfter2 = JSON.parse(fs.readFileSync(cacheFilePath, 'utf8'))
+
+      // expect no errors and cache to be updated
+      expect(code).to.equal(EXIT_CODES.OK, "")
+      expect(stdout.trim()).to.equal('')
+      expect(cacheAfter2).to.not.deep.equal(cacheBefore, "error cacheAfter2")
+    })
+  })
 })
 
 function useFixture(dir) {
