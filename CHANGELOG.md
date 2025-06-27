@@ -1,3 +1,19 @@
+## [5.2.0] - 2025-06-27
+### Fixed
+ - `imports-order` interference with `no-unused-imports` [#684](https://github.com/protofire/solhint/pull/684)
+ 
+### Added
+- Added `cache` flag allowing to skip already evaluated files if no error was thrown and file did not change - [#685](https://github.com/protofire/solhint/pull/685)
+- Added multi-directory config support by hierarchy - [#678](https://github.com/protofire/solhint/pull/678)
+- Added better error handling on invalid configs -  [#683](https://github.com/protofire/solhint/pull/683)
+ 
+
+Thanks to [@smol-ninja](https://github.com/smol-ninja) - [@PaulRBerg](https://github.com/PaulRBerg) [@lechpzn](https://github.com/lechpzn), [@otc-png](https://github.com/otc-png), [@MamunC0der](https://github.com/MamunC0der), [@kks-code](https://github.com/kks-code), [@RidaMichofi](https://github.com/RidaMichofi)
+
+For making the time of proposing rules, pointing out typos, broken links, unused code, copyright, small reviews, etc. We really appreciate your contributions!
+
+<br><br>
+
 ## [5.1.0] - 2025-05-05
 ### Added
 - Argument to avoid discord poster - [#646](https://github.com/protofire/solhint/pull/646)
