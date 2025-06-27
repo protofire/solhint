@@ -35,7 +35,7 @@ This rule accepts a string option for rule severity. Must be one of "error", "wa
 This rule does not have examples.
 
 ## Version
-This rule was introduced in the latest version.
+This rule was introduced in [Solhint 5.1.0](https://github.com/protofire/solhint/blob/v5.1.0)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/order/imports-order.js)

@@ -3,7 +3,7 @@ const contractWith = require('../../common/contract-builder').contractWith
 const { assertErrorCount, assertNoErrors, assertErrorMessage } = require('../../common/asserts')
 const VAR_DECLARATIONS = require('../../fixtures/best-practices/explicit-types')
 
-const getZeroErrosObject = () => {
+const getZeroErrorsObject = () => {
   const zeroErrorsExplicit = {}
   const zeroErrorsImplicit = {}
   for (const key in VAR_DECLARATIONS) {
@@ -20,17 +20,6 @@ const getZeroErrosObject = () => {
 }
 
 describe('Linter - explicit-types rule', () => {
-  it('should throw an error with a wrong configuration rule', () => {
-    const code = contractWith('uint256 public constant SNAKE_CASE = 1;')
-
-    const report = linter.processStr(code, {
-      rules: { 'explicit-types': ['error', 'implicito'] },
-    })
-
-    assertErrorCount(report, 1)
-    assertErrorMessage(report, `Error: Config error on [explicit-types]. See explicit-types.md.`)
-  })
-
   it('should NOT throw error without the config array and default should take place', () => {
     const code = contractWith('uint256 public constant SNAKE_CASE = 1;')
     const report = linter.processStr(code, {
@@ -63,7 +52,7 @@ describe('Linter - explicit-types rule', () => {
   }
 
   describe('Rule [explicit-types] - should not raise any error', () => {
-    const { zeroErrorsImplicit, zeroErrorsExplicit } = getZeroErrosObject()
+    const { zeroErrorsImplicit, zeroErrorsExplicit } = getZeroErrorsObject()
 
     for (const key in zeroErrorsExplicit) {
       it(`should NOT raise error for ${key} on 'explicit' mode`, () => {

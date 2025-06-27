@@ -62,14 +62,17 @@ Options:
   -V, --version                           output the version number
   -f, --formatter [name]                  report formatter name (stylish, table, tap, unix, json, compact, sarif)
   -w, --max-warnings [maxWarningsNumber]  number of allowed warnings, works in quiet mode as well
-  -c, --config [file_name]                file to use as your .solhint.json
+  -c, --config [file_name]                file to use as your rules configuration file (not compatible with multiple configs)
   -q, --quiet                             report errors only - default: false
   --ignore-path [file_name]               file to use as your .solhintignore
   --fix                                   automatically fix problems and show report
+  --cache                                 only lint files that changed since last run
+  --cache-location                        path to the cache file
   --noPrompt                              do not suggest to backup files when any `fix` option is selected
   --init                                  create configuration file for solhint
   --disc                                  do not check for solhint updates
   --save                                  save report to file on current folder
+  --noPoster                              remove discord poster
   -h, --help                              output usage information
 
 Commands:
@@ -98,7 +101,7 @@ This option currently works on:
 
 You can use a `.solhint.json` file to configure Solhint for the whole project.
 
-To generate a new  sample `.solhint.json` file in current folder you can do:
+To generate a new sample `.solhint.json` file in current folder you can do:
 
 ```sh
 solhint --init 
@@ -111,9 +114,37 @@ This file has the following format:
   "extends": "solhint:recommended"
 }
 ```
-### Note
+### Note 1
 The `solhint:default` configuration contains only two rules: max-line-length & no-console
 It is now deprecated since version 5.1.0
+<br>
+
+### Note 2
+Multiple configs files can be used at once. All config files should be named `.solhint.json`.
+If not done like this, multiple hierarchy configuration will not work.
+Solhint will go though all config files automatically.
+
+Given this structure:
+```
+Project ROOT =>
+/contracts
+---> RootAndContractRules.sol
+---> .solhint.json
+
+/src
+--->RootRules.sol
+--->interfaces/
+------->InterfaceRules.sol
+------->solhint.json  
+
+.solhint.json  
+```
+- Solhint config located on `root` will be the main one.
+- When analyzing `RootRules.sol`, `root` file config will be used that file.
+- `InterfaceRules.sol` will be using the one inside its own folder taking precedence over the `root` folder one.
+- Rules not present in `interfaces/` folder and present in `root` will be active.
+- Rules not present in `root` folder and present in `interfaces/` folder will be active.
+- If rule is present in both files, the closest to the analyzed file will take precedence. Meaning when analyzing `InterfaceRules.sol` the config file located in `Interfaces/` will be used with the remaining rules of the `root` one.
 <br><br>
 
 
@@ -137,6 +168,25 @@ the `.gitignore` format.
 node_modules/
 additional-tests.sol
 ```
+
+### Cache
+Solhint supports a caching mechanism using the `--cache` flag to avoid re-linting files that haven't changed. 
+When enabled, Solhint stores a hash of each file's content and effective configuration, skipping analysis if neither has changed. 
+By default, the cache is saved in `.solhintcache.json` in the current working directory. 
+You can customize this location using the `--cache-location option`. If no location is specified, the file will be stored in:
+`node_modules/.cache/solhint/.solhint-cache.json`
+
+Warning:
+When using `cache` flag. If a file was analyzed with not error for a certain config, the hash will be stored. If the file is not changed but the config file (`.solhint.json`) has some new rules, the file will not be analyzed. 
+To analyze it again, remove `cache` option.
+
+Example:
+```
+solhint contracts/**/*.sol --cache
+solhint Foo.sol --cache --cache-location tmp/my-cache.json
+```
+
+
 
 ### Extendable rulesets
 

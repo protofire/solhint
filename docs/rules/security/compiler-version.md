@@ -12,7 +12,7 @@ title:       "compiler-version | Solhint"
 
 
 ## Description
-Compiler version must satisfy a semver requirement.
+Compiler version must satisfy a semver requirement at least ^0.8.24.
 
 ## Options
 This rule accepts an array of options:

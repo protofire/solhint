@@ -1,10 +1,17 @@
 const assert = require('assert')
+const sinon = require('sinon')
 const _ = require('lodash')
+const linter = require('../../lib/index')
+const Reporter = require('../../lib/reporter')
 const {
   validate,
   validSeverityMap,
   defaultSchemaValueForRules,
 } = require('../../lib/config/config-validator')
+const { assertErrorCount, assertErrorMessage } = require('./asserts')
+const contractWith = require('./contract-builder').contractWith
+
+const dummyCode = contractWith('function x() public {}')
 
 describe('Config validator', () => {
   it('should check validSeverityMap', () => {
@@ -44,4 +51,562 @@ describe('Config validator', () => {
 
     validate(config) // should not throw
   })
+})
+
+describe('Better errors addition + rule disable on error', () => {
+  let warnSpy
+  let reportErrorSpy
+  let reportWarnSpy
+
+  beforeEach(() => {
+    // spy on console.warn
+    warnSpy = sinon.spy(console, 'warn')
+
+    // spy on reporter methods
+    reportErrorSpy = sinon.spy(Reporter.prototype, 'error')
+    reportWarnSpy = sinon.spy(Reporter.prototype, 'warn')
+  })
+
+  afterEach(() => {
+    warnSpy.restore()
+    reportErrorSpy.restore()
+    reportWarnSpy.restore()
+  })
+
+  it('Valid CFG - execute: compiler-version config using default)', () => {
+    const report = linter.processStr(
+      `
+      pragma solidity ^0.4.4;
+      `,
+      {
+        rules: { 'compiler-version': 'error' },
+      }
+    )
+
+    assertErrorCount(report, 1)
+    assertErrorMessage(report, '^0.8.24')
+  })
+
+  it('Valid CFG - execute: quotes when only severity is provided using DEFAULT)', () => {
+    const report = linter.processStr(
+      `
+      pragma solidity ^0.4.4;
+      contract Test {
+          string public name = 'Test';
+      }
+      `,
+      {
+        rules: { quotes: 'error' },
+      }
+    )
+
+    assertErrorCount(report, 1)
+    assertErrorMessage(report, 'Use double quotes for string literals')
+  })
+
+  it('Valid CFG - execute: reason-string when only severity is provided using DEFAULT)', () => {
+    // using a string with 33 chars because default is 32
+    const report = linter.processStr(
+      `
+      pragma solidity ^0.4.4;
+      contract Test {
+          string public name = 'Test';
+          function test() public {
+              revert("123456789012345678901234567890123");
+          }
+      }
+      `,
+      {
+        rules: { 'reason-string': 'error' },
+      }
+    )
+    assertErrorCount(report, 1)
+    assertErrorMessage(report, 'Error message for revert is too long: 33 counted / 32 allowed')
+  })
+
+  it('Valid CFG - execute: foundry-test-functions when only severity is provided using DEFAULT)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'foundry-test-functions': 'error' },
+    })
+
+    assertErrorCount(report, 1)
+    assertErrorMessage(report, 'Function x() must match Foundry test naming convention')
+  })
+
+  it('Valid CFG - execute: foundry-test-functions when empty skip array is provided using DEFAULT)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'foundry-test-functions': ['error', []] },
+    })
+
+    assertErrorCount(report, 1)
+    assertErrorMessage(report, 'Function x() must match Foundry test naming convention')
+  })
+
+  it('Invalid CFG - not execute: compiler-version expects string)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'compiler-version': ['error', 123] },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+    assert.ok(
+      logged.includes("invalid configuration for rule 'compiler-version'"),
+      `Expected a warning for compiler-version but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Invalid CFG - not execute: max-line-length expects number)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'max-line-length': ['error', 'not-a-number'] },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+    assert.ok(
+      logged.includes("invalid configuration for rule 'max-line-length'"),
+      `Expected a warning for max-line-length but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Invalid CFG - not execute: interface-starts-with-i expects severity)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'interface-starts-with-i': 'warni' },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+    assert.ok(
+      logged.includes("invalid configuration for rule 'interface-starts-with-i'"),
+      `Expected a warning for interface-starts-with-i but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Invalid CFG - not execute: interface-starts-with-i expects severity)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'interface-starts-with-i': '' },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+    assert.ok(
+      logged.includes("invalid configuration for rule 'interface-starts-with-i'"),
+      `Expected a warning for interface-starts-with-i but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Invalid CFG - invalid rule name', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'interface-sta': 'warn' },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+    assert.ok(
+      logged.includes("[solhint] Warning: Rule 'interface-sta' doesn't exist"),
+      `Expected a warning for interface-sta but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Invalid CFG - not execute: interface-starts-with-i expects ONLY severity)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'interface-starts-with-i': ['warn', 7] },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+    assert.ok(
+      logged.includes("invalid configuration for rule 'interface-starts-with-i'"),
+      `Expected a warning for interface-starts-with-i but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Invalid CFG - not execute: interface-starts-with-i expects ONLY severity)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'interface-starts-with-i': { severity: 'warn' } },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+    assert.ok(
+      logged.includes("invalid configuration for rule 'interface-starts-with-i'"),
+      `Expected a warning for interface-starts-with-i but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Invalid CFG - not execute: reason-string when incorrect object is provided)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'reason-string': ['warn', {}] },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+    assert.ok(
+      logged.includes("invalid configuration for rule 'reason-string'"),
+      `Expected a warning for reason-string but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Invalid CFG - not execute: immutable-vars-naming when user config is invalid)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'immutable-vars-naming': ['warn', { immutablesAsConstants: 10 }] },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+    assert.ok(
+      logged.includes("invalid configuration for rule 'immutable-vars-naming'"),
+      `Expected a warning for immutable-vars-naming but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Invalid CFG - not execute: immutable-vars-naming when no correct object is provided)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'immutable-vars-naming': ['warn', { 'invalid-key': true }] },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+    assert.ok(
+      logged.includes("invalid configuration for rule 'immutable-vars-naming'"),
+      `Expected a warning for immutable-vars-naming but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Invalid CFG - not execute: explicit-types when incorrect object is provided)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'explicit-types': ['warn', {}] },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+    assert.ok(
+      logged.includes("invalid configuration for rule 'explicit-types'"),
+      `Expected a warning for explicit-types but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Invalid CFG - not execute: quotes when wrong value is provided)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { quotes: ['warn', 'wrong-value'] },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+    assert.ok(
+      logged.includes("invalid configuration for rule 'quotes'"),
+      `Expected a warning for quotes but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Invalid CFG - not execute: foundry-test-functions when wrong value in array is provided)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'foundry-test-functions': ['error', [1]] },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+    assert.ok(
+      logged.includes("invalid configuration for rule 'foundry-test-functions'"),
+      `Expected a warning for foundry-test-functions but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Invalid CFG - not execute: foundry-test-functions when wrong type value is provided)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'foundry-test-functions': ['error', 'wrong'] },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+    assert.ok(
+      logged.includes("invalid configuration for rule 'foundry-test-functions'"),
+      `Expected a warning for foundry-test-functions but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Invalid CFG - not execute: foundry-test-functions when empty object is provided)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'foundry-test-functions': ['error', {}] },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+    assert.ok(
+      logged.includes("invalid configuration for rule 'foundry-test-functions'"),
+      `Expected a warning for foundry-test-functions but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  // array with string as config
+  // array with number as config
+  // no array just severity
+  // no array, empty severity
+  // misspelled rule name
+  // additional config value in array
+  // config error object instead of array
+  // config error object with missing key
+  // config error object with no value type
+  // config error object with wrong value type
+
+  // it('Invalid CFG - not execute: reason-string when no property is defined)', () => {
+  //   const report = linter.processStr(dummyCode, {
+  //     rules: { 'interface-starts-with-i': { severity: 'warn' } },
+  //   })
+
+  //   assert.equal(report.errorCount, 0)
+  //   assert.equal(report.warningCount, 0)
+  //   assert.deepEqual(report.messages, [])
+
+  //   const logged = warnSpy
+  //     .getCalls()
+  //     .map((c) => c.args[0])
+  //     .join('\n')
+  //   assert.ok(
+  //     logged.includes("invalid configuration for rule 'interface-starts-with-i'"),
+  //     `Expected a warning for interface-starts-with-i but got:\n${logged}`
+  //   )
+
+  //   assert.ok(warnSpy.called, 'console.warn should have been called')
+  //   sinon.assert.notCalled(reportErrorSpy)
+  //   sinon.assert.notCalled(reportWarnSpy)
+  // })
+
+  // it('Invalid CFG - not execute: explicit-types expects two predefined values)', () => {
+  //   const code = contractWith('uint256 public constant SNAKE_CASE = 1;')
+
+  //   const report = linter.processStr(code, {
+  //     rules: { 'explicit-types': ['error', 'implicito'] },
+  //   })
+  //   assert.equal(report.errorCount, 0)
+  //   assert.equal(report.warningCount, 0)
+  //   assert.deepEqual(report.messages, [])
+  // })
+
+  // it('should run rule with valid config (compiler-version string)', () => {
+  //   const report = linter.processStr(dummyCode, {
+  //     rules: { 'compiler-version': ['error', '^0.8.24'] },
+  //   })
+  //   assert.equal(report.warningCount, 0)
+  //   assert.ok(
+  //     warnMessages.length === 0,
+  //     `Did not expect warnings, but got:\n${warnMessages.join('\n')}`
+  //   )
+  // })
+
+  // it('should not run rule when config is invalid (reason-string expects number)', () => {
+  //   const report = linter.processStr(dummyCode, {
+  //     rules: { 'reason-string': ['warn', { maxLength: 'not-a-number' }] },
+  //   })
+  //   assert.equal(report.errorCount, 0)
+  //   assert.equal(report.warningCount, 0)
+  //   assert.deepEqual(report.messages, [])
+  //   assert.ok(
+  //     findConfigWarning('reason-string'),
+  //     `Expected config warning for reason-string. Got:\n${warnMessages.join('\n')}`
+  //   )
+  //   assert.ok(
+  //     warnMessages.some((msg) => msg.includes('→ config[1].maxLength: should be integer')),
+  //     `Expected fallback error includes "→ config[1].maxLength: should be integer", got:\n${warnMessages.join(
+  //       '\n'
+  //     )}`
+  //   )
+  // })
+
+  // it('should run rule with valid config (reason-string with number)', () => {
+  //   const report = linter.processStr(dummyCode, {
+  //     rules: { 'reason-string': ['warn', { maxLength: 32 }] },
+  //   })
+  //   assert.equal(report.warningCount, 0)
+  //   assert.ok(
+  //     warnMessages.length === 0,
+  //     `Did not expect warnings, but got:\n${warnMessages.join('\n')}`
+  //   )
+  // })
+
+  // it('should run rule with primitive config (code-complexity with number)', () => {
+  //   const report = linter.processStr(
+  //     contractWith('function a(uint x) public { if (x == 1) { if (x > 2) {} } }'),
+  //     {
+  //       rules: { 'code-complexity': ['warn', 1] },
+  //     }
+  //   )
+  //   assert(report.warningCount >= 1)
+  //   assert(report.messages.some((i) => i.ruleId === 'code-complexity'))
+  // })
+
+  // it('should run rule with array config (import-path-check)', () => {
+  //   const report = linter.processStr("import '../X.sol';", {
+  //     rules: { 'import-path-check': ['warn', ['[~dependenciesPath]']] },
+  //   })
+  //   assert.equal(report.errorCount, 0)
+  //   assert(report.warningCount >= 0)
+  //   assert.ok(
+  //     warnMessages.length === 0,
+  //     `Did not expect warnings, but got:\n${warnMessages.join('\n')}`
+  //   )
+  // })
+
+  // it('should warn if rule level is invalid', () => {
+  //   const report = linter.processStr(dummyCode, {
+  //     rules: { 'no-console': 'maybe' },
+  //   })
+  //   assert.equal(report.errorCount, 0)
+  //   assert.equal(report.warningCount, 0)
+  //   assert.deepEqual(report.messages, [])
+  //   assert.ok(
+  //     warnMessages.some((msg) => msg.includes("rule 'no-console' level is 'maybe'")),
+  //     `Expected warning for invalid severity, got:\n${warnMessages.join('\n')}`
+  //   )
+  // })
 })

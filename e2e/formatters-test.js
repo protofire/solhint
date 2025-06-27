@@ -562,7 +562,7 @@ describe('e2e', function () {
           {
             level: 'warning',
             message: {
-              text: 'Variable name must be in mixedCase',
+              text: 'Variable name must be in mixedCase TEST2',
             },
             locations: [
               {

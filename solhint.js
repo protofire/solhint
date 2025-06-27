@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 const program = require('commander')
 const _ = require('lodash')
-const fs = require('fs')
+const fs = require('fs-extra')
 const process = require('process')
 const readline = require('readline')
 const chalk = require('chalk')
 
 const linter = require('./lib/index')
-const { loadConfig } = require('./lib/config/config-file')
+const { loadConfig, loadConfigForFile } = require('./lib/config/config-file')
 const { validate } = require('./lib/config/config-validator')
 const applyFixes = require('./lib/apply-fixes')
 const ruleFixer = require('./lib/rule-fixer')
@@ -31,6 +31,8 @@ function init() {
     .option('-q, --quiet', 'report errors only - default: false')
     .option('--ignore-path [file_name]', 'file to use as your .solhintignore')
     .option('--fix', 'automatically fix problems. Skips fixes in report')
+    .option('--cache', 'Only lint files that changed since last run')
+    .option('--cache-location [file_name]', 'Path to the cache file')
     .option('--noPrompt', 'do not suggest to backup files when any `fix` option is selected')
     .option('--init', 'create configuration file for solhint')
     .option('--disc', 'do not check for solhint updates')
@@ -54,7 +56,7 @@ function init() {
 
   program
     .command('list-rules', null, { noHelp: false })
-    .description('display covered rules of current .solhint.json')
+    .description('display covered rules of current configuration files')
     .action(listRules)
 
   if (process.argv.length <= 2) {
@@ -63,6 +65,45 @@ function init() {
 
   program.parse(process.argv)
 }
+
+const readIgnore = _.memoize(() => {
+  let ignoreFile = '.solhintignore'
+  try {
+    if (program.opts().ignorePath) {
+      ignoreFile = program.opts().ignorePath
+    }
+
+    return fs
+      .readFileSync(ignoreFile)
+      .toString()
+      .split('\n')
+      .map((i) => i.trim())
+  } catch (e) {
+    if (program.opts().ignorePath && e.code === 'ENOENT') {
+      console.error(`\nERROR: ${ignoreFile} is not a valid path.`)
+      process.exit(EXIT_CODES.BAD_OPTIONS)
+    }
+    return []
+  }
+})
+
+const readConfig = _.memoize(() => {
+  let config = {}
+  try {
+    config = loadConfig(program.opts().config)
+  } catch (e) {
+    console.error(e.message)
+    process.exit(EXIT_CODES.BAD_OPTIONS)
+  }
+
+  const configExcludeFiles = _.flatten(config.excludedFiles)
+  config.excludedFiles = _.concat(configExcludeFiles, readIgnore())
+
+  // validate the configuration before continuing
+  validate(config)
+
+  return config
+})
 
 function askUserToContinue(callback) {
   const rl = readline.createInterface({
@@ -134,9 +175,39 @@ function executeMainActionLogic() {
 
   let reports
   try {
-    const reportLists = program.args.filter(_.isString).map(processPath)
-    // console.log('reportLists :>> ', reportLists)
-    reports = _.flatten(reportLists)
+    // load general config only to exclude files, then use per-file config for each file
+    const baseConfig = readConfig()
+    const patterns = program.args.filter(_.isString)
+    let allFiles = []
+    const glob = require('glob')
+    const ignore = require('ignore')
+    const ignoreFilter = ignore({ allowRelativePaths: true }).add(baseConfig.excludedFiles || [])
+
+    for (const pattern of patterns) {
+      const matchedFiles = glob.sync(pattern, { nodir: true })
+      allFiles = allFiles.concat(matchedFiles)
+    }
+    // filter the files that match the ignore rules
+    const filesToLint = ignoreFilter.filter(allFiles)
+
+    // explicit config is used if the user passed -c or --config
+    reports = filesToLint.map((file) => {
+      const configForFile = loadConfigForFile(file, process.cwd(), program.opts().config)
+
+      validate(configForFile)
+
+      return require('./lib/index').processFile(
+        file,
+        {
+          ...configForFile,
+          fix: program.opts().fix,
+          cache: program.opts().cache,
+          cacheLocation: program.opts().cacheLocation,
+        },
+        process.cwd(),
+        program.opts().config
+      )
+    })
   } catch (e) {
     console.error(e)
     process.exit(EXIT_CODES.BAD_OPTIONS)
@@ -231,51 +302,8 @@ function writeSampleConfigFile() {
   process.exit(EXIT_CODES.OK)
 }
 
-const readIgnore = _.memoize(() => {
-  let ignoreFile = '.solhintignore'
-  try {
-    if (program.opts().ignorePath) {
-      ignoreFile = program.opts().ignorePath
-    }
-
-    return fs
-      .readFileSync(ignoreFile)
-      .toString()
-      .split('\n')
-      .map((i) => i.trim())
-  } catch (e) {
-    if (program.opts().ignorePath && e.code === 'ENOENT') {
-      console.error(`\nERROR: ${ignoreFile} is not a valid path.`)
-      process.exit(EXIT_CODES.BAD_OPTIONS)
-    }
-    return []
-  }
-})
-
-const readConfig = _.memoize(() => {
-  let config = {}
-  try {
-    config = loadConfig(program.opts().config)
-  } catch (e) {
-    console.error(e.message)
-    process.exit(EXIT_CODES.BAD_OPTIONS)
-  }
-
-  const configExcludeFiles = _.flatten(config.excludedFiles)
-  config.excludedFiles = _.concat(configExcludeFiles, readIgnore())
-
-  // validate the configuration before continuing
-  validate(config)
-
-  return config
-})
-
 function processStr(input) {
   return linter.processStr(input, readConfig())
-}
-
-function processPath(path) {
-  return linter.processPath(path, readConfig())
 }
 
 function areWarningsExceeded(reports) {
@@ -357,7 +385,7 @@ function writeStringToFile(data) {
   const cleanedData = data.replace(/\x1B\[[0-?]*[ -/]*[@-~]/g, '')
 
   try {
-    fs.writeFileSync(fileName, cleanedData, 'utf-8') // Specify the encoding (UTF-16)
+    fs.writeFileSync(fileName, cleanedData, 'utf-8') // Specify the encoding (UTF-8)
     // console.log('File written successfully:', fileName)
   } catch (err) {
     console.error('Error writing to file:', err)
@@ -397,11 +425,12 @@ function listRules() {
     console.error('Error!! Configuration does not exists')
     process.exit(EXIT_CODES.BAD_OPTIONS)
   } else {
-    const config = readConfig()
+    // load the config using the same function that the linter uses
+    const config = require('./lib/config/config-file').loadConfig(configPath)
+
     console.log('\nConfiguration File: \n', config)
 
-    const reportLists = linter.processPath(configPath, config)
-    const rulesObject = reportLists[0].config
+    const rulesObject = config.rules || {}
 
     console.log('\nRules: \n')
     const orderedRules = Object.keys(rulesObject)
@@ -411,7 +440,6 @@ function listRules() {
         return obj
       }, {})
 
-    // eslint-disable-next-line func-names
     Object.keys(orderedRules).forEach(function (key) {
       console.log('- ', key, ': ', orderedRules[key])
     })
@@ -419,7 +447,6 @@ function listRules() {
 }
 
 function checkForUpdate() {
-  // eslint-disable-next-line import/no-extraneous-dependencies
   return import('latest-version')
     .then((latestVersionModule) => {
       const latestVersion = latestVersionModule.default

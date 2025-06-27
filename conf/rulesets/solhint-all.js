@@ -61,7 +61,12 @@ module.exports = Object.freeze({
       },
     ],
     'use-forbidden-name': 'warn',
-    'var-name-mixedcase': 'warn',
+    'var-name-mixedcase': [
+      'warn',
+      {
+        prefixForImmutables: 'IMM_',
+      },
+    ],
     'imports-on-top': 'warn',
     'imports-order': 'warn',
     ordering: 'warn',

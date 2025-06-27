@@ -200,9 +200,8 @@ describe('e2e general tests', function () {
 
     beforeEach(() => {
       const padded = String(folderCounter).padStart(2, '0')
-      
-      const ROOT = PATH + padded + '/'
 
+      const ROOT = PATH + padded + '/'
       useFixtureFolder(this, ROOT + 'project')
 
       folderCounter++
@@ -223,9 +222,9 @@ describe('e2e general tests', function () {
     })
 
     it('Should succeed when importing from node_modules - filesystem03', () => {
-      const fileName = "node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
+      const fileName = 'node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol'
       createDummyFile(fileName)
-      
+
       const { code, stdout } = shell.exec(`solhint -c ".solhintS03.json" "./contracts/Test.sol"`)
 
       expect(code).to.equal(EXIT_CODES.OK)
@@ -241,11 +240,120 @@ describe('e2e general tests', function () {
       )
     })
   })
+
+  describe('config-hierarchy-test', () => {
+    const PATH = '11-multiple-configs'
+    const ERROR_CONSOLE = 'Unexpected console statement'
+    const ERROR_QUOTES = 'quotes for string literals'
+    const ERROR_EMPTY_BLOCKS = 'Code contains empty blocks'
+
+    useFixture(PATH)
+
+    it(`should inherit no-console rule from root and add contract folder config rules`, () => {
+      const { code, stdout } = shell.exec(`solhint contracts/RootAndContractRules.sol`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout.trim()).to.contain(ERROR_CONSOLE)
+      expect(stdout.trim()).to.contain(ERROR_QUOTES)
+    })
+
+    it(`should inherit both rules from root `, () => {
+      const { code, stdout } = shell.exec(`solhint src/RootRules.sol`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout.trim()).to.contain(ERROR_CONSOLE)
+      expect(stdout.trim()).to.contain(ERROR_QUOTES)
+    })
+
+    it(`should override no console and quotes rules`, () => {
+      const { code, stdout } = shell.exec(`solhint src/interfaces/InterfaceRules.sol`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout.trim()).to.contain(ERROR_EMPTY_BLOCKS)
+      expect(stdout.trim()).to.not.contain(ERROR_CONSOLE)
+      expect(stdout.trim()).to.not.contain(ERROR_QUOTES)
+    })
+  })
+
+  describe('cache support', () => {
+    const PATH = '12-cache-support'
+    let cacheFilePath
+
+    useFixture(PATH)
+
+    beforeEach(() => {
+      cacheFilePath = path.join('node_modules', '.cache', 'solhint', '.solhintcache.json')
+      if (fs.existsSync(cacheFilePath)) fs.unlinkSync(cacheFilePath)
+    })
+
+    it('should create cache file and lint normally on first run', () => {
+      const { code, stdout } = shell.exec(`solhint Foo.sol --cache --noPoster`)
+      expect(fs.existsSync(cacheFilePath)).to.be.true
+
+      const cache = JSON.parse(fs.readFileSync(cacheFilePath, 'utf8'))
+
+      expect(stdout.trim()).to.equal('')
+      expect(code).to.equal(EXIT_CODES.OK)
+      expect(Object.keys(cache).length).to.equal(1)
+    })
+
+    it('should skip linting on second run if file unchanged', () => {
+      shell.exec(`solhint Foo.sol --cache --noPoster`) // populate cache
+
+      const cacheBefore = JSON.parse(fs.readFileSync(cacheFilePath, 'utf8'))
+
+      const { code, stdout } = shell.exec(`solhint Foo.sol --cache --noPoster`)
+
+      const cacheAfter = JSON.parse(fs.readFileSync(cacheFilePath, 'utf8'))
+
+      expect(code).to.equal(EXIT_CODES.OK)
+      expect(stdout.trim()).to.equal('')
+      expect(cacheAfter).to.deep.equal(cacheBefore)
+    })
+
+    it('should re-lint if file content changes', () => {
+      let code
+      let stdout
+      // first run no error, populate cache
+      shell.exec(`solhint Foo.sol --cache --noPoster`) // first run
+
+      // replace file with an error one
+      const cacheBefore = JSON.parse(fs.readFileSync(cacheFilePath, 'utf8'))
+      fs.copyFileSync('FooError.sol', 'Foo.sol') // overwrite Foo.sol
+
+      // check cache was not updated yet
+      const cacheMid = JSON.parse(fs.readFileSync(cacheFilePath, 'utf8'))
+      expect(cacheMid).to.deep.equal(cacheBefore, 'error cache mid')
+
+      // cache will not be updated because now Foo.sol has an error
+      let result = shell.exec(`solhint Foo.sol --cache --noPoster`)
+      code = result.code
+      stdout = result.stdout
+      const cacheAfter1 = JSON.parse(fs.readFileSync(cacheFilePath, 'utf8'))
+
+      // assert the errors
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout.trim()).to.contain('Compiler version')
+      expect(cacheAfter1).to.deep.equal(cacheBefore, "error cacheAfter1")
+      
+      // now replace Foo.sol with a valid file
+      fs.copyFileSync('FooValid.sol','Foo.sol') // restore Foo.sol
+      result = shell.exec(`solhint Foo.sol --cache --noPoster`)
+      code = result.code
+      stdout = result.stdout
+      const cacheAfter2 = JSON.parse(fs.readFileSync(cacheFilePath, 'utf8'))
+
+      // expect no errors and cache to be updated
+      expect(code).to.equal(EXIT_CODES.OK, "")
+      expect(stdout.trim()).to.equal('')
+      expect(cacheAfter2).to.not.deep.equal(cacheBefore, "error cacheAfter2")
+    })
+  })
 })
 
 function useFixture(dir) {
   beforeEach(`switch to ${dir}`, function () {
-    useFixtureFolder(this, dir);
+    useFixtureFolder(this, dir)
   })
 }
 
@@ -265,7 +373,7 @@ function useFixtureFolder(ctx, dir) {
 }
 
 function createDummyFile(fullFilePath, content = '// dummy file\npragma solidity ^0.8.0;') {
-  const dir = path.dirname(fullFilePath);
-  fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(fullFilePath, content);
+  const dir = path.dirname(fullFilePath)
+  fs.mkdirSync(dir, { recursive: true })
+  fs.writeFileSync(fullFilePath, content)
 }
