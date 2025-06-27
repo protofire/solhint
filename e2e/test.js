@@ -282,7 +282,7 @@ describe('e2e general tests', function () {
     useFixture(PATH)
 
     beforeEach(() => {
-      cacheFilePath = path.join(shell.pwd().toString(), '.solhintcache.json')
+      cacheFilePath = path.join('node_modules', '.cache', 'solhint', '.solhintcache.json')
       if (fs.existsSync(cacheFilePath)) fs.unlinkSync(cacheFilePath)
     })
 

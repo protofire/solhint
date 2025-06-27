@@ -173,13 +173,20 @@ additional-tests.sol
 Solhint supports a caching mechanism using the `--cache` flag to avoid re-linting files that haven't changed. 
 When enabled, Solhint stores a hash of each file's content and effective configuration, skipping analysis if neither has changed. 
 By default, the cache is saved in `.solhintcache.json` in the current working directory. 
-You can customize this location using the `--cache-location option`.
+You can customize this location using the `--cache-location option`. If no location is specified, the file will be stored in:
+`node_modules/.cache/solhint/.solhint-cache.json`
+
+Warning:
+When using `cache` flag. If a file was analyzed with not error for a certain config, the hash will be stored. If the file is not changed but the config file (`.solhint.json`) has some new rules, the file will not be analyzed. 
+To analyze it again, remove `cache` option.
 
 Example:
 ```
 solhint contracts/**/*.sol --cache
 solhint Foo.sol --cache --cache-location tmp/my-cache.json
 ```
+
+
 
 ### Extendable rulesets
 
