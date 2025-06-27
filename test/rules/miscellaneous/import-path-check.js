@@ -17,7 +17,7 @@ describe('import-path-check (mocked fs)', () => {
   }
 
   beforeEach(() => {
-    existsStub = sinon.stub(require('fs'), 'existsSync').callsFake((filePath) => {
+    existsStub = sinon.stub(require('fs-extra'), 'existsSync').callsFake((filePath) => {
       return currentFakeFileSystem.has(normalizePath(filePath))
     })
   })

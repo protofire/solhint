@@ -66,10 +66,13 @@ Options:
   -q, --quiet                             report errors only - default: false
   --ignore-path [file_name]               file to use as your .solhintignore
   --fix                                   automatically fix problems and show report
+  --cache                                 only lint files that changed since last run
+  --cache-location                        path to the cache file
   --noPrompt                              do not suggest to backup files when any `fix` option is selected
   --init                                  create configuration file for solhint
   --disc                                  do not check for solhint updates
   --save                                  save report to file on current folder
+  --noPoster                              remove discord poster
   -h, --help                              output usage information
 
 Commands:
@@ -165,6 +168,25 @@ the `.gitignore` format.
 node_modules/
 additional-tests.sol
 ```
+
+### Cache
+Solhint supports a caching mechanism using the `--cache` flag to avoid re-linting files that haven't changed. 
+When enabled, Solhint stores a hash of each file's content and effective configuration, skipping analysis if neither has changed. 
+By default, the cache is saved in `.solhintcache.json` in the current working directory. 
+You can customize this location using the `--cache-location option`. If no location is specified, the file will be stored in:
+`node_modules/.cache/solhint/.solhint-cache.json`
+
+Warning:
+When using `cache` flag. If a file was analyzed with not error for a certain config, the hash will be stored. If the file is not changed but the config file (`.solhint.json`) has some new rules, the file will not be analyzed. 
+To analyze it again, remove `cache` option.
+
+Example:
+```
+solhint contracts/**/*.sol --cache
+solhint Foo.sol --cache --cache-location tmp/my-cache.json
+```
+
+
 
 ### Extendable rulesets
 

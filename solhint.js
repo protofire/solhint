@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const program = require('commander')
 const _ = require('lodash')
-const fs = require('fs')
+const fs = require('fs-extra')
 const process = require('process')
 const readline = require('readline')
 const chalk = require('chalk')
@@ -31,6 +31,8 @@ function init() {
     .option('-q, --quiet', 'report errors only - default: false')
     .option('--ignore-path [file_name]', 'file to use as your .solhintignore')
     .option('--fix', 'automatically fix problems. Skips fixes in report')
+    .option('--cache', 'Only lint files that changed since last run')
+    .option('--cache-location [file_name]', 'Path to the cache file')
     .option('--noPrompt', 'do not suggest to backup files when any `fix` option is selected')
     .option('--init', 'create configuration file for solhint')
     .option('--disc', 'do not check for solhint updates')
@@ -191,12 +193,19 @@ function executeMainActionLogic() {
     // explicit config is used if the user passed -c or --config
     reports = filesToLint.map((file) => {
       const configForFile = loadConfigForFile(file, process.cwd(), program.opts().config)
+
       validate(configForFile)
+
       return require('./lib/index').processFile(
         file,
-        configForFile,
+        {
+          ...configForFile,
+          fix: program.opts().fix,
+          cache: program.opts().cache,
+          cacheLocation: program.opts().cacheLocation,
+        },
         process.cwd(),
-        program.opts().config // explicitConfigPath al final
+        program.opts().config
       )
     })
   } catch (e) {
