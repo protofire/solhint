@@ -27,7 +27,10 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "explicit-types": ["warn","explicit"]
+    "explicit-types": [
+      "warn",
+      "explicit"
+    ]
   }
 }
 ```

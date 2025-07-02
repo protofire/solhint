@@ -24,7 +24,10 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "func-named-parameters": ["warn",4]
+    "func-named-parameters": [
+      "warn",
+      4
+    ]
   }
 }
 ```

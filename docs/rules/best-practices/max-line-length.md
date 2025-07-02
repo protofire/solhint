@@ -26,7 +26,10 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "max-line-length": ["error",120]
+    "max-line-length": [
+      "error",
+      120
+    ]
   }
 }
 ```

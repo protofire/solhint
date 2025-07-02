@@ -21,6 +21,7 @@ title:       "Rule Index of Solhint"
 | [one-contract-per-file](./rules/best-practices/one-contract-per-file.md) | Enforces the use of ONE Contract per file see [here](https://docs.soliditylang.org/en/v0.8.21/style-guide.html#contract-and-library-names) | $~~~~~~~~$✔️ |            |
 | [payable-fallback](./rules/best-practices/payable-fallback.md)           | When fallback is not payable and there is no receive function you will not be able to receive currency.                                    | $~~~~~~~~$✔️ |            |
 | [reason-string](./rules/best-practices/reason-string.md)                 | Require or revert statement must have a reason string and check that each reason string is at most N characters long.                      | $~~~~~~~~$✔️ |            |
+| [use-natspec](./rules/best-practices/use-natspec.md)                     | Enforces the presence and correctness of NatSpec tags.                                                                                     |              |            |
 | [constructor-syntax](./rules/best-practices/constructor-syntax.md)       | Constructors should use the new constructor keyword.                                                                                       |              |            |
         
 

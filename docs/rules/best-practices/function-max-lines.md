@@ -24,7 +24,10 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "function-max-lines": ["warn",50]
+    "function-max-lines": [
+      "warn",
+      50
+    ]
   }
 }
 ```

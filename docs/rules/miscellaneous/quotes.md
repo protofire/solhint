@@ -27,7 +27,10 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "quotes": ["error","double"]
+    "quotes": [
+      "error",
+      "double"
+    ]
   }
 }
 ```

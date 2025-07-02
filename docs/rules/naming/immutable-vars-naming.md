@@ -27,7 +27,12 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "immutable-vars-naming": ["warn",{"immutablesAsConstants":true}]
+    "immutable-vars-naming": [
+      "warn",
+      {
+        "immutablesAsConstants": true
+      }
+    ]
   }
 }
 ```
