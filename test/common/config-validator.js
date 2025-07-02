@@ -155,6 +155,7 @@ describe('Better errors addition + rule disable on error', () => {
       .getCalls()
       .map((c) => c.args[0])
       .join('\n')
+
     assert.ok(
       logged.includes("invalid configuration for rule 'compiler-version'"),
       `Expected a warning for compiler-version but got:\n${logged}`
@@ -178,6 +179,7 @@ describe('Better errors addition + rule disable on error', () => {
       .getCalls()
       .map((c) => c.args[0])
       .join('\n')
+
     assert.ok(
       logged.includes("invalid configuration for rule 'max-line-length'"),
       `Expected a warning for max-line-length but got:\n${logged}`
@@ -201,6 +203,7 @@ describe('Better errors addition + rule disable on error', () => {
       .getCalls()
       .map((c) => c.args[0])
       .join('\n')
+
     assert.ok(
       logged.includes("invalid configuration for rule 'interface-starts-with-i'"),
       `Expected a warning for interface-starts-with-i but got:\n${logged}`
@@ -224,6 +227,7 @@ describe('Better errors addition + rule disable on error', () => {
       .getCalls()
       .map((c) => c.args[0])
       .join('\n')
+
     assert.ok(
       logged.includes("invalid configuration for rule 'interface-starts-with-i'"),
       `Expected a warning for interface-starts-with-i but got:\n${logged}`
@@ -247,6 +251,7 @@ describe('Better errors addition + rule disable on error', () => {
       .getCalls()
       .map((c) => c.args[0])
       .join('\n')
+
     assert.ok(
       logged.includes("[solhint] Warning: Rule 'interface-sta' doesn't exist"),
       `Expected a warning for interface-sta but got:\n${logged}`
@@ -271,6 +276,7 @@ describe('Better errors addition + rule disable on error', () => {
       .getCalls()
       .map((c) => c.args[0])
       .join('\n')
+
     assert.ok(
       logged.includes("invalid configuration for rule 'interface-starts-with-i'"),
       `Expected a warning for interface-starts-with-i but got:\n${logged}`
@@ -294,6 +300,7 @@ describe('Better errors addition + rule disable on error', () => {
       .getCalls()
       .map((c) => c.args[0])
       .join('\n')
+
     assert.ok(
       logged.includes("invalid configuration for rule 'interface-starts-with-i'"),
       `Expected a warning for interface-starts-with-i but got:\n${logged}`
@@ -317,6 +324,7 @@ describe('Better errors addition + rule disable on error', () => {
       .getCalls()
       .map((c) => c.args[0])
       .join('\n')
+
     assert.ok(
       logged.includes("invalid configuration for rule 'reason-string'"),
       `Expected a warning for reason-string but got:\n${logged}`
@@ -340,6 +348,7 @@ describe('Better errors addition + rule disable on error', () => {
       .getCalls()
       .map((c) => c.args[0])
       .join('\n')
+
     assert.ok(
       logged.includes("invalid configuration for rule 'immutable-vars-naming'"),
       `Expected a warning for immutable-vars-naming but got:\n${logged}`
@@ -363,6 +372,7 @@ describe('Better errors addition + rule disable on error', () => {
       .getCalls()
       .map((c) => c.args[0])
       .join('\n')
+
     assert.ok(
       logged.includes("invalid configuration for rule 'immutable-vars-naming'"),
       `Expected a warning for immutable-vars-naming but got:\n${logged}`
@@ -386,6 +396,7 @@ describe('Better errors addition + rule disable on error', () => {
       .getCalls()
       .map((c) => c.args[0])
       .join('\n')
+
     assert.ok(
       logged.includes("invalid configuration for rule 'explicit-types'"),
       `Expected a warning for explicit-types but got:\n${logged}`
@@ -409,6 +420,7 @@ describe('Better errors addition + rule disable on error', () => {
       .getCalls()
       .map((c) => c.args[0])
       .join('\n')
+
     assert.ok(
       logged.includes("invalid configuration for rule 'quotes'"),
       `Expected a warning for quotes but got:\n${logged}`
@@ -432,6 +444,7 @@ describe('Better errors addition + rule disable on error', () => {
       .getCalls()
       .map((c) => c.args[0])
       .join('\n')
+
     assert.ok(
       logged.includes("invalid configuration for rule 'foundry-test-functions'"),
       `Expected a warning for foundry-test-functions but got:\n${logged}`
@@ -455,6 +468,7 @@ describe('Better errors addition + rule disable on error', () => {
       .getCalls()
       .map((c) => c.args[0])
       .join('\n')
+
     assert.ok(
       logged.includes("invalid configuration for rule 'foundry-test-functions'"),
       `Expected a warning for foundry-test-functions but got:\n${logged}`
@@ -478,6 +492,7 @@ describe('Better errors addition + rule disable on error', () => {
       .getCalls()
       .map((c) => c.args[0])
       .join('\n')
+
     assert.ok(
       logged.includes("invalid configuration for rule 'foundry-test-functions'"),
       `Expected a warning for foundry-test-functions but got:\n${logged}`
@@ -488,125 +503,81 @@ describe('Better errors addition + rule disable on error', () => {
     sinon.assert.notCalled(reportWarnSpy)
   })
 
-  // array with string as config
-  // array with number as config
-  // no array just severity
-  // no array, empty severity
-  // misspelled rule name
-  // additional config value in array
-  // config error object instead of array
-  // config error object with missing key
-  // config error object with no value type
-  // config error object with wrong value type
+  it('Invalid CFG - use-natspec with wrong type for "enabled"', () => {
+    const config = {
+      title: {
+        enabled: 'yes', // should be boolean
+      },
+    }
 
-  // it('Invalid CFG - not execute: reason-string when no property is defined)', () => {
-  //   const report = linter.processStr(dummyCode, {
-  //     rules: { 'interface-starts-with-i': { severity: 'warn' } },
-  //   })
+    const report = linter.processStr(dummyCode, {
+      rules: { 'use-natspec': ['warn', config] },
+    })
 
-  //   assert.equal(report.errorCount, 0)
-  //   assert.equal(report.warningCount, 0)
-  //   assert.deepEqual(report.messages, [])
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
 
-  //   const logged = warnSpy
-  //     .getCalls()
-  //     .map((c) => c.args[0])
-  //     .join('\n')
-  //   assert.ok(
-  //     logged.includes("invalid configuration for rule 'interface-starts-with-i'"),
-  //     `Expected a warning for interface-starts-with-i but got:\n${logged}`
-  //   )
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
 
-  //   assert.ok(warnSpy.called, 'console.warn should have been called')
-  //   sinon.assert.notCalled(reportErrorSpy)
-  //   sinon.assert.notCalled(reportWarnSpy)
-  // })
+    assert.ok(logged.includes("invalid configuration for rule 'use-natspec'"), logged)
+    assert.ok(warnSpy.called)
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
 
-  // it('Invalid CFG - not execute: explicit-types expects two predefined values)', () => {
-  //   const code = contractWith('uint256 public constant SNAKE_CASE = 1;')
+  it('Invalid CFG - use-natspec with ignore as non-object', () => {
+    const config = {
+      title: {
+        enabled: true,
+        ignore: 'contractName', // should be an object
+      },
+    }
 
-  //   const report = linter.processStr(code, {
-  //     rules: { 'explicit-types': ['error', 'implicito'] },
-  //   })
-  //   assert.equal(report.errorCount, 0)
-  //   assert.equal(report.warningCount, 0)
-  //   assert.deepEqual(report.messages, [])
-  // })
+    const report = linter.processStr(dummyCode, {
+      rules: { 'use-natspec': ['warn', config] },
+    })
 
-  // it('should run rule with valid config (compiler-version string)', () => {
-  //   const report = linter.processStr(dummyCode, {
-  //     rules: { 'compiler-version': ['error', '^0.8.24'] },
-  //   })
-  //   assert.equal(report.warningCount, 0)
-  //   assert.ok(
-  //     warnMessages.length === 0,
-  //     `Did not expect warnings, but got:\n${warnMessages.join('\n')}`
-  //   )
-  // })
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
 
-  // it('should not run rule when config is invalid (reason-string expects number)', () => {
-  //   const report = linter.processStr(dummyCode, {
-  //     rules: { 'reason-string': ['warn', { maxLength: 'not-a-number' }] },
-  //   })
-  //   assert.equal(report.errorCount, 0)
-  //   assert.equal(report.warningCount, 0)
-  //   assert.deepEqual(report.messages, [])
-  //   assert.ok(
-  //     findConfigWarning('reason-string'),
-  //     `Expected config warning for reason-string. Got:\n${warnMessages.join('\n')}`
-  //   )
-  //   assert.ok(
-  //     warnMessages.some((msg) => msg.includes('→ config[1].maxLength: should be integer')),
-  //     `Expected fallback error includes "→ config[1].maxLength: should be integer", got:\n${warnMessages.join(
-  //       '\n'
-  //     )}`
-  //   )
-  // })
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
 
-  // it('should run rule with valid config (reason-string with number)', () => {
-  //   const report = linter.processStr(dummyCode, {
-  //     rules: { 'reason-string': ['warn', { maxLength: 32 }] },
-  //   })
-  //   assert.equal(report.warningCount, 0)
-  //   assert.ok(
-  //     warnMessages.length === 0,
-  //     `Did not expect warnings, but got:\n${warnMessages.join('\n')}`
-  //   )
-  // })
+    assert.ok(logged.includes("invalid configuration for rule 'use-natspec'"), logged)
+    assert.ok(warnSpy.called)
+  })
 
-  // it('should run rule with primitive config (code-complexity with number)', () => {
-  //   const report = linter.processStr(
-  //     contractWith('function a(uint x) public { if (x == 1) { if (x > 2) {} } }'),
-  //     {
-  //       rules: { 'code-complexity': ['warn', 1] },
-  //     }
-  //   )
-  //   assert(report.warningCount >= 1)
-  //   assert(report.messages.some((i) => i.ruleId === 'code-complexity'))
-  // })
+  it('Invalid CFG - use-natspec with ignore.contract not as array', () => {
+    const config = {
+      title: {
+        enabled: true,
+        ignore: {
+          contract: 'WrongFormat', // must be array
+        },
+      },
+    }
 
-  // it('should run rule with array config (import-path-check)', () => {
-  //   const report = linter.processStr("import '../X.sol';", {
-  //     rules: { 'import-path-check': ['warn', ['[~dependenciesPath]']] },
-  //   })
-  //   assert.equal(report.errorCount, 0)
-  //   assert(report.warningCount >= 0)
-  //   assert.ok(
-  //     warnMessages.length === 0,
-  //     `Did not expect warnings, but got:\n${warnMessages.join('\n')}`
-  //   )
-  // })
+    const report = linter.processStr(dummyCode, {
+      rules: { 'use-natspec': ['warn', config] },
+    })
 
-  // it('should warn if rule level is invalid', () => {
-  //   const report = linter.processStr(dummyCode, {
-  //     rules: { 'no-console': 'maybe' },
-  //   })
-  //   assert.equal(report.errorCount, 0)
-  //   assert.equal(report.warningCount, 0)
-  //   assert.deepEqual(report.messages, [])
-  //   assert.ok(
-  //     warnMessages.some((msg) => msg.includes("rule 'no-console' level is 'maybe'")),
-  //     `Expected warning for invalid severity, got:\n${warnMessages.join('\n')}`
-  //   )
-  // })
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+
+    assert.ok(logged.includes("invalid configuration for rule 'use-natspec'"))
+    assert.ok(warnSpy.called)
+  })
 })

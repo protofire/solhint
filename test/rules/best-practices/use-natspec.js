@@ -1,11 +1,6 @@
 const assert = require('assert')
 const linter = require('../../../lib/index')
-const {
-  assertNoErrors,
-  assertErrorMessage,
-  assertErrorCount,
-  assertWarnsCount,
-} = require('../../common/asserts')
+const { assertNoErrors, assertErrorMessage, assertErrorCount } = require('../../common/asserts')
 
 describe('Linter - use-natspec', () => {
   it('should detect missing @title and @author and @notice in contract', () => {
@@ -446,11 +441,11 @@ describe('Linter - use-natspec', () => {
 
     it('should ignore @param for specific function using ignore.function', () => {
       const code = `
-                    /*
-                      * @title Function Ignore Test
-                      * @author User
-                      * @notice This contract tests function-specific ignores
-                    */
+                    /**
+                     * @title Function Ignore Test
+                     * @author User
+                     * @notice This contract tests function-specific ignores
+                     */
                     contract MyContract {
                       /// @notice Some explanation
                       function skipCheck(uint256 x) public {}
@@ -478,6 +473,11 @@ describe('Linter - use-natspec', () => {
 
     it('should ignore @return for specific function with named return', () => {
       const code = `
+                    /**
+                     * @title Function Ignore Test
+                     * @author User
+                     * @notice This contract tests function-specific ignores
+                     */
                     contract MyContract {
                       /// @notice Something
                       /// @param x input
@@ -505,12 +505,11 @@ describe('Linter - use-natspec', () => {
       assertNoErrors(report)
     })
 
-    // it.only('should error on @notice and @author but ignore @title for specific contract', () => {
-    xit('should error on @notice and @author but ignore @title for specific contract', () => {
+    it('should error on @author, ignore @title for specific contract and error on @return', () => {
       const code = `
                     contract HalfIgnored {
 
-                      function doSomething(uint256 amount) external {}
+                      function doSomething(uint256 amount) external returns(uint256) {}
                     }
                   `
 
@@ -526,158 +525,23 @@ describe('Linter - use-natspec', () => {
                 },
               },
               notice: {
-                enabled: true,
+                enabled: false,
               },
-              author: {
-                enabled: true,
+              param: {
+                enabled: false,
               },
             },
           ],
         },
       })
 
-      console.log('report :>> ', report);
-
-      assertErrorCount(report, 2)
+      assertErrorCount(report, 3)
       assert.ok(report.reports[0].message, "Missing @author tag in contract 'HalfIgnored'")
-      assert.ok(report.reports[1].message, "Missing @notice tag in contract 'HalfIgnored'")
+      assert.ok(report.reports[1].message, "Missing @return tag in function 'doSomething'")
+      assert.ok(
+        report.reports[2].message,
+        "Mismatch in @return count for function 'doSomething'. Expected: 1, Found: 0"
+      )
     })
   })
 })
-
-/*
-
-
-❌ Test negativo: typo en tipo (functions en vez de function)
-
-it('should NOT ignore due to incorrect type key in ignore config', () => {
-  const code = `
-    contract MyContract {
-      /// @notice explanation
-      function foo(uint x) public {}
-    }
-  `
-
-  const report = linter.processStr(code, {
-    rules: {
-      'use-natspec': [
-        'error',
-        {
-          param: {
-            enabled: true,
-            ignore: {
-              functions: ['foo'], // wrong key
-            },
-          },
-        },
-      ],
-    },
-  })
-
-  assertErrorMessage(report, "Missing @param tag in function 'foo'")
-})
-
-❌ Test negativo: combinación de dos tags, uno ignorado, otro no
-
-
-
-✅/❌ Combinación: múltiples tags y múltiples ignores
-
-it('should ignore @title and @author globally but error on @notice', () => {
-  const code = `
-    contract MultiIgnore {
-    }
-  `
-
-  const report = linter.processStr(code, {
-    rules: {
-      'use-natspec': [
-        'error',
-        {
-          title: {
-            enabled: true,
-            ignore: { '*': ['MultiIgnore'] },
-          },
-          author: {
-            enabled: true,
-            ignore: { '*': ['MultiIgnore'] },
-          },
-          notice: {
-            enabled: true,
-          },
-        },
-      ],
-    },
-  })
-
-  assertErrorCount(report, 1)
-  assertErrorMessage(report, "Missing @notice tag in contract 'MultiIgnore'")
-})
-
-❌ Test negativo: tag deshabilitado pero con errores por otros tags
-
-it('should disable @param and still report error for @return', () => {
-  const code = `
-    contract MyContract {
-      /// @notice example
-      /// @param x value
-      function foo(uint x) public returns (uint256 y) {
-        return x;
-      }
-    }
-  `
-
-  const report = linter.processStr(code, {
-    rules: {
-      'use-natspec': [
-        'error',
-        {
-          param: { enabled: false },
-          return: { enabled: true },
-        },
-      ],
-    },
-  })
-
-  assertErrorMessage(report, "Missing @return tag in function 'foo'")
-})
-
-✅ Test mixto: múltiples tags y múltiples funciones ignoradas
-
-it('should ignore param and return for two different functions', () => {
-  const code = `
-    contract Mixed {
-      /// @notice will be ignored
-      function a(uint x) external returns (uint y) {
-        return x;
-      }
-
-      /// @notice still enforced
-      function b(uint x) external returns (uint y) {
-        return x;
-      }
-    }
-  `
-
-  const report = linter.processStr(code, {
-    rules: {
-      'use-natspec': [
-        'error',
-        {
-          param: {
-            enabled: true,
-            ignore: { function: ['a'] },
-          },
-          return: {
-            enabled: true,
-            ignore: { function: ['a'] },
-          },
-        },
-      ],
-    },
-  })
-
-  assertErrorMessage(report, "Missing @param tag in function 'b'")
-  assertErrorMessage(report, "Missing @return tag in function 'b'")
-})
-  */
