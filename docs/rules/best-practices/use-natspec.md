@@ -14,10 +14,10 @@ Enforces the presence and correctness of NatSpec tags.
 ## Options
 This rule accepts an array of options:
 
-| Index | Description                                                              | Default Value   |
-| ----- | ------------------------------------------------------------------------ | --------------- |
-| 0     | Rule severity. Must be one of "error", "warn", "off".                    | warn            |
-| 1     | A JSON object with natspec properties. See EXAMPLE CONFIG section below. | EXAMPLE CONFIG. |
+| Index | Description                                                              | Default Value        |
+| ----- | ------------------------------------------------------------------------ | -------------------- |
+| 0     | Rule severity. Must be one of "error", "warn", "off".                    | warn                 |
+| 1     | A JSON object with natspec properties. See EXAMPLE CONFIG section below. | Check EXAMPLE CONFIG |
 
 
 ### Example Config
@@ -57,6 +57,7 @@ This rule accepts an array of options:
 - If a function or return value has unnamed parameters (e.g. `function foo(uint256)`), the rule only checks the number of `@param` or `@return` tags, not their names.
 - If a function or variable has `@inheritdoc`, the rule skips the validation.
 - The rule supports both `///` and `/** */` style NatSpec comments.
+- If a custom config is provided, it is merged with the default config. Only the overridden fields need to be specified.
 
 ## Examples
 ### 👍 Examples of **correct** code for this rule
