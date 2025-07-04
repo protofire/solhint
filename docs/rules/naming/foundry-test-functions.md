@@ -24,7 +24,12 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "foundry-test-functions": ["warn",["setUp"]]
+    "foundry-test-functions": [
+      "warn",
+      [
+        "setUp"
+      ]
+    ]
   }
 }
 ```

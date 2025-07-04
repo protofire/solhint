@@ -158,12 +158,14 @@ ${table(optionsTable)}
 }
 
 function loadExampleConfig(rule) {
-  return `\`\`\`json
-{
-  "rules": {
-    "${rule.ruleId}": ${JSON.stringify(rule.meta.defaultSetup)}
+  const fullConfig = {
+    rules: {
+      [rule.ruleId]: rule.meta.defaultSetup,
+    },
   }
-}
+
+  return `\`\`\`json
+${JSON.stringify(fullConfig, null, 2)}
 \`\`\`
 `
 }

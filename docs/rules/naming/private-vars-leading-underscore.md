@@ -24,7 +24,12 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "private-vars-leading-underscore": ["warn",{"strict":false}]
+    "private-vars-leading-underscore": [
+      "warn",
+      {
+        "strict": false
+      }
+    ]
   }
 }
 ```

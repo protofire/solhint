@@ -27,7 +27,12 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "func-visibility": ["warn",{"ignoreConstructors":false}]
+    "func-visibility": [
+      "warn",
+      {
+        "ignoreConstructors": false
+      }
+    ]
   }
 }
 ```

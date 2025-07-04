@@ -27,7 +27,12 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "var-name-mixedcase": ["warn",{"prefixForImmutables":"IMM_"}]
+    "var-name-mixedcase": [
+      "warn",
+      {
+        "prefixForImmutables": "IMM_"
+      }
+    ]
   }
 }
 ```

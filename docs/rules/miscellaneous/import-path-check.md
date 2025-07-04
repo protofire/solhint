@@ -27,7 +27,12 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "import-path-check": ["warn",["[~dependenciesPath]"]]
+    "import-path-check": [
+      "warn",
+      [
+        "[~dependenciesPath]"
+      ]
+    ]
   }
 }
 ```
