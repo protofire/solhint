@@ -2,36 +2,46 @@
 
 ### BREAKING CHANGE
 Some rules were removed from the recommended ruleset and other were promoted. See below:
+Rules revision - [#692](https://github.com/protofire/solhint/pull/692)
 
 #### 🟥 DEMOTED
 
-  - `payable-fallback`: Outdated due to the introduction of receive(); rarely needed in modern Solidity.
+- `payable-fallback`: Outdated due to the introduction of receive(); rarely needed in modern Solidity.
 <br>
 
 #### ✅ PROMOTED
 
-  - `interface-starts-with-i`: Promotes clarity by clearly distinguishing interfaces from contracts.
-  - `gas-calldata-parameters`: Encourages optimal memory usage for external functions.
-  - `gas-increment-by-one`: Suggests using ++i style for gas-efficient increments.
-  - `gas-indexed-events`: Improves event indexing for off-chain systems and reduces gas usage.
-  - `gas-small-strings`: Recommends cheaper encoding using bytes32 for short strings.
-  - `gas-strict-inequalities`: Helps avoid subtle off-by-one bugs in range conditions.
-  - `gas-struct-packing`: Maximizes storage efficiency by suggesting tight struct packing.
-  - `duplicated-imports`: Prevents redundant imports that bloat the AST and confuse code structure.
-  - `import-path-check`: Ensures all imported files exist and resolve correctly, avoiding runtime errors.
-  - `function-max-lines`: Encourages smaller, more readable and maintainable functions.
-  - `constructor-syntax`: Enforces modern constructor syntax for consistency and clarity.
-  - `use-natspec`: Promotes proper documentation with NatSpec for better audits and readability.
+- `interface-starts-with-i`: Promotes clarity by clearly distinguishing interfaces from contracts.
+- `gas-calldata-parameters`: Encourages optimal memory usage for external functions.
+- `gas-increment-by-one`: Suggests using ++i style for gas-efficient increments.
+- `gas-indexed-events`: Improves event indexing for off-chain systems and reduces gas usage.
+- `gas-small-strings`: Recommends cheaper encoding using bytes32 for short strings.
+- `gas-strict-inequalities`: Helps avoid subtle off-by-one bugs in range conditions.
+- `gas-struct-packing`: Maximizes storage efficiency by suggesting tight struct packing.
+- `duplicated-imports`: Prevents redundant imports that bloat the AST and confuse code structure.
+- `import-path-check`: Ensures all imported files exist and resolve correctly, avoiding runtime errors.
+- `function-max-lines`: Encourages smaller, more readable and maintainable functions.
+- `constructor-syntax`: Enforces modern constructor syntax for consistency and clarity.
+- `use-natspec`: Promotes proper documentation with NatSpec for better audits and readability.
 
+### Fixed
+- `gas-struct-packing` false positives - [#690](https://github.com/protofire/solhint/pull/690)
+- `gas-increment-by-one` backward expression - [#691](https://github.com/protofire/solhint/pull/691)
+- Typo (thanks to @[MarkFizz77](https://github.com/MarkFizz77))
+
+### Added
+ - `use-natspec`: Promote the use of natspec and make several checks to enforce it - [#689](https://github.com/protofire/solhint/pull/689)
+
+<br><br>
 
 ## [5.2.0] - 2025-06-27
 ### Fixed
- - `imports-order` interference with `no-unused-imports` [#684](https://github.com/protofire/solhint/pull/684)
+ - `imports-order` interference with `no-unused-imports` - [#684](https://github.com/protofire/solhint/pull/684)
  
 ### Added
 - Added `cache` flag allowing to skip already evaluated files if no error was thrown and file did not change - [#685](https://github.com/protofire/solhint/pull/685)
 - Added multi-directory config support by hierarchy - [#678](https://github.com/protofire/solhint/pull/678)
-- Added better error handling on invalid configs -  [#683](https://github.com/protofire/solhint/pull/683)
+- Added better error handling on invalid configs - [#683](https://github.com/protofire/solhint/pull/683)
  
 
 Thanks to [@smol-ninja](https://github.com/smol-ninja) - [@PaulRBerg](https://github.com/PaulRBerg) [@lechpzn](https://github.com/lechpzn), [@otc-png](https://github.com/otc-png), [@MamunC0der](https://github.com/MamunC0der), [@kks-code](https://github.com/kks-code), [@RidaMichofi](https://github.com/RidaMichofi)
