@@ -198,7 +198,7 @@ describe('Linter - gas-custom-errors', () => {
 
     const report = linter.processStr(code, {
       extends: 'solhint:recommended',
-      rules: { 'compiler-version': 'off' },
+      rules: { 'compiler-version': 'off', 'use-natspec': 'off' },
     })
 
     assertWarnsCount(report, 2)

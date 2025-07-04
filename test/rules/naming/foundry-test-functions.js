@@ -162,6 +162,7 @@ describe('Linter - foundry-test-functions', () => {
       extends: 'solhint:recommended',
       rules: {
         'compiler-version': 'off',
+        'use-natspec': 'off',
         'foundry-test-functions': ['error', ['setUp', 'finish']],
       },
     })

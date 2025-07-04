@@ -5,11 +5,14 @@ title:       "gas-small-strings | Solhint"
 ---
 
 # gas-small-strings
+![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
 ![Category Badge](https://img.shields.io/badge/-Gas%20Consumption%20Rules-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
+> The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
+
 
 ## Description
-Keep strings smaller than 32 bytes
+Keep strings smaller than 32 bytes. Promote the use of custom errors
 
 ## Options
 This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.

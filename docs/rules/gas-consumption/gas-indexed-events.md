@@ -5,8 +5,11 @@ title:       "gas-indexed-events | Solhint"
 ---
 
 # gas-indexed-events
+![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
 ![Category Badge](https://img.shields.io/badge/-Gas%20Consumption%20Rules-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
+> The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
+
 
 ## Description
 Suggest indexed arguments on events for uint, bool and address

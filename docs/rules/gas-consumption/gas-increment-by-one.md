@@ -5,8 +5,11 @@ title:       "gas-increment-by-one | Solhint"
 ---
 
 # gas-increment-by-one
+![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
 ![Category Badge](https://img.shields.io/badge/-Gas%20Consumption%20Rules-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
+> The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
+
 
 ## Description
 Suggest increments by one, like this ++i instead of other type
