@@ -43,6 +43,7 @@ describe('import-path-check (mocked fs)', () => {
         'compiler-version': 'off',
         'no-empty-blocks': 'off',
         'no-global-import': 'off',
+        'use-natspec': 'off',
       },
     }
 
@@ -66,6 +67,7 @@ describe('import-path-check (mocked fs)', () => {
       rules: {
         'no-empty-blocks': 'off',
         'no-global-import': 'off',
+        'use-natspec': 'off',
       },
     }
     const report = linter.processStr(code, config, fileName)

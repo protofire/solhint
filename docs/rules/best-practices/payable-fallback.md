@@ -5,11 +5,8 @@ title:       "payable-fallback | Solhint"
 ---
 
 # payable-fallback
-![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
 ![Category Badge](https://img.shields.io/badge/-Best%20Practices%20Rules-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
-> The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
-
 
 ## Description
 When fallback is not payable and there is no receive function you will not be able to receive currency.

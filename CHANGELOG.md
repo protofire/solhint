@@ -1,3 +1,29 @@
+## [6.0.0] - 2025-07-04
+
+### BREAKING CHANGE
+Some rules were removed from the recommended ruleset and other were promoted. See below:
+
+#### 🟥 DEMOTED
+
+  - `payable-fallback`: Outdated due to the introduction of receive(); rarely needed in modern Solidity.
+<br>
+
+#### ✅ PROMOTED
+
+  - `interface-starts-with-i`: Promotes clarity by clearly distinguishing interfaces from contracts.
+  - `gas-calldata-parameters`: Encourages optimal memory usage for external functions.
+  - `gas-increment-by-one`: Suggests using ++i style for gas-efficient increments.
+  - `gas-indexed-events`: Improves event indexing for off-chain systems and reduces gas usage.
+  - `gas-small-strings`: Recommends cheaper encoding using bytes32 for short strings.
+  - `gas-strict-inequalities`: Helps avoid subtle off-by-one bugs in range conditions.
+  - `gas-struct-packing`: Maximizes storage efficiency by suggesting tight struct packing.
+  - `duplicated-imports`: Prevents redundant imports that bloat the AST and confuse code structure.
+  - `import-path-check`: Ensures all imported files exist and resolve correctly, avoiding runtime errors.
+  - `function-max-lines`: Encourages smaller, more readable and maintainable functions.
+  - `constructor-syntax`: Enforces modern constructor syntax for consistency and clarity.
+  - `use-natspec`: Promotes proper documentation with NatSpec for better audits and readability.
+
+
 ## [5.2.0] - 2025-06-27
 ### Fixed
  - `imports-order` interference with `no-unused-imports` [#684](https://github.com/protofire/solhint/pull/684)
