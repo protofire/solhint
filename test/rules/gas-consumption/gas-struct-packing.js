@@ -1,4 +1,5 @@
 const assert = require('assert')
+const { contractWith, multiLine } = require('../../common/contract-builder')
 const linter = require('../../../lib/index')
 const TEST_CASES = require('../../fixtures/gas-consumption/gas-struct-packing-data')
 
@@ -33,23 +34,21 @@ describe('Linter - gas-struct-packing', () => {
     })
   }
 
-  // it(`should NOT raise error for `, () => {
-  //   const code = contractWith(
-  //     multiLine(
-  //       // // Large Types Followed by Small Types
-  //       'struct MyStruct2 {',
-  //       '   address addr1;',
-  //       '   address addr2;',
-  //       '   address addr3;',
-  //       '}'
-  //     )
-  //   )
-  //   const report = linter.processStr(code, {
-  //     rules: { 'gas-struct-packing': 'error' },
-  //   })
+  it(`REPORTED: should NOT raise error for MyStruct2`, () => {
+    const code = contractWith(
+      multiLine(
+        // // Large Types Followed by Small Types
+        'struct MyStruct2 {',
+        '   address addr1;',
+        '   address addr2;',
+        '   address addr3;',
+        '}'
+      )
+    )
+    const report = linter.processStr(code, {
+      rules: { 'gas-struct-packing': 'error' },
+    })
 
-  //   console.log(report)
-
-  //   // assert.equal(report.errorCount, 0)
-  // })
+    assert.equal(report.errorCount, 0)
+  })
 })
