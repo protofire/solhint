@@ -40,15 +40,19 @@ const RAISE_ERRORS = [
     statement: 'anotherVar -= 1;',
     varName: 'anotherVar',
   },
-  // {
-  //   statement:
-  //     'complexMapping[user].balances[asset] = complexMapping[user].balances[asset] + 1 + someFunctionCall();',
-  //   varName: 'complexMapping',
-  // },
-  // {
-  //   statement: 'anotherMapping[user][token].count = anotherMapping[user][token].count - 1 + 5;',
-  //   varName: 'anotherMapping',
-  // },
+  {
+    statement: 'complexMapping[user].balances[asset] = complexMapping[user].balances[asset] + 1;',
+    varName: 'complexMapping',
+  },
+  {
+    statement: 'amount = 1 + amount;',
+    varName: 'amount',
+  },
+  {
+    statement:
+      'complexMappingBackward[user].balances[asset] = 1 + complexMappingBackward[user].balances[asset];',
+    varName: 'complexMappingBackward',
+  },
 ]
 
 const NOT_RAISE_ERRORS = [
