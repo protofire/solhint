@@ -27,7 +27,10 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "max-states-count": ["warn",15]
+    "max-states-count": [
+      "warn",
+      15
+    ]
   }
 }
 ```

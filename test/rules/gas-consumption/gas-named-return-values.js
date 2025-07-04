@@ -76,6 +76,7 @@ describe('Linter - gas-named-return-values', () => {
         'compiler-version': 'off',
         'comprehensive-interface': 'off',
         'foundry-test-functions': 'off',
+        'use-natspec': 'off',
       },
     })
 

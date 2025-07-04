@@ -27,7 +27,12 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "reason-string": ["warn",{"maxLength":32}]
+    "reason-string": [
+      "warn",
+      {
+        "maxLength": 32
+      }
+    ]
   }
 }
 ```

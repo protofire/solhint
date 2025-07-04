@@ -24,7 +24,10 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "code-complexity": ["warn",7]
+    "code-complexity": [
+      "warn",
+      7
+    ]
   }
 }
 ```

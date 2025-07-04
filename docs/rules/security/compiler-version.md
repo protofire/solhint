@@ -27,7 +27,10 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "compiler-version": ["error","^0.8.24"]
+    "compiler-version": [
+      "error",
+      "^0.8.24"
+    ]
   }
 }
 ```

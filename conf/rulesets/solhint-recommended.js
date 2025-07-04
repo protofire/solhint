@@ -6,6 +6,8 @@
 module.exports = Object.freeze({
   rules: {
     'explicit-types': ['warn', 'explicit'],
+    'function-max-lines': ['warn', 50],
+    'interface-starts-with-i': 'warn',
     'max-states-count': ['warn', 15],
     'no-console': 'error',
     'no-empty-blocks': 'warn',
@@ -13,14 +15,46 @@ module.exports = Object.freeze({
     'no-unused-import': 'warn',
     'no-unused-vars': 'warn',
     'one-contract-per-file': 'warn',
-    'payable-fallback': 'warn',
     'reason-string': [
       'warn',
       {
         maxLength: 32,
       },
     ],
+    'use-natspec': [
+      'warn',
+      {
+        title: {
+          enabled: true,
+          ignore: {},
+        },
+        author: {
+          enabled: true,
+          ignore: {},
+        },
+        notice: {
+          enabled: true,
+          ignore: {},
+        },
+        param: {
+          enabled: true,
+          ignore: {},
+        },
+        return: {
+          enabled: true,
+          ignore: {},
+        },
+      },
+    ],
+    'constructor-syntax': 'warn',
+    'gas-calldata-parameters': 'warn',
     'gas-custom-errors': 'warn',
+    'gas-increment-by-one': 'warn',
+    'gas-indexed-events': 'warn',
+    'gas-small-strings': 'warn',
+    'gas-strict-inequalities': 'warn',
+    'gas-struct-packing': 'warn',
+    'duplicated-imports': 'warn',
     'import-path-check': ['warn', ['[~dependenciesPath]']],
     quotes: ['error', 'double'],
     'const-name-snakecase': 'warn',

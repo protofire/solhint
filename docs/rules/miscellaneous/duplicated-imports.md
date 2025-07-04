@@ -5,8 +5,11 @@ title:       "duplicated-imports | Solhint"
 ---
 
 # duplicated-imports
+![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
 ![Category Badge](https://img.shields.io/badge/-Style%20Guide%20Rules-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
+> The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
+
 
 ## Description
 Check if an import is done twice in the same file and there is no alias

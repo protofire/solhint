@@ -71,6 +71,7 @@ describe('Linter - func-named-parameters', () => {
         'compiler-version': 'off',
         'comprehensive-interface': 'off',
         'foundry-test-functions': 'off',
+        'use-natspec': 'off',
       },
     })
 

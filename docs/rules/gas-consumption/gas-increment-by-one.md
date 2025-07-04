@@ -5,8 +5,11 @@ title:       "gas-increment-by-one | Solhint"
 ---
 
 # gas-increment-by-one
+![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
 ![Category Badge](https://img.shields.io/badge/-Gas%20Consumption%20Rules-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
+> The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
+
 
 ## Description
 Suggest increments by one, like this ++i instead of other type
@@ -24,7 +27,6 @@ This rule accepts a string option for rule severity. Must be one of "error", "wa
 ```
 
 ### Notes
-- This rule only works for expressions like this: [ j = j + 1 ] but will fail if the code is written like this: [ j = 1 + j ]
 - [source 1](https://coinsbench.com/comprehensive-guide-tips-and-tricks-for-gas-optimization-in-solidity-5380db734404) of the rule initiative (Incrementing/Decrementing By 1)
 - [source 2](https://www.rareskills.io/post/gas-optimization?postId=c9db474a-ff97-4fa3-a51d-fe13ccb8fe3b#viewer-8rekj) of the rule initiative
 
