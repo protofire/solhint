@@ -36,7 +36,7 @@ This rule accepts an array of options:
 ```
 
 ### Notes
-- This rule allows to put a double quote inside single quote string and viceversa
+- This rule allows to put a double quote inside single quote string and vice versa
 
 ## Examples
 ### 👍 Examples of **correct** code for this rule
