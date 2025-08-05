@@ -39,5 +39,5 @@ This rule was introduced in [Solhint 5.1.0](https://github.com/protofire/solhint
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/order/imports-order.js)
-- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/order/imports-order.md)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/naming/imports-order.md)
 - [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/order/imports-order.js)
