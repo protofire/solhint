@@ -10,10 +10,6 @@ const EXIT_CODES = { BAD_OPTIONS: 255, OK: 0, REPORTED_ERRORS: 1 }
 let foo1Output
 let foo2Output
 
-// const normalizedPath = (...segments) => {
-//   return path.join(...segments)
-// }
-
 describe('e2e', function () {
   describe('formatter tests', () => {
     const outputs = require('./06-formatters/helpers/helpers.js')
