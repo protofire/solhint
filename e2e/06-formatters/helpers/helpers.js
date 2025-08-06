@@ -1,3 +1,5 @@
+const path = require('path')
+
 const normalizedPath = (...segments) => path.join(...segments)
 
 const foo1Output = [
