@@ -133,7 +133,7 @@ This rule accepts an array of options:
 ```
 
 ## Version
-This rule was introduced in the latest version.
+This rule was introduced in [Solhint 6.0.0](https://github.com/protofire/solhint/blob/v6.0.0)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/best-practices/use-natspec.js)
