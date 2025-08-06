@@ -92,7 +92,7 @@ describe('Linter - quotes', () => {
     assertErrorCount(reports[0], 1)
   })
 
-  describe('Double quotes inside single and viceversa', () => {
+  describe('Double quotes inside single and vice versa', () => {
     it('should not raise error when configured as single and there are double quotes inside', function test() {
       const code = contractWith('string private constant STR = \'You shall "pass" !\';')
 
