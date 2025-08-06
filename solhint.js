@@ -16,6 +16,8 @@ const packageJson = require('./package.json')
 
 const EXIT_CODES = { BAD_OPTIONS: 255, OK: 0, REPORTED_ERRORS: 1 }
 
+const normalizePath = (p) => p.replace(/\\/g, '/')
+
 function init() {
   const version = packageJson.version
   program.version(version)
@@ -198,7 +200,7 @@ function executeMainActionLogic() {
 
       validate(configForFile)
 
-      return require('./lib/index').processFile(
+      const report = require('./lib/index').processFile(
         file,
         {
           ...configForFile,
@@ -209,6 +211,10 @@ function executeMainActionLogic() {
         process.cwd(),
         program.opts().config
       )
+
+      // Normalize the path here so it's consistent across OSes
+      report.filePath = normalizePath(report.filePath)
+      return report
     })
   } catch (e) {
     console.error(e)
