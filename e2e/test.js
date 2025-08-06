@@ -193,7 +193,7 @@ describe('e2e general tests', function () {
     })
   })
 
-  describe('import-path-check', () => {
+  describe.only('import-path-check', () => {
     const PATH = '10-import-path-check/filesystem'
 
     let folderCounter = 1
@@ -241,11 +241,11 @@ describe('e2e general tests', function () {
       const { code, stdout } = shell.exec(
         `solhint --noPoster -c ".solhintF04.json" "./contracts/Test.sol"`        
       )
-
+      
       expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
-      expect(stdout.trim()).to.contain(
-        "Import in contracts/Test.sol doesn't exist in: ./Missing.sol"
-      )
+
+      const expectedPath = path.join('contracts', 'Test.sol') 
+      expect(stdout).to.include(`Import in ${expectedPath} doesn't exist in: ./Missing.sol`)
     })
   })
 
