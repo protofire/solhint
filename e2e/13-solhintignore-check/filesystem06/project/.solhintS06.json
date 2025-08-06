@@ -1,0 +1,7 @@
+{
+  "rules": { 
+        "immutable-vars-naming": ["error", { "immutablesAsConstants": false } ],
+        "no-empty-blocks": "error"
+  }
+}
+
