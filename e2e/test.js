@@ -193,7 +193,7 @@ describe('e2e general tests', function () {
     })
   })
 
-  describe.only('import-path-check', () => {
+  describe('import-path-check', () => {
     const PATH = '10-import-path-check/filesystem'
 
     let folderCounter = 1
