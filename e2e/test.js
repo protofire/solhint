@@ -208,14 +208,18 @@ describe('e2e general tests', function () {
     })
 
     it('Should succeed when relative import (same folder) - filesystem01', () => {
-      const { code, stdout } = shell.exec(`solhint -c ".solhintS01.json" "./contracts/Test.sol"`)
+      const { code, stdout } = shell.exec(
+        `solhint --noPoster -c ".solhintS01.json" "./contracts/Test.sol"`
+      )
 
       expect(code).to.equal(EXIT_CODES.OK)
       expect(stdout.trim()).to.be.empty
     })
 
     it('Should succeed when relative import with parent folder - filesystem02', () => {
-      const { code, stdout } = shell.exec(`solhint -c ".solhintS02.json" "./contracts/Test.sol"`)
+      const { code, stdout } = shell.exec(
+        `solhint --noPoster -c ".solhintS02.json" "./contracts/Test.sol"`
+      )
 
       expect(code).to.equal(EXIT_CODES.OK)
       expect(stdout.trim()).to.be.empty
@@ -225,19 +229,23 @@ describe('e2e general tests', function () {
       const fileName = 'node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol'
       createDummyFile(fileName)
 
-      const { code, stdout } = shell.exec(`solhint -c ".solhintS03.json" "./contracts/Test.sol"`)
+      const { code, stdout } = shell.exec(
+        `solhint --noPoster -c ".solhintS03.json" "./contracts/Test.sol"`
+      )
 
       expect(code).to.equal(EXIT_CODES.OK)
       expect(stdout.trim()).to.be.empty
     })
 
     it('Should fail when missing import (relative path) - filesystem04', () => {
-      const { code, stdout } = shell.exec(`solhint -c ".solhintF04.json" "./contracts/Test.sol"`)
-
-      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
-      expect(stdout.trim()).to.contain(
-        "Import in ./contracts/Test.sol doesn't exist in: ./Missing.sol"
+      const { code, stdout } = shell.exec(
+        `solhint --noPoster -c ".solhintF04.json" "./contracts/Test.sol"`        
       )
+      
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+
+      const expectedPath = path.join('contracts', 'Test.sol') 
+      expect(stdout).to.include(`Import in ${expectedPath} doesn't exist in: ./Missing.sol`)
     })
   })
 
@@ -334,19 +342,124 @@ describe('e2e general tests', function () {
       // assert the errors
       expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
       expect(stdout.trim()).to.contain('Compiler version')
-      expect(cacheAfter1).to.deep.equal(cacheBefore, "error cacheAfter1")
-      
+      expect(cacheAfter1).to.deep.equal(cacheBefore, 'error cacheAfter1')
+
       // now replace Foo.sol with a valid file
-      fs.copyFileSync('FooValid.sol','Foo.sol') // restore Foo.sol
+      fs.copyFileSync('FooValid.sol', 'Foo.sol') // restore Foo.sol
       result = shell.exec(`solhint Foo.sol --cache --noPoster`)
       code = result.code
       stdout = result.stdout
       const cacheAfter2 = JSON.parse(fs.readFileSync(cacheFilePath, 'utf8'))
 
       // expect no errors and cache to be updated
-      expect(code).to.equal(EXIT_CODES.OK, "")
+      expect(code).to.equal(EXIT_CODES.OK, '')
       expect(stdout.trim()).to.equal('')
-      expect(cacheAfter2).to.not.deep.equal(cacheBefore, "error cacheAfter2")
+      expect(cacheAfter2).to.not.deep.equal(cacheBefore, 'error cacheAfter2')
+    })
+  })
+
+  describe('solhintignore-check', () => {
+    const PATH = '13-solhintignore-check/filesystem'
+    const ERROR_EMPTY_BLOCKS = 'Code contains empty blocks'
+    const ERROR_IMMUTABLE = 'Immutable variables names are set to be in mixedCase'
+
+    let folderCounter = 1
+
+    beforeEach(() => {
+      const padded = String(folderCounter).padStart(2, '0')
+
+      const ROOT = PATH + padded + '/'
+      useFixtureFolder(this, ROOT + 'project')
+
+      folderCounter++
+    })
+
+    it('should exclude a .solhintignore declared file and include the other in same folder - filesystem01', () => {
+      const { code, stdout } = shell.exec(
+        `solhint --noPoster -c ".solhintS01.json" "contracts/*.sol"`
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout.trim()).to.contain(ERROR_EMPTY_BLOCKS)
+      expect(stdout.trim()).to.contain('Lib.sol')
+
+      expect(stdout.trim()).to.not.contain(ERROR_IMMUTABLE)
+      expect(stdout.trim()).to.not.contain('Skip.sol')
+    })
+
+    it('should exclude files inside ignored folder and include the other in other folder - filesystem02', () => {
+      const { code, stdout } = shell.exec(
+        `solhint --noPoster -c ".solhintS02.json" "contracts/**/*.sol"`
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout.trim()).to.contain(ERROR_EMPTY_BLOCKS)
+      expect(stdout.trim()).to.contain('Lib.sol')
+
+      expect(stdout.trim()).to.not.contain(ERROR_IMMUTABLE)
+      expect(stdout.trim()).to.not.contain('Skip1.sol')
+      expect(stdout.trim()).to.not.contain('Skip2.sol')
+    })
+
+    it('should ignore all folder except the one with ! pattern - filesystem03', () => {
+      const { code, stdout } = shell.exec(
+        `solhint --noPoster -c ".solhintS03.json" "contracts/*.sol"`
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout.trim()).to.contain(ERROR_EMPTY_BLOCKS)
+      expect(stdout.trim()).to.contain('Lib.sol')
+
+      expect(stdout.trim()).to.not.contain(ERROR_IMMUTABLE)
+      expect(stdout.trim()).to.not.contain('Skip.sol')
+    })
+
+    it('should ignore all files - filesystem04', () => {
+      const { code, stderr } = shell.exec(
+        `solhint --noPoster -c ".solhintS04.json" "contracts/*.sol"`
+      )
+
+      expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
+      expect(stderr.trim()).to.contain('No files to lint!')
+    })
+
+    it('should ignore all files in contracts except the ones in the desired (child) folder - filesystem05', () => {
+      const { code, stdout } = shell.exec(
+        `solhint --noPoster -c ".solhintS05.json" "contracts/**/*.sol"`
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout.trim()).to.contain('ERC20A.sol')
+      expect(stdout.trim()).to.contain('ERC20B.sol')
+
+      expect(stdout.trim()).to.not.contain('ERC20Permit.sol')
+      expect(stdout.trim()).to.not.contain('Nft.sol')
+      expect(stdout.trim()).to.not.contain('Lib1.sol')
+      expect(stdout.trim()).to.not.contain('Lib2.sol')
+      expect(stdout.trim()).to.not.contain('Skip.sol')
+      expect(stdout.trim()).to.not.contain(ERROR_EMPTY_BLOCKS)
+    })
+
+    it('should  - filesystem06', () => {
+      const { code, stderr } = shell.exec(
+        `solhint --noPoster --ignore-path ".wrongFile" -c ".solhintS06.json" "contracts/**/*.sol"`
+      )
+
+      expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
+      expect(stderr.trim()).to.contain('ERROR: .wrongFile is not a valid path.')
+    })
+
+    it('should redirect ignore file to specified option and expect same result as filesystem03  - filesystem07', () => {
+      const { code, stdout } = shell.exec(
+        `solhint --noPoster --ignore-path ".ignoresolhint" -c ".solhintS07.json" "contracts/**/*.sol"`
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout.trim()).to.contain(ERROR_EMPTY_BLOCKS)
+      expect(stdout.trim()).to.contain('Lib.sol')
+
+      expect(stdout.trim()).to.not.contain(ERROR_IMMUTABLE)
+      expect(stdout.trim()).to.not.contain('Skip.sol')
     })
   })
 })

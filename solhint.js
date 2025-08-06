@@ -5,6 +5,7 @@ const fs = require('fs-extra')
 const process = require('process')
 const readline = require('readline')
 const chalk = require('chalk')
+const path = require('path')
 
 const linter = require('./lib/index')
 const { loadConfig, loadConfigForFile } = require('./lib/config/config-file')
@@ -14,6 +15,8 @@ const ruleFixer = require('./lib/rule-fixer')
 const packageJson = require('./package.json')
 
 const EXIT_CODES = { BAD_OPTIONS: 255, OK: 0, REPORTED_ERRORS: 1 }
+
+const normalizePath = (p) => p.replace(/\\/g, '/')
 
 function init() {
   const version = packageJson.version
@@ -73,11 +76,13 @@ const readIgnore = _.memoize(() => {
       ignoreFile = program.opts().ignorePath
     }
 
-    return fs
+    const ignoreArray = fs
       .readFileSync(ignoreFile)
       .toString()
       .split('\n')
       .map((i) => i.trim())
+      .filter((i) => i.length > 0)
+    return ignoreArray
   } catch (e) {
     if (program.opts().ignorePath && e.code === 'ENOENT') {
       console.error(`\nERROR: ${ignoreFile} is not a valid path.`)
@@ -96,9 +101,7 @@ const readConfig = _.memoize(() => {
     process.exit(EXIT_CODES.BAD_OPTIONS)
   }
 
-  const configExcludeFiles = _.flatten(config.excludedFiles)
-  config.excludedFiles = _.concat(configExcludeFiles, readIgnore())
-
+  config.excludedFiles = [].concat(config.excludedFiles || [], readIgnore())
   // validate the configuration before continuing
   validate(config)
 
@@ -181,14 +184,15 @@ function executeMainActionLogic() {
     let allFiles = []
     const glob = require('glob')
     const ignore = require('ignore')
-    const ignoreFilter = ignore({ allowRelativePaths: true }).add(baseConfig.excludedFiles || [])
+
+    const ig = ignore().add(baseConfig.excludedFiles)
 
     for (const pattern of patterns) {
       const matchedFiles = glob.sync(pattern, { nodir: true })
-      allFiles = allFiles.concat(matchedFiles)
+      allFiles = allFiles.concat(matchedFiles.map((f) => path.relative(process.cwd(), f)))
     }
-    // filter the files that match the ignore rules
-    const filesToLint = ignoreFilter.filter(allFiles)
+
+    const filesToLint = ig.filter(allFiles)
 
     // explicit config is used if the user passed -c or --config
     reports = filesToLint.map((file) => {
@@ -196,7 +200,7 @@ function executeMainActionLogic() {
 
       validate(configForFile)
 
-      return require('./lib/index').processFile(
+      const report = require('./lib/index').processFile(
         file,
         {
           ...configForFile,
@@ -207,6 +211,10 @@ function executeMainActionLogic() {
         process.cwd(),
         program.opts().config
       )
+
+      // Normalize the path here so it's consistent across OSes
+      report.filePath = normalizePath(report.filePath)
+      return report
     })
   } catch (e) {
     console.error(e)

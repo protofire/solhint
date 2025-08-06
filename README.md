@@ -80,7 +80,7 @@ Commands:
   stdin [options]                         linting of source code data provided to STDIN
   list-rules                              display covered rules of current .solhint.json
 ```
-### Notes
+### New Versions
 - Solhint checks if there are newer versions. The `--disc`  option avoids that check.
 - `--save` option will create a file named as `YYYYMMDDHHMMSS_solhintReport.txt` on current folder with default or specified format 
 
@@ -95,10 +95,9 @@ This option currently works on:
 - quotes
 - contract-name-capwords
 - avoid-suicide
-  
 <br><br>
-## Configuration
 
+## Configuration
 You can use a `.solhint.json` file to configure Solhint for the whole project.
 
 To generate a new sample `.solhint.json` file in current folder you can do:
@@ -114,12 +113,12 @@ This file has the following format:
   "extends": "solhint:recommended"
 }
 ```
-### Note 1
+
 The `solhint:default` configuration contains only two rules: max-line-length & no-console
 It is now deprecated since version 5.1.0
 <br>
 
-### Note 2
+### Multiple Configs
 Multiple configs files can be used at once. All config files should be named `.solhint.json`.
 If not done like this, multiple hierarchy configuration will not work.
 Solhint will go though all config files automatically.
@@ -148,7 +147,7 @@ Project ROOT =>
 <br><br>
 
 
-### Sample
+### Sample of simple config with recommended rules
 ```json
   {
     "extends": "solhint:recommended",
@@ -160,14 +159,27 @@ Project ROOT =>
   }
 ```
 A full list of all supported rules can be found [here](docs/rules.md).
+<br><br>
 
-To ignore files that do not require validation you can use a `.solhintignore` file. It supports rules in
-the `.gitignore` format.
+### Ignore Configuration
+You can exclude files from linting using a `.solhintignore` file (name by default) or `--ignore-path` followed by a custom name. 
+It uses the same syntax as `.gitignore`, including support for negation with !.
+
+Example:
 
 ```
-node_modules/
-additional-tests.sol
+contracts/**
+!contracts/utils/
+!contracts/utils/SafeMath.sol
 ```
+
+This will:
+  - Ignore everything inside contracts/
+  - Except the folder contracts/utils/
+  - And the file SafeMath.sol inside it
+
+Tip: To unignore a file, you must also unignore its parent folders.
+<br><br>
 
 ### Cache
 Solhint supports a caching mechanism using the `--cache` flag to avoid re-linting files that haven't changed. 
@@ -185,8 +197,7 @@ Example:
 solhint contracts/**/*.sol --cache
 solhint Foo.sol --cache --cache-location tmp/my-cache.json
 ```
-
-
+<br><br>
 
 ### Extendable rulesets
 

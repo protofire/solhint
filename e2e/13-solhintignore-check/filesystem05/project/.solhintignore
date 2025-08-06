@@ -1,0 +1,5 @@
+contracts/**
+!contracts/tokens/
+!contracts/tokens/erc20/
+!contracts/tokens/erc20/standard/
+!contracts/tokens/erc20/standard/**

@@ -1,3 +1,7 @@
+const path = require('path')
+
+const normalizedPath = (...segments) => path.join(...segments)
+
 const foo1Output = [
   {
     line: 2,
@@ -6,7 +10,7 @@ const foo1Output = [
     message: 'Compiler version >=0.6.0 does not satisfy the ^0.8.24 semver requirement',
     ruleId: 'compiler-version',
     fix: null,
-    filePath: 'contracts/Foo.sol',
+    filePath: normalizedPath('contracts','Foo.sol'),
   },
   {
     line: 5,
@@ -15,7 +19,7 @@ const foo1Output = [
     message: 'Constant name must be in capitalized SNAKE_CASE',
     ruleId: 'const-name-snakecase',
     fix: null,
-    filePath: 'contracts/Foo.sol',
+    filePath: normalizedPath('contracts','Foo.sol'),
   },
   {
     line: 6,
@@ -24,7 +28,7 @@ const foo1Output = [
     message: 'Explicitly mark visibility of state',
     ruleId: 'state-visibility',
     fix: null,
-    filePath: 'contracts/Foo.sol',
+    filePath: normalizedPath('contracts','Foo.sol'),
   },
   {
     line: 6,
@@ -32,7 +36,7 @@ const foo1Output = [
     severity: 'Warning',
     message: "'TEST2' should start with _",
     ruleId: 'private-vars-leading-underscore',
-    filePath: 'contracts/Foo.sol',
+    filePath: normalizedPath('contracts','Foo.sol'),
   },
   {
     line: 6,
@@ -41,7 +45,7 @@ const foo1Output = [
     message: 'Variable name must be in mixedCase TEST2',
     ruleId: 'var-name-mixedcase',
     fix: null,
-    filePath: 'contracts/Foo.sol',
+    filePath: normalizedPath('contracts','Foo.sol'),
   },
   {
     line: 8,
@@ -51,7 +55,7 @@ const foo1Output = [
       'Explicitly mark visibility in function (Set ignoreConstructors to true if using solidity >=0.7.0)',
     ruleId: 'func-visibility',
     fix: null,
-    filePath: 'contracts/Foo.sol',
+    filePath: normalizedPath('contracts','Foo.sol'),
   },
   {
     line: 8,
@@ -60,7 +64,7 @@ const foo1Output = [
     message: 'Code contains empty blocks',
     ruleId: 'no-empty-blocks',
     fix: null,
-    filePath: 'contracts/Foo.sol',
+    filePath: normalizedPath('contracts','Foo.sol'),
   },
 ]
 
@@ -72,7 +76,7 @@ const foo2Output = [
     message: 'Constant name must be in capitalized SNAKE_CASE',
     ruleId: 'const-name-snakecase',
     fix: null,
-    filePath: 'contracts/Foo2.sol',
+    filePath: normalizedPath('contracts','Foo2.sol'),
   },
   {
     line: 7,
@@ -82,7 +86,7 @@ const foo2Output = [
       'Explicitly mark visibility in function (Set ignoreConstructors to true if using solidity >=0.7.0)',
     ruleId: 'func-visibility',
     fix: null,
-    filePath: 'contracts/Foo2.sol',
+    filePath: normalizedPath('contracts','Foo2.sol'),
   },
   {
     line: 7,
@@ -91,7 +95,7 @@ const foo2Output = [
     message: 'Code contains empty blocks',
     ruleId: 'no-empty-blocks',
     fix: null,
-    filePath: 'contracts/Foo2.sol',
+    filePath: normalizedPath('contracts','Foo2.sol'),
   },
 ]
 
