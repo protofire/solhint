@@ -1,4 +1,4 @@
-const normalizedPath = (...segments) => segments.join('/')
+const normalizedPath = (...segments) => path.join(...segments)
 
 const foo1Output = [
   {
