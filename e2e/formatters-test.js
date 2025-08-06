@@ -291,7 +291,7 @@ describe('e2e', function () {
         const reportLines = stdout.split('\n')
         expect(reportLines[0]).to.eq('TAP version 13')
         expect(reportLines[1]).to.eq('1..1')
-        expect(reportLines[2]).to.eq(`ok 1 - contracts/Foo3.sol`)
+        expect(reportLines[2]).to.eq(`ok 1 - ${path.join('contracts','Foo3.sol')}`)
 
         expect(code).to.equal(EXIT_CODES.OK)
       })
