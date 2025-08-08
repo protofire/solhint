@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const cp = require('child_process')
-const fs = require('fs-extra')
+const fs = require('fs')
 const getStream = require('get-stream')
 const os = require('os')
 const path = require('path')

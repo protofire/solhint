@@ -1,6 +1,6 @@
 const chai = require('chai')
 const { expect } = chai
-const fs = require('fs-extra')
+const fs = require('fs')
 const os = require('os')
 const path = require('path')
 const shell = require('shelljs')
