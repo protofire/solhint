@@ -26,6 +26,8 @@ This rule accepts a string option for rule severity. Must be one of "error", "wa
 }
 ```
 
+### Notes
+- SNAKE_CASE allowed only in interfaces when matching constant/immutable getter signatures.
 
 ## Examples
 This rule does not have examples.
