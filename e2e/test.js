@@ -478,9 +478,12 @@ function useFixtureFolder(ctx, dir) {
 
   ctx.testDirPath = testDirPath
 
-  fs.ensureDirSync(testDirPath)
-  fs.emptyDirSync(testDirPath)
-  fs.copySync(fixturePath, testDirPath)
+    fs.mkdirSync(testDirPath, { recursive: true })
+    for (const entry of fs.readdirSync(testDirPath)) {
+      fs.rmSync(path.join(testDirPath, entry), { recursive: true, force: true });
+    }
+
+    fs.cpSync(fixturePath, testDirPath, { recursive: true })
 
   shell.cd(testDirPath)
 }
