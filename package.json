@@ -51,7 +51,6 @@
     "commander": "^10.0.0",
     "cosmiconfig": "^8.0.0",
     "fast-diff": "^1.2.0",
-    "fs-extra": "^11.1.0",
     "glob": "^8.0.3",
     "ignore": "^5.2.4",
     "js-yaml": "^4.1.0",

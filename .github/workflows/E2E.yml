@@ -17,7 +17,7 @@ jobs:
         node: [16, 18, 20]
     
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
@@ -52,7 +52,7 @@ jobs:
       - name: Enable Debugging
         run: |
           echo "::debug::Debugging enabled"
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-node@v4
         with:
           node-version: 18
@@ -90,7 +90,7 @@ jobs:
     name: Test on MacOS
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - uses: actions/setup-node@v4
       with:
         node-version: 18
