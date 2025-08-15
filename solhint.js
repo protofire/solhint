@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const program = require('commander')
 const _ = require('lodash')
-const fs = require('fs-extra')
+const fs = require('fs')
 const process = require('process')
 const readline = require('readline')
 const chalk = require('chalk')
