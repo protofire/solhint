@@ -2,6 +2,9 @@ const { execSync } = require('child_process')
 
 function changed() {
   try {
+    // execute lint
+    execSync('npm run lint', { stdio: 'inherit' })
+
     // Run Git commands to check for changes in the lib/rules directory
     const diffIndex = execSync('git diff-index --name-only -B -R -M -C HEAD lib/rules')
       .toString()
