@@ -79,7 +79,7 @@
     "shelljs": "^0.8.5",
     "sinon": "^20.0.0",
     "spawn-sync": "^2.0.0",
-    "strip-ansi": "^7.1.0"
+    "strip-ansi": "6"
   },
   "optionalDependencies": {
     "prettier": "^2.8.3"
