@@ -1,5 +1,5 @@
 #!env node
-const fs = require('fs-extra')
+const fs = require('fs')
 const { exec, mkdir } = require('shelljs')
 const semver = require('semver')
 const path = require('path')
