@@ -345,11 +345,28 @@ describe('Linter - no-unused-import', () => {
         }
       `,
     },
+    {
+      description: 'Import is used in /** @inheritdoc - MULTILINE' ,
+      code: `
+        import { IPRBProxyPlugin } from "@prb/proxy/interfaces/IPRBProxyPlugin.sol";
+
+        contract SablierV2ProxyPlugin {
+          /** 
+           * @inheritdoc IPRBProxyPlugin 
+           */
+          function getMethods() external pure returns (bytes4[] memory methods) {
+              methods = new bytes4[](1);
+              methods[0] = this.onStreamCanceled.selector;
+          }
+        }
+      `,
+    },
   ].forEach(({ description, code }) => {
     it(`should not raise when ${description}`, () => {
       const report = linter.processStr(code, {
         rules: { 'no-unused-import': 'error' },
       })
+
       assertNoErrors(report)
     })
   })
