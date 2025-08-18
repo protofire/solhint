@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const cp = require('child_process')
-const fs = require('fs-extra')
+const fs = require('fs')
 const getStream = require('get-stream')
 const os = require('os')
 const path = require('path')
@@ -478,9 +478,12 @@ function useFixtureFolder(ctx, dir) {
 
   ctx.testDirPath = testDirPath
 
-  fs.ensureDirSync(testDirPath)
-  fs.emptyDirSync(testDirPath)
-  fs.copySync(fixturePath, testDirPath)
+    fs.mkdirSync(testDirPath, { recursive: true })
+    for (const entry of fs.readdirSync(testDirPath)) {
+      fs.rmSync(path.join(testDirPath, entry), { recursive: true, force: true });
+    }
+
+    fs.cpSync(fixturePath, testDirPath, { recursive: true })
 
   shell.cd(testDirPath)
 }

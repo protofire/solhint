@@ -1,6 +1,6 @@
 const chai = require('chai')
 const { expect } = chai
-const fs = require('fs-extra')
+const fs = require('fs')
 const os = require('os')
 const path = require('path')
 const shell = require('shelljs')
@@ -566,10 +566,12 @@ function useFixture(dir) {
     const tmpDirContainer = os.tmpdir()
     this.testDirPath = path.join(tmpDirContainer, `solhint-tests-${dir}`)
 
-    fs.ensureDirSync(this.testDirPath)
-    fs.emptyDirSync(this.testDirPath)
+    fs.mkdirSync(this.testDirPath, { recursive: true })
+    for (const entry of fs.readdirSync(this.testDirPath)) {
+      fs.rmSync(path.join(this.testDirPath, entry), { recursive: true, force: true });
+    }
 
-    fs.copySync(fixturePath, this.testDirPath)
+    fs.cpSync(fixturePath, this.testDirPath, { recursive: true })
 
     shell.cd(this.testDirPath)
   })
