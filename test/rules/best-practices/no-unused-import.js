@@ -346,7 +346,7 @@ describe('Linter - no-unused-import', () => {
       `,
     },
     {
-      description: 'Import is used in /** @inheritdoc - MULTILINE' ,
+      description: 'Import is used in /** @inheritdoc - MULTILINE',
       code: `
         import { IPRBProxyPlugin } from "@prb/proxy/interfaces/IPRBProxyPlugin.sol";
 
