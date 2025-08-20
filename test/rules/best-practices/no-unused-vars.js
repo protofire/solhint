@@ -93,6 +93,89 @@ function withdrawalAllowed(address) public view override returns (bool) {
     assertNoWarnings(report)
   })
 
+  it('should detect non used variable on modifier as parameter', () => {
+    const code = contractWith(
+      multiLine(
+        'modifier onlyOwner(uint256 _unusedParam) {',
+        '// This parameter is declared but never used',
+        'require(msg.sender == owner, "Not owner");',
+        '}',
+        'function a() public view returns (uint, uint) {',
+        '  return (1, 2);                               ',
+        '}                                              '
+      )
+    )
+
+    const report = linter.processStr(code, {
+      rules: { 'no-unused-vars': 'warn' },
+    })
+
+    assertWarnsCount(report, 1)
+    assertErrorMessage(report, 'unused')
+  })
+
+  it('should not detect used variable on modifier as parameter if used', () => {
+    const code = contractWith(
+      multiLine(
+        'modifier onlyOwner(uint256 _usedParam) {',
+        '_usedParam;',
+        'require(msg.sender == owner, "Not owner");',
+        '}',
+        'function a() public view returns (uint, uint) {',
+        '  return (1, 2);                               ',
+        '}                                              '
+      )
+    )
+
+    const report = linter.processStr(code, {
+      rules: { 'no-unused-vars': 'warn' },
+    })
+
+    assertNoWarnings(report)
+  })
+
+  it('should detect non used variable on modifier as a local var', () => {
+    const code = contractWith(
+      multiLine(
+        'modifier onlyOwner() {',
+        'uint256 unused;',
+        'require(msg.sender == owner, "Not owner");',
+        '}',
+        'function a() public view returns (uint, uint) {',
+        '  return (1, 2);                               ',
+        '}                                              '
+      )
+    )
+
+    const report = linter.processStr(code, {
+      rules: { 'no-unused-vars': 'warn' },
+    })
+
+    assertWarnsCount(report, 1)
+    assertErrorMessage(report, 'unused')
+  })
+
+  it('should not detect used variable on modifier as a local var', () => {
+    const code = contractWith(
+      multiLine(
+        'modifier onlyOwner() {',
+        'uint256 unused;',
+        'unused;',
+        'require(msg.sender == owner, "Not owner");',
+        '}',
+        'function a() public view returns (uint, uint) {',
+        '  return (1, 2);                               ',
+        '}                                              '
+      )
+    )
+
+    const report = linter.processStr(code, {
+      rules: { 'no-unused-vars': 'warn' },
+    })
+
+    assertNoWarnings(report)
+  })
+
   function label(data) {
     const items = data.split('\n')
     const lastItemIndex = items.length - 1
