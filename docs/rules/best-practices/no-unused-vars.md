@@ -7,7 +7,7 @@ title:       "no-unused-vars | Solhint"
 # no-unused-vars
 ![Recommended Badge](https://img.shields.io/badge/-Recommended-brightgreen)
 ![Category Badge](https://img.shields.io/badge/-Best%20Practices%20Rules-informational)
-![Default Severity Badge error](https://img.shields.io/badge/Default%20Severity-error-red)
+![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 > The {"extends": "solhint:recommended"} property in a configuration file enables this rule.
 
 
@@ -19,7 +19,7 @@ This rule accepts an array of options:
 
 | Index | Description                                                                                                                                       | Default Value               |
 | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| 0     | Rule severity. Must be one of "error", "warn", "off".                                                                                             | error                       |
+| 0     | Rule severity. Must be one of "error", "warn", "off".                                                                                             | warn                        |
 | 1     | A JSON object with a single property "validateParameters" as boolean specifying whether to report unused parameters from functions and modifiers. | {"validateParameters":true} |
 
 
@@ -28,7 +28,7 @@ This rule accepts an array of options:
 {
   "rules": {
     "no-unused-vars": [
-      "error",
+      "warn",
       {
         "validateParameters": true
       }

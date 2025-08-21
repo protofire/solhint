@@ -16,7 +16,7 @@ module.exports = Object.freeze({
     'no-global-import': 'warn',
     'no-unused-import': 'warn',
     'no-unused-vars': [
-      'error',
+      'warn',
       {
         validateParameters: true,
       },
