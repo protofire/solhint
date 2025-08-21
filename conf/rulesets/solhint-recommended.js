@@ -13,7 +13,12 @@ module.exports = Object.freeze({
     'no-empty-blocks': 'warn',
     'no-global-import': 'warn',
     'no-unused-import': 'warn',
-    'no-unused-vars': 'warn',
+    'no-unused-vars': [
+      'error',
+      {
+        validateParameters: true,
+      },
+    ],
     'one-contract-per-file': 'warn',
     'reason-string': [
       'warn',
