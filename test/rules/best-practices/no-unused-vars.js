@@ -4,7 +4,7 @@ const { contractWith, funcWith, multiLine } = require('../../common/contract-bui
 
 describe('Linter - no-unused-vars', () => {
   const UNUSED_VARS = [
-    contractWith('function a(uint a, uint b) public { b += 1; }'),
+    contractWith('function aver(uint aaa, uint b) public { b += 1; }'),
     funcWith('uint a = 0;'),
     funcWith('var (a) = 1;'),
     contractWith('function a(uint a, uint b) public { uint c = a + b; }'),
@@ -19,6 +19,17 @@ describe('Linter - no-unused-vars', () => {
     it(`should raise warn for vars ${label(curData)}`, () => {
       const report = linter.processStr(curData, {
         rules: { 'no-unused-vars': 'warn' },
+      })
+
+      assertWarnsCount(report, 1)
+      assertErrorMessage(report, 'unused')
+    })
+  )
+
+  UNUSED_VARS.forEach((curData) =>
+    it(`should raise warn for vars ${label(curData)}`, () => {
+      const report = linter.processStr(curData, {
+        rules: { 'no-unused-vars': ['warn', { validateParameters: true }] },
       })
 
       assertWarnsCount(report, 1)
@@ -79,15 +90,65 @@ describe('Linter - no-unused-vars', () => {
     })
   )
 
-  it('should not emit an error in override functions without parameter names', () => {
+  USED_VARS.forEach((curData) =>
+    it(`should not raise warn for vars ${label(curData)}`, () => {
+      const report = linter.processStr(curData, {
+        rules: { 'no-unused-vars': ['warn', { validateParameters: true }] },
+      })
+
+      assertNoWarnings(report)
+    })
+  )
+
+  it('should not fail since function parameter is unnamed', () => {
     const code = contractWith(`
-function withdrawalAllowed(address) public view override returns (bool) {
-    return _state == State.Refunding;
-}
-    `)
+      function withdrawalAllowed(address) public view override returns (bool) {
+      return _state == State.Refunding;
+    }`)
 
     const report = linter.processStr(code, {
-      rules: { 'no-unused-vars': 'warn' },
+      rules: { 'no-unused-vars': ['warn', { validateParameters: true }] },
+    })
+
+    assertNoWarnings(report)
+  })
+
+  it('should not throw warning since config is set to false (function)', () => {
+    const code = contractWith(`
+      function withdrawalAllowed(address notChecked) public view override returns (bool) {
+      return _state == State.Refunding;
+    }`)
+
+    const report = linter.processStr(code, {
+      rules: { 'no-unused-vars': ['warn', { validateParameters: false }] },
+    })
+
+    assertNoWarnings(report)
+  })
+
+  it('should not fail since modifier parameter is unnamed', () => {
+    const code = contractWith(`
+      modifier withdrawalAllowed(address) {
+        state == State.Refunding;
+      _;
+    }`)
+
+    const report = linter.processStr(code, {
+      rules: { 'no-unused-vars': ['warn', { validateParameters: true }] },
+    })
+
+    assertNoWarnings(report)
+  })
+
+  it('should not throw warning since config is set to false (modifier)', () => {
+    const code = contractWith(`
+      modifier withdrawalAllowed(address notChecked) {
+        state == State.Refunding;
+      _;
+    }`)
+
+    const report = linter.processStr(code, {
+      rules: { 'no-unused-vars': ['warn', { validateParameters: false }] },
     })
 
     assertNoWarnings(report)
