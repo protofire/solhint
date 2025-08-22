@@ -15,13 +15,24 @@ title:       "no-unused-vars | Solhint"
 Variable "name" is unused.
 
 ## Options
-This rule accepts a string option for rule severity. Must be one of "error", "warn", "off". Defaults to warn.
+This rule accepts an array of options:
+
+| Index | Description                                                                                                                                       | Default Value               |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| 0     | Rule severity. Must be one of "error", "warn", "off".                                                                                             | warn                        |
+| 1     | A JSON object with a single property "validateParameters" as boolean specifying whether to report unused parameters from functions and modifiers. | {"validateParameters":true} |
+
 
 ### Example Config
 ```json
 {
   "rules": {
-    "no-unused-vars": "warn"
+    "no-unused-vars": [
+      "warn",
+      {
+        "validateParameters": true
+      }
+    ]
   }
 }
 ```
