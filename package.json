@@ -1,6 +1,6 @@
 {
   "name": "solhint",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "Solidity Code Linter",
   "main": "lib/index.js",
   "keywords": [
@@ -16,7 +16,7 @@
   "homepage": "https://protofire.github.io/solhint/",
   "repository": "https://github.com/protofire/solhint",
   "scripts": {
-    "exec-tests": "nyc mocha --recursive && nyc report --reporter=text-lcov | coveralls",
+    "exec-tests": "nyc mocha --recursive && nyc report",
     "test:coverage": "npm run exec-tests",
     "test": "mocha --recursive",
     "lint": "eslint .",
@@ -41,12 +41,12 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@solidity-parser/parser": "^0.20.0",
+    "@solidity-parser/parser": "^0.20.2",
     "ajv": "^6.12.6",
     "ajv-errors": "^1.0.1",
-    "better-ajv-errors": "^2.0.2",
     "antlr4": "^4.13.1-patch-1",
     "ast-parents": "^0.0.1",
+    "better-ajv-errors": "^2.0.2",
     "chalk": "^4.1.2",
     "commander": "^10.0.0",
     "cosmiconfig": "^8.0.0",
@@ -58,18 +58,15 @@
     "lodash": "^4.17.21",
     "pluralize": "^8.0.0",
     "semver": "^7.5.2",
-    "strip-ansi": "^6.0.1",
     "table": "^6.8.1",
-    "text-table": "^0.2.0",
-    "fs-extra": "^11.1.0"
+    "text-table": "^0.2.0"
   },
   "devDependencies": {
     "assert": "^2.0.0",
     "chai": "^4.3.7",
-    "coveralls": "^3.1.1",
     "eslint": "^8.56.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^4.2.1",
     "get-stream": "^6.0.0",
@@ -80,7 +77,8 @@
     "rimraf": "^6.0.1",
     "shelljs": "^0.8.5",
     "sinon": "^20.0.0",
-    "spawn-sync": "^2.0.0"
+    "spawn-sync": "^2.0.0",
+    "strip-ansi": "6"
   },
   "optionalDependencies": {
     "prettier": "^2.8.3"

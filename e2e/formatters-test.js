@@ -1,6 +1,6 @@
 const chai = require('chai')
 const { expect } = chai
-const fs = require('fs-extra')
+const fs = require('fs')
 const shell = require('shelljs')
 const url = require('url')
 const os = require('os')
@@ -291,7 +291,7 @@ describe('e2e', function () {
         const reportLines = stdout.split('\n')
         expect(reportLines[0]).to.eq('TAP version 13')
         expect(reportLines[1]).to.eq('1..1')
-        expect(reportLines[2]).to.eq(`ok 1 - contracts/Foo3.sol`)
+        expect(reportLines[2]).to.eq(`ok 1 - ${path.join('contracts','Foo3.sol')}`)
 
         expect(code).to.equal(EXIT_CODES.OK)
       })
@@ -705,10 +705,12 @@ function useFixture(dir) {
     const tmpDirContainer = os.tmpdir()
     this.testDirPath = path.join(tmpDirContainer, `solhint-tests-${dir}`)
 
-    fs.ensureDirSync(this.testDirPath)
-    fs.emptyDirSync(this.testDirPath)
+    fs.mkdirSync(this.testDirPath, { recursive: true })
+    for (const entry of fs.readdirSync(this.testDirPath)) {
+      fs.rmSync(path.join(this.testDirPath, entry), { recursive: true, force: true });
+    }
 
-    fs.copySync(fixturePath, this.testDirPath)
+    fs.cpSync(fixturePath, this.testDirPath, { recursive: true })
 
     shell.cd(this.testDirPath)
   })
