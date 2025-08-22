@@ -9,8 +9,6 @@
 [![](https://img.shields.io/badge/Join%20Our%20Discord-magenta)](https://discord.gg/4TYGq3zpjs)
 [![Donate with Ethereum](https://img.shields.io/badge/Donate-ETH-blue)](https://etherscan.io/address/0xA81705c8C247C413a19A244938ae7f4A0393944e)
 [![NPM version](https://badge.fury.io/js/solhint.svg)](https://npmjs.org/package/solhint)
-[![Coverage Status](https://coveralls.io/repos/github/protofire/solhint/badge.svg?branch=master)](
-https://coveralls.io/github/protofire/solhint?branch=master)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/protofire/solhint/master/LICENSE)
 
 This is an open source project for linting [Solidity](http://solidity.readthedocs.io/en/develop/) code. This project
