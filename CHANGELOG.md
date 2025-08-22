@@ -1,5 +1,46 @@
-## [6.0.1] - 2025-08-07
+## [6.0.1] - 2025-08-22
 
+🛠️ `Fix`: `no-unused-vars` for modifiers
+
+🛠️ `Fix`: `no-unused-imports` handled for multiline @inheritdoc. Eliminates missed detections with multiline inheritance docs
+
+🛠️ `Fix`: `func-name-mixedcase` improvement, added snake case exception in interface (naming). Aligns interface naming edge cases
+
+🛠️ `Fix`: misc minor issues; docs link and typos. General polish and stability
+<br><br>
+
+🧰 `Infra`: Update GitHub Actions in CI workflows. Keeps CI up to date and consistent across jobs
+
+🧰 `Infra`: Ignore enhancement to mimic as regular linters
+<br><br>
+
+🧹 `Chore`: Remove fs-extra dependency. Simplifies deps
+
+🧹 `Chore`: Remove strip-ansi. Cleans unused/legacy deps
+
+🧹 `Chore`: Changed changelog format
+<br><br>
+
+🧱 `Enhancement`: added config for no-unused-vars to validate parameters or not
+<br><br>
+
+🧱 `Validation`: Improve AJV schema validation and related caching approach. More robust/faster config validation
+<br><br>
+
+✨🛡️ Kudos to our contributors! 🛡️✨
+- [@smol-ninja](https://github.com/smol-ninja) 🏅
+- [@talentlessguy](https://github.com/talentlessguy) 🏅
+- [@loki-sama](https://github.com/loki-sama)
+- [@gonzaotc](https://github.com/gonzaotc)
+- [@kilavvy](https://github.com/kilavvy)
+- [@jmendiola222](https://github.com/jmendiola222)
+- [@Daulox92](https://github.com/Daulox92)
+- [@RidaMichofi](https://github.com/RidaMichofi)
+- [@ddnexus](https://github.com/ddnexus)
+- [@zeevick10](https://github.com/zeevick10)
+- [@RyanRHall](https://github.com/RyanRHall)
+- [@fulldecent](https://github.com/fulldecent)
+- [@ncjones](https://github.com/ncjones)
 
 ## [6.0.0] - 2025-07-04
 
@@ -30,7 +71,7 @@ Rules revision - [#692](https://github.com/protofire/solhint/pull/692)
 ### Fixed
 - `gas-struct-packing` false positives - [#690](https://github.com/protofire/solhint/pull/690)
 - `gas-increment-by-one` backward expression - [#691](https://github.com/protofire/solhint/pull/691)
-- Typo (thanks to @[MarkFizz77](https://github.com/MarkFizz77))
+- Typo (thanks to [@MarkFizz77](https://github.com/MarkFizz77))
 
 ### Added
  - `use-natspec`: Promote the use of natspec and make several checks to enforce it - [#689](https://github.com/protofire/solhint/pull/689)
