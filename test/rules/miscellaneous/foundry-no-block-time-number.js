@@ -62,7 +62,7 @@ describe('Linter - foundry-no-block-time-number (functional)', () => {
     )
   })
 
-  it('Should report when using block.number inside test/ dir', () => {
+  it('Should report when using block.number inside test/folder1/folder2 dir', () => {
     const code = multiLine(
       'pragma solidity ^0.8.24;',
       'contract T {',
