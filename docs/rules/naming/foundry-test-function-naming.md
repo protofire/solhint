@@ -1,15 +1,15 @@
 ---
 warning:     "This is a dynamically generated file. Do not edit manually."
 layout:      "default"
-title:       "foundry-test-functions | Solhint"
+title:       "foundry-test-function-naming | Solhint"
 ---
 
-# foundry-test-functions
+# foundry-test-function-naming
 ![Category Badge](https://img.shields.io/badge/-Style%20Guide%20Rules-informational)
 ![Default Severity Badge warn](https://img.shields.io/badge/Default%20Severity-warn-yellow)
 
 ## Description
-Enforce naming convention on functions for Foundry test cases (DEPRECATED, use `foundry-test-functions-naming`)
+Enforce naming convention on functions for Foundry test cases
 
 ## Options
 This rule accepts an array of options:
@@ -24,7 +24,7 @@ This rule accepts an array of options:
 ```json
 {
   "rules": {
-    "foundry-test-functions": [
+    "foundry-test-function-naming": [
       "warn",
       [
         "setUp"
@@ -71,9 +71,9 @@ function numberIs42() public {}
 ```
 
 ## Version
-This rule was introduced in [Solhint 3.6.1](https://github.com/protofire/solhint/blob/v3.6.1)
+This rule was introduced in the latest version.
 
 ## Resources
-- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/naming/foundry-test-functions.js)
-- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/naming/foundry-test-functions.md)
-- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/naming/foundry-test-functions.js)
+- [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/naming/foundry-test-function-naming.js)
+- [Document source](https://github.com/protofire/solhint/blob/master/docs/rules/naming/foundry-test-function-naming.md)
+- [Test cases](https://github.com/protofire/solhint/blob/master/test/rules/naming/foundry-test-function-naming.js)
