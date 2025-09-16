@@ -580,4 +580,141 @@ describe('Better errors addition + rule disable on error', () => {
     assert.ok(logged.includes("invalid configuration for rule 'use-natspec'"))
     assert.ok(warnSpy.called)
   })
+
+  //
+  // ---- foundry-no-block-time-number: CONFIG VALIDATOR TESTS ----
+  //
+
+  it('Valid CFG - accept: foundry-no-block-time-number with only severity (uses DEFAULT test dirs)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'foundry-no-block-time-number': 'warn' },
+    })
+
+    // Not asserting execution here (rule is directory-gated and dummy file path may not match),
+    // we only assert the config is accepted and no reporter was used.
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    // No config warning should be printed
+    sinon.assert.notCalled(warnSpy)
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Valid CFG - accept: foundry-no-block-time-number with custom test dirs array', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'foundry-no-block-time-number': ['warn', ['tests', 'e2e', 'it']] },
+    })
+
+    // Only checking config acceptance (no execution guarantees here).
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    // No schema warning expected
+    sinon.assert.notCalled(warnSpy)
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Invalid CFG - not execute: foundry-no-block-time-number when wrong value type in array is provided', () => {
+    // Second arg must be an array of strings; here it's [1] (invalid element type)
+    const report = linter.processStr(dummyCode, {
+      rules: { 'foundry-no-block-time-number': ['error', [1]] },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+
+    assert.ok(
+      logged.includes("invalid configuration for rule 'foundry-no-block-time-number'"),
+      `Expected a warning for foundry-no-block-time-number but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Invalid CFG - not execute: foundry-no-block-time-number when wrong option type is provided (string)', () => {
+    // Second arg must be an array; here it's a string (invalid)
+    const report = linter.processStr(dummyCode, {
+      rules: { 'foundry-no-block-time-number': ['error', 'wrong'] },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+
+    assert.ok(
+      logged.includes("invalid configuration for rule 'foundry-no-block-time-number'"),
+      `Expected a warning for foundry-no-block-time-number but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Invalid CFG - not execute: foundry-no-block-time-number when empty object is provided', () => {
+    // Second arg must be an array; here it's an object (invalid)
+    const report = linter.processStr(dummyCode, {
+      rules: { 'foundry-no-block-time-number': ['error', {}] },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+
+    assert.ok(
+      logged.includes("invalid configuration for rule 'foundry-no-block-time-number'"),
+      `Expected a warning for foundry-no-block-time-number but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Invalid CFG - not execute: foundry-no-block-time-number when array items are not strings (mixed types)', () => {
+    // Mixed invalid item types
+    const report = linter.processStr(dummyCode, {
+      rules: { 'foundry-no-block-time-number': ['warn', ['tests', 123, null]] },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+
+    assert.ok(
+      logged.includes("invalid configuration for rule 'foundry-no-block-time-number'"),
+      `Expected a warning for foundry-no-block-time-number but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
 })

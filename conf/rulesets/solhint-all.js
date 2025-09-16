@@ -67,6 +67,7 @@ module.exports = Object.freeze({
     'gas-struct-packing': 'warn',
     'comprehensive-interface': 'warn',
     'duplicated-imports': 'warn',
+    'foundry-no-block-time-number': ['warn', ['test', 'tests']],
     'import-path-check': ['warn', ['[~dependenciesPath]']],
     quotes: ['error', 'double'],
     'const-name-snakecase': 'warn',
