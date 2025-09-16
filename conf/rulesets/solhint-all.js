@@ -72,6 +72,7 @@ module.exports = Object.freeze({
     'const-name-snakecase': 'warn',
     'contract-name-capwords': 'warn',
     'event-name-capwords': 'warn',
+    'foundry-test-function-naming': ['warn', ['setUp']],
     'foundry-test-functions': ['warn', ['setUp']],
     'func-name-mixedcase': 'warn',
     'func-named-parameters': ['warn', 4],
