@@ -1,6 +1,7 @@
 ## [6.0.2] - 2025-09-18
 
 🧹 `Chore`: `foundry-test-functions` is deprecated and will be removed in v7.0.0. Please rename to `foundry-test-function-naming`.
+WILL BE REPLACED IN v7
 
 <br><br>
 
