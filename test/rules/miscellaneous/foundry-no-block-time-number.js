@@ -62,6 +62,35 @@ describe('Linter - foundry-no-block-time-number (functional)', () => {
     )
   })
 
+  it('Should report when using block.number inside test/ dir', () => {
+    const code = multiLine(
+      'pragma solidity ^0.8.24;',
+      'contract T {',
+      '  function test_number() public {',
+      '    uint256 n = block.number;',
+      '    n;',
+      '  }',
+      '}'
+    )
+
+    const fileName = '/project/test/folder1/folder2/T.sol'
+    const config = {
+      rules: {
+        'foundry-no-block-time-number': 'error',
+      },
+    }
+
+    const report = linter.processStr(code, config, fileName)
+
+    assertErrorCount(report, 1)
+    assert.ok(
+      report.reports[0].message.includes(
+        'Avoid `block.number` in Foundry tests. Use `vm.getBlockNumber()` instead.'
+      ),
+      `Unexpected message: ${report.reports[0] && report.reports[0].message}`
+    )
+  })
+
   it('Should report twice when both block.timestamp and block.number are used', () => {
     const code = multiLine(
       'pragma solidity ^0.8.24;',
