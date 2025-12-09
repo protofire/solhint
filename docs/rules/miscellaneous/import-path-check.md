@@ -12,7 +12,7 @@ title:       "import-path-check | Solhint"
 
 
 ## Description
-Check if an import file exits in target path
+Check if an import file exists in target path
 
 ## Options
 This rule accepts an array of options:
