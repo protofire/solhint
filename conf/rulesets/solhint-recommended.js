@@ -13,7 +13,6 @@ module.exports = Object.freeze({
     'no-empty-blocks': 'warn',
     'no-global-import': 'warn',
     'no-unused-import': 'warn',
-    'no-unused-private-funcs': 'warn',
     'no-unused-vars': [
       'warn',
       {
