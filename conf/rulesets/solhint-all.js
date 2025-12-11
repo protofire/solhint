@@ -120,6 +120,7 @@ module.exports = Object.freeze({
     ],
     'multiple-sends': 'warn',
     'no-complex-fallback': 'warn',
+    'no-immutable-before-declaration': 'warn',
     'no-inline-assembly': 'warn',
     'not-rely-on-block-hash': 'warn',
     'not-rely-on-time': 'warn',

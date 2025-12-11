@@ -80,24 +80,25 @@ title:       "Rule Index of Solhint"
 
 ## Security Rules
 
-| Rule Id                                                              | Error                                                                    | Recommended  | Deprecated |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------ | ---------- |
-| [avoid-call-value](./rules/security/avoid-call-value.md)             | Avoid to use ".call.value()()".                                          | $~~~~~~~~$✔️ |            |
-| [avoid-low-level-calls](./rules/security/avoid-low-level-calls.md)   | Avoid to use low level calls.                                            | $~~~~~~~~$✔️ |            |
-| [avoid-sha3](./rules/security/avoid-sha3.md)                         | Use "keccak256" instead of deprecated "sha3".                            | $~~~~~~~~$✔️ |            |
-| [avoid-suicide](./rules/security/avoid-suicide.md)                   | Use "selfdestruct" instead of deprecated "suicide".                      | $~~~~~~~~$✔️ |            |
-| [avoid-throw](./rules/security/avoid-throw.md)                       | "throw" is deprecated, avoid to use it.                                  | $~~~~~~~~$✔️ |            |
-| [avoid-tx-origin](./rules/security/avoid-tx-origin.md)               | Avoid to use tx.origin.                                                  | $~~~~~~~~$✔️ |            |
-| [check-send-result](./rules/security/check-send-result.md)           | Check result of "send" call.                                             | $~~~~~~~~$✔️ |            |
-| [compiler-version](./rules/security/compiler-version.md)             | Compiler version must satisfy a semver requirement at least ^0.8.24.     | $~~~~~~~~$✔️ |            |
-| [func-visibility](./rules/security/func-visibility.md)               | Explicitly mark visibility in function.                                  | $~~~~~~~~$✔️ |            |
-| [multiple-sends](./rules/security/multiple-sends.md)                 | Avoid multiple calls of "send" method in single transaction.             | $~~~~~~~~$✔️ |            |
-| [no-complex-fallback](./rules/security/no-complex-fallback.md)       | Fallback function must be simple.                                        | $~~~~~~~~$✔️ |            |
-| [no-inline-assembly](./rules/security/no-inline-assembly.md)         | Avoid to use inline assembly. It is acceptable only in rare cases.       | $~~~~~~~~$✔️ |            |
-| [not-rely-on-block-hash](./rules/security/not-rely-on-block-hash.md) | Do not rely on "block.blockhash". Miners can influence its value.        | $~~~~~~~~$✔️ |            |
-| [not-rely-on-time](./rules/security/not-rely-on-time.md)             | Avoid making time-based decisions in your business logic.                |              |            |
-| [reentrancy](./rules/security/reentrancy.md)                         | Possible reentrancy vulnerabilities. Avoid state changes after transfer. | $~~~~~~~~$✔️ |            |
-| [state-visibility](./rules/security/state-visibility.md)             | Explicitly mark visibility of state.                                     | $~~~~~~~~$✔️ |            |
+| Rule Id                                                                                | Error                                                                                           | Recommended  | Deprecated |
+| -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ------------ | ---------- |
+| [avoid-call-value](./rules/security/avoid-call-value.md)                               | Avoid to use ".call.value()()".                                                                 | $~~~~~~~~$✔️ |            |
+| [avoid-low-level-calls](./rules/security/avoid-low-level-calls.md)                     | Avoid to use low level calls.                                                                   | $~~~~~~~~$✔️ |            |
+| [avoid-sha3](./rules/security/avoid-sha3.md)                                           | Use "keccak256" instead of deprecated "sha3".                                                   | $~~~~~~~~$✔️ |            |
+| [avoid-suicide](./rules/security/avoid-suicide.md)                                     | Use "selfdestruct" instead of deprecated "suicide".                                             | $~~~~~~~~$✔️ |            |
+| [avoid-throw](./rules/security/avoid-throw.md)                                         | "throw" is deprecated, avoid to use it.                                                         | $~~~~~~~~$✔️ |            |
+| [avoid-tx-origin](./rules/security/avoid-tx-origin.md)                                 | Avoid to use tx.origin.                                                                         | $~~~~~~~~$✔️ |            |
+| [check-send-result](./rules/security/check-send-result.md)                             | Check result of "send" call.                                                                    | $~~~~~~~~$✔️ |            |
+| [compiler-version](./rules/security/compiler-version.md)                               | Compiler version must satisfy a semver requirement at least ^0.8.24.                            | $~~~~~~~~$✔️ |            |
+| [func-visibility](./rules/security/func-visibility.md)                                 | Explicitly mark visibility in function.                                                         | $~~~~~~~~$✔️ |            |
+| [multiple-sends](./rules/security/multiple-sends.md)                                   | Avoid multiple calls of "send" method in single transaction.                                    | $~~~~~~~~$✔️ |            |
+| [no-complex-fallback](./rules/security/no-complex-fallback.md)                         | Fallback function must be simple.                                                               | $~~~~~~~~$✔️ |            |
+| [no-immutable-before-declaration](./rules/security/no-immutable-before-declaration.md) | Immutable variables should not be used in state variable initializers before they are declared. | $~~~~~~~~$✔️ |            |
+| [no-inline-assembly](./rules/security/no-inline-assembly.md)                           | Avoid to use inline assembly. It is acceptable only in rare cases.                              | $~~~~~~~~$✔️ |            |
+| [not-rely-on-block-hash](./rules/security/not-rely-on-block-hash.md)                   | Do not rely on "block.blockhash". Miners can influence its value.                               | $~~~~~~~~$✔️ |            |
+| [not-rely-on-time](./rules/security/not-rely-on-time.md)                               | Avoid making time-based decisions in your business logic.                                       |              |            |
+| [reentrancy](./rules/security/reentrancy.md)                                           | Possible reentrancy vulnerabilities. Avoid state changes after transfer.                        | $~~~~~~~~$✔️ |            |
+| [state-visibility](./rules/security/state-visibility.md)                               | Explicitly mark visibility of state.                                                            | $~~~~~~~~$✔️ |            |
         
 
 ## References
