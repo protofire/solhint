@@ -2,7 +2,7 @@ const linter = require('../../../lib/index')
 const { assertWarnsCount, assertErrorMessage, assertNoWarnings } = require('../../common/asserts')
 
 describe('Linter - reentrancy', () => {
-  require('../../fixtures/security/reentrancy-vulnerable').forEach((curCode) =>
+  require('../../../lib/fixtureCases/security/reentrancy-vulnerable').forEach((curCode) =>
     it('should return warn when code contains possible reentrancy', () => {
       const report = linter.processStr(curCode, {
         rules: { reentrancy: 'warn' },
@@ -13,7 +13,7 @@ describe('Linter - reentrancy', () => {
     })
   )
 
-  require('../../fixtures/security/reentrancy-invulnerable').forEach((curCode) =>
+  require('../../../lib/fixtureCases/security/reentrancy-invulnerable').forEach((curCode) =>
     it('should not return warn when code do not contains transfer', () => {
       const report = linter.processStr(curCode, {
         rules: { reentrancy: 'warn' },

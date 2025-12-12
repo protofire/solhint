@@ -9,7 +9,7 @@ const {
 const {
   FUNCTION_CALLS_ERRORS,
   FUNCTION_CALLS_OK,
-} = require('../../fixtures/naming/func-named-parameters')
+} = require('../../../lib/fixtureCases/naming/func-named-parameters')
 
 const DEFAULT_MIN_UNNAMED_ARGUMENTS = 4
 

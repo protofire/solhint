@@ -9,7 +9,7 @@ const {
   NO_NAMED_MAPPING_REGULAR,
   NO_NAMED_MAPPING_NESTED,
   OTHER_WRONG_DECLARATIONS,
-} = require('../../fixtures/naming/named-parameters-mapping')
+} = require('../../../lib/fixtureCases/naming/named-parameters-mapping')
 
 const WRONG_DECLARATIONS = NO_NAMED_MAPPING_REGULAR.concat(
   NO_NAMED_MAPPING_NESTED,

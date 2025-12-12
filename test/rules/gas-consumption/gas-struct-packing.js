@@ -1,7 +1,7 @@
 const assert = require('assert')
 const { contractWith, multiLine } = require('../../common/contract-builder')
 const linter = require('../../../lib/index')
-const TEST_CASES = require('../../fixtures/gas-consumption/gas-struct-packing-data')
+const TEST_CASES = require('../../../lib/fixtureCases/gas-consumption/gas-struct-packing-data')
 
 // const { contractWith, multiLine } = require('../../common/contract-builder')
 

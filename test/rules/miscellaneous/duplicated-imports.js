@@ -1,7 +1,7 @@
 const assert = require('assert')
 const linter = require('../../../lib/index')
 const { assertNoErrors, assertErrorCount } = require('../../common/asserts')
-const TEST_CASES = require('../../fixtures/miscellaneous/duplicated-imports-data')
+const TEST_CASES = require('../../../lib/fixtureCases/miscellaneous/duplicated-imports-data')
 
 describe('Linter - duplicated-imports', () => {
   for (const importCase of TEST_CASES.duplicates) {
