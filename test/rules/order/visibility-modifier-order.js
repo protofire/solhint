@@ -4,7 +4,7 @@ const { contractWith } = require('../../common/contract-builder')
 
 describe('Linter - visibility-modifier-order', () => {
   it('should raise visibility modifier error', () => {
-    const code = require('../../fixtures/order/visibility-modifier-not-first')
+    const code = require('../../../lib/fixtureCases/order/visibility-modifier-not-first')
 
     const report = linter.processStr(code, {
       rules: { 'visibility-modifier-order': 'error' },
@@ -14,7 +14,7 @@ describe('Linter - visibility-modifier-order', () => {
   })
 
   it('should not raise visibility modifier error', () => {
-    const code = require('../../fixtures/order/visibility-modifier-first')
+    const code = require('../../../lib/fixtureCases/order/visibility-modifier-first')
 
     const report = linter.processStr(code, {
       rules: { 'visibility-modifier-order': 'error' },

@@ -1,7 +1,7 @@
 const linter = require('../../../lib/index')
 const contractWith = require('../../common/contract-builder').contractWith
 const { assertErrorCount, assertNoErrors, assertErrorMessage } = require('../../common/asserts')
-const VAR_DECLARATIONS = require('../../fixtures/best-practices/explicit-types')
+const VAR_DECLARATIONS = require('../../../lib/fixtureCases/best-practices/explicit-types')
 
 const getZeroErrorsObject = () => {
   const zeroErrorsExplicit = {}

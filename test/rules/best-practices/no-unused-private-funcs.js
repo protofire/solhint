@@ -5,7 +5,7 @@ const linter = require('../../../lib/index')
 const { contractWith, multiLine } = require('../../common/contract-builder')
 
 // Full integration fixture with many edge cases (recursion, modifiers, libs, abstract, overloads)
-const FIXTURE_CODE = require('../../fixtures/best-practices/no-unused-private-funcs')
+const FIXTURE_CODE = require('../../../lib/fixtureCases/best-practices/no-unused-private-funcs')
 
 describe('Linter - no-unused-private-funcs', () => {
   it('should report all expected unused private functions in the integration fixture', () => {

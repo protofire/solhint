@@ -5,7 +5,7 @@ const { assertErrorCount, assertErrorMessage, assertNoErrors } = require('../../
 describe('Linter - code-complexity', () => {
   it('should raise error when cyclomatic complexity of a function is too high', () => {
     const report = linter.processStr(
-      funcWith(require('../../fixtures/best-practices/code-complexity-high')),
+      funcWith(require('../../../lib/fixtureCases/best-practices/code-complexity-high')),
       {
         rules: { 'code-complexity': 'error' },
       }
@@ -17,7 +17,7 @@ describe('Linter - code-complexity', () => {
 
   it('should not raise error when cyclomatic complexity of a function is equal to max default allowed', () => {
     const report = linter.processStr(
-      funcWith(require('../../fixtures/best-practices/code-complexity-low')),
+      funcWith(require('../../../lib/fixtureCases/best-practices/code-complexity-low')),
       {
         rules: { 'code-complexity': 'error' },
       }
@@ -28,7 +28,7 @@ describe('Linter - code-complexity', () => {
 
   it('should raise error when cyclomatic complexity of a modifier is too high', () => {
     const report = linter.processStr(
-      modifierWith(require('../../fixtures/best-practices/code-complexity-high')),
+      modifierWith(require('../../../lib/fixtureCases/best-practices/code-complexity-high')),
       {
         rules: { 'code-complexity': 'error' },
       }

@@ -1,8 +1,8 @@
 const assert = require('assert')
 const linter = require('../../../lib/index')
 const contractWith = require('../../common/contract-builder').contractWith
-const correctExamples = require('../../fixtures/order/ordering-correct')
-const incorrectExamples = require('../../fixtures/order/ordering-incorrect')
+const correctExamples = require('../../../lib/fixtureCases/order/ordering-correct')
+const incorrectExamples = require('../../../lib/fixtureCases/order/ordering-incorrect')
 
 describe('Linter - ordering', () => {
   describe('correct examples', () => {

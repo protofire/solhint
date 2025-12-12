@@ -1,7 +1,7 @@
 const { assertNoWarnings, assertWarnsCount, assertErrorMessage } = require('../../common/asserts')
 const linter = require('../../../lib/index')
 const { contractWith, multiLine } = require('../../common/contract-builder')
-const FIXTURE_CODE = require('../../fixtures/security/no-immutable-before-declaration')
+const FIXTURE_CODE = require('../../../lib/fixtureCases/security/no-immutable-before-declaration')
 
 describe('Linter - no-immutable-before-declaration', () => {
   it('should report all expected cases in the integration fixture', () => {

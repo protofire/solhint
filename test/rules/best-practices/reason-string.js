@@ -11,7 +11,7 @@ const { funcWith } = require('../../common/contract-builder')
 
 describe('Linter - reason-string', () => {
   it('should raise reason string is mandatory for require', () => {
-    const code = require('../../fixtures/best-practices/require-without-reason')
+    const code = require('../../../lib/fixtureCases/best-practices/require-without-reason')
 
     const report = linter.processStr(code, {
       rules: { 'reason-string': ['warn', { maxLength: 5 }] },
@@ -65,7 +65,7 @@ describe('Linter - reason-string', () => {
   })
 
   it('should not raise warning for require', () => {
-    const code = require('../../fixtures/best-practices/require-with-reason')
+    const code = require('../../../lib/fixtureCases/best-practices/require-with-reason')
 
     const report = linter.processStr(code, {
       rules: { 'reason-string': ['warn', { maxLength: 31 }] },
