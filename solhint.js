@@ -39,7 +39,7 @@ function init() {
     .option('--noPrompt', 'do not suggest to backup files when any `fix` option is selected')
     .option('--init', 'create configuration file for solhint')
     .option('--disc', 'do not check for solhint updates')
-    .option('--save', 'save report to file on current folder')
+    .option('--save', 'save report to file in current folder')
     .option('--noPoster', 'remove discord poster')
     .description('Linter for Solidity programming language')
     .action(execMainAction)

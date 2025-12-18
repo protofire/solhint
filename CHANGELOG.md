@@ -1,3 +1,36 @@
+## [6.0.2] - 2025-12-17
+🛠️ `Fix`: corrected use-natspec enforcement behavior on internal functions
+
+🛠️ `Fix`: misc minor issues and typos. General polish and stability
+<br><br>
+
+🆕 `Rule`: added `foundry-no-block` to detect usage of `block.timestamp` and `block.number` in Solidity tests
+
+🆕 `Rule`: added `no-unused-private-functions` to prevent unused private function declarations
+
+🆕 `Rule`: added `no-immutable-before-declaration` to enforce correct immutable declaration order
+<br><br>
+
+🧱 `Enhancement`: improvements to `foundry-test-function` rule, including naming and configuration updates
+<br><br>
+
+🧰 `Infra`: update GitHub Actions in CI workflows to v5 and v6. Keeps CI aligned with latest ecosystem changes
+
+🧰 `Infra`: bump js-yaml dependency following security recommendations
+<br><br>
+
+🧹 `Chore`: stop publishing the test directory to npm packages. Reduces package size and noise
+
+🧹 `Chore`: `foundry-test-functions` is deprecated and will be removed in v7.0.0. Please rename to `foundry-test-function-naming`.
+WILL BE REPLACED IN v7
+<br><br>
+
+✨🛡️ Kudos to our contributors! 🛡️✨
+- [MamunC0der](https://github.com/MamunC0der)
+- [@MarkFizz77](https://github.com/MarkFizz77)
+- [RidaMichofi](https://github.com/RidaMichofi)
+- [Daulox92](https://github.com/Daulox92)
+
 ## [6.0.1] - 2025-08-22
 
 🛠️ `Fix`: `no-unused-vars` for modifiers

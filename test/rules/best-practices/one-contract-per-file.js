@@ -1,6 +1,6 @@
 const { assertNoWarnings, assertErrorMessage, assertErrorCount } = require('../../common/asserts')
 const linter = require('../../../lib/index')
-const contracts = require('../../fixtures/best-practices/one-contract-per-file')
+const contracts = require('../../../lib/fixtureCases/best-practices/one-contract-per-file')
 
 describe('Linter - one-contract-per-file', () => {
   it('should not raise error for ONE contract only', () => {

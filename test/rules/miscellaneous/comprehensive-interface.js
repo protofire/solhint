@@ -3,7 +3,7 @@ const linter = require('../../../lib/index')
 
 describe('Linter - comprehensive-interface', () => {
   it('should raise an error', () => {
-    const code = require('../../fixtures/miscellaneous/public-function-no-override')
+    const code = require('../../../lib/fixtureCases/miscellaneous/public-function-no-override')
 
     const report = linter.processStr(code, {
       rules: { 'comprehensive-interface': 'error' },
@@ -18,7 +18,7 @@ describe('Linter - comprehensive-interface', () => {
   })
 
   it('should not raise an error', () => {
-    const code = require('../../fixtures/miscellaneous/public-function-with-override')
+    const code = require('../../../lib/fixtureCases/miscellaneous/public-function-with-override')
 
     const report = linter.processStr(code, {
       rules: { 'comprehensive-interface': 'error' },

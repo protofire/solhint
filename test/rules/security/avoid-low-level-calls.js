@@ -3,7 +3,7 @@ const funcWith = require('../../common/contract-builder').funcWith
 const { assertWarnsCount, assertErrorMessage } = require('../../common/asserts')
 
 describe('Linter - avoid-low-level-calls', () => {
-  const LOW_LEVEL_CALLS = require('../../fixtures/security/low-level-calls')
+  const LOW_LEVEL_CALLS = require('../../../lib/fixtureCases/security/low-level-calls')
   const WARN_LOW_LEVEL_CALLS = LOW_LEVEL_CALLS[0].map(funcWith)
   const ALLOWED_LOW_LEVEL_CALLS = LOW_LEVEL_CALLS[1].map(funcWith)
 

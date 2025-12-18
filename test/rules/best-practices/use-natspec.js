@@ -543,5 +543,94 @@ describe('Linter - use-natspec', () => {
         "Mismatch in @return count for function 'doSomething'. Expected: 1, Found: 0"
       )
     })
+
+    it('should ignore internal and private functions if there are no tags', () => {
+      const code = `
+                    contract HalfIgnored {
+
+                      function doSomething1(uint256 amount) internal{}
+
+                      function doSomething2(uint256 amount) private{}
+
+                      /// @dev documented internal function
+                      function doSomething2(uint256 amount) private{}
+                    }
+                  `
+
+      const report = linter.processStr(code, {
+        rules: {
+          'use-natspec': [
+            'error',
+            {
+              title: {
+                enabled: false,
+              },
+              author: {
+                enabled: false,
+              },
+              notice: {
+                enabled: true,
+                ignore: {
+                  contract: ['HalfIgnored'],
+                },
+              },
+              param: {
+                enabled: true,
+              },
+            },
+          ],
+        },
+      })
+      assertNoErrors(report)
+    })
+
+    it('should check internal and private functions if there are tags', () => {
+      const code = `
+                    contract HalfIgnored {
+
+                      /// @notice does something
+                      /// @param amount1 the amount
+                      function doSomething1(uint256 amount) internal returns(uint256){}
+                    }
+                  `
+
+      const report = linter.processStr(code, {
+        rules: {
+          'use-natspec': [
+            'error',
+            {
+              title: {
+                enabled: false,
+              },
+              author: {
+                enabled: false,
+              },
+              notice: {
+                enabled: true,
+                ignore: {
+                  contract: ['HalfIgnored'],
+                },
+              },
+              param: {
+                enabled: true,
+              },
+              return: {
+                enabled: true,
+              },
+            },
+          ],
+        },
+      })
+      assertErrorCount(report, 3)
+      assert.ok(
+        report.reports[0].message,
+        "Mismatch in @param names for function 'doSomething1'. Expected: [amount], Found: [amount1]"
+      )
+      assert.ok(report.reports[1].message, "Missing @return tag in function 'doSomething1'")
+      assert.ok(
+        report.reports[2].message,
+        "Mismatch in @return count for function 'doSomething'. Expected: 1, Found: 0"
+      )
+    })
   })
 })

@@ -4,9 +4,12 @@ const sinon = require('sinon')
 const linter = require('../../../lib/index')
 const { assertNoErrors, assertErrorCount, assertWarnsCount } = require('../../common/asserts')
 const { multiLine } = require('../../common/contract-builder')
-const { successCases, errorCases } = require('../../fixtures/miscellaneous/import-path-check')
+const {
+  successCases,
+  errorCases,
+} = require('../../../lib/fixtureCases/miscellaneous/import-path-check')
 
-describe('import-path-check (mocked fs)', () => {
+describe('Linter - import-path-check (mocked fs)', () => {
   let existsStub
   let currentFakeFileSystem = new Set()
 

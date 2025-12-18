@@ -11,7 +11,7 @@ describe('Linter - quotes', () => {
   })
 
   it('should raise quotes error', () => {
-    const code = require('../../fixtures/miscellaneous/string-with-single-quotes')
+    const code = require('../../../lib/fixtureCases/miscellaneous/string-with-single-quotes')
 
     const report = linter.processStr(code, {
       rules: { quotes: 'error' },
@@ -69,7 +69,9 @@ describe('Linter - quotes', () => {
   )
 
   it('should raise no error', () => {
-    const filePath = storeAsFile(require('../../fixtures/miscellaneous/string-with-double-quotes'))
+    const filePath = storeAsFile(
+      require('../../../lib/fixtureCases/miscellaneous/string-with-double-quotes')
+    )
 
     const report = linter.processFile(filePath, {
       rules: { quotes: 'error' },
