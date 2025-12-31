@@ -6,7 +6,6 @@ convertLib.sol
 /coverage/
 /docs/_site/
 /docs/Gemfile*
-antlr4.jar
 /docs/.sass-cache/
 _temp/
 *solhintReport*.*
