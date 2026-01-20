@@ -1,5 +1,5 @@
 FROM node:20-alpine
 LABEL maintainer="diego.bale@protofire.io" 
-ENV VERSION=6.0.2
+ENV VERSION=6.0.3
 
 RUN npm install -g solhint@"$VERSION"

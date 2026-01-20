@@ -1,3 +1,16 @@
+## [6.0.3] - 2026-01-20
+🛠️ `Fix`: removed unused files, normalized schema for validation, load-rules, base-checker and validator improvements
+
+🛠️ `Fix`: removing console log from use-natspec rule (thanks [brossetti1](https://github.com/brossetti1)!!)
+
+🛠️ `Fix`: misc minor issues and typos. General polish and stability
+<br><br>
+
+✨🛡️ Kudos to our contributors! 🛡️✨
+- [brossetti1](https://github.com/brossetti1)
+- [maradini77](https://github.com/maradini77)
+
+
 ## [6.0.2] - 2025-12-17
 🛠️ `Fix`: corrected use-natspec enforcement behavior on internal functions
 
