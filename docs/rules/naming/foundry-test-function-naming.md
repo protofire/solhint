@@ -71,7 +71,7 @@ function numberIs42() public {}
 ```
 
 ## Version
-This rule was introduced in the latest version.
+This rule was introduced in [Solhint 6.0.2](https://github.com/protofire/solhint/blob/v6.0.2)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/naming/foundry-test-function-naming.js)

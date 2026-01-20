@@ -28,7 +28,7 @@ This rule accepts a string option for rule severity. Must be one of "error", "wa
 This rule does not have examples.
 
 ## Version
-This rule was introduced in the latest version.
+This rule was introduced in [Solhint 6.0.2](https://github.com/protofire/solhint/blob/v6.0.2)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/best-practices/no-unused-private-funcs.js)
