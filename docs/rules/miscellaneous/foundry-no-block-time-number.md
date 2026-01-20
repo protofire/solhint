@@ -42,7 +42,7 @@ This rule accepts an array of options:
 This rule does not have examples.
 
 ## Version
-This rule was introduced in the latest version.
+This rule was introduced in [Solhint 6.0.2](https://github.com/protofire/solhint/blob/v6.0.2)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/miscellaneous/foundry-no-block-time-number.js)
