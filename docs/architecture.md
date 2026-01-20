@@ -41,7 +41,7 @@ Developers of new rules need to have a basic understanding about the concepts an
 
 ### How to Add a Plugin
 
-You can write your own plugins to add new rules to Solhint. A plugin is just an npm packages that exports an array of new rules. The name of the package has to follow the naming convention of `solhint-plugin-<plugin-name>`.
+You can write your own plugins to add new rules to Solhint. A plugin is just an npm package that exports an array of new rules. The name of the package has to follow the naming convention of `solhint-plugin-<plugin-name>`.
 
 Read [this document](https://github.com/protofire/solhint/blob/master/docs/writing-plugins.md) to learn more about writing plugins.
 

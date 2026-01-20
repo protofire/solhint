@@ -28,7 +28,7 @@ format:
       "const-name-snakecase": "off",
       "avoid-suicide": "error",
       "avoid-sha3": "warn",
-      "avoid-tx-origin:": "warn",
+      "avoid-tx-origin": "warn",
       "not-rely-on-time": "warn",
       "not-rely-on-block-hash": "warn"
     }

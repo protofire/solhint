@@ -1,6 +1,6 @@
 {
   "name": "solhint",
-  "version": "6.0.2",
+  "version": "6.0.3",
   "description": "Solidity Code Linter",
   "main": "lib/index.js",
   "keywords": [
@@ -43,7 +43,6 @@
     "@solidity-parser/parser": "^0.20.2",
     "ajv": "^6.12.6",
     "ajv-errors": "^1.0.1",
-    "antlr4": "^4.13.1-patch-1",
     "ast-parents": "^0.0.1",
     "better-ajv-errors": "^2.0.2",
     "chalk": "^4.1.2",
