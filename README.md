@@ -119,7 +119,7 @@ It is now deprecated since version 5.1.0
 ### Multiple Configs
 Multiple configs files can be used at once. All config files should be named `.solhint.json`.
 If not done like this, multiple hierarchy configuration will not work.
-Solhint will go though all config files automatically.
+Solhint will go through all config files automatically.
 
 Given this structure:
 ```
