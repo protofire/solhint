@@ -239,12 +239,12 @@ describe('e2e general tests', function () {
 
     it('Should fail when missing import (relative path) - filesystem04', () => {
       const { code, stdout } = shell.exec(
-        `solhint --noPoster -c ".solhintF04.json" "./contracts/Test.sol"`        
+        `solhint --noPoster -c ".solhintF04.json" "./contracts/Test.sol"`
       )
-      
+
       expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
 
-      const expectedPath = path.join('contracts', 'Test.sol') 
+      const expectedPath = path.join('contracts', 'Test.sol')
       expect(stdout).to.include(`Import in ${expectedPath} doesn't exist in: ./Missing.sol`)
     })
   })
@@ -440,7 +440,7 @@ describe('e2e general tests', function () {
       expect(stdout.trim()).to.not.contain(ERROR_EMPTY_BLOCKS)
     })
 
-    it('should  - filesystem06', () => {
+    it('should fail on invalid path - filesystem06', () => {
       const { code, stderr } = shell.exec(
         `solhint --noPoster --ignore-path ".wrongFile" -c ".solhintS06.json" "contracts/**/*.sol"`
       )
@@ -462,6 +462,81 @@ describe('e2e general tests', function () {
       expect(stdout.trim()).to.not.contain('Skip.sol')
     })
   })
+
+  describe('shareable configs', function () {
+    const PATH = '14-shareable-config/filesystem'
+    let folderCounter = 1
+
+    beforeEach(() => {
+      const padded = String(folderCounter).padStart(2, '0')
+
+      const ROOT = PATH + padded + '/'
+      useFixtureFolder(this, ROOT + 'project')
+
+      folderCounter++
+    })
+
+    it('should load scoped shareable config via extends - fs1', () => {
+      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.include('no-empty-blocks')
+    })
+
+    it('should report when hierarchical config + extends (deepest directory with highest precedence 1) - fs2', () => {
+      //   applies deepest directory config with highest precedence (A.sol uses contracts/.solhint.json)
+      const { code, stdout } = shell.exec(`solhint contracts/A.sol`)
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.include('max-line-length')
+      expect(stdout).to.include('no-empty-blocks')
+    })
+
+    it('should report when hierarchical config + extends (deepest directory with highest precedence 2) - fs3', () => {
+      // applies deepest directory config with highest precedence (B.sol uses contracts/deep/.solhint.json)
+      const { code, stdout } = shell.exec(`solhint contracts/deep/B.sol`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.include('max-line-length')
+      expect(stdout).to.not.include('no-empty-blocks')
+    })
+
+    it('should validate later extends has higher priority (a then b => error)', () => {
+      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol - fs4`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.include('no-empty-blocks')
+    })
+
+    it('should  override local to contract config over extends in node modules', () => {
+      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol - fs5`)
+
+      expect(code).to.equal(EXIT_CODES.OK)
+      expect(stdout).to.not.include('no-empty-blocks')
+    })
+
+    it('should load scoped shareable config via full package name (@scope/solhint-config-*) - fs6', () => {
+      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol`)
+
+      // because it is configured as warning in the shareable config
+      expect(code).to.equal(EXIT_CODES.OK)
+      expect(stdout).to.include('no-empty-blocks')
+      expect(stdout).to.include('warning')
+    })
+
+    it('should accept explicit unscoped full package name (no double-prefix) - fs7', () => {
+      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.include('no-empty-blocks')
+    })
+
+    it('should reject malformed scoped extends (@scope/name/extra) - fs8', () => {
+      const { code, stdout, stderr } = shell.exec(`solhint contracts/EmptyBlocks.sol`)
+
+      expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
+      expect(stderr + stdout).to.include('Failed to load config "@test/demo/extra"')
+    })
+  })
 })
 
 function useFixture(dir) {
@@ -478,12 +553,12 @@ function useFixtureFolder(ctx, dir) {
 
   ctx.testDirPath = testDirPath
 
-    fs.mkdirSync(testDirPath, { recursive: true })
-    for (const entry of fs.readdirSync(testDirPath)) {
-      fs.rmSync(path.join(testDirPath, entry), { recursive: true, force: true });
-    }
+  fs.mkdirSync(testDirPath, { recursive: true })
+  for (const entry of fs.readdirSync(testDirPath)) {
+    fs.rmSync(path.join(testDirPath, entry), { recursive: true, force: true })
+  }
 
-    fs.cpSync(fixturePath, testDirPath, { recursive: true })
+  fs.cpSync(fixturePath, testDirPath, { recursive: true })
 
   shell.cd(testDirPath)
 }

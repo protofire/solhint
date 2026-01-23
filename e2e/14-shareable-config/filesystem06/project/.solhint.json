@@ -1,0 +1,4 @@
+{
+  "extends": ["@test/solhint-config-demo"]
+}
+
