@@ -1,5 +1,7 @@
+const path = require('path')
 const assert = require('assert')
 const { applyExtends } = require('../../lib/config/config-file')
+const { resolveShareableConfigName } = require('../../lib/config/config-file')
 
 describe('applyExtends', () => {
   it('should return the same config if the extends property does not exist', () => {
@@ -123,6 +125,59 @@ describe('applyExtends', () => {
       rules: {
         rule0: 'error',
       },
+    })
+  })
+
+  describe('resolveShareableConfigName', () => {
+    it('keeps solhint: core presets as-is', () => {
+      assert.equal(resolveShareableConfigName('solhint:recommended'), 'solhint:recommended')
+      assert.equal(resolveShareableConfigName('solhint:all'), 'solhint:all')
+    })
+
+    it('keeps absolute paths as-is (posix)', () => {
+      const abs = path.resolve('/tmp/some-config.js')
+      assert.equal(resolveShareableConfigName(abs), abs)
+    })
+
+    it('keeps absolute paths as-is (windows style) - only if running on win', () => {
+      // This avoids failing on non-win where path.isAbsolute('C:\\x') may behave differently
+      if (process.platform !== 'win32') return
+      const abs = 'C:\\temp\\some-config.js'
+      assert.equal(resolveShareableConfigName(abs), abs)
+    })
+
+    it('prefixes legacy unscoped configs (foo -> solhint-config-foo)', () => {
+      assert.equal(resolveShareableConfigName('foo'), 'solhint-config-foo')
+    })
+
+    it('does NOT double-prefix explicit unscoped packages (solhint-config-foo stays)', () => {
+      assert.equal(resolveShareableConfigName('solhint-config-foo'), 'solhint-config-foo')
+    })
+
+    it('keeps scoped configs that already include solhint-config- prefix', () => {
+      assert.equal(
+        resolveShareableConfigName('@scope/solhint-config-myconfig'),
+        '@scope/solhint-config-myconfig'
+      )
+    })
+
+    it('maps @scope/foo -> @scope/solhint-config-foo (eslint-style)', () => {
+      assert.equal(resolveShareableConfigName('@scope/foo'), '@scope/solhint-config-foo')
+    })
+
+    it('does not try to “fix” malformed scoped values (let require fail upstream)', () => {
+      assert.equal(resolveShareableConfigName('@scope'), '@scope')
+      assert.equal(resolveShareableConfigName('@'), '@')
+    })
+
+    it('does not try to support deep scoped paths (leave as-is)', () => {
+      // @scope/pkg/extra is not a standard npm package spec for require()
+      assert.equal(resolveShareableConfigName('@scope/pkg/extra'), '@scope/pkg/extra')
+    })
+
+    it('keeps weird-but-valid unscoped values stable', () => {
+      // If someone uses uppercase or dots, we shouldn’t mangle beyond prefixing.
+      assert.equal(resolveShareableConfigName('Foo.Bar'), 'solhint-config-Foo.Bar')
     })
   })
 })

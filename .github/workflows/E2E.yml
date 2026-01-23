@@ -40,6 +40,11 @@ jobs:
 
       - name: Check solhint version
         run: solhint --version
+
+      - name: Debug fixtures presence
+        run: |
+          ls -R e2e/14-shareable-config/filesystem01/project || true
+          ls -R e2e/14-shareable-config/filesystem04/project || true  
       
       - name: Run E2E Tests
         run: npm run ci:e2e
