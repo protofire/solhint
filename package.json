@@ -41,7 +41,7 @@
   "license": "MIT",
   "dependencies": {
     "@solidity-parser/parser": "^0.20.2",
-    "ajv": "^6.12.6",
+    "ajv": "^8.18.0",
     "ajv-errors": "^1.0.1",
     "ast-parents": "^0.0.1",
     "better-ajv-errors": "^2.0.2",
