@@ -462,6 +462,81 @@ describe('e2e general tests', function () {
       expect(stdout.trim()).to.not.contain('Skip.sol')
     })
   })
+  
+  describe('shareable configs', function () {
+    const PATH = '14-shareable-config/filesystem'
+    let folderCounter = 1
+
+    beforeEach(() => {
+      const padded = String(folderCounter).padStart(2, '0')
+
+      const ROOT = PATH + padded + '/'
+      useFixtureFolder(this, ROOT + 'project')
+
+      folderCounter++
+    })
+
+    it('should load scoped shareable config via extends - fs1', () => {
+      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.include('no-empty-blocks')
+    })
+
+    it('should report when hierarchical config + extends (deepest directory with highest precedence 1) - fs2', () => {
+      //   applies deepest directory config with highest precedence (A.sol uses contracts/.solhint.json)
+      const { code, stdout } = shell.exec(`solhint contracts/A.sol`)
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.include('max-line-length')
+      expect(stdout).to.include('no-empty-blocks')
+    })
+
+    it('should report when hierarchical config + extends (deepest directory with highest precedence 2) - fs3', () => {
+      // applies deepest directory config with highest precedence (B.sol uses contracts/deep/.solhint.json)
+      const { code, stdout } = shell.exec(`solhint contracts/deep/B.sol`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.include('max-line-length')
+      expect(stdout).to.not.include('no-empty-blocks')
+    })
+
+    it('should validate later extends has higher priority (a then b => error)', () => {
+      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol - fs4`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.include('no-empty-blocks')
+    })
+
+    it('should  override local to contract config over extends in node modules', () => {
+      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol - fs5`)
+
+      expect(code).to.equal(EXIT_CODES.OK)
+      expect(stdout).to.not.include('no-empty-blocks')
+    })
+
+    it('should load scoped shareable config via full package name (@scope/solhint-config-*) - fs6', () => {
+      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol`)
+
+      // because it is configured as warning in the shareable config
+      expect(code).to.equal(EXIT_CODES.OK)
+      expect(stdout).to.include('no-empty-blocks')
+      expect(stdout).to.include('warning')
+    })
+
+    it('should accept explicit unscoped full package name (no double-prefix) - fs7', () => {
+      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.include('no-empty-blocks')
+    })
+
+    it('should reject malformed scoped extends (@scope/name/extra) - fs8', () => {
+      const { code, stdout, stderr } = shell.exec(`solhint contracts/EmptyBlocks.sol`)
+
+      expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
+      expect(stderr + stdout).to.include('Failed to load config "@test/demo/extra"')
+    })
+  })
 
   describe('plugins', function () {
     const PATH = '15-plugins'
@@ -540,81 +615,6 @@ describe('e2e general tests', function () {
       expect(stdout).to.contain('Local plugin rule triggered')
       expect(stdout).to.contain('Compiler version')
       expect(stderr + stdout).to.contain('Could not load solhint-plugin-missing-plugin-206')
-    })
-  })
-
-  describe('shareable configs', function () {
-    const PATH = '14-shareable-config/filesystem'
-    let folderCounter = 1
-
-    beforeEach(() => {
-      const padded = String(folderCounter).padStart(2, '0')
-
-      const ROOT = PATH + padded + '/'
-      useFixtureFolder(this, ROOT + 'project')
-
-      folderCounter++
-    })
-
-    it('should load scoped shareable config via extends - fs1', () => {
-      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol`)
-
-      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
-      expect(stdout).to.include('no-empty-blocks')
-    })
-
-    it('should report when hierarchical config + extends (deepest directory with highest precedence 1) - fs2', () => {
-      //   applies deepest directory config with highest precedence (A.sol uses contracts/.solhint.json)
-      const { code, stdout } = shell.exec(`solhint contracts/A.sol`)
-      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
-      expect(stdout).to.include('max-line-length')
-      expect(stdout).to.include('no-empty-blocks')
-    })
-
-    it('should report when hierarchical config + extends (deepest directory with highest precedence 2) - fs3', () => {
-      // applies deepest directory config with highest precedence (B.sol uses contracts/deep/.solhint.json)
-      const { code, stdout } = shell.exec(`solhint contracts/deep/B.sol`)
-
-      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
-      expect(stdout).to.include('max-line-length')
-      expect(stdout).to.not.include('no-empty-blocks')
-    })
-
-    it('should validate later extends has higher priority (a then b => error)', () => {
-      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol - fs4`)
-
-      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
-      expect(stdout).to.include('no-empty-blocks')
-    })
-
-    it('should  override local to contract config over extends in node modules', () => {
-      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol - fs5`)
-
-      expect(code).to.equal(EXIT_CODES.OK)
-      expect(stdout).to.not.include('no-empty-blocks')
-    })
-
-    it('should load scoped shareable config via full package name (@scope/solhint-config-*) - fs6', () => {
-      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol`)
-
-      // because it is configured as warning in the shareable config
-      expect(code).to.equal(EXIT_CODES.OK)
-      expect(stdout).to.include('no-empty-blocks')
-      expect(stdout).to.include('warning')
-    })
-
-    it('should accept explicit unscoped full package name (no double-prefix) - fs7', () => {
-      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol`)
-
-      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
-      expect(stdout).to.include('no-empty-blocks')
-    })
-
-    it('should reject malformed scoped extends (@scope/name/extra) - fs8', () => {
-      const { code, stdout, stderr } = shell.exec(`solhint contracts/EmptyBlocks.sol`)
-
-      expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
-      expect(stderr + stdout).to.include('Failed to load config "@test/demo/extra"')
     })
   })
 })

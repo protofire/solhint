@@ -638,28 +638,5 @@ describe('Linter - use-natspec', () => {
 
       assertNoErrors(report)
     })
-
-    // it.only('Test Github Issue 743 - 1 -> ', () => {
-    //   const code = `
-    //               pragma solidity ^0.8.30;
-
-    //               /// @title A
-    //               /// @author B
-    //               /// @notice Some notice
-    //               contract Test {
-    //                 /**
-    //                  * @notice Example function
-    //                 */
-    //                 // solhint-disable-next-line
-    //                 function f() external returns(uint256) {}
-    //                }
-    //                `
-
-    //   const report = linter.processStr(code, {
-    //     rules: { 'use-natspec': 'error', 'gas-named-return-values': 'error' },
-    //   })
-
-    //   assertNoErrors(report)
-    // })
   })
 })
