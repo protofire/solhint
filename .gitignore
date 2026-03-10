@@ -19,4 +19,6 @@ solhint*.tgz
 # only allow useful test files in those node_modules
 !e2e/**/node_modules/**/*.js
 !e2e/**/node_modules/**/*.json
-!e2e/15-plugins/**/**/node_modules/**/*.*
+
+# allow test plugins inside e2e fixtures
+!e2e/15-plugins/**
