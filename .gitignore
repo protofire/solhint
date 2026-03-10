@@ -16,7 +16,7 @@ _temp/
 solhint*.tgz
 
 # Exception on E2E fixtures' node_modules (they are part of the test data)
-# only allow .js and .json files in those node_modules
+# only allow useful test files in those node_modules
 !e2e/**/node_modules/**/*.js
 !e2e/**/node_modules/**/*.json
-
+!e2e/15-plugins/**/**/node_modules/**/*.*
