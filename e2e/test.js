@@ -463,6 +463,86 @@ describe('e2e general tests', function () {
     })
   })
 
+  describe('plugins', function () {
+    const PATH = '15-plugins'
+
+    useFixture(PATH)
+
+    it('should load plugin from local node_modules', function () {
+      writeJsonFile('.solhint.local-plugin.json', {
+        plugins: ['local'],
+        rules: {
+          'local/local-rule': 'error',
+        },
+      })
+
+      const { code, stdout } = shell.exec(
+        'solhint --noPoster --disc -c .solhint.local-plugin.json Contract.sol'
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.contain('Local plugin rule triggered')
+    })
+
+    it('should load plugin from pluginPaths (plugin under <pluginPath>/node_modules)', function () {
+      writeJsonFile('.solhint.plugin-path.json', {
+        pluginPaths: path.join(this.testDirPath, 'external-project'),
+        plugins: ['external'],
+        rules: {
+          'external/external-rule': 'error',
+        },
+      })
+
+      const { code, stdout } = shell.exec(
+        'solhint --noPoster --disc -c .solhint.plugin-path.json Contract.sol'
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.contain('External plugin rule triggered')
+    })
+
+    it('should support multiple pluginPaths and load plugins from both', function () {
+      writeJsonFile('.solhint.multiple-plugin-paths.json', {
+        pluginPaths: [
+          path.join(this.testDirPath, 'path-one'),
+          path.join(this.testDirPath, 'path-two'),
+        ],
+        plugins: ['multi-one', 'multi-two'],
+        rules: {
+          'multi-one/multi-one-rule': 'error',
+          'multi-two/multi-two-rule': 'error',
+        },
+      })
+
+      const { code, stdout } = shell.exec(
+        'solhint --noPoster --disc -c .solhint.multiple-plugin-paths.json Contract.sol'
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.contain('Multi one plugin rule triggered')
+      expect(stdout).to.contain('Multi two plugin rule triggered')
+    })
+
+    it('should continue linting when one plugin is missing and still run core + valid plugin rules', function () {
+      writeJsonFile('.solhint.plugin-missing.json', {
+        plugins: ['missing-plugin-206', 'local'],
+        rules: {
+          'compiler-version': 'error',
+          'local/local-rule': 'error',
+        },
+      })
+
+      const { code, stdout, stderr } = shell.exec(
+        'solhint --noPoster --disc -c .solhint.plugin-missing.json Contract.sol'
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.contain('Local plugin rule triggered')
+      expect(stdout).to.contain('Compiler version')
+      expect(stderr + stdout).to.contain('Could not load solhint-plugin-missing-plugin-206')
+    })
+  })
+
   describe('shareable configs', function () {
     const PATH = '14-shareable-config/filesystem'
     let folderCounter = 1
@@ -561,6 +641,10 @@ function useFixtureFolder(ctx, dir) {
   fs.cpSync(fixturePath, testDirPath, { recursive: true })
 
   shell.cd(testDirPath)
+}
+
+function writeJsonFile(filePath, data) {
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2))
 }
 
 function createDummyFile(fullFilePath, content = '// dummy file\npragma solidity ^0.8.0;') {
