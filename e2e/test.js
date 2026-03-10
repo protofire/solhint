@@ -462,7 +462,7 @@ describe('e2e general tests', function () {
       expect(stdout.trim()).to.not.contain('Skip.sol')
     })
   })
-  
+
   describe('shareable configs', function () {
     const PATH = '14-shareable-config/filesystem'
     let folderCounter = 1
@@ -615,6 +615,86 @@ describe('e2e general tests', function () {
       expect(stdout).to.contain('Local plugin rule triggered')
       expect(stdout).to.contain('Compiler version')
       expect(stderr + stdout).to.contain('Could not load solhint-plugin-missing-plugin-206')
+    })
+
+it('should load plugin rules from an extended shareable config', function () {
+      fs.mkdirSync('node_modules/@test/solhint-config-demo-plugin-local', { recursive: true })
+      fs.writeFileSync(
+        'node_modules/@test/solhint-config-demo-plugin-local/index.js',
+        `module.exports = {
+          plugins: ['local'],
+          rules: {
+            'local/local-rule': 'error',
+          },
+        }
+        `
+      )
+
+      writeJsonFile('.solhint.extends-local-plugin.json', {
+        extends: ['@test/demo-plugin-local'],
+      })
+
+      const { code, stdout } = shell.exec(
+        'solhint --noPoster --disc -c .solhint.extends-local-plugin.json Contract.sol'
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.contain('Local plugin rule triggered')
+    })
+
+    it('should load plugin from pluginPaths defined in an extended shareable config', function () {
+      fs.mkdirSync('node_modules/@test/solhint-config-demo-plugin-external-path', { recursive: true })
+      fs.writeFileSync(
+        'node_modules/@test/solhint-config-demo-plugin-external-path/index.js',
+        `module.exports = {
+          pluginPaths: ['external-project'],
+          plugins: ['external'],
+          rules: {
+            'external/external-rule': 'error',
+          },
+        }
+        `
+      )
+
+      writeJsonFile('.solhint.extends-external-plugin.json', {
+        extends: ['@test/demo-plugin-external-path'],
+      })
+
+      const { code, stdout } = shell.exec(
+        'solhint --noPoster --disc -c .solhint.extends-external-plugin.json Contract.sol'
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.contain('External plugin rule triggered')
+    })
+
+    it('should load plugin from local config when using extends shareable config', function () {
+      fs.mkdirSync('node_modules/@test/solhint-config-demo-core-only', { recursive: true })
+      fs.writeFileSync(
+        'node_modules/@test/solhint-config-demo-core-only/index.js',
+        `module.exports = {
+          rules: {
+            'compiler-version': ['error', '^0.8.24'],
+          },
+        }
+        `
+      )
+
+      writeJsonFile('.solhint.extends-plus-local-plugin.json', {
+        extends: ['@test/demo-core-only'],
+        plugins: ['local'],
+        rules: {
+          'local/local-rule': 'error',
+        },
+      })
+
+      const { code, stdout } = shell.exec(
+        'solhint --noPoster --disc -c .solhint.extends-plus-local-plugin.json Contract.sol'
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.contain('Compiler version')
+      expect(stdout).to.contain('Local plugin rule triggered')
     })
   })
 })
