@@ -1,0 +1,8 @@
+{
+  "plugins": ["demo"],
+  "rules": {
+    "demo/plugin-rule-test": "error",
+    "no-empty-blocks": "error",
+    "non-existent-rule": "error"
+  }
+}
