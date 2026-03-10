@@ -537,6 +537,27 @@ describe('e2e general tests', function () {
       expect(stderr + stdout).to.include('Failed to load config "@test/demo/extra"')
     })
   })
+
+  describe('plugins', function () {
+    const PATH = '15-plugins/filesystem'
+    let folderCounter = 1
+
+    beforeEach(() => {
+      const padded = String(folderCounter).padStart(2, '0')
+
+      const ROOT = PATH + padded + '/'
+      useFixtureFolder(this, ROOT + 'project')
+
+      folderCounter++
+    })
+
+    it('should load plugin - fs1', () => {
+      const { code, stdout, stderr } = shell.exec(`solhint contracts/EmptyBlocks.sol`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stderr + stdout).to.include('plugin rule executed')
+    })
+  })
 })
 
 function useFixture(dir) {
