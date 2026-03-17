@@ -44,7 +44,7 @@ This rule accepts an array of options:
 - If `searchOn` has value, will be concatenated with DEFAULT_LOCATIONS.
 - If config has `extends:recommended` or `all` and rule is overwritten with `searchOn`, values are concatenated with DEFAULT_LOCATIONS.
 
-     *Default Locations:*
+     *DEFAULT_LOCATIONS:*
     - /[`~current-project`]
     - /[`~current-project`]/contracts
     - /[`~current-project`]/src
