@@ -42,7 +42,7 @@
   "dependencies": {
     "@solidity-parser/parser": "^0.20.2",
     "ajv": "^8.18.0",
-    "ajv-errors": "^1.0.1",
+    "ajv-errors": "^3.0.0",
     "ast-parents": "^0.0.1",
     "better-ajv-errors": "^2.0.2",
     "chalk": "^4.1.2",
