@@ -239,12 +239,12 @@ describe('e2e general tests', function () {
 
     it('Should fail when missing import (relative path) - filesystem04', () => {
       const { code, stdout } = shell.exec(
-        `solhint --noPoster -c ".solhintF04.json" "./contracts/Test.sol"`        
+        `solhint --noPoster -c ".solhintF04.json" "./contracts/Test.sol"`
       )
-      
+
       expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
 
-      const expectedPath = path.join('contracts', 'Test.sol') 
+      const expectedPath = path.join('contracts', 'Test.sol')
       expect(stdout).to.include(`Import in ${expectedPath} doesn't exist in: ./Missing.sol`)
     })
   })
@@ -440,7 +440,7 @@ describe('e2e general tests', function () {
       expect(stdout.trim()).to.not.contain(ERROR_EMPTY_BLOCKS)
     })
 
-    it('should  - filesystem06', () => {
+    it('should fail on invalid path - filesystem06', () => {
       const { code, stderr } = shell.exec(
         `solhint --noPoster --ignore-path ".wrongFile" -c ".solhintS06.json" "contracts/**/*.sol"`
       )
@@ -462,6 +462,241 @@ describe('e2e general tests', function () {
       expect(stdout.trim()).to.not.contain('Skip.sol')
     })
   })
+
+  describe('shareable configs', function () {
+    const PATH = '14-shareable-config/filesystem'
+    let folderCounter = 1
+
+    beforeEach(() => {
+      const padded = String(folderCounter).padStart(2, '0')
+
+      const ROOT = PATH + padded + '/'
+      useFixtureFolder(this, ROOT + 'project')
+
+      folderCounter++
+    })
+
+    it('should load scoped shareable config via extends - fs1', () => {
+      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.include('no-empty-blocks')
+    })
+
+    it('should report when hierarchical config + extends (deepest directory with highest precedence 1) - fs2', () => {
+      //   applies deepest directory config with highest precedence (A.sol uses contracts/.solhint.json)
+      const { code, stdout } = shell.exec(`solhint contracts/A.sol`)
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.include('max-line-length')
+      expect(stdout).to.include('no-empty-blocks')
+    })
+
+    it('should report when hierarchical config + extends (deepest directory with highest precedence 2) - fs3', () => {
+      // applies deepest directory config with highest precedence (B.sol uses contracts/deep/.solhint.json)
+      const { code, stdout } = shell.exec(`solhint contracts/deep/B.sol`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.include('max-line-length')
+      expect(stdout).to.not.include('no-empty-blocks')
+    })
+
+    it('should validate later extends has higher priority (a then b => error)', () => {
+      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol - fs4`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.include('no-empty-blocks')
+    })
+
+    it('should  override local to contract config over extends in node modules', () => {
+      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol - fs5`)
+
+      expect(code).to.equal(EXIT_CODES.OK)
+      expect(stdout).to.not.include('no-empty-blocks')
+    })
+
+    it('should load scoped shareable config via full package name (@scope/solhint-config-*) - fs6', () => {
+      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol`)
+
+      // because it is configured as warning in the shareable config
+      expect(code).to.equal(EXIT_CODES.OK)
+      expect(stdout).to.include('no-empty-blocks')
+      expect(stdout).to.include('warning')
+    })
+
+    it('should accept explicit unscoped full package name (no double-prefix) - fs7', () => {
+      const { code, stdout } = shell.exec(`solhint contracts/EmptyBlocks.sol`)
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.include('no-empty-blocks')
+    })
+
+    it('should reject malformed scoped extends (@scope/name/extra) - fs8', () => {
+      const { code, stdout, stderr } = shell.exec(`solhint contracts/EmptyBlocks.sol`)
+
+      expect(code).to.equal(EXIT_CODES.BAD_OPTIONS)
+      expect(stderr + stdout).to.include('Failed to load config "@test/demo/extra"')
+    })
+  })
+
+  describe('plugins', function () {
+    const PATH = '15-plugins'
+
+    useFixture(PATH)
+
+    it('should load plugin from local node_modules', function () {
+      writeJsonFile('.solhint.local-plugin.json', {
+        plugins: ['local'],
+        rules: {
+          'local/local-rule': 'error',
+        },
+      })
+
+      const { code, stdout } = shell.exec(
+        'solhint --noPoster --disc -c .solhint.local-plugin.json Contract.sol'
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.contain('Local plugin rule triggered')
+    })
+
+    it('should load plugin from pluginPaths (plugin under <pluginPath>/node_modules)', function () {
+      writeJsonFile('.solhint.plugin-path.json', {
+        pluginPaths: path.join(this.testDirPath, 'external-project'),
+        plugins: ['external'],
+        rules: {
+          'external/external-rule': 'error',
+        },
+      })
+
+      const { code, stdout } = shell.exec(
+        'solhint --noPoster --disc -c .solhint.plugin-path.json Contract.sol'
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.contain('External plugin rule triggered')
+    })
+
+    it('should support multiple pluginPaths and load plugins from both', function () {
+      writeJsonFile('.solhint.multiple-plugin-paths.json', {
+        pluginPaths: [
+          path.join(this.testDirPath, 'path-one'),
+          path.join(this.testDirPath, 'path-two'),
+        ],
+        plugins: ['multi-one', 'multi-two'],
+        rules: {
+          'multi-one/multi-one-rule': 'error',
+          'multi-two/multi-two-rule': 'error',
+        },
+      })
+
+      const { code, stdout } = shell.exec(
+        'solhint --noPoster --disc -c .solhint.multiple-plugin-paths.json Contract.sol'
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.contain('Multi one plugin rule triggered')
+      expect(stdout).to.contain('Multi two plugin rule triggered')
+    })
+
+    it('should continue linting when one plugin is missing and still run core + valid plugin rules', function () {
+      writeJsonFile('.solhint.plugin-missing.json', {
+        plugins: ['missing-plugin-206', 'local'],
+        rules: {
+          'compiler-version': 'error',
+          'local/local-rule': 'error',
+        },
+      })
+
+      const { code, stdout, stderr } = shell.exec(
+        'solhint --noPoster --disc -c .solhint.plugin-missing.json Contract.sol'
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.contain('Local plugin rule triggered')
+      expect(stdout).to.contain('Compiler version')
+      expect(stderr + stdout).to.contain('Could not load solhint-plugin-missing-plugin-206')
+    })
+
+it('should load plugin rules from an extended shareable config', function () {
+      fs.mkdirSync('node_modules/@test/solhint-config-demo-plugin-local', { recursive: true })
+      fs.writeFileSync(
+        'node_modules/@test/solhint-config-demo-plugin-local/index.js',
+        `module.exports = {
+          plugins: ['local'],
+          rules: {
+            'local/local-rule': 'error',
+          },
+        }
+        `
+      )
+
+      writeJsonFile('.solhint.extends-local-plugin.json', {
+        extends: ['@test/demo-plugin-local'],
+      })
+
+      const { code, stdout } = shell.exec(
+        'solhint --noPoster --disc -c .solhint.extends-local-plugin.json Contract.sol'
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.contain('Local plugin rule triggered')
+    })
+
+    it('should load plugin from pluginPaths defined in an extended shareable config', function () {
+      fs.mkdirSync('node_modules/@test/solhint-config-demo-plugin-external-path', { recursive: true })
+      fs.writeFileSync(
+        'node_modules/@test/solhint-config-demo-plugin-external-path/index.js',
+        `module.exports = {
+          pluginPaths: ['external-project'],
+          plugins: ['external'],
+          rules: {
+            'external/external-rule': 'error',
+          },
+        }
+        `
+      )
+
+      writeJsonFile('.solhint.extends-external-plugin.json', {
+        extends: ['@test/demo-plugin-external-path'],
+      })
+
+      const { code, stdout } = shell.exec(
+        'solhint --noPoster --disc -c .solhint.extends-external-plugin.json Contract.sol'
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.contain('External plugin rule triggered')
+    })
+
+    it('should load plugin from local config when using extends shareable config', function () {
+      fs.mkdirSync('node_modules/@test/solhint-config-demo-core-only', { recursive: true })
+      fs.writeFileSync(
+        'node_modules/@test/solhint-config-demo-core-only/index.js',
+        `module.exports = {
+          rules: {
+            'compiler-version': ['error', '^0.8.24'],
+          },
+        }
+        `
+      )
+
+      writeJsonFile('.solhint.extends-plus-local-plugin.json', {
+        extends: ['@test/demo-core-only'],
+        plugins: ['local'],
+        rules: {
+          'local/local-rule': 'error',
+        },
+      })
+
+      const { code, stdout } = shell.exec(
+        'solhint --noPoster --disc -c .solhint.extends-plus-local-plugin.json Contract.sol'
+      )
+
+      expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
+      expect(stdout).to.contain('Compiler version')
+      expect(stdout).to.contain('Local plugin rule triggered')
+    })
+  })
 })
 
 function useFixture(dir) {
@@ -478,14 +713,18 @@ function useFixtureFolder(ctx, dir) {
 
   ctx.testDirPath = testDirPath
 
-    fs.mkdirSync(testDirPath, { recursive: true })
-    for (const entry of fs.readdirSync(testDirPath)) {
-      fs.rmSync(path.join(testDirPath, entry), { recursive: true, force: true });
-    }
+  fs.mkdirSync(testDirPath, { recursive: true })
+  for (const entry of fs.readdirSync(testDirPath)) {
+    fs.rmSync(path.join(testDirPath, entry), { recursive: true, force: true })
+  }
 
-    fs.cpSync(fixturePath, testDirPath, { recursive: true })
+  fs.cpSync(fixturePath, testDirPath, { recursive: true })
 
   shell.cd(testDirPath)
+}
+
+function writeJsonFile(filePath, data) {
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2))
 }
 
 function createDummyFile(fullFilePath, content = '// dummy file\npragma solidity ^0.8.0;') {

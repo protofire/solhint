@@ -46,6 +46,28 @@ describe('Config validator', () => {
     assert.throws(() => validate(config), Error)
   })
 
+  it('should validate config with pluginPaths array', () => {
+    const config = {
+      pluginPaths: ['/tmp/solhint-plugins'],
+      rules: {
+        'avoid-throw': 'off',
+      },
+    }
+
+    assert.deepStrictEqual(_.isUndefined(validate(config)), true)
+  })
+
+  it('should validate config with pluginPaths string', () => {
+    const config = {
+      pluginPaths: '/tmp/solhint-plugins',
+      rules: {
+        'avoid-throw': 'off',
+      },
+    }
+
+    assert.deepStrictEqual(_.isUndefined(validate(config)), true)
+  })
+
   it('should work with an empty config', () => {
     const config = {}
 

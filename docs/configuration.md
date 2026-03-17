@@ -44,6 +44,28 @@ node_modules/
 additional-tests.sol
 ```
 
+
+### Plugins and `pluginPaths`
+
+Solhint resolves plugins from `process.cwd()` by default and can also use extra paths from `pluginPaths`.
+
+Resolution paths include:
+
+1. `process.cwd()`
+2. each `pluginPaths` entry
+3. each `<pluginPath>/node_modules`
+
+`pluginPaths` accepts either a string or an array:
+
+```json
+{
+  "pluginPaths": ["/some/path"],
+  "plugins": ["myplugin"]
+}
+```
+
+If one plugin cannot be loaded, Solhint emits a warning and continues linting with core rules and any other valid plugins.
+
 ### Configure linter with comments
 
 You can use comments in the source code to configure solhint in a given line or file.

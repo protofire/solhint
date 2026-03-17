@@ -1,4 +1,6 @@
+# ignore all node_modules by default
 node_modules/
+
 /.idea/
 test2.sol
 convertLib.sol
@@ -12,3 +14,11 @@ _temp/
 .env
 **/.DS_Store
 solhint*.tgz
+
+# Exception on E2E fixtures' node_modules (they are part of the test data)
+# only allow useful test files in those node_modules
+!e2e/**/node_modules/**/*.js
+!e2e/**/node_modules/**/*.json
+
+# allow test plugins inside e2e fixtures
+!e2e/15-plugins/**

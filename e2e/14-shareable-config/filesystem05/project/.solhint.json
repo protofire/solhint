@@ -1,0 +1,5 @@
+{
+  "extends": ["a", "b"],
+  "rules": { "no-empty-blocks": "off" }
+}
+

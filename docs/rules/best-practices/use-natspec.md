@@ -59,7 +59,7 @@ This rule accepts an array of options:
 ### Notes
 - For `internal` or `private` function this rule checks natspec as configured, only if there are tags present. If not, function is skipped.
 - For `external` or `public` function this rule checks natspec as specified in the config.
-- If a function or return value has unnamed parameters (e.g. `function foo(uint256)`), the rule only checks the number of `@param` or `@return` tags, not their names.
+- If a function or return value has unnamed parameters (e.g. `function foo(uint256, uint256 _amount)`), the rule DOES not check ANY of the params/return tags
 - If a function or variable has `@inheritdoc`, the rule skips the validation.
 - The rule supports both `///` and `/** */` style NatSpec comments.
 - If a custom config is provided, it is merged with the default config. Only the overridden fields need to be specified.
