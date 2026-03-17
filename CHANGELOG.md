@@ -16,6 +16,8 @@ Supports editor integrations and external project setups. Failed plugins emit wa
 
 🧹 Chore: bump minimatch to 10.2.4
 
+🧹 Chore: bump loadash to 4.17.23
+
 🧹 Chore: update LICENSE copyright year to 2026 (thanks xiaobei0715!!) (#745)
 <br><br>
 
