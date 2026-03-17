@@ -207,27 +207,6 @@ describe('Linter - use-natspec', () => {
     )
   })
 
-  it('should fail when natspec @param tags quantity does not match Solidity parameters', () => {
-    const code = `
-      /// @title A
-      /// @author B
-      /// @notice test
-      contract C {
-        /// @notice does something
-        /// @param description
-        function test(uint, uint) external {}
-      }
-    `
-    const report = linter.processStr(code, {
-      rules: { 'use-natspec': 'error' },
-    })
-
-    assertErrorMessage(
-      report,
-      "Mismatch in @param count for function 'test'. Expected: 2, Found: 1"
-    )
-  })
-
   it('should pass when unnamed Solidity params match @param count', () => {
     const code = `
       /// @title A
@@ -269,15 +248,15 @@ describe('Linter - use-natspec', () => {
     )
   })
 
-  it('should fail when one named return is undocumented', () => {
+  it('should check when return parameters ara not all named', () => {
     const code = `
       /// @title A
       /// @author B
       /// @notice test
       contract C {
         /// @notice does something
-        /// @return amount description
-        function test() external pure returns (uint256, uint256 amount) {
+        /// @return amount1 description
+        function test() external pure returns (uint256 amount1, uint256) {
           return (1, amount);
         }
       }
@@ -286,10 +265,7 @@ describe('Linter - use-natspec', () => {
       rules: { 'use-natspec': 'error' },
     })
 
-    assertErrorMessage(
-      report,
-      "Mismatch in @return count for function 'test'. Expected: 2, Found: 1"
-    )
+    assertNoErrors(report)
   })
 
   it('should ignore function if @inheritdoc is present', () => {
@@ -509,7 +485,7 @@ describe('Linter - use-natspec', () => {
       const code = `
                     contract HalfIgnored {
 
-                      function doSomething(uint256 amount) external returns(uint256) {}
+                      function doSomething(uint256 amount) external returns(uint256 retParam) {}
                     }
                   `
 
@@ -590,7 +566,7 @@ describe('Linter - use-natspec', () => {
 
                       /// @notice does something
                       /// @param amount1 the amount
-                      function doSomething1(uint256 amount) internal returns(uint256){}
+                      function doSomething1(uint256 amount) internal returns(uint256 retParam){}
                     }
                   `
 
@@ -631,6 +607,36 @@ describe('Linter - use-natspec', () => {
         report.reports[2].message,
         "Mismatch in @return count for function 'doSomething'. Expected: 1, Found: 0"
       )
+    })
+  })
+
+  // //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  describe('REPO Issues reported', () => {
+    it('Test Github Issue 742 - 1 -> unnamed parameters and mixed should not report', () => {
+      const code = `
+                  /// @title A
+                  /// @author B
+                  /// @notice Some notice
+                  contract C {
+
+                  /**
+                   * @notice Example1
+                  */
+                  function oneNoNamedParam(bytes calldata /*message*/) external {}
+
+                  /// @notice Example2
+                  function mixedNamedParams(uint256 named, uint256) external {}
+                }
+                `
+
+      const report = linter.processStr(code, {
+        rules: { 'use-natspec': 'error' },
+      })
+
+      assertNoErrors(report)
     })
   })
 })

@@ -159,6 +159,31 @@ Project ROOT =>
 A full list of all supported rules can be found [here](docs/rules.md).
 <br><br>
 
+
+### Plugins and `pluginPaths`
+
+Solhint resolves plugins using Node resolution from:
+
+1. `process.cwd()` (default behavior, unchanged)
+2. each configured entry in `pluginPaths`
+3. each configured `<pluginPath>/node_modules`
+
+This makes plugin loading work in environments where Solhint runs outside the project folder (for example IDE/editor integrations), while preserving the standard local `node_modules` behavior.
+
+Example:
+
+```json
+{
+  "pluginPaths": ["/some/path"],
+  "plugins": ["myplugin"],
+  "rules": {
+    "myplugin/some-rule": "error"
+  }
+}
+```
+
+If a plugin fails to load, Solhint will warn and continue linting with core rules and any other valid plugins.
+
 ### Ignore Configuration
 You can exclude files from linting using a `.solhintignore` file (name by default) or `--ignore-path` followed by a custom name. 
 It uses the same syntax as `.gitignore`, including support for negation with !.
