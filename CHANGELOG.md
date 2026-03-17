@@ -12,7 +12,7 @@
 Supports editor integrations y external project setups. Failed plugins emit warnings instead of crashing (#751)
 <br><br>
 
-🧹 Chore: bump lodash from 4.17.21 to 4.17.23 — includes prototype pollution fix in baseUnset (#740)
+🧹 Chore: bump ajv to 8.18.0
 
 🧹 Chore: update LICENSE copyright year to 2026 (thanks xiaobei0715!!) (#745)
 <br><br>
