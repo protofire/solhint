@@ -1,3 +1,27 @@
+## [6.0.4] - xxxxxx
+🛠️ Fix: `natspec` rule no longer flags unnamed parameters, which Solidity prohibits documenting with @param (#749)
+
+🛠️ Fix: `natspec` rule and `import-path-check` rules related issues (#750)
+
+🛠️ Fix: scoped package names now supported for shareable configs (#741)
+
+🛠️ Fix: misc minor issues and general polish (#739)
+<br><br>
+
+🧱 Enhancement: added `pluginPaths` config option for resolving plugins from custom locations. 
+Supports editor integrations y external project setups. Failed plugins emit warnings instead of crashing (#751)
+<br><br>
+
+🧹 Chore: bump ajv to 8.18.0
+
+🧹 Chore: update LICENSE copyright year to 2026 (thanks xiaobei0715!!) (#745)
+<br><br>
+
+✨🛡️ Kudos to our contributors! 🛡️✨
+
+- [xiaobei0715](https://github.com/xiaobei0715)
+
+
 ## [6.0.3] - 2026-01-20
 🛠️ `Fix`: removed unused files, normalized schema for validation, load-rules, base-checker and validator improvements
 
