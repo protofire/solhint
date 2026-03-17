@@ -1,4 +1,4 @@
-## [6.0.4] - xxxxxx
+## [6.1.0] - 2026-03-17
 🛠️ Fix: `natspec` rule no longer flags unnamed parameters, which Solidity prohibits documenting with @param (#749)
 
 🛠️ Fix: `natspec` rule and `import-path-check` rules related issues (#750)
@@ -9,10 +9,14 @@
 <br><br>
 
 🧱 Enhancement: added `pluginPaths` config option for resolving plugins from custom locations. 
-Supports editor integrations y external project setups. Failed plugins emit warnings instead of crashing (#751)
+Supports editor integrations and external project setups. Failed plugins emit warnings instead of crashing (#751)
 <br><br>
 
 🧹 Chore: bump ajv to 8.18.0
+
+🧹 Chore: bump minimatch to 10.2.4
+
+🧹 Chore: bump loadash to 4.17.23
 
 🧹 Chore: update LICENSE copyright year to 2026 (thanks xiaobei0715!!) (#745)
 <br><br>
