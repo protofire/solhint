@@ -42,8 +42,8 @@ describe('Linter - gas-struct-packing', () => {
         '   address addr1;',
         '   address addr2;',
         '   address addr3;',
-        '}'
-      )
+        '}',
+      ),
     )
     const report = linter.processStr(code, {
       rules: { 'gas-struct-packing': 'error' },

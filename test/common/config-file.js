@@ -5,7 +5,7 @@ describe('Config file', () => {
   it(`should throw an error if the config file doesn't exist`, () => {
     assert.throws(
       () => loadConfig('.solhint.json'),
-      /^Error: The config file passed as a parameter does not exist$/
+      /^Error: The config file passed as a parameter does not exist$/,
     )
   })
 

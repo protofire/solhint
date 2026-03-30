@@ -102,7 +102,7 @@ describe('Better errors addition + rule disable on error', () => {
       `,
       {
         rules: { 'compiler-version': 'error' },
-      }
+      },
     )
 
     assertErrorCount(report, 1)
@@ -119,7 +119,7 @@ describe('Better errors addition + rule disable on error', () => {
       `,
       {
         rules: { quotes: 'error' },
-      }
+      },
     )
 
     assertErrorCount(report, 1)
@@ -140,7 +140,7 @@ describe('Better errors addition + rule disable on error', () => {
       `,
       {
         rules: { 'reason-string': 'error' },
-      }
+      },
     )
     assertErrorCount(report, 1)
     assertErrorMessage(report, 'Error message for revert is too long: 33 counted / 32 allowed')
@@ -180,7 +180,42 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("invalid configuration for rule 'compiler-version'"),
-      `Expected a warning for compiler-version but got:\n${logged}`
+      `Expected a warning for compiler-version but got:\n${logged}`,
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
+  it('Valid CFG - execute: code-complexity with numeric option (regression #758)', () => {
+    // Regression: code-complexity with ["error", N] crashed on Ajv schema compilation
+    // in some environments (e.g. Bun). Ensure it runs without throwing.
+    linter.processStr(dummyCode, {
+      rules: { 'code-complexity': ['error', 8] },
+    })
+
+    // No config warning should be printed
+    sinon.assert.notCalled(warnSpy)
+  })
+
+  it('Invalid CFG - not execute: code-complexity expects integer)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'code-complexity': ['error', 'not-a-number'] },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+
+    assert.ok(
+      logged.includes("invalid configuration for rule 'code-complexity'"),
+      `Expected a warning for code-complexity but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')
@@ -204,7 +239,7 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("invalid configuration for rule 'max-line-length'"),
-      `Expected a warning for max-line-length but got:\n${logged}`
+      `Expected a warning for max-line-length but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')
@@ -228,7 +263,7 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("invalid configuration for rule 'interface-starts-with-i'"),
-      `Expected a warning for interface-starts-with-i but got:\n${logged}`
+      `Expected a warning for interface-starts-with-i but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')
@@ -252,7 +287,7 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("invalid configuration for rule 'interface-starts-with-i'"),
-      `Expected a warning for interface-starts-with-i but got:\n${logged}`
+      `Expected a warning for interface-starts-with-i but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')
@@ -276,7 +311,7 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("[solhint] Warning: Rule 'interface-sta' doesn't exist"),
-      `Expected a warning for interface-sta but got:\n${logged}`
+      `Expected a warning for interface-sta but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')
@@ -301,7 +336,7 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("invalid configuration for rule 'interface-starts-with-i'"),
-      `Expected a warning for interface-starts-with-i but got:\n${logged}`
+      `Expected a warning for interface-starts-with-i but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')
@@ -325,7 +360,7 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("invalid configuration for rule 'interface-starts-with-i'"),
-      `Expected a warning for interface-starts-with-i but got:\n${logged}`
+      `Expected a warning for interface-starts-with-i but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')
@@ -349,7 +384,7 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("invalid configuration for rule 'reason-string'"),
-      `Expected a warning for reason-string but got:\n${logged}`
+      `Expected a warning for reason-string but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')
@@ -373,7 +408,7 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("invalid configuration for rule 'immutable-vars-naming'"),
-      `Expected a warning for immutable-vars-naming but got:\n${logged}`
+      `Expected a warning for immutable-vars-naming but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')
@@ -397,7 +432,7 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("invalid configuration for rule 'immutable-vars-naming'"),
-      `Expected a warning for immutable-vars-naming but got:\n${logged}`
+      `Expected a warning for immutable-vars-naming but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')
@@ -421,7 +456,7 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("invalid configuration for rule 'explicit-types'"),
-      `Expected a warning for explicit-types but got:\n${logged}`
+      `Expected a warning for explicit-types but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')
@@ -445,7 +480,7 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("invalid configuration for rule 'quotes'"),
-      `Expected a warning for quotes but got:\n${logged}`
+      `Expected a warning for quotes but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')
@@ -469,7 +504,7 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("invalid configuration for rule 'foundry-test-functions'"),
-      `Expected a warning for foundry-test-functions but got:\n${logged}`
+      `Expected a warning for foundry-test-functions but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')
@@ -493,7 +528,7 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("invalid configuration for rule 'foundry-test-functions'"),
-      `Expected a warning for foundry-test-functions but got:\n${logged}`
+      `Expected a warning for foundry-test-functions but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')
@@ -517,7 +552,7 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("invalid configuration for rule 'foundry-test-functions'"),
-      `Expected a warning for foundry-test-functions but got:\n${logged}`
+      `Expected a warning for foundry-test-functions but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')
@@ -657,7 +692,7 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("invalid configuration for rule 'foundry-no-block-time-number'"),
-      `Expected a warning for foundry-no-block-time-number but got:\n${logged}`
+      `Expected a warning for foundry-no-block-time-number but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')
@@ -682,7 +717,7 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("invalid configuration for rule 'foundry-no-block-time-number'"),
-      `Expected a warning for foundry-no-block-time-number but got:\n${logged}`
+      `Expected a warning for foundry-no-block-time-number but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')
@@ -707,7 +742,7 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("invalid configuration for rule 'foundry-no-block-time-number'"),
-      `Expected a warning for foundry-no-block-time-number but got:\n${logged}`
+      `Expected a warning for foundry-no-block-time-number but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')
@@ -732,7 +767,7 @@ describe('Better errors addition + rule disable on error', () => {
 
     assert.ok(
       logged.includes("invalid configuration for rule 'foundry-no-block-time-number'"),
-      `Expected a warning for foundry-no-block-time-number but got:\n${logged}`
+      `Expected a warning for foundry-no-block-time-number but got:\n${logged}`,
     )
 
     assert.ok(warnSpy.called, 'console.warn should have been called')

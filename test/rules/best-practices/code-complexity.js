@@ -8,7 +8,7 @@ describe('Linter - code-complexity', () => {
       funcWith(require('../../../lib/fixtureCases/best-practices/code-complexity-high')),
       {
         rules: { 'code-complexity': 'error' },
-      }
+      },
     )
 
     assertErrorCount(report, 1)
@@ -20,7 +20,7 @@ describe('Linter - code-complexity', () => {
       funcWith(require('../../../lib/fixtureCases/best-practices/code-complexity-low')),
       {
         rules: { 'code-complexity': 'error' },
-      }
+      },
     )
 
     assertNoErrors(report)
@@ -31,7 +31,7 @@ describe('Linter - code-complexity', () => {
       modifierWith(require('../../../lib/fixtureCases/best-practices/code-complexity-high')),
       {
         rules: { 'code-complexity': 'error' },
-      }
+      },
     )
 
     assertErrorCount(report, 1)
@@ -51,8 +51,8 @@ describe('Linter - code-complexity', () => {
       'while (d > e) { }               ',
       'while (d > e) { }               ',
       'while (d > e) { }               ',
-      'while (d > e) { }               '
-    )
+      'while (d > e) { }               ',
+    ),
   )
 
   it('should not raise error when cyclomatic complexity is equal to max allowed', () => {

@@ -1,3 +1,18 @@
+## [6.2.0] - 2026-03-30
+🛠️ Fix: `code-complexity` rule no longer crashes when configured with a numeric option (e.g. `["error", 8]`) (#758)
+<br><br>
+
+🧹 Chore: bump `glob` to 13.0.6 — removes deprecated `inflight` transitive dependency
+
+🧹 Chore: bump `rimraf` to 6.1.3 (devDep)
+
+🧹 Chore: bump `brace-expansion`, `picomatch` and `flatted` to patched versions via overrides
+<br><br>
+
+🧰 Infra: drop Node.js 16 and 18 support (both EOL). Minimum supported version is now Node.js 20. CI matrix updated to `[20, 22]`
+<br><br>
+
+
 ## [6.1.0] - 2026-03-17
 🛠️ Fix: `natspec` rule no longer flags unnamed parameters, which Solidity prohibits documenting with @param (#749)
 

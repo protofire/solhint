@@ -14,7 +14,7 @@ describe('Linter - compiler-version', () => {
             `,
       {
         rules: { 'compiler-version': ['error', DEFAULT_SEMVER] },
-      }
+      },
     )
 
     assertErrorCount(report, 1)
@@ -29,7 +29,7 @@ describe('Linter - compiler-version', () => {
           `,
       {
         rules: { 'compiler-version': ['error', DEFAULT_SEMVER] },
-      }
+      },
     )
 
     assertErrorCount(report, 1)
@@ -44,7 +44,7 @@ describe('Linter - compiler-version', () => {
             `,
       {
         rules: { 'compiler-version': ['error', DEFAULT_SEMVER] },
-      }
+      },
     )
 
     assertErrorCount(report, 1)
@@ -59,7 +59,7 @@ describe('Linter - compiler-version', () => {
             `,
       {
         rules: { 'compiler-version': ['error', DEFAULT_SEMVER] },
-      }
+      },
     )
 
     assertErrorCount(report, 1)
@@ -75,7 +75,7 @@ describe('Linter - compiler-version', () => {
             `,
       {
         rules: { 'compiler-version': ['error', DEFAULT_SEMVER] },
-      }
+      },
     )
 
     assertErrorCount(report, 1)
@@ -91,7 +91,7 @@ describe('Linter - compiler-version', () => {
             `,
       {
         rules: { 'compiler-version': ['error', DEFAULT_SEMVER] },
-      }
+      },
     )
     assertNoErrors(report)
   })
@@ -106,7 +106,7 @@ describe('Linter - compiler-version', () => {
             `,
       {
         rules: { 'compiler-version': ['error', DEFAULT_SEMVER] },
-      }
+      },
     )
 
     assertErrorCount(report, 1)
@@ -184,7 +184,7 @@ describe('Linter - compiler-version', () => {
       contract Foo {}`,
       {
         rules: { 'compiler-version': ['error', '^0.8.2'] },
-      }
+      },
     )
 
     assert.equal(report.errorCount, 0)
@@ -199,7 +199,7 @@ describe('Linter - compiler-version', () => {
        }`,
       {
         rules: { 'compiler-version': ['error', '^0.7.4'] },
-      }
+      },
     )
 
     assert.equal(report.errorCount, 0)
@@ -214,7 +214,7 @@ describe('Linter - compiler-version', () => {
        }`,
       {
         rules: { 'compiler-version': 'error' },
-      }
+      },
     )
 
     assert.equal(report.errorCount, 0)
@@ -228,7 +228,7 @@ describe('Linter - compiler-version', () => {
        }`,
       {
         rules: { 'compiler-version': 'error' },
-      }
+      },
     )
 
     assert.equal(report.errorCount, 1)
@@ -243,7 +243,7 @@ describe('Linter - compiler-version', () => {
        }`,
       {
         rules: { 'compiler-version': 'error' },
-      }
+      },
     )
 
     assert.equal(report.errorCount, 0)
@@ -257,7 +257,7 @@ describe('Linter - compiler-version', () => {
        }`,
       {
         rules: { 'compiler-version': 'error' },
-      }
+      },
     )
     assert.equal(report.errorCount, 1)
     assertErrorMessage(report, DEFAULT_SEMVER)

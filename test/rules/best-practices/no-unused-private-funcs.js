@@ -26,7 +26,7 @@ describe('Linter - no-unused-private-funcs', () => {
     assertErrorMessage(
       report,
       1,
-      'Private function "_neverMutual" in contract "PrivateFuncRecursion"'
+      'Private function "_neverMutual" in contract "PrivateFuncRecursion"',
     )
     // For overload, the message only uses the function name, not the full signature
     assertErrorMessage(report, 2, 'Private function "_overload" in contract "PrivateFuncOverloads"')
@@ -83,8 +83,8 @@ describe('Linter - no-unused-private-funcs', () => {
         '',
         'function doSomething() external autoBump {',
         '  // business logic here',
-        '}'
-      )
+        '}',
+      ),
     )
 
     const report = linter.processStr(code, {
@@ -132,8 +132,8 @@ describe('Linter - no-unused-private-funcs', () => {
         '',
         'function callOne() external pure returns (uint256) {',
         '  return _overload(10);',
-        '}'
-      )
+        '}',
+      ),
     )
 
     const report = linter.processStr(code, {
@@ -163,8 +163,8 @@ describe('Linter - no-unused-private-funcs', () => {
         '  uint256 r = _overload(x);',
         '  r += _overload(data);',
         '  return r;',
-        '}'
-      )
+        '}',
+      ),
     )
 
     const report = linter.processStr(code, {
@@ -201,7 +201,7 @@ describe('Linter - no-unused-private-funcs', () => {
     assertErrorMessage(
       report,
       0,
-      'Private function "_helper" in contract "B" is never used within its defining contract'
+      'Private function "_helper" in contract "B" is never used within its defining contract',
     )
   })
 

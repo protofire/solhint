@@ -39,7 +39,7 @@ describe('applyExtends', () => {
         rule1: 'warning',
       },
     }
-    const result = applyExtends(initialConfig, (configName) => ({ config1 }[configName]))
+    const result = applyExtends(initialConfig, (configName) => ({ config1 })[configName])
 
     assert.deepStrictEqual(result, {
       extends: ['config1'],
@@ -62,7 +62,7 @@ describe('applyExtends', () => {
         rule1: 'warning',
       },
     }
-    const result = applyExtends(initialConfig, (configName) => ({ config1 }[configName]))
+    const result = applyExtends(initialConfig, (configName) => ({ config1 })[configName])
 
     assert.deepStrictEqual(result, {
       extends: ['config1'],
@@ -90,7 +90,7 @@ describe('applyExtends', () => {
         rule1: 'off',
       },
     }
-    const result = applyExtends(initialConfig, (configName) => ({ config1, config2 }[configName]))
+    const result = applyExtends(initialConfig, (configName) => ({ config1, config2 })[configName])
 
     assert.deepStrictEqual(result, {
       extends: ['config1', 'config2'],
@@ -118,7 +118,7 @@ describe('applyExtends', () => {
         rule0: 'off',
       },
     }
-    const result = applyExtends(initialConfig, (configName) => ({ config1, config2 }[configName]))
+    const result = applyExtends(initialConfig, (configName) => ({ config1, config2 })[configName])
 
     assert.deepStrictEqual(result, {
       extends: ['config1', 'config2'],
@@ -157,7 +157,7 @@ describe('applyExtends', () => {
     it('keeps scoped configs that already include solhint-config- prefix', () => {
       assert.equal(
         resolveShareableConfigName('@scope/solhint-config-myconfig'),
-        '@scope/solhint-config-myconfig'
+        '@scope/solhint-config-myconfig',
       )
     })
 

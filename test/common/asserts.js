@@ -14,7 +14,7 @@ function assertErrorMessage(...args) {
   }
 
   const errorMessage = `Report should contain message with text "${message}" at ${index} pos. ${printReport(
-    report
+    report,
   )}`
   assert.ok(report.messages[index].message.includes(message), errorMessage)
 }
@@ -31,7 +31,7 @@ function assertErrorCount(report, count) {
   assert.equal(
     report.errorCount,
     count,
-    `Report must contains ${count} errors. ${printReport(report)}`
+    `Report must contains ${count} errors. ${printReport(report)}`,
   )
 }
 
@@ -39,7 +39,7 @@ function assertWarnsCount(report, count) {
   assert.equal(
     report.warningCount,
     count,
-    `Report must contains ${count} warnings. ${printReport(report)}`
+    `Report must contains ${count} warnings. ${printReport(report)}`,
   )
 }
 

@@ -48,7 +48,7 @@ describe('Linter - no-immutable-before-declaration', () => {
     assertErrorMessage(
       report,
       0,
-      'Immutable "immB" is used in the initializer of "immA" before it is declared.'
+      'Immutable "immB" is used in the initializer of "immA" before it is declared.',
     )
   })
 
@@ -92,7 +92,7 @@ describe('Linter - no-immutable-before-declaration', () => {
     assertErrorMessage(
       report,
       0,
-      'Immutable "immX" is used in the initializer of "value" before it is declared.'
+      'Immutable "immX" is used in the initializer of "value" before it is declared.',
     )
   })
 
@@ -123,8 +123,8 @@ describe('Linter - no-immutable-before-declaration', () => {
         'uint256 internal immutable imm2 = 2;',
         'uint256 public a = imm1 + imm2;', // OK: both imm1 and imm2 declared before
         'uint256 public b = imm3 + imm1;', // BAD: imm3 declared later
-        'uint256 internal immutable imm3 = 3;'
-      )
+        'uint256 internal immutable imm3 = 3;',
+      ),
     )
 
     const report = linter.processStr(code, {
@@ -135,7 +135,7 @@ describe('Linter - no-immutable-before-declaration', () => {
     assertErrorMessage(
       report,
       0,
-      'Immutable "imm3" is used in the initializer of "b" before it is declared.'
+      'Immutable "imm3" is used in the initializer of "b" before it is declared.',
     )
   })
 
@@ -175,7 +175,7 @@ describe('Linter - no-immutable-before-declaration', () => {
     assertErrorMessage(
       report,
       0,
-      'Immutable "immB" is used in the initializer of "value" before it is declared.'
+      'Immutable "immB" is used in the initializer of "value" before it is declared.',
     )
   })
 
@@ -198,7 +198,7 @@ describe('Linter - no-immutable-before-declaration', () => {
     assertErrorMessage(
       report,
       0,
-      'Immutable "imm2" is used in the initializer of "b" before it is declared.'
+      'Immutable "imm2" is used in the initializer of "b" before it is declared.',
     )
   })
 
@@ -216,7 +216,7 @@ describe('Linter - no-immutable-before-declaration', () => {
     assertErrorMessage(
       report,
       0,
-      'Immutable "immB" is used in the initializer of "value" before it is declared.'
+      'Immutable "immB" is used in the initializer of "value" before it is declared.',
     )
   })
 })

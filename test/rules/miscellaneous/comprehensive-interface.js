@@ -12,8 +12,8 @@ describe('Linter - comprehensive-interface', () => {
     assert.equal(report.errorCount, 1)
     assert.ok(
       report.messages[0].message.includes(
-        'All public or external methods in a contract must override a definition from an interface'
-      )
+        'All public or external methods in a contract must override a definition from an interface',
+      ),
     )
   })
 

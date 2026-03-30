@@ -12,7 +12,7 @@ describe('Linter - foundry-no-block-time-number (functional)', () => {
       '    uint256 x = block.timestamp;',
       '    x;',
       '  }',
-      '}'
+      '}',
     )
 
     const fileName = '/project/tests/T.sol'
@@ -27,9 +27,9 @@ describe('Linter - foundry-no-block-time-number (functional)', () => {
     assertErrorCount(report, 1)
     assert.ok(
       report.reports[0].message.includes(
-        'Avoid `block.timestamp` in Foundry tests. Use `vm.getBlockTimestamp()` instead.'
+        'Avoid `block.timestamp` in Foundry tests. Use `vm.getBlockTimestamp()` instead.',
       ),
-      `Unexpected message: ${report.reports[0] && report.reports[0].message}`
+      `Unexpected message: ${report.reports[0] && report.reports[0].message}`,
     )
   })
 
@@ -41,7 +41,7 @@ describe('Linter - foundry-no-block-time-number (functional)', () => {
       '    uint256 n = block.number;',
       '    n;',
       '  }',
-      '}'
+      '}',
     )
 
     const fileName = '/project/test/T.sol'
@@ -56,9 +56,9 @@ describe('Linter - foundry-no-block-time-number (functional)', () => {
     assertErrorCount(report, 1)
     assert.ok(
       report.reports[0].message.includes(
-        'Avoid `block.number` in Foundry tests. Use `vm.getBlockNumber()` instead.'
+        'Avoid `block.number` in Foundry tests. Use `vm.getBlockNumber()` instead.',
       ),
-      `Unexpected message: ${report.reports[0] && report.reports[0].message}`
+      `Unexpected message: ${report.reports[0] && report.reports[0].message}`,
     )
   })
 
@@ -70,7 +70,7 @@ describe('Linter - foundry-no-block-time-number (functional)', () => {
       '    uint256 n = block.number;',
       '    n;',
       '  }',
-      '}'
+      '}',
     )
 
     const fileName = '/project/test/folder1/folder2/T.sol'
@@ -85,9 +85,9 @@ describe('Linter - foundry-no-block-time-number (functional)', () => {
     assertErrorCount(report, 1)
     assert.ok(
       report.reports[0].message.includes(
-        'Avoid `block.number` in Foundry tests. Use `vm.getBlockNumber()` instead.'
+        'Avoid `block.number` in Foundry tests. Use `vm.getBlockNumber()` instead.',
       ),
-      `Unexpected message: ${report.reports[0] && report.reports[0].message}`
+      `Unexpected message: ${report.reports[0] && report.reports[0].message}`,
     )
   })
 
@@ -100,7 +100,7 @@ describe('Linter - foundry-no-block-time-number (functional)', () => {
       '    uint256 b = block.number;',
       '    (a); (b);',
       '  }',
-      '}'
+      '}',
     )
 
     const fileName = '/repo/tests/helpers/T.sol'
@@ -118,11 +118,11 @@ describe('Linter - foundry-no-block-time-number (functional)', () => {
     const messages = report.reports.map((r) => r.message)
     assert.ok(
       messages.some((m) => m.includes('Avoid `block.timestamp`')),
-      `Messages: ${messages}`
+      `Messages: ${messages}`,
     )
     assert.ok(
       messages.some((m) => m.includes('Avoid `block.number`')),
-      `Messages: ${messages}`
+      `Messages: ${messages}`,
     )
   })
 
@@ -133,7 +133,7 @@ describe('Linter - foundry-no-block-time-number (functional)', () => {
       '  function f() public view returns (uint256) {',
       '    return block.timestamp + block.number;',
       '  }',
-      '}'
+      '}',
     )
 
     const fileName = '/project/contracts/Prod.sol' // not under test/tests
@@ -156,7 +156,7 @@ describe('Linter - foundry-no-block-time-number (functional)', () => {
       '    uint256 a = block.number;',
       '    a;',
       '  }',
-      '}'
+      '}',
     )
 
     const fileName = '/project/spec/T.sol'
@@ -171,9 +171,9 @@ describe('Linter - foundry-no-block-time-number (functional)', () => {
     assertErrorCount(report, 1)
     assert.ok(
       report.reports[0].message.includes(
-        'Avoid `block.number` in Foundry tests. Use `vm.getBlockNumber()` instead.'
+        'Avoid `block.number` in Foundry tests. Use `vm.getBlockNumber()` instead.',
       ),
-      `Unexpected message: ${report.reports[0] && report.reports[0].message}`
+      `Unexpected message: ${report.reports[0] && report.reports[0].message}`,
     )
   })
 
@@ -185,7 +185,7 @@ describe('Linter - foundry-no-block-time-number (functional)', () => {
       '    uint256 a = block.timestamp;',
       '    a;',
       '  }',
-      '}'
+      '}',
     )
 
     const fileName = '/project/TeStS/T.sol' // mixed case
@@ -200,9 +200,9 @@ describe('Linter - foundry-no-block-time-number (functional)', () => {
     assertErrorCount(report, 1)
     assert.ok(
       report.reports[0].message.includes(
-        'Avoid `block.timestamp` in Foundry tests. Use `vm.getBlockTimestamp()` instead.'
+        'Avoid `block.timestamp` in Foundry tests. Use `vm.getBlockTimestamp()` instead.',
       ),
-      `Unexpected message: ${report.reports[0] && report.reports[0].message}`
+      `Unexpected message: ${report.reports[0] && report.reports[0].message}`,
     )
   })
 
@@ -214,7 +214,7 @@ describe('Linter - foundry-no-block-time-number (functional)', () => {
       '    uint256 x = 1;',
       '    (x);',
       '  }',
-      '}'
+      '}',
     )
 
     const fileName = '/project/tests/T.sol'

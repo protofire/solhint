@@ -20,7 +20,7 @@ function createPluginPackage(baseDir, pluginName, exportBody) {
       name: `solhint-plugin-${pluginName}`,
       version: '1.0.0',
       main: 'index.js',
-    })
+    }),
   )
 
   fs.writeFileSync(path.join(pluginDir, 'index.js'), exportBody)
@@ -150,7 +150,7 @@ describe('Plugin loading', () => {
     assert.ok(warnSpy.called)
     assert.ok(
       warnSpy.getCalls().some((call) => String(call.args[0]).includes('missing-plugin-206')),
-      'should warn when plugin cannot be loaded'
+      'should warn when plugin cannot be loaded',
     )
   })
 
@@ -184,7 +184,7 @@ describe('Plugin loading', () => {
     createPluginPackage(
       nodeModulesDir,
       'default-export',
-      pluginDefaultExportBody('default-export-rule')
+      pluginDefaultExportBody('default-export-rule'),
     )
 
     process.chdir(projectDir)
