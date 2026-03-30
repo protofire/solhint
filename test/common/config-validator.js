@@ -191,7 +191,7 @@ describe('Better errors addition + rule disable on error', () => {
   it('Valid CFG - execute: code-complexity with numeric option (regression #758)', () => {
     // Regression: code-complexity with ["error", N] crashed on Ajv schema compilation
     // in some environments (e.g. Bun). Ensure it runs without throwing.
-    const report = linter.processStr(dummyCode, {
+    linter.processStr(dummyCode, {
       rules: { 'code-complexity': ['error', 8] },
     })
 
