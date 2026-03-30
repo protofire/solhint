@@ -10,7 +10,7 @@ describe('Linter - reentrancy', () => {
 
       assertWarnsCount(report, 1)
       assertErrorMessage(report, 'reentrancy')
-    })
+    }),
   )
 
   require('../../../lib/fixtureCases/security/reentrancy-invulnerable').forEach((curCode) =>
@@ -20,6 +20,6 @@ describe('Linter - reentrancy', () => {
       })
 
       assertNoWarnings(report)
-    })
+    }),
   )
 })

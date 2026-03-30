@@ -59,7 +59,7 @@ describe('Linter - func-name-mixedcase', () => {
         'contract A is IA {',
         '    /// @inheritdoc IA',
         '    uint256 public constant override START_TIME = 1;',
-        '}'
+        '}',
       )
 
       const report = linter.processStr(code, {
@@ -74,7 +74,7 @@ describe('Linter - func-name-mixedcase', () => {
         'pragma solidity ^0.8.20;',
         'interface IBad {',
         '  function START_TIME() external view returns (uint256, uint256);',
-        '}'
+        '}',
       )
 
       const report = linter.processStr(code, { rules: { 'func-name-mixedcase': 'error' } })
@@ -88,7 +88,7 @@ describe('Linter - func-name-mixedcase', () => {
         'pragma solidity ^0.8.20;',
         'interface IBad {',
         '  function START_TIME() external returns (uint256);',
-        '}'
+        '}',
       )
 
       const report = linter.processStr(code, { rules: { 'func-name-mixedcase': 'error' } })
@@ -102,7 +102,7 @@ describe('Linter - func-name-mixedcase', () => {
         'pragma solidity ^0.8.20;',
         'interface IBad {',
         '  function START_TIME(address who) external view returns (uint256);',
-        '}'
+        '}',
       )
 
       const report = linter.processStr(code, { rules: { 'func-name-mixedcase': 'error' } })
@@ -125,7 +125,7 @@ describe('Linter - func-name-mixedcase', () => {
         'pragma solidity ^0.8.20;',
         'interface IBad {',
         '  function START_TIME() external view returns (uint256 a, uint256 b);',
-        '}'
+        '}',
       )
 
       const report = linter.processStr(code, { rules: { 'func-name-mixedcase': 'error' } })
@@ -148,7 +148,7 @@ describe('Linter - func-name-mixedcase', () => {
         'interface IERC20 { function totalSupply() external view returns (uint256); }',
         'interface I {',
         '  function TOKEN() external view returns (IERC20);',
-        '}'
+        '}',
       )
       const report = linter.processStr(code, { rules: { 'func-name-mixedcase': 'error' } })
 
@@ -161,7 +161,7 @@ describe('Linter - func-name-mixedcase', () => {
         'type UD60x18 is uint256;',
         'interface I {',
         '  function UNLOCK_PERCENTAGE() external view returns (UD60x18);',
-        '}'
+        '}',
       )
       const report = linter.processStr(code, { rules: { 'func-name-mixedcase': 'error' } })
 
@@ -174,7 +174,7 @@ describe('Linter - func-name-mixedcase', () => {
         'enum Status { Init, Live, Done }',
         'interface I {',
         '  function CURRENT_STATUS() external view returns (Status);',
-        '}'
+        '}',
       )
       const report = linter.processStr(code, { rules: { 'func-name-mixedcase': 'error' } })
 
@@ -187,7 +187,7 @@ describe('Linter - func-name-mixedcase', () => {
         'struct Info { uint256 a; uint256 b; }',
         'interface I {',
         '  function DATA() external view returns (Info memory);',
-        '}'
+        '}',
       )
       const report = linter.processStr(code, { rules: { 'func-name-mixedcase': 'error' } })
 
@@ -200,7 +200,7 @@ describe('Linter - func-name-mixedcase', () => {
         'pragma solidity ^0.8.20;',
         'interface I {',
         '  function VALUES() external view returns (uint256[] memory);',
-        '}'
+        '}',
       )
       const report = linter.processStr(code, { rules: { 'func-name-mixedcase': 'error' } })
       assertErrorCount(report, 1)
@@ -212,7 +212,7 @@ describe('Linter - func-name-mixedcase', () => {
         'pragma solidity ^0.8.20;',
         'interface I {',
         '  function START_TIME() external view returns (uint256, uint256);',
-        '}'
+        '}',
       )
       const report = linter.processStr(code, { rules: { 'func-name-mixedcase': 'error' } })
       assertErrorCount(report, 1)
@@ -224,7 +224,7 @@ describe('Linter - func-name-mixedcase', () => {
         'pragma solidity ^0.8.20;',
         'interface I {',
         '  function MAGIC_NUMBER() external pure returns (uint256);',
-        '}'
+        '}',
       )
       const report = linter.processStr(code, { rules: { 'func-name-mixedcase': 'error' } })
       assertErrorCount(report, 1)
@@ -236,7 +236,7 @@ describe('Linter - func-name-mixedcase', () => {
         'pragma solidity ^0.8.20;',
         'interface I {',
         '  function aFunc$1Nam23e() external view returns (uint256);',
-        '}'
+        '}',
       )
       const report = linter.processStr(code, { rules: { 'func-name-mixedcase': 'error' } })
 
@@ -248,7 +248,7 @@ describe('Linter - func-name-mixedcase', () => {
         'pragma solidity ^0.8.20;',
         'interface I {',
         '  function NAME() external view returns (string memory);',
-        '}'
+        '}',
       )
       const report = linter.processStr(code, { rules: { 'func-name-mixedcase': 'error' } })
 
@@ -263,7 +263,7 @@ describe('Linter - func-name-mixedcase', () => {
         '  function TOKEN() external view returns (IERC20) {',
         '    return IERC20(address(0));',
         '  }',
-        '}'
+        '}',
       )
       const report = linter.processStr(code, { rules: { 'func-name-mixedcase': 'error' } })
       assertErrorCount(report, 1)

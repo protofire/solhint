@@ -27,7 +27,7 @@ function init() {
     .usage('[options] <file> [...other_files]')
     .option(
       '-f, --formatter [name]',
-      'report formatter name (stylish, table, tap, unix, json, compact, sarif)'
+      'report formatter name (stylish, table, tap, unix, json, compact, sarif)',
     )
     .option('-w, --max-warnings [maxWarningsNumber]', 'number of allowed warnings')
     .option('-c, --config [file_name]', 'file to use as your .solhint.json')
@@ -48,7 +48,7 @@ function init() {
     .command('stdin', null, { noHelp: false })
     .option('--filename [file_name]', 'name of file received using STDIN')
     .description(
-      'linting of source code data provided to STDIN\nEx: echo "contract Foo { function f1()external view returns(uint256) {} }" | solhint stdin\nEx: solhint stdin --filename "./pathToFilename" -f table'
+      'linting of source code data provided to STDIN\nEx: echo "contract Foo { function f1()external view returns(uint256) {} }" | solhint stdin\nEx: solhint stdin --filename "./pathToFilename" -f table',
     )
     .action(processStdin)
 
@@ -123,7 +123,7 @@ function askUserToContinue(callback) {
       // Normalize and pass the user's answer to the callback function.
       const normalizedAnswer = answer.trim().toLowerCase()
       callback(normalizedAnswer)
-    }
+    },
   )
 }
 
@@ -182,13 +182,13 @@ function executeMainActionLogic() {
     const baseConfig = readConfig()
     const patterns = program.args.filter(_.isString)
     let allFiles = []
-    const glob = require('glob')
+    const { globSync } = require('glob')
     const ignore = require('ignore')
 
     const ig = ignore().add(baseConfig.excludedFiles)
 
     for (const pattern of patterns) {
-      const matchedFiles = glob.sync(pattern, { nodir: true })
+      const matchedFiles = globSync(pattern, { nodir: true })
       allFiles = allFiles.concat(matchedFiles.map((f) => path.relative(process.cwd(), f)))
     }
 
@@ -209,7 +209,7 @@ function executeMainActionLogic() {
           cacheLocation: program.opts().cacheLocation,
         },
         process.cwd(),
-        program.opts().config
+        program.opts().config,
       )
 
       // Normalize the path here so it's consistent across OSes
@@ -351,20 +351,20 @@ function printReports(reports, formatter) {
       if (!program.opts().noPoster) {
         console.log(
           chalk.italic.bgYellow.black.bold(
-            ' -------------------------------------------------------------------------- '
-          )
+            ' -------------------------------------------------------------------------- ',
+          ),
         )
 
         console.log(
           chalk.italic.bgYellow.black.bold(
-            ' ===> Join SOLHINT Community at: https://discord.com/invite/4TYGq3zpjs <=== '
-          )
+            ' ===> Join SOLHINT Community at: https://discord.com/invite/4TYGq3zpjs <=== ',
+          ),
         )
 
         console.log(
           chalk.italic.bgYellow.black.bold(
-            ' -------------------------------------------------------------------------- \n'
-          )
+            ' -------------------------------------------------------------------------- \n',
+          ),
         )
       }
     }

@@ -36,14 +36,14 @@ describe('Load Rules', () => {
       // Your contract: schema must exist (can be null)
       assert.ok(
         Object.prototype.hasOwnProperty.call(rule.meta, 'schema'),
-        `Rule '${rule.ruleId}' meta must define "schema" key (null or object)`
+        `Rule '${rule.ruleId}' meta must define "schema" key (null or object)`,
       )
 
       // Optional: enforce only null or object (not number/string)
       const s = rule.meta.schema
       assert.ok(
         s === null || (typeof s === 'object' && !Array.isArray(s)),
-        `Rule '${rule.ruleId}' meta.schema must be null or an object`
+        `Rule '${rule.ruleId}' meta.schema must be null or an object`,
       )
     }
   })
@@ -77,7 +77,7 @@ describe('Load Rules', () => {
     assert.ok(!ruleIds.has('base-checker'), 'base-checker must not be treated as a rule')
     assert.ok(
       !ruleIds.has('rule-config-validator'),
-      'rule-config-validator must not be treated as a rule'
+      'rule-config-validator must not be treated as a rule',
     )
   })
 

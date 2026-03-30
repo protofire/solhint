@@ -37,7 +37,7 @@ contract Foo {
   function foo() {
     revert();
   }
-}`.trim()
+}`.trim(),
     )
   })
 
@@ -72,7 +72,7 @@ contract Foo {
     revert();
     revert();
   }
-}`.trim()
+}`.trim(),
     )
   })
 })

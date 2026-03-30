@@ -19,7 +19,7 @@ describe('Parse error', () => {
  contract Foo {}}
  contract Bar {
  `,
-      {}
+      {},
     )
 
     assertErrorCount(report, 2)

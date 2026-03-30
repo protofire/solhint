@@ -6,7 +6,7 @@ const { assertErrorCount, assertNoErrors, assertWarnsCount } = require('../../co
 describe('Linter - gas-named-return-values', () => {
   it('should NOT raise error for named return values', () => {
     const code = contractWith(
-      `function getBalanceFromTokens(address wallet) public returns(address token1, address token2, uint256 balance1, uint256 balance2) { balance = 1; }`
+      `function getBalanceFromTokens(address wallet) public returns(address token1, address token2, uint256 balance1, uint256 balance2) { balance = 1; }`,
     )
     const report = linter.processStr(code, {
       rules: { 'gas-named-return-values': 'error' },
@@ -16,7 +16,7 @@ describe('Linter - gas-named-return-values', () => {
 
   it('should raise error for unnamed return values', () => {
     const code = contractWith(
-      `function getBalanceFromTokens(address wallet) public returns(address, address, uint256, uint256) { balance = 1; }`
+      `function getBalanceFromTokens(address wallet) public returns(address, address, uint256, uint256) { balance = 1; }`,
     )
     const report = linter.processStr(code, {
       rules: { 'gas-named-return-values': 'error' },
@@ -26,7 +26,7 @@ describe('Linter - gas-named-return-values', () => {
     for (let index = 0; index < report.reports.length; index++) {
       assert.equal(
         report.reports[index].message,
-        `GC: Named return value is missing - Index ${index}`
+        `GC: Named return value is missing - Index ${index}`,
       )
     }
   })
@@ -41,7 +41,7 @@ describe('Linter - gas-named-return-values', () => {
 
   it('should raise error for 2 unnamed return values', () => {
     const code = contractWith(
-      `function getBalanceFromTokens(address wallet) public returns(address user, address, uint256 amount, uint256) { balance = 1; }`
+      `function getBalanceFromTokens(address wallet) public returns(address user, address, uint256 amount, uint256) { balance = 1; }`,
     )
     const report = linter.processStr(code, {
       rules: { 'gas-named-return-values': 'error' },
@@ -54,7 +54,7 @@ describe('Linter - gas-named-return-values', () => {
 
   it('should NOT raise error for solhint:recommended setup', () => {
     const code = contractWith(
-      `function getBalanceFromTokens(address wallet) public returns(address, address, uint256, uint256) { balance = 1; }`
+      `function getBalanceFromTokens(address wallet) public returns(address, address, uint256, uint256) { balance = 1; }`,
     )
 
     const report = linter.processStr(code, {
@@ -67,7 +67,7 @@ describe('Linter - gas-named-return-values', () => {
 
   it('should raise error for solhint:all setup', () => {
     const code = contractWith(
-      `function getBalance(uint256 wallet) public override returns(uint256, address) { wallet = 1; }`
+      `function getBalance(uint256 wallet) public override returns(uint256, address) { wallet = 1; }`,
     )
 
     const report = linter.processStr(code, {
@@ -85,7 +85,7 @@ describe('Linter - gas-named-return-values', () => {
     for (let index = 0; index < report.reports.length; index++) {
       assert.equal(
         report.reports[index].message,
-        `GC: Named return value is missing - Index ${index}`
+        `GC: Named return value is missing - Index ${index}`,
       )
     }
   })

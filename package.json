@@ -24,6 +24,8 @@
     "docs": "node scripts/generate-rule-docs.js",
     "prepublishOnly": "npm run lint && npm run test && npm run generate-rulesets",
     "local:e2e": "bash -c 'set -xeuo pipefail && rm solhint*tgz -f && npm pack && npm i -g solhint*tgz && (npm run ci:e2e);npm uninstall -g solhint'",
+    "install:global": "bash -c 'set -xeuo pipefail && rm solhint*tgz -f && npm pack && npm i -g solhint*tgz'",
+    "uninstall:global": "npm uninstall -g solhint",
     "ci:e2e": "mocha e2e/test.js e2e/formatters-test.js e2e/autofix-test.js --timeout 10000"
   },
   "bin": {
@@ -49,7 +51,7 @@
     "commander": "^10.0.0",
     "cosmiconfig": "^8.0.0",
     "fast-diff": "^1.2.0",
-    "glob": "^8.0.3",
+    "glob": "^10.4.5",
     "ignore": "^5.2.4",
     "js-yaml": "^4.1.0",
     "latest-version": "^7.0.0",
@@ -66,7 +68,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-prettier": "^5.0.0",
     "get-stream": "^6.0.0",
     "markdown-table": "^2.0.0",
     "mocha": "^10.2.0",
@@ -76,9 +78,23 @@
     "shelljs": "^0.8.5",
     "sinon": "^20.0.0",
     "spawn-sync": "^2.0.0",
-    "strip-ansi": "6"
+    "strip-ansi": "6",
+    "solhint-plugin-prettier": "^0.1.0"
   },
   "optionalDependencies": {
-    "prettier": "^2.8.3"
+    "prettier": "^3.0.0"
+  },
+  "overrides": {
+    "picomatch": "^2.3.2",
+    "flatted": "^3.4.2",
+    "minimatch@^3.0.0": {
+      "brace-expansion": "1.1.13"
+    },
+    "minimatch@^5.0.0": {
+      "brace-expansion": "2.0.3"
+    },
+    "minimatch@^10.0.0": {
+      "brace-expansion": "5.0.5"
+    }
   }
 }

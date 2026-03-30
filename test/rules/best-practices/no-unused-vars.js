@@ -23,7 +23,7 @@ describe('Linter - no-unused-vars', () => {
 
       assertWarnsCount(report, 1)
       assertErrorMessage(report, 'unused')
-    })
+    }),
   )
 
   UNUSED_VARS.forEach((curData) =>
@@ -34,7 +34,7 @@ describe('Linter - no-unused-vars', () => {
 
       assertWarnsCount(report, 1)
       assertErrorMessage(report, 'unused')
-    })
+    }),
   )
 
   const USED_VARS = [
@@ -51,8 +51,8 @@ describe('Linter - no-unused-vars', () => {
         '    let t := eq(a, and(mask, calldataload(4)))',
         '  }',
         '  return t;',
-        '}'
-      )
+        '}',
+      ),
     ),
     contractWith(
       multiLine(
@@ -63,8 +63,8 @@ describe('Linter - no-unused-vars', () => {
         'function b() public view returns (uint, uint) {',
         '  (uint c, uint d) = a();                      ',
         '  return (c, d);                               ',
-        '}                                              '
-      )
+        '}                                              ',
+      ),
     ),
     contractWith(
       multiLine(
@@ -75,8 +75,8 @@ describe('Linter - no-unused-vars', () => {
         'function b() public view returns (uint c, uint d) {',
         '  (c, d) = a();                                    ',
         '  return (c, d);                                   ',
-        '}                                                  '
-      )
+        '}                                                  ',
+      ),
     ),
   ]
 
@@ -87,7 +87,7 @@ describe('Linter - no-unused-vars', () => {
       })
 
       assertNoWarnings(report)
-    })
+    }),
   )
 
   USED_VARS.forEach((curData) =>
@@ -97,7 +97,7 @@ describe('Linter - no-unused-vars', () => {
       })
 
       assertNoWarnings(report)
-    })
+    }),
   )
 
   it('should not fail since function parameter is unnamed', () => {
@@ -163,8 +163,8 @@ describe('Linter - no-unused-vars', () => {
         '}',
         'function a() public view returns (uint, uint) {',
         '  return (1, 2);                               ',
-        '}                                              '
-      )
+        '}                                              ',
+      ),
     )
 
     const report = linter.processStr(code, {
@@ -184,8 +184,8 @@ describe('Linter - no-unused-vars', () => {
         '}',
         'function a() public view returns (uint, uint) {',
         '  return (1, 2);                               ',
-        '}                                              '
-      )
+        '}                                              ',
+      ),
     )
 
     const report = linter.processStr(code, {
@@ -204,8 +204,8 @@ describe('Linter - no-unused-vars', () => {
         '}',
         'function a() public view returns (uint, uint) {',
         '  return (1, 2);                               ',
-        '}                                              '
-      )
+        '}                                              ',
+      ),
     )
 
     const report = linter.processStr(code, {
@@ -226,8 +226,8 @@ describe('Linter - no-unused-vars', () => {
         '}',
         'function a() public view returns (uint, uint) {',
         '  return (1, 2);                               ',
-        '}                                              '
-      )
+        '}                                              ',
+      ),
     )
 
     const report = linter.processStr(code, {

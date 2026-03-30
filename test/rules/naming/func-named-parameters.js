@@ -29,7 +29,7 @@ describe('Linter - func-named-parameters', () => {
         report,
         `Named parameters missing. MIN unnamed arguments is ${
           minUnnamed < DEFAULT_MIN_UNNAMED_ARGUMENTS ? DEFAULT_MIN_UNNAMED_ARGUMENTS : minUnnamed
-        }`
+        }`,
       )
     })
   }
@@ -50,7 +50,7 @@ describe('Linter - func-named-parameters', () => {
 
   it('should NOT raise error when recommended rules are configured', () => {
     const code = contractWith(
-      `function callerFunction() public { funcName(sender, amount, receiver, token1, token2); }`
+      `function callerFunction() public { funcName(sender, amount, receiver, token1, token2); }`,
     )
     const report = linter.processStr(code, {
       extends: 'solhint:recommended',
@@ -62,7 +62,7 @@ describe('Linter - func-named-parameters', () => {
 
   it('should raise warning when all rules are configured (no min value)', () => {
     const code = contractWith(
-      `function callerFunction() public { funcName(sender, amount, receiver, token1, token2, token3); }`
+      `function callerFunction() public { funcName(sender, amount, receiver, token1, token2, token3); }`,
     )
 
     const report = linter.processStr(code, {
@@ -80,13 +80,13 @@ describe('Linter - func-named-parameters', () => {
 
     assertErrorMessage(
       report,
-      `Named parameters missing. MIN unnamed arguments is ${DEFAULT_MIN_UNNAMED_ARGUMENTS}`
+      `Named parameters missing. MIN unnamed arguments is ${DEFAULT_MIN_UNNAMED_ARGUMENTS}`,
     )
   })
 
   it('should raise error when rule has no minUnnamed arguments is set and default value takes over', () => {
     const code = contractWith(
-      `function callerFunction() public { funcName(sender, amount, receiver, token1, token2, token3); }`
+      `function callerFunction() public { funcName(sender, amount, receiver, token1, token2, token3); }`,
     )
     const report = linter.processStr(code, {
       rules: { 'func-named-parameters': 'error' },
@@ -96,7 +96,7 @@ describe('Linter - func-named-parameters', () => {
 
     assertErrorMessage(
       report,
-      `Named parameters missing. MIN unnamed arguments is ${DEFAULT_MIN_UNNAMED_ARGUMENTS}`
+      `Named parameters missing. MIN unnamed arguments is ${DEFAULT_MIN_UNNAMED_ARGUMENTS}`,
     )
   })
 })

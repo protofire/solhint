@@ -27,7 +27,7 @@ describe('Linter - state-visibility', () => {
       })
 
       assert.equal(report.warningCount, 0)
-    })
+    }),
   )
 
   function label(data) {

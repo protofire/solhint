@@ -26,7 +26,7 @@ describe('immutable-vars-naming', () => {
 
     assert.equal(report.errorCount, 1)
     assert.ok(
-      report.messages[0].message.includes('Immutable variables names are set to be in mixedCase')
+      report.messages[0].message.includes('Immutable variables names are set to be in mixedCase'),
     )
   })
 
@@ -50,8 +50,8 @@ describe('immutable-vars-naming', () => {
     assert.equal(report.errorCount, 1)
     assert.ok(
       report.messages[0].message.includes(
-        'Immutable variables name are set to be in capitalized SNAKE_CASE'
-      )
+        'Immutable variables name are set to be in capitalized SNAKE_CASE',
+      ),
     )
   })
 
