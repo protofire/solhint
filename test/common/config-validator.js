@@ -188,6 +188,41 @@ describe('Better errors addition + rule disable on error', () => {
     sinon.assert.notCalled(reportWarnSpy)
   })
 
+  it('Valid CFG - execute: code-complexity with numeric option (regression #758)', () => {
+    // Regression: code-complexity with ["error", N] crashed on Ajv schema compilation
+    // in some environments (e.g. Bun). Ensure it runs without throwing.
+    const report = linter.processStr(dummyCode, {
+      rules: { 'code-complexity': ['error', 8] },
+    })
+
+    // No config warning should be printed
+    sinon.assert.notCalled(warnSpy)
+  })
+
+  it('Invalid CFG - not execute: code-complexity expects integer)', () => {
+    const report = linter.processStr(dummyCode, {
+      rules: { 'code-complexity': ['error', 'not-a-number'] },
+    })
+
+    assert.equal(report.errorCount, 0)
+    assert.equal(report.warningCount, 0)
+    assert.deepEqual(report.messages, [])
+
+    const logged = warnSpy
+      .getCalls()
+      .map((c) => c.args[0])
+      .join('\n')
+
+    assert.ok(
+      logged.includes("invalid configuration for rule 'code-complexity'"),
+      `Expected a warning for code-complexity but got:\n${logged}`
+    )
+
+    assert.ok(warnSpy.called, 'console.warn should have been called')
+    sinon.assert.notCalled(reportErrorSpy)
+    sinon.assert.notCalled(reportWarnSpy)
+  })
+
   it('Invalid CFG - not execute: max-line-length expects number)', () => {
     const report = linter.processStr(dummyCode, {
       rules: { 'max-line-length': ['error', 'not-a-number'] },
