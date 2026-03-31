@@ -15,7 +15,8 @@ This is an open source project for linting [Solidity](http://solidity.readthedoc
 provides both **Security** and **Style Guide** validations.
 <br>
 [VISIT OUR WEBSITE](https://protofire.io/solhint)<br>
-[JOIN OUR DISCORD SERVER](https://discord.gg/4TYGq3zpjs)
+[JOIN OUR DISCORD SERVER](https://discord.gg/4TYGq3zpjs)<br>
+Tech Lead: [dbale-arg](https://github.com/dbale-arg)
 <br>
 ## Installation
 
@@ -29,7 +30,6 @@ solhint --version
 ```
 
 ## Usage
-
 First initialize a configuration file, if you don't have one:
 
 ```sh
@@ -161,7 +161,6 @@ A full list of all supported rules can be found [here](docs/rules.md).
 
 
 ### Plugins and `pluginPaths`
-
 Solhint resolves plugins using Node resolution from:
 
 1. `process.cwd()` (default behavior, unchanged)
@@ -223,7 +222,6 @@ solhint Foo.sol --cache --cache-location tmp/my-cache.json
 <br><br>
 
 ### Extendable rulesets
-
 The rulesets provided by solhint are the following:
 
 + solhint:default (deprecated since version v5.1.0)
@@ -232,7 +230,6 @@ The rulesets provided by solhint are the following:
 Use one of these as the value for the "extends" property in your configuration file.
 
 ### Configure the linter with comments
-
 You can use comments in the source code to configure solhint in a given line or file.
 
 For example, to disable all validations in the line following a comment:
@@ -311,7 +308,6 @@ Replace `$GIT_TAG` with real tag:
 Related documentation you may find [here](https://protofire.github.io/solhint/).
 
 ## IDE Integrations
-
   - **[Sublime Text 3](https://packagecontrol.io/search/solhint)**
   - **[Atom](https://atom.io/packages/atom-solidity-linter)**
   - **[Vim](https://github.com/sohkai/syntastic-local-solhint)**
@@ -322,13 +318,11 @@ Related documentation you may find [here](https://protofire.github.io/solhint/).
          https://marketplace.visualstudio.com/items?itemName=kodebox.solidity-language-server)**
 
 ## Table of Contents
-
 * [Contributing](docs/contributing.md): The core Solhint team :heart: contributions. This describes how you can contribute to the Solhint Project.
 * [Shareable configs](docs/shareable-configs.md): How to create and share your own configurations.
 * [Writing plugins](docs/writing-plugins.md): How to extend Solhint with your own rules.
 
 ## Plugins
-
 - [solhint-plugin-prettier](https://github.com/fvictorio/solhint-plugin-prettier): Integrate Solhint
   with the [Solidity plugin for Prettier](https://github.com/prettier-solidity/prettier-plugin-solidity).
 
@@ -337,7 +331,6 @@ Related documentation you may find [here](https://protofire.github.io/solhint/).
 [<img src="https://avatars2.githubusercontent.com/u/28943015?s=200&v=4" width="75px" height="75px" alt="POA Network - Public EVM Sidechain" title="POA Network - Public EVM Sidechain" style="margin: 20px 20px 0 0" />](https://github.com/poanetwork) [<img src="https://avatars3.githubusercontent.com/u/24832717?s=200&v=4" width="75px" height="75px" alt="0x" title="0x" style="margin: 20px 20px 0 0" />](https://github.com/0xProject) [<img src="https://avatars1.githubusercontent.com/u/24954468?s=200&v=4" width="75px" height="75px" alt="GNOSIS" title="GNOSIS" style="margin: 20px 20px 0 0"/>](https://github.com/gnosis)
 
 ### Projects
-
 - OpenZeppelin:
   - [openzeppelin-contracts](https://github.com/OpenZeppelin/openzeppelin-contracts)
 - POA Network - Public EVM Sidechain:
@@ -350,11 +343,9 @@ Related documentation you may find [here](https://protofire.github.io/solhint/).
   - [The DutchX decentralized trading protocol](https://github.com/gnosis/dex-contracts)
 
 ## Acknowledgements
-
 The Solidity parser used is [`@solidity-parser/parser`](https://github.com/solidity-parser/parser).
 
 ## License
-
 MIT
 
 ## Back us
@@ -363,5 +354,4 @@ Solhint is free to use and open-sourced. If you value our effort and feel like h
 [![Donate with Ethereum](https://img.shields.io/badge/Donate-ETH-blue)](https://etherscan.io/address/0xA81705c8C247C413a19A244938ae7f4A0393944e)
 
 ## Related projects
-
 - [eth-cli](https://github.com/protofire/eth-cli): CLI swiss army knife for Ethereum developers.
