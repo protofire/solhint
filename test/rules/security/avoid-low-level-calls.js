@@ -17,7 +17,7 @@ describe('Linter - avoid-low-level-calls', () => {
 
       assertWarnsCount(report, 1)
       assertErrorMessage(report, 'low level')
-    })
+    }),
   )
 
   ALLOWED_LOW_LEVEL_CALLS.forEach((curCode) =>
@@ -27,6 +27,6 @@ describe('Linter - avoid-low-level-calls', () => {
       })
 
       assertWarnsCount(report, 0)
-    })
+    }),
   )
 })
