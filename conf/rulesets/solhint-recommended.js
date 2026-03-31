@@ -99,6 +99,7 @@ module.exports = Object.freeze({
     'no-complex-fallback': 'warn',
     'no-immutable-before-declaration': 'warn',
     'no-inline-assembly': 'warn',
+    'no-unchecked-calls': 'warn',
     'not-rely-on-block-hash': 'warn',
     reentrancy: 'warn',
     'state-visibility': 'warn',

@@ -95,6 +95,7 @@ title:       "Rule Index of Solhint"
 | [no-complex-fallback](./rules/security/no-complex-fallback.md)                         | Fallback function must be simple.                                                               | $~~~~~~~~$✔️ |            |
 | [no-immutable-before-declaration](./rules/security/no-immutable-before-declaration.md) | Immutable variables should not be used in state variable initializers before they are declared. | $~~~~~~~~$✔️ |            |
 | [no-inline-assembly](./rules/security/no-inline-assembly.md)                           | Avoid to use inline assembly. It is acceptable only in rare cases.                              | $~~~~~~~~$✔️ |            |
+| [no-unchecked-calls](./rules/security/no-unchecked-calls.md)                           | Check return value of low-level calls (call, staticcall, delegatecall).                         | $~~~~~~~~$✔️ |            |
 | [not-rely-on-block-hash](./rules/security/not-rely-on-block-hash.md)                   | Do not rely on "block.blockhash". Miners can influence its value.                               | $~~~~~~~~$✔️ |            |
 | [not-rely-on-time](./rules/security/not-rely-on-time.md)                               | Avoid making time-based decisions in your business logic.                                       |              |            |
 | [reentrancy](./rules/security/reentrancy.md)                                           | Possible reentrancy vulnerabilities. Avoid state changes after transfer.                        | $~~~~~~~~$✔️ |            |
