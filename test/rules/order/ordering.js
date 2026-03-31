@@ -178,8 +178,8 @@ describe('Linter - ordering', () => {
     assert.equal(report.errorCount, 1)
     assert.ok(
       report.messages[0].message.includes(
-        'Function order is incorrect, custom error definition can not go after external view function'
-      )
+        'Function order is incorrect, custom error definition can not go after external view function',
+      ),
     )
   })
 
@@ -197,8 +197,8 @@ describe('Linter - ordering', () => {
     assert.equal(report.errorCount, 1)
     assert.ok(
       report.messages[0].message.includes(
-        'Function order is incorrect, custom error definition can not go after public  function'
-      )
+        'Function order is incorrect, custom error definition can not go after public  function',
+      ),
     )
   })
 
@@ -215,8 +215,8 @@ describe('Linter - ordering', () => {
     assert.equal(report.errorCount, 1)
     assert.ok(
       report.messages[0].message.includes(
-        'Function order is incorrect, custom error definition can not go after constructor'
-      )
+        'Function order is incorrect, custom error definition can not go after constructor',
+      ),
     )
   })
 
@@ -234,8 +234,8 @@ describe('Linter - ordering', () => {
     assert.equal(report.errorCount, 1)
     assert.ok(
       report.messages[0].message.includes(
-        'Function order is incorrect, event definition can not go after custom error'
-      )
+        'Function order is incorrect, event definition can not go after custom error',
+      ),
     )
   })
 
@@ -311,8 +311,8 @@ describe('Linter - ordering', () => {
     assert.equal(report.errorCount, 1)
     assert.ok(
       report.messages[0].message.includes(
-        'Function order is incorrect, import directive can not go after custom error definition'
-      )
+        'Function order is incorrect, import directive can not go after custom error definition',
+      ),
     )
   })
 
@@ -349,8 +349,8 @@ describe('Linter - ordering', () => {
     assert.equal(report.errorCount, 1)
     assert.ok(
       report.messages[0].message.includes(
-        'Function order is incorrect, custom error definition can not go after free function definition'
-      )
+        'Function order is incorrect, custom error definition can not go after free function definition',
+      ),
     )
   })
 
@@ -390,8 +390,8 @@ describe('Linter - ordering', () => {
     assert.equal(report.errorCount, 1)
     assert.ok(
       report.messages[0].message.includes(
-        'Function order is incorrect, file level constant can not go after free function definition'
-      )
+        'Function order is incorrect, file level constant can not go after free function definition',
+      ),
     )
   })
 

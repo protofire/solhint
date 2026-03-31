@@ -55,7 +55,7 @@ describe('Linter - use-natspec', () => {
 
     assertErrorMessage(
       report,
-      "Mismatch in @param names for function 'f'. Expected: [rightName], Found: [wrongName]"
+      "Mismatch in @param names for function 'f'. Expected: [rightName], Found: [wrongName]",
     )
   })
 
@@ -119,7 +119,7 @@ describe('Linter - use-natspec', () => {
     assert.ok(report.reports[0].message, "Missing @return tag in function 'f'")
     assert.ok(
       report.reports[1].message,
-      "Mismatch in @return names for function 'f'. Expected: [val], Found: []"
+      "Mismatch in @return names for function 'f'. Expected: [val], Found: []",
     )
   })
 
@@ -203,7 +203,7 @@ describe('Linter - use-natspec', () => {
 
     assertErrorMessage(
       report,
-      "Mismatch in @param names for function 'test'. Expected: [a], Found: [a, b]"
+      "Mismatch in @param names for function 'test'. Expected: [a], Found: [a, b]",
     )
   })
 
@@ -244,7 +244,7 @@ describe('Linter - use-natspec', () => {
 
     assertErrorMessage(
       report,
-      "Mismatch in @return names for function 'test'. Expected: [amount1, amount2], Found: [amount1]"
+      "Mismatch in @return names for function 'test'. Expected: [amount1, amount2], Found: [amount1]",
     )
   })
 
@@ -516,7 +516,7 @@ describe('Linter - use-natspec', () => {
       assert.ok(report.reports[1].message, "Missing @return tag in function 'doSomething'")
       assert.ok(
         report.reports[2].message,
-        "Mismatch in @return count for function 'doSomething'. Expected: 1, Found: 0"
+        "Mismatch in @return count for function 'doSomething'. Expected: 1, Found: 0",
       )
     })
 
@@ -600,12 +600,12 @@ describe('Linter - use-natspec', () => {
       assertErrorCount(report, 3)
       assert.ok(
         report.reports[0].message,
-        "Mismatch in @param names for function 'doSomething1'. Expected: [amount], Found: [amount1]"
+        "Mismatch in @param names for function 'doSomething1'. Expected: [amount], Found: [amount1]",
       )
       assert.ok(report.reports[1].message, "Missing @return tag in function 'doSomething1'")
       assert.ok(
         report.reports[2].message,
-        "Mismatch in @return count for function 'doSomething'. Expected: 1, Found: 0"
+        "Mismatch in @return count for function 'doSomething'. Expected: 1, Found: 0",
       )
     })
   })

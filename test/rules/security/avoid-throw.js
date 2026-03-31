@@ -15,7 +15,7 @@ describe('Linter - avoid-throw', () => {
 
       assert.equal(report.errorCount, 1)
       assert.ok(report.reports[0].message.includes('deprecate'))
-    })
+    }),
   )
 
   const ALMOST_DEPRECATION_ERRORS = ['throwing;']
@@ -29,6 +29,6 @@ describe('Linter - avoid-throw', () => {
       })
 
       assert.equal(report.errorCount, 0)
-    })
+    }),
   )
 })

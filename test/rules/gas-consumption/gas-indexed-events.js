@@ -9,7 +9,7 @@ const replaceErrorMsg = (variableName, eventName) => {
 describe('Linter - gas-indexed-events', () => {
   it('should raise error on amount and address', () => {
     const code = contractWith(
-      'event LogEvent1(string message, bytes whatever, uint128 amount, address account);'
+      'event LogEvent1(string message, bytes whatever, uint128 amount, address account);',
     )
 
     const report = linter.processStr(code, {
@@ -34,7 +34,7 @@ describe('Linter - gas-indexed-events', () => {
 
   it('should raise error on amount and account', () => {
     const code = contractWith(
-      'event LogEvent4(string indexed message, bytes indexed whatever, bool active, address account);'
+      'event LogEvent4(string indexed message, bytes indexed whatever, bool active, address account);',
     )
 
     const report = linter.processStr(code, {
@@ -48,7 +48,7 @@ describe('Linter - gas-indexed-events', () => {
 
   it('should NOT raise error, all three indexed keyword are used', () => {
     const code = contractWith(
-      'event LogEvent3(string indexed message, bytes indexed whatever, uint256 indexed amount, address account);'
+      'event LogEvent3(string indexed message, bytes indexed whatever, uint256 indexed amount, address account);',
     )
 
     const report = linter.processStr(code, {
@@ -60,7 +60,7 @@ describe('Linter - gas-indexed-events', () => {
 
   it('should NOT raise error, all types are not for suggestion', () => {
     const code = contractWith(
-      'event LogEvent3(string indexed message, bytes whatever, string message2);'
+      'event LogEvent3(string indexed message, bytes whatever, string message2);',
     )
 
     const report = linter.processStr(code, {

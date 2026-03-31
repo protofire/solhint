@@ -13,7 +13,7 @@ const {
 
 const WRONG_DECLARATIONS = NO_NAMED_MAPPING_REGULAR.concat(
   NO_NAMED_MAPPING_NESTED,
-  OTHER_WRONG_DECLARATIONS
+  OTHER_WRONG_DECLARATIONS,
 )
 const MAIN_KEY_ERROR = 'Main key parameter in mapping XXXXX is not named'
 const VALUE_ERROR = 'Value parameter in mapping XXXXX is not named'
@@ -54,7 +54,7 @@ describe('Linter - Named parameters for mapping', () => {
       })
 
       assert.equal(report.errorCount, 0)
-    })
+    }),
   )
 
   WRONG_DECLARATIONS.forEach((objectCode) => {
@@ -92,7 +92,7 @@ describe('Linter - Named parameters for mapping', () => {
       for (let i = 0; i < errorPositions.length; i++) {
         assert.equal(report.reports[i].message, errorPositions[i])
       }
-    })
+    }),
   )
 
   // WARNING FLAG
@@ -105,7 +105,7 @@ describe('Linter - Named parameters for mapping', () => {
 
       assert.equal(report.errorCount, 0)
       assertWarnsCount(report, 0)
-    })
+    }),
   )
 
   // OFF FLAG
@@ -118,7 +118,7 @@ describe('Linter - Named parameters for mapping', () => {
 
       assert.equal(report.errorCount, 0)
       assertWarnsCount(report, 0)
-    })
+    }),
   )
 
   // OFF FLAG
@@ -131,6 +131,6 @@ describe('Linter - Named parameters for mapping', () => {
 
       assert.equal(report.errorCount, 0)
       assertWarnsCount(report, 0)
-    })
+    }),
   )
 })

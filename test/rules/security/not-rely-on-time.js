@@ -16,6 +16,6 @@ describe('Linter - not-rely-on-time', () => {
 
       assertWarnsCount(report, 1)
       assertErrorMessage(report, 'time')
-    })
+    }),
   )
 })

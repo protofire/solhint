@@ -20,7 +20,7 @@ describe('Linter - no-empty-blocks', () => {
 
       assertWarnsCount(report, 1)
       assertErrorMessage(report, 'empty block')
-    })
+    }),
   )
 
   const BLOCKS_WITH_DEFINITIONS = [
@@ -42,7 +42,7 @@ describe('Linter - no-empty-blocks', () => {
       })
 
       assertNoWarnings(report)
-    })
+    }),
   )
 
   it('should not raise error for default function', () => {

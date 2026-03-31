@@ -8,7 +8,7 @@ const { assertErrorCount } = require('../../common/asserts')
 // Helper to create nested temporary directories and return their path
 function createTempProject(
   structure,
-  root = fs.mkdtempSync(path.join(os.tmpdir(), 'solhint-hier-'))
+  root = fs.mkdtempSync(path.join(os.tmpdir(), 'solhint-hier-')),
 ) {
   Object.entries(structure).forEach(([name, content]) => {
     const fullPath = path.join(root, name)

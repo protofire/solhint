@@ -148,7 +148,7 @@ describe('Linter - var-name-mixedcase', () => {
 
       assert.equal(report.errorCount, 1)
       assert.ok(
-        report.messages[0].message.includes('Variable name must be in mixedCase RESULT_MSG')
+        report.messages[0].message.includes('Variable name must be in mixedCase RESULT_MSG'),
       )
     })
   })

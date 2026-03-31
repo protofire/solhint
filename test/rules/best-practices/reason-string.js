@@ -119,7 +119,7 @@ describe('Linter - reason-string', () => {
 
     assert.equal(
       report.reports[0].message,
-      `Error message for require is too long: ${qtyChars} counted / ${maxLength} allowed`
+      `Error message for require is too long: ${qtyChars} counted / ${maxLength} allowed`,
     )
   })
 })

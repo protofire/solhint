@@ -49,7 +49,7 @@ describe('Linter - foundry-test-functions', () => {
       assertErrorMessage(
         report,
         DEPRECATED_ALERT +
-          `Function ${prefix + 'FunctionName()'} must match Foundry test naming convention`
+          `Function ${prefix + 'FunctionName()'} must match Foundry test naming convention`,
       )
     })
   }
@@ -108,7 +108,7 @@ describe('Linter - foundry-test-functions', () => {
 
   it(`should NOT raise error for setUp function, since is configured as SKIPPED`, () => {
     const code = contractWith(
-      'function setUp() public { testNumber = 42; } function finish() public { testNumber = 42; }'
+      'function setUp() public { testNumber = 42; } function finish() public { testNumber = 42; }',
     )
 
     const report = linter.processStr(code, {
@@ -132,11 +132,11 @@ describe('Linter - foundry-test-functions', () => {
     assertErrorCount(report, 2)
     assert.equal(
       report.reports[0].message,
-      DEPRECATED_ALERT + 'Function invalidFunction1() must match Foundry test naming convention'
+      DEPRECATED_ALERT + 'Function invalidFunction1() must match Foundry test naming convention',
     )
     assert.equal(
       report.reports[1].message,
-      DEPRECATED_ALERT + 'Function invalidFunction2() must match Foundry test naming convention'
+      DEPRECATED_ALERT + 'Function invalidFunction2() must match Foundry test naming convention',
     )
   })
 
@@ -173,11 +173,11 @@ describe('Linter - foundry-test-functions', () => {
     assertErrorCount(report, 2)
     assert.equal(
       report.reports[0].message,
-      DEPRECATED_ALERT + 'Function invalidFunction1() must match Foundry test naming convention'
+      DEPRECATED_ALERT + 'Function invalidFunction1() must match Foundry test naming convention',
     )
     assert.equal(
       report.reports[1].message,
-      DEPRECATED_ALERT + 'Function invalidFunction2() must match Foundry test naming convention'
+      DEPRECATED_ALERT + 'Function invalidFunction2() must match Foundry test naming convention',
     )
   })
 
@@ -195,15 +195,15 @@ describe('Linter - foundry-test-functions', () => {
     assertErrorCount(report, 3)
     assert.equal(
       report.reports[0].message,
-      DEPRECATED_ALERT + 'Function finish() must match Foundry test naming convention'
+      DEPRECATED_ALERT + 'Function finish() must match Foundry test naming convention',
     )
     assert.equal(
       report.reports[1].message,
-      DEPRECATED_ALERT + 'Function invalidFunction1() must match Foundry test naming convention'
+      DEPRECATED_ALERT + 'Function invalidFunction1() must match Foundry test naming convention',
     )
     assert.equal(
       report.reports[2].message,
-      DEPRECATED_ALERT + 'Function invalidFunction2() must match Foundry test naming convention'
+      DEPRECATED_ALERT + 'Function invalidFunction2() must match Foundry test naming convention',
     )
   })
 
@@ -220,15 +220,15 @@ describe('Linter - foundry-test-functions', () => {
     assertErrorCount(report, 3)
     assert.equal(
       report.reports[0].message,
-      DEPRECATED_ALERT + 'Function setUp() must match Foundry test naming convention'
+      DEPRECATED_ALERT + 'Function setUp() must match Foundry test naming convention',
     )
     assert.equal(
       report.reports[1].message,
-      DEPRECATED_ALERT + `Function finish() must match Foundry test naming convention`
+      DEPRECATED_ALERT + `Function finish() must match Foundry test naming convention`,
     )
     assert.equal(
       report.reports[2].message,
-      DEPRECATED_ALERT + 'Function invalidFunction() must match Foundry test naming convention'
+      DEPRECATED_ALERT + 'Function invalidFunction() must match Foundry test naming convention',
     )
   })
 })

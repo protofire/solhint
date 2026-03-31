@@ -16,7 +16,7 @@ describe('Linter - avoid-suicide', () => {
 
       assert.equal(report.errorCount, 1)
       assert.ok(report.reports[0].message.includes('deprecate'))
-    })
+    }),
   )
 
   const ALMOST_DEPRECATION_ERRORS = ['suicides();', 'selfdestruct();']
@@ -30,7 +30,7 @@ describe('Linter - avoid-suicide', () => {
       })
 
       assert.equal(report.errorCount, 0)
-    })
+    }),
   )
 
   it(`should not return error when doing for struct name suicide`, () => {

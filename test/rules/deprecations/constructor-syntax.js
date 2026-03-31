@@ -11,7 +11,7 @@ describe('Linter - constructor-syntax', () => {
       'pragma solidity 0.4.22;          ', // 2
       'contract A {                     ', // 3
       '    function A() public {}       ', // 4
-      '}                                ' // 5
+      '}                                ', // 5
     )
     const report = linter.processStr(code, {
       rules: { 'constructor-syntax': 'warn' },
@@ -27,7 +27,7 @@ describe('Linter - constructor-syntax', () => {
       'pragma solidity 0.4.21;          ', // 2
       'contract A {                     ', // 3
       '    function A() public {}       ', // 4
-      '}                                ' // 5
+      '}                                ', // 5
     )
     const report = linter.processStr(code, {
       rules: { 'constructor-syntax': 'warn' },
@@ -41,7 +41,7 @@ describe('Linter - constructor-syntax', () => {
       'pragma solidity 0.4.22;          ', // 2
       'contract A {                     ', // 3
       '    constructor() public {}      ', // 4
-      '}                                ' // 5
+      '}                                ', // 5
     )
     const report = linter.processStr(code, {
       rules: { 'constructor-syntax': 'warn' },
@@ -55,7 +55,7 @@ describe('Linter - constructor-syntax', () => {
       'pragma solidity 0.4.21;          ', // 2
       'contract A {                     ', // 3
       '    constructor() public {}      ', // 4
-      '}                                ' // 5
+      '}                                ', // 5
     )
     const report = linter.processStr(code, {
       rules: { 'constructor-syntax': 'error' },

@@ -65,12 +65,12 @@ describe('Linter - quotes', () => {
 
       assert.equal(report.errorCount, 1)
       assert.ok(report.messages[0].message.includes('double quotes'))
-    })
+    }),
   )
 
   it('should raise no error', () => {
     const filePath = storeAsFile(
-      require('../../../lib/fixtureCases/miscellaneous/string-with-double-quotes')
+      require('../../../lib/fixtureCases/miscellaneous/string-with-double-quotes'),
     )
 
     const report = linter.processFile(filePath, {

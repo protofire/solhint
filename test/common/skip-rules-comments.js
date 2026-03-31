@@ -89,7 +89,7 @@ describe('Configure the linter with comments (solhint-style directives)', () => 
         .map((m) => m.message)
         .join('\n')
         .includes(msgNoConsole),
-      'Did not expect no-console to be reported on disabled line'
+      'Did not expect no-console to be reported on disabled line',
     )
   })
 
