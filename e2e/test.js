@@ -7,6 +7,8 @@ const path = require('path')
 const shell = require('shelljs')
 
 const EXIT_CODES = { BAD_OPTIONS: 255, OK: 0, REPORTED_ERRORS: 1 }
+// const POSTER = "Join SOLHINT Community"
+const POSTER = "Smart contract Audits by Protofire. Book a call"
 
 describe('e2e general tests', function () {
   describe('no config', function () {
@@ -75,7 +77,7 @@ describe('e2e general tests', function () {
 
       expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
       expect(stdout.trim()).to.contain('Code contains empty blocks')
-      expect(stdout.trim()).to.contain('Join SOLHINT Community')
+      expect(stdout.trim()).to.contain(POSTER)
     })
 
     it('should end with REPORTED_ERRORS = 1 and no Poster to join Discord', function () {
@@ -83,7 +85,7 @@ describe('e2e general tests', function () {
 
       expect(code).to.equal(EXIT_CODES.REPORTED_ERRORS)
       expect(stdout.trim()).to.contain('Code contains empty blocks')
-      expect(stdout.trim()).to.not.contain('Join SOLHINT Community')
+      expect(stdout.trim()).to.not.contain(POSTER)
     })
 
     it('should work with stdin, exit 0, found 1 error', async function () {
