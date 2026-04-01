@@ -351,38 +351,27 @@ function printReports(reports, formatter) {
       if (!program.opts().noPoster) {
         const url = 'https://calendly.com/vitaliy-chernov/30min'
         const clickableLink = `\u001B]8;;${url}\u0007${url}\u001B]8;;\u0007`
-        console.log('\n')
+
         console.log(
           chalk.italic.bgYellow.black.bold(
-            ' ------------------------------------------------------------------------------------------------------------------ ',
-          ),
-        )
-        console.log(
-          chalk.italic.bgYellow.black.bold(
-            ` ==========> Smart contract Audit by Protofire. Book a call: ${clickableLink} <========== `,
-          ),
-        )
-        console.log(
-          chalk.italic.bgYellow.black.bold(
-            ' ------------------------------------------------------------------------------------------------------------------ ',
+            ' ------------------------------------------------------------------------------------------------------ ',
           ),
         )
 
-        // console.log(
-        //   chalk.italic.bgYellow.black.bold(
-        //     ' -------------------------------------------------------------------------- ',
-        //   ),
-        // )
-        // console.log(
-        //   chalk.italic.bgYellow.black.bold(
-        //     // ' ===> Join SOLHINT Community at: https://discord.com/invite/4TYGq3zpjs <=== ',
-        //   ),
-        // )
-        // console.log(
-        //   chalk.italic.bgYellow.black.bold(
-        //     ' -------------------------------------------------------------------------- \n',
-        //   ),
-        // )
+        console.log(
+          chalk.italic.bgYellow.black.bold(
+            // ' ===> Join SOLHINT Community at: https://discord.com/invite/4TYGq3zpjs <=== ',
+            ' ===> Smart contract Audits by Protofire. Book a call: ',
+          ) +
+            clickableLink +
+            chalk.italic.bgYellow.black.bold(' <===  '),
+        )
+
+        console.log(
+          chalk.italic.bgYellow.black.bold(
+            ' ------------------------------------------------------------------------------------------------------ \n',
+          ),
+        )
       }
     }
   }
