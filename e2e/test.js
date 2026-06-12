@@ -7,8 +7,7 @@ const path = require('path')
 const shell = require('shelljs')
 
 const EXIT_CODES = { BAD_OPTIONS: 255, OK: 0, REPORTED_ERRORS: 1 }
-// const POSTER = "Join SOLHINT Community"
-const POSTER = "Smart contract Audits by Protofire. Book a call"
+const POSTER = "Smart contract Audits by"
 
 describe('e2e general tests', function () {
   describe('no config', function () {
