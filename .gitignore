@@ -1,5 +1,6 @@
 # ignore all node_modules by default
 node_modules/
+.claude/
 
 /.idea/
 test2.sol
