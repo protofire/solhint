@@ -47,6 +47,16 @@ describe('Linter - no-unchecked-calls', () => {
     assertWarnsCount(report, 1)
   })
 
+  it('should warn when parenthesized call return value is discarded', () => {
+    const code = funcWith('(addr.call(data));')
+
+    const report = linter.processStr(code, {
+      rules: { 'no-unchecked-calls': 'warn' },
+    })
+
+    assertWarnsCount(report, 1)
+  })
+
   it('should not warn when return value is captured in tuple assignment', () => {
     const code = funcWith('(bool success, ) = addr.call(data);')
 
@@ -119,6 +129,16 @@ describe('Linter - no-unchecked-calls', () => {
 
   it('should warn for legacy addr.call.value(1)() when return value is not checked', () => {
     const code = funcWith('addr.call.value(1)();')
+
+    const report = linter.processStr(code, {
+      rules: { 'no-unchecked-calls': 'warn' },
+    })
+
+    assertWarnsCount(report, 1)
+  })
+
+  it('should warn for legacy addr.call.value(1).gas(100)() when return value is not checked', () => {
+    const code = funcWith('addr.call.value(1).gas(100)();')
 
     const report = linter.processStr(code, {
       rules: { 'no-unchecked-calls': 'warn' },

@@ -22,7 +22,7 @@ function changed() {
 if (changed()) {
   try {
     // Run npm commands if there are changes
-    execSync('npm run generate-rulesets', { stdio: 'inherit' })
+    execSync('npm run gen-rules', { stdio: 'inherit' })
     execSync('npm run docs', { stdio: 'inherit' })
   } catch (error) {
     console.error('Error running npm commands:', error)
