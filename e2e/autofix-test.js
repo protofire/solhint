@@ -93,7 +93,7 @@ describe('e2e', function () {
           expect(result).to.be.true
         })
 
-        it('should fix file when noPrompt 1b', () => {
+        it('should fix file when noPrompt (1b)', () => {
           const { code, stdout } = shell.exec(
             `solhint -c ${currentConfig} ${currentFile} --fix --disc --noPrompt`
           )
@@ -102,7 +102,7 @@ describe('e2e', function () {
 
           const reportLines = stdout.split('\n')
           const finalLine = '5 problems (5 errors, 0 warnings)'
-          expect(reportLines[reportLines.length - 7]).to.contain(finalLine)
+          expect(reportLines[reportLines.length - 9]).to.contain(finalLine)
 
           result = compareTextFiles(currentFile, afterFixFile)
           expect(result).to.be.true
@@ -145,7 +145,7 @@ describe('e2e', function () {
         it('should get the right report (2)', () => {
           const reportLines = stdout.split('\n')
           const finalLine = '27 problems (27 errors, 0 warnings)'
-          expect(reportLines[reportLines.length - 7]).to.contain(finalLine)
+          expect(reportLines[reportLines.length - 9]).to.contain(finalLine)
         })
       })
 
@@ -185,7 +185,7 @@ describe('e2e', function () {
         it('should get the right report (3)', () => {
           const reportLines = stdout.split('\n')
           const finalLine = '9 problems (9 errors, 0 warnings)'
-          expect(reportLines[reportLines.length - 7]).to.contain(finalLine)
+          expect(reportLines[reportLines.length - 9]).to.contain(finalLine)
         })
       })
 
@@ -225,7 +225,7 @@ describe('e2e', function () {
         it('should get the right report (4)', () => {
           const reportLines = stdout.split('\n')
           const finalLine = '19 problems (19 errors, 0 warnings)'
-          expect(reportLines[reportLines.length - 7]).to.contain(finalLine)
+          expect(reportLines[reportLines.length - 9]).to.contain(finalLine)
         })
       })
 
@@ -265,7 +265,7 @@ describe('e2e', function () {
         it('should get the right report (5)', () => {
           const reportLines = stdout.split('\n')
           const finalLine = '11 problems (11 errors, 0 warnings)'
-          expect(reportLines[reportLines.length - 7]).to.contain(finalLine)
+          expect(reportLines[reportLines.length - 9]).to.contain(finalLine)
         })
       })
 
@@ -306,7 +306,7 @@ describe('e2e', function () {
         it('should get the right report (6)', () => {
           const reportLines = stdout.split('\n')
           const finalLine = '8 problems (8 errors, 0 warnings)'
-          expect(reportLines[reportLines.length - 7]).to.contain(finalLine)
+          expect(reportLines[reportLines.length - 9]).to.contain(finalLine)
         })
       })
 
@@ -340,7 +340,7 @@ describe('e2e', function () {
         it('should get the right report (6)', () => {
           const reportLines = stdout.split('\n')
           const finalLine = '8 problems (8 errors, 0 warnings)'
-          expect(reportLines[reportLines.length - 7]).to.contain(finalLine)
+          expect(reportLines[reportLines.length - 9]).to.contain(finalLine)
         })
       })
 
@@ -381,7 +381,7 @@ describe('e2e', function () {
         it('should get the right report (7)', () => {
           const reportLines = stdout.split('\n')
           const finalLine = '3 problems (3 errors, 0 warnings)'
-          expect(reportLines[reportLines.length - 7]).to.contain(finalLine)
+          expect(reportLines[reportLines.length - 9]).to.contain(finalLine)
         })
       })
 
@@ -422,7 +422,7 @@ describe('e2e', function () {
         it('should get the right report (8)', () => {
           const reportLines = stdout.split('\n')
           const finalLine = '5 problems (5 errors, 0 warnings)'
-          expect(reportLines[reportLines.length - 7]).to.contain(finalLine)
+          expect(reportLines[reportLines.length - 9]).to.contain(finalLine)
         })
       })
 
@@ -463,7 +463,7 @@ describe('e2e', function () {
         it('should get the right report (9)', () => {
           const reportLines = stdout.split('\n')
           const finalLine = '6 problems (6 errors, 0 warnings)'
-          expect(reportLines[reportLines.length - 7]).to.contain(finalLine)
+          expect(reportLines[reportLines.length - 9]).to.contain(finalLine)
         })
       })
 
@@ -504,7 +504,7 @@ describe('e2e', function () {
           it('should get the right report (10)', () => {
             const reportLines = stdout.split('\n')
             const finalLine = '18 problems (18 errors, 0 warnings)'
-            expect(reportLines[reportLines.length - 7]).to.contain(finalLine)
+            expect(reportLines[reportLines.length - 9]).to.contain(finalLine)
           })
         })
 
@@ -546,7 +546,7 @@ describe('e2e', function () {
         it('should get the right report (11)', () => {
           const reportLines = stdout.split('\n')
           const finalLine = '3 problems (3 errors, 0 warnings)'
-          expect(reportLines[reportLines.length - 7]).to.contain(finalLine)
+          expect(reportLines[reportLines.length - 9]).to.contain(finalLine)
         })
       })
 

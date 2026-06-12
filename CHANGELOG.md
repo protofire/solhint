@@ -1,3 +1,8 @@
+## [6.2.2] - 2026-04-01
+🧹 Chore: Dowser poster added. Solhint needs funds to keep growing
+
+<br><br>
+
 ## [6.2.1] - 2026-04-01
 🧹 Chore: added poster
 <br><br>
