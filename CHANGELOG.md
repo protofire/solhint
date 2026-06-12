@@ -1,3 +1,11 @@
+## [6.2.2] - 2026-06-14
+🧹 Chore: Dowser poster added. Solhint needs funds to keep growing
+
+🛠️ Fix: Removed `ajv-errors` due to  (#750)
+
+🆕 `Rule`: added `no-unchecked-calls` Check return value of low-level calls (call, staticcall, delegatecall)
+
+
 ## [6.2.1] - 2026-04-01
 🧹 Chore: added poster
 <br><br>
