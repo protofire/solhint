@@ -1,3 +1,12 @@
+## [6.2.2] - 2026-04-01
+🧹 Chore: Dowser poster added. Solhint needs funds to keep growing
+
+<br><br>
+
+## [6.2.1] - 2026-04-01
+🧹 Chore: added poster
+<br><br>
+
 ## [6.2.0] - 2026-03-30
 🛠️ Fix: `code-complexity` rule no longer crashes when configured with a numeric option (e.g. `["error", 8]`) (#758)
 <br><br>
