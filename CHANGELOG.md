@@ -1,6 +1,13 @@
-## [6.2.2] - 2026-04-01
+## [6.2.2] - 2026-06-14
 🧹 Chore: Dowser poster added. Solhint needs funds to keep growing
 
+🧹 Chore: bump fast-uri from 3.0.6 to 3.1.2
+
+🧹 Chore: bump lodash from 4.17.23 to 4.18.1
+
+🛠️ Fix: Removed `ajv-errors` due to  (#750)
+
+🆕 `Rule`: added `no-unchecked-calls` Check return value of low-level calls (call, staticcall, delegatecall)
 <br><br>
 
 ## [6.2.1] - 2026-04-01
