@@ -1,6 +1,6 @@
 {
   "name": "solhint",
-  "version": "6.2.1",
+  "version": "6.2.2",
   "description": "Solidity Code Linter",
   "main": "lib/index.js",
   "keywords": [
@@ -20,9 +20,9 @@
     "test:coverage": "npm run exec-tests",
     "test": "mocha --recursive",
     "lint": "eslint .",
-    "generate-rulesets": "node scripts/generate-rulesets.js && prettier --write conf/rulesets",
+    "gen-rules": "node scripts/generate-rulesets.js && prettier --write conf/rulesets",
     "docs": "node scripts/generate-rule-docs.js",
-    "prepublishOnly": "npm run lint && npm run test && npm run generate-rulesets",
+    "prepublishOnly": "npm run lint && npm run test && npm run gen-rules && npm run docs",
     "local:e2e": "bash -c 'set -xeuo pipefail && rm solhint*tgz -f && npm pack && npm i -g solhint*tgz && (npm run ci:e2e);npm uninstall -g solhint'",
     "install:global": "bash -c 'set -xeuo pipefail && rm solhint*tgz -f && npm pack && npm i -g solhint*tgz'",
     "uninstall:global": "npm uninstall -g solhint",
@@ -44,7 +44,6 @@
   "dependencies": {
     "@solidity-parser/parser": "^0.20.2",
     "ajv": "^8.18.0",
-    "ajv-errors": "^3.0.0",
     "ast-parents": "^0.0.1",
     "better-ajv-errors": "^2.0.2",
     "chalk": "^4.1.2",
