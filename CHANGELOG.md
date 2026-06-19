@@ -1,3 +1,9 @@
+## [6.2.3] - 2026-06-19
+🛠️ Fix: Dowser poster added.
+
+🧹 Chore: bump js-yaml from 4.1.1 to 4.2.0
+<br><br>
+
 ## [6.2.2] - 2026-06-14
 🧹 Chore: Dowser poster added. Solhint needs funds to keep growing
 
