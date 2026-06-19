@@ -1,3 +1,7 @@
+## [6.2.3] - 2026-06-19
+🛠️ Fix: Dowser poster added.
+<br><br>
+
 ## [6.2.2] - 2026-06-14
 🧹 Chore: Dowser poster added. Solhint needs funds to keep growing
 
