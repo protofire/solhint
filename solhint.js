@@ -4,10 +4,10 @@ const _ = require('lodash')
 const fs = require('fs')
 const process = require('process')
 const readline = require('readline')
-const chalk = require('chalk')
 const path = require('path')
 
 const linter = require('./lib/index')
+const { checkForUpdate, printPoster } = require('./lib/cli/terminal-output')
 const { loadConfig, loadConfigForFile } = require('./lib/config/config-file')
 const { validate } = require('./lib/config/config-validator')
 const applyFixes = require('./lib/apply-fixes')
@@ -40,7 +40,7 @@ function init() {
     .option('--init', 'create configuration file for solhint')
     .option('--disc', 'do not check for solhint updates')
     .option('--save', 'save report to file in current folder')
-    .option('--noPoster', 'remove discord poster')
+    .option('--noPoster', 'hide terminal poster')
     .description('Linter for Solidity programming language')
     .action(execMainAction)
 
@@ -147,11 +147,7 @@ function execMainAction() {
     if (program.opts().disc) {
       executeMainActionLogic()
     } else {
-      // Call checkForUpdate and wait for it to complete using .then()
-      checkForUpdate().then(() => {
-        // This block runs after checkForUpdate is complete
-        executeMainActionLogic()
-      })
+      checkForUpdate().then(executeMainActionLogic)
     }
   }
 }
@@ -349,9 +345,7 @@ function printReports(reports, formatter) {
     console.log(fullReport)
     if (fullReport && !program.opts().formatter) {
       if (!program.opts().noPoster) {
-        posterAudit()
-        posterExternal()
-        posterFooter()
+        printPoster()
       }
     }
   }
@@ -438,87 +432,6 @@ function listRules() {
       console.log('- ', key, ': ', orderedRules[key])
     })
   }
-}
-
-function checkForUpdate() {
-  return import('latest-version')
-    .then((latestVersionModule) => {
-      const latestVersion = latestVersionModule.default
-      const currentVersion = require('./package.json').version
-
-      return latestVersion('solhint')
-        .then((latest) => {
-          if (currentVersion < latest) {
-            console.log('A new version of Solhint is available:', latest)
-            console.log('Please consider updating your Solhint package.')
-          }
-        })
-        .catch((error) => {
-          console.error('Error checking for updates:', error.message)
-        })
-    })
-    .catch((error) => {
-      console.error('Error importing latest-version:', error.message)
-    })
-}
-
-function posterAudit() {
-  // ' ===> Join SOLHINT Community at: https://discord.com/invite/4TYGq3zpjs <=== ',
-  const urlLink1 = 'https://protofire.io/'
-  const readableLink1 = ' Protofire '
-  const clickableLink1 = `\u001B]8;;${urlLink1}\u0007${readableLink1}\u001B]8;;\u0007`
-
-  const urlLink2 = 'https://calendly.com/vitaliy-chernov/30min'
-  const readableLink2 = ' Call '
-  const clickableLink2 = `\u001B]8;;${urlLink2}\u0007${readableLink2}\u001B]8;;\u0007`
-
-  console.log(
-    chalk.bgYellow.black.bold(
-      ' ------------------------------------------------------------------------------------------------------ ',
-    ),
-  )
-
-  console.log(
-    chalk.bgYellow.black.bold(' ===>                Smart contract Audits by ') +
-      clickableLink1 +
-      chalk.bgYellow.black.bold('  |  Book a ') +
-      clickableLink2 +
-      chalk.bgYellow.black.bold('                       <===  '),
-  )
-
-  // console.log(
-  //   chalk.bgYellow.black.bold(
-  //     ' ------------------------------------------------------------------------------------------------------ \n',
-  //   ),
-  // )
-}
-
-function posterExternal() {
-  const urlLink = 'https://dsa.dowsers.finance/scan/new?ref=solhint'
-  const readableLink = '[ Dowsers.finance ]'
-  const clickableLink = `\u001B]8;;${urlLink}\u0007${readableLink}\u001B]8;;\u0007`
-
-  console.log(
-    chalk.bgYellow.black.bold(
-      ' ==                                                                                                 ==  ',
-    ),
-  )
-
-  console.log(
-    chalk.bgYellow.black.bold(
-      ' ===>  Find the flaw before hackers do!  Free scan & Formal Verification via ',
-    ) +
-      clickableLink +
-      chalk.bgYellow.black.bold('  <===  '),
-  )
-}
-
-function posterFooter() {
-  console.log(
-    chalk.bgYellow.black.bold(
-      ' ------------------------------------------------------------------------------------------------------ \n',
-    ),
-  )
 }
 
 init()
