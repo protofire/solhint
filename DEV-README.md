@@ -2,10 +2,18 @@
 
 After cloning the repository, set up the pre-commit hook by running the following commands:
 
-`git config --unset core.hooksPath`
-To reset the hooks config to git default 
+First, reset the hooks config to git default:
+
+```sh
+git config --unset core.hooksPath
+```
+
+Then create and configure the pre-commit hook:
 
 ```sh
 touch .git/hooks/pre-commit
 chmod +x .git/hooks/pre-commit
 echo '#!/bin/sh\nnode scripts/check-changes.js' > .git/hooks/pre-commit
+```
+
+This hook will run checks before each commit to ensure code quality.
