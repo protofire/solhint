@@ -20,7 +20,7 @@ describe('terminal output', () => {
   })
 
   it('prints the success message and poster in an interactive terminal', () => {
-    expect(printSuccessPoster({ isTTY: true })).to.equal(true)
+    expect(printSuccessPoster({ isTTY: true }, {})).to.equal(true)
     expect(consoleLog.firstCall.args[0]).to.equal('Linting completed. No issues found!\n')
     expect(consoleLog.callCount).to.be.greaterThan(1)
   })

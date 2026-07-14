@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npx mocha:*)"
+      "Bash(npx mocha:*)",
+      "Bash(gh pr *)",
+      "Bash(curl -s https://api.github.com/repos/protofire/solhint/pulls/778)",
+      "Bash(curl *)"
     ]
   }
 }
