@@ -1,3 +1,27 @@
+## [6.2.4] - 2026-08-07
+🛠️ Fix: clarify documentation (#784)
+
+🧹 Chore: bump fast-uri from 3.1.4 to 3.1.5 (#783)
+
+🧹 Chore: bump js-yaml from 4.2.0 to 4.3.0 (#782)
+
+🧹 Chore: bump fast-uri from 3.1.2 to 3.1.4 (#781)
+
+🧹 Chore: bump uuid and nyc (#777)
+
+🛠️ Chore: add "report ok" message (#780)
+
+🛠️ Fix: broken Consensys guide link (#779)
+
+🛠️ Fix: improve developer documentation and Markdown formatting (#778)
+<br><br>
+
+✨🛡️ Kudos to our contributors! 🛡️✨
+
+- [@daixihegu](https://github.com/daixihegu)
+- [@hermannleboss](https://github.com/hermannleboss)
+
+
 ## [6.2.3] - 2026-06-19
 🛠️ Fix: Dowser poster added.
 
