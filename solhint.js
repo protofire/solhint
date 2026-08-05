@@ -7,7 +7,7 @@ const readline = require('readline')
 const path = require('path')
 
 const linter = require('./lib/index')
-const { checkForUpdate, printPoster } = require('./lib/cli/terminal-output')
+const { checkForUpdate, printPoster, printSuccessPoster } = require('./lib/cli/terminal-output')
 const { loadConfig, loadConfigForFile } = require('./lib/config/config-file')
 const { validate } = require('./lib/config/config-validator')
 const applyFixes = require('./lib/apply-fixes')
@@ -343,10 +343,9 @@ function printReports(reports, formatter) {
 
   if (!program.opts().quiet) {
     console.log(fullReport)
-    if (fullReport && !program.opts().formatter) {
-      if (!program.opts().noPoster) {
-        printPoster()
-      }
+    if (!program.opts().formatter && !program.opts().noPoster) {
+      if (fullReport) printPoster()
+      else printSuccessPoster()
     }
   }
 

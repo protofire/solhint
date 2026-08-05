@@ -55,7 +55,7 @@ addr.call.value(1)();
 ```
 
 ## Version
-This rule was introduced in the latest version.
+This rule was introduced in [Solhint 6.2.2](https://github.com/protofire/solhint/blob/v6.2.2)
 
 ## Resources
 - [Rule source](https://github.com/protofire/solhint/blob/master/lib/rules/security/no-unchecked-calls.js)
