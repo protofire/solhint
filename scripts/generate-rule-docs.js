@@ -302,7 +302,7 @@ ${contents}
 
 ## References
 
-- [ConsenSys Guide for Smart Contracts](https://consensys.github.io/smart-contract-best-practices/development-recommendations/)
+- [ConsenSys Guide for Smart Contracts](https://consensysdiligence.github.io/smart-contract-best-practices/)
 - [Solidity Style Guide](http://solidity.readthedocs.io/en/develop/style-guide.html)
 `
 }

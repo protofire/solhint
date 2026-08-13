@@ -20,7 +20,7 @@ Development
 In order to develop Solhint, you'll need:
 
 - [Git](https://git-scm.com/)
-- [Node.js](https://nodejs.org/)
+- [Node.js](https://nodejs.org/) (version 20 or higher)
 
 ### Getting Started
 
@@ -47,6 +47,10 @@ If you make changes to the existing code, please make sure that all tests are
 passing. If you contribute with a new feature, please add tests for it. To run the tests:
 
     $ npm test
+
+### Setting up Git Hooks
+
+For information on setting up pre-commit hooks, please refer to [DEV-README.md](../DEV-README.md).
 
 Pull Requests
 -------------
