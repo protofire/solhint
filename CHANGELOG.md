@@ -5,6 +5,8 @@
 
 🧹 Chore: bump js-yaml from 4.2.0 to 4.3.0 (#782)
 
+🧹 Chore: bump js-yaml from 4.3.0 to 4.3.1 (#787)
+
 🧹 Chore: bump fast-uri from 3.1.2 to 3.1.4 (#781)
 
 🧹 Chore: bump uuid and nyc (#777)
