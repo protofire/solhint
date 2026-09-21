@@ -1,0 +1,31 @@
+{
+  "name": "@solhint/mcp-server",
+  "version": "0.1.0",
+  "description": "MCP server for Solhint — lint Solidity smart contracts directly from Claude Code and other MCP clients",
+  "main": "src/index.js",
+  "bin": {
+    "solhint-mcp": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node src/index.js --test"
+  },
+  "keywords": [
+    "solidity",
+    "solhint",
+    "linter",
+    "smart-contracts",
+    "mcp",
+    "claude",
+    "model-context-protocol"
+  ],
+  "author": "Protofire <info@protofire.io>",
+  "license": "MIT",
+  "peerDependencies": {
+    "solhint": ">=5.0.0"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
