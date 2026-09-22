@@ -1,0 +1,38 @@
+name: Publish MCP Server
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'mcp-server-v*'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/mcp-server-v')
+    runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    defaults:
+      run:
+        working-directory: packages/mcp-server
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+          cache: npm
+          cache-dependency-path: packages/mcp-server/package-lock.json
+      # The root install populates the npm cache that the offline packed smoke test needs.
+      - run: npm ci
+        working-directory: .
+      - run: npm ci
+      - run: npm test
+      # Tag pushes do not trigger MCP-SERVER.yml, so re-verify the tarball install here.
+      - run: npm run test:packed
+      - run: npm pack --dry-run
+      - run: npm publish --access public --provenance

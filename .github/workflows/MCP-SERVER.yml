@@ -1,0 +1,88 @@
+name: MCP Server
+
+on:
+  pull_request:
+    paths:
+      - 'packages/mcp-server/**'
+      - 'lib/**'
+      - 'conf/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/MCP-SERVER.yml'
+  push:
+    branches: [master, develop]
+    paths:
+      - 'packages/mcp-server/**'
+      - 'lib/**'
+      - 'conf/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/MCP-SERVER.yml'
+
+jobs:
+  test:
+    name: ${{ matrix.os }} / Node ${{ matrix.node }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node: [20, 22]
+    defaults:
+      run:
+        working-directory: packages/mcp-server
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: packages/mcp-server/package-lock.json
+      - run: npm ci
+      - run: npm test
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm ci
+        working-directory: packages/mcp-server
+      - run: npm run lint
+
+  packed-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm ci
+        working-directory: packages/mcp-server
+      - run: npm run test:packed
+        working-directory: packages/mcp-server
+
+  compatibility:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # 6.0.x can terminate the host process while loading a missing plugin.
+        solhint: [6.1.0, 6.2.4]
+    defaults:
+      run:
+        working-directory: packages/mcp-server
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: packages/mcp-server/package-lock.json
+      - run: npm ci
+      - run: npm install --no-save --package-lock=false solhint@${{ matrix.solhint }}
+      - run: npm test
