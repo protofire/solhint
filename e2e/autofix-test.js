@@ -3,7 +3,7 @@ const { expect } = chai
 const fs = require('fs')
 const os = require('os')
 const path = require('path')
-const shell = require('shelljs')
+const shell = require('./shell')
 const spawnSync = require('spawn-sync')
 
 const EXIT_CODES = { BAD_OPTIONS: 255, OK: 0, REPORTED_ERRORS: 1 }

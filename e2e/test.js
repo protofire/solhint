@@ -4,7 +4,7 @@ const fs = require('fs')
 const getStream = require('get-stream')
 const os = require('os')
 const path = require('path')
-const shell = require('shelljs')
+const shell = require('./shell')
 
 const EXIT_CODES = { BAD_OPTIONS: 255, OK: 0, REPORTED_ERRORS: 1 }
 const POSTER = "Smart contract Audits by"
