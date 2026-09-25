@@ -1,0 +1,52 @@
+{
+  "name": "@solhint/mcp-server",
+  "version": "0.1.0",
+  "description": "MCP server for Solhint — lint Solidity smart contracts directly from Claude Code and other MCP clients",
+  "main": "src/index.js",
+  "bin": {
+    "solhint-mcp": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test test/implementation.test.js test/server.test.js",
+    "test:packed": "node test/packed-smoke.js"
+  },
+  "keywords": [
+    "solidity",
+    "solhint",
+    "linter",
+    "smart-contracts",
+    "mcp",
+    "claude",
+    "model-context-protocol"
+  ],
+  "author": "Protofire <info@protofire.io>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/protofire/solhint.git",
+    "directory": "packages/mcp-server"
+  },
+  "homepage": "https://github.com/protofire/solhint/tree/master/packages/mcp-server#readme",
+  "bugs": {
+    "url": "https://github.com/protofire/solhint/issues"
+  },
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "solhintCompatibility": ">=6.1.0 <7.0.0",
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.0.0",
+    "glob": "^13.0.6",
+    "semver": "^7.7.2",
+    "solhint": "6.2.4"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
