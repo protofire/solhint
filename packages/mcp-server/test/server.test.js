@@ -18,6 +18,21 @@ function makeProject(files = {}) {
   return root
 }
 
+async function stopServer(server) {
+  const { child } = server
+  if (child.exitCode !== null || child.signalCode !== null) return
+
+  const exited = new Promise((resolve) => child.once('exit', resolve))
+  child.kill()
+  await exited
+}
+
+// Windows locks a process's working directory until it is gone, and can hold the handle
+// for a moment after that, so removal has to wait for the exit and then retry.
+function removeProject(root) {
+  fs.rmSync(root, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 })
+}
+
 function startServer(projectRoot) {
   const child = spawn(process.execPath, [serverEntry, '--bundled-solhint'], {
     cwd: projectRoot,
@@ -151,8 +166,8 @@ test(
       assert.deepEqual(server.invalidLines, [])
       assert.deepEqual(server.unmatchedMessages, [])
     } finally {
-      server.child.kill()
-      fs.rmSync(root, { recursive: true, force: true })
+      await stopServer(server)
+      removeProject(root)
     }
   },
 )
@@ -203,7 +218,7 @@ test('plugin stdout is redirected away from the protocol', { timeout: 20000 }, a
     assert.deepEqual(server.invalidLines, [])
     assert.match(server.stderr(), /boom from plugin/)
   } finally {
-    server.child.kill()
-    fs.rmSync(root, { recursive: true, force: true })
+    await stopServer(server)
+    removeProject(root)
   }
 })

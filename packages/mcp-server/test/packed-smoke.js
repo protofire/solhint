@@ -8,11 +8,15 @@ const readline = require('node:readline')
 const packageRoot = path.resolve(__dirname, '..')
 const repositoryRoot = path.resolve(packageRoot, '..', '..')
 
+// Installing both tarballs pulls Solhint's dependency tree, which on a cold npm cache
+// takes well over a minute on a slow runner.
+const COMMAND_TIMEOUT_MS = 300000
+
 function run(command, args, cwd) {
   const result = spawnSync(command, args, {
     cwd,
     encoding: 'utf8',
-    timeout: 60000,
+    timeout: COMMAND_TIMEOUT_MS,
   })
   if (result.error) throw result.error
   if (result.status !== 0) {
@@ -133,11 +137,15 @@ async function main() {
     console.log(`MCP tarball contents:\n${contents.join('\n')}`)
 
     run('npm', ['init', '--yes'], project)
+    // The temp project has no lockfile, so npm must resolve the tarballs' dependency
+    // ranges from registry metadata. `npm ci` only caches tarballs, never that metadata,
+    // so a strict `--offline` install fails on a clean machine. The offline guarantee
+    // that matters is the server's own, and smokeInstalledPackage() asserts that.
     run(
       'npm',
       [
         'install',
-        '--offline',
+        '--prefer-offline',
         '--ignore-scripts',
         path.join(artifacts, solhintTarball),
         path.join(artifacts, serverTarball),
@@ -151,7 +159,8 @@ async function main() {
     await smokeInstalledPackage(project)
     console.log('Packed installation smoke test passed')
   } finally {
-    fs.rmSync(tempRoot, { recursive: true, force: true })
+    // The npx child ran with its cwd inside tempRoot; retry while the OS releases it.
+    fs.rmSync(tempRoot, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 })
   }
 }
 
