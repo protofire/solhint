@@ -22,7 +22,9 @@ async function stopServer(server) {
   const { child } = server
   if (child.exitCode !== null || child.signalCode !== null) return
 
-  const exited = new Promise((resolve) => child.once('exit', resolve))
+  const exited = new Promise((resolve) => {
+    child.once('exit', resolve)
+  })
   child.kill()
   await exited
 }
