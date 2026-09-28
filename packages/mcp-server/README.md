@@ -5,7 +5,7 @@ Lint Solidity smart contracts directly from **Claude Code**, Cursor, or any [Mod
 ## Install
 
 ```bash
-npm install -g @solhint/mcp-server
+npm install -g solhint-mcp
 ```
 
 Requires `solhint` to be installed in your project (`npm install solhint`) or globally.
@@ -13,7 +13,7 @@ Requires `solhint` to be installed in your project (`npm install solhint`) or gl
 ## Add to Claude Code
 
 ```bash
-claude mcp add solhint npx @solhint/mcp-server
+claude mcp add solhint npx solhint-mcp
 ```
 
 Or add manually to `~/.claude/claude_desktop_config.json`:
@@ -23,7 +23,7 @@ Or add manually to `~/.claude/claude_desktop_config.json`:
   "mcpServers": {
     "solhint": {
       "command": "npx",
-      "args": ["@solhint/mcp-server"]
+      "args": ["solhint-mcp"]
     }
   }
 }
