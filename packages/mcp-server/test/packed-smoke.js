@@ -126,7 +126,10 @@ async function main() {
     run('npm', ['pack', '--pack-destination', artifacts], packageRoot)
     const tarballs = fs.readdirSync(artifacts).filter((file) => file.endsWith('.tgz'))
     const solhintTarball = tarballs.find((file) => /^solhint-\d/.test(file))
-    const serverTarball = tarballs.find((file) => file.startsWith('solhint-mcp-server-'))
+    // npm strips the leading @ and turns / into - when naming a tarball, so this
+    // tracks the package name instead of hardcoding one spelling of it.
+    const tarballPrefix = `${packageJson.name.replace(/^@/, '').replace(/\//g, '-')}-`
+    const serverTarball = tarballs.find((file) => file.startsWith(tarballPrefix))
     assert.ok(solhintTarball, 'root Solhint tarball was not produced')
     assert.ok(serverTarball, 'MCP server tarball was not produced')
 
