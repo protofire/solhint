@@ -2,49 +2,6 @@ const fs = require('fs')
 const path = require('path')
 const { globSync } = require('glob')
 
-const RULE_DOCS = Object.freeze({
-  'compiler-version': {
-    summary: "Pragma doesn't match the required semver range.",
-    why: 'Wide compiler ranges can introduce unexpected behavior between releases.',
-    fix: 'Use a compiler range that matches the project policy.',
-  },
-  'func-name-mixedcase': {
-    summary: 'Function name must be in camelCase.',
-    why: 'Consistent naming makes contracts and generated ABIs easier to understand.',
-    fix: 'Rename `function Transfer()` to `function transfer()`.',
-  },
-  'state-visibility': {
-    summary: 'State variable has no explicit visibility modifier.',
-    why: 'Explicit visibility makes the contract interface unambiguous.',
-    fix: 'Add `public`, `private`, or `internal` to the declaration.',
-  },
-  'reason-string': {
-    summary: 'A require or revert reason does not meet the configured policy.',
-    why: 'Useful reasons make failures easier to diagnose.',
-    fix: 'Add a concise reason or use a custom error.',
-  },
-  'gas-custom-errors': {
-    summary: 'A string-based require can be replaced with a custom error.',
-    why: 'Custom errors generally reduce deployment and execution gas.',
-    fix: 'Declare a custom error and revert with it.',
-  },
-  'no-unused-vars': {
-    summary: 'A variable is declared but never used.',
-    why: 'Unused declarations add noise and can hide incomplete logic.',
-    fix: 'Remove the declaration or use the value.',
-  },
-  'avoid-suicide': {
-    summary: 'The contract uses selfdestruct or its deprecated suicide alias.',
-    why: 'The opcode has changed semantics and should not be used for ordinary lifecycle control.',
-    fix: 'Redesign the lifecycle without selfdestruct.',
-  },
-  'explicit-types': {
-    summary: 'An abbreviated integer type is used.',
-    why: 'Explicit widths make the intended representation clear.',
-    fix: 'Replace `uint` with `uint256`, and `int` with `int256`.',
-  },
-})
-
 const TOOL_DEFINITIONS = Object.freeze([
   {
     name: 'lint_solidity',
@@ -157,17 +114,63 @@ function failure(error, resolutionText) {
   }
 }
 
-function explainRule(ruleId) {
-  const doc = RULE_DOCS[ruleId]
-  if (!doc) {
-    return `No detailed explanation found for rule \`${ruleId}\`.\nSee https://protofire.github.io/solhint/docs/rules.html`
+const MAX_EXAMPLES_PER_KIND = 2
+
+function codeBlock(code) {
+  const lines = String(code)
+    .split('\n')
+    .map((line) => line.replace(/\s+$/, ''))
+  while (lines.length > 0 && lines[0] === '') lines.shift()
+  while (lines.length > 0 && lines[lines.length - 1] === '') lines.pop()
+
+  return ['```solidity', ...lines, '```'].join('\n')
+}
+
+function exampleSection(title, entries) {
+  if (!Array.isArray(entries) || entries.length === 0) return []
+
+  return entries.slice(0, MAX_EXAMPLES_PER_KIND).flatMap((entry) => {
+    const caption = entry.description ? `${title} — ${entry.description}` : title
+    return [`**${caption}**`, codeBlock(entry.code)]
+  })
+}
+
+function explainRule(runner, ruleId) {
+  const rule = runner.describeRule(ruleId)
+  if (!rule) {
+    return (
+      `Solhint has no rule called \`${ruleId}\`.\n` +
+      'Call `lint_project` or `get_config` to see the rules this project actually uses, ' +
+      'or browse https://protofire.github.io/solhint/docs/rules.html'
+    )
   }
-  return (
-    `## \`${ruleId}\`\n\n` +
-    `**What it checks:** ${doc.summary}\n\n` +
-    `**Why it matters:** ${doc.why}\n\n` +
-    `**How to fix:** ${doc.fix}`
-  )
+
+  const heading = rule.category ? `## \`${ruleId}\` — ${rule.category}` : `## \`${ruleId}\``
+  const sections = [heading]
+  if (rule.description) sections.push(rule.description)
+
+  if (rule.defaultSetup !== undefined) {
+    const preset = rule.recommended ? ' (enabled by `solhint:recommended`)' : ''
+    sections.push(`**Default:** \`${JSON.stringify(rule.defaultSetup)}\`${preset}`)
+  }
+
+  if (rule.options.length > 0) {
+    const options = rule.options.map((option) => {
+      const fallback = option.default === undefined ? '' : ` (default: \`${option.default}\`)`
+      return `- ${option.description || 'Option'}${fallback}`
+    })
+    sections.push(['**Options**', ...options].join('\n'))
+  }
+
+  if (rule.notes.length > 0) {
+    const notes = rule.notes.map((entry) => `- ${entry.note || entry}`)
+    sections.push(['**Notes**', ...notes].join('\n'))
+  }
+
+  sections.push(...exampleSection('Good', rule.examples?.good))
+  sections.push(...exampleSection('Bad', rule.examples?.bad))
+
+  return sections.join('\n\n')
 }
 
 function isInside(root, target) {
@@ -280,7 +283,7 @@ function createToolService({ runner }) {
           if (typeof args.ruleId !== 'string' || args.ruleId.length === 0) {
             throw new Error('ruleId is required and must be a non-empty string')
           }
-          return success(`${resolutionText}\n\n${explainRule(args.ruleId)}`)
+          return success(`${resolutionText}\n\n${explainRule(runner, args.ruleId)}`)
         }
         if (name === 'get_config') return success(`${resolutionText}\n\n${formatConfig(runner)}`)
         throw new Error(`Unknown tool: ${name}`)
@@ -292,4 +295,4 @@ function createToolService({ runner }) {
   return Object.freeze({ call })
 }
 
-module.exports = { RULE_DOCS, TOOL_DEFINITIONS, createToolService, explainRule, formatReports }
+module.exports = { TOOL_DEFINITIONS, createToolService, explainRule, formatReports }

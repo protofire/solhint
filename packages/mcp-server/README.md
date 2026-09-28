@@ -46,11 +46,41 @@ working directory. See Anthropic's current
 | `lint_solidity` | `{ code, config? }` | Lint a Solidity source string           |
 | `lint_file`     | `{ filePath }`      | Lint one `.sol` file inside the project |
 | `lint_project`  | `{ pattern? }`      | Lint a project-relative glob            |
-| `explain_rule`  | `{ ruleId }`        | Explain a curated Solhint rule          |
+| `explain_rule`  | `{ ruleId }`        | Explain any rule the linter ships       |
 | `get_config`    | `{}`                | Show the project's Solhint config       |
 
 `lint_project` autodetects `contracts/**/*.sol`, then `src/**/*.sol`, and finally
 `**/*.sol`. Paths and patterns outside the project root are rejected.
+
+`explain_rule` reads the documentation Solhint ships with each rule, so it covers the
+whole registry and always describes the version this project runs: description,
+category, default severity, configurable options, notes and the good/bad examples when
+the rule defines them.
+
+## If your repository already documents a lint command
+
+An agent follows an explicit instruction in your repository over a tool description.
+If `AGENTS.md`, `CLAUDE.md` or a similar playbook says how to lint, for example:
+
+```markdown
+- Solidity lint: `npm run lint:sol`
+```
+
+the agent will run that command and never reach for these tools. That is reasonable
+behaviour, not a misconfiguration, but it means the server goes unused until you say it
+is there. Mention it alongside the command:
+
+```markdown
+- Solidity lint: prefer the `solhint` MCP tools (`lint_file`, `lint_project`,
+  `explain_rule`, `get_config`) when that server is configured; they run this project's
+  own Solhint with its config. Fall back to `npm run lint:sol` when the server is
+  unavailable.
+```
+
+The two are complementary. The command is what a person and CI run. The tools are what
+an agent runs, and their advantage is that the invocation cannot drift: no unquoted
+`**` collapsing to a single level, no forgotten config, no stray flag. A shell glob
+written by hand can silently cover a fraction of a project; `lint_project` cannot.
 
 ## Configuration
 

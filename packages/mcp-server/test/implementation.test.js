@@ -5,7 +5,7 @@ const path = require('node:path')
 const test = require('node:test')
 
 const { createSolhintRunner } = require('../src/solhint-runner')
-const { RULE_DOCS, TOOL_DEFINITIONS, createToolService, formatReports } = require('../src/tools')
+const { TOOL_DEFINITIONS, createToolService, formatReports } = require('../src/tools')
 
 function makeProject(files = {}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'solhint-mcp-test-'))
@@ -266,6 +266,53 @@ test('lint_project discovers nested Hardhat files and rejects empty projects', (
   }
 })
 
+test('.solhintignore excludes files the way the CLI does', () => {
+  // Solhint honours .solhintignore only in its CLI, so a server that enumerates files
+  // itself has to reapply it or it reports violations the project excluded on purpose.
+  const root = makeProject({
+    'contracts/Kept.sol': badSource,
+    'contracts/_mocks/Mock.sol': badSource,
+    '.solhintignore': 'contracts/_mocks\n',
+  })
+  try {
+    const service = createToolService({
+      runner: createSolhintRunner({ projectRoot: root, forceBundled: true }),
+    })
+
+    const project = service.call('lint_project', {})
+    assert.equal(project.isError, undefined)
+    assert.match(project.content[0].text, /Kept\.sol/)
+    assert.doesNotMatch(project.content[0].text, /Mock\.sol/)
+
+    const ignored = service.call('lint_file', { filePath: 'contracts/_mocks/Mock.sol' })
+    assert.equal(ignored.isError, true)
+    assert.match(ignored.content[0].text, /\.solhintignore/)
+  } finally {
+    cleanupProject(root)
+  }
+})
+
+test('excludedFiles in the project config is honoured too', () => {
+  const root = makeProject({
+    'contracts/Kept.sol': badSource,
+    'contracts/skipme/Skipped.sol': badSource,
+    '.solhint.json': JSON.stringify({
+      extends: 'solhint:recommended',
+      excludedFiles: ['contracts/skipme'],
+    }),
+  })
+  try {
+    const service = createToolService({
+      runner: createSolhintRunner({ projectRoot: root, forceBundled: true }),
+    })
+    const project = service.call('lint_project', {})
+    assert.match(project.content[0].text, /Kept\.sol/)
+    assert.doesNotMatch(project.content[0].text, /Skipped\.sol/)
+  } finally {
+    cleanupProject(root)
+  }
+})
+
 test('lint_project discovers Foundry files and rejects escaping patterns', () => {
   const root = makeProject({ 'src/Nested/Bad.sol': badSource })
   try {
@@ -298,12 +345,56 @@ test('lint_project falls back to Solidity files at the project root', () => {
   }
 })
 
-test('all curated explanations refer to real rules', () => {
+test('every rule Solhint ships can be explained', () => {
+  // The explanations come from Solhint's own rule metadata, so coverage has to be total:
+  // a hand-maintained subset is what left the most common rules unexplained before.
   const root = makeProject()
   try {
     const runner = createSolhintRunner({ projectRoot: root, forceBundled: true })
-    const ruleIds = new Set(runner.listRuleIds())
-    for (const ruleId of Object.keys(RULE_DOCS)) assert.ok(ruleIds.has(ruleId), ruleId)
+    const service = createToolService({ runner })
+    const ruleIds = runner.listRuleIds()
+    assert.ok(ruleIds.length > 50, `expected the full registry, got ${ruleIds.length}`)
+
+    for (const ruleId of ruleIds) {
+      const text = service.call('explain_rule', { ruleId }).content[0].text
+      assert.match(text, new RegExp(`\\\`${ruleId}\\\``), ruleId)
+      assert.doesNotMatch(text, /has no rule called/, ruleId)
+    }
+  } finally {
+    cleanupProject(root)
+  }
+})
+
+test('an explanation carries the rule metadata a caller needs', () => {
+  const root = makeProject()
+  try {
+    const service = createToolService({
+      runner: createSolhintRunner({ projectRoot: root, forceBundled: true }),
+    })
+    const text = service.call('explain_rule', { ruleId: 'immutable-vars-naming' }).content[0].text
+
+    assert.match(text, /Style Guide Rules/)
+    assert.match(text, /Capitalized SNAKE_CASE/)
+    assert.match(text, /\*\*Default:\*\*/)
+    // The configurable option is the point: it is what tells a caller the rule can be
+    // relaxed instead of renaming every immutable in the project.
+    assert.match(text, /immutablesAsConstants/)
+  } finally {
+    cleanupProject(root)
+  }
+})
+
+test('an explanation includes the good and bad examples when the rule has them', () => {
+  const root = makeProject()
+  try {
+    const service = createToolService({
+      runner: createSolhintRunner({ projectRoot: root, forceBundled: true }),
+    })
+    const text = service.call('explain_rule', { ruleId: 'gas-custom-errors' }).content[0].text
+
+    assert.match(text, /\*\*Notes\*\*/)
+    assert.match(text, /\*\*Good/)
+    assert.match(text, /```solidity/)
   } finally {
     cleanupProject(root)
   }

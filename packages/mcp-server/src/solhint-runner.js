@@ -1,11 +1,13 @@
 const fs = require('fs')
 const path = require('path')
 const { createRequire } = require('module')
+const ignore = require('ignore')
 const semver = require('semver')
 
 const packageJson = require('../package.json')
 
 const DEFAULT_CONFIG = Object.freeze({ extends: 'solhint:recommended' })
+const IGNORE_FILE = '.solhintignore'
 const CONFIG_FILES = [
   'package.json',
   '.solhint.json',
@@ -91,6 +93,21 @@ function findProjectConfig(projectRoot) {
   return null
 }
 
+// Solhint applies `.solhintignore` in its CLI, not in the library: solhint.js reads the
+// file and concatenates it into `config.excludedFiles`, which only `processPath()` acts
+// on. This server enumerates files itself and calls `processFile()`, so it has to apply
+// the same filter or it reports violations the project deliberately excluded.
+function readIgnorePatterns(projectRoot) {
+  const ignorePath = path.join(projectRoot, IGNORE_FILE)
+  if (!fs.existsSync(ignorePath)) return []
+
+  return fs
+    .readFileSync(ignorePath, 'utf8')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0)
+}
+
 function normalizeReport(report, fallbackFilePath) {
   if (!report || !Array.isArray(report.reports))
     throw new Error('Solhint returned an invalid report')
@@ -144,9 +161,31 @@ function createSolhintRunner({ projectRoot = process.cwd(), forceBundled = false
     return { reports: [normalizeReport(report, fileName)], resolution }
   }
 
-  function lintFiles(files) {
-    if (!Array.isArray(files) || files.length === 0) {
+  // `ignore` matches gitignore-style patterns against project-relative POSIX paths.
+  function lintableFiles(files) {
+    const projectConfig = loadProjectConfig().config
+    const patterns = [].concat(
+      projectConfig?.excludedFiles || [],
+      readIgnorePatterns(resolvedProjectRoot),
+    )
+    if (patterns.length === 0) return files
+
+    const filter = ignore({ allowRelativePaths: true }).add(patterns)
+
+    return files.filter(
+      (file) =>
+        filter.filter([path.relative(resolvedProjectRoot, file).split(path.sep).join('/')]).length >
+        0,
+    )
+  }
+
+  function lintFiles(requestedFiles) {
+    if (!Array.isArray(requestedFiles) || requestedFiles.length === 0) {
       throw new Error('No Solidity files matched the requested project pattern')
+    }
+    const files = lintableFiles(requestedFiles)
+    if (files.length === 0) {
+      throw new Error(`Every requested file is excluded by ${IGNORE_FILE} or excludedFiles`)
     }
     const projectConfig = loadProjectConfig().config
     const reports = files.map((file) => {
@@ -169,16 +208,47 @@ function createSolhintRunner({ projectRoot = process.cwd(), forceBundled = false
     }
   }
 
+  // Solhint ships every rule's documentation as metadata under lib/, which is what
+  // generate-rule-docs.js renders into the published rule pages. Reading it here keeps
+  // explanations complete and tied to the Solhint version this project actually runs,
+  // instead of a hand-maintained subset that drifts.
+  let ruleIndex = null
+
+  function rules() {
+    if (!ruleIndex) {
+      const rulesPath = path.join(resolution.packageRoot, 'lib', 'load-rules.js')
+      const { loadRules } = resolution.packageRequire(rulesPath)
+      ruleIndex = new Map(loadRules().map((rule) => [rule.ruleId, rule]))
+    }
+    return ruleIndex
+  }
+
   function listRuleIds() {
-    const rulesPath = path.join(resolution.packageRoot, 'lib', 'load-rules.js')
-    const { loadRules } = resolution.packageRequire(rulesPath)
-    return loadRules().map((rule) => rule.ruleId)
+    return [...rules().keys()]
+  }
+
+  function describeRule(ruleId) {
+    const rule = rules().get(ruleId)
+    if (!rule) return null
+
+    const docs = rule.meta?.docs || {}
+    return {
+      category: docs.category || null,
+      defaultSetup: rule.meta?.defaultSetup,
+      description: docs.description || null,
+      examples: docs.examples || null,
+      notes: Array.isArray(docs.notes) ? docs.notes : [],
+      options: Array.isArray(docs.options) ? docs.options : [],
+      recommended: rule.meta?.recommended === true,
+      ruleId,
+    }
   }
 
   return Object.freeze({
     describeResolution() {
       return `Solhint ${resolution.version} (${resolution.source}) — ${resolution.entryPath}`
     },
+    describeRule,
     getProjectConfig,
     lintFiles,
     lintSource,
