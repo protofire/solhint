@@ -6,6 +6,8 @@ const path = require('node:path')
 const readline = require('node:readline')
 const test = require('node:test')
 
+const packageJson = require('../package.json')
+
 const serverEntry = path.resolve(__dirname, '..', 'src', 'index.js')
 
 function makeProject(files = {}) {
@@ -119,7 +121,7 @@ test(
           clientInfo: { name: 'test', version: '1.0.0' },
         },
       })
-      assert.equal(initialized.result.serverInfo.name, '@solhint/mcp-server')
+      assert.equal(initialized.result.serverInfo.name, packageJson.name)
 
       server.send({ jsonrpc: '2.0', method: 'notifications/initialized' })
       server.send({ jsonrpc: '2.0', method: 'notifications/unknown' })

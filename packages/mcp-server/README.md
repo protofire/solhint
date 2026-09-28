@@ -1,4 +1,4 @@
-# @solhint/mcp-server
+# solhint-mcp
 
 An MCP server that exposes Solhint as tools for Claude Code and other MCP clients.
 
@@ -18,7 +18,7 @@ different project.
 From the Solidity project directory:
 
 ```bash
-claude mcp add solhint -- npx -y @solhint/mcp-server
+claude mcp add solhint -- npx -y solhint-mcp
 ```
 
 The default local scope associates the server with the current project. Use
@@ -28,7 +28,7 @@ On native Windows, Claude Code requires `cmd /c` for local MCP servers launched 
 `npx`:
 
 ```powershell
-claude mcp add solhint -- cmd /c npx -y @solhint/mcp-server
+claude mcp add solhint -- cmd /c npx -y solhint-mcp
 ```
 
 ## Claude Desktop

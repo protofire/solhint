@@ -5,6 +5,8 @@ const os = require('node:os')
 const path = require('node:path')
 const readline = require('node:readline')
 
+const packageJson = require('../package.json')
+
 const packageRoot = path.resolve(__dirname, '..')
 const repositoryRoot = path.resolve(packageRoot, '..', '..')
 
@@ -43,7 +45,7 @@ function request(child, pending, message) {
 }
 
 async function smokeInstalledPackage(projectRoot) {
-  const child = spawn('npx', ['-y', '@solhint/mcp-server'], {
+  const child = spawn('npx', ['-y', packageJson.name], {
     cwd: projectRoot,
     env: { ...process.env, npm_config_offline: 'true' },
     stdio: ['pipe', 'pipe', 'pipe'],
@@ -85,7 +87,7 @@ async function smokeInstalledPackage(projectRoot) {
         clientInfo: { name: 'packed-smoke', version: '1.0.0' },
       },
     })
-    assert.equal(initialized.result.serverInfo.name, '@solhint/mcp-server')
+    assert.equal(initialized.result.serverInfo.name, packageJson.name)
 
     const listed = await request(child, pending, { jsonrpc: '2.0', id: 2, method: 'tools/list' })
     assert.equal(listed.result.tools.length, 5)
