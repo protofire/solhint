@@ -45,6 +45,41 @@ const TOOL_DEFINITIONS = Object.freeze([
     },
   },
   {
+    name: 'fix_solidity',
+    description:
+      'Apply Solhint autofixes to a Solidity source string and return the corrected source. Does not touch any file.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        code: { type: 'string', minLength: 1, description: 'Solidity source code to fix' },
+        config: { type: 'object', description: 'Optional complete Solhint config object' },
+      },
+      required: ['code'],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: 'fix_file',
+    description:
+      'Apply Solhint autofixes to one Solidity file. Previews the result by default; pass write: true to save it.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        filePath: {
+          type: 'string',
+          minLength: 1,
+          description: 'Path relative to the project root',
+        },
+        write: {
+          type: 'boolean',
+          description: 'Write the fixed source back to the file. Defaults to false (preview only).',
+        },
+      },
+      required: ['filePath'],
+      additionalProperties: false,
+    },
+  },
+  {
     name: 'explain_rule',
     description: 'Explain a known Solhint rule and suggest a correction.',
     inputSchema: {
@@ -245,6 +280,21 @@ function withProtocolStdoutProtected(action) {
   }
 }
 
+function formatFixResult({ fixed, ruleIds, output, reports }, { file = null, written = false }) {
+  const target = file ? `\`${file}\`` : 'the supplied source'
+  if (!fixed) {
+    return `No autofixable violations in ${target}.\n\n${formatReports(reports)}`
+  }
+  const applied = `Fixed ${ruleIds.length} rule${ruleIds.length === 1 ? '' : 's'} in ${target}: ${ruleIds.map((id) => `\`${id}\``).join(', ')}`
+  let disposition = ''
+  if (file) {
+    disposition = written
+      ? '\n\nThe file has been written.'
+      : '\n\nPreview only — the file was not modified. Call again with `write: true` to save it.'
+  }
+  return `${applied}${disposition}\n\n\`\`\`solidity\n${output}\n\`\`\`\n\nRemaining after the fix:\n\n${formatReports(reports)}`
+}
+
 function createToolService({ runner }) {
   const resolutionText = runner.describeResolution()
   function call(name, args = {}) {
@@ -277,6 +327,26 @@ function createToolService({ runner }) {
             .sort()
           return success(
             `${resolutionText}\n\n${formatReports(runner.lintFiles([...new Set(files)]).reports)}`,
+          )
+        }
+        if (name === 'fix_solidity') {
+          if (typeof args.code !== 'string' || args.code.length === 0) {
+            throw new Error('code is required and must be a non-empty string')
+          }
+          const result = runner.fixSource(args.code, args.config)
+          return success(`${resolutionText}\n\n${formatFixResult(result, {})}`)
+        }
+        if (name === 'fix_file') {
+          const file = resolveProjectFile(runner.projectRoot, args.filePath)
+          if (args.write !== undefined && typeof args.write !== 'boolean') {
+            throw new Error('write must be a boolean')
+          }
+          const result = runner.fixFile(file)
+          const written = args.write === true && result.fixed
+          if (written) fs.writeFileSync(file, result.output)
+          const relative = path.relative(runner.projectRoot, file)
+          return success(
+            `${resolutionText}\n\n${formatFixResult(result, { file: relative, written })}`,
           )
         }
         if (name === 'explain_rule') {

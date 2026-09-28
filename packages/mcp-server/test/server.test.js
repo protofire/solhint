@@ -7,6 +7,7 @@ const readline = require('node:readline')
 const test = require('node:test')
 
 const packageJson = require('../package.json')
+const { TOOL_DEFINITIONS } = require('../src/tools')
 
 const serverEntry = path.resolve(__dirname, '..', 'src', 'index.js')
 
@@ -129,7 +130,7 @@ test(
       const listed = await server.request({ jsonrpc: '2.0', id: 2, method: 'tools/list' })
       assert.deepEqual(
         listed.result.tools.map((tool) => tool.name),
-        ['lint_solidity', 'lint_file', 'lint_project', 'explain_rule', 'get_config'],
+        TOOL_DEFINITIONS.map((tool) => tool.name),
       )
       const explainSchema = listed.result.tools.find((tool) => tool.name === 'explain_rule')
       assert.deepEqual(explainSchema.inputSchema.required, ['ruleId'])
@@ -155,7 +156,7 @@ test(
           id: id + 10,
           method: 'tools/list',
         })
-        assert.equal(stillAlive.result.tools.length, 5)
+        assert.equal(stillAlive.result.tools.length, TOOL_DEFINITIONS.length)
       }
 
       const unknown = await server.request({ jsonrpc: '2.0', id: 20, method: 'unknown/method' })

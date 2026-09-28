@@ -65,9 +65,22 @@ function loadResolution(candidate) {
     }
   }
 
+  // The autofix helpers are not re-exported from Solhint's entry point, so they are
+  // loaded by path the same way the config API is. A Solhint build without them still
+  // lints; only the fix_* tools are unavailable.
+  let fixApi = null
+  try {
+    const applyFixes = candidate.require(path.join(packageRoot, 'lib', 'apply-fixes.js'))
+    const ruleFixer = candidate.require(path.join(packageRoot, 'lib', 'rule-fixer.js'))
+    if (typeof applyFixes === 'function' && ruleFixer) fixApi = { applyFixes, ruleFixer }
+  } catch {
+    fixApi = null
+  }
+
   return Object.freeze({
     configApi,
     entryPath: candidate.require.resolve('solhint'),
+    fixApi,
     packageRoot,
     packageRequire: candidate.require,
     solhint,
@@ -155,10 +168,93 @@ function createSolhintRunner({ projectRoot = process.cwd(), forceBundled = false
     return { ...DEFAULT_CONFIG }
   }
 
+  // The Solidity parser throws raw TypeErrors from its AST builder on input it cannot
+  // parse (e.g. `Cannot read properties of null (reading 'getText')`), which tells the
+  // caller nothing. Translate those into something a person or an agent can act on.
+  function processSource(code, config, fileName) {
+    try {
+      return resolution.solhint.processStr(code, config, fileName)
+    } catch (error) {
+      if (error instanceof TypeError) {
+        throw new Error(
+          `Could not parse the Solidity source: it is not valid Solidity, or uses syntax this parser does not support (${error.message})`,
+        )
+      }
+      throw error
+    }
+  }
+
   function lintSource(code, config, fileName = 'contract.sol') {
     if (typeof code !== 'string') throw new Error('code is required and must be a string')
-    const report = resolution.solhint.processStr(code, sourceConfig(config), fileName)
+    const report = processSource(code, sourceConfig(config), fileName)
     return { reports: [normalizeReport(report, fileName)], resolution }
+  }
+
+  function requireFixApi() {
+    if (!resolution.fixApi) {
+      throw new Error(`Solhint ${resolution.version} does not expose its autofix helpers`)
+    }
+    return resolution.fixApi
+  }
+
+  // Solhint only attaches fix functions to reports when `fix` is set on the config,
+  // and the fixes must be applied in source order.
+  function applyReportFixes(report, source) {
+    const { applyFixes, ruleFixer } = requireFixApi()
+    const fixes = report.reports
+      .filter((entry) => entry.fix)
+      .map((entry) => entry.fix(ruleFixer))
+      .sort((a, b) => a.range[0] - b.range[0])
+    if (fixes.length === 0) return { fixed: false, output: source, ruleIds: [] }
+    const { fixed, output } = applyFixes(fixes, source)
+    const ruleIds = [
+      ...new Set(report.reports.filter((entry) => entry.fix).map((entry) => entry.ruleId)),
+    ].sort()
+    return { fixed, output, ruleIds }
+  }
+
+  function fixSource(code, config, fileName = 'contract.sol') {
+    if (typeof code !== 'string') throw new Error('code is required and must be a string')
+    requireFixApi()
+    const report = processSource(code, { ...sourceConfig(config), fix: true }, fileName)
+    const { fixed, output, ruleIds } = applyReportFixes(report, code)
+    // Re-lint the fixed source so the caller sees what is genuinely left, not the
+    // pre-fix report with the fixed entries still in it.
+    const remaining = fixed ? processSource(output, sourceConfig(config), fileName) : report
+    return {
+      fixed,
+      output,
+      ruleIds,
+      reports: [normalizeReport(remaining, fileName)],
+      resolution,
+    }
+  }
+
+  function fixFile(file) {
+    requireFixApi()
+    const files = lintableFiles([file])
+    if (files.length === 0) {
+      throw new Error(`${file} is excluded by ${IGNORE_FILE} or excludedFiles`)
+    }
+    const source = fs.readFileSync(file, 'utf8')
+    const projectConfig = loadProjectConfig().config
+    const fileConfig = resolution.configApi.loadConfigForFile(file, resolvedProjectRoot)
+    let config = { ...DEFAULT_CONFIG }
+    if (projectConfig && Object.keys(projectConfig).length > 0) config = projectConfig
+    if (fileConfig && Object.keys(fileConfig).length > 0) config = fileConfig
+
+    const report = processSource(source, { ...config, fix: true }, file)
+    const { fixed, output, ruleIds } = applyReportFixes(report, source)
+    const remaining = fixed ? processSource(output, config, file) : report
+    return {
+      file,
+      fixed,
+      source,
+      output,
+      ruleIds,
+      reports: [normalizeReport(remaining, file)],
+      resolution,
+    }
   }
 
   // `ignore` matches gitignore-style patterns against project-relative POSIX paths.
@@ -249,6 +345,8 @@ function createSolhintRunner({ projectRoot = process.cwd(), forceBundled = false
       return `Solhint ${resolution.version} (${resolution.source}) — ${resolution.entryPath}`
     },
     describeRule,
+    fixFile,
+    fixSource,
     getProjectConfig,
     lintFiles,
     lintSource,

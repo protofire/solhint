@@ -459,3 +459,97 @@ test('malformed project config is reported as an error', () => {
     cleanupProject(root)
   }
 })
+
+const RECOMMENDED = JSON.stringify({ extends: 'solhint:recommended' })
+
+function fixService(files) {
+  const root = makeProject({ '.solhint.json': RECOMMENDED, ...files })
+  return {
+    root,
+    service: createToolService({ runner: createSolhintRunner({ projectRoot: root }) }),
+  }
+}
+
+test('fix_solidity corrects autofixable violations without touching any file', () => {
+  const { root, service } = fixService()
+  try {
+    const result = service.call('fix_solidity', {
+      code: 'pragma solidity ^0.8.24;\ncontract A { uint b; }\n',
+    })
+    assert.equal(result.isError, undefined)
+    assert.match(result.content[0].text, /uint256 b/)
+    assert.match(result.content[0].text, /`explicit-types`/)
+  } finally {
+    cleanupProject(root)
+  }
+})
+
+test('fix_solidity reports when there is nothing to fix', () => {
+  const { root, service } = fixService()
+  try {
+    const result = service.call('fix_solidity', {
+      code: 'pragma solidity ^0.8.24;\ncontract A {}\n',
+    })
+    assert.match(result.content[0].text, /No autofixable violations/)
+  } finally {
+    cleanupProject(root)
+  }
+})
+
+test('fix_file previews by default and leaves the file untouched', () => {
+  const source = 'pragma solidity ^0.8.24;\ncontract A { uint b; }\n'
+  const { root, service } = fixService({ 'contracts/A.sol': source })
+  try {
+    const result = service.call('fix_file', { filePath: 'contracts/A.sol' })
+    assert.match(result.content[0].text, /Preview only/)
+    assert.equal(fs.readFileSync(path.join(root, 'contracts', 'A.sol'), 'utf8'), source)
+  } finally {
+    cleanupProject(root)
+  }
+})
+
+test('fix_file writes the corrected source when asked', () => {
+  const { root, service } = fixService({
+    'contracts/A.sol': 'pragma solidity ^0.8.24;\ncontract A { uint b; }\n',
+  })
+  try {
+    const result = service.call('fix_file', { filePath: 'contracts/A.sol', write: true })
+    assert.match(result.content[0].text, /file has been written/)
+    assert.match(fs.readFileSync(path.join(root, 'contracts', 'A.sol'), 'utf8'), /uint256 b/)
+  } finally {
+    cleanupProject(root)
+  }
+})
+
+test('fix_file rejects a path outside the project root', () => {
+  const { root, service } = fixService()
+  try {
+    assert.equal(service.call('fix_file', { filePath: '../../etc/hosts' }).isError, true)
+  } finally {
+    cleanupProject(root)
+  }
+})
+
+test('fix_file rejects a non-boolean write flag', () => {
+  const { root, service } = fixService({
+    'contracts/A.sol': 'pragma solidity ^0.8.24;\ncontract A { uint b; }\n',
+  })
+  try {
+    const result = service.call('fix_file', { filePath: 'contracts/A.sol', write: 'yes' })
+    assert.equal(result.isError, true)
+    assert.match(result.content[0].text, /write must be a boolean/)
+  } finally {
+    cleanupProject(root)
+  }
+})
+
+test('unparsable source reports a readable error instead of a parser crash', () => {
+  const { root, service } = fixService()
+  try {
+    const result = service.call('lint_solidity', { code: 'this is not solidity {{{' })
+    assert.equal(result.isError, true)
+    assert.match(result.content[0].text, /Could not parse the Solidity source/)
+  } finally {
+    cleanupProject(root)
+  }
+})

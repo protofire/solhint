@@ -41,16 +41,25 @@ working directory. See Anthropic's current
 
 ## Tools
 
-| Tool            | Input               | Description                             |
-| --------------- | ------------------- | --------------------------------------- |
-| `lint_solidity` | `{ code, config? }` | Lint a Solidity source string           |
-| `lint_file`     | `{ filePath }`      | Lint one `.sol` file inside the project |
-| `lint_project`  | `{ pattern? }`      | Lint a project-relative glob            |
-| `explain_rule`  | `{ ruleId }`        | Explain any rule the linter ships       |
-| `get_config`    | `{}`                | Show the project's Solhint config       |
+| Tool            | Input                  | Description                             |
+| --------------- | ---------------------- | --------------------------------------- |
+| `lint_solidity` | `{ code, config? }`    | Lint a Solidity source string           |
+| `lint_file`     | `{ filePath }`         | Lint one `.sol` file inside the project |
+| `lint_project`  | `{ pattern? }`         | Lint a project-relative glob            |
+| `fix_solidity`  | `{ code, config? }`    | Autofix a Solidity source string        |
+| `fix_file`      | `{ filePath, write? }` | Autofix one `.sol` file                 |
+| `explain_rule`  | `{ ruleId }`           | Explain any rule the linter ships       |
+| `get_config`    | `{}`                   | Show the project's Solhint config       |
 
 `lint_project` autodetects `contracts/**/*.sol`, then `src/**/*.sol`, and finally
 `**/*.sol`. Paths and patterns outside the project root are rejected.
+
+The `fix_*` tools apply Solhint's own autofixes and then re-lint, so what they report
+as remaining is what is genuinely left rather than the pre-fix report. `fix_solidity`
+returns the corrected source and touches nothing on disk. `fix_file` previews by
+default and only writes when called with `write: true` — Solhint's CLI asks for a
+backup before `--fix`, and an MCP client should not rewrite someone's contracts
+without being asked either.
 
 `explain_rule` reads the documentation Solhint ships with each rule, so it covers the
 whole registry and always describes the version this project runs: description,
@@ -72,7 +81,7 @@ is there. Mention it alongside the command:
 
 ```markdown
 - Solidity lint: prefer the `solhint` MCP tools (`lint_file`, `lint_project`,
-  `explain_rule`, `get_config`) when that server is configured; they run this project's
+  `fix_file`, `explain_rule`, `get_config`) when that server is configured; they run this project's
   own Solhint with its config. Fall back to `npm run lint:sol` when the server is
   unavailable.
 ```
