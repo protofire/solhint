@@ -6,6 +6,7 @@ const path = require('node:path')
 const readline = require('node:readline')
 
 const packageJson = require('../package.json')
+const { TOOL_DEFINITIONS } = require('../src/tools')
 
 const packageRoot = path.resolve(__dirname, '..')
 const repositoryRoot = path.resolve(packageRoot, '..', '..')
@@ -90,7 +91,7 @@ async function smokeInstalledPackage(projectRoot) {
     assert.equal(initialized.result.serverInfo.name, packageJson.name)
 
     const listed = await request(child, pending, { jsonrpc: '2.0', id: 2, method: 'tools/list' })
-    assert.equal(listed.result.tools.length, 5)
+    assert.equal(listed.result.tools.length, TOOL_DEFINITIONS.length)
 
     const linted = await request(child, pending, {
       jsonrpc: '2.0',
