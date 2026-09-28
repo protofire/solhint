@@ -1,3 +1,17 @@
+## [6.3.0] - 2026-09-28
+🆕 Enhancement: add an MCP server for linting Solidity files and projects and explaining rules through MCP clients (#795)
+
+🛠️ Fix: skip the npm update check outside interactive terminals and in CI (#796)
+
+🧹 Chore: bump fast-uri from 3.1.5 to 3.1.8 (#789)
+
+🧹 Chore: bump browserslist from 4.28.4 to 4.28.8 (dev dependency) (#790)
+
+🧹 Chore: bump js-yaml to 4.3.2 and 3.15.2 (#791)
+
+🧹 Chore: bump serialize-javascript to 7.1.1 and mocha to 12.0.2 (#794)
+<br><br>
+
 ## [6.2.4] - 2026-08-07
 🛠️ Fix: clarify documentation (#784)
 
