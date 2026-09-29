@@ -1,7 +1,7 @@
 const chai = require('chai')
 const { expect } = chai
 const fs = require('fs')
-const shell = require('./shell')
+const shell = require('shelljs')
 const url = require('url')
 const os = require('os')
 const path = require('path')
