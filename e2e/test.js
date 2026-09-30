@@ -320,6 +320,29 @@ describe('e2e general tests', function () {
       expect(cacheAfter).to.deep.equal(cacheBefore)
     })
 
+    it('should fix cached warnings when fix mode is enabled', () => {
+      writeJsonFile('.solhint.json', { rules: { 'contract-name-capwords': 'warn' } })
+      const source = 'pragma solidity ^0.8.24;\ncontract foo {}\n'
+      fs.writeFileSync('Foo.sol', source)
+
+      const first = shell.exec('solhint Foo.sol --cache --noPoster --disc')
+
+      expect(first.code).to.equal(EXIT_CODES.OK)
+      expect(first.stdout).to.contain('contract-name-capwords')
+      expect(fs.readFileSync('Foo.sol', 'utf8')).to.equal(source)
+      expect(Object.keys(JSON.parse(fs.readFileSync(cacheFilePath, 'utf8')))).to.have.lengthOf(1)
+
+      const second = shell.exec('solhint Foo.sol --cache --fix --noPrompt --noPoster --disc')
+
+      expect(second.code).to.equal(EXIT_CODES.OK)
+      expect(fs.readFileSync('Foo.sol', 'utf8')).to.equal(source.replace('contract foo', 'contract Foo'))
+
+      const third = shell.exec('solhint Foo.sol --cache --fix --noPrompt --noPoster --disc')
+
+      expect(third.code).to.equal(EXIT_CODES.OK)
+      expect(third.stdout.trim()).to.equal('')
+    })
+
     it('should re-lint if file content changes', () => {
       let code
       let stdout
