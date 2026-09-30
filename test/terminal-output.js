@@ -4,6 +4,7 @@ const sinon = require('sinon')
 const {
   checkForUpdate,
   isInteractiveTerminal,
+  printMcpHint,
   printPoster,
   printSuccessPoster,
   supportsTerminalHyperlinks,
@@ -193,6 +194,41 @@ describe('terminal output', () => {
 
       expect(consoleLog.called).to.equal(false)
       expect(consoleError.called).to.equal(false)
+    })
+  })
+
+  describe('MCP hint', () => {
+    it('prints the package and its npm link in an interactive terminal', () => {
+      expect(printMcpHint(false, {}, { isTTY: true })).to.equal(true)
+
+      const output = consoleLog.args.flat().join('\n')
+      expect(output).to.include('solhint-mcp')
+      expect(output).to.include('npmjs.com/package/solhint-mcp')
+    })
+
+    it('names no client-specific command', () => {
+      printMcpHint(false, {}, { isTTY: true })
+
+      const output = consoleLog.args.flat().join('\n')
+      expect(output).not.to.include('claude mcp add')
+    })
+
+    it('is silent in CI and when the output is piped', () => {
+      expect(printMcpHint(false, { CI: 'true' }, { isTTY: true })).to.equal(false)
+      expect(printMcpHint(false, {}, { isTTY: false })).to.equal(false)
+      expect(consoleLog.called).to.equal(false)
+    })
+
+    it('appears in the poster shown when findings exist', () => {
+      printPoster(true, {}, { isTTY: true })
+
+      expect(consoleLog.args.flat().join('\n')).to.include('solhint-mcp')
+    })
+
+    it('is absent from the poster in CI', () => {
+      printPoster(true, { CI: 'true' }, { isTTY: true })
+
+      expect(consoleLog.args.flat().join('\n')).not.to.include('solhint-mcp')
     })
   })
 })
