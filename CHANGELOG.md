@@ -1,5 +1,5 @@
-## [6.3.0] - 2026-09-28
-🆕 Enhancement: add an MCP server for linting Solidity files and projects and explaining rules through MCP clients (#795)
+## [6.2.5] - 2026-10-01
+🛠️  Fix: invalidate the lint cache when --fix mode changes so cached warnings get autofixed (#800)
 
 🛠️ Fix: skip the npm update check outside interactive terminals and in CI (#796)
 
@@ -11,6 +11,11 @@
 
 🧹 Chore: bump serialize-javascript to 7.1.1 and mocha to 12.0.2 (#794)
 <br><br>
+
+✨🛡️ Kudos to our contributors! 🛡️✨
+
+- [@myetcd](https://github.com/myetcd)
+
 
 ## [6.2.4] - 2026-08-07
 🛠️ Fix: clarify documentation (#784)
