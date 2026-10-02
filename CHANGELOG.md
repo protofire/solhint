@@ -1,4 +1,6 @@
 ## [6.2.5] - 2026-10-01
+🆕 Enhancement: show an MCP install hint in the CLI poster for AI coding agents (#801)
+
 🛠️  Fix: invalidate the lint cache when --fix mode changes so cached warnings get autofixed (#800)
 
 🛠️ Fix: skip the npm update check outside interactive terminals and in CI (#796)
