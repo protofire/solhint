@@ -546,7 +546,7 @@ describe('e2e', function () {
 
         it('should get the right report (11)', () => {
           const reportLines = stdout.split('\n')
-          const finalLine = '3 problems (3 errors, 0 warnings)'
+          const finalLine = '5 problems (5 errors, 0 warnings)'
           expect(reportLines[reportLines.length - OFFSET]).to.contain(finalLine)
         })
       })
