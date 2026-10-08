@@ -1,3 +1,24 @@
+## [6.2.5] - 2026-10-01
+🆕 Enhancement: show an MCP install hint in the CLI poster for AI coding agents (#801)
+
+🛠️  Fix: invalidate the lint cache when --fix mode changes so cached warnings get autofixed (#800)
+
+🛠️ Fix: skip the npm update check outside interactive terminals and in CI (#796)
+
+🧹 Chore: bump fast-uri from 3.1.5 to 3.1.8 (#789)
+
+🧹 Chore: bump browserslist from 4.28.4 to 4.28.8 (dev dependency) (#790)
+
+🧹 Chore: bump js-yaml to 4.3.2 and 3.15.2 (#791)
+
+🧹 Chore: bump serialize-javascript to 7.1.1 and mocha to 12.0.2 (#794)
+<br><br>
+
+✨🛡️ Kudos to our contributors! 🛡️✨
+
+- [@myetcd](https://github.com/myetcd)
+
+
 ## [6.2.4] - 2026-08-07
 🛠️ Fix: clarify documentation (#784)
 
