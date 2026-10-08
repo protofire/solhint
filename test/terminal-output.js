@@ -2,6 +2,9 @@ const { expect } = require('chai')
 const sinon = require('sinon')
 
 const {
+  checkForUpdate,
+  isInteractiveTerminal,
+  printMcpHint,
   printPoster,
   printSuccessPoster,
   supportsTerminalHyperlinks,
@@ -152,6 +155,80 @@ describe('terminal output', () => {
         ),
       ).to.equal(true)
       expect(supportsTerminalHyperlinks({ FORCE_HYPERLINK: '0' }, tty)).to.equal(false)
+    })
+  })
+
+  describe('update check', () => {
+    let consoleError
+
+    beforeEach(() => {
+      consoleError = sinon.stub(console, 'error')
+    })
+
+    afterEach(() => {
+      consoleError.restore()
+    })
+
+    it('detects an interactive terminal', () => {
+      expect(isInteractiveTerminal({}, { isTTY: true })).to.equal(true)
+      expect(isInteractiveTerminal({}, { isTTY: false })).to.equal(false)
+      expect(isInteractiveTerminal({ CI: 'true' }, { isTTY: true })).to.equal(false)
+    })
+
+    it('treats the documented disabled CI values as interactive', () => {
+      expect(isInteractiveTerminal({ CI: 'false' }, { isTTY: true })).to.equal(true)
+      expect(isInteractiveTerminal({ CI: '0' }, { isTTY: true })).to.equal(true)
+    })
+
+    // A resolved promise proves the registry was never contacted: the network path is
+    // the only other way out of checkForUpdate, and it would log on success or failure.
+    it('skips the registry request when the output is not a terminal', async () => {
+      await checkForUpdate({}, { isTTY: false })
+
+      expect(consoleLog.called).to.equal(false)
+      expect(consoleError.called).to.equal(false)
+    })
+
+    it('skips the registry request in CI even when a TTY is allocated', async () => {
+      await checkForUpdate({ CI: 'true' }, { isTTY: true })
+
+      expect(consoleLog.called).to.equal(false)
+      expect(consoleError.called).to.equal(false)
+    })
+  })
+
+  describe('MCP hint', () => {
+    it('prints the package and its npm link in an interactive terminal', () => {
+      expect(printMcpHint(false, {}, { isTTY: true })).to.equal(true)
+
+      const output = consoleLog.args.flat().join('\n')
+      expect(output).to.include('solhint-mcp')
+      expect(output).to.include('npmjs.com/package/solhint-mcp')
+    })
+
+    it('names no client-specific command', () => {
+      printMcpHint(false, {}, { isTTY: true })
+
+      const output = consoleLog.args.flat().join('\n')
+      expect(output).not.to.include('claude mcp add')
+    })
+
+    it('is silent in CI and when the output is piped', () => {
+      expect(printMcpHint(false, { CI: 'true' }, { isTTY: true })).to.equal(false)
+      expect(printMcpHint(false, {}, { isTTY: false })).to.equal(false)
+      expect(consoleLog.called).to.equal(false)
+    })
+
+    it('appears in the poster shown when findings exist', () => {
+      printPoster(true, {}, { isTTY: true })
+
+      expect(consoleLog.args.flat().join('\n')).to.include('solhint-mcp')
+    })
+
+    it('is absent from the poster in CI', () => {
+      printPoster(true, { CI: 'true' }, { isTTY: true })
+
+      expect(consoleLog.args.flat().join('\n')).not.to.include('solhint-mcp')
     })
   })
 })
