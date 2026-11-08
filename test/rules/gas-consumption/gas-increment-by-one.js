@@ -57,6 +57,18 @@ const RAISE_ERRORS = [
 
 const NOT_RAISE_ERRORS = [
   {
+    statement: 'balance += 1 ether;',
+    varName: 'balance',
+  },
+  {
+    statement: 'balance = balance - 1 ether;',
+    varName: 'balance',
+  },
+  {
+    statement: 'balance = 1 ether + balance;',
+    varName: 'balance',
+  },
+  {
     statement: 'edgeCaseVar = edgeCaseVar * 2 + 1;',
     varName: 'edgeCaseVar',
   },
