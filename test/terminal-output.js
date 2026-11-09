@@ -109,6 +109,18 @@ describe('terminal output', () => {
           tty,
         ),
       ).to.equal(true)
+      expect(
+        supportsTerminalHyperlinks(
+          { TERM_PROGRAM: 'iTerm.app', TERM_PROGRAM_VERSION: '3.0-invalid' },
+          tty,
+        ),
+      ).to.equal(true)
+      expect(
+        supportsTerminalHyperlinks(
+          { TERM_PROGRAM: 'vscode', TERM_PROGRAM_VERSION: '1.71beta' },
+          tty,
+        ),
+      ).to.equal(true)
     })
 
     it('requires a VS Code version with OSC 8 support', () => {
