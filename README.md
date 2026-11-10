@@ -316,6 +316,7 @@ Related documentation you may find [here](https://protofire.github.io/solhint/).
          https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity)**
   - **[VS Code: Solidity Language Support by CodeChain.io](
          https://marketplace.visualstudio.com/items?itemName=kodebox.solidity-language-server)**
+  - **[Claude Code, Cursor, Codex, and other MCP clients](https://github.com/vschernoff/solhint-mcp)**
 
 ## Table of Contents
 * [Contributing](docs/contributing.md): The core Solhint team :heart: contributions. This describes how you can contribute to the Solhint Project.
