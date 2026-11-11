@@ -16,9 +16,11 @@ import "./../token/interfaces/IXTokenWrapper.sol";
 import { IXTokenWrapper2 } from "./../token/interfaces/IXTokenWrapper2.sol";
 import { Afool1 } from "./Afool1.sol";
 import { Unauthorized, add as func, Point } from "./Foo.sol";
+import * as Utils from "./libraries/Utils.sol";
 import { Initializable } from "./openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "./Ownable.sol";
 import "./ThisIsAVeryLongFileOnPurposeToTestTheFirstPathShorterThanTheLastOnelooooooooooong.sol";
+import "./Types.sol" as Types;
 
 contract ImportsOrder {
     constructor() {}
