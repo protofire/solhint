@@ -27,6 +27,18 @@ describe('Parse error', () => {
     assert.ok(messages[0].startsWith("Parse error: extraneous input '}' expecting"))
     assert.ok(messages[1].startsWith("Parse error: mismatched input '<EOF>' expecting"))
   })
+
+  it('should report a parse error instead of crashing on a function named fallback', () => {
+    // https://github.com/protofire/solhint/issues/817
+    const report = linter.processStr(
+      'contract Foo { function fallback(address payable r) public {} }',
+      {},
+    )
+
+    assertErrorCount(report, 1)
+    assert.equal(report.reports[0].line, 1)
+    assert.ok(report.reports[0].message.startsWith('Parse error: '))
+  })
 })
 
 describe('New Parsers support', () => {
