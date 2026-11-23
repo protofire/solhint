@@ -181,7 +181,7 @@ function executeMainActionLogic() {
     const { globSync } = require('glob')
     const ignore = require('ignore')
 
-    const ig = ignore().add(baseConfig.excludedFiles)
+    const ig = ignore({ allowRelativePaths: true }).add(baseConfig.excludedFiles)
 
     for (const pattern of patterns) {
       const matchedFiles = globSync(pattern, { nodir: true })
