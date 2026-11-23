@@ -117,6 +117,15 @@ describe('e2e general tests', function () {
       const { code } = shell.exec(`solhint contracts/**/*.sol`)
       expect(code).to.equal(EXIT_CODES.OK)
     })
+
+    it('should lint a file given by a path outside the current directory', function () {
+      createDummyFile(path.join(this.testDirPath, 'other', 'Bar.sol'))
+      shell.cd('contracts')
+      const { code, stderr } = shell.exec(`solhint ../other/Bar.sol`)
+
+      expect(stderr).to.not.include('path.relative')
+      expect(code).to.equal(EXIT_CODES.OK)
+    })
   })
 
   describe('--max-warnings parameter tests', function () {
